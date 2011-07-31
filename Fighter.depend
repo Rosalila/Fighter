@@ -1,0 +1,169 @@
+# depslib dependency file v1.0
+1310956150 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/AtributosPersonaje.cpp
+	"../include/AtributosPersonaje.h"
+
+1310956365 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/AtributosPersonaje.h
+	<vector>
+	<iostream>
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<cstdio>
+	"../include/Grafico.h"
+	"../include/Sonido.h"
+
+1312102711 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Grafico.h
+	<stdlib.h>
+	<irrlicht.h>
+	"../include/Input.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Input.h
+	<irrlicht.h>
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Sonido.h
+	"../include/irrKlang/irrKlang.h"
+	<irrlicht.h>
+	<string>
+	<vector>
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/irrKlang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_irrKlangTypes.h
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IVirtualRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ESoundOutputDrivers.h
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ESoundEngineOptions.h
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_EStreamModes.h
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_SAudioStreamFormat.h
+	"ik_IRefCounted.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISoundEngine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISoundSource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISoundEffectControl.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IFileFactory.h
+	"ik_IRefCounted.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISoundMixedOutputReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IAudioStream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IAudioStreamLoader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IFileReader.h
+	"ik_IRefCounted.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISoundStopEventReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_ISoundDeviceList.h
+	"ik_IRefCounted.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/irrKlang/ik_IAudioRecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1312102575 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1312100968 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Fighter.h
+	"../include/Menu.h"
+
+1310952569 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Menu.h
+	"../include/Stage.h"
+	"../include/Grafico.h"
+	"../include/irrKlang/irrKlang.h"
+	"../include/Personaje.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Stage.h
+	"../include/Grafico.h"
+
+1302511522 /home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/include/Personaje.h
+	"../include/AtributosPersonaje.h"
+
+1312104310 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Grafico.cpp
+	"../include/Grafico.h"
+
+1302511522 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Input.cpp
+	"../include/Input.h"
+
+1312102806 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Menu.cpp
+	"../include/Menu.h"
+
+1312100551 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Personaje.cpp
+	"../include/Personaje.h"
+
+1302511522 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Sonido.cpp
+	"../include/Sonido.h"
+
+1312103519 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/src/Stage.cpp
+	"../include/Stage.h"
+
+1312105801 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"include/Input.h"
+	"include/Fighter.h"
+
