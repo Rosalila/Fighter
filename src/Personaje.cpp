@@ -20,7 +20,7 @@ void flipHitBoxes(Personaje* personaje)
     }
 }
 
-Personaje::Personaje(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico)
+Personaje::Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico)
 {
     setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png"),100,100,100,100));
     this->grafico=grafico;
@@ -69,7 +69,7 @@ void Personaje::dibujar()
         getString("orientacion")=="i",
         false);
 }
-void Personaje::dibujarHitBoxes(std::string variable,video::SColor color,bool izquierda)
+void Personaje::dibujarHitBoxes(stringw variable,video::SColor color,bool izquierda)
 {
     vector <HitBox> hitbox=getHitBoxes(variable);
     if(izquierda)
@@ -87,7 +87,7 @@ void Personaje::dibujarHitBoxes(std::string variable,video::SColor color,bool iz
     for(int i=0;i<hb_size;i++)
         grafico->draw2DRectangle(color,core::rect<s32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y,getEntero("posicion_x")+hitbox[i].p2x,getEntero("posicion_y")+hitbox[i].p2y));
 }
-void Personaje::dibujarBarra(std::string variable)
+void Personaje::dibujarBarra(stringw variable)
 {
     Barra barra=getBarra(variable);
     position2d<s32>prueba= barra.posicion.UpperLeftCorner;
@@ -107,78 +107,78 @@ Frame Personaje::getFrameActual()
 }
 
 //GETS variables
-int Personaje::getEntero(std::string variable)
+int Personaje::getEntero(stringw variable)
 {
     return enteros[variable];
 }
-Barra Personaje::getBarra(std::string variable)
+Barra Personaje::getBarra(stringw variable)
 {
     return barras[variable];
 }
-vector<HitBox> Personaje::getHitBoxes(std::string variable)
+vector<HitBox> Personaje::getHitBoxes(stringw variable)
 {
     return hitboxes[variable];
 }
-Imagen Personaje::getImagen(std::string variable)
+Imagen Personaje::getImagen(stringw variable)
 {
     return imagenes[variable];
 }
-std::string Personaje::getString(std::string variable)
+stringw Personaje::getString(stringw variable)
 {
     return strings[variable];
 }
 //SETS variables
-void Personaje::setImagen(std::string variable,Imagen valor)
+void Personaje::setImagen(stringw variable,Imagen valor)
 {
     imagenes[variable]=valor;
 }
-void Personaje::setEntero(std::string variable,int valor)
+void Personaje::setEntero(stringw variable,int valor)
 {
     enteros[variable]=valor;
 }
-void Personaje::setBarra(std::string variable,Barra valor)
+void Personaje::setBarra(stringw variable,Barra valor)
 {
     barras[variable]=valor;
 }
-void Personaje::setHitBoxes(std::string variable,vector<HitBox> valor)
+void Personaje::setHitBoxes(stringw variable,vector<HitBox> valor)
 {
     hitboxes[variable]=valor;
 }
-void Personaje::setString(std::string variable,std::string valor)
+void Personaje::setString(stringw variable,stringw valor)
 {
     strings[variable]=valor;
 }
 
 //Agregares
-void Personaje::agregarCancel(std::string cancelador,std::string cancelado)
+void Personaje::agregarCancel(stringw cancelador,stringw cancelado)
 {
     ((Movimiento*)movimientos[cancelador])->cancels.push_back(cancelado);
 }
-void Personaje::agregarMovimiento(std::string movimiento)
+void Personaje::agregarMovimiento(stringw movimiento)
 {
     movimientos[movimiento]=new Movimiento();
 }
-void Personaje::agregarFrame(std::string movimiento, int duracion)
+void Personaje::agregarFrame(stringw movimiento, int duracion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarFrame(duracion);
 }
-void Personaje::agregarModificador(std::string movimiento,int frame,Imagen modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(std::string movimiento,int frame,int modificador,Personaje* personaje,std::string variable,bool relativo,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,relativo,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(std::string movimiento,int frame,Barra modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(std::string movimiento,int frame,vector <HitBox> modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(std::string movimiento,int frame,std::string modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
 }
@@ -262,7 +262,7 @@ bool Personaje::verificarFinDeMovimiento()
     }
     return false;
 }
-bool Personaje::ejectuarCancel(std::string input)
+bool Personaje::ejectuarCancel(stringw input)
 {
             if(input=="7")
                 input="saltando_atras7";

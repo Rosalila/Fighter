@@ -8,20 +8,21 @@
 #include "include/Fighter.h"
 
 
-void wizardAgregarImagenes(Personaje* personaje,std::string carpeta,int frames,std::string movimiento,Grafico *grafico)
+void wizardAgregarImagenes(Personaje* personaje,stringw carpeta,int frames,stringw movimiento,Grafico *grafico)
 {
     for(int i=0;i<frames;i++)
     {
-        std::string s;
+        stringw s;
         std::stringstream out;
         out << (i+1);
-        s = carpeta+out.str()+".png";
+        irr::core::stringw outw(out.str().c_str());
+        s = carpeta+outw+".png";
         irr::core::stringw str(s.c_str());
         personaje->agregarModificador(movimiento,i,Imagen(grafico->getTexture(irr::io::path(str)),0,0),personaje,"imagen_personaje",false);
     }
 }
 
-void wizardMovimiento(Personaje* personaje,std::string movimiento,int cantidad_frames,int duracion_frame,irr::io::path carpeta_sprites,Grafico* grafico)
+void wizardMovimiento(Personaje* personaje,stringw movimiento,int cantidad_frames,int duracion_frame,irr::io::path carpeta_sprites,Grafico* grafico)
 {
     personaje->agregarMovimiento(movimiento);
     int num1=0;
@@ -34,8 +35,8 @@ void wizardMovimiento(Personaje* personaje,std::string movimiento,int cantidad_f
             //personaje->agregarModificador(movimiento,i,grafico->driver->getTexture(),personaje,"imagen_personaje",true);
             if(i==0)
             {
-                personaje->agregarModificador(movimiento,i,0,personaje,"tiempo_transcurrido",true);
-                personaje->agregarModificador(movimiento,i,"recibir",personaje,"movimiento_actual",true);
+                //personaje->agregarModificador(stringw(movimiento),i,0,personaje,stringw("tiempo_transcurrido"),true);
+                //personaje->agregarModificador(movimiento,i,"recibir",personaje,"movimiento_actual",true);
             }
         }
         personaje->agregarModificador(movimiento,i,Imagen(grafico->getTexture(carpeta_sprites),900,900,0,0),personaje,"imagen_personaje",false);
@@ -61,7 +62,7 @@ void wizardMovimiento(Personaje* personaje,std::string movimiento,int cantidad_f
     }
 }
 
-void wizardAtaque(Personaje* personaje,std::string movimiento,int cantidad_frames,int duracion_frame,irr::io::path carpeta_sprites,Grafico* grafico)
+void wizardAtaque(Personaje* personaje,stringw movimiento,int cantidad_frames,int duracion_frame,irr::io::path carpeta_sprites,Grafico* grafico)
 {
     personaje->agregarMovimiento(movimiento);
     int num1=0;
@@ -95,9 +96,9 @@ void wizardAtaque(Personaje* personaje,std::string movimiento,int cantidad_frame
 class Ryu : Personaje
 {
 public:
-Ryu(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico,Personaje *personaje_contrario)
+Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje *personaje_contrario)
 {
-        setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png"),100,100,100,100));
+        setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/respirar/parado"),100,100,100,100));
         this->grafico=grafico;
         setString("estado_posicion","");
         setEntero("frame_actual_saltando",0);
@@ -115,17 +116,14 @@ Ryu(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico,Person
         hitboxes["rojas"]=hb_vacia;
 
         //Creacion de movimientos
-        //wizardMovimiento(this,"recibir",4,1,"resources/Personajes/Ryu/Sprites/recibir/arriba/01.png",grafico);
-
         agregarMovimiento("recibir");
         for(int i=0;i<4;i++)
             agregarFrame("recibir",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/recibir/arriba/",4,"recibir",grafico);
 
-        wizardMovimiento(this,"1",9,1,"resources/Personajes/Ryu/Sprites/mover/agachar/01.png",grafico);
-        wizardMovimiento(this,"2",9,1,"resources/Personajes/Ryu/Sprites/mover/agachar/01.png",grafico);
-        wizardMovimiento(this,"3",9,1,"resources/Personajes/Ryu/Sprites/mover/agachar/01.png",grafico);
-        //wizardMovimiento(this,"4",11,1,"resources/Personajes/Ryu/Sprites/mover/caminar/atras/01.png",grafico);
+        agregarMovimiento("1");
+        agregarMovimiento("2");
+        agregarMovimiento("3");
         agregarMovimiento("4");
         for(int i=0;i<11;i++)
             agregarFrame("4",1);
@@ -460,7 +458,7 @@ Ryu(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico,Person
 class Fedora : Personaje
 {
 public:
-Fedora(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico,Personaje *personaje_contrario)
+Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje *personaje_contrario)
 {
         setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ivis/respirar/01.png"),100,100,100,100));
         this->grafico=grafico;
@@ -614,7 +612,7 @@ Fedora(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico,Per
 class Ivis : Personaje
 {
 public:
-Ivis(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico,Personaje *personaje_contrario)
+Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje *personaje_contrario)
 {
         setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ivis/respirar/01.png"),100,100,100,100));
         this->grafico=grafico;

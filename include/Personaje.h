@@ -1,5 +1,4 @@
 #include "../include/AtributosPersonaje.h"
-
 class Personaje
 {
     public:
@@ -8,50 +7,50 @@ class Personaje
     Grafico* grafico;
 
     //strings
-    irr::core::map<std::string,std::string> strings;
+    irr::core::map<stringw,stringw> strings;
     //imagenes
-    irr::core::map<std::string,Imagen> imagenes;
+    irr::core::map<stringw,Imagen> imagenes;
     //ints
-    irr::core::map<std::string,int> enteros;
+    irr::core::map<stringw,int> enteros;
     //barra
-    irr::core::map<std::string,Barra> barras;
+    irr::core::map<stringw,Barra> barras;
     //hitboxes
-    irr::core::map<std::string,vector<HitBox> > hitboxes;
+    irr::core::map<stringw,vector<HitBox> > hitboxes;
     //movimientos
-    irr::core::map<std::string,Movimiento*> movimientos;
+    irr::core::map<stringw,Movimiento*> movimientos;
 
-    Personaje(Barra hp,int px,int py,int a,std::string orientacion,Grafico* grafico);
+    Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico);
     Personaje();
     //DIBUJAR
     void dibujar();
-    void dibujarHitBoxes(std::string variable,video::SColor color,bool izquierda);
-    void dibujarBarra(std::string variable);
+    void dibujarHitBoxes(stringw variable,video::SColor color,bool izquierda);
+    void dibujarBarra(stringw variable);
     //GETS shortcuts
     Movimiento* getMovimientoActual();
     Frame getFrameActual();
     //GETS variables
-    int getEntero(std::string variable);
-    Barra getBarra(std::string variable);
-    vector<HitBox> getHitBoxes(std::string variable);
-    Imagen getImagen(std::string variable);
-    std::string getString(std::string variable);
+    int getEntero(stringw variable);
+    Barra getBarra(stringw variable);
+    vector<HitBox> getHitBoxes(stringw variable);
+    Imagen getImagen(stringw variable);
+    stringw getString(stringw variable);
     //SETS variables
-    void setImagen(std::string variable,Imagen valor);
-    void setEntero(std::string variable,int valor);
-    void setBarra(std::string variable,Barra valor);
-    void setHitBoxes(std::string variable,vector<HitBox> valor);
-    void setString(std::string variable,std::string valor);
+    void setImagen(stringw variable,Imagen valor);
+    void setEntero(stringw variable,int valor);
+    void setBarra(stringw variable,Barra valor);
+    void setHitBoxes(stringw variable,vector<HitBox> valor);
+    void setString(stringw variable,stringw valor);
     //Agregares
-    void agregarCancel(std::string cancelador,std::string cancelado);
-    void agregarMovimiento(std::string movimiento);
-    void agregarFrame(std::string movimiento, int duracion);
-    void agregarModificador(std::string movimiento,int frame,Imagen modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario);
-    void agregarModificador(std::string movimiento,int frame,int modificador,Personaje* personaje,std::string variable,bool relativo,bool aplicar_a_contrario);
-    void agregarModificador(std::string movimiento,int frame,Barra modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario);
-    void agregarModificador(std::string movimiento,int frame,vector <HitBox> modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario);
-    void agregarModificador(std::string movimiento,int frame,std::string modificador,Personaje* personaje,std::string variable,bool aplicar_a_contrario);
+    void agregarCancel(stringw cancelador,stringw cancelado);
+    void agregarMovimiento(stringw movimiento);
+    void agregarFrame(stringw movimiento, int duracion);
+    void agregarModificador(stringw movimiento,int frame,Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
     //Logica
-    bool ejectuarCancel(std::string input);
+    bool ejectuarCancel(stringw input);
     bool verificarFinDeMovimiento();
     bool aplicarModificadores();
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);

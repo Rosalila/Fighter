@@ -11,6 +11,7 @@ Menu::Menu(Stage* stage,Personaje *pa,Personaje *pb,Sonido* sonido,Grafico* graf
 
 void Menu::loopMenu()
 {
+    /*
     const SEvent::SJoystickEvent & joystickData = receiver->GetJoystickState();
     int moveHorizontal =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
     int moveVertical =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
@@ -68,6 +69,7 @@ void Menu::loopMenu()
         stage->imagen_fondo=grafico->getTexture("resources/Stages/Stage01.jpg");
     if(opcion_stage==2)
         stage->imagen_fondo=grafico->getTexture("resources/Stages/Stage02.jpg");
+        */
 }
 
 
