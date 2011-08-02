@@ -7,28 +7,34 @@
 	<File name="include/Grafico.h" open="0" top="0" tabpos="0">
 		<Cursor position="179" topLine="5" />
 	</File>
+	<File name="include/Input.h" open="1" top="0" tabpos="3">
+		<Cursor position="802" topLine="7" />
+	</File>
 	<File name="include/Menu.h" open="0" top="0" tabpos="2">
 		<Cursor position="1110" topLine="58" />
 	</File>
 	<File name="include/Personaje.h" open="0" top="0" tabpos="0">
-		<Cursor position="0" topLine="21" />
+		<Cursor position="194" topLine="9" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="4081" topLine="267" />
+		<Cursor position="79" topLine="0" />
 	</File>
 	<File name="src/AtributosPersonaje.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1140" topLine="19" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="2">
+	<File name="src/Fighter.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="2213" topLine="60" />
 	</File>
 	<File name="src/Grafico.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="249" topLine="0" />
 	</File>
+	<File name="src/Input.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="2209" topLine="65" />
+	</File>
 	<File name="src/Menu.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="3207" topLine="0" />
 	</File>
-	<File name="src/Personaje.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="9764" topLine="269" />
+	<File name="src/Personaje.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="4036" topLine="111" />
 	</File>
 </CodeBlocks_layout_file>

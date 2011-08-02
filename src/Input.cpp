@@ -5,50 +5,66 @@ Input::Input()
     tecla_arriba=true;
     for (u32 i=0; i<KEY_KEY_CODES_COUNT; ++i)
         KeyIsDown[i] = false;
+
+    teclas_cruz.push_back(irr::KEY_KEY_S);
+    inputs[irr::KEY_KEY_S]="2";
+    teclas_cruz.push_back(irr::KEY_KEY_A);
+    inputs[irr::KEY_KEY_A]="4";
+    teclas_cruz.push_back(irr::KEY_KEY_D);
+    inputs[irr::KEY_KEY_D]="6";
+    teclas_cruz.push_back(irr::KEY_KEY_W);
+    inputs[irr::KEY_KEY_W]="8";
+
+    teclas_botones.push_back(irr::KEY_KEY_U);
+    inputs[irr::KEY_KEY_U]="a";
+    teclas_botones.push_back(irr::KEY_KEY_I);
+    inputs[irr::KEY_KEY_I]="b";
+    teclas_botones.push_back(irr::KEY_KEY_J);
+    inputs[irr::KEY_KEY_J]="c";
+    teclas_botones.push_back(irr::KEY_KEY_K);
+    inputs[irr::KEY_KEY_K]="d";
+}
+
+stringw Input::getInpurKeaboardCruz()
+{
+    stringw input="";
+    for(int i=0;i<(int)teclas_cruz.size();i++)
+        if(IsKeyDown(teclas_cruz[i]))
+            input+=inputs[teclas_cruz[i]];
+    return input;
+}
+
+string Input::getInpurKeaboardBotones()
+{
+    string input="";
+    if(tecla_arriba)
+    {
+        tecla_arriba=false;
+        for(int i=0;i<(int)teclas_botones.size();i++)
+            if(IsKeyDown(teclas_botones[i]))
+                input+=inputs[teclas_botones[i]];
+    }
+    bool flag=false;
+    for(int i=0;i<(int)teclas_botones.size();i++)
+        if(IsKeyDown(teclas_botones[i]))
+            flag=true;
+    if(flag)
+        tecla_arriba=true;
+    return input;
 }
 
 stringw Input::getInputKeyboard()
 {
-    stringw input="5";
-
-    if(IsKeyDown(irr::KEY_KEY_S) && IsKeyDown(irr::KEY_KEY_A))
-        input="1";
-    else if(IsKeyDown(irr::KEY_KEY_S) && IsKeyDown(irr::KEY_KEY_D))
-        input="3";
-    else if(IsKeyDown(irr::KEY_KEY_W) && IsKeyDown(irr::KEY_KEY_A))
-        input="7";
-    else if(IsKeyDown(irr::KEY_KEY_W) && IsKeyDown(irr::KEY_KEY_D))
-        input="9";
-    else if(IsKeyDown(irr::KEY_KEY_S))
-        input="2";
-    else if(IsKeyDown(irr::KEY_KEY_A))
-        input="4";
-    else if(IsKeyDown(irr::KEY_KEY_D))
-        input="6";
-    else if(IsKeyDown(irr::KEY_KEY_W))
-        input="8";
-    if(tecla_arriba)
-    {
-        tecla_arriba=false;
-        if(IsKeyDown(irr::KEY_KEY_U))
-            input="a";
-        else if(IsKeyDown(irr::KEY_KEY_I))
-            input="b";
-        else if(IsKeyDown(irr::KEY_KEY_O))
-            input="c";
-        else if(IsKeyDown(irr::KEY_KEY_J))
-            input="d";
-        else if(IsKeyDown(irr::KEY_KEY_K))
-            input="e";
-    }
-    if(!IsKeyDown(irr::KEY_KEY_U) && !IsKeyDown(irr::KEY_KEY_I) && !IsKeyDown(irr::KEY_KEY_O) && !IsKeyDown(irr::KEY_KEY_J) && !IsKeyDown(irr::KEY_KEY_K) && !IsKeyDown(irr::KEY_KEY_L))
-        tecla_arriba=true;
-
+    stringw input=getInpurKeaboardCruz()+getInpurKeaboardBotones();
+    if(input=="")
+        return "5";
     return input;
 }
 
 stringw Input::getInputJoystick()
 {
+    f32 moveHorizontal;
+    f32 moveVertical;
     stringw input="5";
     const SEvent::SJoystickEvent & joystickData = GetJoystickState();
     moveHorizontal =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;

@@ -121,9 +121,9 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
             agregarFrame("recibir",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/recibir/arriba/",4,"recibir",grafico);
 
-        agregarMovimiento("1");
+        agregarMovimiento("24");
         agregarMovimiento("2");
-        agregarMovimiento("3");
+        agregarMovimiento("26");
         agregarMovimiento("4");
         for(int i=0;i<11;i++)
             agregarFrame("4",1);
@@ -148,17 +148,17 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
             agregarFrame("6",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/caminar/adelante/",12,"6",grafico);
 
-        agregarMovimiento("7");
+        agregarMovimiento("48");
         for(int i=0;i<13;i++)
-            agregarFrame("7",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/atras/",13,"7",grafico);
+            agregarFrame("48",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/atras/",13,"48",grafico);
 
         agregarMovimiento("8");
         for(int i=0;i<12;i++)
             agregarFrame("8",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/",12,"7",grafico);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/",12,"48",grafico);
 
-        agregarMovimiento("9");
+        agregarMovimiento("68");
 
         agregarMovimiento("a");
         for(int i=0;i<5;i++)
@@ -201,27 +201,27 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         hb_roja.clear();
         agregarModificador("d",4,hb_roja,this,"rojas",false);
 
-        agregarMovimiento("agachado1");
+        agregarMovimiento("agachado24");
         for(int i=0;i<5;i++)
-            agregarFrame("agachado1",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado1",grafico);
+            agregarFrame("agachado24",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado24",grafico);
 
         agregarMovimiento("agachado2");
         for(int i=0;i<5;i++)
             agregarFrame("agachado2",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado2",grafico);
 
-        agregarMovimiento("agachado3");
+        agregarMovimiento("agachado26");
         for(int i=0;i<5;i++)
-            agregarFrame("agachado3",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado3",grafico);
+            agregarFrame("agachado26",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado26",grafico);
 
         agregarMovimiento("agachado4");
         agregarMovimiento("agachado5");
         agregarMovimiento("agachado6");
-        agregarMovimiento("agachado7");
+        agregarMovimiento("agachado48");
         agregarMovimiento("agachado8");
-        agregarMovimiento("agachado9");
+        agregarMovimiento("agachado68");
 
         agregarMovimiento("agachadoa");
         for(int i=0;i<7;i++)
@@ -250,20 +250,20 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
             agregarFrame("agachadod",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/golpe_bajo/",7,"agachadod",grafico);
 
-        agregarMovimiento("saltando_atras1");
+        agregarMovimiento("saltando_atras24");
         agregarMovimiento("saltando_atras2");
-        agregarMovimiento("saltando_atras3");
+        agregarMovimiento("saltando_atras26");
         agregarMovimiento("saltando_atras4");
         agregarMovimiento("saltando_atras5");
         agregarMovimiento("saltando_atras6");
 
-        agregarMovimiento("saltando_atras7");
+        agregarMovimiento("saltando_atras48");
         for(int i=0;i<13;i++)
-            agregarFrame("saltando_atras7",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/atras/",13,"saltando_atras7",grafico);
+            agregarFrame("saltando_atras48",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/atras/",13,"saltando_atras48",grafico);
 
         agregarMovimiento("saltando_atras8");
-        agregarMovimiento("saltando_atras9");
+        agregarMovimiento("saltando_atras68");
 
         agregarMovimiento("saltando_atrasa");
         for(int i=0;i<6;i++)
@@ -292,21 +292,21 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
             agregarFrame("saltando_atrasd",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_atrasd",grafico);
 
-        agregarMovimiento("saltando1");
+        agregarMovimiento("saltando24");
         agregarMovimiento("saltando2");
-        agregarMovimiento("saltando3");
+        agregarMovimiento("saltando26");
         agregarMovimiento("saltando4");
         agregarMovimiento("saltando5");
         //wizardMovimiento(this,"saltando5",12,1,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png",grafico);
         agregarMovimiento("saltando6");
-        agregarMovimiento("saltando7");
+        agregarMovimiento("saltando48");
 
         agregarMovimiento("saltando8");
         for(int i=0;i<12;i++)
             agregarFrame("saltando8",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/",12,"saltando8",grafico);
 
-        agregarMovimiento("saltando9");
+        agregarMovimiento("saltando68");
 
         agregarMovimiento("saltandoa");
         for(int i=0;i<6;i++)
@@ -335,20 +335,20 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
             agregarFrame("saltandod",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltandod",grafico);
 
-        agregarMovimiento("saltando_adelante1");
+        agregarMovimiento("saltando_adelante24");
         agregarMovimiento("saltando_adelante2");
-        agregarMovimiento("saltando_adelante3");
+        agregarMovimiento("saltando_adelante26");
         agregarMovimiento("saltando_adelante4");
         agregarMovimiento("saltando_adelante5");
         //wizardMovimiento(this,"saltando_adelante5",13,1,"resources/Personajes/Ryu/Sprites/mover/saltar/adelante/01.png",grafico);
         agregarMovimiento("saltando_adelante6");
-        agregarMovimiento("saltando_adelante7");
+        agregarMovimiento("saltando_adelante48");
         agregarMovimiento("saltando_adelante8");
 
-        agregarMovimiento("saltando_adelante9");
+        agregarMovimiento("saltando_adelante68");
         for(int i=0;i<13;i++)
-            agregarFrame("saltando_adelante9",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/adelante/",13,"saltando_adelante9",grafico);
+            agregarFrame("saltando_adelante68",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/adelante/",13,"saltando_adelante68",grafico);
 
         agregarMovimiento("saltando_adelantea");
         for(int i=0;i<6;i++)
@@ -388,70 +388,70 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("b","5");
         agregarCancel("c","5");
         agregarCancel("d","5");
-        agregarCancel("agachado1","5");
+        agregarCancel("agachado24","5");
         agregarCancel("agachado2","5");
-        agregarCancel("agachado3","5");
+        agregarCancel("agachado26","5");
         agregarCancel("4","5");
         agregarCancel("6","5");
-        agregarCancel("saltando_atras7","5");
+        agregarCancel("saltando_atras48","5");
         agregarCancel("saltando8","5");
-        agregarCancel("saltando_adelante9","5");
+        agregarCancel("saltando_adelante68","5");
 
         agregarCancel("a","4");
         agregarCancel("b","4");
         agregarCancel("c","4");
         agregarCancel("d","4");
-        agregarCancel("agachado1","4");
+        agregarCancel("agachado24","4");
         agregarCancel("agachado2","4");
-        agregarCancel("agachado3","4");
+        agregarCancel("agachado26","4");
         agregarCancel("5","4");
         agregarCancel("6","4");
-        agregarCancel("saltando_atras7","4");
+        agregarCancel("saltando_atras48","4");
         agregarCancel("saltando8","4");
-        agregarCancel("saltando_adelante9","4");
+        agregarCancel("saltando_adelante68","4");
         //
         agregarCancel("a","6");
         agregarCancel("b","6");
         agregarCancel("c","6");
         agregarCancel("d","6");
-        agregarCancel("agachado1","6");
+        agregarCancel("agachado24","6");
         agregarCancel("agachado2","6");
-        agregarCancel("agachado3","6");
+        agregarCancel("agachado26","6");
         agregarCancel("4","6");
         agregarCancel("5","6");
-        agregarCancel("saltando_atras7","6");
+        agregarCancel("saltando_atras48","6");
         agregarCancel("saltando8","6");
-        agregarCancel("saltando_adelante9","6");
+        agregarCancel("saltando_adelante68","6");
 
         //saltar
-        agregarCancel("saltando_atrasa","saltando_atras7");
+        agregarCancel("saltando_atrasa","saltando_atras48");
         agregarCancel("saltandoa","saltando8");
-        agregarCancel("saltando_adelantea","saltando_adelante9");
+        agregarCancel("saltando_adelantea","saltando_adelante68");
 
-        agregarCancel("saltando_atrasb","saltando_atras7");
+        agregarCancel("saltando_atrasb","saltando_atras48");
         agregarCancel("saltandob","saltando8");
-        agregarCancel("saltando_adelanteb","saltando_adelante9");
+        agregarCancel("saltando_adelanteb","saltando_adelante68");
 
-        agregarCancel("saltando_atrasc","saltando_atras7");
+        agregarCancel("saltando_atrasc","saltando_atras48");
         agregarCancel("saltandoc","saltando8");
-        agregarCancel("saltando_adelantec","saltando_adelante9");
+        agregarCancel("saltando_adelantec","saltando_adelante68");
 
-        agregarCancel("saltando_atrasd","saltando_atras7");
+        agregarCancel("saltando_atrasd","saltando_atras48");
         agregarCancel("saltandod","saltando8");
-        agregarCancel("saltando_adelanted","saltando_adelante9");
+        agregarCancel("saltando_adelanted","saltando_adelante68");
         //agachar
-        agregarCancel("agachadoa","agachado1");
-        agregarCancel("agachadob","agachado1");
-        agregarCancel("agachadoc","agachado1");
-        agregarCancel("agachadod","agachado1");
+        agregarCancel("agachadoa","agachado24");
+        agregarCancel("agachadob","agachado24");
+        agregarCancel("agachadoc","agachado24");
+        agregarCancel("agachadod","agachado24");
         agregarCancel("agachadoa","agachado2");
         agregarCancel("agachadob","agachado2");
         agregarCancel("agachadoc","agachado2");
         agregarCancel("agachadod","agachado2");
-        agregarCancel("agachadoa","agachado3");
-        agregarCancel("agachadob","agachado3");
-        agregarCancel("agachadoc","agachado3");
-        agregarCancel("agachadod","agachado13");
+        agregarCancel("agachadoa","agachado26");
+        agregarCancel("agachadob","agachado26");
+        agregarCancel("agachadoc","agachado26");
+        agregarCancel("agachadod","agachado126");
     }
 };
 
@@ -481,9 +481,9 @@ Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Persona
         vector <HitBox> hb_roja;
         vector <HitBox> hb_azul;
         agregarMovimiento("recibir");
-        agregarMovimiento("1");
+        agregarMovimiento("24");
         agregarMovimiento("2");
-        agregarMovimiento("3");
+        agregarMovimiento("26");
         agregarMovimiento("4");
             agregarFrame("4",1);
                 agregarModificador("4",0,-10,this,"posicion_x",true,false);
@@ -498,9 +498,9 @@ Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Persona
         agregarMovimiento("6");
             agregarFrame("6",1);
                 agregarModificador("6",0,10,this,"posicion_x",true,false);
-        agregarMovimiento("7");
+        agregarMovimiento("48");
         agregarMovimiento("8");
-        agregarMovimiento("9");
+        agregarMovimiento("68");
         agregarMovimiento("a");
             agregarFrame("a",2);
                 agregarModificador("a",0,Imagen(grafico->getTexture("resources/Personajes/Fedora/02.png"),257,300,0,0),this,"imagen_personaje",false);
@@ -531,15 +531,15 @@ Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Persona
 
 
         agregarMovimiento("agachadorecibir");
-        agregarMovimiento("agachado1");
+        agregarMovimiento("agachado24");
         agregarMovimiento("agachado2");
-        agregarMovimiento("agachado3");
+        agregarMovimiento("agachado26");
         agregarMovimiento("agachado4");
         agregarMovimiento("agachado5");
         agregarMovimiento("agachado6");
-        agregarMovimiento("agachado7");
+        agregarMovimiento("agachado48");
         agregarMovimiento("agachado8");
-        agregarMovimiento("agachado9");
+        agregarMovimiento("agachado68");
         agregarMovimiento("agachadoa");
         agregarMovimiento("agachadob");
         agregarMovimiento("agachadoc");
@@ -548,15 +548,15 @@ Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Persona
         agregarMovimiento("agachadof");
 
         agregarMovimiento("saltando_adelanterecibir");
-        agregarMovimiento("saltando_adelante1");
+        agregarMovimiento("saltando_adelante24");
         agregarMovimiento("saltando_adelante2");
-        agregarMovimiento("saltando_adelante3");
+        agregarMovimiento("saltando_adelante26");
         agregarMovimiento("saltando_adelante4");
         agregarMovimiento("saltando_adelante5");
         agregarMovimiento("saltando_adelante6");
-        agregarMovimiento("saltando_adelante7");
+        agregarMovimiento("saltando_adelante48");
         agregarMovimiento("saltando_adelante8");
-        agregarMovimiento("saltando_adelante9");
+        agregarMovimiento("saltando_adelante68");
         agregarMovimiento("saltando_adelantea");
         agregarMovimiento("saltando_adelanteb");
         agregarMovimiento("saltando_adelantec");
@@ -565,15 +565,15 @@ Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Persona
         agregarMovimiento("saltando_adelantef");
 
         agregarMovimiento("saltandorecibir");
-        agregarMovimiento("saltando1");
+        agregarMovimiento("saltando24");
         agregarMovimiento("saltando2");
-        agregarMovimiento("saltando3");
+        agregarMovimiento("saltando26");
         agregarMovimiento("saltando4");
         agregarMovimiento("saltando5");
         agregarMovimiento("saltando6");
-        agregarMovimiento("saltando7");
+        agregarMovimiento("saltando48");
         agregarMovimiento("saltando8");
-        agregarMovimiento("saltando9");
+        agregarMovimiento("saltando68");
         agregarMovimiento("saltandoa");
         agregarMovimiento("saltandob");
         agregarMovimiento("saltandoc");
@@ -582,15 +582,15 @@ Fedora(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Persona
         agregarMovimiento("saltandof");
 
         agregarMovimiento("saltando_atrasrecibir");
-        agregarMovimiento("saltando_atras1");
+        agregarMovimiento("saltando_atras24");
         agregarMovimiento("saltando_atras2");
-        agregarMovimiento("saltando_atras3");
+        agregarMovimiento("saltando_atras26");
         agregarMovimiento("saltando_atras4");
         agregarMovimiento("saltando_atras5");
         agregarMovimiento("saltando_atras6");
-        agregarMovimiento("saltando_atras7");
+        agregarMovimiento("saltando_atras48");
         agregarMovimiento("saltando_atras8");
-        agregarMovimiento("saltando_atras9");
+        agregarMovimiento("saltando_atras68");
         agregarMovimiento("saltando_atrasa");
         agregarMovimiento("saltando_atrasb");
         agregarMovimiento("saltando_atrasc");
@@ -639,9 +639,9 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
         agregarMovimiento("defender");
         agregarMovimiento("dash");
         agregarMovimiento("backstep");
-        agregarMovimiento("1");
+        agregarMovimiento("24");
         agregarMovimiento("2");
-        agregarMovimiento("3");
+        agregarMovimiento("26");
         agregarMovimiento("4");
             agregarFrame("4",1);
                 agregarModificador("4",0,-10,this,"posicion_x",true,false);
@@ -686,9 +686,9 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
             agregarFrame("6",1);
                 agregarModificador("6",2,10,this,"posicion_x",true,false);
                 agregarModificador("6",2,Imagen(grafico->getTexture("resources/Personajes/Ivis/caminar/03.png"),1000,600,0,0),this,"imagen_personaje",false);
-        agregarMovimiento("7");
+        agregarMovimiento("48");
         agregarMovimiento("8");
-        agregarMovimiento("9");
+        agregarMovimiento("68");
         agregarMovimiento("a");
             agregarFrame("a",1);
                 agregarModificador("a",0,Imagen(grafico->getTexture("resources/Personajes/Ivis/atacar/01.png"),1000,600,0,0),this,"imagen_personaje",false);
@@ -714,15 +714,15 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
 
 
         agregarMovimiento("agachadorecibir");
-        agregarMovimiento("agachado1");
+        agregarMovimiento("agachado24");
         agregarMovimiento("agachado2");
-        agregarMovimiento("agachado3");
+        agregarMovimiento("agachado26");
         agregarMovimiento("agachado4");
         agregarMovimiento("agachado5");
         agregarMovimiento("agachado6");
-        agregarMovimiento("agachado7");
+        agregarMovimiento("agachado48");
         agregarMovimiento("agachado8");
-        agregarMovimiento("agachado9");
+        agregarMovimiento("agachado68");
         agregarMovimiento("agachadoa");
         agregarMovimiento("agachadob");
         agregarMovimiento("agachadoc");
@@ -731,15 +731,15 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
         agregarMovimiento("agachadof");
 
         agregarMovimiento("saltando_adelanterecibir");
-        agregarMovimiento("saltando_adelante1");
+        agregarMovimiento("saltando_adelante24");
         agregarMovimiento("saltando_adelante2");
-        agregarMovimiento("saltando_adelante3");
+        agregarMovimiento("saltando_adelante26");
         agregarMovimiento("saltando_adelante4");
         agregarMovimiento("saltando_adelante5");
         agregarMovimiento("saltando_adelante6");
-        agregarMovimiento("saltando_adelante7");
+        agregarMovimiento("saltando_adelante48");
         agregarMovimiento("saltando_adelante8");
-        agregarMovimiento("saltando_adelante9");
+        agregarMovimiento("saltando_adelante68");
         agregarMovimiento("saltando_adelantea");
         agregarMovimiento("saltando_adelanteb");
         agregarMovimiento("saltando_adelantec");
@@ -748,15 +748,15 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
         agregarMovimiento("saltando_adelantef");
 
         agregarMovimiento("saltandorecibir");
-        agregarMovimiento("saltando1");
+        agregarMovimiento("saltando24");
         agregarMovimiento("saltando2");
-        agregarMovimiento("saltando3");
+        agregarMovimiento("saltando26");
         agregarMovimiento("saltando4");
         agregarMovimiento("saltando5");
         agregarMovimiento("saltando6");
-        agregarMovimiento("saltando7");
+        agregarMovimiento("saltando48");
         agregarMovimiento("saltando8");
-        agregarMovimiento("saltando9");
+        agregarMovimiento("saltando68");
         agregarMovimiento("saltandoa");
         agregarMovimiento("saltandob");
         agregarMovimiento("saltandoc");
@@ -765,15 +765,15 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
         agregarMovimiento("saltandof");
 
         agregarMovimiento("saltando_atrasrecibir");
-        agregarMovimiento("saltando_atras1");
+        agregarMovimiento("saltando_atras24");
         agregarMovimiento("saltando_atras2");
-        agregarMovimiento("saltando_atras3");
+        agregarMovimiento("saltando_atras26");
         agregarMovimiento("saltando_atras4");
         agregarMovimiento("saltando_atras5");
         agregarMovimiento("saltando_atras6");
-        agregarMovimiento("saltando_atras7");
+        agregarMovimiento("saltando_atras48");
         agregarMovimiento("saltando_atras8");
-        agregarMovimiento("saltando_atras9");
+        agregarMovimiento("saltando_atras68");
         agregarMovimiento("saltando_atrasa");
         agregarMovimiento("saltando_atrasb");
         agregarMovimiento("saltando_atrasc");
@@ -790,9 +790,9 @@ Ivis(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje
         agregarCancel("a","5");
         agregarCancel("a","4");
         agregarCancel("a","6");
-        agregarCancel("7","5");
+        agregarCancel("48","5");
         agregarCancel("8","5");
-        agregarCancel("9","5");
+        agregarCancel("68","5");
     }
 };
 

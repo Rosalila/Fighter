@@ -264,12 +264,12 @@ bool Personaje::verificarFinDeMovimiento()
 }
 bool Personaje::ejectuarCancel(stringw input)
 {
-            if(input=="7")
-                input="saltando_atras7";
+            if(input=="48")
+                input="saltando_atras48";
             if(input=="8")
                 input="saltando8";
-            if(input=="9")
-                input="saltando_adelante9";
+            if(input=="68")
+                input="saltando_adelante68";
             if(input=="2")
                 input="agachado2";
     int cancel_size=((Movimiento*)movimientos[input])->cancels.size();
@@ -279,11 +279,11 @@ bool Personaje::ejectuarCancel(stringw input)
 //            if(getEntero("frame_actual_saltando")==0)
 //                setString("estado_posicion","");
 
-            if(input=="saltando_atras7")
+            if(input=="saltando_atras48")
                 setString("estado_posicion","saltando_atras");
             if(input=="saltando8")
                 setString("estado_posicion","saltando");
-            if(input=="saltando_adelante9")
+            if(input=="saltando_adelante68")
                 setString("estado_posicion","saltando_adelante");
             if(input=="agachado2")
                 setString("estado_posicion","agachado");
