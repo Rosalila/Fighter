@@ -343,7 +343,7 @@
 	"include/Input.h"
 	"include/Fighter.h"
 
-1312315212 /home/userr/CodeBlocksProyects/Fighter/include/Input.h
+1312317854 /home/userr/CodeBlocksProyects/Fighter/include/Input.h
 	<vector>
 	<stdarg.h>
 	<irrlicht.h>
@@ -490,7 +490,7 @@
 1312142276 source:/home/userr/CodeBlocksProyects/Fighter/src/Grafico.cpp
 	"../include/Grafico.h"
 
-1312314815 source:/home/userr/CodeBlocksProyects/Fighter/src/Input.cpp
+1312317893 source:/home/userr/CodeBlocksProyects/Fighter/src/Input.cpp
 	"../include/Input.h"
 
 1312150176 source:/home/userr/CodeBlocksProyects/Fighter/src/Menu.cpp

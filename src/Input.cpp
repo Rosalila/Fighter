@@ -25,7 +25,7 @@ Input::Input()
     inputs[irr::KEY_KEY_K]="d";
 }
 
-stringw Input::getInpurKeaboardCruz()
+stringw Input::getInputKeaboardCruz()
 {
     stringw input="";
     for(int i=0;i<(int)teclas_cruz.size();i++)
@@ -34,9 +34,9 @@ stringw Input::getInpurKeaboardCruz()
     return input;
 }
 
-string Input::getInpurKeaboardBotones()
+stringw Input::getInputKeaboardBotones()
 {
-    string input="";
+    stringw input="";
     if(tecla_arriba)
     {
         tecla_arriba=false;
@@ -55,7 +55,7 @@ string Input::getInpurKeaboardBotones()
 
 stringw Input::getInputKeyboard()
 {
-    stringw input=getInpurKeaboardCruz()+getInpurKeaboardBotones();
+    stringw input=getInputKeaboardCruz()+getInputKeaboardBotones();
     if(input=="")
         return "5";
     return input;

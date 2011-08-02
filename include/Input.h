@@ -29,8 +29,8 @@ private:
 public:
     Input();
     core::stringw getInputKeyboard();
-    string getInpurKeaboarCruz();
-    string getInpurKeaboardBotones();
+    stringw getInputKeaboardCruz();
+    stringw getInputKeaboardBotones();
     core::stringw getInputJoystick();
     virtual bool IsKeyDown(EKEY_CODE keyCode) const;
     //stringw getInputString(const irr::EKEY_CODE* first, ...);
