@@ -1,25 +1,5 @@
 #include "../include/Personaje.h"
 
-void flipHitBoxes(Personaje* personaje)
-{
-    int hitboxes_size=personaje->getHitBoxes("azules").size();
-    for(int i=0;i<hitboxes_size;i++)
-    {
-        int a=personaje->getHitBoxes("azules")[i].p1x;
-        int b=personaje->getHitBoxes("azules")[i].p2x;
-        personaje->getHitBoxes("azules")[i].p1x=-b;
-        personaje->getHitBoxes("azules")[i].p2x=-a;
-    }
-    hitboxes_size=personaje->getHitBoxes("rojas").size();
-    for(int i=0;i<hitboxes_size;i++)
-    {
-        int a=personaje->getHitBoxes("rojas")[i].p1x;
-        int b=personaje->getHitBoxes("rojas")[i].p2x;
-        personaje->getHitBoxes("rojas")[i].p1x=-b;
-        personaje->getHitBoxes("rojas")[i].p2x=-a;
-    }
-}
-
 Personaje::Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico)
 {
     setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png"),100,100,100,100));
@@ -46,6 +26,27 @@ Personaje::Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* g
     hitboxes["rojas"]=hb_vacia;
 
 }
+
+void flipHitBoxes(Personaje* personaje)
+{
+    int hitboxes_size=personaje->getHitBoxes("azules").size();
+    for(int i=0;i<hitboxes_size;i++)
+    {
+        int a=personaje->getHitBoxes("azules")[i].p1x;
+        int b=personaje->getHitBoxes("azules")[i].p2x;
+        personaje->getHitBoxes("azules")[i].p1x=-b;
+        personaje->getHitBoxes("azules")[i].p2x=-a;
+    }
+    hitboxes_size=personaje->getHitBoxes("rojas").size();
+    for(int i=0;i<hitboxes_size;i++)
+    {
+        int a=personaje->getHitBoxes("rojas")[i].p1x;
+        int b=personaje->getHitBoxes("rojas")[i].p2x;
+        personaje->getHitBoxes("rojas")[i].p1x=-b;
+        personaje->getHitBoxes("rojas")[i].p2x=-a;
+    }
+}
+
 Personaje::Personaje()
 {
 
@@ -264,14 +265,18 @@ bool Personaje::verificarFinDeMovimiento()
 }
 bool Personaje::ejectuarCancel(stringw input)
 {
-            if(input=="48")
-                input="saltando_atras48";
-            if(input=="8")
-                input="saltando8";
-            if(input=="68")
-                input="saltando_adelante68";
-            if(input=="2")
-                input="agachado2";
+    if(input=="48")
+        input="saltando_atras48";
+    if(input=="8")
+        input="saltando8";
+    if(input=="68")
+        input="saltando_adelante68";
+    if(input=="2")
+        input="agachado2";
+
+    if(!movimientos.find(input))
+        return false;
+
     int cancel_size=((Movimiento*)movimientos[input])->cancels.size();
     for(int i=0;i<cancel_size;i++)
         if(((Movimiento*)movimientos[input])->cancels[i]==getString("movimiento_actual"))

@@ -14,26 +14,53 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
-class Input : public IEventReceiver
+class Receiver : public IEventReceiver
 {
 private:
-    bool tecla_arriba;
-    bool tecla_arriba2;
-    irr::core::map<irr::EKEY_CODE,stringw> inputs;
-    vector<irr::EKEY_CODE> teclas_cruz;
-    vector<irr::EKEY_CODE> teclas_botones;
     SEvent::SJoystickEvent JoystickState;
     bool KeyIsDown[KEY_KEY_CODES_COUNT];
     virtual bool OnEvent(const SEvent& event);
-    const SEvent::SJoystickEvent & GetJoystickState(void) const;
 public:
-    Input();
-    core::stringw getInputKeyboard();
-    stringw getInputKeaboardCruz();
-    stringw getInputKeaboardBotones();
-    core::stringw getInputJoystick();
+    Receiver();
     virtual bool IsKeyDown(EKEY_CODE keyCode) const;
+    const SEvent::SJoystickEvent & GetJoystickState(void) const;
     //stringw getInputString(const irr::EKEY_CODE* first, ...);
+};
+
+class Input
+{
+private:
+
+private:
+    Receiver* receiver;
+    bool usando_joystick;
+    //Teclado
+    bool tecla_arriba;
+    irr::core::map<irr::EKEY_CODE,stringw> inputs;
+    vector<irr::EKEY_CODE> teclas_cruz;
+    vector<irr::EKEY_CODE> teclas_botones;
+    core::stringw getInputKeyboard();
+    stringw getInputKeyboardCruz();
+    stringw getInputKeyboardBotones();
+
+    //Joystick
+    bool tecla_arriba2;
+    irr::core::map<int,stringw> inputs_joystick;
+    vector<int> joystick_botones;
+    core::stringw getInputJoystick();
+    stringw getInputJoystickCruz();
+    stringw getInputJoystickBotones();
+
+    //Pila
+    vector<stringw> buffer_inputs;
+public:
+    stringw getInput();
+    stringw getInputCruz();
+    stringw getInputBotones();
+    vector<stringw> getBufferInputs();
+    Input(int i,Receiver* receiver);
+    Input(stringw str,Receiver* receiver);
+    Input();
 };
 
 #endif // MYEVENTRECEIVER_H

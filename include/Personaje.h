@@ -5,6 +5,7 @@ class Personaje
     //Otras
     Personaje *personaje_contrario;
     Grafico* grafico;
+    Input* input;
 
     //strings
     irr::core::map<stringw,stringw> strings;

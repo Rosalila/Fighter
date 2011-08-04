@@ -10,13 +10,14 @@ using namespace irr;
 class Grafico
 {
     int ventana_x,ventana_y;
-    IrrlichtDevice *device;
+
     video::IVideoDriver* driver;
     gui::IGUIFont* font;
 
 
     public:
-    Grafico(Input* receiver);
+    IrrlichtDevice *device;
+    Grafico(Receiver* receiver);
     bool isWindowActive();
     void beginScene();
     void endScene();

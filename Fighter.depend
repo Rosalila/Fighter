@@ -335,7 +335,7 @@
 1312103519 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786 (copy)/src/Stage.cpp
 	"../include/Stage.h"
 
-1312312340 source:/home/userr/CodeBlocksProyects/Fighter/main.cpp
+1312480978 source:/home/userr/CodeBlocksProyects/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -343,12 +343,12 @@
 	"include/Input.h"
 	"include/Fighter.h"
 
-1312317854 /home/userr/CodeBlocksProyects/Fighter/include/Input.h
+1312482654 /home/userr/CodeBlocksProyects/Fighter/include/Input.h
 	<vector>
 	<stdarg.h>
 	<irrlicht.h>
 
-1312152801 /home/userr/CodeBlocksProyects/Fighter/include/Fighter.h
+1312480185 /home/userr/CodeBlocksProyects/Fighter/include/Fighter.h
 	"../include/Menu.h"
 
 1312142276 /home/userr/CodeBlocksProyects/Fighter/include/Menu.h
@@ -360,7 +360,7 @@
 1312142276 /home/userr/CodeBlocksProyects/Fighter/include/Stage.h
 	"../include/Grafico.h"
 
-1312150648 /home/userr/CodeBlocksProyects/Fighter/include/Grafico.h
+1312443469 /home/userr/CodeBlocksProyects/Fighter/include/Grafico.h
 	<stdlib.h>
 	<irrlicht.h>
 	"../include/Input.h"
@@ -461,7 +461,7 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1312151135 /home/userr/CodeBlocksProyects/Fighter/include/Personaje.h
+1312443918 /home/userr/CodeBlocksProyects/Fighter/include/Personaje.h
 	"../include/AtributosPersonaje.h"
 
 1312150998 /home/userr/CodeBlocksProyects/Fighter/include/AtributosPersonaje.h
@@ -484,19 +484,19 @@
 1312150960 source:/home/userr/CodeBlocksProyects/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1312154111 source:/home/userr/CodeBlocksProyects/Fighter/src/Fighter.cpp
+1312483060 source:/home/userr/CodeBlocksProyects/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
-1312142276 source:/home/userr/CodeBlocksProyects/Fighter/src/Grafico.cpp
+1312443436 source:/home/userr/CodeBlocksProyects/Fighter/src/Grafico.cpp
 	"../include/Grafico.h"
 
-1312317893 source:/home/userr/CodeBlocksProyects/Fighter/src/Input.cpp
+1312482876 source:/home/userr/CodeBlocksProyects/Fighter/src/Input.cpp
 	"../include/Input.h"
 
 1312150176 source:/home/userr/CodeBlocksProyects/Fighter/src/Menu.cpp
 	"../include/Menu.h"
 
-1312312457 source:/home/userr/CodeBlocksProyects/Fighter/src/Personaje.cpp
+1312443258 source:/home/userr/CodeBlocksProyects/Fighter/src/Personaje.cpp
 	"../include/Personaje.h"
 
 1312142276 source:/home/userr/CodeBlocksProyects/Fighter/src/Sonido.cpp

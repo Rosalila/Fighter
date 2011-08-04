@@ -1,8 +1,7 @@
 #include "../include/Fighter.h"
-Fighter::Fighter(Stage* stage,Personaje*pa,Personaje*pb,Input *receiver,Grafico *grafico,Sonido *sonido)
+Fighter::Fighter(Stage* stage,Personaje*pa,Personaje*pb,Grafico *grafico,Sonido *sonido)
 {
     //Engines
-    this->receiver=receiver;
     this->grafico=grafico;
     this->sonido=sonido;
 
@@ -73,11 +72,11 @@ void Fighter::loopJuego()
 {
     sonido->reproducirSonido("Fight!");
     sonido->reproducirSonido("Fondo");
-	for (;!receiver->IsKeyDown(irr::KEY_KEY_Q);)
+	for (;;)
 	{
         render(pa,pb,stage);
-        logica(pa,receiver->getInputJoystick());
-        logica(pb,receiver->getInputKeyboard());
+        logica(pa,pa->input->getInput());
+        logica(pb,pb->input->getInput());
 	}
 }
 
@@ -129,6 +128,13 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pa->dibujarHitBoxes("rojas",video::SColor(100,255,0,0),pa->getString("orientacion")=="i");
         pb->dibujarHitBoxes("rojas",video::SColor(100,255,0,0),pb->getString("orientacion")=="i");
         */
+
+        //Movimento actual
+        //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
+        stringw str="";
+        for(int i=0;i<pb->input->getBufferInputs().size();i++)
+            str+=pb->input->getBufferInputs()[i]+"-";
+        grafico->device->setWindowCaption(str.c_str());
 
         grafico->endScene();
     }

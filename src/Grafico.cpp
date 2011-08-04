@@ -1,13 +1,13 @@
 #include "../include/Grafico.h"
 
-Grafico::Grafico(Input* receiver)
+Grafico::Grafico(Receiver* receiver)
 {
     ventana_x=1024;
     ventana_y=600;
     video::E_DRIVER_TYPE driverType;
     driverType = video::EDT_OPENGL;
     //driverType = video::EDT_SOFTWARE;
-    device = createDevice(driverType,core::dimension2d<u32>(600,300),true ,false, false, false, receiver);
+    device = createDevice(driverType,core::dimension2d<u32>(600,300),true ,false, false, false,receiver);
     if (device == 0)
         return; // could not create selected driver.
     core::array<SJoystickInfo> joystickInfo;
@@ -46,7 +46,7 @@ void Grafico::endScene()
         str += driver->getCurrentRenderTargetSize().Height;
         str += "  ==>  ";
         str += (float)ventana_y/(float)driver->getCurrentRenderTargetSize().Height;
-        device->setWindowCaption(str.c_str());
+        //device->setWindowCaption(str.c_str());
         lastFPS = fps;
     }
     driver->endScene();
