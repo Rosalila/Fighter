@@ -4,11 +4,14 @@
 	<File name="include/AtributosPersonaje.h" open="0" top="0" tabpos="3">
 		<Cursor position="970" topLine="68" />
 	</File>
-	<File name="include/Grafico.h" open="1" top="0" tabpos="5">
+	<File name="include/Fighter.h" open="0" top="0" tabpos="0">
+		<Cursor position="28" topLine="0" />
+	</File>
+	<File name="include/Grafico.h" open="0" top="0" tabpos="5">
 		<Cursor position="297" topLine="0" />
 	</File>
-	<File name="include/Input.h" open="0" top="0" tabpos="3">
-		<Cursor position="781" topLine="13" />
+	<File name="include/Input.h" open="1" top="1" tabpos="3">
+		<Cursor position="1420" topLine="41" />
 	</File>
 	<File name="include/Menu.h" open="0" top="0" tabpos="2">
 		<Cursor position="1110" topLine="58" />
@@ -17,24 +20,24 @@
 		<Cursor position="460" topLine="6" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="7983" topLine="191" />
+		<Cursor position="16186" topLine="387" />
 	</File>
 	<File name="src/AtributosPersonaje.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1140" topLine="19" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="4215" topLine="118" />
+	<File name="src/Fighter.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="4175" topLine="75" />
 	</File>
-	<File name="src/Grafico.cpp" open="1" top="0" tabpos="4">
+	<File name="src/Grafico.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1382" topLine="26" />
 	</File>
-	<File name="src/Input.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="1561" topLine="0" />
+	<File name="src/Input.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="1007" topLine="15" />
 	</File>
 	<File name="src/Menu.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="3207" topLine="0" />
 	</File>
-	<File name="src/Personaje.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="15772" topLine="399" />
+	<File name="src/Personaje.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="15772" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
