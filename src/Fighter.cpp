@@ -72,7 +72,6 @@ void Fighter::loopJuego()
 {
     sonido->reproducirSonido("Fight!");
     sonido->reproducirSonido("Fondo");
-    sonido->pararSonido("");
 	for (;;)
 	{
         render(pa,pb,stage);
@@ -133,7 +132,7 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         //Movimento actual
         //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
         stringw str="";
-        for(int i=0;i<pb->input->getBufferInputs().size();i++)
+        for(int i=0;i<(int)pb->input->getBufferInputs().size();i++)
             str+=pb->input->getBufferInputs()[i]+"-";
         grafico->device->setWindowCaption(str.c_str());
 

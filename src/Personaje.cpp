@@ -299,13 +299,13 @@ bool Personaje::ejectuarCancel(stringw input)
             {
                 int i=1;
                 bool a=false,b=false;
-                for(;i<this->input->getBufferInputs().size();i++)
+                for(;i<(int)this->input->getBufferInputs().size();i++)
                     if(this->input->getBufferInputs()[i]=="4")
                     {
                         a=true;
                         break;
                     }
-                for(;i<this->input->getBufferInputs().size();i++)
+                for(;i<(int)this->input->getBufferInputs().size();i++)
                     if(this->input->getBufferInputs()[i]=="2")
                     {
                         b=true;

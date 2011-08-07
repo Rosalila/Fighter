@@ -475,7 +475,7 @@
 	"../include/Grafico.h"
 	"../include/Sonido.h"
 
-1312681339 /home/userr/CodeBlocksProyects/Fighter/include/Sonido.h
+1312758115 /home/userr/CodeBlocksProyects/Fighter/include/Sonido.h
 	"../include/irrKlang/irrKlang.h"
 	<irrlicht.h>
 	<string>
@@ -484,7 +484,7 @@
 1312150960 source:/home/userr/CodeBlocksProyects/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1312681388 source:/home/userr/CodeBlocksProyects/Fighter/src/Fighter.cpp
+1312757818 source:/home/userr/CodeBlocksProyects/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1312443436 source:/home/userr/CodeBlocksProyects/Fighter/src/Grafico.cpp
@@ -499,7 +499,7 @@
 1312529312 source:/home/userr/CodeBlocksProyects/Fighter/src/Personaje.cpp
 	"../include/Personaje.h"
 
-1312142276 source:/home/userr/CodeBlocksProyects/Fighter/src/Sonido.cpp
+1312758115 source:/home/userr/CodeBlocksProyects/Fighter/src/Sonido.cpp
 	"../include/Sonido.h"
 
 1312142276 source:/home/userr/CodeBlocksProyects/Fighter/src/Stage.cpp
