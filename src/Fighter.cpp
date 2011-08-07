@@ -72,6 +72,7 @@ void Fighter::loopJuego()
 {
     sonido->reproducirSonido("Fight!");
     sonido->reproducirSonido("Fondo");
+    sonido->pararSonido("");
 	for (;;)
 	{
         render(pa,pb,stage);

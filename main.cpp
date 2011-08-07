@@ -103,14 +103,21 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarModificador("a",4,hb_roja,this,"rojas",false);
 
         agregarMovimiento("b");
-        for(int i=0;i<14;i++)
+        for(int i=0;i<5;i++)
             agregarFrame("b",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/agarre/",14,"b",grafico);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque1/",5,"b",grafico);
+
+        agregarModificador("b",2,"recibir",this,"movimiento_actual",true);
+        hb_roja.clear();
+        hb_roja.push_back(HitBox(-100,-100,100,100));
+        agregarModificador("b",0,hb_roja,this,"rojas",false);
+        hb_roja.clear();
+        agregarModificador("b",4,hb_roja,this,"rojas",false);
 
         agregarMovimiento("c");
-        for(int i=0;i<7;i++)
+        for(int i=0;i<5;i++)
             agregarFrame("c",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/overhead/",7,"c",grafico);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque1/",5,"c",grafico);
 
         agregarModificador("c",2,"recibir",this,"movimiento_actual",true);
         hb_roja.clear();
@@ -130,6 +137,22 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarModificador("d",0,hb_roja,this,"rojas",false);
         hb_roja.clear();
         agregarModificador("d",4,hb_roja,this,"rojas",false);
+
+        agregarMovimiento("ab");
+        for(int i=0;i<14;i++)
+            agregarFrame("ab",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/agarre/",14,"ab",grafico);
+
+        agregarMovimiento("cd");
+        for(int i=0;i<7;i++)
+            agregarFrame("cd",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/overhead/",7,"cd",grafico);
+
+
+        agregarMovimiento("hadouken");
+        for(int i=0;i<14;i++)
+            agregarFrame("hadouken",1);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/especial/hadouken/",14,"hadouken",grafico);
 
         agregarMovimiento("agachado24");
         for(int i=0;i<5;i++)
@@ -318,6 +341,9 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("b","5");
         agregarCancel("c","5");
         agregarCancel("d","5");
+        agregarCancel("ab","5");
+        agregarCancel("cd","5");
+        agregarCancel("hadouken","5");
         agregarCancel("agachado24","5");
         agregarCancel("agachado2","5");
         agregarCancel("agachado26","5");
@@ -331,6 +357,9 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("b","4");
         agregarCancel("c","4");
         agregarCancel("d","4");
+        agregarCancel("ab","4");
+        agregarCancel("cd","4");
+        agregarCancel("hadouken","4");
         agregarCancel("agachado24","4");
         agregarCancel("agachado2","4");
         agregarCancel("agachado26","4");
@@ -344,6 +373,9 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("b","6");
         agregarCancel("c","6");
         agregarCancel("d","6");
+        agregarCancel("ab","6");
+        agregarCancel("cd","6");
+        agregarCancel("hadouken","6");
         agregarCancel("agachado24","6");
         agregarCancel("agachado2","6");
         agregarCancel("agachado26","6");
@@ -389,17 +421,35 @@ int main()
 {
     Receiver* receiver=new Receiver();
 
+    vector<Boton> botonesa,botonesb;
 
+    botonesb.push_back(Boton(-2,"2"));
+    botonesb.push_back(Boton(-4,"4"));
+    botonesb.push_back(Boton(-6,"6"));
+    botonesb.push_back(Boton(-8,"8"));
 
-    Input *inputa=new Input(1,receiver);
-    Input *inputb=new Input("a",receiver);
+    botonesb.push_back(Boton(0,"a"));
+    botonesb.push_back(Boton(1,"b"));
+    botonesb.push_back(Boton(2,"c"));
+    botonesb.push_back(Boton(3,"d"));
+
+    botonesa.push_back(Boton(irr::KEY_KEY_S,"2"));
+    botonesa.push_back(Boton(irr::KEY_KEY_A,"4"));
+    botonesa.push_back(Boton(irr::KEY_KEY_D,"6"));
+    botonesa.push_back(Boton(irr::KEY_KEY_W,"8"));
+
+    botonesa.push_back(Boton(irr::KEY_KEY_U,"a"));
+    botonesa.push_back(Boton(irr::KEY_KEY_I,"b"));
+    botonesa.push_back(Boton(irr::KEY_KEY_J,"c"));
+    botonesa.push_back(Boton(irr::KEY_KEY_K,"d"));
+
+    Input *inputa=new Input(botonesa,receiver);
+    Input *inputb=new Input(botonesb,receiver);
 
     Grafico *grafico=new Grafico(receiver);
     Sonido *sonido = new Sonido();
 
     Stage *stage=new Stage(grafico->getTexture("resources/Stages/Stage02.png"),grafico->getTexture("resources/Stages/Barra_Vida.png"),grafico);
-
-
 
     Personaje *pb=(Personaje*)new Ryu(Barra(250,250,-1,1,video::SColor(255,255,0,0),core::rect<s32>(250,0,450,50),NULL),800,300,3,"i",grafico,NULL,inputb);
     Personaje *pa=(Personaje*)new Ryu(Barra(250,250,-1,1,video::SColor(255,255,0,0),core::rect<s32>(0,0,200,50),NULL),50,300,2,"d",grafico,pb,inputa);

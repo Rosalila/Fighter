@@ -295,6 +295,25 @@ bool Personaje::ejectuarCancel(stringw input)
 
             getMovimientoActual()->frame_actual=0;
             setString("movimiento_actual",input);
+            if(this->input->getBufferInputs()[0]=="a" || this->input->getBufferInputs()[0]=="4a")
+            {
+                int i=1;
+                bool a=false,b=false;
+                for(;i<this->input->getBufferInputs().size();i++)
+                    if(this->input->getBufferInputs()[i]=="4")
+                    {
+                        a=true;
+                        break;
+                    }
+                for(;i<this->input->getBufferInputs().size();i++)
+                    if(this->input->getBufferInputs()[i]=="2")
+                    {
+                        b=true;
+                        break;
+                    }
+                if(a&&b)
+                    setString("movimiento_actual","hadouken");
+            }
             return true;
         }
     return false;

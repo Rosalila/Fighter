@@ -10,10 +10,15 @@ void Sonido::drop()
 }
 void Sonido::agregarSonido(std::string variable,const ik_c8* valor)
 {
-
-    sonidos[variable]=engine->addSoundSourceFromFile(valor);;
+    sonidos[variable]=engine->addSoundSourceFromFile(valor);
 }
 void Sonido::reproducirSonido(std::string variable)
 {
-    engine->play2D(sonidos[variable]);
+    ultimo=engine->play2D(sonidos[variable],false,false,true,true);
+}
+
+void Sonido::pararSonido(std::string variable)
+{
+    if(ultimo!=NULL)
+        ultimo->setVolume(0);
 }

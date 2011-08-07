@@ -10,8 +10,8 @@
 	<File name="include/Grafico.h" open="0" top="0" tabpos="5">
 		<Cursor position="297" topLine="0" />
 	</File>
-	<File name="include/Input.h" open="1" top="1" tabpos="3">
-		<Cursor position="1420" topLine="41" />
+	<File name="include/Input.h" open="1" top="0" tabpos="3">
+		<Cursor position="1706" topLine="62" />
 	</File>
 	<File name="include/Menu.h" open="0" top="0" tabpos="2">
 		<Cursor position="1110" topLine="58" />
@@ -20,19 +20,19 @@
 		<Cursor position="460" topLine="6" />
 	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="16186" topLine="387" />
+		<Cursor position="18286" topLine="437" />
 	</File>
 	<File name="src/AtributosPersonaje.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="1140" topLine="19" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="4175" topLine="75" />
+	<File name="src/Fighter.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="2133" topLine="78" />
 	</File>
 	<File name="src/Grafico.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="1382" topLine="26" />
 	</File>
-	<File name="src/Input.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="1007" topLine="15" />
+	<File name="src/Input.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="1781" topLine="61" />
 	</File>
 	<File name="src/Menu.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="3207" topLine="0" />

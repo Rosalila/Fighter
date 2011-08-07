@@ -17,50 +17,71 @@ using namespace gui;
 class Receiver : public IEventReceiver
 {
 private:
+    f32 moveHorizontal;
+    f32 moveVertical;
     SEvent::SJoystickEvent JoystickState;
     bool KeyIsDown[KEY_KEY_CODES_COUNT];
     virtual bool OnEvent(const SEvent& event);
+    const SEvent::SJoystickEvent & GetJoystickState(void) const;
+
 public:
     Receiver();
     virtual bool IsKeyDown(EKEY_CODE keyCode) const;
-    const SEvent::SJoystickEvent & GetJoystickState(void) const;
-    //stringw getInputString(const irr::EKEY_CODE* first, ...);
+    bool IsJoyDown(int joyCode);
+};
+
+class Boton
+{
+private:
+    irr::EKEY_CODE teclado;
+    int joystick;
+    stringw mapeo;
+    bool usando_joystick;
+public:
+    Boton(irr::EKEY_CODE teclado,stringw mapeo)
+    {
+        this->teclado=teclado;
+        this->mapeo=mapeo;
+        usando_joystick=false;
+    }
+    Boton(int joystick,stringw mapeo)
+    {
+        this->joystick=joystick;
+        this->mapeo=mapeo;
+        usando_joystick=true;
+    }
+
+    bool estaPresionado(Receiver* receiver)
+    {
+        if(usando_joystick)
+        {
+            if(receiver->IsJoyDown(joystick))
+                return true;
+        }else
+        {
+            if (receiver->IsKeyDown(teclado))
+                return true;
+        }
+        return false;
+    }
+
+    stringw getMapeo()
+    {
+        return mapeo;
+    }
 };
 
 class Input
 {
 private:
-
-private:
     Receiver* receiver;
-    bool usando_joystick;
-    //Teclado
     bool tecla_arriba;
-    irr::core::map<irr::EKEY_CODE,stringw> inputs;
-    vector<irr::EKEY_CODE> teclas_cruz;
-    vector<irr::EKEY_CODE> teclas_botones;
-    core::stringw getInputKeyboard();
-    stringw getInputKeyboardCruz();
-    stringw getInputKeyboardBotones();
-
-    //Joystick
-    bool tecla_arriba2;
-    irr::core::map<int,stringw> inputs_joystick;
-    vector<int> joystick_botones;
-    core::stringw getInputJoystick();
-    stringw getInputJoystickCruz();
-    stringw getInputJoystickBotones();
-
-    //Pila
+    vector<Boton> botones;
     vector<stringw> buffer_inputs;
 public:
+    Input(vector<Boton> botones,Receiver* receiver);
     stringw getInput();
-    stringw getInputCruz();
-    stringw getInputBotones();
     vector<stringw> getBufferInputs();
-    Input(int i,Receiver* receiver);
-    Input(stringw str,Receiver* receiver);
-    Input();
 };
 
 #endif // MYEVENTRECEIVER_H

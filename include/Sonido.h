@@ -11,9 +11,11 @@ class Sonido
 {
     ISoundEngine *engine;
     irr::core::map<std::string,irrklang::ISoundSource*> sonidos;
+    ISound* ultimo;
 public:
     Sonido();
     void drop();
     void agregarSonido(std::string variable,const ik_c8* valor);
     void reproducirSonido(std::string variable);
+    void pararSonido(std::string variable);
 };
