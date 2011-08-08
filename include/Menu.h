@@ -1,8 +1,9 @@
 #include "../include/Stage.h"
 #include "../include/Grafico.h"
 #include "../include/irrKlang/irrKlang.h"
-using namespace irrklang;
 #include "../include/Personaje.h"
+using namespace irrklang;
+
 
 /*
 class Elemento

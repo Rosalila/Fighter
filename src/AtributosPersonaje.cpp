@@ -45,44 +45,39 @@ Imagen::Imagen()
 
 }
 
-ModificadorImagen::ModificadorImagen(Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+ModificadorImagen::ModificadorImagen(Imagen modificador,stringw variable,bool aplicar_a_contrario)
 {
     tipo="imagen";
-    this->personaje=personaje;
     this->variable=variable;
     this->modificador_imagen=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
 
-ModificadorEntero::ModificadorEntero(int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario)
+ModificadorEntero::ModificadorEntero(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
 {
     tipo="entero";
-    this->personaje=personaje;
     this->variable=variable;
     this->modificador_entero=modificador;
     this->relativo=relativo;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorBarra::ModificadorBarra(Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+ModificadorBarra::ModificadorBarra(Barra modificador,stringw variable,bool aplicar_a_contrario)
 {
     tipo="barra";
-    this->personaje=personaje;
     this->variable=variable;
     this->modificador_barra=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorHitboxes::ModificadorHitboxes(vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+ModificadorHitboxes::ModificadorHitboxes(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario)
 {
     tipo="hitboxes";
-    this->personaje=personaje;
     this->variable=variable;
     this->modificador_hitbox=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorString::ModificadorString(stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+ModificadorString::ModificadorString(stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
     tipo="string";
-    this->personaje=personaje;
     this->variable=variable;
     this->modificador_string=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
@@ -93,25 +88,25 @@ Frame::Frame(int duracion)
     this->modificadores=vector<Modificador>();
     this->duracion=duracion;
 }
-void Frame::agregarModificador(Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(Imagen modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorImagen(modificador,personaje,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorImagen(modificador,variable,aplicar_a_contrario));
 }
-void Frame::agregarModificador(int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario)
+void Frame::agregarModificador(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorEntero(modificador,personaje,variable,relativo,aplicar_a_contrario));
+    modificadores.push_back(ModificadorEntero(modificador,variable,relativo,aplicar_a_contrario));
 }
-void Frame::agregarModificador(Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorBarra(modificador,personaje,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorBarra(modificador,variable,aplicar_a_contrario));
 }
-void Frame::agregarModificador(vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorHitboxes(modificador,personaje,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorHitboxes(modificador,variable,aplicar_a_contrario));
 }
-void Frame::agregarModificador(stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorString(modificador,personaje,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorString(modificador,variable,aplicar_a_contrario));
 }
 
 Movimiento::Movimiento()

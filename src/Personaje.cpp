@@ -163,25 +163,25 @@ void Personaje::agregarFrame(stringw movimiento, int duracion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarFrame(duracion);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,Imagen modificador,stringw variable,bool aplicar_a_contrario)
 {
-    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
+    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,int modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
 {
-    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,relativo,aplicar_a_contrario);
+    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,relativo,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,Barra modificador,stringw variable,bool aplicar_a_contrario)
 {
-    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
+    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario)
 {
-    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
+    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
-    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,personaje,variable,aplicar_a_contrario);
+    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
 
 //Logica
@@ -265,15 +265,6 @@ bool Personaje::verificarFinDeMovimiento()
 }
 bool Personaje::ejectuarCancel(stringw input)
 {
-    if(input=="48")
-        input="saltando_atras48";
-    if(input=="8")
-        input="saltando8";
-    if(input=="68")
-        input="saltando_adelante68";
-    if(input=="2")
-        input="agachado2";
-
     if(!movimientos.find(input))
         return false;
 
@@ -318,6 +309,51 @@ bool Personaje::ejectuarCancel(stringw input)
         }
     return false;
 }
+
+//            Barra barra=personaje_contrario->getBarra("hp");
+//            barra.valor_actual-=10;
+//            personaje_contrario->setBarra("hp",barra);
+//            personaje_contrario->setImagen(mi->variable,mi->modificador_imagen);
+
+void Personaje::aplicarModificador(ModificadorImagen* mi)
+{
+    if(mi->aplicar_a_contrario)
+        personaje_contrario->setImagen(mi->variable,mi->modificador_imagen);
+    else
+        setImagen(mi->variable,mi->modificador_imagen);
+}
+
+
+void Personaje::aplicarModificador(ModificadorEntero* me)
+{
+    if(me->relativo)
+        if(me->aplicar_a_contrario)
+            personaje_contrario->setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+        else
+            setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+    else
+        if(me->aplicar_a_contrario)
+            personaje_contrario->setEntero(me->variable,me->modificador_entero);
+        else
+            setEntero(me->variable,me->modificador_entero);
+}
+
+void Personaje::aplicarModificador(ModificadorString* ms)
+{
+    if(ms->aplicar_a_contrario)
+        personaje_contrario->setString(ms->variable,ms->modificador_string);//limpio
+    else
+        setString(ms->variable,ms->modificador_string);
+}
+
+void Personaje::aplicarModificador(ModificadorHitboxes* mh)
+{
+    if(mh->aplicar_a_contrario)
+        personaje_contrario->setHitBoxes(mh->variable,mh->modificador_hitbox);
+    else
+        setHitBoxes(mh->variable,mh->modificador_hitbox);
+}
+
 bool Personaje::aplicarModificadores()
 {
     if(getEntero("tiempo_transcurrido")>getFrameActual().duracion)
@@ -328,65 +364,13 @@ bool Personaje::aplicarModificadores()
         {
             Modificador modificador=frame.modificadores[i];
             if(modificador.tipo=="imagen")
-            {
-                ModificadorImagen* mod_imagen=(ModificadorImagen*)&modificador;
-                if(mod_imagen->aplicar_a_contrario)
-                {
-                    if(getColisionHitBoxes(this,personaje_contrario))//chancho
-                    {
-                        Barra barra=mod_imagen->personaje->personaje_contrario->getBarra("hp");
-                        barra.valor_actual-=10;
-                        mod_imagen->personaje->personaje_contrario->setBarra("hp",barra);
-                        mod_imagen->personaje->personaje_contrario->setImagen(mod_imagen->variable,mod_imagen->modificador_imagen);
-                    }
-                }
-                else
-                    mod_imagen->personaje->setImagen(mod_imagen->variable,mod_imagen->modificador_imagen);
-            }
+                aplicarModificador((ModificadorImagen*)&modificador);
             if(modificador.tipo=="entero")
-            {
-                ModificadorEntero* mod_entero=(ModificadorEntero*)&modificador;
-                if(mod_entero->relativo)
-                    if(mod_entero->aplicar_a_contrario)
-                        mod_entero->personaje->personaje_contrario->setEntero(mod_entero->variable,mod_entero->modificador_entero+getEntero(mod_entero->variable));
-                    else
-                    {
-                        if(mod_entero->variable=="posicion_x" && getString("orientacion")=="i")
-                            mod_entero->personaje->setEntero(mod_entero->variable,-mod_entero->modificador_entero+getEntero(mod_entero->variable));
-                        else
-                            mod_entero->personaje->setEntero(mod_entero->variable,mod_entero->modificador_entero+getEntero(mod_entero->variable));
-                    }
-                else
-                    if(mod_entero->aplicar_a_contrario)
-                        mod_entero->personaje->personaje_contrario->setEntero(mod_entero->variable,mod_entero->modificador_entero);
-                    else
-                        mod_entero->personaje->setEntero(mod_entero->variable,mod_entero->modificador_entero);
-            }
+                aplicarModificador((ModificadorEntero*)&modificador);
             if(modificador.tipo=="string")
-            {
-                ModificadorString* mod_string=(ModificadorString*)&modificador;
-                if(mod_string->aplicar_a_contrario)
-                {
-                    if(getColisionHitBoxes(this,personaje_contrario))//chanchada
-                    {
-                        mod_string->personaje->personaje_contrario->setString(mod_string->variable,mod_string->modificador_string);//limpio
-
-                        Barra barra=mod_string->personaje->personaje_contrario->getBarra("hp");
-                        barra.valor_actual-=10;
-                        mod_string->personaje->personaje_contrario->setBarra("hp",barra);
-                    }
-                }
-                else
-                    mod_string->personaje->setString(mod_string->variable,mod_string->modificador_string);
-            }
+                aplicarModificador((ModificadorString*)&modificador);
             if(modificador.tipo=="hitboxes")
-            {
-                ModificadorHitboxes* mod_hitboxes=(ModificadorHitboxes*)&modificador;
-                if(mod_hitboxes->aplicar_a_contrario)
-                    mod_hitboxes->personaje->personaje_contrario->setHitBoxes(mod_hitboxes->variable,mod_hitboxes->modificador_hitbox);
-                else
-                    mod_hitboxes->personaje->setHitBoxes(mod_hitboxes->variable,mod_hitboxes->modificador_hitbox);
-            }
+                aplicarModificador((ModificadorHitboxes*)&modificador);
         }
         getMovimientoActual()->frame_actual++;
         setEntero("tiempo_transcurrido",0);

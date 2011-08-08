@@ -18,7 +18,7 @@ void wizardAgregarImagenes(Personaje* personaje,stringw carpeta,int frames,strin
         irr::core::stringw outw(out.str().c_str());
         s = carpeta+outw+".png";
         irr::core::stringw str(s.c_str());
-        personaje->agregarModificador(movimiento,i,Imagen(grafico->getTexture(irr::io::path(str)),0,0),personaje,"imagen_personaje",false);
+        personaje->agregarModificador(movimiento,i,Imagen(grafico->getTexture(irr::io::path(str)),0,0),"imagen_personaje",false);
     }
 }
 
@@ -58,7 +58,6 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         for(int i=0;i<11;i++)
             agregarFrame("4",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/caminar/atras/",11,"4",grafico);
-        //wizardMovimiento(this,"5",10,1,"resources/Personajes/Ryu/Sprites/respirar/01.png",grafico);
         agregarMovimiento("5");
         for(int i=0;i<10;i++)
             agregarFrame("5",1);
@@ -67,12 +66,8 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         vector <HitBox> hb_roja;
         vector <HitBox> hb_azul;
         hb_azul.push_back(HitBox(-100,-100,100,100));
-        //hb_roja.push_back(HitBox(60,80,80,120));
-        agregarModificador("5",0,hb_azul,this,"azules",false);
-        //personaje->agregarModificador(movimiento,i,hb_roja,personaje,"rojas",false);
+        agregarModificador("5",0,hb_azul,"azules",false);
 
-
-        //wizardMovimiento(this,"6",12,1,"resources/Personajes/Ryu/Sprites/mover/caminar/adelante/01.png",grafico);
         agregarMovimiento("6");
         for(int i=0;i<12;i++)
             agregarFrame("6",1);
@@ -81,62 +76,68 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarMovimiento("48");
         for(int i=0;i<13;i++)
             agregarFrame("48",1);
+        agregarModificador("48",0,"saltando_atras","estado_posicion",false);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/atras/",13,"48",grafico);
 
         agregarMovimiento("8");
         for(int i=0;i<12;i++)
             agregarFrame("8",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/",12,"48",grafico);
+        agregarModificador("8",0,"saltando","estado_posicion",false);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/",12,"8",grafico);
 
         agregarMovimiento("68");
+        for(int i=0;i<13;i++)
+            agregarFrame("68",1);
+        agregarModificador("68",0,"saltando_adelante","estado_posicion",false);
+        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/adelante/",13,"68",grafico);
 
         agregarMovimiento("a");
         for(int i=0;i<5;i++)
             agregarFrame("a",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque1/",5,"a",grafico);
 
-        agregarModificador("a",2,"recibir",this,"movimiento_actual",true);
+        agregarModificador("a",2,"recibir","movimiento_actual",true);
         hb_roja.clear();
         hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("a",0,hb_roja,this,"rojas",false);
+        agregarModificador("a",0,hb_roja,"rojas",false);
         hb_roja.clear();
-        agregarModificador("a",4,hb_roja,this,"rojas",false);
+        agregarModificador("a",4,hb_roja,"rojas",false);
 
         agregarMovimiento("b");
         for(int i=0;i<5;i++)
             agregarFrame("b",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque1/",5,"b",grafico);
 
-        agregarModificador("b",2,"recibir",this,"movimiento_actual",true);
+        agregarModificador("b",2,"recibir","movimiento_actual",true);
         hb_roja.clear();
         hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("b",0,hb_roja,this,"rojas",false);
+        agregarModificador("b",0,hb_roja,"rojas",false);
         hb_roja.clear();
-        agregarModificador("b",4,hb_roja,this,"rojas",false);
+        agregarModificador("b",4,hb_roja,"rojas",false);
 
         agregarMovimiento("c");
         for(int i=0;i<5;i++)
             agregarFrame("c",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque1/",5,"c",grafico);
 
-        agregarModificador("c",2,"recibir",this,"movimiento_actual",true);
+        agregarModificador("c",2,"recibir","movimiento_actual",true);
         hb_roja.clear();
         hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("c",0,hb_roja,this,"rojas",false);
+        agregarModificador("c",0,hb_roja,"rojas",false);
         hb_roja.clear();
-        agregarModificador("c",4,hb_roja,this,"rojas",false);
+        agregarModificador("c",4,hb_roja,"rojas",false);
 
         agregarMovimiento("d");
         for(int i=0;i<5;i++)
             agregarFrame("d",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque1/",5,"d",grafico);
 
-        agregarModificador("d",2,"recibir",this,"movimiento_actual",true);
+        agregarModificador("d",2,"recibir","movimiento_actual",true);
         hb_roja.clear();
         hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("d",0,hb_roja,this,"rojas",false);
+        agregarModificador("d",0,hb_roja,"rojas",false);
         hb_roja.clear();
-        agregarModificador("d",4,hb_roja,this,"rojas",false);
+        agregarModificador("d",4,hb_roja,"rojas",false);
 
         agregarMovimiento("ab");
         for(int i=0;i<14;i++)
@@ -154,187 +155,11 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
             agregarFrame("hadouken",1);
         wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/especial/hadouken/",14,"hadouken",grafico);
 
-        agregarMovimiento("agachado24");
-        for(int i=0;i<5;i++)
-            agregarFrame("agachado24",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado24",grafico);
-
-        agregarMovimiento("agachado2");
-        for(int i=0;i<5;i++)
-            agregarFrame("agachado2",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado2",grafico);
-
-        agregarMovimiento("agachado26");
-        for(int i=0;i<5;i++)
-            agregarFrame("agachado26",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/respirar/agachado/",5,"agachado26",grafico);
-
-        agregarMovimiento("agachado4");
-        agregarMovimiento("agachado5");
-        agregarMovimiento("agachado6");
-        agregarMovimiento("agachado48");
-        agregarMovimiento("agachado8");
-        agregarMovimiento("agachado68");
-
-        agregarMovimiento("agachadoa");
-        for(int i=0;i<7;i++)
-            agregarFrame("agachadoa",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/golpe_bajo/",7,"agachadoa",grafico);
-
-        agregarModificador("agachadoa",2,"recibir",this,"movimiento_actual",true);
-        hb_roja.clear();
-        hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("agachadoa",0,hb_roja,this,"rojas",false);
-        hb_roja.clear();
-        agregarModificador("agachadoa",4,hb_roja,this,"rojas",false);
-
-        agregarMovimiento("agachadob");
-        for(int i=0;i<7;i++)
-            agregarFrame("agachadob",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/golpe_bajo/",7,"agachadob",grafico);
-
-        agregarMovimiento("agachadoc");
-        for(int i=0;i<7;i++)
-            agregarFrame("agachadoc",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/golpe_bajo/",7,"agachadoc",grafico);
-
-        agregarMovimiento("agachadod");
-        for(int i=0;i<7;i++)
-            agregarFrame("agachadod",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/golpe_bajo/",7,"agachadod",grafico);
-
-        agregarMovimiento("saltando_atras24");
-        agregarMovimiento("saltando_atras2");
-        agregarMovimiento("saltando_atras26");
-        agregarMovimiento("saltando_atras4");
-        agregarMovimiento("saltando_atras5");
-        agregarMovimiento("saltando_atras6");
-
-        agregarMovimiento("saltando_atras48");
-        for(int i=0;i<13;i++)
-            agregarFrame("saltando_atras48",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/atras/",13,"saltando_atras48",grafico);
-
-        agregarMovimiento("saltando_atras8");
-        agregarMovimiento("saltando_atras68");
-
-        agregarMovimiento("saltando_atrasa");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_atrasa",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_atrasa",grafico);
-
-        agregarModificador("saltando_atrasa",2,"recibir",this,"movimiento_actual",true);
-        hb_roja.clear();
-        hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("saltando_atrasa",0,hb_roja,this,"rojas",false);
-        hb_roja.clear();
-        agregarModificador("saltando_atrasa",4,hb_roja,this,"rojas",false);
-
-        agregarMovimiento("saltando_atrasb");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_atrasb",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_atrasb",grafico);
-
-        agregarMovimiento("saltando_atrasc");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_atrasc",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_atrasc",grafico);
-
-        agregarMovimiento("saltando_atrasd");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_atrasd",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_atrasd",grafico);
-
-        agregarMovimiento("saltando24");
-        agregarMovimiento("saltando2");
-        agregarMovimiento("saltando26");
-        agregarMovimiento("saltando4");
-        agregarMovimiento("saltando5");
-        //wizardMovimiento(this,"saltando5",12,1,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png",grafico);
-        agregarMovimiento("saltando6");
-        agregarMovimiento("saltando48");
-
-        agregarMovimiento("saltando8");
-        for(int i=0;i<12;i++)
-            agregarFrame("saltando8",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/arriba/",12,"saltando8",grafico);
-
-        agregarMovimiento("saltando68");
-
-        agregarMovimiento("saltandoa");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltandoa",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltandoa",grafico);
-
-        agregarModificador("saltandoa",2,"recibir",this,"movimiento_actual",true);
-        hb_roja.clear();
-        hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("saltandoa",0,hb_roja,this,"rojas",false);
-        hb_roja.clear();
-        agregarModificador("saltandoa",4,hb_roja,this,"rojas",false);
-
-        agregarMovimiento("saltandob");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltandob",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltandob",grafico);
-
-        agregarMovimiento("saltandoc");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltandoc",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltandoc",grafico);
-
-        agregarMovimiento("saltandod");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltandod",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltandod",grafico);
-
-        agregarMovimiento("saltando_adelante24");
-        agregarMovimiento("saltando_adelante2");
-        agregarMovimiento("saltando_adelante26");
-        agregarMovimiento("saltando_adelante4");
-        agregarMovimiento("saltando_adelante5");
-        //wizardMovimiento(this,"saltando_adelante5",13,1,"resources/Personajes/Ryu/Sprites/mover/saltar/adelante/01.png",grafico);
-        agregarMovimiento("saltando_adelante6");
-        agregarMovimiento("saltando_adelante48");
-        agregarMovimiento("saltando_adelante8");
-
-        agregarMovimiento("saltando_adelante68");
-        for(int i=0;i<13;i++)
-            agregarFrame("saltando_adelante68",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/mover/saltar/adelante/",13,"saltando_adelante68",grafico);
-
-        agregarMovimiento("saltando_adelantea");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_adelantea",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_adelantea",grafico);
-
-        agregarModificador("saltando_adelantea",2,"recibir",this,"movimiento_actual",true);
-        hb_roja.clear();
-        hb_roja.push_back(HitBox(-100,-100,100,100));
-        agregarModificador("saltando_adelantea",0,hb_roja,this,"rojas",false);
-        hb_roja.clear();
-        agregarModificador("saltando_adelantea",4,hb_roja,this,"rojas",false);
-
-        agregarMovimiento("saltando_adelanteb");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_adelanteb",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_adelanteb",grafico);
-
-        agregarMovimiento("saltando_adelantec");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_adelantec",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_adelantec",grafico);
-
-        agregarMovimiento("saltando_adelanted");
-        for(int i=0;i<6;i++)
-            agregarFrame("saltando_adelanted",1);
-        wizardAgregarImagenes(this,"resources/Personajes/Ryu/Sprites/atacar/ataque_aereo/",6,"saltando_adelanted",grafico);
-
 
         for(int i=0;i<11;i++)
-            agregarModificador("4",i,-10,this,"posicion_x",true,false);
+            agregarModificador("4",i,-10,"posicion_x",true,false);
         for(int i=0;i<12;i++)
-            agregarModificador("6",i,10,this,"posicion_x",true,false);
+            agregarModificador("6",i,10,"posicion_x",true,false);
 
         //cancels
         agregarCancel("a","5");
@@ -344,14 +169,11 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("ab","5");
         agregarCancel("cd","5");
         agregarCancel("hadouken","5");
-        agregarCancel("agachado24","5");
-        agregarCancel("agachado2","5");
-        agregarCancel("agachado26","5");
         agregarCancel("4","5");
         agregarCancel("6","5");
-        agregarCancel("saltando_atras48","5");
-        agregarCancel("saltando8","5");
-        agregarCancel("saltando_adelante68","5");
+        agregarCancel("48","5");
+        agregarCancel("8","5");
+        agregarCancel("68","5");
 
         agregarCancel("a","4");
         agregarCancel("b","4");
@@ -360,14 +182,8 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("ab","4");
         agregarCancel("cd","4");
         agregarCancel("hadouken","4");
-        agregarCancel("agachado24","4");
-        agregarCancel("agachado2","4");
-        agregarCancel("agachado26","4");
         agregarCancel("5","4");
         agregarCancel("6","4");
-        agregarCancel("saltando_atras48","4");
-        agregarCancel("saltando8","4");
-        agregarCancel("saltando_adelante68","4");
         //
         agregarCancel("a","6");
         agregarCancel("b","6");
@@ -376,44 +192,8 @@ Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje 
         agregarCancel("ab","6");
         agregarCancel("cd","6");
         agregarCancel("hadouken","6");
-        agregarCancel("agachado24","6");
-        agregarCancel("agachado2","6");
-        agregarCancel("agachado26","6");
         agregarCancel("4","6");
         agregarCancel("5","6");
-        agregarCancel("saltando_atras48","6");
-        agregarCancel("saltando8","6");
-        agregarCancel("saltando_adelante68","6");
-
-        //saltar
-        agregarCancel("saltando_atrasa","saltando_atras48");
-        agregarCancel("saltandoa","saltando8");
-        agregarCancel("saltando_adelantea","saltando_adelante68");
-
-        agregarCancel("saltando_atrasb","saltando_atras48");
-        agregarCancel("saltandob","saltando8");
-        agregarCancel("saltando_adelanteb","saltando_adelante68");
-
-        agregarCancel("saltando_atrasc","saltando_atras48");
-        agregarCancel("saltandoc","saltando8");
-        agregarCancel("saltando_adelantec","saltando_adelante68");
-
-        agregarCancel("saltando_atrasd","saltando_atras48");
-        agregarCancel("saltandod","saltando8");
-        agregarCancel("saltando_adelanted","saltando_adelante68");
-        //agachar
-        agregarCancel("agachadoa","agachado24");
-        agregarCancel("agachadob","agachado24");
-        agregarCancel("agachadoc","agachado24");
-        agregarCancel("agachadod","agachado24");
-        agregarCancel("agachadoa","agachado2");
-        agregarCancel("agachadob","agachado2");
-        agregarCancel("agachadoc","agachado2");
-        agregarCancel("agachadod","agachado2");
-        agregarCancel("agachadoa","agachado26");
-        agregarCancel("agachadob","agachado26");
-        agregarCancel("agachadoc","agachado26");
-        agregarCancel("agachadod","agachado126");
     }
 };
 

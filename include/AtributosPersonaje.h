@@ -51,45 +51,44 @@ class Modificador
     //info
     bool aplicar_a_contrario;
     stringw tipo;
-    Personaje* personaje;
     stringw variable;
-    bool relativo;
-    //modificadores
     Imagen modificador_imagen;
-    int modificador_entero;
+
     Barra modificador_barra;
     vector <HitBox> modificador_hitbox;
     stringw modificador_string;
+    int modificador_entero;
 };
 
 class ModificadorImagen : public Modificador
 {
     public:
-    ModificadorImagen(Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    ModificadorImagen(Imagen modificador,stringw variable,bool aplicar_a_contrario);
 };
 
 class ModificadorEntero : public Modificador
 {
     public:
-    ModificadorEntero(int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario);
+    bool relativo;
+    ModificadorEntero(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
 };
 
 class ModificadorBarra : public Modificador
 {
     public:
-    ModificadorBarra(Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    ModificadorBarra(Barra modificador,stringw variable,bool aplicar_a_contrario);
 };
 
 class ModificadorHitboxes : public Modificador
 {
     public:
-    ModificadorHitboxes(vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    ModificadorHitboxes(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
 };
 
 class ModificadorString : public Modificador
 {
     public:
-    ModificadorString(stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    ModificadorString(stringw modificador,stringw variable,bool aplicar_a_contrario);
 };
 
 class Frame
@@ -99,11 +98,11 @@ class Frame
     int duracion;
     Frame(int duracion);
     //modificadores
-    void agregarModificador(Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario);
-    void agregarModificador(Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(Imagen modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
+    void agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario);
 };
 
 class Movimiento

@@ -45,11 +45,16 @@ class Personaje
     void agregarCancel(stringw cancelador,stringw cancelado);
     void agregarMovimiento(stringw movimiento);
     void agregarFrame(stringw movimiento, int duracion);
-    void agregarModificador(stringw movimiento,int frame,Imagen modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,int modificador,Personaje* personaje,stringw variable,bool relativo,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,Barra modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,stringw modificador,Personaje* personaje,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,Imagen modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,Barra modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario);
+    //Aplicar modificadores
+    void aplicarModificador(ModificadorImagen* mi);
+    void aplicarModificador(ModificadorEntero* me);
+    void aplicarModificador(ModificadorString* ms);
+    void aplicarModificador(ModificadorHitboxes* mh);
     //Logica
     bool ejectuarCancel(stringw input);
     bool verificarFinDeMovimiento();
