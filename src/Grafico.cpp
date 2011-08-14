@@ -89,10 +89,18 @@ void Grafico::draw2DImage
 				 bool flipVertically 	)
 {
    //inicio escala
-   float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-   float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+   float escala_x,escala_y;
+   if(scale.X!=0 && scale.Y!=0)
+   {
+       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
+       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
+   }else
+   {
+       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+   }
+
    scale=irr::core::vector2df (escala_x,escala_y);
-   position=irr::core::position2d<irr::f32>(position.X*escala_x,position.Y*escala_y);
    //fin escala
    if(!texture)
 	   return;

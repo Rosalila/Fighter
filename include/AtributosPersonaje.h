@@ -37,10 +37,10 @@ public:
 class Imagen
 {
 public:
-    int dimension_x,dimension_y,alineacion_x,alineacion_y;
+    int dimension_x,dimension_y,alineacion_x,alineacion_y,escala;
     video::ITexture* imagen;
 
-    Imagen(video::ITexture* imagen,int dimension_x,int dimension_y,int alineacion_x,int alineacion_y);
+    Imagen(video::ITexture* imagen,float escala,int alineacion_x,int alineacion_y);
     Imagen(video::ITexture* imagen,int alineacion_x,int alineacion_y);
     Imagen();
 };
@@ -91,10 +91,35 @@ class ModificadorString : public Modificador
     ModificadorString(stringw modificador,stringw variable,bool aplicar_a_contrario);
 };
 
+class Condicion
+{
+public:
+    stringw tipo;
+    stringw variable;
+    //entero
+    stringw comparacion;
+    int entero;
+    //cadena
+    stringw cadena;
+    Condicion(int entero,stringw comparacion,stringw variable)
+    {
+        tipo=L"entero";
+        this->comparacion=comparacion;
+        this->entero=entero;
+    }
+    Condicion(stringw cadena,stringw variable)
+    {
+        tipo=L"cadena";
+        this->cadena=cadena;
+        this->variable=variable;
+    }
+};
+
 class Frame
 {
     public:
     vector <Modificador> modificadores;
+    vector <Condicion> condiciones;
     int duracion;
     Frame(int duracion);
     //modificadores
@@ -103,6 +128,12 @@ class Frame
     void agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario);
+
+    //condiciones
+    void agregarCondicion(Condicion condicion)
+    {
+        condiciones.push_back(condicion);
+    }
 };
 
 class Movimiento
@@ -110,8 +141,23 @@ class Movimiento
     public:
     int frame_actual;
     vector <Frame> frames;
-    vector <stringw> cancels;
     Movimiento();
     Frame getFrameActual();
     void agregarFrame(int duracion);
+    void agregarCondicion(Condicion condicion,int frame)
+    {
+        frames[frame].condiciones.push_back(condicion);
+    }
+};
+
+class InputMovimiento
+{
+public:
+    stringw input;
+    stringw movimiento;
+    InputMovimiento(stringw input,stringw movimiento)
+    {
+        this->input=input;
+        this->movimiento=movimiento;
+    }
 };

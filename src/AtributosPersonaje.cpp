@@ -25,17 +25,19 @@ HitBox::HitBox (int p1x,int p1y,int p2x,int p2y)
 Imagen::Imagen(video::ITexture* imagen,int alineacion_x,int alineacion_y)
 {
     this->imagen=imagen;
+    this->escala=1;
     this->dimension_x=(int)imagen->getSize().Width;
     this->dimension_y=(int)imagen->getOriginalSize().Height;
     this->alineacion_x=alineacion_x;
     this->alineacion_y=alineacion_y;
 }
 
-Imagen::Imagen(video::ITexture* imagen,int dimension_x,int dimension_y,int alineacion_x,int alineacion_y)
+Imagen::Imagen(video::ITexture* imagen,float escala,int alineacion_x,int alineacion_y)
 {
     this->imagen=imagen;
-    this->dimension_x=dimension_x;
-    this->dimension_y=dimension_y;
+    this->escala=escala;
+    this->dimension_x=(int)imagen->getSize().Width;
+    this->dimension_y=(int)imagen->getOriginalSize().Height;
     this->alineacion_x=alineacion_x;
     this->alineacion_y=alineacion_y;
 }

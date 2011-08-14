@@ -2,7 +2,7 @@
 
 Personaje::Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico)
 {
-    setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png"),100,100,100,100));
+    setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png"),1,100,100));
     this->grafico=grafico;
     strings["estado_posicion"]="";
     strings["movimiento_actual"]="";
@@ -54,6 +54,8 @@ Personaje::Personaje()
 //DIBUJAR
 void Personaje::dibujar()
 {
+    if(getImagen("imagen_personaje").imagen==NULL)
+        return;
     int dimension_x=getImagen("imagen_personaje").dimension_x;
     int dimension_y=getImagen("imagen_personaje").dimension_y;
     int alineacion_x=getImagen("imagen_personaje").alineacion_x;
@@ -64,7 +66,7 @@ void Personaje::dibujar()
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
         irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x/2)+alineacion_x,getEntero("posicion_y")-(dimension_y/2)+alineacion_y),
         irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (0,0),
+        irr::f32(0), irr::core::vector2df (getImagen("imagen_personaje").escala,getImagen("imagen_personaje").escala),
         true,
         irr::video::SColor(255,255,255,255),
         getString("orientacion")=="i",
@@ -151,9 +153,14 @@ void Personaje::setString(stringw variable,stringw valor)
 }
 
 //Agregares
-void Personaje::agregarCancel(stringw cancelador,stringw cancelado)
+void Personaje::agregarInput(stringw input,stringw movimiento)
 {
-    ((Movimiento*)movimientos[cancelador])->cancels.push_back(cancelado);
+    inputs.push_back(InputMovimiento(input,movimiento));
+}
+
+void Personaje::agregarCondicion(stringw movimiento,int frame,Condicion condicion)
+{
+    ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 void Personaje::agregarMovimiento(stringw movimiento)
 {
@@ -182,6 +189,46 @@ void Personaje::agregarModificador(stringw movimiento,int frame,vector <HitBox> 
 void Personaje::agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
+}
+
+//Aplicares
+void Personaje::aplicarModificador(ModificadorImagen* mi)
+{
+    if(mi->aplicar_a_contrario)
+        personaje_contrario->setImagen(mi->variable,mi->modificador_imagen);
+    else
+        setImagen(mi->variable,mi->modificador_imagen);
+}
+
+
+void Personaje::aplicarModificador(ModificadorEntero* me)
+{
+    if(me->relativo)
+        if(me->aplicar_a_contrario)
+            personaje_contrario->setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+        else
+            setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+    else
+        if(me->aplicar_a_contrario)
+            personaje_contrario->setEntero(me->variable,me->modificador_entero);
+        else
+            setEntero(me->variable,me->modificador_entero);
+}
+
+void Personaje::aplicarModificador(ModificadorString* ms)
+{
+    if(ms->aplicar_a_contrario)
+        personaje_contrario->setString(ms->variable,ms->modificador_string);//limpio
+    else
+        setString(ms->variable,ms->modificador_string);
+}
+
+void Personaje::aplicarModificador(ModificadorHitboxes* mh)
+{
+    if(mh->aplicar_a_contrario)
+        personaje_contrario->setHitBoxes(mh->variable,mh->modificador_hitbox);
+    else
+        setHitBoxes(mh->variable,mh->modificador_hitbox);
 }
 
 //Logica
@@ -265,48 +312,24 @@ bool Personaje::verificarFinDeMovimiento()
 }
 bool Personaje::ejectuarCancel(stringw input)
 {
-    if(!movimientos.find(input))
-        return false;
-
-    int cancel_size=((Movimiento*)movimientos[input])->cancels.size();
-    for(int i=0;i<cancel_size;i++)
-        if(((Movimiento*)movimientos[input])->cancels[i]==getString("movimiento_actual"))
+    for(int x=0;x<(int)inputs.size();x++)
+    {
+        if(input!=inputs[x].input)
+            continue;
+        stringw movimiento=inputs[x].movimiento;
+        vector<Condicion> condiciones;
+        condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones;
+        bool flag=false;
+        for(int i=0;i<(int)condiciones.size();i++)
+            if(getString(condiciones[i].variable)==condiciones[i].cadena)
+                flag=true;
+        if(flag)
         {
-//            if(getEntero("frame_actual_saltando")==0)
-//                setString("estado_posicion","");
-
-            if(input=="saltando_atras48")
-                setString("estado_posicion","saltando_atras");
-            if(input=="saltando8")
-                setString("estado_posicion","saltando");
-            if(input=="saltando_adelante68")
-                setString("estado_posicion","saltando_adelante");
-            if(input=="agachado2")
-                setString("estado_posicion","agachado");
-
             getMovimientoActual()->frame_actual=0;
-            setString("movimiento_actual",input);
-            if(this->input->getBufferInputs()[0]=="a" || this->input->getBufferInputs()[0]=="4a")
-            {
-                int i=1;
-                bool a=false,b=false;
-                for(;i<(int)this->input->getBufferInputs().size();i++)
-                    if(this->input->getBufferInputs()[i]=="4")
-                    {
-                        a=true;
-                        break;
-                    }
-                for(;i<(int)this->input->getBufferInputs().size();i++)
-                    if(this->input->getBufferInputs()[i]=="2")
-                    {
-                        b=true;
-                        break;
-                    }
-                if(a&&b)
-                    setString("movimiento_actual","hadouken");
-            }
+            setString("movimiento_actual",movimiento);
             return true;
         }
+    }
     return false;
 }
 
@@ -314,45 +337,6 @@ bool Personaje::ejectuarCancel(stringw input)
 //            barra.valor_actual-=10;
 //            personaje_contrario->setBarra("hp",barra);
 //            personaje_contrario->setImagen(mi->variable,mi->modificador_imagen);
-
-void Personaje::aplicarModificador(ModificadorImagen* mi)
-{
-    if(mi->aplicar_a_contrario)
-        personaje_contrario->setImagen(mi->variable,mi->modificador_imagen);
-    else
-        setImagen(mi->variable,mi->modificador_imagen);
-}
-
-
-void Personaje::aplicarModificador(ModificadorEntero* me)
-{
-    if(me->relativo)
-        if(me->aplicar_a_contrario)
-            personaje_contrario->setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
-        else
-            setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
-    else
-        if(me->aplicar_a_contrario)
-            personaje_contrario->setEntero(me->variable,me->modificador_entero);
-        else
-            setEntero(me->variable,me->modificador_entero);
-}
-
-void Personaje::aplicarModificador(ModificadorString* ms)
-{
-    if(ms->aplicar_a_contrario)
-        personaje_contrario->setString(ms->variable,ms->modificador_string);//limpio
-    else
-        setString(ms->variable,ms->modificador_string);
-}
-
-void Personaje::aplicarModificador(ModificadorHitboxes* mh)
-{
-    if(mh->aplicar_a_contrario)
-        personaje_contrario->setHitBoxes(mh->variable,mh->modificador_hitbox);
-    else
-        setHitBoxes(mh->variable,mh->modificador_hitbox);
-}
 
 bool Personaje::aplicarModificadores()
 {
@@ -375,54 +359,6 @@ bool Personaje::aplicarModificadores()
         getMovimientoActual()->frame_actual++;
         setEntero("tiempo_transcurrido",0);
         return true;
-    }
-    if(getString("estado_posicion")=="saltando")
-    {
-        if(getEntero("frame_actual_saltando")==12)
-        {
-            setEntero("frame_actual_saltando",0);
-            setString("estado_posicion","");
-        }
-        int desplazamiento=-1;
-        if(getEntero("frame_actual_saltando")>=6)
-            desplazamiento=1;
-        setEntero("posicion_y",desplazamiento*20+getEntero("posicion_y"));
-        setEntero("frame_actual_saltando",getEntero("frame_actual_saltando")+1);
-    }
-    if(getString("estado_posicion")=="saltando_adelante")
-    {
-        if(getEntero("frame_actual_saltando")==13)
-        {
-            setEntero("frame_actual_saltando",0);
-            setString("estado_posicion","");
-        }
-        int desplazamiento=-1;
-        if(getEntero("frame_actual_saltando")>=6)
-            desplazamiento=1;
-        if(getEntero("frame_actual_saltando")!=6)
-            setEntero("posicion_y",desplazamiento*20+getEntero("posicion_y"));
-        setEntero("posicion_x",20+getEntero("posicion_x"));
-        setEntero("frame_actual_saltando",getEntero("frame_actual_saltando")+1);
-    }
-    if(getString("estado_posicion")=="saltando_atras")
-    {
-        if(getEntero("frame_actual_saltando")==13)
-        {
-            setEntero("frame_actual_saltando",0);
-            setString("estado_posicion","");
-        }
-        int desplazamiento=-1;
-        if(getEntero("frame_actual_saltando")>=6)
-            desplazamiento=1;
-        if(getEntero("frame_actual_saltando")!=6)
-            setEntero("posicion_y",desplazamiento*20+getEntero("posicion_y"));
-        setEntero("posicion_x",-20+getEntero("posicion_x"));
-        setEntero("frame_actual_saltando",getEntero("frame_actual_saltando")+1);
-    }
-    if(getString("estado_posicion")=="agachado")
-    {
-        if(getString("movimiento_actual")=="5")
-            setString("estado_posicion","");
     }
     return false;
 }

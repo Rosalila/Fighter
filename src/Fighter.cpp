@@ -13,7 +13,7 @@ Fighter::Fighter(Stage* stage,Personaje*pa,Personaje*pb,Grafico *grafico,Sonido 
     pb->personaje_contrario=pa;
 
     sonido->agregarSonido("Fight!","resources/Stages/Sonidos/Fight1.wav");
-    sonido->agregarSonido("Fondo","resources/Stages/Sonidos/Now.ogg");
+    sonido->agregarSonido("Fondo","resources/Stages/Sonidos/Fondo.ogg");
     sonido->agregarSonido("Fondo2","resources/Stages/Sonidos/Something like this.mp3");
 
     //Menu
@@ -74,9 +74,9 @@ void Fighter::loopJuego()
     sonido->reproducirSonido("Fondo");
 	for (;;)
 	{
-        render(pa,pb,stage);
         logica(pa,pa->input->getInput());
         logica(pb,pb->input->getInput());
+        render(pa,pb,stage);
 	}
 }
 
@@ -111,15 +111,15 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
     {
         grafico->beginScene();
         //Stage
-        stage->dibujar();
+        //stage->dibujar();
 
         //Personaje
         pa->dibujar();
         pb->dibujar();
 
         //HP
-        pa->dibujarBarra("hp");
-        pb->dibujarBarra("hp");
+        //pa->dibujarBarra("hp");
+        //pb->dibujarBarra("hp");
 
         //Hit Boxes
         /*
@@ -132,8 +132,8 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         //Movimento actual
         //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
         stringw str="";
-        for(int i=0;i<(int)pb->input->getBufferInputs().size();i++)
-            str+=pb->input->getBufferInputs()[i]+"-";
+        for(int i=0;i<(int)pa->input->getBufferInputs().size();i++)
+            str+=pa->input->getBufferInputs()[i]+"-";
         grafico->device->setWindowCaption(str.c_str());
 
         grafico->endScene();

@@ -77,6 +77,7 @@ private:
     Receiver* receiver;
     bool tecla_arriba;
     vector<Boton> botones;
+    vector<Boton> cruz;
     vector<stringw> buffer_inputs;
 public:
     Input(vector<Boton> botones,Receiver* receiver);

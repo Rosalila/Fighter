@@ -7,12 +7,19 @@ Input::Input(vector<Boton> botones,Receiver* receiver)
 
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
-    this->botones=botones;
+    for(int i=0;i<(int)botones.size();i++)
+        if(botones[i].getMapeo()=="2" || botones[i].getMapeo()=="4" || botones[i].getMapeo()=="6" || botones[i].getMapeo()=="8")
+            this->cruz.push_back(botones[i]);
+        else
+            this->botones.push_back(botones[i]);
 }
 
 stringw Input::getInput()
 {
     stringw resultado="";
+    for(int i=0;i<(int)cruz.size();i++)
+        if(cruz[i].estaPresionado(receiver))
+            resultado+=cruz[i].getMapeo();
     if(tecla_arriba)
     {
         tecla_arriba=false;
@@ -24,7 +31,7 @@ stringw Input::getInput()
     for(int i=0;i<(int)botones.size();i++)
         if(botones[i].estaPresionado(receiver))
             flag=true;
-    if(flag)
+    if(!flag)
         tecla_arriba=true;
     if(resultado=="")
         resultado="5";

@@ -6,6 +6,7 @@ class Personaje
     Personaje *personaje_contrario;
     Grafico* grafico;
     Input* input;
+    vector<InputMovimiento> inputs;
 
     //strings
     irr::core::map<stringw,stringw> strings;
@@ -42,7 +43,8 @@ class Personaje
     void setHitBoxes(stringw variable,vector<HitBox> valor);
     void setString(stringw variable,stringw valor);
     //Agregares
-    void agregarCancel(stringw cancelador,stringw cancelado);
+    void agregarInput(stringw input,stringw movimiento);
+    void agregarCondicion(stringw movimiento,int frame,Condicion condicion);
     void agregarMovimiento(stringw movimiento);
     void agregarFrame(stringw movimiento, int duracion);
     void agregarModificador(stringw movimiento,int frame,Imagen modificador,stringw variable,bool aplicar_a_contrario);
