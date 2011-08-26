@@ -1,0 +1,22 @@
+joystick 1
+down=>2
+left=>4
+right=>6
+up=>8
+0=>a
+3=>b
+5=>c
+1=>d
+2=>e
+7=>f
+keyboard 2
+S=>2
+A=>4
+D=>6
+W=>8
+U=>a
+I=>b
+O=>c
+J=>d
+K=>e
+L=>f

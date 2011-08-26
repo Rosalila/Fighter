@@ -89,6 +89,7 @@ void Grafico::draw2DImage
 				 bool flipVertically 	)
 {
    //inicio escala
+
    float escala_x,escala_y;
    if(scale.X!=0 && scale.Y!=0)
    {
@@ -101,6 +102,7 @@ void Grafico::draw2DImage
    }
 
    scale=irr::core::vector2df (escala_x,escala_y);
+
    //fin escala
    if(!texture)
 	   return;

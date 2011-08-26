@@ -82,8 +82,6 @@ void Fighter::loopJuego()
 
 void Fighter::logica(Personaje* personaje,stringw input)
 {
-    input=personaje->getString("estado_posicion")+input;
-
     //flipear personaje
     if(personaje->getEntero("posicion_x")>personaje->personaje_contrario->getEntero("posicion_x"))
     {
@@ -95,6 +93,15 @@ void Fighter::logica(Personaje* personaje,stringw input)
     }
     else
         personaje->strings["orientacion"]="d";
+    if(getColisionHitBoxes(pa,pb))
+        pb->setString("colision_hitboxes","si");
+    else
+        pb->setString("colision_hitboxes","no");
+
+    if(getColisionHitBoxes(pb,pa))
+        pa->setString("colision_hitboxes","si");
+    else
+        pa->setString("colision_hitboxes","no");
     //avanzar tiempo ++
     personaje->setEntero("tiempo_transcurrido",personaje->getEntero("tiempo_transcurrido")+1);
     //si se termino
@@ -103,6 +110,10 @@ void Fighter::logica(Personaje* personaje,stringw input)
     personaje->ejectuarCancel(input);
     //modificadores
     personaje->aplicarModificadores();
+    //Constantes
+    personaje->setEntero("tiempo_transcurrido_continuo",personaje->getEntero("tiempo_transcurrido_continuo")+1);
+    personaje->ejecutarMovimientosConstantes();
+    personaje->aplicarModificadoresConstantes();
 }
 
 bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
@@ -111,7 +122,7 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
     {
         grafico->beginScene();
         //Stage
-        //stage->dibujar();
+        stage->dibujar();
 
         //Personaje
         pa->dibujar();
@@ -122,20 +133,38 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         //pb->dibujarBarra("hp");
 
         //Hit Boxes
-        /*
-        pa->dibujarHitBoxes("azules",video::SColor(100,0,0,255),pa->getString("orientacion")=="i");
-        pb->dibujarHitBoxes("azules",video::SColor(100,0,0,255),pb->getString("orientacion")=="i");
-        pa->dibujarHitBoxes("rojas",video::SColor(100,255,0,0),pa->getString("orientacion")=="i");
-        pb->dibujarHitBoxes("rojas",video::SColor(100,255,0,0),pb->getString("orientacion")=="i");
-        */
+        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");
+        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
+        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
+        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
+//
+//
+//        //Movimento actual
+//        //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
 
-        //Movimento actual
-        //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
-        stringw str="";
-        for(int i=0;i<(int)pa->input->getBufferInputs().size();i++)
-            str+=pa->input->getBufferInputs()[i]+"-";
-        grafico->device->setWindowCaption(str.c_str());
+//        stringw str=pa->getString("movimiento_actual")+","+pa->getString("estado_posicion")+": ";
+//        for(int i=0;i<(int)pa->input->getBufferInputs().size();i++)
+//            str+=pa->input->getBufferInputs()[i]+"-";
+        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
 
+//
+//        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(pa->getEntero("posicion_x"),pa->getEntero("posicion_y"),pa->getEntero("posicion_x")+100,pa->getEntero("posicion_y")+100));
+//
+//        int dimension_x=50;
+//        int dimension_y=50;
+//        grafico->draw2DImage
+//    (   grafico->getTexture("resources/green.png"),
+//        irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
+//        irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
+//        irr::core::position2d<irr::f32>(pa->getEntero("posicion_x"),pa->getEntero("posicion_y")),
+//        irr::core::position2d<irr::f32>(0,0),
+//        irr::f32(0), irr::core::vector2df (1,1),
+//        true,
+//        irr::video::SColor(255,255,255,255),
+//        false,
+//        false);
+
+        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(0,0,1000,1000));
         grafico->endScene();
     }
     return grafico->run();

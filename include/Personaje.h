@@ -25,7 +25,7 @@ class Personaje
     Personaje();
     //DIBUJAR
     void dibujar();
-    void dibujarHitBoxes(stringw variable,video::SColor color,bool izquierda);
+    void dibujarHitBoxes(stringw variable,stringw path,bool izquierda);
     void dibujarBarra(stringw variable);
     //GETS shortcuts
     Movimiento* getMovimientoActual();
@@ -58,6 +58,8 @@ class Personaje
     void aplicarModificador(ModificadorString* ms);
     void aplicarModificador(ModificadorHitboxes* mh);
     //Logica
+    bool ejecutarMovimientosConstantes();
+    bool aplicarModificadoresConstantes();
     bool ejectuarCancel(stringw input);
     bool verificarFinDeMovimiento();
     bool aplicarModificadores();

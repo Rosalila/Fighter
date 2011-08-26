@@ -1,6 +1,8 @@
 #ifndef MYEVENTRECEIVER_H
 #define MYEVENTRECEIVER_H
 
+#include <iostream>
+#include <fstream>
 #include <vector>
 #include <stdarg.h>
 using namespace std;

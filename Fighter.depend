@@ -335,7 +335,7 @@
 1312103519 source:/home/userr/CodeBlocksProyects/Turupawn-Fighter-f391786 (copy)/src/Stage.cpp
 	"../include/Stage.h"
 
-1313313657 source:/home/userr/CodeBlocksProyects/Fighter/main.cpp
+1313886948 source:/home/userr/CodeBlocksProyects/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -343,7 +343,9 @@
 	"include/Input.h"
 	"include/Fighter.h"
 
-1313308323 /home/userr/CodeBlocksProyects/Fighter/include/Input.h
+1313809603 /home/userr/CodeBlocksProyects/Fighter/include/Input.h
+	<iostream>
+	<fstream>
 	<vector>
 	<stdarg.h>
 	<irrlicht.h>
@@ -360,7 +362,7 @@
 1312142276 /home/userr/CodeBlocksProyects/Fighter/include/Stage.h
 	"../include/Grafico.h"
 
-1312443469 /home/userr/CodeBlocksProyects/Fighter/include/Grafico.h
+1313381760 /home/userr/CodeBlocksProyects/Fighter/include/Grafico.h
 	<stdlib.h>
 	<irrlicht.h>
 	"../include/Input.h"
@@ -461,10 +463,10 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1313312459 /home/userr/CodeBlocksProyects/Fighter/include/Personaje.h
+1313792250 /home/userr/CodeBlocksProyects/Fighter/include/Personaje.h
 	"../include/AtributosPersonaje.h"
 
-1313311745 /home/userr/CodeBlocksProyects/Fighter/include/AtributosPersonaje.h
+1313373791 /home/userr/CodeBlocksProyects/Fighter/include/AtributosPersonaje.h
 	<vector>
 	<iostream>
 	<string>
@@ -484,24 +486,196 @@
 1313172234 source:/home/userr/CodeBlocksProyects/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1313310278 source:/home/userr/CodeBlocksProyects/Fighter/src/Fighter.cpp
+1313793172 source:/home/userr/CodeBlocksProyects/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
-1313173244 source:/home/userr/CodeBlocksProyects/Fighter/src/Grafico.cpp
+1313381729 source:/home/userr/CodeBlocksProyects/Fighter/src/Grafico.cpp
 	"../include/Grafico.h"
 
-1313308496 source:/home/userr/CodeBlocksProyects/Fighter/src/Input.cpp
+1313886915 source:/home/userr/CodeBlocksProyects/Fighter/src/Input.cpp
 	"../include/Input.h"
 
 1312150176 source:/home/userr/CodeBlocksProyects/Fighter/src/Menu.cpp
 	"../include/Menu.h"
 
-1313312583 source:/home/userr/CodeBlocksProyects/Fighter/src/Personaje.cpp
+1313792768 source:/home/userr/CodeBlocksProyects/Fighter/src/Personaje.cpp
 	"../include/Personaje.h"
 
 1312758115 source:/home/userr/CodeBlocksProyects/Fighter/src/Sonido.cpp
 	"../include/Sonido.h"
 
 1312142276 source:/home/userr/CodeBlocksProyects/Fighter/src/Stage.cpp
+	"../include/Stage.h"
+
+1313886948 source:/media/subdisko/01011/actual/Fighter/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"include/Input.h"
+	"include/Fighter.h"
+
+1313809603 /media/subdisko/01011/actual/Fighter/include/Input.h
+	<iostream>
+	<fstream>
+	<vector>
+	<stdarg.h>
+	<irrlicht.h>
+
+1312480185 /media/subdisko/01011/actual/Fighter/include/Fighter.h
+	"../include/Menu.h"
+
+1312768528 /media/subdisko/01011/actual/Fighter/include/Menu.h
+	"../include/Stage.h"
+	"../include/Grafico.h"
+	"../include/irrKlang/irrKlang.h"
+	"../include/Personaje.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/Stage.h
+	"../include/Grafico.h"
+
+1313381760 /media/subdisko/01011/actual/Fighter/include/Grafico.h
+	<stdlib.h>
+	<irrlicht.h>
+	"../include/Input.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/irrKlang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_irrKlangTypes.h
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IVirtualRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ESoundOutputDrivers.h
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ESoundEngineOptions.h
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_EStreamModes.h
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_SAudioStreamFormat.h
+	"ik_IRefCounted.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISoundEngine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISoundSource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISoundEffectControl.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IFileFactory.h
+	"ik_IRefCounted.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISoundMixedOutputReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IAudioStream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IAudioStreamLoader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IFileReader.h
+	"ik_IRefCounted.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISoundStopEventReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_ISoundDeviceList.h
+	"ik_IRefCounted.h"
+
+1312142276 /media/subdisko/01011/actual/Fighter/include/irrKlang/ik_IAudioRecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1313792250 /media/subdisko/01011/actual/Fighter/include/Personaje.h
+	"../include/AtributosPersonaje.h"
+
+1313373791 /media/subdisko/01011/actual/Fighter/include/AtributosPersonaje.h
+	<vector>
+	<iostream>
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<cstdio>
+	"../include/Grafico.h"
+	"../include/Sonido.h"
+
+1312758271 /media/subdisko/01011/actual/Fighter/include/Sonido.h
+	"../include/irrKlang/irrKlang.h"
+	<irrlicht.h>
+	<string>
+	<vector>
+
+1313172234 source:/media/subdisko/01011/actual/Fighter/src/AtributosPersonaje.cpp
+	"../include/AtributosPersonaje.h"
+
+1313793172 source:/media/subdisko/01011/actual/Fighter/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1313381729 source:/media/subdisko/01011/actual/Fighter/src/Grafico.cpp
+	"../include/Grafico.h"
+
+1313886978 source:/media/subdisko/01011/actual/Fighter/src/Input.cpp
+	"../include/Input.h"
+
+1312150176 source:/media/subdisko/01011/actual/Fighter/src/Menu.cpp
+	"../include/Menu.h"
+
+1313792768 source:/media/subdisko/01011/actual/Fighter/src/Personaje.cpp
+	"../include/Personaje.h"
+
+1312758115 source:/media/subdisko/01011/actual/Fighter/src/Sonido.cpp
+	"../include/Sonido.h"
+
+1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
