@@ -2,7 +2,7 @@
 #define GRAFICO_H
 
 #include <stdlib.h>	// for itoa() call
-#include <irrlicht.h>
+#include <irrlicht/irrlicht.h>
 using namespace irr;
 #include "../include/Input.h"
 

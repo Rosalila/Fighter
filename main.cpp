@@ -7,6 +7,7 @@
 #include "include/Input.h"
 #include "include/Fighter.h"
 
+#include"include/Parser.h"
 
 void wizardAgregarImagenes(Personaje* personaje,stringw carpeta,int frames,stringw movimiento,Grafico *grafico)
 {
@@ -96,24 +97,24 @@ public:
         agregarModificador("8",0,"saltando","estado_posicion",false);
         wizardAgregarImagenes(this,carpeta+"/jump/8/",7,"8",grafico);
 
-        agregarMovimiento("68");
-        agregarInput("68","68");
+        agregarMovimiento("9");
+        agregarInput("9","9");
         for(int i=0;i<7;i++)
-            agregarFrame("68",3);
-        agregarCondicion("68",0,Condicion("movimiento_actual","=","5",false));
-        agregarModificador("68",0,"saltando adelante","estado_posicion",false);
-        wizardAgregarImagenes(this,carpeta+"/jump/9/",7,"68",grafico);
+            agregarFrame("9",3);
+        agregarCondicion("9",0,Condicion("movimiento_actual","=","5",false));
+        agregarModificador("9",0,"saltando adelante","estado_posicion",false);
+        wizardAgregarImagenes(this,carpeta+"/jump/9/",7,"9",grafico);
 
-        agregarMovimiento("48");
-        agregarInput("48","48");
+        agregarMovimiento("7");
+        agregarInput("7","7");
         for(int i=0;i<7;i++)
-            agregarFrame("48",3);
-        agregarCondicion("48",0,Condicion("movimiento_actual","=","5",false));
-        agregarModificador("48",0,"saltando atras","estado_posicion",false);
-        wizardAgregarImagenes(this,carpeta+"/jump/9/",7,"48",grafico);
+            agregarFrame("7",3);
+        agregarCondicion("7",0,Condicion("movimiento_actual","=","5",false));
+        agregarModificador("7",0,"saltando atras","estado_posicion",false);
+        wizardAgregarImagenes(this,carpeta+"/jump/9/",7,"7",grafico);
 
         agregarMovimiento("defensa abajo");
-        agregarInput("24","defensa abajo");
+        agregarInput("1","defensa abajo");
         for(int i=0;i<1;i++)
             agregarFrame("defensa abajo",2);
         agregarCondicion("defensa abajo",0,Condicion("movimiento_actual","=","a",true));
@@ -122,8 +123,8 @@ public:
 
         agregarMovimiento("2");
         agregarInput("2","2");
-        agregarInput("24","2");
-        agregarInput("26","2");
+        agregarInput("1","2");
+        agregarInput("3","2");
         for(int i=0;i<1;i++)
             agregarFrame("2",3);
         agregarCondicion("2",0,Condicion("movimiento_actual","=","5",false));
@@ -135,28 +136,28 @@ public:
         agregarInput("4a","8a");
         agregarInput("6a","8a");
         agregarInput("8a","8a");
-        agregarInput("24a","8a");
-        agregarInput("26a","8a");
-        agregarInput("48a","8a");
-        agregarInput("68a","8a");
+        agregarInput("1a","8a");
+        agregarInput("3a","8a");
+        agregarInput("7a","8a");
+        agregarInput("9a","8a");
         agregarInput("b","8a");
         agregarInput("2b","8a");
         agregarInput("4b","8a");
         agregarInput("6b","8a");
         agregarInput("8b","8a");
-        agregarInput("24b","8a");
-        agregarInput("26b","8a");
-        agregarInput("48b","8a");
-        agregarInput("68b","8a");
+        agregarInput("1b","8a");
+        agregarInput("3b","8a");
+        agregarInput("7b","8a");
+        agregarInput("9b","8a");
         agregarInput("c","8a");
         agregarInput("2c","8a");
         agregarInput("4c","8a");
         agregarInput("6c","8a");
         agregarInput("8c","8a");
-        agregarInput("24c","8a");
-        agregarInput("26c","8a");
-        agregarInput("48c","8a");
-        agregarInput("68c","8a");
+        agregarInput("1c","8a");
+        agregarInput("3c","8a");
+        agregarInput("7c","8a");
+        agregarInput("9c","8a");
         for(int i=0;i<3;i++)
             agregarFrame("8a",3);
         agregarCondicion("8a",0,Condicion("movimiento_actual","=","8",false));
@@ -168,19 +169,19 @@ public:
         agregarInput("4d","8d");
         agregarInput("6d","8d");
         agregarInput("8d","8d");
-        agregarInput("24d","8d");
-        agregarInput("26d","8d");
-        agregarInput("48d","8d");
-        agregarInput("68d","8d");
+        agregarInput("1d","8d");
+        agregarInput("3d","8d");
+        agregarInput("7d","8d");
+        agregarInput("9d","8d");
         agregarInput("e","8d");
         agregarInput("2e","8d");
         agregarInput("4e","8d");
         agregarInput("6e","8d");
         agregarInput("8e","8d");
-        agregarInput("24e","8d");
-        agregarInput("26e","8d");
-        agregarInput("48e","8d");
-        agregarInput("68e","8d");
+        agregarInput("1e","8d");
+        agregarInput("3e","8d");
+        agregarInput("7e","8d");
+        agregarInput("9e","8d");
         for(int i=0;i<2;i++)
             agregarFrame("8d",3);
         agregarCondicion("8d",0,Condicion("movimiento_actual","=","8",false));
@@ -193,10 +194,10 @@ public:
         agregarInput("4f","8f");
         agregarInput("6f","8f");
         agregarInput("8f","8f");
-        agregarInput("24f","8f");
-        agregarInput("26f","8f");
-        agregarInput("48f","8f");
-        agregarInput("68f","8f");
+        agregarInput("1f","8f");
+        agregarInput("3f","8f");
+        agregarInput("7f","8f");
+        agregarInput("9f","8f");
         for(int i=0;i<3;i++)
             agregarFrame("8f",3);
         agregarCondicion("8f",0,Condicion("movimiento_actual","=","8",false));
@@ -208,32 +209,32 @@ public:
         agregarInput("4a","9a");
         agregarInput("6a","9a");
         agregarInput("8a","9a");
-        agregarInput("24a","9a");
-        agregarInput("26a","9a");
-        agregarInput("48a","9a");
-        agregarInput("68a","9a");
+        agregarInput("1a","9a");
+        agregarInput("3a","9a");
+        agregarInput("7a","9a");
+        agregarInput("9a","9a");
         agregarInput("b","9a");
         agregarInput("2b","9a");
         agregarInput("4b","9a");
         agregarInput("6b","9a");
         agregarInput("8b","9a");
-        agregarInput("24b","9a");
-        agregarInput("26b","9a");
-        agregarInput("48b","9a");
-        agregarInput("68b","9a");
+        agregarInput("1b","9a");
+        agregarInput("3b","9a");
+        agregarInput("7b","9a");
+        agregarInput("9b","9a");
         agregarInput("c","9a");
         agregarInput("2c","9a");
         agregarInput("4c","9a");
         agregarInput("6c","9a");
         agregarInput("8c","9a");
-        agregarInput("24c","9a");
-        agregarInput("26c","9a");
-        agregarInput("48c","9a");
-        agregarInput("68c","9a");
+        agregarInput("1c","9a");
+        agregarInput("3c","9a");
+        agregarInput("7c","9a");
+        agregarInput("9c","9a");
         for(int i=0;i<2;i++)
             agregarFrame("9a",3);
-        agregarCondicion("9a",0,Condicion("movimiento_actual","=","68",false));
-        agregarCondicion("9a",0,Condicion("movimiento_actual","=","48",false));
+        agregarCondicion("9a",0,Condicion("movimiento_actual","=","9",false));
+        agregarCondicion("9a",0,Condicion("movimiento_actual","=","7",false));
         wizardAgregarImagenes(this,carpeta+"/jump/9a/",2,"9a",grafico);
 
         agregarMovimiento("9e");
@@ -242,32 +243,32 @@ public:
         agregarInput("4d","9e");
         agregarInput("6d","9e");
         agregarInput("8d","9e");
-        agregarInput("24d","9e");
-        agregarInput("26d","9e");
-        agregarInput("48d","9e");
-        agregarInput("68d","9e");
+        agregarInput("1d","9e");
+        agregarInput("3d","9e");
+        agregarInput("7d","9e");
+        agregarInput("9d","9e");
         agregarInput("e","9e");
         agregarInput("2e","9e");
         agregarInput("4e","9e");
         agregarInput("6e","9e");
         agregarInput("8e","9e");
-        agregarInput("24e","9e");
-        agregarInput("26e","9e");
-        agregarInput("48e","9e");
-        agregarInput("68e","9e");
+        agregarInput("1e","9e");
+        agregarInput("3e","9e");
+        agregarInput("7e","9e");
+        agregarInput("9e","9e");
         agregarInput("f","9e");
         agregarInput("2f","9e");
         agregarInput("4f","9e");
         agregarInput("6f","9e");
         agregarInput("8f","9e");
-        agregarInput("24f","9e");
-        agregarInput("26f","9e");
-        agregarInput("48f","9e");
-        agregarInput("68f","9e");
+        agregarInput("1f","9e");
+        agregarInput("3f","9e");
+        agregarInput("7f","9e");
+        agregarInput("9f","9e");
         for(int i=0;i<2;i++)
             agregarFrame("9e",3);
-        agregarCondicion("9e",0,Condicion("movimiento_actual","=","68",false));
-        agregarCondicion("9e",0,Condicion("movimiento_actual","=","48",false));
+        agregarCondicion("9e",0,Condicion("movimiento_actual","=","9",false));
+        agregarCondicion("9e",0,Condicion("movimiento_actual","=","7",false));
         wizardAgregarImagenes(this,carpeta+"/jump/9e 9f/",2,"9e",grafico);
 
         agregarMovimiento("a");
@@ -289,8 +290,8 @@ public:
 
         agregarMovimiento("2a");
         agregarInput("2a","2a");
-        agregarInput("24a","2a");
-        agregarInput("26a","2a");
+        agregarInput("1a","2a");
+        agregarInput("3a","2a");
         for(int i=0;i<3;i++)
             agregarFrame("2a",3);
         agregarCondicion("2a",0,Condicion("movimiento_actual","=","2",false));
@@ -310,8 +311,8 @@ public:
 
         agregarMovimiento("2b");
         agregarInput("2b","2b");
-        agregarInput("24b","2b");
-        agregarInput("26b","2b");
+        agregarInput("1b","2b");
+        agregarInput("3b","2b");
         for(int i=0;i<4;i++)
             agregarFrame("2b",3);
         agregarCondicion("2b",0,Condicion("movimiento_actual","=","2",false));
@@ -324,7 +325,7 @@ public:
         agregarInput("6c","c");
         for(int i=0;i<5;i++)
             agregarFrame("c",3);
-        agregarCondicion("c",0,Condicion("movimiento_actual","=","68",false));
+        agregarCondicion("c",0,Condicion("movimiento_actual","=","9",false));
         agregarCondicion("c",0,Condicion("movimiento_actual","=","5",false));
         agregarCondicion("c",0,Condicion("movimiento_actual","=","4",false));
         agregarCondicion("c",0,Condicion("movimiento_actual","=","6",false));
@@ -332,8 +333,8 @@ public:
 
         agregarMovimiento("2c");
         agregarInput("2c","2c");
-        agregarInput("24c","2c");
-        agregarInput("26c","2c");
+        agregarInput("1c","2c");
+        agregarInput("3c","2c");
         for(int i=0;i<5;i++)
             agregarFrame("2c",3);
         agregarCondicion("2c",0,Condicion("movimiento_actual","=","2",false));
@@ -353,8 +354,8 @@ public:
 
         agregarMovimiento("2d");
         agregarInput("2d","2d");
-        agregarInput("24d","2d");
-        agregarInput("26d","2d");
+        agregarInput("1d","2d");
+        agregarInput("3d","2d");
         for(int i=0;i<3;i++)
             agregarFrame("2d",3);
         agregarCondicion("2d",0,Condicion("movimiento_actual","=","2",false));
@@ -374,8 +375,8 @@ public:
 
         agregarMovimiento("2e");
         agregarInput("2e","2e");
-        agregarInput("24e","2e");
-        agregarInput("26e","2e");
+        agregarInput("1e","2e");
+        agregarInput("3e","2e");
         for(int i=0;i<3;i++)
             agregarFrame("2e",3);
         agregarCondicion("2e",0,Condicion("movimiento_actual","=","2",false));
@@ -395,8 +396,8 @@ public:
 
         agregarMovimiento("2f");
         agregarInput("2f","2f");
-        agregarInput("24f","2f");
-        agregarInput("26f","2f");
+        agregarInput("1f","2f");
+        agregarInput("3f","2f");
         for(int i=0;i<5;i++)
             agregarFrame("2f",3);
         agregarCondicion("2f",0,Condicion("movimiento_actual","=","2",false));
@@ -481,19 +482,19 @@ int main()
 {
     Receiver* receiver=new Receiver();
 
-    vector<Boton> botonesa,botonesb;
-
-    botonesb.push_back(Boton(-2,"2"));
-    botonesb.push_back(Boton(-4,"4"));
-    botonesb.push_back(Boton(-6,"6"));
-    botonesb.push_back(Boton(-8,"8"));
-
-    botonesb.push_back(Boton(0,"a"));
-    botonesb.push_back(Boton(3,"b"));
-    botonesb.push_back(Boton(5,"c"));
-    botonesb.push_back(Boton(1,"d"));
-    botonesb.push_back(Boton(2,"e"));
-    botonesb.push_back(Boton(7,"f"));
+//    vector<Boton> botonesa,botonesb;
+//
+//    botonesb.push_back(Boton(-2,"2"));
+//    botonesb.push_back(Boton(-4,"4"));
+//    botonesb.push_back(Boton(-6,"6"));
+//    botonesb.push_back(Boton(-8,"8"));
+//
+//    botonesb.push_back(Boton(0,"a"));
+//    botonesb.push_back(Boton(3,"b"));
+//    botonesb.push_back(Boton(5,"c"));
+//    botonesb.push_back(Boton(1,"d"));
+//    botonesb.push_back(Boton(2,"e"));
+//    botonesb.push_back(Boton(7,"f"));
 
 //    botonesa.push_back(Boton(irr::KEY_KEY_S,"2"));
 //    botonesa.push_back(Boton(irr::KEY_KEY_A,"4"));
@@ -507,8 +508,14 @@ int main()
 //    botonesa.push_back(Boton(irr::KEY_KEY_K,"e"));
 //    botonesa.push_back(Boton(irr::KEY_KEY_L,"f"));
 
-    Input *inputb=new Input(botonesa,receiver);
-    Input *inputa=new Input(botonesb,receiver);
+
+    Parser parser;
+    if(!parser.parseInput(receiver))
+        cout<<"Archivo de input incorrecto";
+
+
+    Input *inputb=parser.inputs[1];
+    Input *inputa=parser.inputs[0];
 
     Grafico *grafico=new Grafico(receiver);
     Sonido *sonido = new Sonido();

@@ -679,3 +679,353 @@
 1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
+1314492819 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"include/Input.h"
+	"include/Fighter.h"
+	"include/Parser.h"
+
+1314488101 /home/userr/ProyectosActuales/Fighter/include/Input.h
+	<iostream>
+	<fstream>
+	<vector>
+	<stdarg.h>
+	<irrlicht/irrlicht.h>
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
+	"../include/Menu.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/Menu.h
+	"../include/Stage.h"
+	"../include/Grafico.h"
+	"../include/irrKlang/irrKlang.h"
+	"../include/Personaje.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/Stage.h
+	"../include/Grafico.h"
+
+1314411036 /home/userr/ProyectosActuales/Fighter/include/Grafico.h
+	<stdlib.h>
+	<irrlicht/irrlicht.h>
+	"../include/Input.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/irrKlang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_irrKlangTypes.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IVirtualRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ESoundOutputDrivers.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ESoundEngineOptions.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_EStreamModes.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_SAudioStreamFormat.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISoundEngine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISoundSource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISoundEffectControl.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IFileFactory.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISoundMixedOutputReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IAudioStream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IAudioStreamLoader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IFileReader.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISoundStopEventReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_ISoundDeviceList.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/irrKlang/ik_IAudioRecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/Personaje.h
+	"../include/AtributosPersonaje.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter/include/AtributosPersonaje.h
+	<vector>
+	<iostream>
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<cstdio>
+	"../include/Grafico.h"
+	"../include/Sonido.h"
+
+1314411052 /home/userr/ProyectosActuales/Fighter/include/Sonido.h
+	"../include/irrKlang/irrKlang.h"
+	<irrlicht/irrlicht.h>
+	<string>
+	<vector>
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
+	"../include/AtributosPersonaje.h"
+
+1314492860 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
+	"../include/Grafico.h"
+
+1314492727 source:/home/userr/ProyectosActuales/Fighter/src/Input.cpp
+	"../include/Input.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Menu.cpp
+	"../include/Menu.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
+	"../include/Personaje.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Sonido.cpp
+	"../include/Sonido.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Stage.cpp
+	"../include/Stage.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"include/Input.h"
+	"include/Fighter.h"
+
+1314411022 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Input.h
+	<iostream>
+	<fstream>
+	<vector>
+	<stdarg.h>
+	<irrlicht/irrlicht.h>
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Fighter.h
+	"../include/Menu.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Menu.h
+	"../include/Stage.h"
+	"../include/Grafico.h"
+	"../include/irrKlang/irrKlang.h"
+	"../include/Personaje.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Stage.h
+	"../include/Grafico.h"
+
+1314411036 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Grafico.h
+	<stdlib.h>
+	<irrlicht/irrlicht.h>
+	"../include/Input.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/irrKlang.h
+	"ik_irrKlangTypes.h"
+	"ik_vec3d.h"
+	"ik_IRefCounted.h"
+	"ik_IVirtualRefCounted.h"
+	"ik_ESoundOutputDrivers.h"
+	"ik_ESoundEngineOptions.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+	"ik_ISoundEngine.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_IAudioStream.h"
+	"ik_IAudioStreamLoader.h"
+	"ik_ISoundEffectControl.h"
+	"ik_ISoundStopEventReceiver.h"
+	"ik_IFileFactory.h"
+	"ik_IFileReader.h"
+	"ik_ISoundDeviceList.h"
+	"ik_IAudioRecorder.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_irrKlangTypes.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_vec3d.h
+	<math.h>
+	"ik_irrKlangTypes.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IVirtualRefCounted.h
+	"ik_irrKlangTypes.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ESoundOutputDrivers.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ESoundEngineOptions.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_EStreamModes.h
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_SAudioStreamFormat.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISoundEngine.h
+	"ik_IRefCounted.h"
+	"ik_vec3d.h"
+	"ik_ISoundSource.h"
+	"ik_ISound.h"
+	"ik_EStreamModes.h"
+	"ik_IFileFactory.h"
+	"ik_ISoundMixedOutputReceiver.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISoundSource.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+	"ik_EStreamModes.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISound.h
+	"ik_IVirtualRefCounted.h"
+	"ik_ISoundEffectControl.h"
+	"ik_vec3d.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISoundEffectControl.h
+	"ik_IVirtualRefCounted.h"
+	"ik_vec3d.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IFileFactory.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISoundMixedOutputReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IAudioStream.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IAudioStreamLoader.h
+	"ik_IRefCounted.h"
+	"ik_IFileReader.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IFileReader.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISoundStopEventReceiver.h
+	"ik_IRefCounted.h"
+	"ik_SAudioStreamFormat.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_ISoundDeviceList.h
+	"ik_IRefCounted.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/irrKlang/ik_IAudioRecorder.h
+	"ik_IRefCounted.h"
+	"ik_ISoundSource.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Personaje.h
+	"../include/AtributosPersonaje.h"
+
+1314405313 /home/userr/ProyectosActuales/Fighter (otra copia)/include/AtributosPersonaje.h
+	<vector>
+	<iostream>
+	<string>
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<cstdio>
+	"../include/Grafico.h"
+	"../include/Sonido.h"
+
+1314411052 /home/userr/ProyectosActuales/Fighter (otra copia)/include/Sonido.h
+	"../include/irrKlang/irrKlang.h"
+	<irrlicht/irrlicht.h>
+	<string>
+	<vector>
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/AtributosPersonaje.cpp
+	"../include/AtributosPersonaje.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Fighter.cpp
+	"../include/Fighter.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Grafico.cpp
+	"../include/Grafico.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Input.cpp
+	"../include/Input.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Menu.cpp
+	"../include/Menu.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Personaje.cpp
+	"../include/Personaje.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Sonido.cpp
+	"../include/Sonido.h"
+
+1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Stage.cpp
+	"../include/Stage.h"
+
+1314493058 /home/userr/ProyectosActuales/Fighter/include/Parser.h
+
+1314419530 source:/home/userr/ProyectosActuales/Fighter/src/Parser.cpp
+	"../include/AtributosPersonaje.h"
+

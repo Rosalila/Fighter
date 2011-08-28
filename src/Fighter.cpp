@@ -74,8 +74,16 @@ void Fighter::loopJuego()
     sonido->reproducirSonido("Fondo");
 	for (;;)
 	{
+	    //setear frames a "60"
+	    grafico->device->getTimer()->start();
+	    for(u32 t=grafico->device->getTimer()->getTime();
+            t+16>grafico->device->getTimer()->getTime();
+            grafico->device->getTimer()->tick()
+         );
+        //logica
         logica(pa,pa->input->getInput());
         logica(pb,pb->input->getInput());
+        //render
         render(pa,pb,stage);
 	}
 }
@@ -139,13 +147,14 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
 //
 //
-//        //Movimento actual
-//        //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
+        //Movimento actual
+        //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
 
 //        stringw str=pa->getString("movimiento_actual")+","+pa->getString("estado_posicion")+": ";
 //        for(int i=0;i<(int)pa->input->getBufferInputs().size();i++)
 //            str+=pa->input->getBufferInputs()[i]+"-";
-        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
+//        grafico->device->setWindowCaption(str.c_str());
+//        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
 
 //
 //        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(pa->getEntero("posicion_x"),pa->getEntero("posicion_y"),pa->getEntero("posicion_x")+100,pa->getEntero("posicion_y")+100));

@@ -1,4 +1,4 @@
-joystick 1
+joystick:
 down=>2
 left=>4
 right=>6
@@ -9,7 +9,7 @@ up=>8
 1=>d
 2=>e
 7=>f
-keyboard 2
+keyboard:
 S=>2
 A=>4
 D=>6

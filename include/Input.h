@@ -7,7 +7,7 @@
 #include <stdarg.h>
 using namespace std;
 
-#include <irrlicht.h>
+#include <irrlicht/irrlicht.h>
 
 using namespace irr;
 using namespace core;
@@ -40,6 +40,10 @@ private:
     stringw mapeo;
     bool usando_joystick;
 public:
+    Boton()
+    {
+
+    }
     Boton(irr::EKEY_CODE teclado,stringw mapeo)
     {
         this->teclado=teclado;
@@ -78,10 +82,11 @@ class Input
 private:
     Receiver* receiver;
     bool tecla_arriba;
-    vector<Boton> botones;
     vector<Boton> cruz;
     vector<stringw> buffer_inputs;
 public:
+vector<Boton> botones;
+    Input(){}
     Input(vector<Boton> botones,Receiver* receiver);
     stringw getInput();
     vector<stringw> getBufferInputs();

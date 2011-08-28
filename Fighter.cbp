@@ -37,6 +37,7 @@
 		<Unit filename="include/Grafico.h" />
 		<Unit filename="include/Input.h" />
 		<Unit filename="include/Menu.h" />
+		<Unit filename="include/Parser.h" />
 		<Unit filename="include/Personaje.h" />
 		<Unit filename="include/Sonido.h" />
 		<Unit filename="include/Stage.h" />
@@ -46,6 +47,7 @@
 		<Unit filename="src/Grafico.cpp" />
 		<Unit filename="src/Input.cpp" />
 		<Unit filename="src/Menu.cpp" />
+		<Unit filename="src/Parser.cpp" />
 		<Unit filename="src/Personaje.cpp" />
 		<Unit filename="src/Sonido.cpp" />
 		<Unit filename="src/Stage.cpp" />

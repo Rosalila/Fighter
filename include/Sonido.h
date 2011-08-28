@@ -2,7 +2,7 @@
 //using namespace System;
 //using namespace System.IO;
 using namespace irrklang;
-#include <irrlicht.h>
+#include <irrlicht/irrlicht.h>
 using namespace irr;
 #include <string>
 #include <vector>

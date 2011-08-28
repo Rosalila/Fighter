@@ -5,51 +5,6 @@ Input::Input(vector<Boton> botones,Receiver* receiver)
     this->receiver=receiver;
     tecla_arriba=true;
 ///
-    std::string line; //this will contain the data read from the file
-    ifstream myfile ("input"); //opening the file.
-    bool teclado=true;
-    if (myfile.is_open()) //if the file is open
-    {
-        while (! myfile.eof() ) //while the end of file is NOT reached
-        {
-            getline (myfile,line); //get one line from the file
-            if(myfile.eof())
-                break;
-            //cout << line << endl; //and output it
-            vector <std::string> paramentros;
-            for(int i=0;i<line.length();i++)
-            {
-                std::string token="";
-                for(;(line[i]>=65 && line[i]<=90)||(line[i]>=97 && line[i]<=122)||(line[i]>=48 && line[i]<=57);i++)
-                    token+=line[i];
-                if(token!="")
-                    paramentros.push_back(token);
-            }
-            cout<<"->";
-            cout.flush();
-            cout<<paramentros[0]<<"##"<<paramentros[1]<<endl;
-            cout.flush();
-            if(paramentros[0]=="joystick")
-                teclado=false;
-            else if (paramentros[0]=="keyboard")
-                teclado=true;
-            else
-            {
-                if(teclado)
-                {
-                    stringw str(paramentros[1].c_str());
-                    botones.push_back(Boton((irr::EKEY_CODE)paramentros[0][0],str));
-                }
-                else
-                {
-                }
-            }
-        }
-        myfile.close(); //closing the file
-    }
-    else
-        cout << "Unable to open file"; //if the file is not open output <--
-///
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
     for(int i=0;i<(int)botones.size();i++)
@@ -65,6 +20,14 @@ stringw Input::getInput()
     for(int i=0;i<(int)cruz.size();i++)
         if(cruz[i].estaPresionado(receiver))
             resultado+=cruz[i].getMapeo();
+    if(resultado=="24" || resultado=="42")
+        resultado="1";
+    if(resultado=="26" || resultado=="62")
+        resultado="3";
+    if(resultado=="84" || resultado=="48")
+        resultado="7";
+    if(resultado=="68" || resultado=="86")
+        resultado="9";
     if(tecla_arriba)
     {
         tecla_arriba=false;
