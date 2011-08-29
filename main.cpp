@@ -41,6 +41,11 @@ public:
         setString("movimiento_actual_continuo","");
         setString("colision_hitboxes","");
 
+        setEntero("hp_valor_maximo",250);
+        setEntero("hp_valor_actual",250);
+        setEntero("hp_modificador_periodico",-1);
+        setEntero("hp_periodo",1);
+
         enteros["posicion_x"]=px;
         enteros["posicion_y"]=py;
 
@@ -276,10 +281,11 @@ public:
         agregarInput("4a","a");
         agregarInput("6a","a");
         for(int i=0;i<3;i++)
-            agregarFrame("a",10);
+            agregarFrame("a",3);
         hb_roja.clear();
-        hb_roja.push_back(HitBox(-50,-100,100,100));
+        hb_roja.push_back(HitBox(0,-15,100,50));
         agregarModificador("a",0,hb_roja,"rojas",false);
+        agregarModificador("a",0,"si","atacando",false);
         agregarCondicion("a",0,Condicion("movimiento_actual","=","5",false));
         agregarCondicion("a",0,Condicion("movimiento_actual","=","4",false));
         agregarCondicion("a",0,Condicion("movimiento_actual","=","6",false));
@@ -471,6 +477,9 @@ public:
             agregarFrame("recibir",3);
         agregarCondicion("recibir",0,Condicion("colision_hitboxes","=","si",false));
         agregarCondicion("recibir",0,Condicion("movimiento_actual_continuo","!=","recibir",false));
+
+        agregarModificador("recibir",0,-10,"hp_valor_actual",true,false);
+//        agregarModificador("a",0,"si","atacando",false);
         wizardAgregarImagenes(this,carpeta+"/stand/hit/",4,"recibir",grafico);
     }
 };
@@ -478,25 +487,20 @@ public:
 int main()
 {
     Receiver* receiver=new Receiver();
-
     Parser parser;
     if(!parser.parseInput(receiver))
         cout<<"Archivo de input incorrecto";
-
     Input *inputa=parser.inputs[0];
     Input *inputb=parser.inputs[1];
-
     Grafico *grafico=new Grafico(receiver);
     Sonido *sonido = new Sonido();
-
     Stage *stage=new Stage(grafico->getTexture("resources/Stages/Stage02.png"),grafico->getTexture("resources/Stages/Barra_Vida.png"),grafico);
-
-    Personaje *pb=(Personaje*)new Ryu(Barra(250,250,-1,1,video::SColor(255,255,0,0),core::rect<s32>(250,0,450,50),NULL),400,150,3,"i",grafico,NULL,inputb);
-    Personaje *pa=(Personaje*)new Ryu(Barra(250,250,-1,1,video::SColor(255,255,0,0),core::rect<s32>(0,0,200,50),NULL),100,150,2,"d",grafico,pb,inputa);
+    Personaje *pa=(Personaje*)new Ryu(Barra("hp_valor_maximo","hp_valor_actual","hp_modificador_periodico","hp_periodo",video::SColor(255,255,0,0),core::rect<s32>(0,0,200,50),NULL),300,350,2,"d",grafico,NULL,inputa);
+    Personaje *pb=(Personaje*)new Ryu(Barra("hp_valor_maximo","hp_valor_actual","hp_modificador_periodico","hp_periodo",video::SColor(255,255,0,0),core::rect<s32>(250,0,450,50),NULL),624,350,3,"i",grafico,NULL,inputb);
 
     //Menu m(stage,pa,pb,sonido,grafico,receiver);
     //m.loopMenu();
 
-    Fighter fighter(stage,pa,pb,grafico,sonido);
+    Fighter *fighter=new Fighter(stage,pa,pb,grafico,sonido);
     return 0;
 }

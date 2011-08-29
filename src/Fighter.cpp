@@ -92,8 +92,12 @@ void Fighter::loopJuego()
 {
     //sonido->reproducirSonido("Fight!");
     //sonido->reproducirSonido("Fondo");
-	for (;!pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE);)
+	for (;!pa->input->receiver->IsKeyDown(irr::KEY_RETURN);)
 	{
+	    if(pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE))
+            exit(0);
+	    if(pa->getEntero("hp_valor_actual")<=0 || pb->getEntero("hp_valor_actual")<=0)
+            break;
 	    //setear frames a "60"
 	    grafico->device->getTimer()->start();
 	    for(u32 t=grafico->device->getTimer()->getTime();
@@ -105,6 +109,29 @@ void Fighter::loopJuego()
         logica(pb,pb->input->getInput());
         //render
         render(pa,pb,stage);
+	}
+	//game over
+	for(;!pa->input->receiver->IsKeyDown(irr::KEY_RETURN);)
+	{
+	    if(pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE))
+            exit(0);
+        if (grafico->isWindowActive())
+        {
+            grafico->beginScene();
+            grafico->draw2DImage
+            (   grafico->getTexture("resources/ko.jpg"),
+                irr::core::dimension2d<irr::f32> (grafico->ventana_x,grafico->ventana_y),
+                irr::core::rect<irr::f32>(0,0,grafico->ventana_x,grafico->ventana_y),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::f32(0), irr::core::vector2df (0,0),
+                true,
+                irr::video::SColor(255,255,255,255),
+                false,
+                false);
+            grafico->endScene();
+        }
+        grafico->run();
 	}
 }
 
@@ -167,8 +194,8 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pb->dibujar();
 
         //HP
-        //pa->dibujarBarra("hp");
-        //pb->dibujarBarra("hp");
+        pa->dibujarBarra("hp");
+        pb->dibujarBarra("hp");
 
         //Hit Boxes
         pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");

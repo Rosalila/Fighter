@@ -14,15 +14,15 @@ class Personaje;
 class Barra
 {
 public:
-    int valor_maximo;
-    int valor_actual;
-    int modificador_periodico;
-    int periodo;
+    stringw valor_maximo;
+    stringw valor_actual;
+    stringw modificador_periodico;
+    stringw periodo;
     video::SColor color;
     core::rect<s32> posicion;
     irr::video::ITexture* imagenes[];
 
-    Barra(int valor_maximo,int valor_actual,int modificador_periodico,int periodo,video::SColor color,core::rect<s32> posicion,irr::video::ITexture* imagenes[]);
+    Barra(stringw valor_maximo,stringw valor_actual,stringw modificador_periodico,stringw periodo,video::SColor color,core::rect<s32> posicion,irr::video::ITexture* imagenes[]);
     Barra();
 };
 

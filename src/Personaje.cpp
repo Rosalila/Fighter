@@ -77,7 +77,7 @@ void Personaje::dibujarBarra(stringw variable)
     position2d<s32>prueba= barra.posicion.UpperLeftCorner;
     position2d<s32>prueba2= barra.posicion.LowerRightCorner;
     int l=prueba2.X-prueba.X;
-    int bx2=(barra.valor_maximo/l)*barra.valor_actual;
+    int bx2=(getEntero(barra.valor_maximo)/l)*getEntero(barra.valor_actual);
     grafico->draw2DRectangle(barra.color,core::rect<s32>(prueba.X,prueba.Y,prueba.X+bx2,prueba2.Y));
 }
 //GETS shortcuts
