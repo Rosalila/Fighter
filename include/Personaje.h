@@ -63,6 +63,5 @@ class Personaje
     bool ejectuarCancel(stringw input);
     bool verificarFinDeMovimiento();
     bool aplicarModificadores();
-    bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
-    bool getColisionHitBoxes(Personaje *atacante,Personaje* atacado);
+    void flipHitBoxes();
 };

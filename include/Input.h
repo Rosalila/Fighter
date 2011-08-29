@@ -80,12 +80,12 @@ public:
 class Input
 {
 private:
-    Receiver* receiver;
     bool tecla_arriba;
     vector<Boton> cruz;
     vector<stringw> buffer_inputs;
 public:
 vector<Boton> botones;
+Receiver* receiver;
     Input(){}
     Input(vector<Boton> botones,Receiver* receiver);
     stringw getInput();

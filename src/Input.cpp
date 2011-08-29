@@ -4,7 +4,6 @@ Input::Input(vector<Boton> botones,Receiver* receiver)
 {
     this->receiver=receiver;
     tecla_arriba=true;
-///
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
     for(int i=0;i<(int)botones.size();i++)

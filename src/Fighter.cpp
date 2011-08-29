@@ -54,25 +54,45 @@ bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,in
 
 bool Fighter::getColisionHitBoxes(Personaje *atacante,Personaje* atacado)
 {
+
+    vector <HitBox> hb_azules=atacado->getHitBoxes("azules");
+    vector <HitBox> hb_rojas=atacante->getHitBoxes("rojas");
+
+    if(atacante->getString("orientacion")=="i")
+    for(int i=0;i<(int)hb_rojas.size();i++)
+    {
+        int a=hb_rojas[i].p1x;
+        int b=hb_rojas[i].p2x;
+        hb_rojas[i].p1x=-b;
+        hb_rojas[i].p2x=-a;
+    }
+    if(atacado->getString("orientacion")=="i")
+    for(int i=0;i<(int)hb_azules.size();i++)
+    {
+        int a=hb_azules[i].p1x;
+        int b=hb_azules[i].p2x;
+        hb_azules[i].p1x=-b;
+        hb_azules[i].p2x=-a;
+    }
+
+
     int ax=atacado->getEntero("posicion_x");
     int ay=atacado->getEntero("posicion_y");
     int rx=atacante->getEntero("posicion_x");
     int ry=atacante->getEntero("posicion_y");
 
-    int hb_azul_size=atacado->getHitBoxes("azules").size();
-    int hb_roja_size=atacante->getHitBoxes("rojas").size();
-    for(int a=0;a<hb_azul_size;a++)
-        for(int r=0;r<hb_roja_size;r++)
-            if(getColisionHitBoxes(atacado->getHitBoxes("azules")[a],atacante->getHitBoxes("rojas")[r],ax,ay,rx,ry))
+    for(int a=0;a<(int)hb_azules.size();a++)
+        for(int r=0;r<(int)hb_rojas.size();r++)
+            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
                 return true;
     return false;
 }
 
 void Fighter::loopJuego()
 {
-    sonido->reproducirSonido("Fight!");
-    sonido->reproducirSonido("Fondo");
-	for (;;)
+    //sonido->reproducirSonido("Fight!");
+    //sonido->reproducirSonido("Fondo");
+	for (;!pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE);)
 	{
 	    //setear frames a "60"
 	    grafico->device->getTimer()->start();
@@ -93,14 +113,24 @@ void Fighter::logica(Personaje* personaje,stringw input)
     //flipear personaje
     if(personaje->getEntero("posicion_x")>personaje->personaje_contrario->getEntero("posicion_x"))
     {
-        personaje->strings["orientacion"]="i";
+        if(personaje->getString("orientacion")!="i")
+        {
+            personaje->strings["orientacion"]="i";
+            personaje->flipHitBoxes();
+        }
         if(input=="4")
             input="6";
         else if(input=="6")
             input="4";
     }
     else
-        personaje->strings["orientacion"]="d";
+    {
+        if(personaje->getString("orientacion")!="d")
+        {
+            personaje->strings["orientacion"]="d";
+        }
+    }
+    //deteccion de hitboxes
     if(getColisionHitBoxes(pa,pb))
         pb->setString("colision_hitboxes","si");
     else

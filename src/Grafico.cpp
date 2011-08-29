@@ -7,7 +7,7 @@ Grafico::Grafico(Receiver* receiver)
     video::E_DRIVER_TYPE driverType;
     driverType = video::EDT_OPENGL;
     //driverType = video::EDT_SOFTWARE;
-    device = createDevice(driverType,core::dimension2d<u32>(600,300),true ,false, false, false,receiver);
+    device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,false, false, false,receiver);
     if (device == 0)
         return; // could not create selected driver.
     core::array<SJoystickInfo> joystickInfo;

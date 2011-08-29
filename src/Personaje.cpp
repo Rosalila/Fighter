@@ -27,26 +27,6 @@ Personaje::Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* g
 
 }
 
-void flipHitBoxes(Personaje* personaje)
-{
-    int hitboxes_size=personaje->getHitBoxes("azules").size();
-    for(int i=0;i<hitboxes_size;i++)
-    {
-        int a=personaje->getHitBoxes("azules")[i].p1x;
-        int b=personaje->getHitBoxes("azules")[i].p2x;
-        personaje->getHitBoxes("azules")[i].p1x=-b;
-        personaje->getHitBoxes("azules")[i].p2x=-a;
-    }
-    hitboxes_size=personaje->getHitBoxes("rojas").size();
-    for(int i=0;i<hitboxes_size;i++)
-    {
-        int a=personaje->getHitBoxes("rojas")[i].p1x;
-        int b=personaje->getHitBoxes("rojas")[i].p2x;
-        personaje->getHitBoxes("rojas")[i].p1x=-b;
-        personaje->getHitBoxes("rojas")[i].p2x=-a;
-    }
-}
-
 Personaje::Personaje()
 {
 
@@ -64,7 +44,7 @@ void Personaje::dibujar()
     (   getImagen("imagen_personaje").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x/2)+alineacion_x,getEntero("posicion_y")-(dimension_y/2)+alineacion_y),
+        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x*getImagen("imagen_personaje").escala/2)+alineacion_x,getEntero("posicion_y")-(dimension_y*getImagen("imagen_personaje").escala/2)+alineacion_y),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (getImagen("imagen_personaje").escala,getImagen("imagen_personaje").escala),
         true,
@@ -75,41 +55,20 @@ void Personaje::dibujar()
 void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda)
 {
     vector <HitBox> hitbox=getHitBoxes(variable);
-    if(izquierda)
+    if(getString("orientacion")=="i")
+    for(int i=0;i<(int)hitbox.size();i++)
     {
-        int hitboxes_size=hitbox.size();
-        for(int i=0;i<hitboxes_size;i++)
-        {
-            int a=hitbox[i].p1x;
-            int b=hitbox[i].p2x;
-            hitbox[i].p1x=-b;
-            hitbox[i].p2x=-a;
-        }
+        int a=hitbox[i].p1x;
+        int b=hitbox[i].p2x;
+        hitbox[i].p1x=-b;
+        hitbox[i].p2x=-a;
     }
-    int hb_size=hitbox.size();
-        //grafico->draw2DRectangle(color,core::rect<s32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y,getEntero("posicion_x")+hitbox[i].p2x,getEntero("posicion_y")+hitbox[i].p2y));
-    for(int i=0;i<hb_size;i++)
+    for(int i=0;i<(int)hitbox.size();i++)
     {
-        int dimension_x,dimension_y;
-        if(hitbox[i].p1x>hitbox[i].p2x)
-            dimension_x=hitbox[i].p1x-hitbox[i].p2x;
+        if(variable=="azules")
+            grafico->draw2DRectangle(irr::video::SColor(100,0,0,100),core::rect<s32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y,getEntero("posicion_x")+hitbox[i].p2x,getEntero("posicion_y")+hitbox[i].p2y));
         else
-            dimension_x=hitbox[i].p2x-hitbox[i].p1x;
-        if(hitbox[i].p1y>hitbox[i].p2y)
-            dimension_y=hitbox[i].p1y-hitbox[i].p2y;
-        else
-            dimension_y=hitbox[i].p2y-hitbox[i].p1y;
-        grafico->draw2DImage
-    (   grafico->getTexture(path),
-        irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
-        irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y),
-        irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (1,1),
-        true,
-        irr::video::SColor(255,255,255,255),
-        false,
-        false);
+            grafico->draw2DRectangle(irr::video::SColor(100,100,0,0),core::rect<s32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y,getEntero("posicion_x")+hitbox[i].p2x,getEntero("posicion_y")+hitbox[i].p2y));
     }
 }
 void Personaje::dibujarBarra(stringw variable)
@@ -245,6 +204,29 @@ void Personaje::aplicarModificador(ModificadorString* ms)
         setString(ms->variable,ms->modificador_string);
 }
 
+void Personaje::flipHitBoxes()
+{
+    vector<HitBox> hb=getHitBoxes("azules");
+    for(int i=0;i<(int)hb.size();i++)
+    {
+        int a=hb[i].p1x;
+        int b=hb[i].p2x;
+        hb[i].p1x=-b;
+        hb[i].p2x=-a;
+    }
+    setHitBoxes("azules",hb);
+
+    hb=getHitBoxes("rojas");
+    for(int i=0;i<(int)hb.size();i++)
+    {
+        int a=hb[i].p1x;
+        int b=hb[i].p2x;
+        hb[i].p1x=-b;
+        hb[i].p2x=-a;
+    }
+    setHitBoxes("rojas",hb);
+}
+
 void Personaje::aplicarModificador(ModificadorHitboxes* mh)
 {
     if(mh->aplicar_a_contrario)
@@ -254,73 +236,6 @@ void Personaje::aplicarModificador(ModificadorHitboxes* mh)
 }
 
 //Logica
-bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
-{
-    int x1r=hb_roja.p1x+atacante_x;
-    int y1r=hb_roja.p1y+atacante_y;
-    int x2r=hb_roja.p2x+atacante_x;
-    int y2r=hb_roja.p2y+atacante_y;
-
-    int x1a=hb_azul.p1x+atacado_x;
-    int y1a=hb_azul.p1y+atacado_y;
-    int x2a=hb_azul.p2x+atacado_x;
-    int y2a=hb_azul.p2y+atacado_y;
-
-    return (
-            (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
-            (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
-            (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
-            (x1a<=x1r && x1r<=x2a && x2a<=x2r)
-            )&&(
-            (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
-            (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
-            (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
-            (y1a<=y1r && y1r<=y2a && y2a<=y2r)
-            );
-}
-
-bool Personaje::getColisionHitBoxes(Personaje *atacante,Personaje* atacado)
-{
-    int ax=atacado->getEntero("posicion_x");
-    int ay=atacado->getEntero("posicion_y");
-    int rx=atacante->getEntero("posicion_x");
-    int ry=atacante->getEntero("posicion_y");
-
-    vector <HitBox> hb_azules=atacado->getHitBoxes("azules");
-    vector <HitBox> hb_rojas=atacante->getHitBoxes("rojas");
-
-    if(atacado->getString("orientacion")=="i")
-    {
-        int hitboxes_size=hb_azules.size();
-        for(int i=0;i<hitboxes_size;i++)
-        {
-            int a=hb_azules[i].p1x;
-            int b=hb_azules[i].p2x;
-            hb_azules[i].p1x=-b;
-            hb_azules[i].p2x=-a;
-        }
-    }
-    if(atacante->getString("orientacion")=="i")
-    {
-        int hitboxes_size=hb_rojas.size();
-        for(int i=0;i<hitboxes_size;i++)
-        {
-            int a=hb_rojas[i].p1x;
-            int b=hb_rojas[i].p2x;
-            hb_rojas[i].p1x=-b;
-            hb_rojas[i].p2x=-a;
-        }
-    }
-
-    int hb_azul_size=hb_azules.size();
-    int hb_roja_size=hb_rojas.size();
-    for(int a=0;a<hb_azul_size;a++)
-        for(int r=0;r<hb_roja_size;r++)
-            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
-                return true;
-    return false;
-}
-
 bool Personaje::verificarFinDeMovimiento()
 {
     if((int)getMovimientoActual()->frames.size()==getMovimientoActual()->frame_actual)

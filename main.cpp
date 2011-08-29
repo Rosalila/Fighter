@@ -56,7 +56,7 @@ public:
             agregarFrame("5",3);
         vector <HitBox> hb_roja;
         vector <HitBox> hb_azul;
-        hb_azul.push_back(HitBox(-100,-100,100,100));
+        hb_azul.push_back(HitBox(0,-50,150,50));
         agregarModificador("5",0,hb_azul,"azules",false);
         agregarModificador("5",0,hb_roja,"rojas",false);
         agregarCondicion("5",0,Condicion("movimiento_actual","=","6",false));
@@ -278,10 +278,7 @@ public:
         for(int i=0;i<3;i++)
             agregarFrame("a",10);
         hb_roja.clear();
-        hb_azul.clear();
         hb_roja.push_back(HitBox(-50,-100,100,100));
-        hb_azul.push_back(HitBox(-100,-100,50,100));
-        agregarModificador("a",0,hb_azul,"azules",false);
         agregarModificador("a",0,hb_roja,"rojas",false);
         agregarCondicion("a",0,Condicion("movimiento_actual","=","5",false));
         agregarCondicion("a",0,Condicion("movimiento_actual","=","4",false));
@@ -482,40 +479,12 @@ int main()
 {
     Receiver* receiver=new Receiver();
 
-//    vector<Boton> botonesa,botonesb;
-//
-//    botonesb.push_back(Boton(-2,"2"));
-//    botonesb.push_back(Boton(-4,"4"));
-//    botonesb.push_back(Boton(-6,"6"));
-//    botonesb.push_back(Boton(-8,"8"));
-//
-//    botonesb.push_back(Boton(0,"a"));
-//    botonesb.push_back(Boton(3,"b"));
-//    botonesb.push_back(Boton(5,"c"));
-//    botonesb.push_back(Boton(1,"d"));
-//    botonesb.push_back(Boton(2,"e"));
-//    botonesb.push_back(Boton(7,"f"));
-
-//    botonesa.push_back(Boton(irr::KEY_KEY_S,"2"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_A,"4"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_D,"6"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_W,"8"));
-//
-//    botonesa.push_back(Boton(irr::KEY_KEY_U,"a"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_I,"b"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_O,"c"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_J,"d"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_K,"e"));
-//    botonesa.push_back(Boton(irr::KEY_KEY_L,"f"));
-
-
     Parser parser;
     if(!parser.parseInput(receiver))
         cout<<"Archivo de input incorrecto";
 
-
-    Input *inputb=parser.inputs[1];
     Input *inputa=parser.inputs[0];
+    Input *inputb=parser.inputs[1];
 
     Grafico *grafico=new Grafico(receiver);
     Sonido *sonido = new Sonido();
