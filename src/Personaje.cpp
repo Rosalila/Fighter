@@ -134,14 +134,25 @@ void Personaje::setString(stringw variable,stringw valor)
 }
 
 //Agregares
-void Personaje::agregarInput(stringw input,stringw movimiento)
+void Personaje::agregarInput(vector<stringw> input,stringw movimiento)
 {
     inputs.push_back(InputMovimiento(input,movimiento));
 }
 
-void Personaje::agregarCondicion(stringw movimiento,int frame,Condicion condicion)
+void Personaje::agregarInput(stringw input,stringw movimiento)
+{
+    vector<stringw> lista_input;
+    lista_input.push_back(input);
+    inputs.push_back(InputMovimiento(lista_input,movimiento));
+}
+
+void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion> condicion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
+}
+void Personaje::agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion)
+{
+    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
 }
 void Personaje::agregarMovimiento(stringw movimiento)
 {
@@ -256,11 +267,11 @@ bool Personaje::ejecutarMovimientosConstantes()
 {
     for(int x=0;x<(int)inputs.size();x++)
     {
-        if(inputs[x].input=="*")
+        if(inputs[x].input[0]=="*")
         {
             stringw movimiento=inputs[x].movimiento;
             vector<Condicion> condiciones;
-            condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones;
+            condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones[0];
             bool flag=true;
             for(int i=0;i<(int)condiciones.size();i++)
                 if(!condiciones[i].comparar(getString(condiciones[i].variable)))
@@ -281,11 +292,11 @@ bool Personaje::ejectuarCancel(stringw input)
 {
     for(int x=0;x<(int)inputs.size();x++)
     {
-        if(input==inputs[x].input)
+        if(input==inputs[x].input[0])
         {
             stringw movimiento=inputs[x].movimiento;
             vector<Condicion> condiciones;
-            condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones;
+            condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones[0];
             bool flag=false;
             for(int i=0;i<(int)condiciones.size();i++)
                 if(condiciones[i].personaje_contrario)
@@ -307,11 +318,6 @@ bool Personaje::ejectuarCancel(stringw input)
     }
     return false;
 }
-
-//            Barra barra=personaje_contrario->getBarra("hp");
-//            barra.valor_actual-=10;
-//            personaje_contrario->setBarra("hp",barra);
-//            personaje_contrario->setImagen(mi->variable,mi->modificador_imagen);
 
 bool Personaje::aplicarModificadores()
 {

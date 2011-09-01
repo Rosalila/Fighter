@@ -148,7 +148,7 @@ class Frame
 {
     public:
     vector <Modificador> modificadores;
-    vector <Condicion> condiciones;
+    vector < vector<Condicion> > condiciones;
     int duracion;
     Frame(int duracion);
     //modificadores
@@ -159,9 +159,13 @@ class Frame
     void agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario);
 
     //condiciones
-    void agregarCondicion(Condicion condicion)
+    void agregarCondicion(vector<Condicion> condicion)
     {
         condiciones.push_back(condicion);
+    }
+    void agregarCondicion(int posicion,Condicion condicion)
+    {
+        condiciones[posicion].push_back(condicion);
     }
 };
 
@@ -173,18 +177,22 @@ class Movimiento
     Movimiento();
     Frame getFrameActual();
     void agregarFrame(int duracion);
-    void agregarCondicion(Condicion condicion,int frame)
+    void agregarCondicion(vector<Condicion> condicion,int frame)
     {
         frames[frame].condiciones.push_back(condicion);
+    }
+    void agregarCondicion(int posicion,Condicion condicion,int frame)
+    {
+        frames[frame].condiciones[posicion].push_back(condicion);
     }
 };
 
 class InputMovimiento
 {
 public:
-    stringw input;
+    vector<stringw> input;
     stringw movimiento;
-    InputMovimiento(stringw input,stringw movimiento)
+    InputMovimiento(vector<stringw> input,stringw movimiento)
     {
         this->input=input;
         this->movimiento=movimiento;

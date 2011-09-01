@@ -1,4 +1,6 @@
 #include "../include/Menu.h"
+#include <stdio.h>
+
 class Fighter
 {
 public:

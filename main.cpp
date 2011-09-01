@@ -29,6 +29,7 @@ public:
     Ryu(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico,Personaje *personaje_contrario,Input* input)
     {
         stringw carpeta="resources/Personajes/RyuSF2";
+        vector <HitBox> hb_roja,hb_azul;
         this->input=input;
         setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/RyuSF2/stand/idle/1.png"),1,100,100));
 
@@ -55,24 +56,41 @@ public:
         hitboxes["azules"]=hb_vacia;
         hitboxes["rojas"]=hb_vacia;
 
+        vector<Condicion> condicion;
+        vector<stringw> lista_input;
+
+
         agregarMovimiento("5");
-        agregarInput("5","5");
+        lista_input.clear();
+        lista_input.push_back("5");
+        agregarInput(lista_input,"5");
         for(int i=0;i<4;i++)
             agregarFrame("5",3);
-        vector <HitBox> hb_roja;
-        vector <HitBox> hb_azul;
-        hb_azul.push_back(HitBox(0,-50,150,50));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
         agregarModificador("5",0,hb_azul,"azules",false);
         agregarModificador("5",0,hb_roja,"rojas",false);
-        agregarCondicion("5",0,Condicion("movimiento_actual","=","6",false));
-        agregarCondicion("5",0,Condicion("movimiento_actual","=","4",false));
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("5",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("5",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/idle/",4,"5",grafico);
 
         agregarMovimiento("6");
         agregarInput("6","6");
         for(int i=0;i<5;i++)
             agregarFrame("6",3);
-        agregarCondicion("6",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        agregarModificador("6",0,hb_azul,"azules",false);
+        agregarModificador("6",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("6",0,condicion);
         for(int i=0;i<5;i++)
             agregarModificador("6",i,10,"posicion_x",true,false);
         wizardAgregarImagenes(this,carpeta+"/stand/walking/",5,"6",grafico);
@@ -80,16 +98,31 @@ public:
         agregarMovimiento("defensa");
         agregarInput("4","defensa");
         for(int i=0;i<1;i++)
-            agregarFrame("defensa",2);
-        agregarCondicion("defensa",0,Condicion("movimiento_actual","=","a",true));
-        agregarCondicion("defensa",0,Condicion("movimiento_actual","=","defensa",false));
+            agregarFrame("defensa",3);
+        hb_roja.clear();
+        hb_azul.clear();
+        agregarModificador("defensa",0,hb_azul,"azules",false);
+        agregarModificador("defensa",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","a",true));
+        agregarCondicion("defensa",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","defensa",false));
+        agregarCondicion("defensa",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/block/",1,"defensa",grafico);
 
         agregarMovimiento("4");
         agregarInput("4","4");
         for(int i=0;i<5;i++)
             agregarFrame("4",3);
-        agregarCondicion("4",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        agregarModificador("4",0,hb_azul,"azules",false);
+        agregarModificador("4",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("4",0,condicion);
         for(int i=0;i<5;i++)
             agregarModificador("4",i,-10,"posicion_x",true,false);
         wizardAgregarImagenes(this,carpeta+"/stand/walking/",5,"4",grafico);
@@ -98,7 +131,14 @@ public:
         agregarInput("8","8");
         for(int i=0;i<12;i++)
             agregarFrame("8",3);
-        agregarCondicion("8",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        agregarModificador("8",0,hb_azul,"azules",false);
+        agregarModificador("8",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("8",0,condicion);
         agregarModificador("8",0,"saltando","estado_posicion",false);
         wizardAgregarImagenes(this,carpeta+"/jump/8/",7,"8",grafico);
 
@@ -106,7 +146,14 @@ public:
         agregarInput("9","9");
         for(int i=0;i<7;i++)
             agregarFrame("9",3);
-        agregarCondicion("9",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-70,-70,80,80));
+        agregarModificador("9",0,hb_azul,"azules",false);
+        agregarModificador("9",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("9",0,condicion);
         agregarModificador("9",0,"saltando adelante","estado_posicion",false);
         wizardAgregarImagenes(this,carpeta+"/jump/9/",7,"9",grafico);
 
@@ -114,16 +161,31 @@ public:
         agregarInput("7","7");
         for(int i=0;i<7;i++)
             agregarFrame("7",3);
-        agregarCondicion("7",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-70,-70,80,80));
+        agregarModificador("7",0,hb_azul,"azules",false);
+        agregarModificador("7",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("7",0,condicion);
         agregarModificador("7",0,"saltando atras","estado_posicion",false);
         wizardAgregarImagenes(this,carpeta+"/jump/9/",7,"7",grafico);
 
         agregarMovimiento("defensa abajo");
         agregarInput("1","defensa abajo");
         for(int i=0;i<1;i++)
-            agregarFrame("defensa abajo",2);
-        agregarCondicion("defensa abajo",0,Condicion("movimiento_actual","=","a",true));
-        agregarCondicion("defensa abajo",0,Condicion("movimiento_actual","=","defensa abajo",false));
+            agregarFrame("defensa abajo",3);
+        hb_roja.clear();
+        hb_azul.clear();
+        agregarModificador("defensa abajo",0,hb_azul,"azules",false);
+        agregarModificador("defensa abajo",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","a",true));
+        agregarCondicion("defensa abajo",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","defensa abajo",false));
+        agregarCondicion("defensa abajo",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/block/",1,"defensa abajo",grafico);
 
         agregarMovimiento("2");
@@ -132,7 +194,14 @@ public:
         agregarInput("3","2");
         for(int i=0;i<1;i++)
             agregarFrame("2",3);
-        agregarCondicion("2",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,50,50,200));
+        agregarModificador("2",0,hb_azul,"azules",false);
+        agregarModificador("2",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/idle/",1,"2",grafico);
 
         agregarMovimiento("8a");
@@ -165,7 +234,15 @@ public:
         agregarInput("9c","8a");
         for(int i=0;i<3;i++)
             agregarFrame("8a",3);
-        agregarCondicion("8a",0,Condicion("movimiento_actual","=","8",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,150));
+        hb_roja.push_back(HitBox(0,0,100,70));
+        agregarModificador("8a",0,hb_azul,"azules",false);
+        agregarModificador("8a",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","8",false));
+        agregarCondicion("8a",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/jump/8a 8b 8c/",3,"8a",grafico);
 
         agregarMovimiento("8d");
@@ -189,7 +266,15 @@ public:
         agregarInput("9e","8d");
         for(int i=0;i<2;i++)
             agregarFrame("8d",3);
-        agregarCondicion("8d",0,Condicion("movimiento_actual","=","8",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,150));
+        hb_roja.push_back(HitBox(0,-50,80,50));
+        agregarModificador("8d",0,hb_azul,"azules",false);
+        agregarModificador("8d",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","8",false));
+        agregarCondicion("8d",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/jump/8d 8e/",2,"8d",grafico);
 
 
@@ -205,7 +290,14 @@ public:
         agregarInput("9f","8f");
         for(int i=0;i<3;i++)
             agregarFrame("8f",3);
-        agregarCondicion("8f",0,Condicion("movimiento_actual","=","8",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,150));
+        hb_roja.push_back(HitBox(0,-20,110,50));
+        agregarModificador("8f",0,hb_azul,"azules",false);
+        agregarModificador("8f",0,hb_roja,"rojas",false);
+        condicion.push_back(Condicion("movimiento_actual","=","8",false));
+        agregarCondicion("8f",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/jump/8f/",3,"8f",grafico);
 
         agregarMovimiento("9a");
@@ -238,8 +330,18 @@ public:
         agregarInput("9c","9a");
         for(int i=0;i<2;i++)
             agregarFrame("9a",3);
-        agregarCondicion("9a",0,Condicion("movimiento_actual","=","9",false));
-        agregarCondicion("9a",0,Condicion("movimiento_actual","=","7",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-70,-70,80,140));
+        hb_roja.push_back(HitBox(0,-20,80,120));
+        agregarModificador("9a",0,hb_azul,"azules",false);
+        agregarModificador("9a",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","9",false));
+        agregarCondicion("9a",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","7",false));
+        agregarCondicion("9a",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/jump/9a/",2,"9a",grafico);
 
         agregarMovimiento("9e");
@@ -272,8 +374,18 @@ public:
         agregarInput("9f","9e");
         for(int i=0;i<2;i++)
             agregarFrame("9e",3);
-        agregarCondicion("9e",0,Condicion("movimiento_actual","=","9",false));
-        agregarCondicion("9e",0,Condicion("movimiento_actual","=","7",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-70,-70,80,140));
+        hb_roja.push_back(HitBox(0,40,130,130));
+        agregarModificador("9e",0,hb_azul,"azules",false);
+        agregarModificador("9e",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","9",false));
+        agregarCondicion("9e",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","7",false));
+        agregarCondicion("9e",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/jump/9e 9f/",2,"9e",grafico);
 
         agregarMovimiento("a");
@@ -282,13 +394,22 @@ public:
         agregarInput("6a","a");
         for(int i=0;i<3;i++)
             agregarFrame("a",3);
+        hb_azul.clear();
         hb_roja.clear();
-        hb_roja.push_back(HitBox(0,-15,100,50));
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(0,-15,100,40));
+        agregarModificador("a",0,hb_azul,"azules",false);
         agregarModificador("a",0,hb_roja,"rojas",false);
         agregarModificador("a",0,"si","atacando",false);
-        agregarCondicion("a",0,Condicion("movimiento_actual","=","5",false));
-        agregarCondicion("a",0,Condicion("movimiento_actual","=","4",false));
-        agregarCondicion("a",0,Condicion("movimiento_actual","=","6",false));
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("a",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("a",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("a",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/a/",3,"a",grafico);
 
         agregarMovimiento("2a");
@@ -297,8 +418,17 @@ public:
         agregarInput("3a","2a");
         for(int i=0;i<3;i++)
             agregarFrame("2a",3);
-        agregarCondicion("2a",0,Condicion("movimiento_actual","=","2",false));
-        agregarCondicion("2a",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(20,50,110,100));
+        hb_azul.push_back(HitBox(-50,50,50,200));
+        agregarModificador("2a",0,hb_azul,"azules",false);
+        agregarModificador("2a",0,hb_roja,"rojas",false);
+        condicion.push_back(Condicion("movimiento_actual","=","2",false));
+        agregarCondicion("2a",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2a",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/a/",3,"2a",grafico);
 
         agregarMovimiento("b");
@@ -307,9 +437,21 @@ public:
         agregarInput("6b","b");
         for(int i=0;i<5;i++)
             agregarFrame("b",3);
-        agregarCondicion("b",0,Condicion("movimiento_actual","=","5",false));
-        agregarCondicion("b",0,Condicion("movimiento_actual","=","4",false));
-        agregarCondicion("b",0,Condicion("movimiento_actual","=","6",false));
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(0,-15,140,40));
+        agregarModificador("b",0,hb_azul,"azules",false);
+        agregarModificador("b",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("b",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("b",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("b",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/b c/",5,"b",grafico);
 
         agregarMovimiento("2b");
@@ -318,8 +460,18 @@ public:
         agregarInput("3b","2b");
         for(int i=0;i<4;i++)
             agregarFrame("2b",3);
-        agregarCondicion("2b",0,Condicion("movimiento_actual","=","2",false));
-        agregarCondicion("2b",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(20,50,120,100));
+        hb_azul.push_back(HitBox(-50,50,50,200));
+        agregarModificador("2b",0,hb_azul,"azules",false);
+        agregarModificador("2b",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","2",false));
+        agregarCondicion("2b",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2b",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/b/",4,"2b",grafico);
 
         agregarMovimiento("c");
@@ -328,10 +480,24 @@ public:
         agregarInput("6c","c");
         for(int i=0;i<5;i++)
             agregarFrame("c",3);
-        agregarCondicion("c",0,Condicion("movimiento_actual","=","9",false));
-        agregarCondicion("c",0,Condicion("movimiento_actual","=","5",false));
-        agregarCondicion("c",0,Condicion("movimiento_actual","=","4",false));
-        agregarCondicion("c",0,Condicion("movimiento_actual","=","6",false));
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(0,-15,140,40));
+        agregarModificador("c",0,hb_azul,"azules",false);
+        agregarModificador("c",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","9",false));
+        agregarCondicion("c",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("c",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("c",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("c",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/b c/",5,"c",grafico);
 
         agregarMovimiento("2c");
@@ -340,8 +506,18 @@ public:
         agregarInput("3c","2c");
         for(int i=0;i<5;i++)
             agregarFrame("2c",3);
-        agregarCondicion("2c",0,Condicion("movimiento_actual","=","2",false));
-        agregarCondicion("2c",0,Condicion("movimiento_actual","=","5",false));
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(20,-100,80,100));
+        agregarModificador("2c",0,hb_azul,"azules",false);
+        agregarModificador("2c",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","2",false));
+        agregarCondicion("2c",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2c",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/c/",5,"2c",grafico);
 
         agregarMovimiento("d");
@@ -350,9 +526,20 @@ public:
         agregarInput("6d","d");
         for(int i=0;i<3;i++)
             agregarFrame("d",3);
-        agregarCondicion("d",0,Condicion("movimiento_actual","=","5",false));
-        agregarCondicion("d",0,Condicion("movimiento_actual","=","4",false));
-        agregarCondicion("d",0,Condicion("movimiento_actual","=","6",false));
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(0,-50,80,40));
+        agregarModificador("d",0,hb_azul,"azules",false);
+        agregarModificador("d",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("d",0,condicion);
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("d",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("d",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/d e/",3,"d",grafico);
 
         agregarMovimiento("2d");
@@ -361,8 +548,18 @@ public:
         agregarInput("3d","2d");
         for(int i=0;i<3;i++)
             agregarFrame("2d",3);
-        agregarCondicion("2d",0,Condicion("movimiento_actual","=","2",false));
-        agregarCondicion("2d",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(20,140,140,190));
+        hb_azul.push_back(HitBox(-50,50,50,200));
+        agregarModificador("2d",0,hb_azul,"azules",false);
+        agregarModificador("2d",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","2",false));
+        agregarCondicion("2d",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2d",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/d/",3,"2d",grafico);
 
         agregarMovimiento("e");
@@ -371,9 +568,21 @@ public:
         agregarInput("6e","e");
         for(int i=0;i<3;i++)
             agregarFrame("e",3);
-        agregarCondicion("e",0,Condicion("movimiento_actual","=","5",false));
-        agregarCondicion("e",0,Condicion("movimiento_actual","=","4",false));
-        agregarCondicion("e",0,Condicion("movimiento_actual","=","6",false));
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(0,-50,80,40));
+        agregarModificador("e",0,hb_azul,"azules",false);
+        agregarModificador("e",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("e",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("e",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("e",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/d e/",3,"e",grafico);
 
         agregarMovimiento("2e");
@@ -382,8 +591,18 @@ public:
         agregarInput("3e","2e");
         for(int i=0;i<3;i++)
             agregarFrame("2e",3);
-        agregarCondicion("2e",0,Condicion("movimiento_actual","=","2",false));
-        agregarCondicion("2e",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(20,140,160,190));
+        hb_azul.push_back(HitBox(-50,50,50,200));
+        agregarModificador("2e",0,hb_azul,"azules",false);
+        agregarModificador("2e",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","2",false));
+        agregarCondicion("2e",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2e",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/e/",3,"2e",grafico);
 
         agregarMovimiento("f");
@@ -392,9 +611,21 @@ public:
         agregarInput("6f","f");
         for(int i=0;i<5;i++)
             agregarFrame("f",3);
-        agregarCondicion("f",0,Condicion("movimiento_actual","=","5",false));
-        agregarCondicion("f",0,Condicion("movimiento_actual","=","4",false));
-        agregarCondicion("f",0,Condicion("movimiento_actual","=","6",false));
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        hb_roja.push_back(HitBox(0,-50,130,40));
+        agregarModificador("f",0,hb_azul,"azules",false);
+        agregarModificador("f",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("f",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","4",false));
+        agregarCondicion("f",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","6",false));
+        agregarCondicion("f",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/stand/f/",5,"f",grafico);
 
         agregarMovimiento("2f");
@@ -403,16 +634,28 @@ public:
         agregarInput("3f","2f");
         for(int i=0;i<5;i++)
             agregarFrame("2f",3);
-        agregarCondicion("2f",0,Condicion("movimiento_actual","=","2",false));
-        agregarCondicion("2f",0,Condicion("movimiento_actual","=","5",false));
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(20,140,160,190));
+        hb_azul.push_back(HitBox(-50,50,50,200));
+        agregarModificador("2f",0,hb_azul,"azules",false);
+        agregarModificador("2f",0,hb_roja,"rojas",false);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","2",false));
+        agregarCondicion("2f",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual","=","5",false));
+        agregarCondicion("2f",0,condicion);
         wizardAgregarImagenes(this,carpeta+"/crouch/f/",5,"2f",grafico);
 
         agregarMovimiento("saltando");
         agregarInput("*","saltando");
         for(int i=0;i<12;i++)
-            agregarFrame("saltando",2);
-        agregarCondicion("saltando",0,Condicion("estado_posicion","=","saltando",false));
-        agregarCondicion("saltando",0,Condicion("movimiento_actual_continuo","=","",false));
+            agregarFrame("saltando",3);
+        condicion.clear();
+        condicion.push_back(Condicion("estado_posicion","=","saltando",false));
+        condicion.push_back(Condicion("movimiento_actual_continuo","=","",false));
+        agregarCondicion("saltando",0,condicion);
         agregarModificador("saltando",0,-25,"posicion_y",true,false);
         agregarModificador("saltando",1,-25,"posicion_y",true,false);
         agregarModificador("saltando",2,-25,"posicion_y",true,false);
@@ -430,9 +673,11 @@ public:
         agregarMovimiento("saltando adelante");
         agregarInput("*","saltando adelante");
         for(int i=0;i<12;i++)
-            agregarFrame("saltando adelante",2);
-        agregarCondicion("saltando adelante",0,Condicion("estado_posicion","=","saltando adelante",false));
-        agregarCondicion("saltando adelante",0,Condicion("movimiento_actual_continuo","=","",false));
+            agregarFrame("saltando adelante",3);
+        condicion.clear();
+        condicion.push_back(Condicion("estado_posicion","=","saltando adelante",false));
+        condicion.push_back(Condicion("movimiento_actual_continuo","=","",false));
+        agregarCondicion("saltando adelante",0,condicion);
         agregarModificador("saltando adelante",0,-25,"posicion_y",true,false);
         agregarModificador("saltando adelante",1,-25,"posicion_y",true,false);
         agregarModificador("saltando adelante",2,-25,"posicion_y",true,false);
@@ -445,16 +690,18 @@ public:
         agregarModificador("saltando adelante",9,25,"posicion_y",true,false);
         agregarModificador("saltando adelante",10,25,"posicion_y",true,false);
         agregarModificador("saltando adelante",11,25,"posicion_y",true,false);
+        agregarModificador("saltando adelante",11,"","estado_posicion",false);
         for(int i=0;i<12;i++)
             agregarModificador("saltando adelante",i,10,"posicion_x",true,false);
-        agregarModificador("saltando adelante",11,"","estado_posicion",false);
 
         agregarMovimiento("saltando atras");
         agregarInput("*","saltando atras");
         for(int i=0;i<12;i++)
-            agregarFrame("saltando atras",2);
-        agregarCondicion("saltando atras",0,Condicion("estado_posicion","=","saltando atras",false));
-        agregarCondicion("saltando atras",0,Condicion("movimiento_actual_continuo","=","",false));
+            agregarFrame("saltando atras",3);
+        condicion.clear();
+        condicion.push_back(Condicion("estado_posicion","=","saltando atras",false));
+        condicion.push_back(Condicion("movimiento_actual_continuo","=","",false));
+        agregarCondicion("saltando atras",0,condicion);
         agregarModificador("saltando atras",0,-25,"posicion_y",true,false);
         agregarModificador("saltando atras",1,-25,"posicion_y",true,false);
         agregarModificador("saltando atras",2,-25,"posicion_y",true,false);
@@ -467,16 +714,20 @@ public:
         agregarModificador("saltando atras",9,25,"posicion_y",true,false);
         agregarModificador("saltando atras",10,25,"posicion_y",true,false);
         agregarModificador("saltando atras",11,25,"posicion_y",true,false);
+        agregarModificador("saltando atras",11,"","estado_posicion",false);
         for(int i=0;i<12;i++)
             agregarModificador("saltando atras",i,-10,"posicion_x",true,false);
-        agregarModificador("saltando atras",11,"","estado_posicion",false);
 
         agregarMovimiento("recibir");
         agregarInput("*","recibir");
         for(int i=0;i<4;i++)
             agregarFrame("recibir",3);
-        agregarCondicion("recibir",0,Condicion("colision_hitboxes","=","si",false));
-        agregarCondicion("recibir",0,Condicion("movimiento_actual_continuo","!=","recibir",false));
+        condicion.clear();
+        condicion.push_back(Condicion("colision_hitboxes","=","si",false));
+        agregarCondicion("recibir",0,condicion);
+        condicion.clear();
+        condicion.push_back(Condicion("movimiento_actual_continuo","!=","recibir",false));
+        agregarCondicion("recibir",0,condicion);
 
         agregarModificador("recibir",0,-10,"hp_valor_actual",true,false);
 //        agregarModificador("a",0,"si","atacando",false);
@@ -501,6 +752,6 @@ int main()
     //Menu m(stage,pa,pb,sonido,grafico,receiver);
     //m.loopMenu();
 
-    Fighter *fighter=new Fighter(stage,pa,pb,grafico,sonido);
+    Fighter fighter(stage,pa,pb,grafico,sonido);
     return 0;
 }

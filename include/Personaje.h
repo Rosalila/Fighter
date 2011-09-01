@@ -43,8 +43,10 @@ class Personaje
     void setHitBoxes(stringw variable,vector<HitBox> valor);
     void setString(stringw variable,stringw valor);
     //Agregares
+    void agregarInput(vector<stringw> input,stringw movimiento);
     void agregarInput(stringw input,stringw movimiento);
-    void agregarCondicion(stringw movimiento,int frame,Condicion condicion);
+    void agregarCondicion(stringw movimiento,int frame,vector<Condicion> condicion);
+    void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
     void agregarMovimiento(stringw movimiento);
     void agregarFrame(stringw movimiento, int duracion);
     void agregarModificador(stringw movimiento,int frame,Imagen modificador,stringw variable,bool aplicar_a_contrario);

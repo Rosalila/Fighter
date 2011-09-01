@@ -107,10 +107,12 @@ void Fighter::loopJuego()
         //logica
         logica(pa,pa->input->getInput());
         logica(pb,pb->input->getInput());
+
         //render
         render(pa,pb,stage);
 	}
 	//game over
+	irr::video::ITexture* texture_game_over=grafico->getTexture("resources/ko.jpg");
 	for(;!pa->input->receiver->IsKeyDown(irr::KEY_RETURN);)
 	{
 	    if(pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE))
@@ -119,7 +121,7 @@ void Fighter::loopJuego()
         {
             grafico->beginScene();
             grafico->draw2DImage
-            (   grafico->getTexture("resources/ko.jpg"),
+            (   texture_game_over,
                 irr::core::dimension2d<irr::f32> (grafico->ventana_x,grafico->ventana_y),
                 irr::core::rect<irr::f32>(0,0,grafico->ventana_x,grafico->ventana_y),
                 irr::core::position2d<irr::f32>(0,0),
@@ -139,36 +141,14 @@ void Fighter::logica(Personaje* personaje,stringw input)
 {
     //flipear personaje
     if(personaje->getEntero("posicion_x")>personaje->personaje_contrario->getEntero("posicion_x"))
-    {
-        if(personaje->getString("orientacion")!="i")
-        {
-            personaje->strings["orientacion"]="i";
-            personaje->flipHitBoxes();
-        }
-        if(input=="4")
-            input="6";
-        else if(input=="6")
-            input="4";
-    }
+        personaje->strings["orientacion"]="i";
     else
-    {
-        if(personaje->getString("orientacion")!="d")
-        {
-            personaje->strings["orientacion"]="d";
-        }
-    }
+        personaje->strings["orientacion"]="d";
     //deteccion de hitboxes
-    if(getColisionHitBoxes(pa,pb))
-        pb->setString("colision_hitboxes","si");
+    if(getColisionHitBoxes(personaje->personaje_contrario,personaje))
+        personaje->setString("colision_hitboxes","si");
     else
-        pb->setString("colision_hitboxes","no");
-
-    if(getColisionHitBoxes(pb,pa))
-        pa->setString("colision_hitboxes","si");
-    else
-        pa->setString("colision_hitboxes","no");
-    //avanzar tiempo ++
-    personaje->setEntero("tiempo_transcurrido",personaje->getEntero("tiempo_transcurrido")+1);
+        personaje->setString("colision_hitboxes","no");
     //si se termino
     personaje->verificarFinDeMovimiento();
     //si hay cancel, cambiar input
@@ -176,10 +156,46 @@ void Fighter::logica(Personaje* personaje,stringw input)
     //modificadores
     personaje->aplicarModificadores();
     //Constantes
-    personaje->setEntero("tiempo_transcurrido_continuo",personaje->getEntero("tiempo_transcurrido_continuo")+1);
     personaje->ejecutarMovimientosConstantes();
     personaje->aplicarModificadoresConstantes();
+    //avanzar tiempo ++
+    personaje->setEntero("tiempo_transcurrido",personaje->getEntero("tiempo_transcurrido")+1);
+    personaje->setEntero("tiempo_transcurrido_continuo",personaje->getEntero("tiempo_transcurrido_continuo")+1);
 }
+
+void itoa(int n, char *s, int b) {
+	static char digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
+	int i=0, sign;
+
+	if ((sign = n) < 0)
+		n = -n;
+
+	do {
+		s[i++] = digits[n % b];
+	} while ((n /= b) > 0);
+
+	if (sign < 0)
+		s[i++] = '-';
+	s[i] = '\0';
+
+	//return strrev(s);
+}
+
+char *strrev(char *str) {
+	char *p1, *p2;
+
+	if (!str || !*str)
+		return str;
+
+	for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2) {
+		*p1 ^= *p2;
+		*p2 ^= *p1;
+		*p1 ^= *p2;
+	}
+
+	return str;
+}
+
 
 bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
 {
@@ -198,10 +214,10 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pb->dibujarBarra("hp");
 
         //Hit Boxes
-        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");
-        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
-        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
-        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
+//        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");
+//        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
+//        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
+//        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
 //
 //
         //Movimento actual
@@ -212,6 +228,14 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
 //            str+=pa->input->getBufferInputs()[i]+"-";
 //        grafico->device->setWindowCaption(str.c_str());
 //        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
+	int num = pa->getEntero("posicion_y");
+	char buf[5];
+
+	// convert 123 to string [buf]
+	itoa(num, buf, 10);
+	stringw str(strrev(buf));
+grafico->device->setWindowCaption(str.c_str());
+        //grafico->device->setWindowCaption((pa->getEntero("posicion_x")+","+pa->getEntero("posicion_y")).c_str());
 
 //
 //        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(pa->getEntero("posicion_x"),pa->getEntero("posicion_y"),pa->getEntero("posicion_x")+100,pa->getEntero("posicion_y")+100));
