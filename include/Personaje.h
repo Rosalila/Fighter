@@ -7,6 +7,7 @@ class Personaje
     Grafico* grafico;
     Input* input;
     vector<InputMovimiento> inputs;
+    vector<Movimiento*> movimientos_constantes_actuales;
 
     //strings
     irr::core::map<stringw,stringw> strings;
@@ -60,10 +61,10 @@ class Personaje
     void aplicarModificador(ModificadorString* ms);
     void aplicarModificador(ModificadorHitboxes* mh);
     //Logica
-    bool ejecutarMovimientosConstantes();
-    bool aplicarModificadoresConstantes();
-    bool ejectuarCancel(stringw input);
-    bool verificarFinDeMovimiento();
-    bool aplicarModificadores();
+    void aplicarModificadores(vector<Modificador>);
     void flipHitBoxes();
+    stringw mapInputToMovimiento();
+    bool cumpleCondiciones(stringw str_movimiento);
+    bool cumpleCondicion(Condicion* condicion);
+    bool inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer);
 };

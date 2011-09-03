@@ -54,7 +54,6 @@ bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,in
 
 bool Fighter::getColisionHitBoxes(Personaje *atacante,Personaje* atacado)
 {
-
     vector <HitBox> hb_azules=atacado->getHitBoxes("azules");
     vector <HitBox> hb_rojas=atacante->getHitBoxes("rojas");
 
@@ -88,6 +87,88 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,Personaje* atacado)
     return false;
 }
 
+void Fighter::logicaPersonaje(Personaje* p)
+{
+    //verificar colision de hitboxes
+    if(getColisionHitBoxes(p->personaje_contrario,p))
+        p->setString("colision_hitboxes","si");
+    else
+        p->setString("colision_hitboxes","no");
+    //verificar flip
+    if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x"))
+        p->strings["orientacion"]="i";
+    else
+        p->strings["orientacion"]="d";
+    //get input
+    stringw str_movimiento=p->mapInputToMovimiento();
+    //ejecutar cancel
+    if(str_movimiento!="")
+    if(p->cumpleCondiciones(str_movimiento))
+    {
+        Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        p->setString("movimiento_actual",str_movimiento);
+    }
+    //Movimientos continuos
+      //agregar nuevos
+    for(int i=0;i<(int)p->inputs.size();i++)
+        if(p->inputs[i].input[0]=="*")
+            if(p->cumpleCondiciones(p->inputs[i].movimiento))
+                p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
+}
+
+void Fighter::aplicarModificadores(Personaje *p)
+{
+    //get movimiento y frame
+    Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+    Frame* f=&m->frames[m->frame_actual];
+    //aplicar modificadores
+    p->aplicarModificadores(f->modificadores);
+    //avanzar frame
+    if(m->tiempo_transcurrido==f->duracion)
+    {
+        m->frame_actual++;
+        m->tiempo_transcurrido=0;
+    }else
+        m->tiempo_transcurrido++;
+    //verificar fin de movimiento
+    if(m->frame_actual==(int)m->frames.size())
+    {
+        m->frame_actual=0;
+        p->setString("movimiento_actual","5");
+    }
+    //Movimientos continuos
+      //ejecutar existentes
+    for(int i=0;i<(int)p->movimientos_constantes_actuales.size();i++)
+    {
+        Movimiento* mc=p->movimientos_constantes_actuales[i];
+        Frame* fc=&mc->frames[mc->frame_actual];
+        p->aplicarModificadores(fc->modificadores);
+        //avanzar frame
+        if(mc->tiempo_transcurrido==fc->duracion)
+        {
+            mc->frame_actual++;
+            mc->tiempo_transcurrido=0;
+        }else
+            mc->tiempo_transcurrido++;
+        //verificar fin de movimiento
+        if(mc->frame_actual==(int)mc->frames.size())
+        {
+            mc->frame_actual=0;
+            p->movimientos_constantes_actuales.erase(p->movimientos_constantes_actuales.begin()+i);
+        }
+    }
+}
+
+void Fighter::logica()
+{
+    logicaPersonaje(pa);
+    logicaPersonaje(pb);
+    aplicarModificadores(pa);
+    aplicarModificadores(pb);
+}
+
 void Fighter::loopJuego()
 {
     //sonido->reproducirSonido("Fight!");
@@ -105,8 +186,7 @@ void Fighter::loopJuego()
             grafico->device->getTimer()->tick()
          );
         //logica
-        logica(pa,pa->input->getInput());
-        logica(pb,pb->input->getInput());
+        logica();
 
         //render
         render(pa,pb,stage);
@@ -135,32 +215,6 @@ void Fighter::loopJuego()
         }
         grafico->run();
 	}
-}
-
-void Fighter::logica(Personaje* personaje,stringw input)
-{
-    //flipear personaje
-    if(personaje->getEntero("posicion_x")>personaje->personaje_contrario->getEntero("posicion_x"))
-        personaje->strings["orientacion"]="i";
-    else
-        personaje->strings["orientacion"]="d";
-    //deteccion de hitboxes
-    if(getColisionHitBoxes(personaje->personaje_contrario,personaje))
-        personaje->setString("colision_hitboxes","si");
-    else
-        personaje->setString("colision_hitboxes","no");
-    //si se termino
-    personaje->verificarFinDeMovimiento();
-    //si hay cancel, cambiar input
-    personaje->ejectuarCancel(input);
-    //modificadores
-    personaje->aplicarModificadores();
-    //Constantes
-    personaje->ejecutarMovimientosConstantes();
-    personaje->aplicarModificadoresConstantes();
-    //avanzar tiempo ++
-    personaje->setEntero("tiempo_transcurrido",personaje->getEntero("tiempo_transcurrido")+1);
-    personaje->setEntero("tiempo_transcurrido_continuo",personaje->getEntero("tiempo_transcurrido_continuo")+1);
 }
 
 void itoa(int n, char *s, int b) {
@@ -214,10 +268,10 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pb->dibujarBarra("hp");
 
         //Hit Boxes
-//        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");
-//        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
-//        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
-//        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
+        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");
+        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
+        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
+        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
 //
 //
         //Movimento actual
@@ -228,13 +282,13 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
 //            str+=pa->input->getBufferInputs()[i]+"-";
 //        grafico->device->setWindowCaption(str.c_str());
 //        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
-	int num = pa->getEntero("posicion_y");
-	char buf[5];
+//	int num = pa->getEntero("posicion_y");
+//	char buf[5];
 
 	// convert 123 to string [buf]
-	itoa(num, buf, 10);
-	stringw str(strrev(buf));
-grafico->device->setWindowCaption(str.c_str());
+//	itoa(num, buf, 10);
+//	stringw str(strrev(buf));
+//grafico->device->setWindowCaption(str.c_str());
         //grafico->device->setWindowCaption((pa->getEntero("posicion_x")+","+pa->getEntero("posicion_y")).c_str());
 
 //

@@ -114,6 +114,7 @@ void Frame::agregarModificador(stringw modificador,stringw variable,bool aplicar
 Movimiento::Movimiento()
 {
     frame_actual=0;
+    tiempo_transcurrido=0;
 }
 Frame Movimiento::getFrameActual()
 {

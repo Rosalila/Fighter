@@ -17,7 +17,9 @@ public:
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(Personaje *atacante,Personaje* atacado);
-    void logica(Personaje*personaje,stringw input);
     void loopJuego();
+    void logicaPersonaje(Personaje *p);
+    void aplicarModificadores(Personaje *p);
+    void logica();
     bool render(Personaje* pa,Personaje* pb,Stage* stage);
 };

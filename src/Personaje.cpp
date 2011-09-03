@@ -89,7 +89,6 @@ Frame Personaje::getFrameActual()
 {
     return getMovimientoActual()->getFrameActual();
 }
-
 //GETS variables
 int Personaje::getEntero(stringw variable)
 {
@@ -196,15 +195,27 @@ void Personaje::aplicarModificador(ModificadorImagen* mi)
 void Personaje::aplicarModificador(ModificadorEntero* me)
 {
     if(me->relativo)
+    {
         if(me->aplicar_a_contrario)
+        {
             personaje_contrario->setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+        }
         else
+        {
             setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+        }
+    }
     else
+    {
         if(me->aplicar_a_contrario)
+        {
             personaje_contrario->setEntero(me->variable,me->modificador_entero);
+        }
         else
+        {
             setEntero(me->variable,me->modificador_entero);
+        }
+    }
 }
 
 void Personaje::aplicarModificador(ModificadorString* ms)
@@ -247,125 +258,76 @@ void Personaje::aplicarModificador(ModificadorHitboxes* mh)
 }
 
 //Logica
-bool Personaje::verificarFinDeMovimiento()
+stringw Personaje::mapInputToMovimiento()
 {
-    if((int)getMovimientoActual()->frames.size()==getMovimientoActual()->frame_actual)
+    input->getInput();
+    for(int i=0;i<(int)inputs.size();i++)
+        if(inputEstaEnBuffer(inputs[i].input,input->getBufferInputs()))
+            if(cumpleCondiciones(inputs[i].movimiento))
+                return inputs[i].movimiento;
+    return "";
+}
+bool Personaje::inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer)
+{
+    if(input.size()==1)
+        return input[0]==buffer[0];
+    int j=(int)input.size()-1;
+    for(int i=0;i<(int)buffer.size();i++)
     {
-        getMovimientoActual()->frame_actual=0;
-        setString("movimiento_actual","5");
-    }
-    if(getString("movimiento_actual_continuo")!="")
-    if((int)((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->frames.size()==((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->frame_actual)
-    {
-        ((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->frame_actual=0;
-        setString("movimiento_actual_continuo","");
+        if(input[j]==buffer[i])
+            j--;
+        if(j==-1)
+            return true;
     }
     return false;
 }
-
-bool Personaje::ejecutarMovimientosConstantes()
+bool Personaje::cumpleCondiciones(stringw str_movimiento)
 {
-    for(int x=0;x<(int)inputs.size();x++)
+    Movimiento *movimiento=movimientos[str_movimiento];
+    Frame *frame=&movimiento->frames[0];
+    vector<vector<Condicion> > condiciones=frame->condiciones;
+    for(int i=0;i<(int)condiciones.size();i++)
     {
-        if(inputs[x].input[0]=="*")
+        vector<Condicion> subcondiciones=condiciones[i];
+        bool flag=true;
+        for(int j=0;j<(int)subcondiciones.size();j++)
         {
-            stringw movimiento=inputs[x].movimiento;
-            vector<Condicion> condiciones;
-            condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones[0];
-            bool flag=true;
-            for(int i=0;i<(int)condiciones.size();i++)
-                if(!condiciones[i].comparar(getString(condiciones[i].variable)))
-                    flag=false;
-            if(flag)
-            {
-                if(getString("movimiento_actual_continuo")!="")
-                    ((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->frame_actual=0;
-                setString("movimiento_actual_continuo",movimiento);
-                return true;
-            }
+            if(!cumpleCondicion(&subcondiciones[j]))
+                flag=false;
         }
+        if(flag)
+            return true;
     }
     return false;
 }
-
-bool Personaje::ejectuarCancel(stringw input)
+bool Personaje::cumpleCondicion(Condicion* condicion)
 {
-    for(int x=0;x<(int)inputs.size();x++)
+    Personaje* personaje;
+    if(!condicion->personaje_contrario)
+        personaje=this;
+    else
+        personaje=personaje_contrario;
+    if(condicion->tipo=="cadena")
     {
-        if(input==inputs[x].input[0])
-        {
-            stringw movimiento=inputs[x].movimiento;
-            vector<Condicion> condiciones;
-            condiciones=((Movimiento*)movimientos[movimiento])->frames[0].condiciones[0];
-            bool flag=false;
-            for(int i=0;i<(int)condiciones.size();i++)
-                if(condiciones[i].personaje_contrario)
-                {
-                    if(condiciones[i].comparar(personaje_contrario->getString(condiciones[i].variable)))
-                        flag=true;
-                }else
-                {
-                    if(condiciones[i].comparar(getString(condiciones[i].variable)))
-                        flag=true;
-                }
-            if(flag)
-            {
-                getMovimientoActual()->frame_actual=0;
-                setString("movimiento_actual",movimiento);
-                return true;
-            }
-        }
+        return condicion->comparar(personaje->getString(condicion->variable));
+    }else if(condicion->tipo=="entero")
+    {
+        return condicion->comparar(personaje->getEntero(condicion->variable));
     }
     return false;
 }
-
-bool Personaje::aplicarModificadores()
+void Personaje::aplicarModificadores(vector<Modificador> modificadores)
 {
-    if(getEntero("tiempo_transcurrido")>getFrameActual().duracion)
+    for(int i=0;i<(int)modificadores.size();i++)
     {
-        Frame frame=getFrameActual();
-        int frame_modificadores_size=frame.modificadores.size();
-        for(int i=0;i<frame_modificadores_size;i++)
-        {
-            Modificador modificador=frame.modificadores[i];
-            if(modificador.tipo=="imagen")
-                aplicarModificador((ModificadorImagen*)&modificador);
-            if(modificador.tipo=="entero")
-                aplicarModificador((ModificadorEntero*)&modificador);
-            if(modificador.tipo=="string")
-                aplicarModificador((ModificadorString*)&modificador);
-            if(modificador.tipo=="hitboxes")
-                aplicarModificador((ModificadorHitboxes*)&modificador);
-        }
-        getMovimientoActual()->frame_actual++;
-        setEntero("tiempo_transcurrido",0);
-        return true;
+        Modificador modificador=modificadores[i];
+        if(modificador.tipo=="imagen")
+            aplicarModificador((ModificadorImagen*)&modificador);
+        if(modificador.tipo=="entero")
+            aplicarModificador((ModificadorEntero*)&modificador);
+        if(modificador.tipo=="string")
+            aplicarModificador((ModificadorString*)&modificador);
+        if(modificador.tipo=="hitboxes")
+            aplicarModificador((ModificadorHitboxes*)&modificador);
     }
-    return false;
-}
-
-bool Personaje::aplicarModificadoresConstantes()
-{
-    if(getString("movimiento_actual_continuo")!="")
-    if(getEntero("tiempo_transcurrido_continuo")>((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->getFrameActual().duracion)
-    {
-        Frame frame=((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->getFrameActual();
-        int frame_modificadores_size=frame.modificadores.size();
-        for(int i=0;i<frame_modificadores_size;i++)
-        {
-            Modificador modificador=frame.modificadores[i];
-            if(modificador.tipo=="imagen")
-                aplicarModificador((ModificadorImagen*)&modificador);
-            if(modificador.tipo=="entero")
-                aplicarModificador((ModificadorEntero*)&modificador);
-            if(modificador.tipo=="string")
-                aplicarModificador((ModificadorString*)&modificador);
-            if(modificador.tipo=="hitboxes")
-                aplicarModificador((ModificadorHitboxes*)&modificador);
-        }
-        ((Movimiento*)movimientos[getString("movimiento_actual_continuo")])->frame_actual++;
-        setEntero("tiempo_transcurrido_continuo",0);
-        return true;
-    }
-    return false;
 }

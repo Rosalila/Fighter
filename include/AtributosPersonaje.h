@@ -54,6 +54,8 @@ class Modificador
     stringw variable;
     Imagen modificador_imagen;
 
+    bool relativo;//solo para ints
+
     Barra modificador_barra;
     vector <HitBox> modificador_hitbox;
     stringw modificador_string;
@@ -69,7 +71,6 @@ class ModificadorImagen : public Modificador
 class ModificadorEntero : public Modificador
 {
     public:
-    bool relativo;
     ModificadorEntero(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
 };
 
@@ -172,7 +173,7 @@ class Frame
 class Movimiento
 {
     public:
-    int frame_actual;
+    int frame_actual,tiempo_transcurrido;
     vector <Frame> frames;
     Movimiento();
     Frame getFrameActual();

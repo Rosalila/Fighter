@@ -679,7 +679,7 @@
 1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
-1314845390 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+1315029957 source:/home/userr/ProyectosActuales/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -695,7 +695,7 @@
 	<stdarg.h>
 	<irrlicht/irrlicht.h>
 
-1314649400 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
+1315020405 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
 	"../include/Menu.h"
 	<stdio.h>
 
@@ -809,10 +809,10 @@
 	"ik_IRefCounted.h"
 	"ik_ISoundSource.h"
 
-1314847075 /home/userr/ProyectosActuales/Fighter/include/Personaje.h
+1315025629 /home/userr/ProyectosActuales/Fighter/include/Personaje.h
 	"../include/AtributosPersonaje.h"
 
-1314843414 /home/userr/ProyectosActuales/Fighter/include/AtributosPersonaje.h
+1315011155 /home/userr/ProyectosActuales/Fighter/include/AtributosPersonaje.h
 	<vector>
 	<iostream>
 	<string>
@@ -829,10 +829,10 @@
 	<string>
 	<vector>
 
-1314579991 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
+1314999932 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1314821063 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1315020602 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1314558207 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -844,7 +844,7 @@
 1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Menu.cpp
 	"../include/Menu.h"
 
-1314847721 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
+1315026912 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
 	"../include/Personaje.h"
 
 1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Sonido.cpp
