@@ -80,6 +80,26 @@ void Personaje::dibujarBarra(stringw variable)
     int bx2=(getEntero(barra.valor_maximo)/l)*getEntero(barra.valor_actual);
     grafico->draw2DRectangle(barra.color,core::rect<s32>(prueba.X,prueba.Y,prueba.X+bx2,prueba2.Y));
 }
+void Personaje::dibujarProyectiles()
+{
+    for(int i=0;i<(int)proyectiles_actuales.size();i++)
+    {
+        if(getString(proyectiles_actuales[i]->estado)!="activo")
+            continue;
+        Imagen imagen=getImagen(proyectiles_actuales[i]->imagen);
+        grafico->draw2DImage
+        (   imagen.imagen,
+            irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
+            irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
+            irr::core::position2d<irr::f32>(getEntero(proyectiles_actuales[i]->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x,getEntero(proyectiles_actuales[i]->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y),
+            irr::core::position2d<irr::f32>(0,0),
+            irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
+            true,
+            irr::video::SColor(255,255,255,255),
+            false,
+            false);
+    }
+}
 //GETS shortcuts
 Movimiento* Personaje::getMovimientoActual()
 {
@@ -157,6 +177,11 @@ void Personaje::agregarMovimiento(stringw movimiento)
 {
     movimientos[movimiento]=new Movimiento(movimiento);
 }
+void Personaje::agregarProyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado)
+{
+    proyectiles_actuales.push_back(new Proyectil(nombre,posicion_x,posicion_y,imagen,hitboxes,estado));
+    proyectiles[nombre]=new Proyectil(nombre,posicion_x,posicion_y,imagen,hitboxes,estado);
+}
 void Personaje::agregarFrame(stringw movimiento, int duracion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarFrame(duracion);
@@ -180,6 +205,10 @@ void Personaje::agregarModificador(stringw movimiento,int frame,vector <HitBox> 
 void Personaje::agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
+}
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+{
+    ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(tipo,variable_modificador,variable,relativo,aplicar_a_contrario);
 }
 
 //Aplicares
@@ -257,6 +286,26 @@ void Personaje::aplicarModificador(ModificadorHitboxes* mh)
         setHitBoxes(mh->variable,mh->modificador_hitbox);
 }
 
+void Personaje::aplicarModificador(ModificadorPorVariable* mv)
+{
+    if(mv->tipo_variable=="entero")
+    {
+        if(mv->relativo)
+        {
+            if(mv->aplicar_a_contrario)
+                personaje_contrario->setEntero(mv->variable,personaje_contrario->getEntero(mv->modificador_string)+personaje_contrario->getEntero(mv->variable));
+            else
+                setEntero(mv->variable,getEntero(mv->modificador_string)+getEntero(mv->variable));
+        }else
+        {
+            if(mv->aplicar_a_contrario)
+                personaje_contrario->setEntero(mv->variable,personaje_contrario->getEntero(mv->modificador_string)+personaje_contrario->getEntero(mv->variable));
+            else
+                setEntero(mv->variable,getEntero(mv->modificador_string)+getEntero(mv->variable));
+        }
+    }
+}
+
 //Logica
 stringw Personaje::mapInputToMovimiento()
 {
@@ -329,5 +378,7 @@ void Personaje::aplicarModificadores(vector<Modificador> modificadores)
             aplicarModificador((ModificadorString*)&modificador);
         if(modificador.tipo=="hitboxes")
             aplicarModificador((ModificadorHitboxes*)&modificador);
+        if(modificador.tipo=="variable")
+            aplicarModificador((ModificadorPorVariable*)&modificador);
     }
 }

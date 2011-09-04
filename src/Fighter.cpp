@@ -139,7 +139,8 @@ void Fighter::aplicarModificadores(Personaje *p)
     Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
     Frame* f=&m->frames[m->frame_actual];
     //aplicar modificadores
-    p->aplicarModificadores(f->modificadores);
+    if(m->tiempo_transcurrido==0)
+        p->aplicarModificadores(f->modificadores);
     //avanzar frame
     if(m->tiempo_transcurrido==f->duracion)
     {
@@ -159,7 +160,8 @@ void Fighter::aplicarModificadores(Personaje *p)
     {
         Movimiento* mc=p->movimientos_constantes_actuales[i];
         Frame* fc=&mc->frames[mc->frame_actual];
-        p->aplicarModificadores(fc->modificadores);
+        if(mc->tiempo_transcurrido==0)
+            p->aplicarModificadores(fc->modificadores);
         //avanzar frame
         if(mc->tiempo_transcurrido==fc->duracion)
         {
@@ -287,6 +289,9 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
         pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
         pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
+
+        pa->dibujarProyectiles();
+        pb->dibujarProyectiles();
 //
 //
         //Movimento actual

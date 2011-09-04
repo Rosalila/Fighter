@@ -8,6 +8,7 @@ class Personaje
     Input* input;
     vector<InputMovimiento> inputs;
     vector<Movimiento*> movimientos_constantes_actuales;
+    vector<Proyectil*> proyectiles_actuales;
 
     //strings
     irr::core::map<stringw,stringw> strings;
@@ -21,6 +22,8 @@ class Personaje
     irr::core::map<stringw,vector<HitBox> > hitboxes;
     //movimientos
     irr::core::map<stringw,Movimiento*> movimientos;
+    //movimientos
+    irr::core::map<stringw,Proyectil*> proyectiles;
 
     Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico);
     Personaje();
@@ -28,6 +31,7 @@ class Personaje
     void dibujar();
     void dibujarHitBoxes(stringw variable,stringw path,bool izquierda);
     void dibujarBarra(stringw variable);
+    void dibujarProyectiles();
     //GETS shortcuts
     Movimiento* getMovimientoActual();
     Frame getFrameActual();
@@ -49,17 +53,20 @@ class Personaje
     void agregarCondicion(stringw movimiento,int frame,vector<Condicion> condicion);
     void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
     void agregarMovimiento(stringw movimiento);
+    void agregarProyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado);
     void agregarFrame(stringw movimiento, int duracion);
     void agregarModificador(stringw movimiento,int frame,Imagen modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw movimiento,int frame,int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
     void agregarModificador(stringw movimiento,int frame,Barra modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
     //Aplicar modificadores
     void aplicarModificador(ModificadorImagen* mi);
     void aplicarModificador(ModificadorEntero* me);
     void aplicarModificador(ModificadorString* ms);
     void aplicarModificador(ModificadorHitboxes* mh);
+    void aplicarModificador(ModificadorPorVariable* mv);
     //Logica
     void aplicarModificadores(vector<Modificador>);
     void flipHitBoxes();

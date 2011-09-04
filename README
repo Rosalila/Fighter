@@ -5,10 +5,8 @@ PORHACER:
 Logica
 -Proyectiles
 -Soporte de multiples joysticks
--Soporte de asignacion de variables internas
 
 Pruebas
--Daño diferente por movimiento
 -Empujar cuando se pega a la defensa
 -Poner hitboxes a los especiales
 -Agregar movimiento de KO

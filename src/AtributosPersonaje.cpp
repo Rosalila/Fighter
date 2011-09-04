@@ -84,6 +84,15 @@ ModificadorString::ModificadorString(stringw modificador,stringw variable,bool a
     this->modificador_string=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
+ModificadorPorVariable::ModificadorPorVariable(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+{
+    this->tipo="variable";
+    this->tipo_variable=tipo;
+    this->variable=variable;
+    this->modificador_string=variable_modificador;
+    this->relativo=relativo;
+    this->aplicar_a_contrario=aplicar_a_contrario;
+}
 
 Frame::Frame(int duracion)
 {
@@ -109,6 +118,10 @@ void Frame::agregarModificador(vector <HitBox> modificador,stringw variable,bool
 void Frame::agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
     modificadores.push_back(ModificadorString(modificador,variable,aplicar_a_contrario));
+}
+void Frame::agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+{
+    modificadores.push_back(ModificadorPorVariable(tipo,variable_modificador,variable,relativo,aplicar_a_contrario));
 }
 
 Movimiento::Movimiento(stringw nombre)

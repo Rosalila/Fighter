@@ -55,6 +55,7 @@ class Modificador
     Imagen modificador_imagen;
 
     bool relativo;//solo para ints
+    stringw tipo_variable;//solo para por variables
 
     Barra modificador_barra;
     vector <HitBox> modificador_hitbox;
@@ -90,6 +91,12 @@ class ModificadorString : public Modificador
 {
     public:
     ModificadorString(stringw modificador,stringw variable,bool aplicar_a_contrario);
+};
+
+class ModificadorPorVariable : public Modificador
+{
+    public:
+    ModificadorPorVariable(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
 };
 
 class Condicion
@@ -158,6 +165,7 @@ class Frame
     void agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario);
+    void agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
 
     //condiciones
     void agregarCondicion(vector<Condicion> condicion)
@@ -198,5 +206,25 @@ public:
     {
         this->input=input;
         this->movimiento=movimiento;
+    }
+};
+
+class Proyectil
+{
+public:
+    stringw nombre;
+    stringw posicion_x;
+    stringw posicion_y;
+    stringw imagen;
+    stringw hitboxes;
+    stringw estado;
+    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado)
+    {
+        this->nombre=nombre;
+        this->posicion_x=posicion_x;
+        this->posicion_y=posicion_y;
+        this->imagen=imagen;
+        this->hitboxes=hitboxes;
+        this->estado=estado;
     }
 };
