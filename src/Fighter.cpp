@@ -52,10 +52,10 @@ bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,in
 }
 
 
-bool Fighter::getColisionHitBoxes(Personaje *atacante,Personaje* atacado)
+bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado)
 {
-    vector <HitBox> hb_azules=atacado->getHitBoxes("azules");
-    vector <HitBox> hb_rojas=atacante->getHitBoxes("rojas");
+    vector <HitBox> hb_azules=atacado->getHitBoxes(variable_atacado);
+    vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
     if(atacante->getString("orientacion")=="i")
     for(int i=0;i<(int)hb_rojas.size();i++)
@@ -90,10 +90,15 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,Personaje* atacado)
 void Fighter::logicaPersonaje(Personaje* p)
 {
     //verificar colision de hitboxes
-    if(getColisionHitBoxes(p->personaje_contrario,p))
+    if(getColisionHitBoxes(p->personaje_contrario,"rojas",p,"azules"))
         p->setString("colision_hitboxes","si");
     else
         p->setString("colision_hitboxes","no");
+
+    if(getColisionHitBoxes(p->personaje_contrario,"azules",p,"azules"))
+        p->setString("colision_hitboxes_azules","si");
+    else
+        p->setString("colision_hitboxes_azules","no");
     //verificar flip
     if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x"))
         p->strings["orientacion"]="i";
@@ -112,10 +117,20 @@ void Fighter::logicaPersonaje(Personaje* p)
     }
     //Movimientos continuos
       //agregar nuevos
-    for(int i=0;i<(int)p->inputs.size();i++)
-        if(p->inputs[i].input[0]=="*")
-            if(p->cumpleCondiciones(p->inputs[i].movimiento))
-                p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
+    for(int i=0;i<(int)p->inputs.size();i++)//for each movimiento
+        if(p->inputs[i].input[0]=="*")//buscar los constantes
+            if(p->cumpleCondiciones(p->inputs[i].movimiento))//si cumple
+            {
+                bool existe=false;
+                for(int j=0;j<(int)p->movimientos_constantes_actuales.size();j++)//for each movimiento
+                    if(p->movimientos_constantes_actuales[j]->nombre==p->inputs[i].movimiento)
+                    {
+                        existe=true;
+                    }
+                if(!existe)
+                    p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
+            }
+
 }
 
 void Fighter::aplicarModificadores(Personaje *p)

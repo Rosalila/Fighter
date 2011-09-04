@@ -173,9 +173,10 @@ class Frame
 class Movimiento
 {
     public:
+    stringw nombre;
     int frame_actual,tiempo_transcurrido;
     vector <Frame> frames;
-    Movimiento();
+    Movimiento(stringw nombre);
     Frame getFrameActual();
     void agregarFrame(int duracion);
     void agregarCondicion(vector<Condicion> condicion,int frame)

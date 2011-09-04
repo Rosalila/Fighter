@@ -1,16 +1,19 @@
-Fighter de Rosalila
-===================
+Rosalila Fighter
+================
 PORHACER:
 
-Estructura
--Diagrama UML
-
 Logica
--Mejorar logica
 -Proyectiles
--Barra de Super
--Deschanchar Inputs
+-Soporte de multiples joysticks
+-Soporte de asignacion de variables internas
 
 Pruebas
--Hacer nuevo Dummy
--Verificar portabilidad con w
+-Daño diferente por movimiento
+-Empujar cuando se pega a la defensa
+-Poner hitboxes a los especiales
+-Agregar movimiento de KO
+
+Paja
+-Fondo bonito
+-Usar diferentes colores
+-Recomenzar cuando termine la partida

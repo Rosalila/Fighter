@@ -155,7 +155,7 @@ void Personaje::agregarCondicion(stringw movimiento,int frame,int posicion,Condi
 }
 void Personaje::agregarMovimiento(stringw movimiento)
 {
-    movimientos[movimiento]=new Movimiento();
+    movimientos[movimiento]=new Movimiento(movimiento);
 }
 void Personaje::agregarFrame(stringw movimiento, int duracion)
 {
@@ -198,7 +198,7 @@ void Personaje::aplicarModificador(ModificadorEntero* me)
     {
         if(me->aplicar_a_contrario)
         {
-            personaje_contrario->setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
+            personaje_contrario->setEntero(me->variable,me->modificador_entero+personaje_contrario->getEntero(me->variable));
         }
         else
         {

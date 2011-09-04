@@ -111,10 +111,11 @@ void Frame::agregarModificador(stringw modificador,stringw variable,bool aplicar
     modificadores.push_back(ModificadorString(modificador,variable,aplicar_a_contrario));
 }
 
-Movimiento::Movimiento()
+Movimiento::Movimiento(stringw nombre)
 {
     frame_actual=0;
     tiempo_transcurrido=0;
+    this->nombre=nombre;
 }
 Frame Movimiento::getFrameActual()
 {
