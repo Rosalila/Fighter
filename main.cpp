@@ -85,6 +85,29 @@ public:
             agregarModificador("tatsumaki",i,5,"posicion_x",true,false);
         agregarModificador("tatsumaki",0,-10,"posicion_y",true,false);
         agregarModificador("tatsumaki",7,10,"posicion_y",true,false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-100,50,120));
+        agregarModificador("tatsumaki",0,hb_azul,"azules",false);
+        agregarModificador("tatsumaki",0,hb_roja,"rojas",false);
+        agregarModificador("tatsumaki",3,hb_azul,"azules",false);
+        agregarModificador("tatsumaki",3,hb_roja,"rojas",false);
+        agregarModificador("tatsumaki",5,hb_azul,"azules",false);
+        agregarModificador("tatsumaki",5,hb_roja,"rojas",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(10,-40,125,20));
+        hb_azul.push_back(HitBox(10,-20,125,30));
+        hb_azul.push_back(HitBox(-50,-100,50,120));
+        agregarModificador("tatsumaki",2,hb_roja,"rojas",false);
+        agregarModificador("tatsumaki",2,hb_azul,"azules",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(-125,-40,-10,20));
+        hb_azul.push_back(HitBox(-125,-20,-10,30));
+        hb_azul.push_back(HitBox(-50,-100,50,120));
+        agregarModificador("tatsumaki",4,hb_roja,"rojas",false);
+        agregarModificador("tatsumaki",4,hb_azul,"azules",false);
         wizardAgregarImagenes(this,carpeta+"/special/tatsumaki/",8,"tatsumaki",grafico);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","5",false));
@@ -125,6 +148,29 @@ public:
             agregarModificador("tatsumakii",i,-5,"posicion_x",true,false);
         agregarModificador("tatsumakii",0,-10,"posicion_y",true,false);
         agregarModificador("tatsumakii",7,10,"posicion_y",true,false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-100,50,120));
+        agregarModificador("tatsumakii",0,hb_azul,"azules",false);
+        agregarModificador("tatsumakii",0,hb_roja,"rojas",false);
+        agregarModificador("tatsumakii",3,hb_azul,"azules",false);
+        agregarModificador("tatsumakii",3,hb_roja,"rojas",false);
+        agregarModificador("tatsumakii",5,hb_azul,"azules",false);
+        agregarModificador("tatsumakii",5,hb_roja,"rojas",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(10,-40,125,20));
+        hb_azul.push_back(HitBox(10,-20,125,30));
+        hb_azul.push_back(HitBox(-50,-100,50,120));
+        agregarModificador("tatsumakii",2,hb_roja,"rojas",false);
+        agregarModificador("tatsumakii",2,hb_azul,"azules",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_roja.push_back(HitBox(-125,-40,-10,20));
+        hb_azul.push_back(HitBox(-125,-20,-10,30));
+        hb_azul.push_back(HitBox(-50,-100,50,120));
+        agregarModificador("tatsumakii",4,hb_roja,"rojas",false);
+        agregarModificador("tatsumakii",4,hb_azul,"azules",false);
         wizardAgregarImagenes(this,carpeta+"/special/tatsumaki/",8,"tatsumakii",grafico);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","5",false));
@@ -159,13 +205,30 @@ public:
         lista_input.push_back("2");
         lista_input.push_back("3c");
         agregarInput(lista_input,"shoryuken");
-        for(int i=0;i<7;i++)
+        for(int i=0;i<6;i++)
             agregarFrame("shoryuken",3);
+        agregarModificador("shoryuken",2,-10,"posicion_y",true,false);
         agregarModificador("shoryuken",3,-10,"posicion_y",true,false);
-        agregarModificador("shoryuken",4,-10,"posicion_y",true,false);
+        agregarModificador("shoryuken",4,10,"posicion_y",true,false);
         agregarModificador("shoryuken",5,10,"posicion_y",true,false);
-        agregarModificador("shoryuken",6,10,"posicion_y",true,false);
-        wizardAgregarImagenes(this,carpeta+"/special/shoryuken/",7,"shoryuken",grafico);
+        hb_roja.clear();
+        hb_azul.clear();
+        agregarModificador("shoryuken",0,hb_azul,"azules",false);
+        agregarModificador("shoryuken",0,hb_roja,"rojas",false);
+        hb_roja.push_back(HitBox(-20,-130,70,70));
+        agregarModificador("shoryuken",2,hb_azul,"azules",false);
+        agregarModificador("shoryuken",2,hb_roja,"rojas",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-100,50,150));
+        agregarModificador("shoryuken",3,hb_azul,"azules",false);
+        agregarModificador("shoryuken",3,hb_roja,"rojas",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-100,50,170));
+        agregarModificador("shoryuken",5,hb_azul,"azules",false);
+        agregarModificador("shoryuken",5,hb_roja,"rojas",false);
+        wizardAgregarImagenes(this,carpeta+"/special/shoryuken/",6,"shoryuken",grafico);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","5",false));
         condicion.push_back(Condicion("orientacion","=","d",false));
@@ -199,13 +262,30 @@ public:
         lista_input.push_back("2");
         lista_input.push_back("1c");
         agregarInput(lista_input,"shoryukeni");
-        for(int i=0;i<7;i++)
+        for(int i=0;i<6;i++)
             agregarFrame("shoryukeni",3);
+        agregarModificador("shoryukeni",2,-10,"posicion_y",true,false);
         agregarModificador("shoryukeni",3,-10,"posicion_y",true,false);
-        agregarModificador("shoryukeni",4,-10,"posicion_y",true,false);
+        agregarModificador("shoryukeni",4,10,"posicion_y",true,false);
         agregarModificador("shoryukeni",5,10,"posicion_y",true,false);
-        agregarModificador("shoryukeni",6,10,"posicion_y",true,false);
-        wizardAgregarImagenes(this,carpeta+"/special/shoryuken/",7,"shoryukeni",grafico);
+        hb_roja.clear();
+        hb_azul.clear();
+        agregarModificador("shoryukeni",0,hb_azul,"azules",false);
+        agregarModificador("shoryukeni",0,hb_roja,"rojas",false);
+        hb_roja.push_back(HitBox(-20,-130,70,70));
+        agregarModificador("shoryukeni",2,hb_azul,"azules",false);
+        agregarModificador("shoryukeni",2,hb_roja,"rojas",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-100,50,150));
+        agregarModificador("shoryukeni",3,hb_azul,"azules",false);
+        agregarModificador("shoryukeni",3,hb_roja,"rojas",false);
+        hb_roja.clear();
+        hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-100,50,170));
+        agregarModificador("shoryukeni",5,hb_azul,"azules",false);
+        agregarModificador("shoryukeni",5,hb_roja,"rojas",false);
+        wizardAgregarImagenes(this,carpeta+"/special/shoryuken/",6,"shoryukeni",grafico);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","5",false));
         condicion.push_back(Condicion("orientacion","=","i",false));
@@ -242,21 +322,33 @@ public:
         for(int i=0;i<5;i++)
             agregarFrame("hadouken",3);
         wizardAgregarImagenes(this,carpeta+"/special/hadouken/",5,"hadouken",grafico);
+        agregarModificador("hadouken",3,"activo","iniciar hadouken",false);
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        agregarModificador("hadouken",0,hb_azul,"azules",false);
+        agregarModificador("hadouken",0,hb_roja,"rojas",false);
+        hb_azul.push_back(HitBox(0,0,120,80));
+        agregarModificador("hadouken",3,hb_azul,"azules",false);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","5",false));
         condicion.push_back(Condicion("orientacion","=","d",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadouken",0,condicion);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","2",false));
         condicion.push_back(Condicion("orientacion","=","d",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadouken",0,condicion);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","4",false));
         condicion.push_back(Condicion("orientacion","=","d",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadouken",0,condicion);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","6",false));
         condicion.push_back(Condicion("orientacion","=","d",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadouken",0,condicion);
 
         agregarMovimiento("hadoukeni");
@@ -278,21 +370,33 @@ public:
         for(int i=0;i<5;i++)
             agregarFrame("hadoukeni",3);
         wizardAgregarImagenes(this,carpeta+"/special/hadouken/",5,"hadoukeni",grafico);
+        agregarModificador("hadoukeni",3,"activo","iniciar hadoukeni",false);
+        hb_azul.clear();
+        hb_roja.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
+        agregarModificador("hadoukeni",0,hb_azul,"azules",false);
+        agregarModificador("hadoukeni",0,hb_roja,"rojas",false);
+        hb_azul.push_back(HitBox(0,0,120,80));
+        agregarModificador("hadoukeni",3,hb_azul,"azules",false);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","5",false));
         condicion.push_back(Condicion("orientacion","=","i",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadoukeni",0,condicion);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","2",false));
         condicion.push_back(Condicion("orientacion","=","i",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadoukeni",0,condicion);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","4",false));
         condicion.push_back(Condicion("orientacion","=","i",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadoukeni",0,condicion);
         condicion.clear();
         condicion.push_back(Condicion("movimiento_actual","=","6",false));
         condicion.push_back(Condicion("orientacion","=","i",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("hadoukeni",0,condicion);
 
         agregarMovimiento("9");
@@ -384,6 +488,7 @@ public:
             agregarFrame("defensa",3);
         hb_roja.clear();
         hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
         agregarModificador("defensa",0,hb_azul,"azules",false);
         agregarModificador("defensa",0,hb_roja,"rojas",false);
         condicion.clear();
@@ -399,6 +504,7 @@ public:
             agregarFrame("defensai",3);
         hb_roja.clear();
         hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,-50,50,200));
         agregarModificador("defensai",0,hb_azul,"azules",false);
         agregarModificador("defensai",0,hb_roja,"rojas",false);
         condicion.clear();
@@ -445,6 +551,7 @@ public:
             agregarFrame("defensa abajo",3);
         hb_roja.clear();
         hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,50,50,200));
         agregarModificador("defensa abajo",0,hb_azul,"azules",false);
         agregarModificador("defensa abajo",0,hb_roja,"rojas",false);
         condicion.clear();
@@ -460,6 +567,7 @@ public:
             agregarFrame("defensa abajoi",3);
         hb_roja.clear();
         hb_azul.clear();
+        hb_azul.push_back(HitBox(-50,50,50,200));
         agregarModificador("defensa abajoi",0,hb_azul,"azules",false);
         agregarModificador("defensa abajoi",0,hb_roja,"rojas",false);
         condicion.clear();
@@ -1240,6 +1348,10 @@ public:
         condicion.clear();
         condicion.push_back(Condicion("colision_hitboxes","=","si",false));
         condicion.push_back(Condicion("recibir_lock","!=","activo",false));
+        condicion.push_back(Condicion("movimiento_actual","!=","defensa",false));
+        condicion.push_back(Condicion("movimiento_actual","!=","defensai",false));
+        condicion.push_back(Condicion("movimiento_actual","!=","defensa abajo",false));
+        condicion.push_back(Condicion("movimiento_actual","!=","defensa abajoi",false));
         agregarCondicion("recibir",0,condicion);
         agregarModificador("recibir",0,"activo","recibir_lock",false);
         agregarModificador("recibir",0,"entero","daño fisico","hp_valor_actual",true,false);
@@ -1258,10 +1370,10 @@ public:
         agregarModificador("recibir",11,Imagen(grafico->getTexture(carpeta+"/stand/hit/4.png"),3,0,0),"imagen_personaje",false);
 //        wizardAgregarImagenes(this,carpeta+"/stand/hit/",4,"recibir",grafico);
 
-        setString("hadouken_lock","");
-        setEntero("hadouken posicion x",300);
-        setEntero("hadouken posicion y",300);
-        setImagen("hadouken imagen",Imagen(grafico->getTexture("resources/Personajes/RyuSF2/stand/idle/1.png"),1,100,100));
+        setString("iniciar hadouken","");
+        setEntero("hadouken posicion x",0);
+        setEntero("hadouken posicion y",350);
+        setImagen("hadouken imagen",Imagen(grafico->getTexture("resources/Personajes/RyuSF2/proyectiles/1.png"),3,0,0));
         setHitBoxes("hadouken hitboxes",hb_vacia);
         setString("hadouken estado","");
         agregarProyectil("hadouken","hadouken posicion x","hadouken posicion y","hadouken imagen","hadouken hitboxes","hadouken estado");
@@ -1270,41 +1382,45 @@ public:
         for(int i=0;i<10;i++)
             agregarFrame("procesar hadouken",3);
         condicion.clear();
-        condicion.push_back(Condicion("movimiento_actual","=","hadouken",false));
-        condicion.push_back(Condicion("hadouken_lock","!=","activo",false));
+        condicion.push_back(Condicion("iniciar hadouken","=","activo",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("procesar hadouken",0,condicion);
-        agregarModificador("procesar hadouken",0,"activo","hadouken_lock",false);
-        agregarModificador("procesar hadouken",0,-3,"hp_valor_actual",true,false);
-        agregarModificador("procesar hadouken",9,"","hadouken_lock",false);
+        agregarModificador("procesar hadouken",0,"","iniciar hadouken",false);
         agregarModificador("procesar hadouken",0,"activo","hadouken estado",false);
         agregarModificador("procesar hadouken",9,"","hadouken estado",false);
-        for(int i=0;i<10;i++)
-            agregarModificador("procesar hadouken",0,3,"hadouken posicion x",true,false);
+        agregarModificador("procesar hadouken",0,"entero","posicion_x","hadouken posicion x",false,false);
+        agregarModificador("procesar hadouken",0,125,"hadouken posicion x",true,false);
+        for(int i=1;i<10;i++)
+        {
+            if(i%2==0)
+                agregarModificador("procesar hadouken",i,Imagen(grafico->getTexture("resources/Personajes/RyuSF2/proyectiles/1.png"),3,0,0),"hadouken imagen",false);
+            else
+                agregarModificador("procesar hadouken",i,Imagen(grafico->getTexture("resources/Personajes/RyuSF2/proyectiles/2.png"),3,0,0),"hadouken imagen",false);
+            agregarModificador("procesar hadouken",i,25,"hadouken posicion x",true,false);
+        }
 
-        setString("hadouken_locki","");
-        setEntero("hadouken posicion xi",300);
-        setEntero("hadouken posicion yi",300);
-        setEntero("hadouken daño",0);
-        setImagen("hadouken imageni",Imagen(grafico->getTexture("resources/Personajes/RyuSF2/stand/idle/1.png"),1,100,100));
-        setHitBoxes("hadouken hitboxesi",hb_vacia);
-        setString("hadouken estadoi","");
-        agregarProyectil("hadoukeni","hadouken posicion xi","hadouken posicion yi","hadouken imageni","hadouken hitboxesi","hadouken estadoi");
+        setString("iniciar hadoukeni","");
         agregarMovimiento("procesar hadoukeni");
         agregarInput("*","procesar hadoukeni");
         for(int i=0;i<10;i++)
             agregarFrame("procesar hadoukeni",3);
         condicion.clear();
-        condicion.push_back(Condicion("movimiento_actual","=","hadoukeni",false));
-        condicion.push_back(Condicion("hadouken_locki","!=","activo",false));
+        condicion.push_back(Condicion("iniciar hadoukeni","=","activo",false));
+        condicion.push_back(Condicion("hadouken estado","!=","activo",false));
         agregarCondicion("procesar hadoukeni",0,condicion);
-        agregarModificador("procesar hadoukeni",0,"activo","hadouken_locki",false);
-//        agregarModificador("procesar hadoukeni",0,-50,"hadouken daño",false,true);
-//        agregarModificador("procesar hadoukeni",0,"entero","hadouken daño","hp_valor_actual",true,true);
-        agregarModificador("procesar hadoukeni",9,"","hadouken_locki",false);
-        agregarModificador("procesar hadoukeni",0,"activo","hadouken estadoi",false);
-        agregarModificador("procesar hadoukeni",9,"","hadouken estadoi",false);
-        for(int i=0;i<10;i++)
-            agregarModificador("procesar hadoukeni",0,-3,"hadouken posicion xi",true,false);
+        agregarModificador("procesar hadoukeni",0,"","iniciar hadoukeni",false);
+        agregarModificador("procesar hadoukeni",0,"activo","hadouken estado",false);
+        agregarModificador("procesar hadoukeni",9,"","hadouken estado",false);
+        agregarModificador("procesar hadoukeni",0,"entero","posicion_x","hadouken posicion x",false,false);
+        agregarModificador("procesar hadoukeni",0,-125,"hadouken posicion x",true,false);
+        for(int i=1;i<10;i++)
+        {
+            if(i%2==0)
+                agregarModificador("procesar hadoukeni",i,Imagen(grafico->getTexture("resources/Personajes/RyuSF2/proyectiles/1.png"),3,0,0),"hadouken imagen",false);
+            else
+                agregarModificador("procesar hadoukeni",i,Imagen(grafico->getTexture("resources/Personajes/RyuSF2/proyectiles/2.png"),3,0,0),"hadouken imagen",false);
+            agregarModificador("procesar hadoukeni",i,-25,"hadouken posicion x",true,false);
+        }
 
         agregarMovimiento("5 aereo");
         agregarInput("*","5 aereo");
@@ -1314,6 +1430,26 @@ public:
         condicion.push_back(Condicion("saltando_lock","=","activo",false));
         agregarCondicion("5 aereo",0,condicion);
         agregarModificador("5 aereo",0,Imagen(grafico->getTexture(carpeta+"/jump/idle/1.png"),3,0,0),"imagen_personaje",false);
+
+        agregarMovimiento("separar");
+        agregarInput("*","separar");
+        agregarFrame("separar",0);
+        condicion.clear();
+        condicion.push_back(Condicion("colision_hitboxes","=","si",false));
+        condicion.push_back(Condicion("orientacion","=","d",false));
+        agregarCondicion("separar",0,condicion);
+        agregarModificador("separar",0,-10,"posicion_x",true,false);
+        agregarModificador("separar",0,10,"posicion_x",true,true);
+
+        agregarMovimiento("separari");
+        agregarInput("*","separari");
+        agregarFrame("separari",0);
+        condicion.clear();
+        condicion.push_back(Condicion("colision_hitboxes","=","si",false));
+        condicion.push_back(Condicion("orientacion","=","i",false));
+        agregarCondicion("separari",0,condicion);
+        agregarModificador("separari",0,10,"posicion_x",true,false);
+        agregarModificador("separari",0,-10,"posicion_x",true,true);
     }
 };
 

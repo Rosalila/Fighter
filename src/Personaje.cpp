@@ -299,9 +299,9 @@ void Personaje::aplicarModificador(ModificadorPorVariable* mv)
         }else
         {
             if(mv->aplicar_a_contrario)
-                personaje_contrario->setEntero(mv->variable,personaje_contrario->getEntero(mv->modificador_string)+personaje_contrario->getEntero(mv->variable));
+                personaje_contrario->setEntero(mv->variable,personaje_contrario->getEntero(mv->modificador_string));
             else
-                setEntero(mv->variable,getEntero(mv->modificador_string)+getEntero(mv->variable));
+                setEntero(mv->variable,getEntero(mv->modificador_string));
         }
     }
 }

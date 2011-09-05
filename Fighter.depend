@@ -679,7 +679,7 @@
 1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
-1315173082 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+1315199161 source:/home/userr/ProyectosActuales/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -844,7 +844,7 @@
 1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Menu.cpp
 	"../include/Menu.h"
 
-1315167482 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
+1315192758 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
 	"../include/Personaje.h"
 
 1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Sonido.cpp
