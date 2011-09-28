@@ -66,37 +66,37 @@ class Modificador
 class ModificadorImagen : public Modificador
 {
     public:
-    ModificadorImagen(Imagen modificador,stringw variable,bool aplicar_a_contrario);
+    ModificadorImagen(stringw variable,Imagen modificador,bool aplicar_a_contrario);
 };
 
 class ModificadorEntero : public Modificador
 {
     public:
-    ModificadorEntero(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
+    ModificadorEntero(stringw variable,int modificador,bool relativo,bool aplicar_a_contrario);
 };
 
 class ModificadorBarra : public Modificador
 {
     public:
-    ModificadorBarra(Barra modificador,stringw variable,bool aplicar_a_contrario);
+    ModificadorBarra(stringw variable,Barra modificador,bool aplicar_a_contrario);
 };
 
 class ModificadorHitboxes : public Modificador
 {
     public:
-    ModificadorHitboxes(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
+    ModificadorHitboxes(stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario);
 };
 
 class ModificadorString : public Modificador
 {
     public:
-    ModificadorString(stringw modificador,stringw variable,bool aplicar_a_contrario);
+    ModificadorString(stringw variable,stringw modificador,bool aplicar_a_contrario);
 };
 
 class ModificadorPorVariable : public Modificador
 {
     public:
-    ModificadorPorVariable(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
+    ModificadorPorVariable(stringw tipo,stringw variable,stringw variable_modificador,bool relativo,bool aplicar_a_contrario);
 };
 
 class Condicion
@@ -218,7 +218,8 @@ public:
     stringw imagen;
     stringw hitboxes;
     stringw estado;
-    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado)
+    stringw orientacion;
+    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion)
     {
         this->nombre=nombre;
         this->posicion_x=posicion_x;
@@ -226,5 +227,6 @@ public:
         this->imagen=imagen;
         this->hitboxes=hitboxes;
         this->estado=estado;
+        this->orientacion=orientacion;
     }
 };

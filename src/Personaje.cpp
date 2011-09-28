@@ -52,7 +52,7 @@ void Personaje::dibujar()
         getString("orientacion")=="i",
         false);
 }
-void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda)
+void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y)
 {
     vector <HitBox> hitbox=getHitBoxes(variable);
     if(getString("orientacion")=="i")
@@ -66,9 +66,9 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda)
     for(int i=0;i<(int)hitbox.size();i++)
     {
         if(variable=="azules")
-            grafico->draw2DRectangle(irr::video::SColor(100,0,0,100),core::rect<s32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y,getEntero("posicion_x")+hitbox[i].p2x,getEntero("posicion_y")+hitbox[i].p2y));
+            grafico->draw2DRectangle(irr::video::SColor(100,0,0,100),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
         else
-            grafico->draw2DRectangle(irr::video::SColor(100,100,0,0),core::rect<s32>(getEntero("posicion_x")+hitbox[i].p1x,getEntero("posicion_y")+hitbox[i].p1y,getEntero("posicion_x")+hitbox[i].p2x,getEntero("posicion_y")+hitbox[i].p2y));
+            grafico->draw2DRectangle(irr::video::SColor(100,100,0,0),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
     }
 }
 void Personaje::dibujarBarra(stringw variable)
@@ -96,8 +96,9 @@ void Personaje::dibujarProyectiles()
             irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
             true,
             irr::video::SColor(255,255,255,255),
-            false,
+            getString(proyectiles_actuales[i]->orientacion)=="i",
             false);
+        dibujarHitBoxes("hadouken hitboxes","resources/red.png",getString("hadouken orientacion")=="i",getEntero("hadouken posicion x"),getEntero("hadouken posicion y"));
     }
 }
 //GETS shortcuts
@@ -177,36 +178,35 @@ void Personaje::agregarMovimiento(stringw movimiento)
 {
     movimientos[movimiento]=new Movimiento(movimiento);
 }
-void Personaje::agregarProyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado)
+void Personaje::agregarProyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion)
 {
-    proyectiles_actuales.push_back(new Proyectil(nombre,posicion_x,posicion_y,imagen,hitboxes,estado));
-    proyectiles[nombre]=new Proyectil(nombre,posicion_x,posicion_y,imagen,hitboxes,estado);
+    proyectiles_actuales.push_back(new Proyectil(nombre,posicion_x,posicion_y,imagen,hitboxes,estado,orientacion));
 }
 void Personaje::agregarFrame(stringw movimiento, int duracion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarFrame(duracion);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,Imagen modificador,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,Imagen modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,int modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,int modificador,bool relativo,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,relativo,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,Barra modificador,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,Barra modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,stringw modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+void Personaje::agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable,stringw variable_modificador,bool relativo,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(tipo,variable_modificador,variable,relativo,aplicar_a_contrario);
 }

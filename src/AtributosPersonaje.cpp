@@ -47,7 +47,7 @@ Imagen::Imagen()
 
 }
 
-ModificadorImagen::ModificadorImagen(Imagen modificador,stringw variable,bool aplicar_a_contrario)
+ModificadorImagen::ModificadorImagen(stringw variable,Imagen modificador,bool aplicar_a_contrario)
 {
     tipo="imagen";
     this->variable=variable;
@@ -55,7 +55,7 @@ ModificadorImagen::ModificadorImagen(Imagen modificador,stringw variable,bool ap
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
 
-ModificadorEntero::ModificadorEntero(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+ModificadorEntero::ModificadorEntero(stringw variable,int modificador,bool relativo,bool aplicar_a_contrario)
 {
     tipo="entero";
     this->variable=variable;
@@ -63,28 +63,28 @@ ModificadorEntero::ModificadorEntero(int modificador,stringw variable,bool relat
     this->relativo=relativo;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorBarra::ModificadorBarra(Barra modificador,stringw variable,bool aplicar_a_contrario)
+ModificadorBarra::ModificadorBarra(stringw variable,Barra modificador,bool aplicar_a_contrario)
 {
     tipo="barra";
     this->variable=variable;
     this->modificador_barra=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorHitboxes::ModificadorHitboxes(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario)
+ModificadorHitboxes::ModificadorHitboxes(stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario)
 {
     tipo="hitboxes";
     this->variable=variable;
     this->modificador_hitbox=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorString::ModificadorString(stringw modificador,stringw variable,bool aplicar_a_contrario)
+ModificadorString::ModificadorString(stringw variable,stringw modificador,bool aplicar_a_contrario)
 {
     tipo="string";
     this->variable=variable;
     this->modificador_string=modificador;
     this->aplicar_a_contrario=aplicar_a_contrario;
 }
-ModificadorPorVariable::ModificadorPorVariable(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
+ModificadorPorVariable::ModificadorPorVariable(stringw tipo,stringw variable,stringw variable_modificador,bool relativo,bool aplicar_a_contrario)
 {
     this->tipo="variable";
     this->tipo_variable=tipo;
@@ -101,27 +101,27 @@ Frame::Frame(int duracion)
 }
 void Frame::agregarModificador(Imagen modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorImagen(modificador,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorImagen(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorEntero(modificador,variable,relativo,aplicar_a_contrario));
+    modificadores.push_back(ModificadorEntero(variable,modificador,relativo,aplicar_a_contrario));
 }
 void Frame::agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorBarra(modificador,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorBarra(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorHitboxes(modificador,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorHitboxes(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorString(modificador,variable,aplicar_a_contrario));
+    modificadores.push_back(ModificadorString(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorPorVariable(tipo,variable_modificador,variable,relativo,aplicar_a_contrario));
+    modificadores.push_back(ModificadorPorVariable(tipo,variable,variable_modificador,relativo,aplicar_a_contrario));
 }
 
 Movimiento::Movimiento(stringw nombre)

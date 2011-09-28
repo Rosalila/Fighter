@@ -51,6 +51,40 @@ bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,in
             );
 }
 
+bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+{
+    vector <HitBox> hb_azules=atacado->getHitBoxes(variable_atacado);
+    vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
+
+    if(atacante->getString("orientacion")=="i")
+    for(int i=0;i<(int)hb_rojas.size();i++)
+    {
+        int a=hb_rojas[i].p1x;
+        int b=hb_rojas[i].p2x;
+        hb_rojas[i].p1x=-b;
+        hb_rojas[i].p2x=-a;
+    }
+    if(atacado->getString("orientacion")=="i")
+    for(int i=0;i<(int)hb_azules.size();i++)
+    {
+        int a=hb_azules[i].p1x;
+        int b=hb_azules[i].p2x;
+        hb_azules[i].p1x=-b;
+        hb_azules[i].p2x=-a;
+    }
+
+
+    int ax=atacado_x;
+    int ay=atacado_y;
+    int rx=atacante_x;
+    int ry=atacante_y;
+
+    for(int a=0;a<(int)hb_azules.size();a++)
+        for(int r=0;r<(int)hb_rojas.size();r++)
+            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
+                return true;
+    return false;
+}
 
 bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado)
 {
@@ -99,6 +133,12 @@ void Fighter::logicaPersonaje(Personaje* p)
         p->setString("colision_hitboxes_azules","si");
     else
         p->setString("colision_hitboxes_azules","no");
+    //verificar colision de hitboxes hadouken
+    if(getColisionHitBoxes(p->personaje_contrario,"hadouken hitboxes",p,"azules",p->personaje_contrario->getEntero("hadouken posicion x"),p->personaje_contrario->getEntero("hadouken posicion y"),p->getEntero("posicion_x"),p->getEntero("posicion_y")) && p->personaje_contrario->getString("hadouken estado")=="activo")
+        p->setString("colision_hadouken","si");
+    else
+        p->setString("colision_hadouken","no");
+
     //verificar flip
     if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x"))
         p->strings["orientacion"]="i";
@@ -285,10 +325,10 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         pb->dibujarBarra("hp");
 
         //Hit Boxes
-        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i");
-        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i");
-        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i");
-        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i");
+        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
+        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
+        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
+        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
 
         pa->dibujarProyectiles();
         pb->dibujarProyectiles();
