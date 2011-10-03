@@ -679,7 +679,7 @@
 1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
-1317168896 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+1317603137 source:/home/userr/ProyectosActuales/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -687,6 +687,8 @@
 	"include/Input.h"
 	"include/Fighter.h"
 	"include/Parser.h"
+	"include/TinyXml/tinyxml.h"
+	<iostream>
 
 1314554372 /home/userr/ProyectosActuales/Fighter/include/Input.h
 	<iostream>
@@ -1029,4 +1031,37 @@
 
 1314419530 source:/home/userr/ProyectosActuales/Fighter/src/Parser.cpp
 	"../include/AtributosPersonaje.h"
+
+1317581644 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1317579397 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1305426297 source:/home/userr/ProyectosActuales/Fighter/include/TinyXml/tinystr.cpp
+	"tinystr.h"
+
+1305426297 source:/home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"tinyxml.h"
+
+1305426297 source:/home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxmlerror.cpp
+	"tinyxml.h"
+
+1305426297 source:/home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"tinyxml.h"
+	<windows.h>
 
