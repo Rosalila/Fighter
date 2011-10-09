@@ -41,6 +41,12 @@
 		<Unit filename="include/Personaje.h" />
 		<Unit filename="include/Sonido.h" />
 		<Unit filename="include/Stage.h" />
+		<Unit filename="include/TinyXml/tinystr.cpp" />
+		<Unit filename="include/TinyXml/tinystr.h" />
+		<Unit filename="include/TinyXml/tinyxml.cpp" />
+		<Unit filename="include/TinyXml/tinyxml.h" />
+		<Unit filename="include/TinyXml/tinyxmlerror.cpp" />
+		<Unit filename="include/TinyXml/tinyxmlparser.cpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AtributosPersonaje.cpp" />
 		<Unit filename="src/Fighter.cpp" />

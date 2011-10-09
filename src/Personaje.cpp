@@ -44,7 +44,7 @@ void Personaje::dibujar()
     (   getImagen("imagen_personaje").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x*getImagen("imagen_personaje").escala/2)+alineacion_x,getEntero("posicion_y")-(dimension_y*getImagen("imagen_personaje").escala/2)+alineacion_y),
+        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x*getImagen("imagen_personaje").escala/2)+alineacion_x,getEntero("posicion_y")-(dimension_y*getImagen("imagen_personaje").escala/2)-alineacion_y),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (getImagen("imagen_personaje").escala,getImagen("imagen_personaje").escala),
         true,
@@ -231,6 +231,10 @@ void Personaje::aplicarModificador(ModificadorEntero* me)
         }
         else
         {
+            if(me->variable=="posicion_x" && getEntero(me->variable)-me->modificador_entero<80 && me->modificador_entero<0)
+                return;
+            if(me->variable=="posicion_x" && getEntero(me->variable)-me->modificador_entero>900 && me->modificador_entero>0)
+                return;
             setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
         }
     }

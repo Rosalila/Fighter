@@ -25,11 +25,12 @@ private:
     bool KeyIsDown[KEY_KEY_CODES_COUNT];
     virtual bool OnEvent(const SEvent& event);
     const SEvent::SJoystickEvent & GetJoystickState(void) const;
+    int joystick;
 
 public:
     Receiver();
     virtual bool IsKeyDown(EKEY_CODE keyCode) const;
-    bool IsJoyDown(int joyCode);
+    bool IsJoyDown(int joyCode,int joystick);
 };
 
 class Boton
@@ -40,6 +41,7 @@ private:
     stringw mapeo;
     bool usando_joystick;
 public:
+int num_joystick;
     Boton()
     {
 
@@ -50,8 +52,9 @@ public:
         this->mapeo=mapeo;
         usando_joystick=false;
     }
-    Boton(int joystick,stringw mapeo)
+    Boton(int joystick,int num_joystick,stringw mapeo)
     {
+        this->num_joystick=num_joystick;
         this->joystick=joystick;
         this->mapeo=mapeo;
         usando_joystick=true;
@@ -61,7 +64,7 @@ public:
     {
         if(usando_joystick)
         {
-            if(receiver->IsJoyDown(joystick))
+            if(receiver->IsJoyDown(joystick,num_joystick))/////
                 return true;
         }else
         {

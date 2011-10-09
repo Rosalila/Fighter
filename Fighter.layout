@@ -10,11 +10,14 @@
 	<File name="include/Grafico.h" open="0" top="0" tabpos="4">
 		<Cursor position="678" topLine="26" />
 	</File>
-	<File name="include/Input.h" open="0" top="0" tabpos="4">
-		<Cursor position="174" topLine="1" />
+	<File name="include/Input.h" open="0" top="0" tabpos="3">
+		<Cursor position="895" topLine="32" />
 	</File>
 	<File name="include/Menu.h" open="0" top="0" tabpos="2">
 		<Cursor position="137" topLine="1" />
+	</File>
+	<File name="include/Parser.h" open="0" top="0" tabpos="4">
+		<Cursor position="7385" topLine="201" />
 	</File>
 	<File name="include/Personaje.h" open="0" top="0" tabpos="5">
 		<Cursor position="42" topLine="0" />
@@ -22,29 +25,26 @@
 	<File name="include/Sonido.h" open="0" top="0" tabpos="0">
 		<Cursor position="142" topLine="0" />
 	</File>
-	<File name="include/TinyXml/tinyxml.h" open="1" top="1" tabpos="2">
-		<Cursor position="10737" topLine="319" />
-	</File>
 	<File name="main.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="71415" topLine="1467" />
+		<Cursor position="16001" topLine="280" />
 	</File>
 	<File name="src/AtributosPersonaje.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3709" topLine="106" />
 	</File>
 	<File name="src/Fighter.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="4951" topLine="112" />
+		<Cursor position="6314" topLine="187" />
 	</File>
 	<File name="src/Grafico.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="1882" topLine="48" />
 	</File>
-	<File name="src/Input.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="577" topLine="3" />
+	<File name="src/Input.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="2475" topLine="84" />
 	</File>
 	<File name="src/Menu.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="3207" topLine="0" />
 	</File>
-	<File name="src/Personaje.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="386" topLine="0" />
+	<File name="src/Personaje.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="1916" topLine="42" />
 	</File>
 	<File name="src/Sonido.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="52" topLine="0" />

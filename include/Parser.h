@@ -180,8 +180,10 @@ public:
     vector<Boton> botones_temp;
     Boton boton_temp;
     std::string dispositivo;
+    int chancha;
     Parser()
     {
+        chancha=0;
     }
     bool parseInput(Receiver* receiver)
     {
@@ -222,6 +224,7 @@ public:
         botones_temp.clear();
         if(!listaDeDefiniciones())
             return false;
+        chancha++;
         inputs.push_back(new Input(botones_temp,receiver));
         return true;
     }
@@ -275,15 +278,15 @@ public:
         }else if(dispositivo=="joystick")
         {
             if(mapeado=="up")
-                boton_temp=Boton(-8,mapeador.c_str());
+                boton_temp=Boton(-8,chancha,mapeador.c_str());/////
             else if(mapeado=="down")
-                boton_temp=Boton(-2,mapeador.c_str());
+                boton_temp=Boton(-2,chancha,mapeador.c_str());
             else if(mapeado=="left")
-                boton_temp=Boton(-4,mapeador.c_str());
+                boton_temp=Boton(-4,chancha,mapeador.c_str());
             else if(mapeado=="right")
-                boton_temp=Boton(-6,mapeador.c_str());
+                boton_temp=Boton(-6,chancha,mapeador.c_str());
             else
-                boton_temp=Boton(mapeado[0]-48,mapeador.c_str());
+                boton_temp=Boton(mapeado[0]-48,0,mapeador.c_str());
         }
         return true;
     }

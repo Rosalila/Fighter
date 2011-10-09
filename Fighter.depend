@@ -679,7 +679,7 @@
 1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
-1317603137 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+1318185302 source:/home/userr/ProyectosActuales/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -690,7 +690,7 @@
 	"include/TinyXml/tinyxml.h"
 	<iostream>
 
-1314554372 /home/userr/ProyectosActuales/Fighter/include/Input.h
+1317952072 /home/userr/ProyectosActuales/Fighter/include/Input.h
 	<iostream>
 	<fstream>
 	<vector>
@@ -840,13 +840,13 @@
 1314558207 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
 	"../include/Grafico.h"
 
-1314554135 source:/home/userr/ProyectosActuales/Fighter/src/Input.cpp
+1317951055 source:/home/userr/ProyectosActuales/Fighter/src/Input.cpp
 	"../include/Input.h"
 
 1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Menu.cpp
 	"../include/Menu.h"
 
-1317169058 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
+1318186126 source:/home/userr/ProyectosActuales/Fighter/src/Personaje.cpp
 	"../include/Personaje.h"
 
 1314405313 source:/home/userr/ProyectosActuales/Fighter/src/Sonido.cpp
@@ -1027,7 +1027,7 @@
 1314405313 source:/home/userr/ProyectosActuales/Fighter (otra copia)/src/Stage.cpp
 	"../include/Stage.h"
 
-1314493058 /home/userr/ProyectosActuales/Fighter/include/Parser.h
+1317951822 /home/userr/ProyectosActuales/Fighter/include/Parser.h
 
 1314419530 source:/home/userr/ProyectosActuales/Fighter/src/Parser.cpp
 	"../include/AtributosPersonaje.h"
