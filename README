@@ -3,7 +3,6 @@ Rosalila Fighter
 PORHACER:
 
 Logica
--Proyectiles
 -Soporte de multiples joysticks
 
 Pruebas
@@ -13,3 +12,4 @@ Paja
 -Fondo bonito
 -Usar diferentes colores
 -Recomenzar cuando termine la partida
+-Cargar desde multiples xmls

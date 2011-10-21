@@ -234,8 +234,6 @@ void Fighter::loopJuego()
 	{
 	    if(pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE))
             exit(0);
-	    if(pa->getEntero("hp_valor_actual")<=0 || pb->getEntero("hp_valor_actual")<=0)
-            break;
 	    //setear frames a "60"
 	    grafico->device->getTimer()->start();
 	    for(u32 t=grafico->device->getTimer()->getTime();
@@ -247,30 +245,6 @@ void Fighter::loopJuego()
 
         //render
         render(pa,pb,stage);
-	}
-	//game over
-	irr::video::ITexture* texture_game_over=grafico->getTexture("resources/ko.jpg");
-	for(;!pa->input->receiver->IsKeyDown(irr::KEY_RETURN);)
-	{
-	    if(pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE))
-            exit(0);
-        if (grafico->isWindowActive())
-        {
-            grafico->beginScene();
-            grafico->draw2DImage
-            (   texture_game_over,
-                irr::core::dimension2d<irr::f32> (grafico->ventana_x,grafico->ventana_y),
-                irr::core::rect<irr::f32>(0,0,grafico->ventana_x,grafico->ventana_y),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::f32(0), irr::core::vector2df (0,0),
-                true,
-                irr::video::SColor(255,255,255,255),
-                false,
-                false);
-            grafico->endScene();
-        }
-        grafico->run();
 	}
 }
 
@@ -314,24 +288,41 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
     {
         grafico->beginScene();
         //Stage
-        stage->dibujar();
+        stage->dibujarBack();
 
         //Personaje
         pa->dibujar();
         pb->dibujar();
 
-        //HP
-        pa->dibujarBarra("hp");
-        pb->dibujarBarra("hp");
-
         //Hit Boxes
-        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
-        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
-        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
-        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
+//        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
+//        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
+//        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
+//        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
 
         pa->dibujarProyectiles();
         pb->dibujarProyectiles();
+
+        //HP
+        pa->dibujarBarra("hp",312-70,50);
+        pb->dibujarBarra("hp",512+45,50);
+
+        if(pa->getEntero("hp_valor_actual")<=0 || pb->getEntero("hp_valor_actual")<=0)
+        {
+            irr::video::ITexture* texture_game_over=grafico->getTexture("stages/Stage1/ko.png");
+            grafico->draw2DImage
+            (   texture_game_over,
+                irr::core::dimension2d<irr::f32> (500,500),
+                irr::core::rect<irr::f32>(0,0,500,500),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::f32(0), irr::core::vector2df (0,0),
+                true,
+                irr::video::SColor(255,255,255,255),
+                false,
+                false);
+        }
+        stage->dibujarFront();
 //
 //
         //Movimento actual

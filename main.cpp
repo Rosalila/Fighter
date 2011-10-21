@@ -7,8 +7,6 @@
 #include "include/Input.h"
 #include "include/Fighter.h"
 
-#include"include/Parser.h"
-
 #include "include/TinyXml/tinyxml.h"
 #include <iostream>
 using namespace std;
@@ -22,11 +20,9 @@ public:
         doc.LoadFile();
         return doc;
     }
-    RyuXml(int px,int py,Grafico* grafico,Input* input,char* archivo_xml)
-    {
-        this->input=input;
-        this->grafico=grafico;
 
+    void cargarDesdeXml(char* archivo_xml)
+    {
         //Desde Xml
 		//Abrir personaje.xml
 		TiXmlDocument doc_t=abrirXml(archivo_xml);
@@ -44,6 +40,8 @@ public:
                 {
                     stringw variable(elemento_imagen->Attribute("variable"));
                     stringw path(elemento_imagen->Attribute("path"));
+                    stringw dir("chars/");
+                    path=dir+path;
                     int escala=atoi(elemento_imagen->Attribute("escala"));
                     int alineacion_x=atoi(elemento_imagen->Attribute("alineacion_x"));
                     int alineacion_y=atoi(elemento_imagen->Attribute("alineacion_y"));
@@ -123,7 +121,8 @@ public:
         {
             TiXmlElement *elemento=nodo->ToElement();
             stringw nombre(elemento->Attribute("nombre"));
-            agregarMovimiento(nombre);
+            if(movimientos.find(nombre)==0)
+                agregarMovimiento(nombre);
             //For each Input
             for(TiXmlNode* nodo_input=nodo->FirstChild("Input");
                     nodo_input!=NULL;
@@ -146,7 +145,8 @@ public:
                     nodo_frame=nodo_frame->NextSibling("Frame"))
             {
                 TiXmlElement *elemento_frame=nodo_frame->ToElement();
-                agregarFrame(nombre,atoi(elemento_frame->Attribute("duracion")));
+                if((int)((Movimiento*)movimientos[nombre])->frames.size()<=frame)
+                    agregarFrame(nombre,atoi(elemento_frame->Attribute("duracion")));
                 //For each Modificador
                 if(!nodo_frame->NoChildren())
                 {
@@ -199,6 +199,8 @@ public:
                         {
                             stringw str_variable(elemento_modificador->Attribute("variable"));
                             stringw path(elemento_modificador->Attribute("path"));
+                            stringw dir("chars/");
+                            path=dir+path;
                             int escala=atoi(elemento_modificador->Attribute("escala"));
                             int alineacion_x=atoi(elemento_modificador->Attribute("alineacion_x"));
                             int alineacion_y=atoi(elemento_modificador->Attribute("alineacion_y"));
@@ -241,29 +243,141 @@ public:
                 agregarCondicion(nombre,0,condiciones);
             }
         }
+    }
+
+    RyuXml(int px,int py,Grafico* grafico,Input* input,char* archivo_xml)
+    {
+        this->input=input;
+        this->grafico=grafico;
+
+        cargarDesdeXml(archivo_xml);
+
         setEntero("posicion_x",px);
         setEntero("posicion_y",py);
+
+		TiXmlDocument doc_t=abrirXml(archivo_xml);
+        TiXmlDocument *doc;
+        doc=&doc_t;
+		//for each Movimiento
+		TiXmlNode *archivos=doc->FirstChild("Archivos");
+		for(TiXmlNode* nodo=archivos->FirstChild("archivo");
+                nodo!=NULL;
+                nodo=nodo->NextSibling("archivo"))
+        {
+            char* str_archivo=(char*)nodo->ToElement()->Attribute("nombre");
+            cargarDesdeXml(str_archivo);
+        }
     }
 };
 
+class InputXml : Input
+{
+public:
+    TiXmlDocument abrirXml(char* archivo)
+    {
+        TiXmlDocument doc( archivo );
+        doc.LoadFile();
+        return doc;
+    }
+    InputXml(int jugador,Receiver* receiver)
+    {
+		TiXmlDocument doc_t=abrirXml((char*)"config.xml");
+        TiXmlDocument *doc;
+        doc=&doc_t;
+
+        vector<Boton> botones;
+		for(TiXmlNode* input=doc->FirstChild("Input");
+                input!=NULL;
+                input=input->NextSibling("Input"))
+        {
+            if(jugador==atoi(input->ToElement()->Attribute("jugador")))
+            {
+                //Key
+                if(strcmp("keyboard",input->ToElement()->Attribute("tipo"))==0)
+                for(TiXmlNode* boton=input->FirstChild("boton");
+                        boton!=NULL;
+                        boton=boton->NextSibling("boton"))
+                {
+                    botones.push_back(Boton((irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],boton->ToElement()->Attribute("mapeo")));
+                }
+                //Joy
+                if(strcmp("joystick",input->ToElement()->Attribute("tipo"))==0)
+                for(TiXmlNode* boton=input->FirstChild("boton");
+                        boton!=NULL;
+                        boton=boton->NextSibling("boton"))
+                {
+                    int int_boton;
+                    if(strcmp(boton->ToElement()->Attribute("input"),"up")==0)
+                        int_boton=-8;
+                    else if(strcmp(boton->ToElement()->Attribute("input"),"down")==0)
+                        int_boton=-2;
+                    else if(strcmp(boton->ToElement()->Attribute("input"),"left")==0)
+                        int_boton=-4;
+                    else if(strcmp(boton->ToElement()->Attribute("input"),"right")==0)
+                        int_boton=-6;
+                    else
+                        int_boton=boton->ToElement()->Attribute("input")[0]-48;
+                    botones.push_back(Boton(int_boton,input->ToElement()->Attribute("numero_joystick")[0]-48,boton->ToElement()->Attribute("mapeo")));
+                }
+            }
+        }
+
+        //Map
+        this->receiver=receiver;
+        tecla_arriba=true;
+        for(int i=0;i<20;i++)
+            buffer_inputs.push_back("5");
+        for(int i=0;i<(int)botones.size();i++)
+            if(botones[i].getMapeo()=="2" || botones[i].getMapeo()=="4" || botones[i].getMapeo()=="6" || botones[i].getMapeo()=="8")
+                this->cruz.push_back(botones[i]);
+            else
+                this->botones.push_back(botones[i]);
+    }
+};
+class StageXml:Stage
+{
+public:
+    TiXmlDocument abrirXml(char* archivo)
+    {
+        TiXmlDocument doc( archivo );
+        doc.LoadFile();
+        return doc;
+    }
+    StageXml(Grafico* grafico,char* archivo)
+    {
+        this->grafico=grafico;
+
+		TiXmlDocument doc_t=abrirXml((char*)archivo);
+        TiXmlDocument *doc;
+        doc=&doc_t;
+
+        TiXmlNode *nodo_back=doc->FirstChild("Back");
+        for(TiXmlNode* layer=nodo_back->FirstChild("layer");
+                layer!=NULL;
+                layer=layer->NextSibling("layer"))
+        {
+            back.push_back(grafico->getTexture(layer->ToElement()->Attribute("imagen")));
+        }
+
+        TiXmlNode *nodo_front=doc->FirstChild("Front");
+        for(TiXmlNode* layer=nodo_front->FirstChild("layer");
+                layer!=NULL;
+                layer=layer->NextSibling("layer"))
+        {
+            front.push_back(grafico->getTexture(layer->ToElement()->Attribute("imagen")));
+        }
+    }
+};
 int main()
 {
     Receiver* receiver=new Receiver();
-    Parser parser;
-    if(!parser.parseInput(receiver))
-        cout<<"Archivo de input incorrecto";
-    Input *inputa=parser.inputs[0];
-    Input *inputb=parser.inputs[1];
-//    for(int i=0;i<parser.inputs[1]->botones.size();i++)
-//        parser.inputs[1]->botones[i].num_joystick=1;
+    Input *inputa=(Input*)new InputXml(1,receiver);
+    Input *inputb=(Input*)new InputXml(2,receiver);
     Grafico *grafico=new Grafico(receiver);
     Sonido *sonido = new Sonido();
-    Stage *stage=new Stage(grafico->getTexture("resources/Stages/Stage02.png"),grafico->getTexture("resources/Stages/Barra_Vida.png"),grafico);
-    Personaje *pa=(Personaje*)new RyuXml(300,350,grafico,inputa,(char *)"resources/Personajes/RyuSF2/Ryu.xml");
-    Personaje *pb=(Personaje*)new RyuXml(524,350,grafico,inputb,(char *)"resources/Personajes/KFM/kfm.xml");
-//    Personaje *pa=(Personaje*)new RyuXml(Barra("hp_valor_maximo","hp_valor_actual","hp_modificador_periodico","hp_periodo",video::SColor(255,255,0,0),core::rect<s32>(0,0,200,50),NULL),300,350,2,"d",grafico,NULL,inputa);
-//    Personaje *pb=(Personaje*)new RyuXml(Barra("hp_valor_maximo","hp_valor_actual","hp_modificador_periodico","hp_periodo",video::SColor(255,255,0,0),core::rect<s32>(250,0,450,50),NULL),624,350,3,"i",grafico,NULL,inputb);
-
+    Stage *stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
+    Personaje *pa=(Personaje*)new RyuXml(300,370,grafico,inputa,(char *)"chars/RyuSF2/RyuSF2.xml");
+    Personaje *pb=(Personaje*)new RyuXml(524,370,grafico,inputb,(char *)"chars/RyuSF2/RyuSF2.xml");
     //Menu m(stage,pa,pb,sonido,grafico,receiver);
     //m.loopMenu();
 

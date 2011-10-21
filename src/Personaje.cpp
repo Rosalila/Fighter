@@ -71,14 +71,15 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
             grafico->draw2DRectangle(irr::video::SColor(100,100,0,0),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
     }
 }
-void Personaje::dibujarBarra(stringw variable)
+void Personaje::dibujarBarra(stringw variable,int alineacion_x,int alineacion_y)
 {
     Barra barra=getBarra(variable);
     position2d<s32>prueba= barra.posicion.UpperLeftCorner;
     position2d<s32>prueba2= barra.posicion.LowerRightCorner;
     int l=prueba2.X-prueba.X;
     int bx2=(getEntero(barra.valor_maximo)/l)*getEntero(barra.valor_actual);
-    grafico->draw2DRectangle(barra.color,core::rect<s32>(prueba.X,prueba.Y,prueba.X+bx2,prueba2.Y));
+    //int alineacion_x=,alineacion_y=;
+    grafico->draw2DRectangle(barra.color,core::rect<s32>(prueba.X+alineacion_x,prueba.Y+alineacion_y,prueba.X+bx2+alineacion_x,prueba2.Y+alineacion_y));
 }
 void Personaje::dibujarProyectiles()
 {

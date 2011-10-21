@@ -1,0 +1,46 @@
+<Chars>
+	<char nombre="RyuSF2" />
+	<char nombre="RyuSF2" />
+</Chars>
+<Stages>
+	<stage nombre="Stage1" />
+</Stages>
+<Input jugador="2" tipo="keyboard">
+	<boton input="S" mapeo="2"/>
+	<boton input="A" mapeo="4"/>
+	<boton input="D" mapeo="6"/>
+	<boton input="W" mapeo="8"/>
+	<boton input="U" mapeo="a"/>
+	<boton input="I" mapeo="b"/>
+	<boton input="O" mapeo="c"/>
+	<boton input="J" mapeo="d"/>
+	<boton input="K" mapeo="e"/>
+	<boton input="L" mapeo="f"/>
+</Input>
+
+
+<Input jugador="1" tipo="joystick" numero_joystick="0">
+	<boton input="down" mapeo="2"/>
+	<boton input="left" mapeo="4"/>
+	<boton input="right" mapeo="6"/>
+	<boton input="up" mapeo="8"/>
+	<boton input="0" mapeo="a"/>
+	<boton input="3" mapeo="b"/>
+	<boton input="5" mapeo="c"/>
+	<boton input="1" mapeo="d"/>
+	<boton input="2" mapeo="e"/>
+	<boton input="7" mapeo="f"/>
+</Input>
+
+<Input jugador="2" tipo="joystick" numero_joystick="1">
+	<boton input="down" mapeo="2"/>
+	<boton input="left" mapeo="4"/>
+	<boton input="right" mapeo="6"/>
+	<boton input="up" mapeo="8"/>
+	<boton input="0" mapeo="a"/>
+	<boton input="3" mapeo="b"/>
+	<boton input="5" mapeo="c"/>
+	<boton input="1" mapeo="d"/>
+	<boton input="2" mapeo="e"/>
+	<boton input="7" mapeo="f"/>
+</Input>

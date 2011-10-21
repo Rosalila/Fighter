@@ -21,7 +21,8 @@ class Receiver : public IEventReceiver
 private:
     f32 moveHorizontal;
     f32 moveVertical;
-    SEvent::SJoystickEvent JoystickState;
+    SEvent::SJoystickEvent JoystickState0;
+    SEvent::SJoystickEvent JoystickState1;
     bool KeyIsDown[KEY_KEY_CODES_COUNT];
     virtual bool OnEvent(const SEvent& event);
     const SEvent::SJoystickEvent & GetJoystickState(void) const;
@@ -82,7 +83,7 @@ int num_joystick;
 
 class Input
 {
-private:
+protected:
     bool tecla_arriba;
     vector<Boton> cruz;
     vector<stringw> buffer_inputs;

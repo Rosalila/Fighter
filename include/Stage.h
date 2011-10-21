@@ -3,8 +3,10 @@
 class Stage
 {
     public:
-    video::ITexture *imagen_fondo,*imagen_barra;
+    vector<video::ITexture*> back,front;
     Grafico* grafico;
-    Stage(video::ITexture* imagen_fondo,video::ITexture* imagen_barra,Grafico* grafico);
-    void dibujar();
+    Stage(vector<video::ITexture*> back,vector<video::ITexture*> front,Grafico* grafico);
+    Stage(){};
+    void dibujarBack();
+    void dibujarFront();
 };

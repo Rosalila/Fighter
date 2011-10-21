@@ -28,7 +28,7 @@ class Personaje
     //DIBUJAR
     void dibujar();
     void dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y);
-    void dibujarBarra(stringw variable);
+    void dibujarBarra(stringw variable,int alineacion_x,int alineacion_y);
     void dibujarProyectiles();
     //GETS shortcuts
     Movimiento* getMovimientoActual();

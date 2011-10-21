@@ -68,16 +68,25 @@ bool Receiver::OnEvent(const SEvent& event)
         KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
     //Joystick
     if (event.EventType == irr::EET_JOYSTICK_INPUT_EVENT
-            && event.JoystickEvent.Joystick == joystick)
+            && event.JoystickEvent.Joystick == 0)
     {
-            JoystickState = event.JoystickEvent;
+            JoystickState0 = event.JoystickEvent;
+    }
+    if (event.EventType == irr::EET_JOYSTICK_INPUT_EVENT
+            && event.JoystickEvent.Joystick == 1)
+    {
+            JoystickState1 = event.JoystickEvent;
     }
     return false;
 }
 
 const SEvent::SJoystickEvent & Receiver::GetJoystickState(void) const
 {
-    return JoystickState;
+    if(joystick==0)
+        return JoystickState0;
+    if(joystick==1)
+        return JoystickState1;
+    return JoystickState0;;
 }
 
 bool Receiver::IsKeyDown(EKEY_CODE keyCode) const
@@ -89,8 +98,8 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
 {
     this->joystick=joystick;
     const SEvent::SJoystickEvent & joystickData = GetJoystickState();
-    moveHorizontal=(f32)JoystickState.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-    moveVertical=(f32)JoystickState.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
+    moveHorizontal=(f32)GetJoystickState().Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+    moveVertical=(f32)GetJoystickState().Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
     if(moveVertical<0 && joyCode==-2)
         return true;
     if(moveHorizontal<0 && joyCode==-4)
