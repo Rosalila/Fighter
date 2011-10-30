@@ -16,7 +16,7 @@ Grafico::Grafico(Receiver* receiver)
     driver = device->getVideoDriver();
 
     //init fonts
-    font = device->getGUIEnvironment()->getFont("menus/font.png");
+    font = device->getGUIEnvironment()->getFont("menu/font.png");
 }
 
 bool Grafico::isWindowActive()

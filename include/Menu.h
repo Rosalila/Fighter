@@ -2,6 +2,7 @@
 #include "../include/Grafico.h"
 #include "../include/irrKlang/irrKlang.h"
 #include "../include/Personaje.h"
+#include "../include/TinyXml/tinyxml.h"
 using namespace irrklang;
 
 class Elemento
@@ -12,6 +13,10 @@ public:
     int height;
     int width;
     bool visible;
+
+
+    stringw texto;
+    video::SColor color;
 
     Elemento(){}
 
@@ -80,8 +85,6 @@ public:
 class MenuTexto:Elemento
 {
 public:
-    stringw texto;
-    video::SColor color;
     MenuTexto(int x, int y, int width, int height,bool visible,stringw texto,video::SColor color)
     {
         this->x=x;
@@ -110,6 +113,7 @@ class MenuBoton:Elemento
 {
 public:
     bool seleccionado;
+    int accion;
 
     irr::video::ITexture* imagen;
     stringw texto;
@@ -122,7 +126,8 @@ public:
     int alineacion_texto_x_sel,alineacion_texto_y_sel;
     MenuBoton(int x, int y, int width, int height,bool visible,
               irr::video::ITexture* imagen,int alineacion_texto_x,int alineacion_texto_y, stringw texto,video::SColor color,
-              irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel
+              irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel,
+              int accion
               )
     {
         this->x=x;
@@ -141,6 +146,11 @@ public:
         this->alineacion_texto_x_sel=alineacion_texto_x_sel;
         this->alineacion_texto_y_sel=alineacion_texto_y_sel;
         this->seleccionado=false;
+        this->accion=accion;
+    }
+    int getAccion()
+    {
+        return accion;
     }
     virtual int getTipo()
     {
@@ -261,6 +271,16 @@ public:
     virtual int getTipo()
     {
         return 5;
+    }
+    void avanzar()
+    {
+        if(actual<(int)elementos.size()-1)
+            actual++;
+    }
+    void retroceder()
+    {
+        if(actual>0)
+            actual--;
     }
     virtual void dibujar(Grafico*grafico)
     {
@@ -418,6 +438,16 @@ public:
     virtual int getTipo()
     {
         return 6;
+    }
+    void avanzar()
+    {
+        if(actual<maximo)
+            actual++;
+    }
+    void retroceder()
+    {
+        if(actual>0)
+            actual--;
     }
     virtual void dibujar(Grafico*grafico)
     {
@@ -630,7 +660,11 @@ public:
 
     vector<Elemento*> elementos;
 
+    MenuContenedor*contenedor_actual;
+
+    Menu(){}
     Menu(Stage* stage,Personaje *pa,Personaje *pb,Grafico* grafico,Receiver* receiver);
     void loopMenu();
     void dibujarMenu();
+    void cargarDesdeXml(char*archivo);
 };

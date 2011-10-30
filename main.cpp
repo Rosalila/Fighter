@@ -7,7 +7,6 @@
 #include "include/Input.h"
 #include "include/Fighter.h"
 
-#include "include/TinyXml/tinyxml.h"
 #include <iostream>
 using namespace std;
 
@@ -368,6 +367,7 @@ public:
         }
     }
 };
+
 int main()
 {
     Receiver* receiver=new Receiver();
@@ -381,6 +381,10 @@ int main()
 
     Menu m(stage,pa,pb,grafico,receiver);
     m.loopMenu();
+//    Menu*m=(Menu*)new MenuXml(stage,pa,pb,grafico,receiver,(char*)"menu/menu.xml");
+//    m->loopMenu();
+//MenuXml m(stage,pa,pb,grafico,receiver,(char*)"menu/menu.xml");
+//m.loopMenu();
 
     Fighter fighter(stage,pa,pb,grafico,sonido);
     return 0;

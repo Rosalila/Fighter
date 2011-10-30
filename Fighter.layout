@@ -14,7 +14,7 @@
 		<Cursor position="1672" topLine="29" />
 	</File>
 	<File name="include/Menu.h" open="1" top="0" tabpos="3">
-		<Cursor position="5259" topLine="210" />
+		<Cursor position="23770" topLine="597" />
 	</File>
 	<File name="include/Personaje.h" open="0" top="0" tabpos="5">
 		<Cursor position="12" topLine="0" />
@@ -35,13 +35,13 @@
 		<Cursor position="9740" topLine="306" />
 	</File>
 	<File name="src/Grafico.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="1882" topLine="0" />
+		<Cursor position="347" topLine="15" />
 	</File>
 	<File name="src/Input.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="2123" topLine="60" />
 	</File>
 	<File name="src/Menu.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="513" topLine="1" />
+		<Cursor position="4825" topLine="70" />
 	</File>
 	<File name="src/Personaje.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="6049" topLine="159" />
@@ -49,7 +49,7 @@
 	<File name="src/Sonido.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="52" topLine="0" />
 	</File>
-	<File name="src/Stage.cpp" open="1" top="0" tabpos="5">
+	<File name="src/Stage.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="857" topLine="10" />
 	</File>
 </CodeBlocks_layout_file>

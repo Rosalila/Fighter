@@ -230,10 +230,8 @@ void Fighter::loopJuego()
 {
     //sonido->reproducirSonido("Fight!");
     //sonido->reproducirSonido("Fondo");
-	for (;!pa->input->receiver->IsKeyDown(irr::KEY_RETURN);)
+	for (;!pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE);)
 	{
-	    if(pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE))
-            exit(0);
 	    //setear frames a "60"
 	    grafico->device->getTimer()->start();
 	    for(u32 t=grafico->device->getTimer()->getTime();
