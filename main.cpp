@@ -378,8 +378,9 @@ int main()
     Stage *stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
     Personaje *pa=(Personaje*)new RyuXml(300,370,grafico,inputa,(char *)"chars/RyuSF2/RyuSF2.xml");
     Personaje *pb=(Personaje*)new RyuXml(524,370,grafico,inputb,(char *)"chars/RyuSF2/RyuSF2.xml");
-    //Menu m(stage,pa,pb,sonido,grafico,receiver);
-    //m.loopMenu();
+
+    Menu m(stage,pa,pb,grafico,receiver);
+    m.loopMenu();
 
     Fighter fighter(stage,pa,pb,grafico,sonido);
     return 0;

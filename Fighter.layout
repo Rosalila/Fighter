@@ -13,8 +13,8 @@
 	<File name="include/Input.h" open="0" top="0" tabpos="3">
 		<Cursor position="1672" topLine="29" />
 	</File>
-	<File name="include/Menu.h" open="0" top="0" tabpos="2">
-		<Cursor position="137" topLine="1" />
+	<File name="include/Menu.h" open="1" top="0" tabpos="3">
+		<Cursor position="5259" topLine="210" />
 	</File>
 	<File name="include/Personaje.h" open="0" top="0" tabpos="5">
 		<Cursor position="12" topLine="0" />
@@ -22,34 +22,34 @@
 	<File name="include/Sonido.h" open="0" top="0" tabpos="0">
 		<Cursor position="142" topLine="0" />
 	</File>
-	<File name="include/Stage.h" open="1" top="0" tabpos="3">
+	<File name="include/Stage.h" open="0" top="0" tabpos="3">
 		<Cursor position="272" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="18426" topLine="368" />
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="18426" topLine="366" />
 	</File>
 	<File name="src/AtributosPersonaje.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3709" topLine="106" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="4">
+	<File name="src/Fighter.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="9740" topLine="306" />
 	</File>
-	<File name="src/Grafico.cpp" open="0" top="0" tabpos="5">
+	<File name="src/Grafico.cpp" open="1" top="0" tabpos="4">
 		<Cursor position="1882" topLine="0" />
 	</File>
 	<File name="src/Input.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="2123" topLine="60" />
 	</File>
-	<File name="src/Menu.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="3207" topLine="0" />
+	<File name="src/Menu.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="513" topLine="1" />
 	</File>
-	<File name="src/Personaje.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="3234" topLine="39" />
+	<File name="src/Personaje.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="6049" topLine="159" />
 	</File>
 	<File name="src/Sonido.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="52" topLine="0" />
 	</File>
-	<File name="src/Stage.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="468" topLine="7" />
+	<File name="src/Stage.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="857" topLine="10" />
 	</File>
 </CodeBlocks_layout_file>

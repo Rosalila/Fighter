@@ -1,162 +1,105 @@
 #include "../include/Menu.h"
-Menu::Menu(Stage* stage,Personaje *pa,Personaje *pb,Sonido* sonido,Grafico* grafico,Input* receiver)
+Menu::Menu(Stage* stage,Personaje *pa,Personaje *pb,Grafico* grafico,Receiver* receiver)
 {
     this->stage=stage;
     this->pa=pa;
     this->pb=pb;
-    this->sonido=sonido;
     this->grafico=grafico;
     this->receiver=receiver;
+
+    elementos.push_back((Elemento*)new MenuImagen(0,0,1024,600,true,grafico->getTexture("menus/fondo.png")));
+    elementos.push_back((Elemento*)new MenuTexto(0,0,100,100,true,"L. GPL",video::SColor(255,255,255,255)));
+    elementos.push_back((Elemento*)new MenuTexto(0,20,100,100,true,"V. 1.0",video::SColor(255,255,255,255)));
+    elementos.push_back((Elemento*)new MenuImagen(300,0,400,283,true,grafico->getTexture("menus/logo.png")));
+
+
+    vector<Elemento*>elementos_contenedor;
+    elementos_contenedor.push_back((Elemento*)new MenuBoton(0,0,150,50,true,
+                                                            grafico->getTexture("menus/fondo_boton.png"),5,5,"Iniciar",video::SColor(255,255,255,255),
+                                                            grafico->getTexture("menus/fondo_boton2.png"),5,5,"Iniciarr",video::SColor(255,0,0,0)
+                                                            ));
+    vector<Elemento*>elem_lista;
+    elem_lista.push_back((Elemento*)new MenuTexto(0,20,100,100,true,"RyuSf2",video::SColor(255,255,255,255)));
+    elementos_contenedor.push_back((Elemento*)new MenuLista(0,30,50,50,true,
+                                                            -50,0,grafico->getTexture("menus/flecha_izq.png"),150,0,grafico->getTexture("menus/flecha_der.png"),
+                                                            -50,0,grafico->getTexture("menus/flecha_izq2.png"),150,0,grafico->getTexture("menus/flecha_der2.png"),
+                                                            elem_lista
+                                                            ));
+    vector<Elemento*>elem_lista2;
+    elem_lista2.push_back((Elemento*)new MenuTexto(0,20,100,100,true,"Stage1",video::SColor(255,255,255,255)));
+    elementos_contenedor.push_back((Elemento*)new MenuLista(0,60,50,50,true,
+                                    -50,0,grafico->getTexture("menus/flecha_izq.png"),150,0,grafico->getTexture("menus/flecha_der.png"),
+                                    -50,0,grafico->getTexture("menus/flecha_izq2.png"),150,0,grafico->getTexture("menus/flecha_der2.png"),
+                                    elem_lista2));
+    elementos_contenedor.push_back((Elemento*)new MenuBarra(0,120,200,50,true,
+                                                            grafico->getTexture("menus/fondo_boton.png"),0,0,grafico->getTexture("menus/barra.png"),
+                                                            grafico->getTexture("menus/fondo_boton2.png"),0,0,grafico->getTexture("menus/barra.png"),
+                                                            5,3));
+
+    elementos.push_back((Elemento*)new MenuContenedor(400,270,500,500,true,elementos_contenedor));
+
+    //elementos[4]=(Elemento*)mc;
+
+
+    //vector<Elemento*> contenedor;
+    //contenedor.push_back((Elemento*)new MenuImagen(0,0,100,100,true,grafico->getTexture("menus/Rosalila01.png")));
+    //elementos.push_back((Elemento*)new MenuContenedor(0,0,100,100,true,contenedor));
+    //elementos.push_back(new MenuImagen(0,0,100,100,true,grafico->getTexture("menus/Rosalila01.png")));
 }
 
 void Menu::loopMenu()
 {
-    /*
-    const SEvent::SJoystickEvent & joystickData = receiver->GetJoystickState();
-    int moveHorizontal =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-    int moveVertical =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-    //Joystick
-    bool flag_boton_arriba;
-    for(int i=0;i<190;i++)
-    {
-        dibujarImagen(grafico->getTexture("resources/Menu/intro_rosalila.png"));
-        if(receiver->IsKeyDown(irr::KEY_KEY_Y)||joystickData.IsButtonPressed(0))
-            break;
-    }
-    flag_boton_arriba=false;
-    for(int i=0;i<190;i++)
-    {
-        dibujarImagen(grafico->getTexture("resources/Menu/intro_cria.jpg"));
-        if(!receiver->IsKeyDown(irr::KEY_KEY_Y)&&!joystickData.IsButtonPressed(0))
-            flag_boton_arriba=true;
-        else if((receiver->IsKeyDown(irr::KEY_KEY_Y)||joystickData.IsButtonPressed(0)) && flag_boton_arriba)
-            break;
-    }
-    flag_boton_arriba=false;
-    int opcion=1;
-    int opcion_stage=1;
-    for(;;)
-    {
-        dibujarMenu(grafico->getTexture("resources/Menu/menu_principal.jpg"),opcion,opcion_stage);
-        moveHorizontal =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-        moveVertical =(f32)joystickData.Axis[SEvent::SJoystickEvent::AXIS_Y] / -32767.f;
-        if(!receiver->IsKeyDown(irr::KEY_KEY_Y)&&!joystickData.IsButtonPressed(0)&&moveVertical==0&&moveHorizontal==0)
-            flag_boton_arriba=true;
-        else if((receiver->IsKeyDown(irr::KEY_KEY_Y)||joystickData.IsButtonPressed(0)) && flag_boton_arriba)
-            break;
-        if(moveVertical>0 && flag_boton_arriba)
+	for (;!pa->input->receiver->IsKeyDown(irr::KEY_KEY_0);)
+	{
+	    //setear frames a "60"
+	    grafico->device->getTimer()->start();
+	    for(u32 t=grafico->device->getTimer()->getTime();
+            t+16>grafico->device->getTimer()->getTime();
+            grafico->device->getTimer()->tick()
+         );
+        dibujarMenu();
+        if(pa->input->receiver->IsKeyDown(irr::KEY_DOWN))
         {
-            opcion--;
-            flag_boton_arriba=false;
+            ((MenuContenedor*)elementos[4])->avanzar();
         }
-        if(moveVertical<0 && flag_boton_arriba)
+        if(pa->input->receiver->IsKeyDown(irr::KEY_UP))
         {
-            opcion++;
-            flag_boton_arriba=false;
+            ((MenuContenedor*)elementos[4])->retroceder();
         }
-        if(moveHorizontal>0 && flag_boton_arriba)
+        if(pa->input->receiver->IsKeyDown(irr::KEY_RIGHT))
         {
-            opcion_stage++;
-            flag_boton_arriba=false;
+            if(((MenuContenedor*)elementos[4])->getSeleccionado()->getTipo()==5)
+            {
+                ((MenuLista*)((MenuContenedor*)elementos[4])->getSeleccionado())->actual++;
+            }
+            if(((MenuContenedor*)elementos[4])->getSeleccionado()->getTipo()==6)
+            {
+                ((MenuBarra*)((MenuContenedor*)elementos[4])->getSeleccionado())->actual++;
+            }
         }
-        if(moveHorizontal<0 && flag_boton_arriba)
+        if(pa->input->receiver->IsKeyDown(irr::KEY_LEFT))
         {
-            opcion_stage--;
-            flag_boton_arriba=false;
+            if(((MenuContenedor*)elementos[4])->getSeleccionado()->getTipo()==5)
+            {
+                ((MenuLista*)((MenuContenedor*)elementos[4])->getSeleccionado())->actual--;
+            }
+            if(((MenuContenedor*)elementos[4])->getSeleccionado()->getTipo()==6)
+            {
+                ((MenuBarra*)((MenuContenedor*)elementos[4])->getSeleccionado())->actual--;
+            }
         }
-    }
-    if(opcion_stage==1)
-        stage->imagen_fondo=grafico->getTexture("resources/Stages/Stage01.jpg");
-    if(opcion_stage==2)
-        stage->imagen_fondo=grafico->getTexture("resources/Stages/Stage02.jpg");
-        */
+	}
 }
 
-
-bool Menu::dibujarImagen(video::ITexture* imagen)
-{
-    if (grafico->isWindowActive())
-    {
-        grafico->beginScene();
-        grafico->draw2DImage
-        (
-            imagen,
-            irr::core::dimension2d<irr::f32> (1024,600),
-            irr::core::rect<irr::f32>(0,0,1024,600),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
-            false);
-
-        grafico->endScene();
-    }
-    //return grafico->device->run() && grafico->driver;
-    return true;
-}
-
-bool Menu::dibujarMenu(video::ITexture* imagen,int opcion,int opcion_stage)
+void Menu::dibujarMenu()
 {
     if (grafico->isWindowActive())
     {
         grafico->beginScene();
 
-        //Fondo
-        grafico->draw2DImage
-        (
-            imagen,
-            irr::core::dimension2d<irr::f32> (1024,600),
-            irr::core::rect<irr::f32>(0,0,1024,600),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
-            false);
-        //Opcion
-        int o1=1,o2=1,o3=1,o4=1;
-        if(opcion==1)o1=0;
-        if(opcion==2)o2=0;
-        if(opcion==3)o3=0;
-        if(opcion==4)o4=0;
-        grafico->drawText(L"Menu",
-                    core::rect<s32>(130,10,300,50),
-                    video::SColor(255,255,255,255));
-        grafico->drawText(L"Personaje1",
-                    core::rect<s32>(130,100,300,150),
-                    video::SColor(255,255*o1,255*o1,255));
-        grafico->drawText(L"Personaje2",
-                    core::rect<s32>(130,150,300,200),
-                    video::SColor(255,255*o2,255*o2,255));
-        grafico->drawText(L"Stage",
-                    core::rect<s32>(130,200,300,250),
-                    video::SColor(255,255*o3,255*o3,255));
-        grafico->drawText(L"Iniciar",
-                    core::rect<s32>(130,250,300,300),
-                    video::SColor(255,255*o4,255*o4,255));
-
-        //Stage
-        video::ITexture* imagen_stage_menu=grafico->getTexture("resources/Stages/Stage01.jpg");
-        if(opcion_stage%2==0)
-            imagen_stage_menu=grafico->getTexture("resources/Stages/Stage02.jpg");
-        grafico->draw2DImage
-        (
-            imagen_stage_menu,
-            irr::core::dimension2d<irr::f32> (1024,600),
-            irr::core::rect<irr::f32>(0,0,1024,600),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (0.25,0.25),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
-            false);
-
+        for(int i=0;i<(int)elementos.size();i++)
+            elementos[i]->dibujar(grafico);
         grafico->endScene();
     }
-    return grafico->run();
+    grafico->run();
 }
-
