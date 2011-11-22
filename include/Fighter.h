@@ -1,10 +1,13 @@
-#include "../include/Menu.h"
+#include "TinyXml/tinyxml.h"
+#include "Menu/Menu.h"
 #include <stdio.h>
 
 class Fighter
 {
 public:
     //Logica
+    Input*inputa,*inputb;
+    Menu* menu;
     Stage* stage;
     Personaje *pa;
     Personaje *pb;
@@ -12,8 +15,9 @@ public:
     //Engines
     Sonido* sonido;
     Grafico* grafico;
+    Receiver* receiver;
 
-    Fighter(Stage* stage,Personaje*pa,Personaje*pb,Grafico *grafico,Sonido *sonido);
+    Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado);
@@ -23,4 +27,5 @@ public:
     void aplicarModificadores(Personaje *p);
     void logica();
     bool render(Personaje* pa,Personaje* pb,Stage* stage);
+    void mainLoop();
 };

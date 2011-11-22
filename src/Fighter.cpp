@@ -1,14 +1,27 @@
 #include "../include/Fighter.h"
-Fighter::Fighter(Stage* stage,Personaje*pa,Personaje*pb,Grafico *grafico,Sonido *sonido)
+Fighter::Fighter()
 {
-    //Engines
-    this->grafico=grafico;
-    this->sonido=sonido;
+    //Creadas abierto
+    receiver=new Receiver();
+    //this->inputa=(Input*)new InputXml(1,receiver);
+    //this->inputb=(Input*)new InputXml(2,receiver);
+    this->inputa=new Input();
+    this->inputb=new Input();
+    this->inputa->cargarDesdeXML(1,receiver);
+    this->inputb->cargarDesdeXML(2,receiver);
 
-    //Sets
-    this->stage=stage;
-    this->pa=pa;
-    this->pb=pb;
+    //Parte de la clase
+    this->grafico=new Grafico(receiver);
+    this->sonido = new Sonido();
+    stage=new Stage();
+    stage->cargarDesdeXML(grafico,(char*)"stages/Stage1/Stage1.xml");
+    //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
+    pa=new Personaje();
+    pb=new Personaje();
+    pa->cargarDesdeXML(300,370,grafico,inputa,(char *)"chars/RyuSF2/RyuSF2.xml");
+    pb->cargarDesdeXML(524,370,grafico,inputb,(char *)"chars/RyuSF2/RyuSF2.xml");
+    //this->pa=(Personaje*)new RyuXml(300,370,grafico,inputa,(char *)"chars/RyuSF2/RyuSF2.xml");
+    //this->pb=(Personaje*)new RyuXml(524,370,grafico,inputb,(char *)"chars/RyuSF2/RyuSF2.xml");
     pa->personaje_contrario=pb;
     pb->personaje_contrario=pa;
 
@@ -16,14 +29,52 @@ Fighter::Fighter(Stage* stage,Personaje*pa,Personaje*pb,Grafico *grafico,Sonido 
     sonido->agregarSonido("Fondo","resources/Stages/Sonidos/Fondo.ogg");
     sonido->agregarSonido("Fondo2","resources/Stages/Sonidos/Something like this.mp3");
 
-    //Menu
-    //loopMenu();
+    menu=new Menu(grafico,receiver);
+}
 
-    //Juego
-    loopJuego();
+void Fighter::mainLoop()
+{
+    for(;;)
+    {
+        menu->loopMenu();
 
+        char *path_a=new char[255];
+        strcpy(path_a,"chars/");
+        strcat(path_a,(char*)menu->getPersonajeA());
+        strcat(path_a,"/");
+        strcat(path_a,(char*)menu->getPersonajeA());
+        strcat(path_a,".xml\0");
+
+        char *path_b=new char[255];
+        strcpy(path_b,"chars/");
+        strcat(path_b,(char*)menu->getPersonajeB());
+        strcat(path_b,"/");
+        strcat(path_b,(char*)menu->getPersonajeB());
+        strcat(path_b,".xml\0");
+
+        char *path_s=new char[255];
+        strcpy(path_s,"stages/");
+        strcat(path_s,(char*)menu->getStage());
+        strcat(path_s,"/");
+        strcat(path_s,(char*)menu->getStage());
+        strcat(path_s,".xml\0");
+
+        pa=new Personaje();
+        pb=new Personaje();
+        pa->cargarDesdeXML(300,370,grafico,inputa,(char *)path_a);
+        pb->cargarDesdeXML(524,370,grafico,inputb,(char *)path_b);
+        //this->pa=(Personaje*)new RyuXml(300,370,grafico,inputa,(char *)path_a);
+        //this->pb=(Personaje*)new RyuXml(524,370,grafico,inputb,(char *)path_b);
+        stage=new Stage();
+        stage->cargarDesdeXML(grafico,(char*)path_s);
+        //this->stage=(Stage*)new StageXml(grafico,(char*)path_s);
+        pa->personaje_contrario=pb;
+        pb->personaje_contrario=pa;
+        //Juego
+        loopJuego();
+    }
     //Drops
-    sonido->drop(); // delete engine
+    sonido->drop();
 }
 
 bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
@@ -230,14 +281,15 @@ void Fighter::loopJuego()
 {
     //sonido->reproducirSonido("Fight!");
     //sonido->reproducirSonido("Fondo");
-	for (;!pa->input->receiver->IsKeyDown(irr::KEY_ESCAPE);)
+    u32 anterior=grafico->device->getTimer()->getTime();
+	for (;!receiver->IsKeyDown(irr::KEY_ESCAPE);)
 	{
+	    grafico->device->run();
+	    //cout<<grafico->device->getTimer()->getTime()<<endl;
 	    //setear frames a "60"
-	    grafico->device->getTimer()->start();
-	    for(u32 t=grafico->device->getTimer()->getTime();
-            t+16>grafico->device->getTimer()->getTime();
-            grafico->device->getTimer()->tick()
-         );
+	    if(grafico->device->getTimer()->getTime()<anterior+16)
+            continue;
+        anterior=grafico->device->getTimer()->getTime();
         //logica
         logica();
 

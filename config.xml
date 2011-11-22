@@ -1,9 +1,11 @@
 <Chars>
 	<char nombre="RyuSF2" />
-	<char nombre="RyuSF2" />
+	<char nombre="StickMan" />
+	<char nombre="p3" />
 </Chars>
 <Stages>
 	<stage nombre="Stage1" />
+	<stage nombre="Stage2" />
 </Stages>
 <Input jugador="2" tipo="keyboard">
 	<boton input="S" mapeo="2"/>
