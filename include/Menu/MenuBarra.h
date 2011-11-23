@@ -13,13 +13,13 @@ private:
     bool seleccionado;
 
 public:
-    MenuBarra(int x, int y, int width, int height,bool visible,
+    MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool visible,
               irr::video::ITexture*fondo,int barra_x,int barra_y,irr::video::ITexture*barra,
               irr::video::ITexture*fondo_sel,int barra_x_sel,int barra_y_sel,irr::video::ITexture*barra_sel,
               int maximo,int actual);
     virtual int getTipo();
-    virtual void dibujar(Grafico*grafico);
-    virtual void dibujar(int alineacion_x,int alineacion_y,Grafico*grafico);
+    virtual void dibujar();
+    virtual void dibujar(int alineacion_x,int alineacion_y);
     void avanzar();
     void retroceder();
     bool getSeleccionado();

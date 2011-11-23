@@ -17,7 +17,7 @@ void Input::actualizarBuffer()
 {
     stringw resultado="";
     for(int i=0;i<(int)cruz.size();i++)
-        if(cruz[i].estaPresionado(receiver))
+        if(cruz[i].estaPresionado())
             resultado+=cruz[i].getMapeo();
     if(resultado=="24" || resultado=="42")
         resultado="1";
@@ -31,12 +31,12 @@ void Input::actualizarBuffer()
     {
         tecla_arriba=false;
         for(int i=0;i<(int)botones.size();i++)
-            if(botones[i].estaPresionado(receiver))
+            if(botones[i].estaPresionado())
                 resultado+=botones[i].getMapeo();
     }
     bool flag=false;
     for(int i=0;i<(int)botones.size();i++)
-        if(botones[i].estaPresionado(receiver))
+        if(botones[i].estaPresionado())
             flag=true;
     if(!flag)
         tecla_arriba=true;
@@ -53,7 +53,8 @@ vector<stringw> Input::getBufferInputs()
 
 void Input::cargarDesdeXML(int jugador,Receiver* receiver)
 {
-
+    //Map
+    this->receiver=receiver;
     TiXmlDocument doc_t((char*)"config.xml");
     doc_t.LoadFile();
     TiXmlDocument *doc;
@@ -72,7 +73,7 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
                     boton!=NULL;
                     boton=boton->NextSibling("boton"))
             {
-                botones.push_back(Boton((irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],boton->ToElement()->Attribute("mapeo")));
+                botones.push_back(Boton(receiver,(irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],boton->ToElement()->Attribute("mapeo")));
             }
             //Joy
             if(strcmp("joystick",input->ToElement()->Attribute("tipo"))==0)
@@ -91,13 +92,11 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
                     int_boton=-6;
                 else
                     int_boton=boton->ToElement()->Attribute("input")[0]-48;
-                botones.push_back(Boton(int_boton,input->ToElement()->Attribute("numero_joystick")[0]-48,boton->ToElement()->Attribute("mapeo")));
+                botones.push_back(Boton(receiver,int_boton,input->ToElement()->Attribute("numero_joystick")[0]-48,boton->ToElement()->Attribute("mapeo")));
             }
         }
     }
 
-    //Map
-    this->receiver=receiver;
     tecla_arriba=true;
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");

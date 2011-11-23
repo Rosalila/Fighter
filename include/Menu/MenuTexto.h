@@ -6,8 +6,8 @@ private:
     video::SColor color;
 public:
     stringw texto;//!!!!!!!!
-    MenuTexto(int x, int y, int width, int height,bool visible,stringw texto,video::SColor color);
+    MenuTexto(Grafico*grafico,int x, int y, int width, int height,bool visible,stringw texto,video::SColor color);
     virtual int getTipo();
-    virtual void dibujar(Grafico*grafico);
-    virtual void dibujar(int alineacion_x,int alineacion_y,Grafico*grafico);
+    virtual void dibujar();
+    virtual void dibujar(int alineacion_x,int alineacion_y);
 };

@@ -1,6 +1,6 @@
 #include "Menu/MenuBoton.h"
 
-MenuBoton::MenuBoton(int x, int y, int width, int height,bool visible,
+MenuBoton::MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool visible,
           irr::video::ITexture* imagen,int alineacion_texto_x,int alineacion_texto_y, stringw texto,video::SColor color,
           irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel,
           int accion
@@ -23,6 +23,7 @@ MenuBoton::MenuBoton(int x, int y, int width, int height,bool visible,
     this->alineacion_texto_y_sel=alineacion_texto_y_sel;
     this->seleccionado=false;
     this->accion=accion;
+    this->grafico=grafico;
 }
 
 int MenuBoton::getAccion()
@@ -35,7 +36,7 @@ int MenuBoton::getTipo()
     return 4;
 }
 
-void MenuBoton::dibujar(Grafico*grafico)
+void MenuBoton::dibujar()
 {
     if(!seleccionado)
     {
@@ -68,7 +69,7 @@ void MenuBoton::dibujar(Grafico*grafico)
     }
 }
 
-void MenuBoton::dibujar(int alineacion_x,int alineacion_y,Grafico*grafico)
+void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
 {
     if(!seleccionado)
     {

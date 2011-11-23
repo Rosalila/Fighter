@@ -29,3 +29,11 @@ void Frame::agregarModificador(stringw tipo,stringw variable_modificador,stringw
 {
     modificadores.push_back(ModificadorPorVariable(tipo,variable,variable_modificador,relativo,aplicar_a_contrario));
 }
+void Frame::agregarCondicion(vector<Condicion> condicion)
+{
+    condiciones.push_back(condicion);
+}
+void Frame::agregarCondicion(int posicion,Condicion condicion)
+{
+    condiciones[posicion].push_back(condicion);
+}

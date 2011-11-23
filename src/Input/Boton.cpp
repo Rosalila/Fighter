@@ -1,21 +1,23 @@
 #include "Input/Boton.h"
 
-Boton::Boton(irr::EKEY_CODE teclado,stringw mapeo)
+Boton::Boton(Receiver* receiver,irr::EKEY_CODE teclado,stringw mapeo)
 {
     this->teclado=teclado;
     this->mapeo=mapeo;
     usando_joystick=false;
+    this->receiver=receiver;
 }
 
-Boton::Boton(int joystick,int num_joystick,stringw mapeo)
+Boton::Boton(Receiver* receiver,int joystick,int num_joystick,stringw mapeo)
 {
     this->num_joystick=num_joystick;
     this->joystick=joystick;
     this->mapeo=mapeo;
     usando_joystick=true;
+    this->receiver=receiver;
 }
 
-bool Boton::estaPresionado(Receiver* receiver)
+bool Boton::estaPresionado()
 {
     if(usando_joystick)
     {

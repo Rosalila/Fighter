@@ -1,6 +1,6 @@
 #include "Menu/MenuBarra.h"
 
-MenuBarra::MenuBarra(int x, int y, int width, int height,bool visible,
+MenuBarra::MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool visible,
           irr::video::ITexture*fondo,int barra_x,int barra_y,irr::video::ITexture*barra,
           irr::video::ITexture*fondo_sel,int barra_x_sel,int barra_y_sel,irr::video::ITexture*barra_sel,
           int maximo,int actual)
@@ -24,6 +24,7 @@ MenuBarra::MenuBarra(int x, int y, int width, int height,bool visible,
     this->maximo=maximo;
     this->actual=actual;
     this->seleccionado=false;
+    this->grafico=grafico;
 }
 
 int MenuBarra::getTipo()
@@ -43,7 +44,7 @@ void MenuBarra::retroceder()
         actual--;
 }
 
-void MenuBarra::dibujar(Grafico*grafico)
+void MenuBarra::dibujar()
 {
     if(!seleccionado)
     {
@@ -96,7 +97,7 @@ void MenuBarra::dibujar(Grafico*grafico)
     }
 }
 
-void MenuBarra::dibujar(int alineacion_x,int alineacion_y,Grafico*grafico)
+void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
 {
     if(!seleccionado)
     {

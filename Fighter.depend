@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1321975184 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1321975611 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1078,13 +1078,13 @@
 1321887558 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
 	"Input/Receiver.h"
 
-1321888108 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
+1322053955 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1321888097 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
+1322054145 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
 
-1321916671 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1322059119 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1321974179 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
@@ -1095,25 +1095,25 @@
 	"Menu/MenuContenedor.h"
 	"Sonido/Sonido.h"
 
-1321909060 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
+1322056553 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1321915013 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
+1322059183 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1321917192 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
+1322059194 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
 	"Menu/MenuContenedor.h"
 
-1321918437 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
+1322074569 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
 	"Menu/MenuImagen.h"
 
-1321919154 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
+1322059208 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
 	"Menu/MenuLista.h"
 
-1321919566 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
+1322057395 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
 	"Menu/MenuTexto.h"
 
-1321916002 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
+1322057767 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
 	"Menu/MenuBarra.h"
 
 1321952610 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinystr.cpp
@@ -1202,12 +1202,13 @@
 
 1321970143 /home/userr/ProyectosActuales/Fighter/include/AtributosPersonaje/Proyectil.h
 
-1321972993 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
+1322077039 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
 	"Personaje/Barra.h"
 
-1321960002 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
+1322077604 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
+	"Personaje/Condicion.h"
 
-1321973002 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
+1322078227 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
 	"Personaje/Frame.h"
 
 1321973111 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/HitBox.cpp
@@ -1216,7 +1217,8 @@
 1321973117 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Imagen.cpp
 	"Personaje/Imagen.h"
 
-1321960037 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/InputMovimiento.cpp
+1322078563 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/InputMovimiento.cpp
+	"Personaje/InputMovimiento.h"
 
 1321959771 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Modificador.cpp
 
@@ -1241,7 +1243,7 @@
 1321973177 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1321974973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1322077146 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1321960049 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp

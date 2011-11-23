@@ -8,10 +8,11 @@ private:
     stringw mapeo;
     bool usando_joystick;
     int num_joystick;
+    Receiver* receiver;
 public:
     Boton(){}
-    Boton(irr::EKEY_CODE teclado,stringw mapeo);
-    Boton(int joystick,int num_joystick,stringw mapeo);
-    bool estaPresionado(Receiver* receiver);
+    Boton(Receiver* receiver,irr::EKEY_CODE teclado,stringw mapeo);
+    Boton(Receiver* receiver,int joystick,int num_joystick,stringw mapeo);
+    bool estaPresionado();
     stringw getMapeo();
 };

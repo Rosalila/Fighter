@@ -1,6 +1,6 @@
 #include "Menu/MenuLista.h"
 
-MenuLista::MenuLista(int x, int y, int width, int height,bool visible,
+MenuLista::MenuLista(Grafico*grafico,int x, int y, int width, int height,bool visible,
           int flecha_izq_x,int flecha_izq_y,irr::video::ITexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,irr::video::ITexture*flecha_derecha,
           int flecha_izq_x_sel,int flecha_izq_y_sel,irr::video::ITexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,irr::video::ITexture*flecha_derecha_sel,
           vector<Elemento*>elementos
@@ -29,6 +29,7 @@ MenuLista::MenuLista(int x, int y, int width, int height,bool visible,
     this->elementos=elementos;
     actual=0;
     seleccionado=false;
+    this->grafico=grafico;
 }
 
 int MenuLista::getTipo()
@@ -48,12 +49,12 @@ void MenuLista::retroceder()
         actual--;
 }
 
-void MenuLista::dibujar(Grafico*grafico)
+void MenuLista::dibujar()
 {
     if(!seleccionado)
     {
         if(actual>=0 && actual<(int)elementos.size())
-            elementos[actual]->dibujar(x,y,grafico);
+            elementos[actual]->dibujar(x,y);
         grafico->draw2DImage
         (   flecha_izquierda,
             irr::core::dimension2d<irr::f32> (width,height),
@@ -79,7 +80,7 @@ void MenuLista::dibujar(Grafico*grafico)
     }else
     {
         if(actual>=0 && actual<(int)elementos.size())
-            elementos[actual]->dibujar(x,y,grafico);
+            elementos[actual]->dibujar(x,y);
         grafico->draw2DImage
         (   flecha_izquierda_sel,
             irr::core::dimension2d<irr::f32> (width,height),
@@ -105,12 +106,12 @@ void MenuLista::dibujar(Grafico*grafico)
     }
 }
 
-void MenuLista::dibujar(int alineacion_x,int alineacion_y,Grafico*grafico)
+void MenuLista::dibujar(int alineacion_x,int alineacion_y)
 {
     if(!seleccionado)
     {
         if(actual>=0 && actual<(int)elementos.size())
-            elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y,grafico);
+            elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y);
         grafico->draw2DImage
         (   flecha_izquierda,
             irr::core::dimension2d<irr::f32> (width,height),
@@ -136,7 +137,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y,Grafico*grafico)
     }else
     {
         if(actual>=0 && actual<(int)elementos.size())
-            elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y,grafico);
+            elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y);
         grafico->draw2DImage
         (   flecha_izquierda_sel,
             irr::core::dimension2d<irr::f32> (width,height),
