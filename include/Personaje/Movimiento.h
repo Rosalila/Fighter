@@ -10,12 +10,6 @@ class Movimiento
     Movimiento(stringw nombre);
     Frame getFrameActual();
     void agregarFrame(int duracion);
-    void agregarCondicion(vector<Condicion> condicion,int frame)
-    {
-        frames[frame].condiciones.push_back(condicion);
-    }
-    void agregarCondicion(int posicion,Condicion condicion,int frame)
-    {
-        frames[frame].condiciones[posicion].push_back(condicion);
-    }
+    void agregarCondicion(vector<Condicion*> condicion,int frame);
+    //void agregarCondicion(int posicion,Condicion condicion,int frame);
 };

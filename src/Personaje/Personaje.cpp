@@ -169,14 +169,14 @@ void Personaje::agregarInput(stringw input,stringw movimiento)
     inputs.push_back(InputMovimiento(lista_input,movimiento));
 }
 
-void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion> condicion)
+void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion*> condicion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
-void Personaje::agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion)
-{
-    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
-}
+//void Personaje::agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion)
+//{
+//    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
+//}
 void Personaje::agregarMovimiento(stringw movimiento)
 {
     movimientos[movimiento]=new Movimiento(movimiento);
@@ -339,16 +339,17 @@ bool Personaje::inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer)
 }
 bool Personaje::cumpleCondiciones(stringw str_movimiento)
 {
-    Movimiento *movimiento=movimientos[str_movimiento];
+    Movimiento*movimiento=movimientos[str_movimiento];
     Frame *frame=&movimiento->frames[0];
-    vector<vector<Condicion> > condiciones=frame->condiciones;
+    vector<vector<Condicion*> > condiciones=frame->condiciones;
     for(int i=0;i<(int)condiciones.size();i++)
     {
-        vector<Condicion> subcondiciones=condiciones[i];
+        vector<Condicion*> subcondiciones=condiciones[i];
         bool flag=true;
         for(int j=0;j<(int)subcondiciones.size();j++)
         {
-            if(!cumpleCondicion(&subcondiciones[j]))
+            Condicion* c_temp=(Condicion*)subcondiciones[j];
+            if(!cumpleCondicion(c_temp))
                 flag=false;
         }
         if(flag)
@@ -400,37 +401,49 @@ void Personaje::cargarArchivo(char* archivo_xml)
     doc=&doc_t;
 
     //for each Movimiento
-    for(TiXmlNode* nodo=doc->FirstChild("Declaraciones");
+    for(TiXmlNode* nodo=doc->FirstChild("Declarations");
             nodo!=NULL;
-            nodo=nodo->NextSibling("Declaraciones"))
+            nodo=nodo->NextSibling("Declarations"))
     {
-            for(TiXmlElement *elemento_imagen=nodo->FirstChild("imagen")->ToElement();
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("Move")->ToElement();
                     elemento_imagen!=NULL;
-                    elemento_imagen=elemento_imagen->NextSiblingElement("imagen"))
+                    elemento_imagen=elemento_imagen->NextSiblingElement("Move"))
+            {
+                stringw nombre(elemento_imagen->Attribute("name"));
+                int frames=atoi(elemento_imagen->Attribute("frames"));
+                int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
+                agregarMovimiento(nombre);
+                for(int i=0;i<frames;i++)
+                    agregarFrame(nombre,frame_duration);
+            }
+
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("sprite")->ToElement();
+                    elemento_imagen!=NULL;
+                    elemento_imagen=elemento_imagen->NextSiblingElement("sprite"))
             {
                 stringw variable(elemento_imagen->Attribute("variable"));
                 stringw path(elemento_imagen->Attribute("path"));
                 stringw dir("chars/");
                 path=dir+path;
-                int escala=atoi(elemento_imagen->Attribute("escala"));
-                int alineacion_x=atoi(elemento_imagen->Attribute("alineacion_x"));
-                int alineacion_y=atoi(elemento_imagen->Attribute("alineacion_y"));
+                int escala=atoi(elemento_imagen->Attribute("scale"));
+                int alineacion_x=atoi(elemento_imagen->Attribute("align_x"));
+                int alineacion_y=atoi(elemento_imagen->Attribute("align_y"));
                 setImagen(variable,Imagen(grafico->getTexture(path),escala,alineacion_x,alineacion_y));
             }
-            for(TiXmlElement *elemento_imagen=nodo->FirstChild("cadena")->ToElement();
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
                     elemento_imagen!=NULL;
-                    elemento_imagen=elemento_imagen->NextSiblingElement("cadena"))
+                    elemento_imagen=elemento_imagen->NextSiblingElement("string"))
             {
                 stringw variable(elemento_imagen->Attribute("variable"));
-                stringw valor(elemento_imagen->Attribute("valor"));
+                stringw valor(elemento_imagen->Attribute("value"));
                 setString(variable,valor);
             }
-            for(TiXmlElement *elemento_imagen=nodo->FirstChild("entero")->ToElement();
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("integer")->ToElement();
                     elemento_imagen!=NULL;
-                    elemento_imagen=elemento_imagen->NextSiblingElement("entero"))
+                    elemento_imagen=elemento_imagen->NextSiblingElement("integer"))
             {
                 stringw variable(elemento_imagen->Attribute("variable"));
-                int valor=atoi(elemento_imagen->Attribute("valor"));
+                int valor=atoi(elemento_imagen->Attribute("value"));
                 setEntero(variable,valor);
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("hitboxes")->ToElement();
@@ -452,28 +465,28 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 }
                 setHitBoxes(variable,hitbox);
             }
-            for(TiXmlElement *elemento_imagen=nodo->FirstChild("proyectil")->ToElement();
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("projectile")->ToElement();
                     elemento_imagen!=NULL;
-                    elemento_imagen=elemento_imagen->NextSiblingElement("proyectil"))
+                    elemento_imagen=elemento_imagen->NextSiblingElement("projectile"))
             {
-                stringw nombre(elemento_imagen->Attribute("nombre"));
-                stringw posicion_x(elemento_imagen->Attribute("posicion_x"));
-                stringw posicion_y(elemento_imagen->Attribute("posicion_y"));
-                stringw imagen(elemento_imagen->Attribute("imagen"));
+                stringw nombre(elemento_imagen->Attribute("name"));
+                stringw posicion_x(elemento_imagen->Attribute("position_x"));
+                stringw posicion_y(elemento_imagen->Attribute("position_y"));
+                stringw imagen(elemento_imagen->Attribute("sprite"));
                 stringw hitboxes(elemento_imagen->Attribute("hitboxes"));
-                stringw estado(elemento_imagen->Attribute("estado"));
-                stringw orientacion(elemento_imagen->Attribute("orientacion"));
+                stringw estado(elemento_imagen->Attribute("state"));
+                stringw orientacion(elemento_imagen->Attribute("orientation"));
                 agregarProyectil(nombre,posicion_x,posicion_y,imagen,hitboxes,estado,orientacion);
             }
-            for(TiXmlElement *elemento_imagen=nodo->FirstChild("barra")->ToElement();
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("bar")->ToElement();
                     elemento_imagen!=NULL;
-                    elemento_imagen=elemento_imagen->NextSiblingElement("barra"))
+                    elemento_imagen=elemento_imagen->NextSiblingElement("bar"))
             {
                 stringw variable(elemento_imagen->Attribute("variable"));
-                stringw valor_maximo(elemento_imagen->Attribute("valor_maximo"));
-                stringw valor_actual(elemento_imagen->Attribute("valor_actual"));
-                stringw modificador_periodico(elemento_imagen->Attribute("modificador_periodico"));
-                stringw periodo(elemento_imagen->Attribute("periodico"));
+                stringw valor_maximo(elemento_imagen->Attribute("max_value"));
+                stringw valor_actual(elemento_imagen->Attribute("current_value"));
+                stringw modificador_periodico(elemento_imagen->Attribute("periodic_modifier"));
+                stringw periodo(elemento_imagen->Attribute("period"));
                 int alpha=atoi(elemento_imagen->Attribute("alpha"));
                 int r=atoi(elemento_imagen->Attribute("r"));
                 int g=atoi(elemento_imagen->Attribute("g"));
@@ -485,74 +498,50 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 setBarra(variable,Barra(valor_maximo,valor_actual,modificador_periodico,periodo,video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),NULL));
             }
     }
-    for(TiXmlNode* nodo=doc->FirstChild("Movimiento");
+    for(TiXmlNode* nodo=doc->FirstChild("Move");
             nodo!=NULL;
-            nodo=nodo->NextSibling("Movimiento"))
+            nodo=nodo->NextSibling("Move"))
     {
         TiXmlElement *elemento=nodo->ToElement();
-        stringw nombre(elemento->Attribute("nombre"));
-        if(movimientos.find(nombre)==0)
-            agregarMovimiento(nombre);
+        stringw nombre(elemento->Attribute("name"));
         //For each Input
         for(TiXmlNode* nodo_input=nodo->FirstChild("Input");
                 nodo_input!=NULL;
                 nodo_input=nodo_input->NextSibling("Input"))
         {
             vector<stringw> lista_botones;
-            for(TiXmlElement *elemento_boton=nodo_input->FirstChild("boton")->ToElement();
+            for(TiXmlElement *elemento_boton=nodo_input->FirstChild("button")->ToElement();
                     elemento_boton!=NULL;
-                    elemento_boton=elemento_boton->NextSiblingElement("boton"))
+                    elemento_boton=elemento_boton->NextSiblingElement("button"))
             {
-                stringw boton(elemento_boton->Attribute("valor"));
+                stringw boton(elemento_boton->Attribute("value"));
                 lista_botones.push_back(boton);
             }
             agregarInput(lista_botones,nombre);
         }
         //For each Frame
-        int frame=0;
         for(TiXmlNode* nodo_frame=nodo->FirstChild("Frame");
                 nodo_frame!=NULL;
                 nodo_frame=nodo_frame->NextSibling("Frame"))
         {
             TiXmlElement *elemento_frame=nodo_frame->ToElement();
-            if((int)((Movimiento*)movimientos[nombre])->frames.size()<=frame)
-                agregarFrame(nombre,atoi(elemento_frame->Attribute("duracion")));
+            int frame=atoi(elemento_frame->Attribute("number"))-1;
             //For each Modificador
             if(!nodo_frame->NoChildren())
             {
-                for(TiXmlElement *elemento_modificador=nodo_frame->FirstChild("Modificador")->ToElement();
-                        elemento_modificador!=NULL;
-                        elemento_modificador=elemento_modificador->NextSiblingElement("Modificador"))
+                if(nodo_frame->FirstChild("Hitboxes")!=NULL)
                 {
-                    stringw tipo(elemento_modificador->Attribute("tipo"));
-                    if(tipo=="Entero")
-                    {
-                        stringw str_variable(elemento_modificador->Attribute("variable"));
-                        stringw str_contrario(elemento_modificador->Attribute("contrario"));
-                        stringw str_relativo(elemento_modificador->Attribute("relativo"));
-                        int valor=atoi(elemento_modificador->Attribute("valor"));
-                        bool contrario=(str_contrario=="si");
-                        bool relativo=(str_relativo=="si");
-                        agregarModificador(nombre,frame,str_variable,valor,relativo,contrario);
-                    }
-                    if(tipo=="Cadena")
-                    {
-                        //agregarModificador("hadouken",3,"iniciar hadouken","activo",false);
-                        stringw str_variable(elemento_modificador->Attribute("variable"));
-                        stringw str_contrario(elemento_modificador->Attribute("contrario"));
-                        stringw str_valor(elemento_modificador->Attribute("valor"));
-                        bool contrario=(str_contrario=="si");
-                        agregarModificador(nombre,frame,str_variable,str_valor,contrario);
-                    }
-                    if(tipo=="Hitbox")
+                    for(TiXmlElement *e=nodo_frame->FirstChild("Hitboxes")->ToElement();
+                            e!=NULL;
+                            e=e->NextSiblingElement("Hitboxes"))
                     {
                         vector <HitBox> hitbox;
-                        stringw str_variable(elemento_modificador->Attribute("variable"));
-                        stringw str_contrario(elemento_modificador->Attribute("contrario"));
-                        bool contrario=(str_contrario=="si");
-                        if(!elemento_modificador->NoChildren())
+                        stringw str_variable(e->Attribute("variable"));
+                        stringw str_contrario(e->Attribute("to_opponent"));
+                        bool contrario=(str_contrario=="yes");
+                        if(!e->NoChildren())
                         {
-                            for(TiXmlElement *elemento_hitbox=elemento_modificador->FirstChild("Hitbox")->ToElement();
+                            for(TiXmlElement *elemento_hitbox=e->FirstChild("Hitbox")->ToElement();
                                     elemento_hitbox!=NULL;
                                     elemento_hitbox=elemento_hitbox->NextSiblingElement("Hitbox"))
                             {
@@ -565,52 +554,98 @@ void Personaje::cargarArchivo(char* archivo_xml)
                         }
                         agregarModificador(nombre,frame,str_variable,hitbox,contrario);
                     }
-                    if(tipo=="Imagen")
+                }
+
+                if(nodo_frame->FirstChild("Sprite")!=NULL)
+                {
+                    for(TiXmlElement *e=nodo_frame->FirstChild("Sprite")->ToElement();
+                            e!=NULL;
+                            e=e->NextSiblingElement("Sprite"))
                     {
-                        stringw str_variable(elemento_modificador->Attribute("variable"));
-                        stringw path(elemento_modificador->Attribute("path"));
+                        stringw str_variable(e->Attribute("variable"));
+                        stringw path(e->Attribute("path"));
                         stringw dir("chars/");
                         path=dir+path;
-                        int escala=atoi(elemento_modificador->Attribute("escala"));
-                        int alineacion_x=atoi(elemento_modificador->Attribute("alineacion_x"));
-                        int alineacion_y=atoi(elemento_modificador->Attribute("alineacion_y"));
-                        stringw str_contrario(elemento_modificador->Attribute("contrario"));
+                        int escala=atoi(e->Attribute("scale"));
+                        int alineacion_x=atoi(e->Attribute("align_x"));
+                        int alineacion_y=atoi(e->Attribute("align_y"));
+                        stringw str_contrario(e->Attribute("to_opponent"));
                         bool contrario=(str_contrario=="si");
                         agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path)),escala,alineacion_x,alineacion_y),contrario);
                     }
-                    if(tipo=="Variable")
+                }
+//
+                if(nodo_frame->FirstChild("Variable")!=NULL)
+                {
+                    for(TiXmlElement *e=nodo_frame->FirstChild("Variable")->ToElement();
+                            e!=NULL;
+                            e=e->NextSiblingElement("Variable"))
                     {
-                        stringw str_tipo(elemento_modificador->Attribute("tipo_variable"));
-                        stringw str_variable(elemento_modificador->Attribute("variable"));
-                        stringw str_valor(elemento_modificador->Attribute("valor"));
-                        stringw str_contrario(elemento_modificador->Attribute("contrario"));
-                        stringw str_relativo(elemento_modificador->Attribute("relativo"));
-                        bool contrario=(str_contrario=="si");
-                        bool relativo=(str_relativo=="si");
+                        stringw str_tipo(e->Attribute("type"));
+                        stringw str_variable(e->Attribute("variable"));
+                        stringw str_valor(e->Attribute("value"));
+                        stringw str_contrario(e->Attribute("to_opponent"));
+                        stringw str_relativo(e->Attribute("relative"));
+                        bool contrario=(str_contrario=="yes");
+                        bool relativo=(str_relativo=="yes");
                         agregarModificador(nombre,frame,str_tipo,str_variable,str_valor,relativo,contrario);
                     }
                 }
+
+                if(nodo_frame->FirstChild("Integer")!=NULL)
+                {
+                    for(TiXmlElement *e=nodo_frame->FirstChild("Integer")->ToElement();
+                            e!=NULL;
+                            e=e->NextSiblingElement("Integer"))
+                    {
+                        stringw str_variable(e->Attribute("variable"));
+                        stringw str_contrario(e->Attribute("to_opponent"));
+                        stringw str_relativo(e->Attribute("relative"));
+                        int valor=atoi(e->Attribute("value"));
+                        bool contrario=(str_contrario=="yes");
+                        bool relativo=(str_relativo=="yes");
+                        agregarModificador(nombre,frame,str_variable,valor,relativo,contrario);
+                    }
+                }
+
+                if(nodo_frame->FirstChild("String")!=NULL)
+                {
+                    for(TiXmlElement *e=nodo_frame->FirstChild("String")->ToElement();
+                            e!=NULL;
+                            e=e->NextSiblingElement("String"))
+                    {
+                        //agregarModificador("hadouken",3,"iniciar hadouken","activo",false);
+                        stringw str_variable(e->Attribute("variable"));
+                        stringw str_contrario(e->Attribute("to_opponent"));
+                        stringw str_valor(e->Attribute("value"));
+                        bool contrario=(str_contrario=="yes");
+                        agregarModificador(nombre,frame,str_variable,str_valor,contrario);
+                    }
+                }
             }
-            frame++;
         }
         //For each Condiciones
-        for(TiXmlNode* nodo_condiciones=nodo->FirstChild("Condiciones");
+        for(TiXmlNode* nodo_condiciones=nodo->FirstChild("Trigger");
                 nodo_condiciones!=NULL;
-                nodo_condiciones=nodo_condiciones->NextSibling("Condiciones"))
+                nodo_condiciones=nodo_condiciones->NextSibling("Trigger"))
         {
-            vector<Condicion> condiciones;
-            for(TiXmlElement *elemento_condicion=nodo_condiciones->FirstChild("condicion")->ToElement();
-                    elemento_condicion!=NULL;
-                    elemento_condicion=elemento_condicion->NextSiblingElement("condicion"))
+            vector<Condicion*> condiciones_temp;
+            if(nodo_condiciones->FirstChild("condition")!=NULL)
             {
-                stringw exp_i(elemento_condicion->Attribute("exp_izquierda"));
-                stringw op(elemento_condicion->Attribute("op_relacional"));
-                stringw exp_d(elemento_condicion->Attribute("exp_derecha"));
-                stringw str_contrario(elemento_condicion->Attribute("contrario"));
-                bool contrario=(str_contrario=="si");
-                condiciones.push_back(Condicion(exp_i,op,exp_d,contrario));
+                for(TiXmlElement *elemento_condicion=nodo_condiciones->FirstChild("condition")->ToElement();
+                        elemento_condicion!=NULL;
+                        elemento_condicion=elemento_condicion->NextSiblingElement("condition"))
+                {
+                    stringw exp_i(elemento_condicion->Attribute("left_exp"));
+                    stringw op(elemento_condicion->Attribute("relational_op"));
+                    stringw exp_d(elemento_condicion->Attribute("right_exp"));
+                    stringw str_contrario(elemento_condicion->Attribute("to_opponent"));
+                    bool contrario=(str_contrario=="yes");
+                    Condicion *c=new Condicion(exp_i,op,exp_d,contrario);
+                    condiciones_temp.push_back(c);
+                }
             }
-            agregarCondicion(nombre,0,condiciones);
+            agregarCondicion(nombre,0,condiciones_temp);
         }
     }
 }

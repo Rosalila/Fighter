@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1321975611 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1326602272 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1072,7 +1072,7 @@
 	<irrlicht/irrlicht.h>
 	"Input/Input.h"
 
-1321887639 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
+1323189558 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
 	"Grafico/Grafico.h"
 
 1321887558 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
@@ -1081,8 +1081,9 @@
 1322053955 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1322054145 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
+1326603650 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
+	<sstream>
 
 1322059119 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
@@ -1205,10 +1206,10 @@
 1322077039 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
 	"Personaje/Barra.h"
 
-1322077604 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
+1323218905 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
 	"Personaje/Condicion.h"
 
-1322078227 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
+1326603076 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
 	"Personaje/Frame.h"
 
 1321973111 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/HitBox.cpp
@@ -1240,13 +1241,14 @@
 1321973167 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorString.cpp
 	"Personaje/ModificadorString.h"
 
-1321973177 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
+1323256625 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1322077146 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1326549740 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
-1321960049 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
+1322083929 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
+	"Personaje/Proyectil.h"
 
 1321973834 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Reproduccion.cpp
 	"Sonido/Reproduccion.h"
@@ -1254,6 +1256,14 @@
 1321973877 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1321975363 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
+1323716360 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
+
+1326602710 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
+	"IA/IA.h"
+
+1326602615 source:/home/userr/ProyectosActuales/Fighter/include/IA/IA.h
+	<cstdlib>
+	<iostream>
+	<string>
 

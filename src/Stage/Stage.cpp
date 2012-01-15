@@ -62,7 +62,7 @@ void Stage::cargarDesdeXML(Grafico* grafico,char* archivo)
             layer!=NULL;
             layer=layer->NextSibling("layer"))
     {
-        back.push_back(grafico->getTexture(layer->ToElement()->Attribute("imagen")));
+        back.push_back(grafico->getTexture(layer->ToElement()->Attribute("image")));
     }
 
     TiXmlNode *nodo_front=doc->FirstChild("Front");
@@ -70,6 +70,6 @@ void Stage::cargarDesdeXML(Grafico* grafico,char* archivo)
             layer!=NULL;
             layer=layer->NextSibling("layer"))
     {
-        front.push_back(grafico->getTexture(layer->ToElement()->Attribute("imagen")));
+        front.push_back(grafico->getTexture(layer->ToElement()->Attribute("image")));
     }
 }

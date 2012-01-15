@@ -7,7 +7,7 @@ Fighter::Fighter()
     //this->inputb=(Input*)new InputXml(2,receiver);
     this->inputa=new Input();
     this->inputb=new Input();
-    this->inputa->cargarDesdeXML(1,receiver);
+    this->inputa->cargarIAXML(1);
     this->inputb->cargarDesdeXML(2,receiver);
 
     //Parte de la clase
@@ -18,16 +18,11 @@ Fighter::Fighter()
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
     pa=new Personaje();
     pb=new Personaje();
-    pa->cargarDesdeXML(300,370,grafico,inputa,(char *)"chars/RyuSF2/RyuSF2.xml");
-    pb->cargarDesdeXML(524,370,grafico,inputb,(char *)"chars/RyuSF2/RyuSF2.xml");
-    //this->pa=(Personaje*)new RyuXml(300,370,grafico,inputa,(char *)"chars/RyuSF2/RyuSF2.xml");
-    //this->pb=(Personaje*)new RyuXml(524,370,grafico,inputb,(char *)"chars/RyuSF2/RyuSF2.xml");
-    pa->personaje_contrario=pb;
-    pb->personaje_contrario=pa;
 
     sonido->agregarSonido("Fight!","resources/Stages/Sonidos/Fight1.wav");
     sonido->agregarSonido("Fondo","resources/Stages/Sonidos/Fondo.ogg");
     sonido->agregarSonido("Fondo2","resources/Stages/Sonidos/Something like this.mp3");
+
 
     menu=new Menu(grafico,receiver);
 }
@@ -63,11 +58,8 @@ void Fighter::mainLoop()
         pb=new Personaje();
         pa->cargarDesdeXML(300,370,grafico,inputa,(char *)path_a);
         pb->cargarDesdeXML(524,370,grafico,inputb,(char *)path_b);
-        //this->pa=(Personaje*)new RyuXml(300,370,grafico,inputa,(char *)path_a);
-        //this->pb=(Personaje*)new RyuXml(524,370,grafico,inputb,(char *)path_b);
         stage=new Stage();
         stage->cargarDesdeXML(grafico,(char*)path_s);
-        //this->stage=(Stage*)new StageXml(grafico,(char*)path_s);
         pa->personaje_contrario=pb;
         pb->personaje_contrario=pa;
         //Juego
@@ -197,6 +189,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         p->strings["orientacion"]="d";
     //get input
     stringw str_movimiento=p->mapInputToMovimiento();
+
     //ejecutar cancel
     if(str_movimiento!="")
     if(p->cumpleCondiciones(str_movimiento))
@@ -378,19 +371,19 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
         //Movimento actual
         //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
 
-//        stringw str=pa->getString("movimiento_actual")+","+pa->getString("estado_posicion")+": ";
-//        for(int i=0;i<(int)pa->input->getBufferInputs().size();i++)
-//            str+=pa->input->getBufferInputs()[i]+"-";
+//        stringw str=pb->getString("movimiento_actual")+","+pb->getString("estado_posicion")+": ";
+//        for(int i=0;i<(int)pb->input->getBufferInputs().size();i++)
+//            str+=pb->input->getBufferInputs()[i]+"-";
 //        grafico->device->setWindowCaption(str.c_str());
 //        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
 //	int num = pa->getEntero("posicion_y");
 //	char buf[5];
 
-	// convert 123 to string [buf]
+//	 convert 123 to string [buf]
 //	itoa(num, buf, 10);
 //	stringw str(strrev(buf));
 //grafico->device->setWindowCaption(str.c_str());
-        //grafico->device->setWindowCaption((pa->getEntero("posicion_x")+","+pa->getEntero("posicion_y")).c_str());
+//        grafico->device->setWindowCaption((pa->getEntero("posicion_x")+","+pa->getEntero("posicion_y")).c_str());
 
 //
 //        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(pa->getEntero("posicion_x"),pa->getEntero("posicion_y"),pa->getEntero("posicion_x")+100,pa->getEntero("posicion_y")+100));

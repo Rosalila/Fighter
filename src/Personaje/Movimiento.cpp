@@ -14,3 +14,13 @@ void Movimiento::agregarFrame(int duracion)
 {
     frames.push_back(Frame(duracion));
 }
+
+void Movimiento::agregarCondicion(vector<Condicion*> condicion,int frame)
+{
+    frames[frame].condiciones.push_back(condicion);
+}
+
+//void Movimiento::agregarCondicion(int posicion,Condicion condicion,int frame)
+//{
+//    frames[frame].condiciones[posicion].push_back(condicion);
+//}

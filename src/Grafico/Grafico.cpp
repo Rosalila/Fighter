@@ -12,7 +12,7 @@ Grafico::Grafico(Receiver* receiver)
         return; // could not create selected driver.
     core::array<SJoystickInfo> joystickInfo;
     device->activateJoysticks(joystickInfo);
-    device->setWindowCaption(L"Fighter");
+    //device->setWindowCaption(L"Fighter");
     driver = device->getVideoDriver();
 
     //init fonts
@@ -46,7 +46,7 @@ void Grafico::endScene()
         str += driver->getCurrentRenderTargetSize().Height;
         str += "  ==>  ";
         str += (float)ventana_y/(float)driver->getCurrentRenderTargetSize().Height;
-        device->setWindowCaption(str.c_str());
+        //device->setWindowCaption(str.c_str());
         lastFPS = fps;
     }
     driver->endScene();

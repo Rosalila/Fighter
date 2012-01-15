@@ -52,8 +52,8 @@ class Personaje
     //Agregares
     void agregarInput(vector<stringw> input,stringw movimiento);
     void agregarInput(stringw input,stringw movimiento);
-    void agregarCondicion(stringw movimiento,int frame,vector<Condicion> condicion);
-    void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
+    void agregarCondicion(stringw movimiento,int frame,vector<Condicion*> condicion);
+    //void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
     void agregarMovimiento(stringw movimiento);
     void agregarProyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion);
     void agregarFrame(stringw movimiento, int duracion);

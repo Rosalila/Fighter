@@ -14,7 +14,7 @@ class Frame
 {
     public:
     vector <Modificador> modificadores;
-    vector < vector<Condicion> > condiciones;
+    vector < vector<Condicion*> > condiciones;
     int duracion;
     Frame(int duracion);
     //modificadores
@@ -26,8 +26,8 @@ class Frame
     void agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
 
     //condiciones
-    void agregarCondicion(vector<Condicion> condicion);
-    void agregarCondicion(int posicion,Condicion condicion);
+    void agregarCondicion(vector<Condicion*> condicion);
+    //void agregarCondicion(int posicion,Condicion condicion);
 };
 
 #endif
