@@ -47,7 +47,7 @@ void Input::actualizarBuffer()
     }
     else
     {
-        resultado=stringw(ia->getInput().c_str());
+        resultado=ia->getInput();
     }
     if(resultado=="")
         resultado="5";

@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1326602272 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1326629821 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1081,7 +1081,7 @@
 1322053955 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1326603650 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
+1326629953 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
 	<sstream>
 
@@ -1259,11 +1259,22 @@
 1323716360 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
-1326602710 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
+1326625409 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
 	"IA/IA.h"
 
 1326602615 source:/home/userr/ProyectosActuales/Fighter/include/IA/IA.h
 	<cstdlib>
 	<iostream>
 	<string>
+
+1326630051 source:/home/userr/ProyectosActuales/Fighter/src/IA/Estado.cpp
+	"IA/Estado.h"
+
+1326629356 source:/home/userr/ProyectosActuales/Fighter/src/IA/Transicion.cpp
+	"IA/Transicion.h"
+
+1326630388 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
+	"IA/Automata.h"
+	<cstdlib>
+	<iostream>
 
