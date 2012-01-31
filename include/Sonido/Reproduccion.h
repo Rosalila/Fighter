@@ -1,3 +1,6 @@
+#ifndef REPRODUCCION_H
+#define REPRODUCCION_H
+
 #include "irrKlang/irrKlang.h"
 using namespace irrklang;
 
@@ -8,3 +11,5 @@ public:
     ISound* sonido;
     ISoundSource* source;
 };
+
+#endif

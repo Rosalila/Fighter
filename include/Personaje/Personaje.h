@@ -1,6 +1,8 @@
 #include "Personaje/Movimiento.h"
 #include "Personaje/InputMovimiento.h"
 #include "Personaje/Proyectil.h"
+#include "Sonido/Sonido.h"
+
 class Personaje
 {
     public:
@@ -8,6 +10,8 @@ class Personaje
     Personaje *personaje_contrario;
     Grafico* grafico;
     Input* input;
+    Sonido* sonido;
+
     vector<InputMovimiento> inputs;
     vector<Movimiento*> movimientos_constantes_actuales;
     vector<Proyectil*> proyectiles_actuales;
@@ -25,9 +29,8 @@ class Personaje
     //movimientos
     irr::core::map<stringw,Movimiento*> movimientos;
 
-    Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico);
-    Personaje();
-    void cargarDesdeXML(int px,int py,Grafico* grafico,Input* input,char* archivo_xml);
+    Personaje(Grafico* grafico,Sonido* sonido);
+    void cargarDesdeXML(int px,int py,Input* input,char* archivo_xml);
     void cargarArchivo(char* archivo_xml);
     //DIBUJAR
     void dibujar();

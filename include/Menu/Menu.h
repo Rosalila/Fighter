@@ -20,7 +20,7 @@ private:
 
 public:
     Menu(){}
-    Menu(Grafico* grafico,Receiver* receiver);
+    Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido);
     void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
     void loopMenu();
     char* getPersonajeA();

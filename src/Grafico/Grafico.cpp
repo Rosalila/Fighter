@@ -168,6 +168,8 @@ void Grafico::draw2DImage
 
    float screenWidth = (float)driver->getScreenSize().Width;
    float screenHeight = (float)driver->getScreenSize().Height;
+//   float screenWidth = (float)ventana_x;
+//   float screenHeight = (float)ventana_y;
    for (int x = 0; x < 4; x++) {
       float screenPosX = ((corner[x].X/screenWidth)-0.5f)*2.0f;
       float screenPosY = ((corner[x].Y/screenHeight)-0.5f)*-2.0f;

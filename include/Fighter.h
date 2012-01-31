@@ -9,6 +9,7 @@ public:
     Input*inputa,*inputb;
     Menu* menu;
     Stage* stage;
+    int pos_stage;
     Personaje *pa;
     Personaje *pb;
 
@@ -24,6 +25,7 @@ public:
     bool getColisionHitBoxes(Personaje*atacante,stringw variable_atacante,Personaje*atacado,stringw variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     void loopJuego();
     void logicaPersonaje(Personaje *p);
+    void logicaStage();
     void aplicarModificadores(Personaje *p);
     void logica();
     bool render(Personaje* pa,Personaje* pb,Stage* stage);

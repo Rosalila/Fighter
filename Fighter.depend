@@ -679,7 +679,7 @@
 1312142276 source:/media/subdisko/01011/actual/Fighter/src/Stage.cpp
 	"../include/Stage.h"
 
-1321887947 source:/home/userr/ProyectosActuales/Fighter/main.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -695,7 +695,7 @@
 	<irrlicht/irrlicht.h>
 	"../include/TinyXml/tinyxml.h"
 
-1321974057 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
+1327977756 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
 	"TinyXml/tinyxml.h"
 	"Menu/Menu.h"
 	<stdio.h>
@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1326629821 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1328014703 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1034,7 +1034,7 @@
 1314419530 source:/home/userr/ProyectosActuales/Fighter/src/Parser.cpp
 	"../include/AtributosPersonaje.h"
 
-1317581644 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxml.h
+1327860973 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinyxml.h
 	<ctype.h>
 	<stdio.h>
 	<stdlib.h>
@@ -1045,7 +1045,7 @@
 	<sstream>
 	"tinystr.h"
 
-1317579397 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinystr.h
+1327860973 /home/userr/ProyectosActuales/Fighter/include/TinyXml/tinystr.h
 	<assert.h>
 	<string.h>
 
@@ -1072,23 +1072,23 @@
 	<irrlicht/irrlicht.h>
 	"Input/Input.h"
 
-1323189558 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
+1328013356 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
 	"Grafico/Grafico.h"
 
-1321887558 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
 	"Input/Receiver.h"
 
-1322053955 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1326629953 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
 	<sstream>
 
-1322059119 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1327879224 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
-1321974179 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
+1327875914 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
 	"Stage/Stage.h"
 	"Grafico/Grafico.h"
 	"irrKlang/irrKlang.h"
@@ -1096,40 +1096,40 @@
 	"Menu/MenuContenedor.h"
 	"Sonido/Sonido.h"
 
-1322056553 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1322059183 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1322059194 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
 	"Menu/MenuContenedor.h"
 
-1322074569 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
 	"Menu/MenuImagen.h"
 
-1322059208 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
 	"Menu/MenuLista.h"
 
-1322057395 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
 	"Menu/MenuTexto.h"
 
-1322057767 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
 	"Menu/MenuBarra.h"
 
-1321952610 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinystr.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinystr.cpp
 	"TinyXml/tinystr.h"
 
-1321952617 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxml.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxml.cpp
 	<ctype.h>
 	<sstream>
 	<iostream>
 	"TinyXml/tinyxml.h"
 
-1321952623 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlerror.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlerror.cpp
 	"TinyXml/tinyxml.h"
 
-1321952629 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlparser.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinyxmlparser.cpp
 	<ctype.h>
 	<stddef.h>
 	"TinyXml/tinyxml.h"
@@ -1203,63 +1203,63 @@
 
 1321970143 /home/userr/ProyectosActuales/Fighter/include/AtributosPersonaje/Proyectil.h
 
-1322077039 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Barra.cpp
 	"Personaje/Barra.h"
 
-1323218905 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Condicion.cpp
 	"Personaje/Condicion.h"
 
-1326603076 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Frame.cpp
 	"Personaje/Frame.h"
 
-1321973111 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/HitBox.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/HitBox.cpp
 	"Personaje/HitBox.h"
 
-1321973117 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Imagen.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Imagen.cpp
 	"Personaje/Imagen.h"
 
-1322078563 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/InputMovimiento.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/InputMovimiento.cpp
 	"Personaje/InputMovimiento.h"
 
-1321959771 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Modificador.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Modificador.cpp
 
-1321973125 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorBarra.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorBarra.cpp
 	"Personaje/ModificadorBarra.h"
 
-1321973134 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorEntero.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorEntero.cpp
 	"Personaje/ModificadorEntero.h"
 
-1321973142 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorHitboxes.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorHitboxes.cpp
 	"Personaje/ModificadorHitboxes.h"
 
-1321973150 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorImagen.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorImagen.cpp
 	"Personaje/ModificadorImagen.h"
 
-1321973158 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorPorVariable.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorPorVariable.cpp
 	"Personaje/ModificadorPorVariable.h"
 
-1321973167 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorString.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/ModificadorString.cpp
 	"Personaje/ModificadorString.h"
 
-1323256625 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1326549740 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1327974740 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
-1322083929 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
 	"Personaje/Proyectil.h"
 
-1321973834 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Reproduccion.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Reproduccion.cpp
 	"Sonido/Reproduccion.h"
 
-1321973877 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
+1327879038 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1323716360 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
+1328014763 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
-1326625409 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
 	"IA/IA.h"
 
 1326602615 source:/home/userr/ProyectosActuales/Fighter/include/IA/IA.h
@@ -1267,13 +1267,13 @@
 	<iostream>
 	<string>
 
-1326630051 source:/home/userr/ProyectosActuales/Fighter/src/IA/Estado.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/IA/Estado.cpp
 	"IA/Estado.h"
 
-1326629356 source:/home/userr/ProyectosActuales/Fighter/src/IA/Transicion.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/IA/Transicion.cpp
 	"IA/Transicion.h"
 
-1326630388 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
+1327860973 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
 	"IA/Automata.h"
 	<cstdlib>
 	<iostream>

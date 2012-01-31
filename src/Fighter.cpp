@@ -7,24 +7,23 @@ Fighter::Fighter()
     //this->inputb=(Input*)new InputXml(2,receiver);
     this->inputa=new Input();
     this->inputb=new Input();
-    this->inputa->cargarIAXML(1);
+    //this->inputa->cargarIAXML(1);
+    this->inputa->cargarDesdeXML(1,receiver);
     this->inputb->cargarDesdeXML(2,receiver);
+
 
     //Parte de la clase
     this->grafico=new Grafico(receiver);
     this->sonido = new Sonido();
-    stage=new Stage();
-    stage->cargarDesdeXML(grafico,(char*)"stages/Stage1/Stage1.xml");
+    stage=new Stage(grafico,sonido);
+
+    stage->cargarDesdeXML((char*)"stages/Stage1/main.xml");
+    pos_stage=0;
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
-    pa=new Personaje();
-    pb=new Personaje();
+    pa=new Personaje(grafico,sonido);
+    pb=new Personaje(grafico,sonido);
 
-    sonido->agregarSonido("Fight!","resources/Stages/Sonidos/Fight1.wav");
-    sonido->agregarSonido("Fondo","resources/Stages/Sonidos/Fondo.ogg");
-    sonido->agregarSonido("Fondo2","resources/Stages/Sonidos/Something like this.mp3");
-
-
-    menu=new Menu(grafico,receiver);
+    menu=new Menu(grafico,receiver,sonido);
 }
 
 void Fighter::mainLoop()
@@ -50,16 +49,15 @@ void Fighter::mainLoop()
         char *path_s=new char[255];
         strcpy(path_s,"stages/");
         strcat(path_s,(char*)menu->getStage());
-        strcat(path_s,"/");
-        strcat(path_s,(char*)menu->getStage());
-        strcat(path_s,".xml\0");
+        strcat(path_s,"/main.xml\0");
 
-        pa=new Personaje();
-        pb=new Personaje();
-        pa->cargarDesdeXML(300,370,grafico,inputa,(char *)path_a);
-        pb->cargarDesdeXML(524,370,grafico,inputb,(char *)path_b);
-        stage=new Stage();
-        stage->cargarDesdeXML(grafico,(char*)path_s);
+        pa=new Personaje(grafico,sonido);
+        pb=new Personaje(grafico,sonido);
+        pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
+        pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
+        stage=new Stage(grafico,sonido);
+        stage->cargarDesdeXML((char*)path_s);
+        pos_stage=0;
         pa->personaje_contrario=pb;
         pb->personaje_contrario=pa;
         //Juego
@@ -198,6 +196,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
         p->setString("movimiento_actual",str_movimiento);
+        sonido->reproducirSonido(str_movimiento);
     }
     //Movimientos continuos
       //agregar nuevos
@@ -214,7 +213,6 @@ void Fighter::logicaPersonaje(Personaje* p)
                 if(!existe)
                     p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
             }
-
 }
 
 void Fighter::aplicarModificadores(Personaje *p)
@@ -262,18 +260,61 @@ void Fighter::aplicarModificadores(Personaje *p)
     }
 }
 
+void Fighter::logicaStage()
+{
+    //Validaciones de stage
+    Personaje* p=pa;
+    int borde_izq=50,borde_der=999;
+    if(p->getEntero("posicion_x")<=borde_izq && p->getString("movimiento_actual")=="4" && p->personaje_contrario->getEntero("posicion_x")<=borde_der && pos_stage<stage->size/2-grafico->ventana_x/2)
+    {
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+1);
+        pos_stage++;
+    }
+
+    if(p->getEntero("posicion_x")>borde_der && p->getString("movimiento_actual")=="6" && p->personaje_contrario->getEntero("posicion_x")>borde_izq && pos_stage>-stage->size/2+grafico->ventana_x/2)
+    {
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-1);
+        pos_stage--;
+    }
+
+    if(p->getEntero("posicion_x")<0)
+        p->setEntero("posicion_x",0);
+    if(p->getEntero("posicion_x")>1024)
+        p->setEntero("posicion_x",1024);
+
+    //Validaciones de stage
+    p=pb;
+    if(p->getEntero("posicion_x")<=borde_izq && p->getString("movimiento_actual")=="4" && p->personaje_contrario->getEntero("posicion_x")<=borde_der && pos_stage<stage->size/2-grafico->ventana_x/2)
+    {
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+1);
+        pos_stage++;
+    }
+
+    if(p->getEntero("posicion_x")>borde_der && p->getString("movimiento_actual")=="6" && p->personaje_contrario->getEntero("posicion_x")>borde_izq && pos_stage>-stage->size/2+grafico->ventana_x/2)
+    {
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-1);
+        pos_stage--;
+    }
+
+    if(p->getEntero("posicion_x")<0)
+        p->setEntero("posicion_x",0);
+    if(p->getEntero("posicion_x")>1024)
+        p->setEntero("posicion_x",1024);
+}
+
+
 void Fighter::logica()
 {
     logicaPersonaje(pa);
     logicaPersonaje(pb);
     aplicarModificadores(pa);
     aplicarModificadores(pb);
+    logicaStage();
 }
 
 void Fighter::loopJuego()
 {
-    //sonido->reproducirSonido("Fight!");
-    //sonido->reproducirSonido("Fondo");
+    sonido->reproducirSonido("Stage.music");
     u32 anterior=grafico->device->getTimer()->getTime();
 	for (;!receiver->IsKeyDown(irr::KEY_ESCAPE);)
 	{
@@ -283,12 +324,14 @@ void Fighter::loopJuego()
 	    if(grafico->device->getTimer()->getTime()<anterior+16)
             continue;
         anterior=grafico->device->getTimer()->getTime();
+
         //logica
         logica();
 
         //render
         render(pa,pb,stage);
 	}
+	sonido->pararSonido("Stage.music");
 }
 
 void itoa(int n, char *s, int b) {
@@ -331,7 +374,8 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
     {
         grafico->beginScene();
         //Stage
-        stage->dibujarBack();
+        stage->dibujarBack(pos_stage);
+
 
         //Personaje
         pa->dibujar();
@@ -365,7 +409,7 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
                 false,
                 false);
         }
-        stage->dibujarFront();
+        stage->dibujarFront(pos_stage);
 //
 //
         //Movimento actual

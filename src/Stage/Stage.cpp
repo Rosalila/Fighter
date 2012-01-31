@@ -1,44 +1,40 @@
 #include "Stage/Stage.h"
 
-Stage::Stage(vector<video::ITexture*> back,vector<video::ITexture*> front,Grafico* grafico)
+Stage::Stage(Grafico* grafico,Sonido* sonido)
 {
-    this->back=back;
-    this->front=front;
     this->grafico=grafico;
-}
-void Stage::dibujarBack()
-{
-    //Fondo
-    for(int i=0;i<(int)back.size();i++)
-    {
-        int dimension_x=back[i]->getOriginalSize().Width;
-        int dimension_y=back[i]->getOriginalSize().Height;
-        grafico->draw2DImage
-        (   back[i],
-            irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
-            irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1.30,1.40),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
-            false);
-    }
+    this->sonido=sonido;
 }
 
-void Stage::dibujarFront()
+void Stage::dibujarBackground()
 {
-    //Barra
-    for(int i=0;i<(int)front.size();i++)
+    int dimension_x=background->imagen->getOriginalSize().Width;
+    int dimension_y=background->imagen->getOriginalSize().Height;
+    grafico->draw2DImage
+    (   background->imagen,
+        irr::core::dimension2d<irr::f32> (background->size_x,background->size_y),
+        irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
+        irr::core::position2d<irr::f32>(0,0),
+        irr::core::position2d<irr::f32>(0,0),
+        irr::f32(0), irr::core::vector2df (0,0),
+        true,
+        irr::video::SColor(255,255,255,255),
+        false,
+        false);
+}
+
+void Stage::dibujarBack(int pos)
+{
+    dibujarBackground();
+    for(int i=0;i<(int)back.size();i++)
     {
-        int dimension_x=front[i]->getOriginalSize().Width;
-        int dimension_y=front[i]->getOriginalSize().Height;
+        int dimension_x=back[i].imagen->getOriginalSize().Width;
+        int dimension_y=back[i].imagen->getOriginalSize().Height;
         grafico->draw2DImage
-        (   front[i],
-            irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
+        (   back[i].imagen,
+            irr::core::dimension2d<irr::f32> (back[i].size_x,back[i].size_y),
             irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-            irr::core::position2d<irr::f32>(grafico->ventana_x/2-dimension_x/2,0),
+            irr::core::position2d<irr::f32>(pos-back[i].size_x/2+grafico->ventana_x/2,grafico->ventana_y-back[i].size_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,
@@ -48,21 +44,58 @@ void Stage::dibujarFront()
     }
 }
 
-void Stage::cargarDesdeXML(Grafico* grafico,char* archivo)
+void Stage::dibujarFront(int pos)
 {
-    this->grafico=grafico;
+    //Barra
+    for(int i=0;i<(int)front.size();i++)
+    {
+        int dimension_x=front[i].imagen->getOriginalSize().Width;
+        int dimension_y=front[i].imagen->getOriginalSize().Height;
+        grafico->draw2DImage
+        (   front[i].imagen,
+            irr::core::dimension2d<irr::f32> (front[i].size_x,front[i].size_y),
+            irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
+            irr::core::position2d<irr::f32>(pos-front[i].size_x/2+grafico->ventana_x/2,grafico->ventana_y-front[i].size_y),
+            irr::core::position2d<irr::f32>(0,0),
+            irr::f32(0), irr::core::vector2df (0,0),
+            true,
+            irr::video::SColor(255,255,255,255),
+            false,
+            false);
+    }
+}
 
+void Stage::cargarDesdeXML(char* archivo)
+{
     TiXmlDocument doc_t( archivo );
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
+
+    sonido->agregarSonido(stringw("Stage.music"),"stages/Stage1/music.ogg");
+
+    TiXmlNode *nodo_ss=doc->FirstChild("StageSize");
+    this->size=atoi(nodo_ss->ToElement()->Attribute("x"));
+
+    TiXmlNode *nodo_bg=doc->FirstChild("Background");
+    char *bg=new char[255];
+    strcpy(bg,"stages/Stage1/");
+    strcat(bg,nodo_bg->ToElement()->Attribute("image"));
+    int size_x=atoi(nodo_bg->ToElement()->Attribute("size_x"));
+    int size_y=atoi(nodo_bg->ToElement()->Attribute("size_y"));
+    background=new Layer(grafico->getTexture(bg),size_x,size_y);
 
     TiXmlNode *nodo_back=doc->FirstChild("Back");
     for(TiXmlNode* layer=nodo_back->FirstChild("layer");
             layer!=NULL;
             layer=layer->NextSibling("layer"))
     {
-        back.push_back(grafico->getTexture(layer->ToElement()->Attribute("image")));
+        char *image=new char[255];
+        strcpy(image,"stages/Stage1/");
+        strcat(image,layer->ToElement()->Attribute("image"));
+        int size_x=atoi(layer->ToElement()->Attribute("size_x"));
+        int size_y=atoi(layer->ToElement()->Attribute("size_y"));
+        back.push_back(Layer(grafico->getTexture(image),size_x,size_y));
     }
 
     TiXmlNode *nodo_front=doc->FirstChild("Front");
@@ -70,6 +103,11 @@ void Stage::cargarDesdeXML(Grafico* grafico,char* archivo)
             layer!=NULL;
             layer=layer->NextSibling("layer"))
     {
-        front.push_back(grafico->getTexture(layer->ToElement()->Attribute("image")));
+        char *image=new char[255];
+        strcpy(image,"stages/Stage1/");
+        strcat(image,layer->ToElement()->Attribute("image"));
+        int size_x=atoi(layer->ToElement()->Attribute("size_x"));
+        int size_y=atoi(layer->ToElement()->Attribute("size_y"));
+        front.push_back(Layer(grafico->getTexture(image),size_x,size_y));
     }
 }

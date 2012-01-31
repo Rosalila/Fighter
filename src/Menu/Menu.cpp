@@ -1,8 +1,9 @@
 #include "Menu/Menu.h"
-Menu::Menu(Grafico* grafico,Receiver* receiver)
+Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido)
 {
     this->grafico=grafico;
     this->receiver=receiver;
+    this->sonido=sonido;
 
         TiXmlDocument doc_t((char*)"config.xml");
         doc_t.LoadFile();
@@ -40,6 +41,7 @@ Menu::Menu(Grafico* grafico,Receiver* receiver)
 void Menu::loopMenu()
 {
     bool tecla_arriba=true;
+    sonido->reproducirSonido(stringw("Menu.music"));
 	for (;;)
 	{
 	    //setear frames a "60"
@@ -104,6 +106,7 @@ void Menu::loopMenu()
             }
         }
 	}
+	sonido->pararSonido("Menu.music");
 }
 
 void Menu::dibujarMenu()
@@ -125,6 +128,9 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
+
+    sonido->agregarSonido("Menu.music","menu/music.ogg");
+
     for(TiXmlNode* elemento=doc->FirstChild();
             elemento!=NULL;
             elemento=elemento->NextSibling())

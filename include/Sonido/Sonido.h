@@ -1,20 +1,26 @@
+#ifndef SONIDO_H
+#define SONIDO_H
+
 #include "../include/irrKlang/irrKlang.h"
 using namespace irrklang;
 #include <irrlicht/irrlicht.h>
 using namespace irr;
+using namespace core;
 #include <string>
 #include <vector>
-#include "Reproduccion.h"
+#include "Sonido/Reproduccion.h"
 
 class Sonido
 {
     ISoundEngine *engine;
-    irr::core::map<std::string,Reproduccion*> sonidos;
+    irr::core::map<stringw,Reproduccion*> sonidos;
 public:
     Sonido();
     void drop();
-    void agregarSonido(std::string variable,const ik_c8* valor);
-    void reproducirSonido(std::string variable);
-    void pararSonido(std::string variable);
-    void setVolumen(std::string variable,float volumen);
+    void agregarSonido(stringw variable,const ik_c8* valor);
+    void reproducirSonido(stringw variable);
+    void pararSonido(stringw variable);
+    void setVolumen(stringw variable,float volumen);
 };
+
+#endif

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include/Fighter.h" open="0" top="0" tabpos="0">
-		<Cursor position="150" topLine="12" />
+	<File name="include/Fighter.h" open="1" top="0" tabpos="1">
+		<Cursor position="838" topLine="16" />
+	</File>
+	<File name="include/Grafico/Grafico.h" open="0" top="0" tabpos="0">
+		<Cursor position="269" topLine="11" />
 	</File>
 	<File name="include/Input/Boton.h" open="0" top="0" tabpos="0">
 		<Cursor position="308" topLine="1" />
@@ -67,14 +70,17 @@
 	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="0">
 		<Cursor position="465" topLine="4" />
 	</File>
-	<File name="include/Stage/Stage.h" open="0" top="0" tabpos="1">
-		<Cursor position="60" topLine="0" />
+	<File name="include/Stage/Stage.h" open="1" top="0" tabpos="3">
+		<Cursor position="425" topLine="14" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="8721" topLine="234" />
+	<File name="src/Fighter.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="10063" topLine="281" />
+	</File>
+	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="6053" topLine="63" />
 	</File>
 	<File name="src/Input/Boton.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="460" topLine="0" />
@@ -121,8 +127,8 @@
 	<File name="src/Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="448" topLine="9" />
 	</File>
-	<File name="src/Personaje/Personaje.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="14652" topLine="395" />
+	<File name="src/Personaje/Personaje.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="8248" topLine="201" />
 	</File>
 	<File name="src/Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="32" topLine="0" />
@@ -134,6 +140,6 @@
 		<Cursor position="16" topLine="0" />
 	</File>
 	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="2309" topLine="44" />
+		<Cursor position="2495" topLine="66" />
 	</File>
 </CodeBlocks_layout_file>

@@ -1,35 +1,9 @@
 #include "Personaje/Personaje.h"
 
-Personaje::Personaje(Barra hp,int px,int py,int a,stringw orientacion,Grafico* grafico)
+Personaje::Personaje(Grafico* grafico,Sonido* sonido)
 {
-    setImagen("imagen_personaje",Imagen(grafico->getTexture("resources/Personajes/Ryu/Sprites/mover/saltar/arriba/01.png"),1,100,100));
     this->grafico=grafico;
-    strings["estado_posicion"]="";
-    strings["movimiento_actual"]="";
-    strings["orientacion"]="";
-    enteros["tiempo_transcurrido"]=0;
-    enteros["frame_actual_saltando"]=0;
-
-    setString("estado_posicion","");
-    setEntero("frame_actual_saltando",0);
-    setEntero("tiempo_transcurrido",0);
-    setString("orientacion",orientacion);
-    setString("movimiento_actual","5");
-
-    enteros["posicion_x"]=px;
-    enteros["posicion_y"]=py;
-
-    barras["hp"]=hp;
-
-    vector<HitBox> hb_vacia;
-    hitboxes["azules"]=hb_vacia;
-    hitboxes["rojas"]=hb_vacia;
-
-}
-
-Personaje::Personaje()
-{
-
+    this->sonido=sonido;
 }
 //DIBUJAR
 void Personaje::dibujar()
@@ -234,10 +208,6 @@ void Personaje::aplicarModificador(ModificadorEntero* me)
         }
         else
         {
-            if(me->variable=="posicion_x" && getEntero(me->variable)-me->modificador_entero<80 && me->modificador_entero<0)
-                return;
-            if(me->variable=="posicion_x" && getEntero(me->variable)-me->modificador_entero>900 && me->modificador_entero>0)
-                return;
             setEntero(me->variable,me->modificador_entero+getEntero(me->variable));
         }
     }
@@ -648,9 +618,18 @@ void Personaje::cargarArchivo(char* archivo_xml)
             agregarCondicion(nombre,0,condiciones_temp);
         }
     }
+    //For each Sound
+    for(TiXmlNode* nodo_sonido=doc->FirstChild("Sound");
+            nodo_sonido!=NULL;
+            nodo_sonido=nodo_sonido->NextSibling("Sound"))
+    {
+        TiXmlElement* elemento_sonido=nodo_sonido->ToElement();
+        stringw move(elemento_sonido->Attribute("move"));
+        sonido->agregarSonido(move,elemento_sonido->Attribute("file"));
+    }
 }
 
-void Personaje::cargarDesdeXML(int px,int py,Grafico* grafico,Input* input,char* archivo_xml)
+void Personaje::cargarDesdeXML(int px,int py,Input* input,char* archivo_xml)
 {
     this->input=input;
     this->grafico=grafico;

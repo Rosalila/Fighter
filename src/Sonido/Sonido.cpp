@@ -8,24 +8,31 @@ void Sonido::drop()
 {
     engine->drop();
 }
-void Sonido::agregarSonido(std::string variable,const ik_c8* valor)
+void Sonido::agregarSonido(stringw variable,const ik_c8* valor)
 {
-    sonidos[variable]=new Reproduccion(engine->addSoundSourceFromFile(valor));
+    if(sonidos.find(variable)==0)
+        sonidos[variable]=new Reproduccion(engine->addSoundSourceFromFile(valor));
 }
-void Sonido::reproducirSonido(std::string variable)
+void Sonido::reproducirSonido(stringw variable)
 {
+    if(sonidos.find(variable)==0)
+        return;
     Reproduccion* rep=sonidos[variable];
     rep->sonido=engine->play2D(rep->source,false,false,true,true);
 }
 
-void Sonido::pararSonido(std::string variable)
+void Sonido::pararSonido(stringw variable)
 {
+    if(sonidos.find(variable)==0)
+        return;
     Reproduccion* rep=sonidos[variable];
     rep->sonido->stop();
 }
 
-void Sonido::setVolumen(std::string variable,float volumen)
+void Sonido::setVolumen(stringw variable,float volumen)
 {
+    if(sonidos.find(variable)==0)
+        return;
     Reproduccion* rep=sonidos[variable];
     rep->sonido->setVolume(volumen);
 }
