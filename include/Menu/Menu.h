@@ -17,9 +17,11 @@ private:
     MenuContenedor*contenedor_actual;
     TiXmlDocument abrirXml(char* archivo);
     void dibujarMenu();
+    int pos_pa,pos_pb,pos_stage,pos_ia_lvl;
 
 public:
-    Menu(){}
+    Personaje *pa,*pb;
+    Stage* stage;
     Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido);
     void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
     void loopMenu();

@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1328014703 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1328050386 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1085,10 +1085,10 @@
 	"Input/Input.h"
 	<sstream>
 
-1327879224 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1328054839 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
-1327875914 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
+1328051994 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
 	"Stage/Stage.h"
 	"Grafico/Grafico.h"
 	"irrKlang/irrKlang.h"
@@ -1256,7 +1256,7 @@
 1327879038 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1328014763 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
+1328019071 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
 1327860973 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp

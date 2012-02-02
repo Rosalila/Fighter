@@ -32,34 +32,40 @@ void Fighter::mainLoop()
     {
         menu->loopMenu();
 
-        char *path_a=new char[255];
-        strcpy(path_a,"chars/");
-        strcat(path_a,(char*)menu->getPersonajeA());
-        strcat(path_a,"/");
-        strcat(path_a,(char*)menu->getPersonajeA());
-        strcat(path_a,".xml\0");
+//        char *path_a=new char[255];
+//        strcpy(path_a,"chars/");
+//        strcat(path_a,(char*)menu->getPersonajeA());
+//        strcat(path_a,"/");
+//        strcat(path_a,(char*)menu->getPersonajeA());
+//        strcat(path_a,".xml\0");
+//
+//        char *path_b=new char[255];
+//        strcpy(path_b,"chars/");
+//        strcat(path_b,(char*)menu->getPersonajeB());
+//        strcat(path_b,"/");
+//        strcat(path_b,(char*)menu->getPersonajeB());
+//        strcat(path_b,".xml\0");
+//
+//        char *path_s=new char[255];
+//        strcpy(path_s,"stages/");
+//        strcat(path_s,(char*)menu->getStage());
+//        strcat(path_s,"/");
+//
+//        pa=new Personaje(grafico,sonido);
+//        pb=new Personaje(grafico,sonido);
+//        pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
+//        pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
+//        stage=new Stage(grafico,sonido);
+//        stage->cargarDesdeXML((char*)path_s);
+//        pos_stage=0;
+//        pa->personaje_contrario=pb;
+//        pb->personaje_contrario=pa;
 
-        char *path_b=new char[255];
-        strcpy(path_b,"chars/");
-        strcat(path_b,(char*)menu->getPersonajeB());
-        strcat(path_b,"/");
-        strcat(path_b,(char*)menu->getPersonajeB());
-        strcat(path_b,".xml\0");
 
-        char *path_s=new char[255];
-        strcpy(path_s,"stages/");
-        strcat(path_s,(char*)menu->getStage());
-        strcat(path_s,"/main.xml\0");
-
-        pa=new Personaje(grafico,sonido);
-        pb=new Personaje(grafico,sonido);
-        pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
-        pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
-        stage=new Stage(grafico,sonido);
-        stage->cargarDesdeXML((char*)path_s);
+        pa=menu->pa;
+        pb=menu->pb;
+        stage=menu->stage;
         pos_stage=0;
-        pa->personaje_contrario=pb;
-        pb->personaje_contrario=pa;
         //Juego
         loopJuego();
     }
@@ -264,17 +270,17 @@ void Fighter::logicaStage()
 {
     //Validaciones de stage
     Personaje* p=pa;
-    int borde_izq=50,borde_der=999;
+    int borde_izq=50,borde_der=999,desplazamiento=25/3;
     if(p->getEntero("posicion_x")<=borde_izq && p->getString("movimiento_actual")=="4" && p->personaje_contrario->getEntero("posicion_x")<=borde_der && pos_stage<stage->size/2-grafico->ventana_x/2)
     {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+1);
-        pos_stage++;
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
+        pos_stage+=desplazamiento;
     }
 
     if(p->getEntero("posicion_x")>borde_der && p->getString("movimiento_actual")=="6" && p->personaje_contrario->getEntero("posicion_x")>borde_izq && pos_stage>-stage->size/2+grafico->ventana_x/2)
     {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-1);
-        pos_stage--;
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
+        pos_stage-=desplazamiento;
     }
 
     if(p->getEntero("posicion_x")<0)
@@ -286,20 +292,34 @@ void Fighter::logicaStage()
     p=pb;
     if(p->getEntero("posicion_x")<=borde_izq && p->getString("movimiento_actual")=="4" && p->personaje_contrario->getEntero("posicion_x")<=borde_der && pos_stage<stage->size/2-grafico->ventana_x/2)
     {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+1);
-        pos_stage++;
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
+        pos_stage+=desplazamiento;
     }
 
     if(p->getEntero("posicion_x")>borde_der && p->getString("movimiento_actual")=="6" && p->personaje_contrario->getEntero("posicion_x")>borde_izq && pos_stage>-stage->size/2+grafico->ventana_x/2)
     {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-1);
-        pos_stage--;
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
+        pos_stage-=desplazamiento;
     }
 
     if(p->getEntero("posicion_x")<0)
         p->setEntero("posicion_x",0);
     if(p->getEntero("posicion_x")>1024)
         p->setEntero("posicion_x",1024);
+
+
+    if(pos_stage>stage->size/2-grafico->ventana_x/2)
+    {
+        int dif=pos_stage-(stage->size/2-grafico->ventana_x/2);
+        pos_stage=stage->size/2-grafico->ventana_x/2;
+        pa->setEntero("posicion_x",pa->getEntero("posicion_x")-dif);
+    }
+    if(pos_stage<-stage->size/2+grafico->ventana_x/2)
+    {
+        int dif=pos_stage-(-stage->size/2+grafico->ventana_x/2);
+        pos_stage=-stage->size/2+grafico->ventana_x/2;
+        pa->setEntero("posicion_x",pa->getEntero("posicion_x")-dif);
+    }
 }
 
 
@@ -396,7 +416,7 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
 
         if(pa->getEntero("hp_valor_actual")<=0 || pb->getEntero("hp_valor_actual")<=0)
         {
-            irr::video::ITexture* texture_game_over=grafico->getTexture("stages/Stage1/ko.png");
+            irr::video::ITexture* texture_game_over=grafico->getTexture("misc/ko.png");
             grafico->draw2DImage
             (   texture_game_over,
                 irr::core::dimension2d<irr::f32> (500,500),

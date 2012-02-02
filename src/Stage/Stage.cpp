@@ -65,14 +65,21 @@ void Stage::dibujarFront(int pos)
     }
 }
 
-void Stage::cargarDesdeXML(char* archivo)
+void Stage::cargarDesdeXML(char* path)
 {
+    //strcpy(path,"stages/Stage1/\0");
+    char *archivo=new char[255];
+    strcpy(archivo,"stages/Stage1/");
+    strcat(archivo,"main.xml");
     TiXmlDocument doc_t( archivo );
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    sonido->agregarSonido(stringw("Stage.music"),"stages/Stage1/music.ogg");
+    char *music=new char[255];
+    strcpy(music,"stages/Stage1/");
+    strcat(music,"music.ogg");
+    sonido->agregarSonido(stringw("Stage.music"),music);
 
     TiXmlNode *nodo_ss=doc->FirstChild("StageSize");
     this->size=atoi(nodo_ss->ToElement()->Attribute("x"));
@@ -80,6 +87,7 @@ void Stage::cargarDesdeXML(char* archivo)
     TiXmlNode *nodo_bg=doc->FirstChild("Background");
     char *bg=new char[255];
     strcpy(bg,"stages/Stage1/");
+    strcat(bg,"images/");
     strcat(bg,nodo_bg->ToElement()->Attribute("image"));
     int size_x=atoi(nodo_bg->ToElement()->Attribute("size_x"));
     int size_y=atoi(nodo_bg->ToElement()->Attribute("size_y"));
@@ -92,6 +100,7 @@ void Stage::cargarDesdeXML(char* archivo)
     {
         char *image=new char[255];
         strcpy(image,"stages/Stage1/");
+        strcat(image,"images/");
         strcat(image,layer->ToElement()->Attribute("image"));
         int size_x=atoi(layer->ToElement()->Attribute("size_x"));
         int size_y=atoi(layer->ToElement()->Attribute("size_y"));
@@ -105,6 +114,7 @@ void Stage::cargarDesdeXML(char* archivo)
     {
         char *image=new char[255];
         strcpy(image,"stages/Stage1/");
+        strcat(image,"images/");
         strcat(image,layer->ToElement()->Attribute("image"));
         int size_x=atoi(layer->ToElement()->Attribute("size_x"));
         int size_y=atoi(layer->ToElement()->Attribute("size_y"));
