@@ -9,14 +9,15 @@ protected:
     vector<Boton> cruz;
     vector<stringw> buffer_inputs;
     IA *ia;
+    int jugador;
 
     Receiver* receiver;
 public:
 vector<Boton> botones;
     Input(){}
-    Input(vector<Boton> botones,Receiver* receiver,bool inteligencia_artificial);
     void cargarDesdeXML(int jugador,Receiver* receiver);
     void cargarIAXML(int jugador);
+    TiXmlDocument* getXML(TiXmlDocument *doc);
     void actualizarBuffer();
     vector<stringw> getBufferInputs();
 };

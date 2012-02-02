@@ -30,4 +30,5 @@ public:
     void logica();
     bool render(Personaje* pa,Personaje* pb,Stage* stage);
     void mainLoop();
+    void escribirInputsXML();
 };

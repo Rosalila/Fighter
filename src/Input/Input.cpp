@@ -1,20 +1,6 @@
 #include "Input/Input.h"
 #include <sstream>
 
-Input::Input(vector<Boton> botones,Receiver* receiver,bool inteligencia_artificial)
-{
-    this->receiver=receiver;
-    this->inteligencia_artificial=inteligencia_artificial;
-    tecla_arriba=true;
-    for(int i=0;i<20;i++)
-        buffer_inputs.push_back("5");
-    for(int i=0;i<(int)botones.size();i++)
-        if(botones[i].getMapeo()=="2" || botones[i].getMapeo()=="4" || botones[i].getMapeo()=="6" || botones[i].getMapeo()=="8")
-            this->cruz.push_back(botones[i]);
-        else
-            this->botones.push_back(botones[i]);
-}
-
 void Input::actualizarBuffer()
 {
     stringw resultado="";
@@ -70,9 +56,10 @@ std::string stringw_to_stdstring(irr::core::stringw sw)
 
 void Input::cargarDesdeXML(int jugador,Receiver* receiver)
 {
+    this->jugador=jugador;
     this->receiver=receiver;
     this->inteligencia_artificial=false;
-    TiXmlDocument doc_t((char*)"config.xml");
+    TiXmlDocument doc_t((char*)"misc/inputs.xml");
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -86,30 +73,34 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
         {
             //Key
             if(strcmp("keyboard",input->ToElement()->Attribute("type"))==0)
-            for(TiXmlNode* boton=input->FirstChild("button");
-                    boton!=NULL;
-                    boton=boton->NextSibling("button"))
             {
-                botones.push_back(Boton(receiver,(irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],stringw(boton->ToElement()->Attribute("map"))));
+                for(TiXmlNode* boton=input->FirstChild("button");
+                        boton!=NULL;
+                        boton=boton->NextSibling("button"))
+                {
+                    botones.push_back(Boton(receiver,(irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],stringw(boton->ToElement()->Attribute("map"))));
+                }
             }
             //Joy
             if(strcmp("joystick",input->ToElement()->Attribute("type"))==0)
-            for(TiXmlNode* boton=input->FirstChild("button");
-                    boton!=NULL;
-                    boton=boton->NextSibling("button"))
             {
-                int int_boton;
-                if(strcmp(boton->ToElement()->Attribute("input"),"up")==0)
-                    int_boton=-8;
-                else if(strcmp(boton->ToElement()->Attribute("input"),"down")==0)
-                    int_boton=-2;
-                else if(strcmp(boton->ToElement()->Attribute("input"),"left")==0)
-                    int_boton=-4;
-                else if(strcmp(boton->ToElement()->Attribute("input"),"right")==0)
-                    int_boton=-6;
-                else
-                    int_boton=boton->ToElement()->Attribute("input")[0]-48;
-                botones.push_back(Boton(receiver,int_boton,input->ToElement()->Attribute("joystick_number")[0]-48,boton->ToElement()->Attribute("map")));
+                for(TiXmlNode* boton=input->FirstChild("button");
+                        boton!=NULL;
+                        boton=boton->NextSibling("button"))
+                {
+                    int int_boton;
+                    if(strcmp(boton->ToElement()->Attribute("input"),"up")==0)
+                        int_boton=-8;
+                    else if(strcmp(boton->ToElement()->Attribute("input"),"down")==0)
+                        int_boton=-2;
+                    else if(strcmp(boton->ToElement()->Attribute("input"),"left")==0)
+                        int_boton=-4;
+                    else if(strcmp(boton->ToElement()->Attribute("input"),"right")==0)
+                        int_boton=-6;
+                    else
+                        int_boton=boton->ToElement()->Attribute("input")[0]-48;
+                    botones.push_back(Boton(receiver,int_boton,input->ToElement()->Attribute("joystick_number")[0]-48,boton->ToElement()->Attribute("map")));
+                }
             }
         }
     }
@@ -132,6 +123,7 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
 
 void Input::cargarIAXML(int jugador)
 {
+    this->jugador=jugador;
     this->inteligencia_artificial=true;
     tecla_arriba=true;
     for(int i=0;i<20;i++)
@@ -146,4 +138,85 @@ void Input::cargarIAXML(int jugador)
 //            input=input->NextSibling("Input"))
 //    {
 
+}
+TiXmlDocument* Input::getXML(TiXmlDocument *doc)
+{
+	for(int i=0;i<(int)botones.size();i++)
+	{
+	    cout<<botones[i].usaJoystick();
+	}
+ 	TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "" );
+	doc->LinkEndChild( decl );
+
+	TiXmlElement * root = new TiXmlElement( "Input" );
+	doc->LinkEndChild( root );
+	root->SetDoubleAttribute("player",jugador);
+	root->SetAttribute("type", "keyboard");
+
+	for(int i=0;i<(int)botones.size();i++)
+	{
+	    if(botones[i].usaJoystick())
+            continue;
+        TiXmlElement * cxn = new TiXmlElement( "button" );
+        root->LinkEndChild( cxn );
+        cxn->SetAttribute("input", (char*)botones[i].getInput().c_str());
+        cxn->SetAttribute("map", (char*)botones[i].getMapeo().c_str());
+	}
+	for(int i=0;i<(int)cruz.size();i++)
+	{
+	    if(cruz[i].usaJoystick())
+            continue;
+        TiXmlElement * cxn = new TiXmlElement( "button" );
+        root->LinkEndChild( cxn );
+        if(cruz[i].getInput()[0]=='d')
+            cxn->SetAttribute("input", "down");
+        else if(cruz[i].getInput()[0]=='l')
+            cxn->SetAttribute("input", "left");
+        else if(cruz[i].getInput()[0]=='r')
+            cxn->SetAttribute("input", "right");
+        else if(cruz[i].getInput()[0]=='u')
+            cxn->SetAttribute("input", "up");
+        else
+            cxn->SetAttribute("input", (char*)cruz[i].getInput().c_str());
+        cxn->SetAttribute("map", (char*)cruz[i].getMapeo().c_str());
+	}
+
+
+    //Joystick
+	root = new TiXmlElement( "Input" );
+	doc->LinkEndChild( root );
+	root->SetDoubleAttribute("player",jugador);
+	root->SetAttribute("type", "joystick");
+
+	for(int i=0;i<(int)botones.size();i++)
+	{
+	    if(!botones[i].usaJoystick())
+            continue;
+        root->SetDoubleAttribute("joystick_number",botones[i].getNumJoystick());
+        TiXmlElement * cxn = new TiXmlElement( "button" );
+        root->LinkEndChild( cxn );
+        cxn->SetAttribute("input", (char*)botones[i].getInput().c_str());
+        cxn->SetAttribute("map", (char*)botones[i].getMapeo().c_str());
+	}
+	for(int i=0;i<(int)cruz.size();i++)
+	{
+	    if(!cruz[i].usaJoystick())
+            continue;
+        TiXmlElement * cxn = new TiXmlElement( "button" );
+        root->LinkEndChild( cxn );
+        if(cruz[i].getInput()[0]=='d')
+            cxn->SetAttribute("input", "down");
+        else if(cruz[i].getInput()[0]=='l')
+            cxn->SetAttribute("input", "left");
+        else if(cruz[i].getInput()[0]=='r')
+            cxn->SetAttribute("input", "right");
+        else if(cruz[i].getInput()[0]=='u')
+            cxn->SetAttribute("input", "up");
+        else
+            cxn->SetAttribute("input", (char*)cruz[i].getInput().c_str());
+        cxn->SetAttribute("map", (char*)cruz[i].getMapeo().c_str());
+	}
+
+	return doc;
+	//doc->SaveFile( "appsettings.xml" );
 }

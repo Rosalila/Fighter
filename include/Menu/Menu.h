@@ -20,6 +20,7 @@ private:
     int pos_pa,pos_pb,pos_stage,pos_ia_lvl;
 
 public:
+    Input *inputa,*inputb;
     Personaje *pa,*pb;
     Stage* stage;
     Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido);

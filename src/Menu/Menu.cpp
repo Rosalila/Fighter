@@ -98,8 +98,8 @@ void Menu::loopMenu()
                     if(mb->getAccion()==0)
                     {
 
-                        Input *inputa=new Input();
-                        Input *inputb=new Input();
+                        inputa=new Input();
+                        inputb=new Input();
                         //this->inputa->cargarIAXML(1);
                         inputa->cargarDesdeXML(1,receiver);
                         inputb->cargarDesdeXML(2,receiver);
@@ -137,8 +137,8 @@ void Menu::loopMenu()
 
                     if(mb->getAccion()==1)
                     {
-                        Input *inputa=new Input();
-                        Input *inputb=new Input();
+                        inputa=new Input();
+                        inputb=new Input();
                         inputa->cargarIAXML(1);
                         //inputa->cargarDesdeXML(1,receiver);
                         inputb->cargarDesdeXML(2,receiver);

@@ -24,6 +24,8 @@ Fighter::Fighter()
     pb=new Personaje(grafico,sonido);
 
     menu=new Menu(grafico,receiver,sonido);
+
+    escribirInputsXML();
 }
 
 void Fighter::mainLoop()
@@ -32,39 +34,11 @@ void Fighter::mainLoop()
     {
         menu->loopMenu();
 
-//        char *path_a=new char[255];
-//        strcpy(path_a,"chars/");
-//        strcat(path_a,(char*)menu->getPersonajeA());
-//        strcat(path_a,"/");
-//        strcat(path_a,(char*)menu->getPersonajeA());
-//        strcat(path_a,".xml\0");
-//
-//        char *path_b=new char[255];
-//        strcpy(path_b,"chars/");
-//        strcat(path_b,(char*)menu->getPersonajeB());
-//        strcat(path_b,"/");
-//        strcat(path_b,(char*)menu->getPersonajeB());
-//        strcat(path_b,".xml\0");
-//
-//        char *path_s=new char[255];
-//        strcpy(path_s,"stages/");
-//        strcat(path_s,(char*)menu->getStage());
-//        strcat(path_s,"/");
-//
-//        pa=new Personaje(grafico,sonido);
-//        pb=new Personaje(grafico,sonido);
-//        pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
-//        pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
-//        stage=new Stage(grafico,sonido);
-//        stage->cargarDesdeXML((char*)path_s);
-//        pos_stage=0;
-//        pa->personaje_contrario=pb;
-//        pb->personaje_contrario=pa;
-
-
         pa=menu->pa;
         pb=menu->pb;
         stage=menu->stage;
+        inputa=menu->inputa;
+        inputb=menu->inputb;
         pos_stage=0;
         //Juego
         loopJuego();
@@ -473,4 +447,9 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
     //return true;
 }
 
-
+void Fighter::escribirInputsXML()
+{
+    TiXmlDocument *doc=new TiXmlDocument();
+    inputb->getXML(inputa->getXML(doc));
+    doc->SaveFile( "misc/inputs.xml" );
+}
