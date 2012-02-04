@@ -1,7 +1,7 @@
 #include "Input/Input.h"
 #include <sstream>
 
-void Input::actualizarBuffer()
+void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario)
 {
     stringw resultado="";
     if(!inteligencia_artificial)
@@ -33,7 +33,7 @@ void Input::actualizarBuffer()
     }
     else
     {
-        resultado=ia->getInput();
+        resultado=ia->getInput(strings,strings_contrario);
     }
     if(resultado=="")
         resultado="5";
@@ -129,15 +129,6 @@ void Input::cargarIAXML(int jugador)
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
     ia=new IA();
-//    TiXmlDocument doc_t((char*)"config.xml");
-//    doc_t.LoadFile();
-//    TiXmlDocument *doc;
-//    doc=&doc_t;
-//    for(TiXmlNode* input=doc->FirstChild("Input");
-//            input!=NULL;
-//            input=input->NextSibling("Input"))
-//    {
-
 }
 TiXmlDocument* Input::getXML(TiXmlDocument *doc)
 {

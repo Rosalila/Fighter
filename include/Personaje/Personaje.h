@@ -11,6 +11,8 @@ class Personaje
     Grafico* grafico;
     Input* input;
     Sonido* sonido;
+    int comparacion_hp;
+    int comparacion_hp_contrario;
 
     vector<InputMovimiento> inputs;
     vector<Movimiento*> movimientos_constantes_actuales;

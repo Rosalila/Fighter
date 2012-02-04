@@ -286,7 +286,26 @@ void Personaje::aplicarModificador(ModificadorPorVariable* mv)
 //Logica
 stringw Personaje::mapInputToMovimiento()
 {
-    input->actualizarBuffer();
+    //inteligenca artificial ia ai
+//    comparacion_hp_contrario=-1;
+//    comparacion_hp=-1;
+//    if(comparacion_hp==-1)
+//        comparacion_hp=getEntero("hp_valor_actual");
+//    if(comparacion_hp_contrario==-1)
+//        comparacion_hp=personaje_contrario->getEntero("hp_valor_actual");
+    if(comparacion_hp>getEntero("hp_valor_actual") && input->inteligencia_artificial)
+    {
+        comparacion_hp=getEntero("hp_valor_actual");
+        input->ia->quitarRecompensa();
+    }
+    if(comparacion_hp_contrario>personaje_contrario->getEntero("hp_valor_actual") && input->inteligencia_artificial)
+    {
+        comparacion_hp_contrario=personaje_contrario->getEntero("hp_valor_actual");
+        input->ia->darRecompensa();
+    }
+    //cout<<getEntero("hp_valor_actual")<<endl;
+    input->actualizarBuffer(&strings,&personaje_contrario->strings);
+
     for(int i=0;i<(int)inputs.size();i++)
         if(inputEstaEnBuffer(inputs[i].input,input->getBufferInputs()))
             if(cumpleCondiciones(inputs[i].movimiento))

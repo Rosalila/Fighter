@@ -308,6 +308,12 @@ void Fighter::logica()
 
 void Fighter::loopJuego()
 {
+    pa->comparacion_hp=pa->getEntero("hp_valor_actual");
+    pa->comparacion_hp_contrario=pb->getEntero("hp_valor_actual");
+
+    pb->comparacion_hp=pb->getEntero("hp_valor_actual");
+    pb->comparacion_hp_contrario=pa->getEntero("hp_valor_actual");
+
     sonido->reproducirSonido("Stage.music");
     u32 anterior=grafico->device->getTimer()->getTime();
 	for (;!receiver->IsKeyDown(irr::KEY_ESCAPE);)

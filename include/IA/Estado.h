@@ -13,10 +13,10 @@ using namespace core;
 
 class Estado
 {
-    vector<Transicion*>transiciones;
 public:
+    vector<Transicion*>transiciones;
     Estado(vector<Transicion*>transiciones);
-    Transicion* getNextTransicion();
+    Transicion* getNextTransicion(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario);
 };
 
 #endif

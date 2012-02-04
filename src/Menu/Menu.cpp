@@ -214,7 +214,6 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             elemento=elemento->NextSibling())
     {
         TiXmlElement* e=elemento->ToElement();
-        cout<<e->Value()<<endl;
         if(strcmp(e->Value(),"Image")==0)
         {
             stringw path(e->Attribute("path"));
