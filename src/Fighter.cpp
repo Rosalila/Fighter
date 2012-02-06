@@ -23,9 +23,10 @@ Fighter::Fighter()
     pa=new Personaje(grafico,sonido);
     pb=new Personaje(grafico,sonido);
 
-    menu=new Menu(grafico,receiver,sonido);
+    menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
+    pause_menu=new Menu(grafico,receiver,sonido,(char*)"menu/pause_menu.xml");
 
-    escribirInputsXML();
+    //escribirInputsXML();
 }
 
 void Fighter::mainLoop()
@@ -33,6 +34,10 @@ void Fighter::mainLoop()
     for(;;)
     {
         menu->loopMenu();
+        if(menu->getExitSignal())
+            break;
+//        if(menu->getSaveInputsSignal())
+//            escribirInputsXML();
 
         pa=menu->pa;
         pb=menu->pb;
@@ -316,13 +321,22 @@ void Fighter::loopJuego()
 
     sonido->reproducirSonido("Stage.music");
     u32 anterior=grafico->device->getTimer()->getTime();
-	for (;!receiver->IsKeyDown(irr::KEY_ESCAPE);)
+	for (;;)
 	{
+	    //receiver->endEventProcess();
 	    grafico->device->run();
 	    //cout<<grafico->device->getTimer()->getTime()<<endl;
 	    //setear frames a "60"
 	    if(grafico->device->getTimer()->getTime()<anterior+16)
             continue;
+
+        if(receiver->IsKeyPressed(irr::KEY_ESCAPE))///!!!
+        {
+            pause_menu->loopMenu();
+            if(pause_menu->getExitSignal())
+                break;
+        }
+
         anterior=grafico->device->getTimer()->getTime();
 
         //logica
@@ -330,6 +344,7 @@ void Fighter::loopJuego()
 
         //render
         render(pa,pb,stage);
+        //receiver->startEventProcess();
 	}
 	sonido->pararSonido("Stage.music");
 }

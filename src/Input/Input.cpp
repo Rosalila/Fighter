@@ -132,10 +132,6 @@ void Input::cargarIAXML(int jugador)
 }
 TiXmlDocument* Input::getXML(TiXmlDocument *doc)
 {
-	for(int i=0;i<(int)botones.size();i++)
-	{
-	    cout<<botones[i].usaJoystick();
-	}
  	TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "" );
 	doc->LinkEndChild( decl );
 

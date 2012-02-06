@@ -6,6 +6,7 @@ Boton::Boton(Receiver* receiver,irr::EKEY_CODE teclado,stringw mapeo)
     this->mapeo=mapeo;
     usando_joystick=false;
     this->receiver=receiver;
+    //this->joystick=999;
 }
 
 Boton::Boton(Receiver* receiver,int joystick,int num_joystick,stringw mapeo)
@@ -25,7 +26,7 @@ bool Boton::estaPresionado()
             return true;
     }else
     {
-        if (receiver->IsKeyDown(teclado))
+        if (receiver->IsKeyDownn(teclado))
             return true;
     }
     return false;
@@ -53,11 +54,11 @@ stringw Boton::getInput()
         return stringw("d");
     }else
     {
-        return keyToString(teclado);
+        return stringw(keyToString());
     }
 }
 
-stringw Boton::keyToString(irr::EKEY_CODE teclado)
+stringw Boton::keyToString()
 {
     if(teclado==irr::KEY_KEY_Q)
         return "Q";

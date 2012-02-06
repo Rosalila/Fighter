@@ -13,7 +13,9 @@ private:
     stringw texto_sel;
     video::SColor color_sel;
     int alineacion_texto_x_sel,alineacion_texto_y_sel;
+    //otra
 public:
+    stringw input_config;
     MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool visible,
               irr::video::ITexture* imagen,int alineacion_texto_x,int alineacion_texto_y, stringw texto,video::SColor color,
               irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel,

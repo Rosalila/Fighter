@@ -24,6 +24,7 @@ MenuBoton::MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool vi
     this->seleccionado=false;
     this->accion=accion;
     this->grafico=grafico;
+    this->input_config="not set";
 }
 
 int MenuBoton::getAccion()
@@ -51,7 +52,13 @@ void MenuBoton::dibujar()
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->drawText(texto,core::rect<s32>(x+alineacion_texto_x,y+alineacion_texto_y,x+width,y+height),color);
+
+        stringw temp=texto;
+        if(accion>=10 && accion<=29)
+        {
+            temp+=input_config;
+        }
+        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x,y+alineacion_texto_y,x+width,y+height),color);
     }else
     {
         grafico->draw2DImage
@@ -65,7 +72,13 @@ void MenuBoton::dibujar()
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->drawText(texto_sel,core::rect<s32>(x+alineacion_texto_x_sel,y+alineacion_texto_y_sel,x+width,y+height),color_sel);
+
+        stringw temp=texto_sel;
+        if(accion>=10 && accion<=29)
+        {
+            temp+=input_config;
+        }
+        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel,y+alineacion_texto_y_sel,x+width,y+height),color_sel);
     }
 }
 
@@ -84,7 +97,13 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->drawText(texto,core::rect<s32>(x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y+alineacion_y,x+width,y+height),color);
+
+        stringw temp=texto;
+        if(accion>=10 && accion<=29)
+        {
+            temp+=input_config;
+        }
+        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y+alineacion_y,x+width,y+height),color);
     }else
     {
         grafico->draw2DImage
@@ -98,7 +117,13 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->drawText(texto_sel,core::rect<s32>(x+alineacion_texto_x_sel+alineacion_x,y+alineacion_texto_y_sel+alineacion_y,x+width,y+height),color_sel);
+
+        stringw temp=texto_sel;
+        if(accion>=10 && accion<=29)
+        {
+            temp+=input_config;
+        }
+        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel+alineacion_x,y+alineacion_texto_y_sel+alineacion_y,x+width,y+height),color_sel);
     }
 }
 

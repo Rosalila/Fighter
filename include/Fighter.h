@@ -7,7 +7,7 @@ class Fighter
 public:
     //Logica
     Input*inputa,*inputb;
-    Menu* menu;
+    Menu *menu,*pause_menu;
     Stage* stage;
     int pos_stage;
     Personaje *pa;
