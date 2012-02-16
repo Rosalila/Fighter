@@ -86,7 +86,7 @@ const SEvent::SJoystickEvent & Receiver::GetJoystickState(void) const
 
 bool Receiver::IsKeyPressed(char keycode)
 {
-  if (keyState[keycode] == PRESSED)
+  if (keyState[(int)keycode] == PRESSED)
   {
      return true;
   }
@@ -98,7 +98,7 @@ bool Receiver::IsKeyPressed(char keycode)
 
 bool Receiver::IsKeyDownn(char keycode)
 {
-  if (keyState[keycode] == DOWN || keyState[keycode] == PRESSED)
+  if (keyState[(int)keycode] == DOWN || keyState[(int)keycode] == PRESSED)
   {
      return true;
   }

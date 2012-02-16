@@ -129,8 +129,8 @@ void Menu::loopMenu()
                         strcat(path_s,(char*)getStage());
                         strcat(path_s,"/");
 
-                        pa=new Personaje(grafico,sonido);
-                        pb=new Personaje(grafico,sonido);
+                        pa=new Personaje(grafico,sonido,1);
+                        pb=new Personaje(grafico,sonido,2);
                         pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
                         pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
                         stage=new Stage(grafico,sonido);
@@ -168,8 +168,8 @@ void Menu::loopMenu()
                         strcat(path_s,(char*)getStage());
                         strcat(path_s,"/");
 
-                        pa=new Personaje(grafico,sonido);
-                        pb=new Personaje(grafico,sonido);
+                        pa=new Personaje(grafico,sonido,1);
+                        pb=new Personaje(grafico,sonido,2);
                         pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
                         pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
                         stage=new Stage(grafico,sonido);
@@ -228,11 +228,11 @@ void Menu::loopMenu()
                         if((char)str_input[0]!='j')
                         {
                             int pos=-1,posc=-1;
-                            for(int j=0;j<temp->botones.size();j++)
+                            for(int j=0;j<(int)temp->botones.size();j++)
                                 if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
                                     pos=j;
 
-                            for(int j=0;j<temp->cruz.size();j++)
+                            for(int j=0;j<(int)temp->cruz.size();j++)
                                 if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
                                     posc=j;
 
@@ -246,11 +246,11 @@ void Menu::loopMenu()
                         }else//joy
                         {
                             int pos=-1,posc=-1;
-                            for(int j=0;j<temp->botones.size();j++)
+                            for(int j=0;j<(int)temp->botones.size();j++)
                                 if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
                                     pos=j;
 
-                            for(int j=0;j<temp->cruz.size();j++)
+                            for(int j=0;j<(int)temp->cruz.size();j++)
                                 if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
                                     posc=j;
 
@@ -703,6 +703,7 @@ irr::EKEY_CODE Menu::toKeyCode(stringw str)
         return irr::KEY_KEY_N;
     if(str==stringw("M"))
         return irr::KEY_KEY_M;
+    return irr::KEY_ESCAPE;
 }
 
 
@@ -747,11 +748,11 @@ void Menu::llenarInputsBotones()
                 //key
                 mb->input_config="";
                 int pos=-1,posc=-1;
-                for(int j=0;j<temp->botones.size();j++)
+                for(int j=0;j<(int)temp->botones.size();j++)
                     if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
                         pos=j;
 
-                for(int j=0;j<temp->cruz.size();j++)
+                for(int j=0;j<(int)temp->cruz.size();j++)
                     if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
                         posc=j;
 
@@ -763,11 +764,11 @@ void Menu::llenarInputsBotones()
 
                 //joy
                 pos=-1;
-                for(int j=0;j<temp->botones.size();j++)
+                for(int j=0;j<(int)temp->botones.size();j++)
                     if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
                         pos=j;
                 posc=-1;
-                for(int j=0;j<temp->cruz.size();j++)
+                for(int j=0;j<(int)temp->cruz.size();j++)
                     if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
                         posc=j;
 

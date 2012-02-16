@@ -69,8 +69,10 @@ void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColo
 
 void Grafico::draw2DRectangle(irr::video::SColor color,core::rect<s32> posicion)
 {
-    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
+    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
+//    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+//    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
     posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,posicion.UpperLeftCorner.Y*escala_y,posicion.LowerRightCorner.X*escala_x,posicion.LowerRightCorner.Y*escala_y);
     driver->draw2DRectangle(color,posicion);
 }
@@ -93,12 +95,16 @@ void Grafico::draw2DImage
    float escala_x,escala_y;
    if(scale.X!=0 && scale.Y!=0)
    {
-       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
-       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
+       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
+       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
+//       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
+//       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
    }else
    {
-       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
+       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
+//       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+//       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
    }
 
    scale=irr::core::vector2df (escala_x,escala_y);

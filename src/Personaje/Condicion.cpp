@@ -20,6 +20,7 @@ Condicion::Condicion(stringw variable,stringw comparacion,stringw cadena,bool pe
 
 bool Condicion::comparar(int c)
 {
+    //cout<<comparacion.c_str()[0]<<endl;cout.flush();
     if(comparacion=="=")
         return c==entero;
     if(comparacion=="!=")

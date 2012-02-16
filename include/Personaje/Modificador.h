@@ -22,6 +22,7 @@ class Modificador
     vector <HitBox> modificador_hitbox;
     stringw modificador_string;
     int modificador_entero;
+    bool flipeable;
 };
 
 #endif

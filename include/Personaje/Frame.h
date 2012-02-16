@@ -19,11 +19,11 @@ class Frame
     Frame(int duracion);
     //modificadores
     void agregarModificador(Imagen modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
+    void agregarModificador(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario,bool flipeable);
     void agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario);
+    void agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario,bool flipeable);
 
     //condiciones
     void agregarCondicion(vector<Condicion*> condicion);

@@ -6,16 +6,19 @@
 class Barra
 {
 public:
+    int tiempo;
+    stringw nombre;
     stringw valor_maximo;
     stringw valor_actual;
     stringw modificador_periodico;
     stringw periodo;
     video::SColor color;
     core::rect<s32> posicion;
-    irr::video::ITexture* imagenes[];
+    irr::video::ITexture* imagen;
 
     Barra(){}
-    Barra(stringw valor_maximo,stringw valor_actual,stringw modificador_periodico,stringw periodo,video::SColor color,core::rect<s32> posicion,irr::video::ITexture* imagenes[]);
+    Barra(stringw nombre,stringw valor_maximo,stringw valor_actual,stringw modificador_periodico,stringw periodo,video::SColor color,core::rect<s32> posicion,irr::video::ITexture* imagen);
+    bool procesarTiempo(int periodo);
 };
 
 #endif
