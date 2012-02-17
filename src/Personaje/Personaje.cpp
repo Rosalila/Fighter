@@ -368,7 +368,6 @@ stringw Personaje::mapInputToMovimiento()
         comparacion_hp_contrario=personaje_contrario->getEntero("hp.current_value");
         input->ia->darRecompensa();
     }
-    //cout<<getEntero("hp_valor_actual")<<endl;
     input->actualizarBuffer(&strings,&personaje_contrario->strings);
 
     for(int i=0;i<(int)inputs.size();i++)
@@ -494,14 +493,17 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 stringw nombre(elemento_imagen->Attribute("name"));
                 int posicion_x(atoi(elemento_imagen->Attribute("position_x")));
                 int posicion_y(atoi(elemento_imagen->Attribute("position_y")));
-                setEntero(nombre+".position_x",posicion_x);
-                setEntero(nombre+".position_y",posicion_y);
+                int speed_x(atoi(elemento_imagen->Attribute("speed_x")));
+                int speed_y(atoi(elemento_imagen->Attribute("speed_y")));
+                int damage(atoi(elemento_imagen->Attribute("damage")));
+                setEntero(nombre+".position_x",0);
+                setEntero(nombre+".position_y",0);
 
                 setString(nombre+".state","");
                 setString(nombre+".orientacion","");
 
+                //Sprites
                 vector<Imagen>sprites;
-
                 TiXmlNode *temp=elemento_imagen->FirstChild("Sprites");
                 for(TiXmlElement *elemento_sprite=temp->FirstChild("Sprite")->ToElement();
                         elemento_sprite!=NULL;
@@ -516,6 +518,7 @@ void Personaje::cargarArchivo(char* archivo_xml)
                     sprites.push_back(Imagen(grafico->getTexture(path),escala,alineacion_x,alineacion_y));
                 }
 
+                //Hitboxes
                 temp=elemento_imagen->FirstChild("Hitboxes");
                 vector<HitBox> hitboxes;
                 if(!temp->NoChildren())
@@ -531,44 +534,35 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 }
                 setHitBoxes(nombre+".hitboxes",hitboxes);
 
+                //Proyectil listo
+                Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage);
 
-                Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites);
-
-                //agregar a inputs constantes
+                //Frames
                 stringw prefijo="Projectile.";
                 int frames=atoi(elemento_imagen->Attribute("frames"));
                 int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
 
-                //sets
-                setString(nombre+".trigger","off");
-                setString(nombre+".triggeri","off");
-
                 for(int i=0;i<frames;i++)
                 {
                     proyectil->agregarFrame(frame_duration);
-                    proyectil->frames[i].agregarModificador(25,nombre+".position_x",true,false,true);
+                    proyectil->frames[i].agregarModificador(speed_x,nombre+".position_x",true,false,true);
+                    proyectil->frames[i].agregarModificador(-speed_y,nombre+".position_y",true,false,false);
                 }
-                //modificadores
+
+                //Modificadores
                 proyectil->frames[0].agregarModificador("off",nombre+".trigger",false);
                 proyectil->frames[0].agregarModificador("entero","posicion_x",nombre+".position_x",false,false,false);
-                proyectil->frames[0].agregarModificador(125,nombre+".position_x",true,false,true);
+                proyectil->frames[0].agregarModificador(posicion_x,nombre+".position_x",true,false,true);
+                proyectil->frames[0].agregarModificador("entero","posicion_y",nombre+".position_y",false,false,false);
+                proyectil->frames[0].agregarModificador(-posicion_y,nombre+".position_y",true,false,false);
 
-                //triggers
+                //Triggers
+                setString(nombre+".trigger","off");
                 vector<Condicion*>cond_temp;
                 cond_temp.push_back(new Condicion("hadouken.trigger","=","on",false));
                 proyectil->agregarCondicion(cond_temp,0);
 
-//                //agregarModificador("Projectile.hadouken",2,"hadouken.position_x",500,"yes","no");
-//                for(int i=0;i<frames;i++)
-//                {
-//                    agregarFrame(prefijo+nombre+"i",frame_duration);
-//                    agregarModificador(prefijo+nombre+"i",i,nombre+"i"+".position_x",25,true,false);
-//                }
-
-//                vector<stringw> lista_botones;
-//                lista_botones.push_back("*");
-                //agregarInput(lista_botones,stringw(prefijo+nombre));
-
+                //Listo
                 agregarProyectil(proyectil);
             }
 
@@ -869,12 +863,14 @@ void Personaje::logicaProyectiles()
         if(getString(proyectil->estado)!=stringw("on"))
             continue;
 
-        setImagen(proyectil->imagen,proyectiles_actuales[i]->sprites[proyectiles_actuales[i]->sprite_actual]);
-
         Frame* fc=&proyectil->frames[proyectil->frame_actual];
         if(proyectil->tiempo_transcurrido==0)
         {
             aplicarModificadores(fc->modificadores,getString(proyectil->orientacion)=="i");
+            setImagen(proyectil->imagen,proyectil->sprites[proyectil->sprite_actual]);
+            proyectil->sprite_actual++;
+            if(proyectil->sprite_actual>=(int)proyectil->sprites.size())
+                proyectil->sprite_actual=0;
         }
         //avanzar frame
         if(proyectil->tiempo_transcurrido==fc->duracion)
@@ -889,6 +885,46 @@ void Personaje::logicaProyectiles()
             proyectil->frame_actual=0;
             setString(proyectil->estado,"off");
         }
-        //proyectiles_actuales[i]->avanzarFrame();
+        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("azules"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("posicion_x"),personaje_contrario->getEntero("posicion_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
+        {
+            personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
+            proyectil->frame_actual=0;
+            personaje_contrario->setString("hit","yes");
+            setString(proyectil->estado,"off");
+        }
     }
+}
+
+bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+{
+    int x1r=hb_roja.p1x+atacante_x;
+    int y1r=hb_roja.p1y+atacante_y;
+    int x2r=hb_roja.p2x+atacante_x;
+    int y2r=hb_roja.p2y+atacante_y;
+
+    int x1a=hb_azul.p1x+atacado_x;
+    int y1a=hb_azul.p1y+atacado_y;
+    int x2a=hb_azul.p2x+atacado_x;
+    int y2a=hb_azul.p2y+atacado_y;
+
+    return (
+            (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
+            (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
+            (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
+            (x1a<=x1r && x1r<=x2a && x2a<=x2r)
+            )&&(
+            (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
+            (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
+            (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
+            (y1a<=y1r && y1r<=y2a && y2a<=y2r)
+            );
+}
+
+bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+{
+    for(int a=0;a<(int)hb_azules.size();a++)
+        for(int r=0;r<(int)hb_rojas.size();r++)
+            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],atacado_x,atacado_y,atacante_x,atacante_y))
+                return true;
+    return false;
 }

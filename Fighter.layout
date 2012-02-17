@@ -59,7 +59,7 @@
 		<Cursor position="262" topLine="0" />
 	</File>
 	<File name="include/Personaje/Frame.h" open="0" top="0" tabpos="0">
-		<Cursor position="1267" topLine="17" />
+		<Cursor position="1160" topLine="16" />
 	</File>
 	<File name="include/Personaje/Imagen.h" open="0" top="0" tabpos="0">
 		<Cursor position="353" topLine="0" />
@@ -68,16 +68,22 @@
 		<Cursor position="111" topLine="0" />
 	</File>
 	<File name="include/Personaje/Modificador.h" open="0" top="0" tabpos="0">
-		<Cursor position="0" topLine="6" />
+		<Cursor position="546" topLine="11" />
+	</File>
+	<File name="include/Personaje/ModificadorEntero.h" open="0" top="0" tabpos="0">
+		<Cursor position="246" topLine="0" />
+	</File>
+	<File name="include/Personaje/ModificadorPorVariable.h" open="0" top="0" tabpos="0">
+		<Cursor position="153" topLine="0" />
 	</File>
 	<File name="include/Personaje/Movimiento.h" open="0" top="0" tabpos="0">
-		<Cursor position="356" topLine="0" />
+		<Cursor position="110" topLine="0" />
 	</File>
-	<File name="include/Personaje/Personaje.h" open="0" top="0" tabpos="2">
-		<Cursor position="2086" topLine="48" />
+	<File name="include/Personaje/Personaje.h" open="1" top="0" tabpos="2">
+		<Cursor position="3465" topLine="70" />
 	</File>
 	<File name="include/Personaje/Proyectil.h" open="0" top="0" tabpos="0">
-		<Cursor position="185" topLine="0" />
+		<Cursor position="253" topLine="2" />
 	</File>
 	<File name="include/Sonido/Reproduccion.h" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
@@ -91,8 +97,8 @@
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="233" topLine="0" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="5657" topLine="164" />
+	<File name="src/Fighter.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="8383" topLine="240" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="2092" topLine="62" />
@@ -149,19 +155,25 @@
 		<Cursor position="322" topLine="31" />
 	</File>
 	<File name="src/Personaje/Frame.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1453" topLine="23" />
+		<Cursor position="1127" topLine="18" />
 	</File>
 	<File name="src/Personaje/InputMovimiento.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="175" topLine="0" />
 	</File>
-	<File name="src/Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="448" topLine="9" />
+	<File name="src/Personaje/ModificadorEntero.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="369" topLine="0" />
 	</File>
-	<File name="src/Personaje/Personaje.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="30615" topLine="719" />
+	<File name="src/Personaje/ModificadorPorVariable.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="192" topLine="0" />
+	</File>
+	<File name="src/Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="150" topLine="0" />
+	</File>
+	<File name="src/Personaje/Personaje.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="36684" topLine="862" />
 	</File>
 	<File name="src/Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="32" topLine="0" />
+		<Cursor position="838" topLine="20" />
 	</File>
 	<File name="src/Sonido/Reproduccion.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="29" topLine="0" />

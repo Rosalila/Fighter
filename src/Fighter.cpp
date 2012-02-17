@@ -211,8 +211,6 @@ void Fighter::logicaPersonaje(Personaje* p)
             proyectil->frame_actual=0;
             proyectil->sprite_actual=0;
             proyectil->tiempo_transcurrido=0;
-            vector<HitBox>hitboxes;
-            p->setHitBoxes(proyectil->hitboxes,hitboxes);
         }
     }
     p->logicaProyectiles();

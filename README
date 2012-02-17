@@ -2,14 +2,8 @@ Rosalila Fighter
 ================
 PORHACER:
 
-Logica
--Soporte de multiples joysticks
-
-Pruebas
--Agregar movimiento de KO
-
-Paja
--Fondo bonito
--Usar diferentes colores
--Recomenzar cuando termine la partida
--Cargar desde multiples xmls
+-Tag team
+-Terminar el movimiento de las stages
+-Terminar IA
+-Portear a Android
+-Portear a winnie

@@ -1,6 +1,6 @@
 #include "Personaje/Proyectil.h"
 
-Proyectil::Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites)
+Proyectil::Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage)
 {
     this->nombre=nombre;
     this->posicion_x=posicion_x;
@@ -13,6 +13,7 @@ Proyectil::Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,string
     this->frame_actual=0;
     this->tiempo_transcurrido=0;
     this->sprite_actual=0;
+    this->damage=damage;
 }
 
 void Proyectil::avanzarFrame()
