@@ -5,6 +5,7 @@
 class Proyectil
 {
 public:
+int frame_actual,tiempo_transcurrido,damage;
     //variables
     stringw nombre;
     stringw posicion_x;
@@ -16,13 +17,12 @@ public:
 
     //logica
     vector<Imagen>sprites;
-    int frame_actual,tiempo_transcurrido;
     vector <Frame> frames;
     Frame getFrameActual();
     void agregarFrame(int duracion);
     void agregarCondicion(vector<Condicion*> condicion,int frame);
 
     int sprite_actual;
-    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites);
+    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage);
     void avanzarFrame();
 };

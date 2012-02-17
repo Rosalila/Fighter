@@ -75,6 +75,8 @@ class Personaje
     void aplicarModificador(ModificadorHitboxes* mh);
     void aplicarModificador(ModificadorPorVariable* mv);
     //Logica
+    bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
+    bool getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     void logicaBarras();
     void logicaProyectiles();
     void aplicarModificadores(vector<Modificador>,bool flip);

@@ -262,59 +262,66 @@ void Fighter::aplicarModificadores(Personaje *p)
     p->logicaBarras();
 }
 
+void Fighter::logicaStagePersonaje(Personaje* p)
+{
+    int borde_izq=0,borde_der=1024,desplazamiento;
+    int sub_borde_izq=256,sub_borde_der=768;
+    //int sub_borde_izq=256,sub_borde_der=1024;
+
+    desplazamiento=sub_borde_izq-p->getEntero("posicion_x");
+    if(desplazamiento>0
+       && p->getEntero("posicion_x")<p->personaje_contrario->getEntero("posicion_x")
+       && p->getEntero("posicion_x")>borde_izq-desplazamiento
+       && p->personaje_contrario->getEntero("posicion_x")<borde_der-desplazamiento
+       && pos_stage<stage->size/2-grafico->ventana_x/2)
+    {
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
+        p->setEntero("posicion_x",p->getEntero("posicion_x")+desplazamiento);
+        pos_stage+=desplazamiento;
+    }
+
+    desplazamiento=p->getEntero("posicion_x")-sub_borde_der;
+    if(desplazamiento>0
+       && p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x")
+       && p->getEntero("posicion_x")<borde_der+desplazamiento
+       && p->personaje_contrario->getEntero("posicion_x")>borde_izq+desplazamiento
+       && pos_stage>-stage->size/2+grafico->ventana_x/2)
+    {
+        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
+        p->setEntero("posicion_x",p->getEntero("posicion_x")-desplazamiento);
+        pos_stage-=desplazamiento;
+    }
+
+    if(p->getEntero("posicion_x")<borde_izq)
+        p->setEntero("posicion_x",borde_izq+10);
+    if(p->getEntero("posicion_x")>borde_der)
+        p->setEntero("posicion_x",borde_der-10);
+
+    if(p->personaje_contrario->getEntero("posicion_x")<borde_izq)
+        p->personaje_contrario->setEntero("posicion_x",borde_izq+10);
+    if(p->personaje_contrario->getEntero("posicion_x")>borde_der)
+        p->personaje_contrario->setEntero("posicion_x",borde_der-10);
+}
+
 void Fighter::logicaStage()
 {
     //Validaciones de stage
-    Personaje* p=pa;
-    int borde_izq=50,borde_der=999,desplazamiento=25/3;
-    if(p->getEntero("posicion_x")<=borde_izq && p->getString("movimiento_actual")=="4" && p->personaje_contrario->getEntero("posicion_x")<=borde_der && pos_stage<stage->size/2-grafico->ventana_x/2)
-    {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
-        pos_stage+=desplazamiento;
-    }
-
-    if(p->getEntero("posicion_x")>borde_der && p->getString("movimiento_actual")=="6" && p->personaje_contrario->getEntero("posicion_x")>borde_izq && pos_stage>-stage->size/2+grafico->ventana_x/2)
-    {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
-        pos_stage-=desplazamiento;
-    }
-
-    if(p->getEntero("posicion_x")<0)
-        p->setEntero("posicion_x",0);
-    if(p->getEntero("posicion_x")>1024)
-        p->setEntero("posicion_x",1024);
-
-    //Validaciones de stage
-    p=pb;
-    if(p->getEntero("posicion_x")<=borde_izq && p->getString("movimiento_actual")=="4" && p->personaje_contrario->getEntero("posicion_x")<=borde_der && pos_stage<stage->size/2-grafico->ventana_x/2)
-    {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
-        pos_stage+=desplazamiento;
-    }
-
-    if(p->getEntero("posicion_x")>borde_der && p->getString("movimiento_actual")=="6" && p->personaje_contrario->getEntero("posicion_x")>borde_izq && pos_stage>-stage->size/2+grafico->ventana_x/2)
-    {
-        p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
-        pos_stage-=desplazamiento;
-    }
-
-    if(p->getEntero("posicion_x")<0)
-        p->setEntero("posicion_x",0);
-    if(p->getEntero("posicion_x")>1024)
-        p->setEntero("posicion_x",1024);
-
+    logicaStagePersonaje(pa);
+    logicaStagePersonaje(pb);
 
     if(pos_stage>stage->size/2-grafico->ventana_x/2)
     {
         int dif=pos_stage-(stage->size/2-grafico->ventana_x/2);
         pos_stage=stage->size/2-grafico->ventana_x/2;
         pa->setEntero("posicion_x",pa->getEntero("posicion_x")-dif);
+        pb->setEntero("posicion_x",pb->getEntero("posicion_x")-dif);
     }
     if(pos_stage<-stage->size/2+grafico->ventana_x/2)
     {
         int dif=pos_stage-(-stage->size/2+grafico->ventana_x/2);
         pos_stage=-stage->size/2+grafico->ventana_x/2;
         pa->setEntero("posicion_x",pa->getEntero("posicion_x")-dif);
+        pb->setEntero("posicion_x",pb->getEntero("posicion_x")-dif);
     }
 }
 
