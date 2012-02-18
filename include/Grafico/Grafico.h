@@ -20,6 +20,7 @@ class Grafico
     void endScene();
     bool run();
     irr::video::ITexture* getTexture(irr::core::stringw archivo);
+    irr::video::ITexture* getTexture(irr::core::stringw archivo,video::SColor color_a_ignorar);
     void drawText(core::stringw texto,core::rect<s32> posicion,video::SColor color);
     void draw2DRectangle(irr::video::SColor color,core::rect<s32> posicion);
     void draw2DImage	(

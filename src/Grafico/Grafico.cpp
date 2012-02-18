@@ -57,9 +57,17 @@ bool Grafico::run()
     return device->run() && driver;
 }
 
+irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo,video::SColor color_a_ignorar)
+{
+    irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
+    driver->makeColorKeyTexture(texture,color_a_ignorar);
+    return texture;
+}
+
 irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo)
 {
-    return driver->getTexture(irr::io::path(archivo));
+    irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
+    return texture;
 }
 
 void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColor color)
@@ -91,7 +99,6 @@ void Grafico::draw2DImage
 				 bool flipVertically 	)
 {
    //inicio escala
-
    float escala_x,escala_y;
    if(scale.X!=0 && scale.Y!=0)
    {

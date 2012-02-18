@@ -515,7 +515,22 @@ void Personaje::cargarArchivo(char* archivo_xml)
                     int escala=atoi(elemento_sprite->Attribute("scale"));
                     int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
                     int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
-                    sprites.push_back(Imagen(grafico->getTexture(path),escala,alineacion_x,alineacion_y));
+
+
+                    int ignore_red=-1;
+                    int ignore_green=-1;
+                    int ignore_blue=-1;
+
+                    if(elemento_sprite->Attribute("ignore_red")!=NULL)
+                        ignore_red=atoi(elemento_sprite->Attribute("ignore_red"));
+                    if(elemento_sprite->Attribute("ignore_green")!=NULL)
+                        ignore_green=atoi(elemento_sprite->Attribute("ignore_green"));
+                    if(elemento_sprite->Attribute("ignore_blue")!=NULL)
+                        ignore_blue=atoi(elemento_sprite->Attribute("ignore_blue"));
+
+
+                    irr::video::ITexture* texture=grafico->getTexture(path,irr::video::SColor(0,ignore_red,ignore_green,ignore_blue));
+                    sprites.push_back(Imagen(texture,escala,alineacion_x,alineacion_y));
                 }
 
                 //Hitboxes
@@ -577,7 +592,19 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 int escala=atoi(elemento_imagen->Attribute("scale"));
                 int alineacion_x=atoi(elemento_imagen->Attribute("align_x"));
                 int alineacion_y=atoi(elemento_imagen->Attribute("align_y"));
-                setImagen(variable,Imagen(grafico->getTexture(path),escala,alineacion_x,alineacion_y));
+
+                int ignore_red=-1;
+                int ignore_green=-1;
+                int ignore_blue=-1;
+
+                if(elemento_imagen->Attribute("ignore_red")!=NULL)
+                    ignore_red=atoi(elemento_imagen->Attribute("ignore_red"));
+                if(elemento_imagen->Attribute("ignore_green")!=NULL)
+                    ignore_green=atoi(elemento_imagen->Attribute("ignore_green"));
+                if(elemento_imagen->Attribute("ignore_blue")!=NULL)
+                    ignore_blue=atoi(elemento_imagen->Attribute("ignore_blue"));
+
+                setImagen(variable,Imagen(grafico->getTexture(path,irr::video::SColor(0,ignore_red,ignore_green,ignore_blue)),escala,alineacion_x,alineacion_y));
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
                     elemento_imagen!=NULL;
@@ -717,7 +744,19 @@ void Personaje::cargarArchivo(char* archivo_xml)
                         int alineacion_y=atoi(e->Attribute("align_y"));
                         stringw str_contrario(e->Attribute("to_opponent"));
                         bool contrario=(str_contrario=="si");
-                        agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path)),escala,alineacion_x,alineacion_y),contrario);
+
+                        int ignore_red=-1;
+                        int ignore_green=-1;
+                        int ignore_blue=-1;
+
+                        if(e->Attribute("ignore_red")!=NULL)
+                            ignore_red=atoi(e->Attribute("ignore_red"));
+                        if(e->Attribute("ignore_green")!=NULL)
+                            ignore_green=atoi(e->Attribute("ignore_green"));
+                        if(e->Attribute("ignore_blue")!=NULL)
+                            ignore_blue=atoi(e->Attribute("ignore_blue"));
+
+                        agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path),irr::video::SColor(0,ignore_red,ignore_green,ignore_blue)),escala,alineacion_x,alineacion_y),contrario);
                     }
                 }
 //
