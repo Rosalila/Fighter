@@ -1,6 +1,10 @@
 #include "Menu/Menu.h"
 Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo)
 {
+    for(int i=0;i<3;i++)
+        pos_pa.push_back(0);
+    for(int i=0;i<3;i++)
+        pos_pb.push_back(0);
     this->grafico=grafico;
     this->receiver=receiver;
     this->sonido=sonido;
@@ -110,72 +114,72 @@ void Menu::loopMenu()
                         inputa->cargarDesdeXML(1,receiver);
                         inputb->cargarDesdeXML(2,receiver);
 
-                        char *path_a=new char[255];
-                        strcpy(path_a,"chars/");
-                        strcat(path_a,(char*)getPersonajeA());
-                        strcat(path_a,"/");
-                        strcat(path_a,(char*)getPersonajeA());
-                        strcat(path_a,".xml\0");
-
-                        char *path_b=new char[255];
-                        strcpy(path_b,"chars/");
-                        strcat(path_b,(char*)getPersonajeB());
-                        strcat(path_b,"/");
-                        strcat(path_b,(char*)getPersonajeB());
-                        strcat(path_b,".xml\0");
-
                         char *path_s=new char[255];
                         strcpy(path_s,"stages/");
                         strcat(path_s,(char*)getStage());
                         strcat(path_s,"/");
 
-                        pa=new Personaje(grafico,sonido,1);
-                        pb=new Personaje(grafico,sonido,2);
-                        pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
-                        pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
+                        Personaje* p1a=getPersonajeA(0,false);
+                        Personaje* p1b=getPersonajeB(0,false);
+                        p1a->personaje_contrario=p1b;
+                        p1b->personaje_contrario=p1a;
+
+                        Personaje* p2a=getPersonajeA(1,false);
+                        Personaje* p2b=getPersonajeB(1,false);
+                        p2a->personaje_contrario=p1b;
+                        p2b->personaje_contrario=p1a;
+
+                        Personaje* p3a=getPersonajeA(2,false);
+                        Personaje* p3b=getPersonajeB(2,false);
+                        p3a->personaje_contrario=p1b;
+                        p3b->personaje_contrario=p1a;
+
+                        pa.push_back(p1a);
+                        pa.push_back(p2a);
+                        pa.push_back(p3a);
+
+                        pb.push_back(p1b);
+                        pb.push_back(p2b);
+                        pb.push_back(p3b);
+
                         stage=new Stage(grafico,sonido);
                         stage->cargarDesdeXML((char*)path_s);
-                        pa->personaje_contrario=pb;
-                        pb->personaje_contrario=pa;
 
                         break;
                     }
 
                     if(mb->getAccion()==1)
                     {
-                        inputa=new Input();
-                        inputb=new Input();
-                        inputa->cargarIAXML(1);
-                        //inputa->cargarDesdeXML(1,receiver);
-                        inputb->cargarDesdeXML(2,receiver);
-
-                        char *path_a=new char[255];
-                        strcpy(path_a,"chars/");
-                        strcat(path_a,(char*)getPersonajeA());
-                        strcat(path_a,"/");
-                        strcat(path_a,(char*)getPersonajeA());
-                        strcat(path_a,".xml\0");
-
-                        char *path_b=new char[255];
-                        strcpy(path_b,"chars/");
-                        strcat(path_b,(char*)getPersonajeB());
-                        strcat(path_b,"/");
-                        strcat(path_b,(char*)getPersonajeB());
-                        strcat(path_b,".xml\0");
-
                         char *path_s=new char[255];
                         strcpy(path_s,"stages/");
                         strcat(path_s,(char*)getStage());
                         strcat(path_s,"/");
 
-                        pa=new Personaje(grafico,sonido,1);
-                        pb=new Personaje(grafico,sonido,2);
-                        pa->cargarDesdeXML(300,370,inputa,(char *)path_a);
-                        pb->cargarDesdeXML(524,370,inputb,(char *)path_b);
+                        Personaje* p1a=getPersonajeA(0,false);
+                        Personaje* p1b=getPersonajeB(0,true);
+                        p1a->personaje_contrario=p1b;
+                        p1b->personaje_contrario=p1a;
+
+                        Personaje* p2a=getPersonajeA(1,false);
+                        Personaje* p2b=getPersonajeB(1,true);
+                        p2a->personaje_contrario=p1b;
+                        p2b->personaje_contrario=p1a;
+
+                        Personaje* p3a=getPersonajeA(2,false);
+                        Personaje* p3b=getPersonajeB(2,true);
+                        p3a->personaje_contrario=p1b;
+                        p3b->personaje_contrario=p1a;
+
+                        pa.push_back(p1a);
+                        pa.push_back(p2a);
+                        pa.push_back(p3a);
+
+                        pb.push_back(p1b);
+                        pb.push_back(p2b);
+                        pb.push_back(p3b);
+
                         stage=new Stage(grafico,sonido);
                         stage->cargarDesdeXML((char*)path_s);
-                        pa->personaje_contrario=pb;
-                        pb->personaje_contrario=pa;
 
                         break;
                     }
@@ -430,10 +434,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         if(strcmp(el->Value(),"chars")==0)
                         {
                             int player=atoi(el->Attribute("player"));
+                            int pos=atoi(el->Attribute("number"));
                             if(player==1)
-                                pos_pa=elementos_contenedor.size();
+                                pos_pa[pos]=elementos_contenedor.size();
                             if(player==2)
-                                pos_pb=elementos_contenedor.size();
+                                pos_pb[pos]=elementos_contenedor.size();
                             for(int i=0;i<(int)chars.size();i++)
                             elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("height")),atoi(el->Attribute("width")),strcmp(el->Attribute("visible"),"true")==0,
                                                              chars[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
@@ -465,26 +470,74 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
     }
 }
 
-char* Menu::getPersonajeA()
+Personaje* Menu::getPersonajeA(int num,bool ia)
 {
+    //get string
     MenuContenedor *mc=(MenuContenedor*)elementos[4];
-    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa];
+    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa[num]];
     MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
     stringw s2=mt->texto;
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
-    return str;
+
+    //get cadena
+    char *path_a=new char[255];
+    strcpy(path_a,"");
+    strcat(path_a,str);
+
+    if(ia)
+    {
+        inputa=new Input();
+        char*file_ia=new char[255];
+        strcpy(file_ia,"chars/");
+        strcat(file_ia,path_a);
+        strcat(file_ia,"/ia.xml");
+        inputa->cargarIAXML(2,file_ia);
+    }else
+    {
+        inputa=new Input();
+        inputa->cargarDesdeXML(1,receiver);
+    }
+
+    //get char
+    Personaje* p=new Personaje(grafico,sonido,1);
+    p->cargarDesdeXML(300,370,inputa,(char *)path_a);
+    return p;
 }
 
-char* Menu::getPersonajeB()
+Personaje* Menu::getPersonajeB(int num,bool ia)
 {
+    //get string
     MenuContenedor *mc=(MenuContenedor*)elementos[4];
-    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb];
+    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb[num]];
     MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
     stringw s2=mt->texto;
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
-    return str;
+
+    //get string
+    char *path_b=new char[255];
+    strcpy(path_b,"");
+    strcat(path_b,str);
+
+    if(ia)
+    {
+        inputb=new Input();
+        char*file_ia=new char[255];
+        strcpy(file_ia,"chars/");
+        strcat(file_ia,path_b);
+        strcat(file_ia,"/ai.xml");
+        inputb->cargarIAXML(2,file_ia);
+    }else
+    {
+        inputb=new Input();
+        inputb->cargarDesdeXML(2,receiver);
+    }
+
+    //get char
+    Personaje* p=new Personaje(grafico,sonido,2);
+    p->cargarDesdeXML(524,370,inputb,(char *)path_b);
+    return p;
 }
 
 char* Menu::getStage()

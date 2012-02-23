@@ -17,18 +17,21 @@ private:
     MenuContenedor*contenedor_actual;
     TiXmlDocument abrirXml(char* archivo);
     void dibujarMenu();
-    int pos_pa,pos_pb,pos_stage,pos_ia_lvl;
+    vector<int> pos_pa;
+    vector<int> pos_pb;
+    int pos_stage,pos_ia_lvl;
     bool exit_signal,save_inputs_signal;
 
 public:
     Input *inputa,*inputb;
-    Personaje *pa,*pb;
+    vector<Personaje*>pa;
+    vector<Personaje*>pb;
     Stage* stage;
     Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo);
     void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
     void loopMenu();
-    char* getPersonajeA();
-    char* getPersonajeB();
+    Personaje* getPersonajeA(int num,bool ia);
+    Personaje* getPersonajeB(int num,bool ia);
     char* getStage();
     bool getExitSignal();
     bool getSaveInputsSignal();

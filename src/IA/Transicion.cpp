@@ -44,12 +44,23 @@ int Transicion::getRecompensa()
     return recompensa;
 }
 
-bool Transicion::cumpleCondiciones(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario)
+bool Transicion::cumpleCondiciones(irr::core::map<stringw,stringw>*strings,
+                                   irr::core::map<stringw,stringw>*strings_contrario,
+                                   irr::core::map<stringw,int>*enteros,
+                                   irr::core::map<stringw,int>*enteros_contrario
+                                   )
 {
     for(int i=0;i<(int)condiciones.size();i++)
     {
-        if(!cumpleCondicion(condiciones[i],strings,strings_contrario))
-            return false;
+        if(condiciones[i].tipo=="cadena")
+        {
+            if(!cumpleCondicion(condiciones[i],strings,strings_contrario))
+                return false;
+        }else
+        {
+            if(!cumpleCondicion(condiciones[i],enteros,enteros_contrario))
+                return false;
+        }
     }
     return true;
 }
@@ -59,6 +70,13 @@ bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,str
     if(condicion.personaje_contrario)
         return condicion.comparar(strings_contrario->operator[](condicion.variable));
     return condicion.comparar(strings->operator[](condicion.variable));
+}
+
+bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,int>*enteros,irr::core::map<stringw,int>*enteros_contrario)
+{
+    if(condicion.personaje_contrario)
+        return condicion.comparar(enteros_contrario->operator[](condicion.variable));
+    return condicion.comparar(enteros->operator[](condicion.variable));
 }
 
 

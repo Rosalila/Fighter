@@ -20,13 +20,75 @@ Fighter::Fighter()
     stage->cargarDesdeXML((char*)"stages/Stage1/main.xml");
     pos_stage=0;
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
-    pa=new Personaje(grafico,sonido,1);
-    pb=new Personaje(grafico,sonido,2);
+    this->pa_actual=0;
+    this->pb_actual=0;
+
+//    Personaje*
+//    setPaActual(new Personaje(grafico,sonido,1));
+//    setPbActual(new Personaje(grafico,sonido,2));
 
     menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
     pause_menu=new Menu(grafico,receiver,sonido,(char*)"menu/pause_menu.xml");
 
     //escribirInputsXML();
+}
+
+Personaje* Fighter::getPaActual()
+{
+    return pa[pa_actual];
+}
+
+Personaje* Fighter::getPbActual()
+{
+    return pb[pb_actual];
+}
+
+Personaje* Fighter::get2doPa()
+{
+    if(pa_actual==(int)pa.size()-1)
+        return pa[0];
+    return pa[pa_actual+1];
+}
+
+Personaje* Fighter::get2doPb()
+{
+    if(pb_actual==(int)pb.size()-1)
+        return pb[0];
+    return pb[pb_actual+1];
+}
+
+Personaje* Fighter::get3erPa()
+{
+    if(pa_actual==(int)pa.size()-2)
+        return pa[0];
+    if(pa_actual==(int)pa.size()-1)
+        return pa[1];
+    return pa[pa_actual+2];
+}
+
+Personaje* Fighter::get3erPb()
+{
+    if(pb_actual==(int)pb.size()-2)
+        return pb[0];
+    if(pb_actual==(int)pb.size()-1)
+        return pb[1];
+    return pb[pb_actual+2];
+}
+
+void Fighter::setPaActual(Personaje* p)
+{
+    if(pa_actual==(int)pa.size())
+        pa.push_back(p);
+    else
+        pa[pa_actual]=p;
+}
+
+void Fighter::setPbActual(Personaje* p)
+{
+    if(pb_actual==(int)pb.size())
+        pb.push_back(p);
+    else
+        pb[pb_actual]=p;
 }
 
 void Fighter::mainLoop()
@@ -36,11 +98,17 @@ void Fighter::mainLoop()
         menu->loopMenu();
         if(menu->getExitSignal())
             break;
-//        if(menu->getSaveInputsSignal())
-//            escribirInputsXML();
 
-        pa=menu->pa;
-        pb=menu->pb;
+        pa.push_back(menu->pa[0]);
+        pa.push_back(menu->pa[1]);
+        pa.push_back(menu->pa[2]);
+
+        pb.push_back(menu->pb[0]);
+        pb.push_back(menu->pb[1]);
+        pb.push_back(menu->pb[2]);
+
+//        setPaActual(menu->pa[0]);
+//        setPbActual(menu->pb[0]);
         stage=menu->stage;
         inputa=menu->inputa;
         inputb=menu->inputb;
@@ -149,6 +217,11 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,
 
 void Fighter::logicaPersonaje(Personaje* p)
 {
+    //verificar distancia entre chars
+    int distancia=p->getEntero("posicion_x")-p->personaje_contrario->getEntero("posicion_x");
+    if(distancia<0)
+        distancia=-distancia;
+    p->setEntero("distance",distancia);
     //verificar colision de hitboxes
     if(getColisionHitBoxes(p->personaje_contrario,"rojas",p,"azules"))
         p->setString("colision_hitboxes","si");
@@ -159,11 +232,42 @@ void Fighter::logicaPersonaje(Personaje* p)
         p->setString("colision_hitboxes_azules","si");
     else
         p->setString("colision_hitboxes_azules","no");
-//    //verificar colision de hitboxes hadouken
-//    if(getColisionHitBoxes(p->personaje_contrario,"hadouken hitboxes",p,"azules",p->personaje_contrario->getEntero("hadouken posicion x"),p->personaje_contrario->getEntero("hadouken posicion y"),p->getEntero("posicion_x"),p->getEntero("posicion_y")) && p->personaje_contrario->getString("hadouken estado")=="activo")
-//        p->setString("colision_hadouken","si");
-//    else
-//        p->setString("colision_hadouken","no");
+
+    //Change char
+    if(stringw("on")==p->getString("change_char"))
+    {
+        if(p->numero==1)
+        {
+            int p_anterior=pa_actual;
+            pa_actual++;
+            if(pa_actual>=(int)pa.size())
+                pa_actual=0;
+            pa[pa_actual]->setEntero("posicion_x",pa[p_anterior]->getEntero("posicion_x"));
+            pa[pa_actual]->setEntero("posicion_y",pa[p_anterior]->getEntero("posicion_y"));
+            p->setString("change_char","off");
+            p=pa[pa_actual];
+        }else
+        {
+            int p_anterior=pb_actual;
+            pb_actual++;
+            if(pb_actual>=(int)pb.size())
+                pb_actual=0;
+            pb[pb_actual]->setEntero("posicion_x",pb[p_anterior]->getEntero("posicion_x"));
+            pb[pb_actual]->setEntero("posicion_y",pb[p_anterior]->getEntero("posicion_y"));
+            p->setString("change_char","off");
+            p=pb[pb_actual];
+            p->setString("change_char","off");
+        }
+        pa[pa_actual]->personaje_contrario=pb[pb_actual];
+        pb[pb_actual]->personaje_contrario=pa[pa_actual];
+
+        //aplicar movimiento entrance
+        Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        p->setString("movimiento_actual","entrance");
+        sonido->reproducirSonido("entrance");
+    }
 
     //verificar flip
     if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x"))
@@ -306,42 +410,42 @@ void Fighter::logicaStagePersonaje(Personaje* p)
 void Fighter::logicaStage()
 {
     //Validaciones de stage
-    logicaStagePersonaje(pa);
-    logicaStagePersonaje(pb);
+    logicaStagePersonaje(getPaActual());
+    logicaStagePersonaje(getPbActual());
 
     if(pos_stage>stage->size/2-grafico->ventana_x/2)
     {
         int dif=pos_stage-(stage->size/2-grafico->ventana_x/2);
         pos_stage=stage->size/2-grafico->ventana_x/2;
-        pa->setEntero("posicion_x",pa->getEntero("posicion_x")-dif);
-        pb->setEntero("posicion_x",pb->getEntero("posicion_x")-dif);
+        getPaActual()->setEntero("posicion_x",getPaActual()->getEntero("posicion_x")-dif);
+        getPbActual()->setEntero("posicion_x",getPbActual()->getEntero("posicion_x")-dif);
     }
     if(pos_stage<-stage->size/2+grafico->ventana_x/2)
     {
         int dif=pos_stage-(-stage->size/2+grafico->ventana_x/2);
         pos_stage=-stage->size/2+grafico->ventana_x/2;
-        pa->setEntero("posicion_x",pa->getEntero("posicion_x")-dif);
-        pb->setEntero("posicion_x",pb->getEntero("posicion_x")-dif);
+        getPaActual()->setEntero("posicion_x",getPaActual()->getEntero("posicion_x")-dif);
+        getPbActual()->setEntero("posicion_x",getPbActual()->getEntero("posicion_x")-dif);
     }
 }
 
 
 void Fighter::logica()
 {
-    logicaPersonaje(pa);
-    logicaPersonaje(pb);
-    aplicarModificadores(pa);
-    aplicarModificadores(pb);
+    logicaPersonaje(getPaActual());
+    logicaPersonaje(getPbActual());
+    aplicarModificadores(getPaActual());
+    aplicarModificadores(getPbActual());
     logicaStage();
 }
 
 void Fighter::loopJuego()
 {
-    pa->comparacion_hp=pa->getEntero("hp.current_value");
-    pa->comparacion_hp_contrario=pb->getEntero("hp.current_value");
+    getPaActual()->comparacion_hp=getPaActual()->getEntero("hp.current_value");
+    getPaActual()->comparacion_hp_contrario=getPbActual()->getEntero("hp.current_value");
 
-    pb->comparacion_hp=pb->getEntero("hp.current_value");
-    pb->comparacion_hp_contrario=pa->getEntero("hp.current_value");
+    getPbActual()->comparacion_hp=getPbActual()->getEntero("hp.current_value");
+    getPbActual()->comparacion_hp_contrario=getPbActual()->getEntero("hp.current_value");
 
     sonido->reproducirSonido("Stage.music");
     u32 anterior=grafico->device->getTimer()->getTime();
@@ -367,7 +471,7 @@ void Fighter::loopJuego()
         logica();
 
         //render
-        render(pa,pb,stage);
+        render();
         //receiver->startEventProcess();
 	}
 	sonido->pararSonido("Stage.music");
@@ -406,8 +510,23 @@ char *strrev(char *str) {
 	return str;
 }
 
+void Fighter::dibujarBarra()
+{
+    irr::video::ITexture* texture_bar=grafico->getTexture("misc/bar.png");
+    grafico->draw2DImage
+    (   texture_bar,
+        irr::core::dimension2d<irr::f32> (texture_bar->getOriginalSize ().Width,texture_bar->getOriginalSize ().Height),
+        irr::core::rect<irr::f32>(0,0,texture_bar->getOriginalSize().Width,texture_bar->getOriginalSize().Height),
+        irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_bar->getOriginalSize().Width/2,0),
+        irr::core::position2d<irr::f32>(0,0),
+        irr::f32(0), irr::core::vector2df (0,0),
+        true,
+        irr::video::SColor(255,255,255,255),
+        false,
+        false);
+}
 
-bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
+bool Fighter::render()
 {
     if (grafico->isWindowActive())
     {
@@ -417,8 +536,8 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
 
 
         //Personaje
-        pa->dibujar();
-        pb->dibujar();
+        getPaActual()->dibujar();
+        getPbActual()->dibujar();
 
         //Hit Boxes
 //        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
@@ -426,16 +545,22 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
 //        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
 //        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
 
-        pa->dibujarProyectiles();
-        pb->dibujarProyectiles();
+        getPaActual()->dibujarProyectiles();
+        getPbActual()->dibujarProyectiles();
 
         //HP
-        pa->dibujarBarras();
-        pb->dibujarBarras();
+        getPaActual()->dibujarBarras();
+        getPbActual()->dibujarBarras();
+
+        get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
+        get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
+
+        get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
+        get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
 //        pa->dibujarBarra("hp",312-70,50);
 //        pb->dibujarBarra("hp",512+45,50);
 
-        if(pa->getEntero("hp.current_value")<=0 || pb->getEntero("hp.current_value")<=0)
+        if(getPaActual()->getEntero("hp.current_value")<=0 || getPbActual()->getEntero("hp.current_value")<=0)
         {
             irr::video::ITexture* texture_game_over=grafico->getTexture("misc/ko.png");
             grafico->draw2DImage
@@ -451,6 +576,8 @@ bool Fighter::render(Personaje* pa,Personaje* pb,Stage* stage)
                 false);
         }
         stage->dibujarFront(pos_stage);
+
+        dibujarBarra();
 //
 //
         //Movimento actual

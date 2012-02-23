@@ -1,14 +1,18 @@
 #include "IA/IA.h"
 
-IA::IA()
+IA::IA(char* archivo)
 {
-    automata=new Automata();
+    automata=new Automata(archivo);
     //transicion_a_recompenzar=automata->getEstadoInicial()->transiciones[0];
 }
 
-stringw IA::getInput(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario)
+stringw IA::getInput(irr::core::map<stringw,stringw>*strings,
+                     irr::core::map<stringw,stringw>*strings_contrario,
+                     irr::core::map<stringw,int>*enteros,
+                     irr::core::map<stringw,int>*enteros_contrario
+                     )
 {
-    stringw res=automata->getNextInput(strings,strings_contrario);
+    stringw res=automata->getNextInput(strings,strings_contrario,enteros,enteros_contrario);
     transicion_a_recompenzar=automata->transicion_a_recompenzar;
     return res;
 }

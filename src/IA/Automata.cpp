@@ -1,10 +1,10 @@
 #include "IA/Automata.h"
 
-Automata::Automata()
+Automata::Automata(char* archivo)
 {
     estado_actual="S";
     estados["S"]=new Estado(vector<Transicion*>());
-    cargarDesdeXML((char*)"chars/RyuSF2/ai.xml");
+    cargarDesdeXML(archivo);
     transicion_a_recompenzar=NULL;
 }
 
@@ -13,7 +13,11 @@ Estado* Automata::getEstadoInicial()
     return estados["S"];
 }
 
-stringw Automata::getNextInput(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario)
+stringw Automata::getNextInput(irr::core::map<stringw,stringw>*strings,
+                               irr::core::map<stringw,stringw>*strings_contrario,
+                               irr::core::map<stringw,int>*enteros,
+                               irr::core::map<stringw,int>*enteros_contrario
+                               )
 {
     if(wait>0)
     {
@@ -23,7 +27,7 @@ stringw Automata::getNextInput(irr::core::map<stringw,stringw>*strings,irr::core
     }else
     {
         Estado* e=estados[estado_actual];
-        Transicion* t=e->getNextTransicion(strings,strings_contrario);
+        Transicion* t=e->getNextTransicion(strings,strings_contrario,enteros,enteros_contrario);
         if(t->recompensable)
         {
             transicion_a_recompenzar=t;
@@ -78,6 +82,20 @@ void Automata::cargarDesdeXML(char* archivo)
                 }
             }
 
+            if(e_action->FirstChild("condition_integer")!=NULL)
+            {
+                for(TiXmlElement *elemento_condicion=e_action->FirstChild("condition_integer")->ToElement();
+                        elemento_condicion!=NULL;
+                        elemento_condicion=elemento_condicion->NextSiblingElement("condition_integer"))
+                {
+                    stringw exp_i(elemento_condicion->Attribute("left_exp"));
+                    stringw op(elemento_condicion->Attribute("relational_op"));
+                    int exp_d=atoi(elemento_condicion->Attribute("right_exp"));
+                    stringw str_contrario(elemento_condicion->Attribute("to_opponent"));
+                    bool contrario=(str_contrario=="yes");
+                    transicion->agregarCondicion(Condicion2(exp_i,op,exp_d,contrario));
+                }
+            }
 
             transiciones.push_back(transicion);
         }

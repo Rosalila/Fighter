@@ -1,7 +1,11 @@
 #include "Input/Input.h"
 #include <sstream>
 
-void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario)
+void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
+                             irr::core::map<stringw,stringw>*strings_contrario,
+                             irr::core::map<stringw,int>*enteros,
+                             irr::core::map<stringw,int>*enteros_contrario
+                             )
 {
     stringw resultado="";
     if(!inteligencia_artificial)
@@ -33,7 +37,7 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,irr::core::
     }
     else
     {
-        resultado=ia->getInput(strings,strings_contrario);
+        resultado=ia->getInput(strings,strings_contrario,enteros,enteros_contrario);
     }
     if(resultado=="")
         resultado="5";
@@ -121,14 +125,14 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
     }
 }
 
-void Input::cargarIAXML(int jugador)
+void Input::cargarIAXML(int jugador,char* archivo)
 {
     this->jugador=jugador;
     this->inteligencia_artificial=true;
     tecla_arriba=true;
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
-    ia=new IA();
+    ia=new IA(archivo);
 }
 TiXmlDocument* Input::getXML(TiXmlDocument *doc)
 {

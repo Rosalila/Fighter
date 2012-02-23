@@ -43,8 +43,13 @@ public:
     stringw getDestino();
     int getRecompensa();
     int getWait();
-    bool cumpleCondiciones(irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario);
+    bool cumpleCondiciones(irr::core::map<stringw,stringw>*strings,
+                           irr::core::map<stringw,stringw>*strings_contrario,
+                           irr::core::map<stringw,int>*enteros,
+                           irr::core::map<stringw,int>*enteros_contrario
+                           );
     bool cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario);
+    bool cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,int>*enteros,irr::core::map<stringw,int>*enteros_contrario);
 };
 
 #endif

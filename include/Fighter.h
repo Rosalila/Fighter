@@ -10,8 +10,9 @@ public:
     Menu *menu,*pause_menu;
     Stage* stage;
     int pos_stage;
-    Personaje *pa;
-    Personaje *pb;
+    vector<Personaje*>pa;
+    vector<Personaje*>pb;
+    int pa_actual,pb_actual;
 
     //Engines
     Sonido* sonido;
@@ -29,7 +30,16 @@ public:
     void logicaStagePersonaje(Personaje *p);
     void aplicarModificadores(Personaje *p);
     void logica();
-    bool render(Personaje* pa,Personaje* pb,Stage* stage);
+    bool render();
+    void dibujarBarra();
     void mainLoop();
     void escribirInputsXML();
+    Personaje* getPaActual();
+    Personaje* getPbActual();
+    Personaje* get2doPa();
+    Personaje* get2doPb();
+    Personaje* get3erPa();
+    Personaje* get3erPb();
+    void setPaActual(Personaje* p);
+    void setPbActual(Personaje* p);
 };

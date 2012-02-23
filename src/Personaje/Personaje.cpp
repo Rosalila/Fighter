@@ -15,6 +15,8 @@ void Personaje::dibujar()
     int dimension_y=getImagen("imagen_personaje").dimension_y;
     int alineacion_x=getImagen("imagen_personaje").alineacion_x;
     int alineacion_y=getImagen("imagen_personaje").alineacion_y;
+//    u32 t=grafico->device->getTimer()->getTime();
+//    int t2=t%255;
     grafico->draw2DImage
     (   getImagen("imagen_personaje").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
@@ -47,50 +49,113 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
     }
 }
 
+void Personaje::dibujarBarra(Barra barra)
+{
+    position2d<s32>punto1= barra.posicion.UpperLeftCorner;
+    position2d<s32>punto2= barra.posicion.LowerRightCorner;
+    float longitud_total=(float)punto2.X-(float)punto1.X;
+    float longitud_actual=((float)longitud_total/getEntero(barra.valor_maximo))*(float)getEntero(barra.valor_actual);
+    float altura=(float)punto2.Y-(float)punto1.Y;
+
+    float p1x,p1y,p2x,p2y;
+    bool player2=false;
+    if(numero==1)//player 1
+    {
+        p1x=punto1.X;
+        p1y=punto1.Y;
+        p2x=punto1.X+longitud_actual;
+        p2y=punto2.Y;
+    }else//flip if player 2
+    {
+        float temp_x2=grafico->ventana_x-punto1.X;
+        float temp_x1=grafico->ventana_x-punto1.X-longitud_actual;
+
+        p1x=temp_x1;
+        p1y=punto1.Y;
+        p2x=temp_x2;
+        p2y=punto2.Y;
+
+        player2=true;
+    }
+    if(barra.imagen==NULL)
+        grafico->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+    else
+        grafico->draw2DImage
+        (   barra.imagen,
+            irr::core::dimension2d<irr::f32> (longitud_actual,altura),
+            irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),
+            irr::core::position2d<irr::f32>(p1x,p1y),
+            irr::core::position2d<irr::f32>(0,0),
+            irr::f32(0), irr::core::vector2df (1,1),
+            true,
+            irr::video::SColor(255,255,255,255),
+            player2,
+            false);
+}
+
+void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
+{
+    position2d<s32>punto1= barra.posicion.UpperLeftCorner;
+    position2d<s32>punto2= barra.posicion.LowerRightCorner;
+    float longitud_total=(float)punto2.X-(float)punto1.X;
+    float longitud_actual=((float)longitud_total/getEntero(barra.valor_maximo))*(float)getEntero(barra.valor_actual);
+    float altura=(float)punto2.Y-(float)punto1.Y;
+
+    float p1x,p1y,p2x,p2y;
+    bool player2=false;
+    if(numero==1)//player 1
+    {
+        p1x=punto1.X;
+        p1y=punto1.Y;
+        p2x=punto1.X+longitud_actual;
+        p2y=punto2.Y;
+
+        p1x+=cambio_x;
+        p2x+=cambio_x;
+        p1y+=cambio_y;
+        p2y+=cambio_y;
+        p2x-=(p2x-p1x)/2;
+        p2y-=(p2y-p1y)/2;
+    }else//flip if player 2
+    {
+        float temp_x2=grafico->ventana_x-punto1.X;
+        float temp_x1=grafico->ventana_x-punto1.X-longitud_actual;
+
+        p1x=temp_x1;
+        p1y=punto1.Y;
+        p2x=temp_x2;
+        p2y=punto2.Y;
+
+        p1x-=cambio_x;
+        p2x-=cambio_x;
+        p1y+=cambio_y;
+        p2y+=cambio_y;
+        p1x-=(p1x-p2x)/2;
+        p2y-=(p2y-p1y)/2;
+
+        player2=true;
+    }
+    if(barra.imagen==NULL)
+        grafico->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+    else
+        grafico->draw2DImage
+        (   barra.imagen,
+            irr::core::dimension2d<irr::f32> (longitud_actual,altura),
+            irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),
+            irr::core::position2d<irr::f32>(p1x,p1y),
+            irr::core::position2d<irr::f32>(0,0),
+            irr::f32(0), irr::core::vector2df (1,1),
+            true,
+            irr::video::SColor(255,255,255,255),
+            player2,
+            false);
+}
+
 void Personaje::dibujarBarras()
 {
     for(int i=0;i<(int)barras.size();i++)
     {
-        position2d<s32>punto1= barras[i].posicion.UpperLeftCorner;
-        position2d<s32>punto2= barras[i].posicion.LowerRightCorner;
-        float longitud_total=(float)punto2.X-(float)punto1.X;
-        float longitud_actual=((float)longitud_total/getEntero(barras[i].valor_maximo))*(float)getEntero(barras[i].valor_actual);
-        float altura=(float)punto2.Y-(float)punto1.Y;
-
-        float p1x,p1y,p2x,p2y;
-        bool player2=false;
-        if(numero==1)//player 1
-        {
-            p1x=punto1.X;
-            p1y=punto1.Y;
-            p2x=punto1.X+longitud_actual;
-            p2y=punto2.Y;
-        }else//flip if player 2
-        {
-            float temp_x2=grafico->ventana_x-punto1.X;
-            float temp_x1=grafico->ventana_x-punto1.X-longitud_actual;
-
-            p1x=temp_x1;
-            p1y=punto1.Y;
-            p2x=temp_x2;
-            p2y=punto2.Y;
-
-            player2=true;
-        }
-        if(barras[i].imagen==NULL)
-            grafico->draw2DRectangle(barras[i].color,core::rect<s32>(p1x,p1y,p2x,p2y));
-        else
-            grafico->draw2DImage
-            (   barras[i].imagen,
-                irr::core::dimension2d<irr::f32> (longitud_actual,altura),
-                irr::core::rect<irr::f32>(0,0,barras[i].imagen->getOriginalSize().Width*((float)getEntero(barras[i].valor_actual)/(float)getEntero(barras[i].valor_maximo)),barras[i].imagen->getOriginalSize().Height),
-                irr::core::position2d<irr::f32>(p1x,p1y),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::f32(0), irr::core::vector2df (1,1),
-                true,
-                irr::video::SColor(255,255,255,255),
-                player2,
-                false);
+        dibujarBarra(barras[i]);
     }
 }
 
@@ -368,7 +433,7 @@ stringw Personaje::mapInputToMovimiento()
         comparacion_hp_contrario=personaje_contrario->getEntero("hp.current_value");
         input->ia->darRecompensa();
     }
-    input->actualizarBuffer(&strings,&personaje_contrario->strings);
+    input->actualizarBuffer(&strings,&personaje_contrario->strings,&enteros,&personaje_contrario->enteros);
 
     for(int i=0;i<(int)inputs.size();i++)
         if(inputEstaEnBuffer(inputs[i].input,input->getBufferInputs()))
@@ -470,7 +535,15 @@ void Personaje::cargarArchivo(char* archivo_xml)
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    //for each Movimiento
+    TiXmlNode* ignore_color_node=doc->FirstChild("IgnoreColor");
+    irr::video::SColor ignore_color=NULL;
+    if(ignore_color_node!=NULL)
+    {
+        ignore_color=irr::video::SColor(0,atoi(ignore_color_node->ToElement()->Attribute("red")),
+                                        atoi(ignore_color_node->ToElement()->Attribute("green")),
+                                        atoi(ignore_color_node->ToElement()->Attribute("blue")));
+    }
+
     for(TiXmlNode* nodo=doc->FirstChild("Declarations");
             nodo!=NULL;
             nodo=nodo->NextSibling("Declarations"))
@@ -511,25 +584,17 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 {
                     stringw path(elemento_sprite->Attribute("path"));
                     stringw dir("chars/");
-                    path=dir+path;
+                    path=dir+char_name+"/"+path;
                     int escala=atoi(elemento_sprite->Attribute("scale"));
                     int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
                     int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
 
 
-                    int ignore_red=-1;
-                    int ignore_green=-1;
-                    int ignore_blue=-1;
-
-                    if(elemento_sprite->Attribute("ignore_red")!=NULL)
-                        ignore_red=atoi(elemento_sprite->Attribute("ignore_red"));
-                    if(elemento_sprite->Attribute("ignore_green")!=NULL)
-                        ignore_green=atoi(elemento_sprite->Attribute("ignore_green"));
-                    if(elemento_sprite->Attribute("ignore_blue")!=NULL)
-                        ignore_blue=atoi(elemento_sprite->Attribute("ignore_blue"));
-
-
-                    irr::video::ITexture* texture=grafico->getTexture(path,irr::video::SColor(0,ignore_red,ignore_green,ignore_blue));
+                    irr::video::ITexture* texture;
+                    if(ignore_color==NULL)
+                        texture=grafico->getTexture(path);
+                    else
+                        texture=grafico->getTexture(path,ignore_color);
                     sprites.push_back(Imagen(texture,escala,alineacion_x,alineacion_y));
                 }
 
@@ -588,23 +653,15 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 stringw variable(elemento_imagen->Attribute("variable"));
                 stringw path(elemento_imagen->Attribute("path"));
                 stringw dir("chars/");
-                path=dir+path;
+                path=dir+char_name+"/"+path;
                 int escala=atoi(elemento_imagen->Attribute("scale"));
                 int alineacion_x=atoi(elemento_imagen->Attribute("align_x"));
                 int alineacion_y=atoi(elemento_imagen->Attribute("align_y"));
 
-                int ignore_red=-1;
-                int ignore_green=-1;
-                int ignore_blue=-1;
-
-                if(elemento_imagen->Attribute("ignore_red")!=NULL)
-                    ignore_red=atoi(elemento_imagen->Attribute("ignore_red"));
-                if(elemento_imagen->Attribute("ignore_green")!=NULL)
-                    ignore_green=atoi(elemento_imagen->Attribute("ignore_green"));
-                if(elemento_imagen->Attribute("ignore_blue")!=NULL)
-                    ignore_blue=atoi(elemento_imagen->Attribute("ignore_blue"));
-
-                setImagen(variable,Imagen(grafico->getTexture(path,irr::video::SColor(0,ignore_red,ignore_green,ignore_blue)),escala,alineacion_x,alineacion_y));
+                if(ignore_color==NULL)
+                    setImagen(variable,Imagen(grafico->getTexture(path),escala,alineacion_x,alineacion_y));
+                else
+                    setImagen(variable,Imagen(grafico->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
                     elemento_imagen!=NULL;
@@ -738,25 +795,17 @@ void Personaje::cargarArchivo(char* archivo_xml)
                         stringw str_variable(e->Attribute("variable"));
                         stringw path(e->Attribute("path"));
                         stringw dir("chars/");
-                        path=dir+path;
+                        path=dir+char_name+"/"+path;
                         int escala=atoi(e->Attribute("scale"));
                         int alineacion_x=atoi(e->Attribute("align_x"));
                         int alineacion_y=atoi(e->Attribute("align_y"));
                         stringw str_contrario(e->Attribute("to_opponent"));
                         bool contrario=(str_contrario=="si");
 
-                        int ignore_red=-1;
-                        int ignore_green=-1;
-                        int ignore_blue=-1;
-
-                        if(e->Attribute("ignore_red")!=NULL)
-                            ignore_red=atoi(e->Attribute("ignore_red"));
-                        if(e->Attribute("ignore_green")!=NULL)
-                            ignore_green=atoi(e->Attribute("ignore_green"));
-                        if(e->Attribute("ignore_blue")!=NULL)
-                            ignore_blue=atoi(e->Attribute("ignore_blue"));
-
-                        agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path),irr::video::SColor(0,ignore_red,ignore_green,ignore_blue)),escala,alineacion_x,alineacion_y),contrario);
+                        if(ignore_color==NULL)
+                            agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path)),escala,alineacion_x,alineacion_y),contrario);
+                        else
+                            agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path),ignore_color),escala,alineacion_x,alineacion_y),contrario);
                     }
                 }
 //
@@ -851,33 +900,73 @@ void Personaje::cargarArchivo(char* archivo_xml)
     {
         TiXmlElement* elemento_sonido=nodo_sonido->ToElement();
         stringw move(elemento_sonido->Attribute("move"));
-        sonido->agregarSonido(move,elemento_sonido->Attribute("file"));
+
+        char*file=new char[255];
+        strcpy(file,"chars/");
+
+        //convert char_name to char*
+        size_t count = 255;
+        c8* c_name = (char*)malloc( 255 );
+        wcstombs(c_name, char_name.c_str(), count);
+
+
+        strcat(file,(char*)c_name);
+        strcat(file,"/sfx/");
+        strcat(file,elemento_sonido->Attribute("file"));
+        sonido->agregarSonido(move,file);
     }
 }
 
-void Personaje::cargarDesdeXML(int px,int py,Input* input,char* archivo_xml)
+void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
 {
     this->input=input;
     this->grafico=grafico;
-
-    cargarArchivo(archivo_xml);
+    this->char_name=stringw(nombre);
 
     setEntero("posicion_x",px);
     setEntero("posicion_y",py);
 
-    TiXmlDocument doc_t( archivo_xml );
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-    //for each Movimiento
-    TiXmlNode *archivos=doc->FirstChild("Archivos");
-    for(TiXmlNode* nodo=archivos->FirstChild("archivo");
-            nodo!=NULL;
-            nodo=nodo->NextSibling("archivo"))
-    {
-        char* str_archivo=(char*)nodo->ToElement()->Attribute("nombre");
-        cargarArchivo(str_archivo);
-    }
+    char *path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/main.xml\0");
+    cargarArchivo(path);
+
+    path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/vars.xml\0");
+    cargarArchivo(path);
+
+    path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/input.xml\0");
+    cargarArchivo(path);
+
+    path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/triggers.xml\0");
+    cargarArchivo(path);
+
+    path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/sprites.xml\0");
+    cargarArchivo(path);
+
+    path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/hitboxes.xml\0");
+    cargarArchivo(path);
+
+    path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,nombre);
+    strcat(path,"/sfx.xml\0");
+    cargarArchivo(path);
 }
 
 void Personaje::logicaBarras()

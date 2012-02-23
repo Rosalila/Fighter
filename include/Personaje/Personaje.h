@@ -11,6 +11,8 @@ class Personaje
     Grafico* grafico;
     Input* input;
     Sonido* sonido;
+
+    stringw char_name;
     int comparacion_hp;
     int comparacion_hp_contrario;
     int numero;
@@ -32,12 +34,14 @@ class Personaje
     irr::core::map<stringw,Movimiento*> movimientos;
 
     Personaje(Grafico* grafico,Sonido* sonido,int numero);
-    void cargarDesdeXML(int px,int py,Input* input,char* archivo_xml);
+    void cargarDesdeXML(int px,int py,Input* input,char* nombre);
     void cargarArchivo(char* archivo_xml);
     //DIBUJAR
     void dibujar();
     void dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y);
     void dibujarBarras();
+    void dibujarBarra(Barra barra);
+    void dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y);
     void dibujarProyectiles();
     //GETS shortcuts
     Movimiento* getMovimientoActual();
