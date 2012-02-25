@@ -5,7 +5,7 @@
 		<Cursor position="1045" topLine="21" />
 	</File>
 	<File name="include/Grafico/Grafico.h" open="0" top="0" tabpos="0">
-		<Cursor position="549" topLine="13" />
+		<Cursor position="663" topLine="13" />
 	</File>
 	<File name="include/IA/Automata.h" open="0" top="0" tabpos="0">
 		<Cursor position="564" topLine="13" />
@@ -77,7 +77,7 @@
 		<Cursor position="153" topLine="0" />
 	</File>
 	<File name="include/Personaje/Movimiento.h" open="0" top="0" tabpos="0">
-		<Cursor position="110" topLine="0" />
+		<Cursor position="256" topLine="0" />
 	</File>
 	<File name="include/Personaje/Personaje.h" open="0" top="0" tabpos="4">
 		<Cursor position="384" topLine="9" />
@@ -98,13 +98,13 @@
 		<Cursor position="233" topLine="0" />
 	</File>
 	<File name="src/Fighter.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="2698" topLine="104" />
+		<Cursor position="11573" topLine="376" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1943" topLine="55" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="3142" topLine="72" />
+		<Cursor position="3142" topLine="2" />
 	</File>
 	<File name="src/IA/Estado.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="654" topLine="10" />
@@ -170,10 +170,10 @@
 		<Cursor position="192" topLine="0" />
 	</File>
 	<File name="src/Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="150" topLine="0" />
+		<Cursor position="172" topLine="0" />
 	</File>
 	<File name="src/Personaje/Personaje.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="712" topLine="9" />
+		<Cursor position="43958" topLine="1080" />
 	</File>
 	<File name="src/Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="838" topLine="20" />

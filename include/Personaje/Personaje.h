@@ -16,6 +16,7 @@ class Personaje
     int comparacion_hp;
     int comparacion_hp_contrario;
     int numero;
+    int combo;
 
     //efecto
     vector<Imagen>sombra;

@@ -233,7 +233,15 @@ void Fighter::logicaPersonaje(Personaje* p)
     p->setEntero("distance",distancia);
     //verificar colision de hitboxes
     if(getColisionHitBoxes(p->personaje_contrario,"rojas",p,"azules"))
+    {
         p->setString("colision_hitboxes","si");
+        Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("movimiento_actual")];
+        if(!m->ya_pego)
+        {
+            p->setString("hit","yes");
+            m->ya_pego=true;
+        }
+    }
     else
         p->setString("colision_hitboxes","no");
 
@@ -293,6 +301,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
+        m->ya_pego=false;
         p->setString("movimiento_actual",str_movimiento);
         sonido->reproducirSonido(str_movimiento);
     }
@@ -309,7 +318,25 @@ void Fighter::logicaPersonaje(Personaje* p)
                         existe=true;
                     }
                 if(!existe)
-                    p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
+                {
+                    if(p->inputs[i].movimiento=="recibir")
+                    {
+                        if(p->getString("movimiento_actual")=="recibir")
+                        {
+                            p->combo++;
+                        }
+                        Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+                        m->frame_actual=0;
+                        m->tiempo_transcurrido=0;
+                        m->ya_pego=false;
+                        p->setString("movimiento_actual","recibir");
+                        sonido->reproducirSonido(str_movimiento);
+                    }
+                    else
+                    {
+                        p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
+                    }
+                }
             }
 
     //Agregar Proyectiles
@@ -348,6 +375,9 @@ void Fighter::aplicarModificadores(Personaje *p)
     if(m->frame_actual==(int)m->frames.size())
     {
         m->frame_actual=0;
+        m->ya_pego=false;
+        if(p->getString("movimiento_actual")=="recibir")
+            p->combo=0;
         p->setString("movimiento_actual","5");
     }
     //Movimientos continuos
@@ -369,6 +399,7 @@ void Fighter::aplicarModificadores(Personaje *p)
         if(mc->frame_actual==(int)mc->frames.size())
         {
             mc->frame_actual=0;
+            mc->ya_pego=false;
             p->movimientos_constantes_actuales.erase(p->movimientos_constantes_actuales.begin()+i);
         }
     }
@@ -591,6 +622,11 @@ bool Fighter::render()
         stage->dibujarFront(pos_stage);
 
         dibujarBarra();
+
+        if(pa[pa_actual]->combo>0)
+            grafico->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,100,0,0),video::SColor (255,255,255,255));
+        if(pb[pb_actual]->combo>0)
+            grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(900,100,0,0),video::SColor (255,255,255,255));
 //
 //
         //Movimento actual

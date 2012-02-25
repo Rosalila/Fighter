@@ -5,6 +5,7 @@ Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero)
     this->grafico=grafico;
     this->sonido=sonido;
     this->numero=numero;
+    this->combo=0;
 }
 //DIBUJAR
 void Personaje::dibujar()

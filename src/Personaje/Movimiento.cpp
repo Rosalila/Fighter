@@ -5,6 +5,7 @@ Movimiento::Movimiento(stringw nombre)
     frame_actual=0;
     tiempo_transcurrido=0;
     this->nombre=nombre;
+    this->ya_pego=false;
 }
 Frame Movimiento::getFrameActual()
 {

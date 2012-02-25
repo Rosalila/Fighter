@@ -9,6 +9,7 @@ class Movimiento
     vector <Frame> frames;
     Movimiento(stringw nombre);
     Frame getFrameActual();
+    bool ya_pego;
     void agregarFrame(int duracion);
     void agregarCondicion(vector<Condicion*> condicion,int frame);
     //void agregarCondicion(int posicion,Condicion condicion,int frame);
