@@ -26,6 +26,8 @@ void Sonido::pararSonido(stringw variable)
     if(sonidos.find(variable)==0)
         return;
     Reproduccion* rep=sonidos[variable];
+    if(rep->sonido==NULL)
+        return;
     rep->sonido->stop();
 }
 
@@ -34,5 +36,7 @@ void Sonido::setVolumen(stringw variable,float volumen)
     if(sonidos.find(variable)==0)
         return;
     Reproduccion* rep=sonidos[variable];
+    if(rep->sonido==NULL)
+        return;
     rep->sonido->setVolume(volumen);
 }

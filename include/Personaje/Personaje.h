@@ -17,6 +17,13 @@ class Personaje
     int comparacion_hp_contrario;
     int numero;
 
+    //efecto
+    vector<Imagen>sombra;
+    vector<int>sombra_x;
+    vector<int>sombra_y;
+    vector<bool>flip_sombra;
+
+    //Otros vectores
     vector<InputMovimiento> inputs;
     vector<Movimiento*> movimientos_constantes_actuales;
     vector<Proyectil*> proyectiles_actuales;

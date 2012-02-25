@@ -115,9 +115,8 @@ void Menu::loopMenu()
                         inputb->cargarDesdeXML(2,receiver);
 
                         char *path_s=new char[255];
-                        strcpy(path_s,"stages/");
+                        strcpy(path_s,"");
                         strcat(path_s,(char*)getStage());
-                        strcat(path_s,"/");
 
                         Personaje* p1a=getPersonajeA(0,false);
                         Personaje* p1b=getPersonajeB(0,false);
@@ -134,13 +133,15 @@ void Menu::loopMenu()
                         p3a->personaje_contrario=p1b;
                         p3b->personaje_contrario=p1a;
 
+                        pa.clear();
                         pa.push_back(p1a);
-                        pa.push_back(p2a);
-                        pa.push_back(p3a);
+                        //pa.push_back(p2a);
+                        //pa.push_back(p3a);
 
+                        pb.clear();
                         pb.push_back(p1b);
-                        pb.push_back(p2b);
-                        pb.push_back(p3b);
+                        //pb.push_back(p2b);
+                        //pb.push_back(p3b);
 
                         stage=new Stage(grafico,sonido);
                         stage->cargarDesdeXML((char*)path_s);
@@ -151,9 +152,8 @@ void Menu::loopMenu()
                     if(mb->getAccion()==1)
                     {
                         char *path_s=new char[255];
-                        strcpy(path_s,"stages/");
+                        strcpy(path_s,"");
                         strcat(path_s,(char*)getStage());
-                        strcat(path_s,"/");
 
                         Personaje* p1a=getPersonajeA(0,false);
                         Personaje* p1b=getPersonajeB(0,true);
@@ -192,8 +192,135 @@ void Menu::loopMenu()
                     }
                     if(mb->getAccion()==4)
                     {
-                        Menu *temp=new Menu(grafico,receiver,sonido,(char*)"menu/input_menu.xml");
+                        Menu *temp=new Menu(grafico,receiver,sonido,mb->load_menu);
                         temp->loopMenu();
+                    }
+                    if(mb->getAccion()==5)
+                    {
+                        char *path_s=new char[255];
+                        strcpy(path_s,"");
+                        strcat(path_s,(char*)getStage());
+
+                        Personaje* p1a=getPersonajeA(0,false);
+                        Personaje* p1b=getPersonajeB(0,true);
+                        p1a->personaje_contrario=p1b;
+                        p1b->personaje_contrario=p1a;
+                        p1b->setEntero("hp.periodic_modifier",1);
+                        p1b->setEntero("hp.period",1);
+                        Input*i_temp=new Input();
+                        i_temp->cargarIAXML(2,(char*)"");
+                        p1b->input=i_temp;
+
+                        Personaje* p2a=getPersonajeA(1,false);
+                        Personaje* p2b=getPersonajeB(1,true);
+                        p2a->personaje_contrario=p1b;
+                        p2b->personaje_contrario=p1a;
+                        p2b->setEntero("hp.periodic_modifier",1);
+                        p2b->setEntero("hp.period",1);
+                        i_temp=new Input();
+                        i_temp->cargarIAXML(2,(char*)"");
+                        p2b->input=i_temp;
+
+                        Personaje* p3a=getPersonajeA(2,false);
+                        Personaje* p3b=getPersonajeB(2,true);
+                        p3a->personaje_contrario=p1b;
+                        p3b->personaje_contrario=p1a;
+                        p3b->setEntero("hp.periodic_modifier",1);
+                        p3b->setEntero("hp.period",1);
+                        i_temp=new Input();
+                        i_temp->cargarIAXML(2,(char*)"");
+                        p3b->input=i_temp;
+
+                        pa.push_back(p1a);
+                        pa.push_back(p2a);
+                        pa.push_back(p3a);
+
+                        pb.push_back(p1b);
+                        pb.push_back(p2b);
+                        pb.push_back(p3b);
+
+                        stage=new Stage(grafico,sonido);
+                        stage->cargarDesdeXML((char*)path_s);
+
+                        break;
+                    }
+                    if(mb->getAccion()==6)
+                    {
+                        inputa=new Input();
+                        inputb=new Input();
+                        //this->inputa->cargarIAXML(1);
+                        inputa->cargarDesdeXML(1,receiver);
+                        inputb->cargarDesdeXML(2,receiver);
+
+                        char *path_s=new char[255];
+                        strcpy(path_s,"");
+                        strcat(path_s,(char*)getStage());
+
+                        Personaje* p1a=getPersonajeA(0,false);
+                        Personaje* p1b=getPersonajeB(0,false);
+                        p1a->personaje_contrario=p1b;
+                        p1b->personaje_contrario=p1a;
+
+                        Personaje* p2a=getPersonajeA(1,false);
+                        Personaje* p2b=getPersonajeB(1,false);
+                        p2a->personaje_contrario=p1b;
+                        p2b->personaje_contrario=p1a;
+
+                        Personaje* p3a=getPersonajeA(2,false);
+                        Personaje* p3b=getPersonajeB(2,false);
+                        p3a->personaje_contrario=p1b;
+                        p3b->personaje_contrario=p1a;
+
+                        pa.push_back(p1a);
+                        pa.push_back(p2a);
+                        //pa.push_back(p3a);
+
+                        pb.push_back(p1b);
+                        pb.push_back(p2b);
+                        //pb.push_back(p3b);
+
+                        stage=new Stage(grafico,sonido);
+                        stage->cargarDesdeXML((char*)path_s);
+                        break;
+                    }
+                    if(mb->getAccion()==7)
+                    {
+                        inputa=new Input();
+                        inputb=new Input();
+                        //this->inputa->cargarIAXML(1);
+                        inputa->cargarDesdeXML(1,receiver);
+                        inputb->cargarDesdeXML(2,receiver);
+
+                        char *path_s=new char[255];
+                        strcpy(path_s,"");
+                        strcat(path_s,(char*)getStage());
+
+                        Personaje* p1a=getPersonajeA(0,false);
+                        Personaje* p1b=getPersonajeB(0,false);
+                        p1a->personaje_contrario=p1b;
+                        p1b->personaje_contrario=p1a;
+
+                        Personaje* p2a=getPersonajeA(1,false);
+                        Personaje* p2b=getPersonajeB(1,false);
+                        p2a->personaje_contrario=p1b;
+                        p2b->personaje_contrario=p1a;
+
+                        Personaje* p3a=getPersonajeA(2,false);
+                        Personaje* p3b=getPersonajeB(2,false);
+                        p3a->personaje_contrario=p1b;
+                        p3b->personaje_contrario=p1a;
+
+                        pa.push_back(p1a);
+                        pa.push_back(p2a);
+                        pa.push_back(p3a);
+
+                        pb.push_back(p1b);
+                        pb.push_back(p2b);
+                        pb.push_back(p3b);
+
+                        stage=new Stage(grafico,sonido);
+                        stage->cargarDesdeXML((char*)path_s);
+                        break;
                     }
                     if(mb->getAccion()>=10 && mb->getAccion()<=29)
                     {
@@ -326,11 +453,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             stringw path(e->Attribute("path"));
             stringw dir("menu/");
             path=dir+path;
-            elementos.push_back((Elemento*)new MenuImagen(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("height")),atoi(e->Attribute("width")),strcmp(e->Attribute("visible"),"true")==0,
+            elementos.push_back((Elemento*)new MenuImagen(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
                                                           grafico->getTexture(irr::io::path(path))));
         }else if(strcmp(e->Value(),"Text")==0)
         {
-                elementos.push_back((Elemento*)new MenuTexto(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("height")),atoi(e->Attribute("width")),strcmp(e->Attribute("visible"),"true")==0,
+                elementos.push_back((Elemento*)new MenuTexto(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
                                                              e->Attribute("text"),video::SColor(atoi(e->Attribute("alpha")),atoi(e->Attribute("red")),atoi(e->Attribute("green")),atoi(e->Attribute("blue")))
                                                              ));
         }else if(strcmp(e->Value(),"Container")==0)
@@ -344,7 +471,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                 if(strcmp(ec->Value(),"Button")==0)
                 {
                     int action=-1;
-                    if(strcmp(ec->Attribute("action"),"PvP")==0)
+                    if(strcmp(ec->Attribute("action"),"1v1")==0)
                         action=0;
                     if(strcmp(ec->Attribute("action"),"PvCPU")==0)
                         action=1;
@@ -352,8 +479,15 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         action=2;
                     if(strcmp(ec->Attribute("action"),"Exit")==0)
                         action=3;
-                    if(strcmp(ec->Attribute("action"),"InputConfig")==0)
+                    if(strcmp(ec->Attribute("action"),"Load")==0)
                         action=4;
+                    if(strcmp(ec->Attribute("action"),"Training")==0)
+                        action=5;
+                    if(strcmp(ec->Attribute("action"),"2v2")==0)
+                        action=6;
+                    if(strcmp(ec->Attribute("action"),"3v3")==0)
+                        action=7;
+
 
                     if(strcmp(ec->Attribute("action"),"Player1.KeyConfig:up")==0)
                         action=10;
@@ -397,15 +531,23 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                     if(strcmp(ec->Attribute("action"),"Player2.KeyConfig:f")==0)
                         action=29;
 
-                    elementos_contenedor.push_back((Elemento*)new MenuBoton(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("height")),atoi(ec->Attribute("width")),strcmp(ec->Attribute("visible"),"true")==0,
+                    char* menu_load=new char[255];
+                    strcpy(menu_load,"");
+                    if(action==4)
+                    {
+                        strcpy(menu_load,"menu/");
+                        strcat(menu_load,ec->Attribute("load_menu"));
+                    }
+
+                    elementos_contenedor.push_back((Elemento*)new MenuBoton(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
                                                                             grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path"))),atoi(ec->Attribute("text_x")),atoi(ec->Attribute("text_y")),ec->Attribute("text"),video::SColor(atoi(ec->Attribute("alpha")),atoi(ec->Attribute("red")),atoi(ec->Attribute("green")),atoi(ec->Attribute("blue"))),
                                                                             grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_selected"))),atoi(ec->Attribute("text_x_selected")),atoi(ec->Attribute("text_y_selected")),ec->Attribute("text_selected"),video::SColor(atoi(ec->Attribute("alpha_selected")),atoi(ec->Attribute("red_selected")),atoi(ec->Attribute("green_selected")),atoi(ec->Attribute("blue_selected"))),
-                                                                            action
+                                                                            action,menu_load
                                                                             ));
                 }
                 if(strcmp(ec->Value(),"Bar")==0)
                 {
-                    elementos_contenedor.push_back((Elemento*)new MenuBarra(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("height")),atoi(ec->Attribute("width")),strcmp(ec->Attribute("visible"),"true")==0,
+                    elementos_contenedor.push_back((Elemento*)new MenuBarra(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
                                                                             grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_bg"))),atoi(ec->Attribute("bar_x")),atoi(ec->Attribute("bar_y")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path"))),
                                                                             grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_bg_selected"))),atoi(ec->Attribute("bar_x_selected")),atoi(ec->Attribute("bar_y_selected")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_selected"))),
                                                                             atoi(ec->Attribute("max")),atoi(ec->Attribute("default_value"))));
@@ -420,7 +562,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                     {
                         TiXmlElement* el=elem_list->ToElement();
                         if(strcmp(el->Value(),"Text")==0)
-                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(ec->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("height")),atoi(el->Attribute("width")),strcmp(el->Attribute("visible"),"true")==0,
+                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(ec->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                              el->Attribute("text"),video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
                                                              ));
                         if(strcmp(el->Value(),"Image")==0)
@@ -428,7 +570,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             stringw path(el->Attribute("path"));
                             stringw dir("menu/");
                             path=dir+path;
-                            elem_lista.push_back((Elemento*)new MenuImagen(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("height")),atoi(el->Attribute("width")),strcmp(el->Attribute("visible"),"true")==0,
+                            elem_lista.push_back((Elemento*)new MenuImagen(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                                           grafico->getTexture(irr::io::path(path))));
                         }
                         if(strcmp(el->Value(),"chars")==0)
@@ -440,7 +582,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             if(player==2)
                                 pos_pb[pos]=elementos_contenedor.size();
                             for(int i=0;i<(int)chars.size();i++)
-                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("height")),atoi(el->Attribute("width")),strcmp(el->Attribute("visible"),"true")==0,
+                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                              chars[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
                                                              ));
                         }
@@ -448,12 +590,12 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         {
                             pos_stage=elementos_contenedor.size();
                             for(int i=0;i<(int)stages.size();i++)
-                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("height")),atoi(el->Attribute("width")),strcmp(el->Attribute("visible"),"true")==0,
+                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                              stages[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
                                                              ));
                         }
                     }
-                    elementos_contenedor.push_back((Elemento*)new MenuLista(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("height")),atoi(ec->Attribute("width")),strcmp(ec->Attribute("visible"),"true")==0,
+                    elementos_contenedor.push_back((Elemento*)new MenuLista(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
                                                                             atoi(ec->Attribute("arrow_left_x")),atoi(ec->Attribute("arrow_left_y")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_left"))),
                                                                             atoi(ec->Attribute("arrow_right_x")),atoi(ec->Attribute("arrow_right_y")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_right"))),
                                                                             //atoi(ec->Attribute("arrow_right_x")),0,grafico->getTexture("menu/flecha_izq2.png"),150,0,grafico->getTexture("menu/flecha_der2.png"),
@@ -463,7 +605,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                                                             ));
                 }
             }
-            contenedor_actual=new MenuContenedor(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("height")),atoi(e->Attribute("width")),strcmp(e->Attribute("visible"),"true")
+            contenedor_actual=new MenuContenedor(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")
                                                               ,elementos_contenedor);
             elementos.push_back((Elemento*)contenedor_actual);
         }
@@ -542,7 +684,8 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 
 char* Menu::getStage()
 {
-    MenuContenedor *mc=(MenuContenedor*)elementos[4];
+    //!
+    MenuContenedor *mc=((MenuContenedor*)contenedor_actual);
     MenuLista *ml=(MenuLista*)mc->elementos[pos_stage];
     MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
     stringw s2=mt->texto;

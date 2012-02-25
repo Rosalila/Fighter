@@ -9,14 +9,74 @@ Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero)
 //DIBUJAR
 void Personaje::dibujar()
 {
+    bool shadow=getString("effect.shadow")==stringw("on");
+    bool violet=getString("effect.violet")==stringw("on");
+    bool red=getString("effect.red")==stringw("on");
+    bool green=getString("effect.green")==stringw("on");
+    bool blue=getString("effect.blue")==stringw("on");
+    if(sombra.size()>20)
+    {
+        sombra.erase (sombra.begin());
+        sombra_x.erase (sombra_x.begin());
+        sombra_y.erase (sombra_y.begin());
+        flip_sombra.erase (flip_sombra.begin());
+    }
+    if(shadow)
+    {
+        for(int i=1;i<(int)sombra.size();i++)
+        {
+            if(i%8!=0)
+                continue;
+            if(sombra[i].imagen==NULL)
+                continue;
+            int dimension_x=sombra[i].dimension_x;
+            int dimension_y=sombra[i].dimension_y;
+            int alineacion_x=sombra[i].alineacion_x;
+            int alineacion_y=sombra[i].alineacion_y;
+        //    u32 t=grafico->device->getTimer()->getTime();
+        //    int t2=t%255;
+            grafico->draw2DImage
+            (   sombra[i].imagen,
+                irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
+                irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
+                irr::core::position2d<irr::f32>(sombra_x[i]-(dimension_x*sombra[i].escala/2)+alineacion_x,sombra_y[i]-(dimension_y*sombra[i].escala/2)-alineacion_y),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::f32(0), irr::core::vector2df (sombra[i].escala,sombra[i].escala),
+                true,
+                irr::video::SColor(255,0,0,255),
+                flip_sombra[i],
+                false);
+        }
+    }
+
     if(getImagen("imagen_personaje").imagen==NULL)
         return;
     int dimension_x=getImagen("imagen_personaje").dimension_x;
     int dimension_y=getImagen("imagen_personaje").dimension_y;
     int alineacion_x=getImagen("imagen_personaje").alineacion_x;
     int alineacion_y=getImagen("imagen_personaje").alineacion_y;
-//    u32 t=grafico->device->getTimer()->getTime();
-//    int t2=t%255;
+    u32 t=grafico->device->getTimer()->getTime();
+    int tr=255,tg=255,tb=255;
+
+    if(violet)
+    {
+        tg=t%255;
+    }
+    if(red)
+    {
+        tg=t%255;
+        tb=t%255;
+    }
+    if(green)
+    {
+        tr=t%255;
+        tb=t%255;
+    }
+    if(blue)
+    {
+        tr=t%255;
+        tg=t%255;
+    }
     grafico->draw2DImage
     (   getImagen("imagen_personaje").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
@@ -25,9 +85,14 @@ void Personaje::dibujar()
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (getImagen("imagen_personaje").escala,getImagen("imagen_personaje").escala),
         true,
-        irr::video::SColor(255,255,255,255),
+        irr::video::SColor(255,tr,tg,tb),
         getString("orientacion")=="i",
         false);
+
+    sombra.push_back(getImagen("imagen_personaje"));
+    sombra_x.push_back(getEntero("posicion_x"));
+    sombra_y.push_back(getEntero("posicion_y"));
+    flip_sombra.push_back(getString("orientacion")=="i");
 }
 void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y)
 {
@@ -721,6 +786,7 @@ void Personaje::cargarArchivo(char* archivo_xml)
                 int x2=atoi(elemento_imagen->Attribute("x2"));
                 int y2=atoi(elemento_imagen->Attribute("y2"));
                 stringw imagen(elemento_imagen->Attribute("image"));
+                imagen=stringw("chars/")+char_name+stringw("/")+imagen;
 
                 if(imagen!=NULL)
                     agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),grafico->getTexture(imagen)));
@@ -922,6 +988,12 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     this->input=input;
     this->grafico=grafico;
     this->char_name=stringw(nombre);
+
+    setString("effect.shadow","off");
+    setString("effect.violet","off");
+    setString("effect.red","off");
+    setString("effect.green","off");
+    setString("effect.blue","off");
 
     setEntero("posicion_x",px);
     setEntero("posicion_y",py);

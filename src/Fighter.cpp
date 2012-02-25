@@ -17,7 +17,7 @@ Fighter::Fighter()
     this->sonido = new Sonido();
     stage=new Stage(grafico,sonido);
 
-    stage->cargarDesdeXML((char*)"stages/Stage1/main.xml");
+    //stage->cargarDesdeXML((char*)"Stage1");
     pos_stage=0;
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
     this->pa_actual=0;
@@ -95,23 +95,32 @@ void Fighter::mainLoop()
 {
     for(;;)
     {
+        menu->pa.clear();
+        menu->pb.clear();
+
         menu->loopMenu();
         if(menu->getExitSignal())
             break;
 
+        pa.clear();
         pa.push_back(menu->pa[0]);
-        pa.push_back(menu->pa[1]);
-        pa.push_back(menu->pa[2]);
+        if(menu->pa.size()>=2)
+            pa.push_back(menu->pa[1]);
+        if(menu->pa.size()==3)
+            pa.push_back(menu->pa[2]);
 
+        pb.clear();
         pb.push_back(menu->pb[0]);
-        pb.push_back(menu->pb[1]);
-        pb.push_back(menu->pb[2]);
+        if(menu->pb.size()>=2)
+            pb.push_back(menu->pb[1]);
+        if(menu->pb.size()==3)
+            pb.push_back(menu->pb[2]);
 
 //        setPaActual(menu->pa[0]);
 //        setPbActual(menu->pb[0]);
         stage=menu->stage;
-        inputa=menu->inputa;
-        inputb=menu->inputb;
+//        inputa=menu->inputa;
+//        inputb=menu->inputb;
         pos_stage=0;
         //Juego
         loopJuego();
@@ -552,11 +561,15 @@ bool Fighter::render()
         getPaActual()->dibujarBarras();
         getPbActual()->dibujarBarras();
 
-        get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
-        get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
+        if(pa.size()>=2)
+            get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
+        if(pa.size()==3)
+            get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
 
-        get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
-        get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
+        if(pb.size()>=2)
+            get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
+        if(pb.size()==3)
+            get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
 //        pa->dibujarBarra("hp",312-70,50);
 //        pb->dibujarBarra("hp",512+45,50);
 

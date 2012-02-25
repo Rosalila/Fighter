@@ -67,18 +67,19 @@ void Stage::dibujarFront(int pos)
 
 void Stage::cargarDesdeXML(char* path)
 {
-    //strcpy(path,"stages/Stage1/\0");
     char *archivo=new char[255];
-    strcpy(archivo,"stages/Stage1/");
-    strcat(archivo,"main.xml");
+    strcpy(archivo,"stages/");
+    strcat(archivo,path);
+    strcat(archivo,"/main.xml");
     TiXmlDocument doc_t( archivo );
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
 
     char *music=new char[255];
-    strcpy(music,"stages/Stage1/");
-    strcat(music,"music.ogg");
+    strcpy(music,"stages/");
+    strcat(music,path);
+    strcat(music,"/music.ogg");
     sonido->agregarSonido(stringw("Stage.music"),music);
 
     TiXmlNode *nodo_ss=doc->FirstChild("StageSize");
@@ -86,8 +87,9 @@ void Stage::cargarDesdeXML(char* path)
 
     TiXmlNode *nodo_bg=doc->FirstChild("Background");
     char *bg=new char[255];
-    strcpy(bg,"stages/Stage1/");
-    strcat(bg,"images/");
+    strcpy(bg,"stages/");
+    strcat(bg,path);
+    strcat(bg,"/images/");
     strcat(bg,nodo_bg->ToElement()->Attribute("image"));
     int size_x=atoi(nodo_bg->ToElement()->Attribute("size_x"));
     int size_y=atoi(nodo_bg->ToElement()->Attribute("size_y"));
@@ -99,8 +101,9 @@ void Stage::cargarDesdeXML(char* path)
             layer=layer->NextSibling("layer"))
     {
         char *image=new char[255];
-        strcpy(image,"stages/Stage1/");
-        strcat(image,"images/");
+        strcpy(image,"stages/");
+        strcat(image,path);
+        strcat(image,"/images/");
         strcat(image,layer->ToElement()->Attribute("image"));
         int size_x=atoi(layer->ToElement()->Attribute("size_x"));
         int size_y=atoi(layer->ToElement()->Attribute("size_y"));
@@ -113,8 +116,9 @@ void Stage::cargarDesdeXML(char* path)
             layer=layer->NextSibling("layer"))
     {
         char *image=new char[255];
-        strcpy(image,"stages/Stage1/");
-        strcat(image,"images/");
+        strcpy(image,"stages/");
+        strcat(image,path);
+        strcat(image,"/images/");
         strcat(image,layer->ToElement()->Attribute("image"));
         int size_x=atoi(layer->ToElement()->Attribute("size_x"));
         int size_y=atoi(layer->ToElement()->Attribute("size_y"));

@@ -3,7 +3,7 @@
 MenuBoton::MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool visible,
           irr::video::ITexture* imagen,int alineacion_texto_x,int alineacion_texto_y, stringw texto,video::SColor color,
           irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel,
-          int accion
+          int accion,char* load_menu
           )
 {
     this->x=x;
@@ -23,6 +23,7 @@ MenuBoton::MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool vi
     this->alineacion_texto_y_sel=alineacion_texto_y_sel;
     this->seleccionado=false;
     this->accion=accion;
+    this->load_menu=load_menu;
     this->grafico=grafico;
     this->input_config="not set";
 }
