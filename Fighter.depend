@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1330202447 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1330232918 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1244,7 +1244,7 @@
 1330201250 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1330197347 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1330232892 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1329450439 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
@@ -1275,4 +1275,7 @@
 
 1329992307 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
 	"IA/Automata.h"
+
+1330226089 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Animacion.cpp
+	"Personaje/Animacion.h"
 

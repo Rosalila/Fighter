@@ -1040,6 +1040,104 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     strcat(path,nombre);
     strcat(path,"/sfx.xml\0");
     cargarArchivo(path);
+
+    //Cargar animations
+    char* path_animations=new char[255];
+    strcpy(path_animations,"chars/");
+    strcat(path_animations,nombre);
+    strcat(path_animations,"/animations.xml");
+    TiXmlDocument doc_t(path_animations);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+    TiXmlNode *back=doc->FirstChild("Back");
+    TiXmlNode *front=doc->FirstChild("Front");
+
+    //Back
+    for(TiXmlNode* nodo=back->FirstChild("Animation");
+            nodo!=NULL;
+            nodo=nodo->NextSibling("Animation"))
+    {
+        vector<Imagen>i_temp;
+        for(TiXmlNode* nodo_frame=nodo->FirstChild("Sprite");
+        nodo_frame!=NULL;
+        nodo_frame=nodo_frame->NextSibling("Sprite"))
+        {
+            TiXmlElement *elem_frame=nodo_frame->ToElement();
+            irr::video::ITexture *texture=grafico->getTexture(stringw(elem_frame->Attribute("path")));
+            i_temp.push_back(Imagen(texture,
+                                    (float)atoi(elem_frame->Attribute("scale")),
+                                    atoi(elem_frame->Attribute("align_x")),
+                                    atoi(elem_frame->Attribute("align_y"))));
+        }
+        TiXmlElement *elem_animation=nodo->ToElement();
+        bool to_oponent=strcmp(elem_animation->Attribute("to_opponent"),"i")==0;
+        stringw name=stringw(elem_animation->Attribute("name"));
+        stringw pos_x=stringw(elem_animation->Attribute("position_x"));
+        stringw pos_y=stringw(elem_animation->Attribute("position_y"));
+        if(enteros.find(pos_x)==0)
+        {
+            pos_x=stringw("Animation.")+name+stringw(".x");
+            setEntero(pos_x,atoi(elem_animation->Attribute("position_x")));
+        }
+        if(enteros.find(pos_y)==0)
+        {
+            pos_y=stringw("Animation.")+name+stringw(".y");
+            setEntero(pos_y,atoi(elem_animation->Attribute("position_y")));
+        }
+        animaciones_back.push_back(Animacion(name,
+                                        i_temp,
+                                        pos_x,
+                                        pos_y,
+                                        atoi(elem_animation->Attribute("duration")),
+                                        to_oponent));
+        setString(stringw("Animation.")+name,"off");
+
+    }
+
+
+    for(TiXmlNode* nodo=front->FirstChild("Animation");
+            nodo!=NULL;
+            nodo=nodo->NextSibling("Animation"))
+    {
+        vector<Imagen>i_temp;
+        for(TiXmlNode* nodo_frame=nodo->FirstChild("Sprite");
+        nodo_frame!=NULL;
+        nodo_frame=nodo_frame->NextSibling("Sprite"))
+        {
+            TiXmlElement *elem_frame=nodo_frame->ToElement();
+            irr::video::ITexture *texture=grafico->getTexture(stringw(elem_frame->Attribute("path")));
+            i_temp.push_back(Imagen(texture,
+                                    (float)atoi(elem_frame->Attribute("scale")),
+                                    atoi(elem_frame->Attribute("align_x")),
+                                    atoi(elem_frame->Attribute("align_y"))));
+        }
+        TiXmlElement *elem_animation=nodo->ToElement();
+        bool to_oponent=strcmp(elem_animation->Attribute("to_opponent"),"i")==0;
+        stringw name=stringw(elem_animation->Attribute("name"));
+        stringw pos_x=stringw(elem_animation->Attribute("position_x"));
+        stringw pos_y=stringw(elem_animation->Attribute("position_y"));
+        if(enteros.find(pos_x)==0)
+        {
+            pos_x=stringw("Animation.")+name+stringw(".x");
+            setEntero(pos_x,atoi(elem_animation->Attribute("position_x")));
+        }
+        if(enteros.find(pos_y)==0)
+        {
+            pos_y=stringw("Animation.")+name+stringw(".y");
+            setEntero(pos_y,atoi(elem_animation->Attribute("position_y")));
+        }
+        animaciones_front.push_back(Animacion(name,
+                                        i_temp,
+                                        pos_x,
+                                        pos_y,
+                                        atoi(elem_animation->Attribute("duration")),
+                                        to_oponent));
+        setString(stringw("Animation.")+name,"off");
+
+    }
+
 }
 
 void Personaje::logicaBarras()
@@ -1128,4 +1226,79 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
             if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],atacado_x,atacado_y,atacante_x,atacante_y))
                 return true;
     return false;
+}
+
+void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
+{
+    irr::video::ITexture *texture=imagen.imagen;
+    grafico->draw2DImage
+    (   texture,
+        irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
+        irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
+        irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x,posicion_y+imagen.alineacion_y),
+        irr::core::position2d<irr::f32>(0,0),
+        irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
+        true,
+        irr::video::SColor(255,255,255,255),
+        false,
+        false);
+}
+void Personaje::dibujarAnimacionesBack()
+{
+    for(int i=0;i<(int)animaciones_back.size();i++)
+    {
+        if(getString(stringw(stringw("Animation.")+animaciones_back[i].nombre))=="on")
+        {
+            animaciones_actuales_back.push_back(animaciones_back[i]);
+            setString(stringw(stringw("Animation.")+animaciones_back[i].nombre),"off");
+        }
+    }
+    for(int i=0;i<(int)animaciones_actuales_back.size();i++)
+    {
+        Animacion* animacion=&animaciones_actuales_back[i];
+        dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
+        {
+            animacion->tiempo_transcurrido++;
+            continue;
+        }
+        //si ya termino el frame
+        animacion->imagen_actual++;
+        animacion->tiempo_transcurrido=0;
+        //Cuando termina
+        if(animacion->imagen_actual>=(int)animacion->sprites.size())
+        {
+            animaciones_actuales_back.erase(animaciones_actuales_back.begin()+i);
+        }
+    }
+}
+
+void Personaje::dibujarAnimacionesFront()
+{
+    for(int i=0;i<(int)animaciones_front.size();i++)
+    {
+        if(getString(stringw(stringw("Animation.")+animaciones_front[i].nombre))=="on")
+        {
+            animaciones_actuales_front.push_back(animaciones_front[i]);
+            setString(stringw(stringw("Animation.")+animaciones_front[i].nombre),"off");
+        }
+    }
+    for(int i=0;i<(int)animaciones_actuales_front.size();i++)
+    {
+        Animacion* animacion=&animaciones_actuales_front[i];
+        dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
+        {
+            animacion->tiempo_transcurrido++;
+            continue;
+        }
+        //si ya termino el frame
+        animacion->imagen_actual++;
+        animacion->tiempo_transcurrido=0;
+        //Cuando termina
+        if(animacion->imagen_actual>=(int)animacion->sprites.size())
+        {
+            animaciones_actuales_front.erase(animaciones_actuales_front.begin()+i);
+        }
+    }
 }

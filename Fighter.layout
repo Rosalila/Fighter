@@ -52,6 +52,9 @@
 	<File name="include/Menu/MenuTexto.h" open="0" top="0" tabpos="0">
 		<Cursor position="316" topLine="0" />
 	</File>
+	<File name="include/Personaje/Animacion.h" open="0" top="0" tabpos="4">
+		<Cursor position="288" topLine="0" />
+	</File>
 	<File name="include/Personaje/Barra.h" open="0" top="0" tabpos="0">
 		<Cursor position="106" topLine="7" />
 	</File>
@@ -61,7 +64,7 @@
 	<File name="include/Personaje/Frame.h" open="0" top="0" tabpos="0">
 		<Cursor position="1160" topLine="16" />
 	</File>
-	<File name="include/Personaje/Imagen.h" open="0" top="0" tabpos="0">
+	<File name="include/Personaje/Imagen.h" open="0" top="0" tabpos="5">
 		<Cursor position="353" topLine="0" />
 	</File>
 	<File name="include/Personaje/InputMovimiento.h" open="0" top="0" tabpos="0">
@@ -79,8 +82,8 @@
 	<File name="include/Personaje/Movimiento.h" open="0" top="0" tabpos="0">
 		<Cursor position="256" topLine="0" />
 	</File>
-	<File name="include/Personaje/Personaje.h" open="0" top="0" tabpos="4">
-		<Cursor position="384" topLine="9" />
+	<File name="include/Personaje/Personaje.h" open="1" top="0" tabpos="1">
+		<Cursor position="631" topLine="20" />
 	</File>
 	<File name="include/Personaje/Proyectil.h" open="0" top="0" tabpos="0">
 		<Cursor position="253" topLine="2" />
@@ -97,11 +100,11 @@
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="233" topLine="0" />
 	</File>
-	<File name="src/Fighter.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="11573" topLine="376" />
+	<File name="src/Fighter.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="9560" topLine="314" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="1943" topLine="55" />
+		<Cursor position="1943" topLine="87" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3142" topLine="2" />
@@ -148,6 +151,9 @@
 	<File name="src/Menu/MenuTexto.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="329" topLine="0" />
 	</File>
+	<File name="src/Personaje/Animacion.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="195" topLine="0" />
+	</File>
 	<File name="src/Personaje/Barra.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="500" topLine="0" />
 	</File>
@@ -172,8 +178,8 @@
 	<File name="src/Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="172" topLine="0" />
 	</File>
-	<File name="src/Personaje/Personaje.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="43958" topLine="1080" />
+	<File name="src/Personaje/Personaje.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="50592" topLine="1241" />
 	</File>
 	<File name="src/Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="838" topLine="20" />
@@ -182,7 +188,7 @@
 		<Cursor position="29" topLine="0" />
 	</File>
 	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="370" topLine="20" />
+		<Cursor position="793" topLine="24" />
 	</File>
 	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="2">
 		<Cursor position="3792" topLine="93" />

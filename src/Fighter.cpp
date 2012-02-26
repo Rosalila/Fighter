@@ -574,10 +574,15 @@ bool Fighter::render()
         //Stage
         stage->dibujarBack(pos_stage);
 
-
+        //Animaciones back
+        getPaActual()->dibujarAnimacionesBack();
+        getPbActual()->dibujarAnimacionesBack();
         //Personaje
         getPaActual()->dibujar();
         getPbActual()->dibujar();
+        //Animaciones front
+        getPaActual()->dibujarAnimacionesFront();
+        getPbActual()->dibujarAnimacionesFront();
 
         //Hit Boxes
 //        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));

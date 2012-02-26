@@ -2,6 +2,7 @@
 #include "Personaje/InputMovimiento.h"
 #include "Personaje/Proyectil.h"
 #include "Sonido/Sonido.h"
+#include "Personaje/Animacion.h"
 
 class Personaje
 {
@@ -25,7 +26,11 @@ class Personaje
     vector<bool>flip_sombra;
 
     //Otros vectores
-    vector<InputMovimiento> inputs;
+    vector<Animacion>animaciones_back;
+    vector<Animacion>animaciones_front;
+    vector<Animacion>animaciones_actuales_back;
+    vector<Animacion>animaciones_actuales_front;
+    vector<InputMovimiento>inputs;
     vector<Movimiento*> movimientos_constantes_actuales;
     vector<Proyectil*> proyectiles_actuales;
     vector<Barra> barras;
@@ -46,6 +51,9 @@ class Personaje
     void cargarArchivo(char* archivo_xml);
     //DIBUJAR
     void dibujar();
+    void dibujarImagen(Grafico*grafico,Imagen imagen,int posicion_x,int posicion_y);
+    void dibujarAnimacionesBack();
+    void dibujarAnimacionesFront();
     void dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y);
     void dibujarBarras();
     void dibujarBarra(Barra barra);

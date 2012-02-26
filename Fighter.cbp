@@ -49,6 +49,7 @@
 		<Unit filename="include/Menu/MenuImagen.h" />
 		<Unit filename="include/Menu/MenuLista.h" />
 		<Unit filename="include/Menu/MenuTexto.h" />
+		<Unit filename="include/Personaje/Animacion.h" />
 		<Unit filename="include/Personaje/Barra.h" />
 		<Unit filename="include/Personaje/Condicion.h" />
 		<Unit filename="include/Personaje/Frame.h" />
@@ -88,6 +89,7 @@
 		<Unit filename="src/Menu/MenuImagen.cpp" />
 		<Unit filename="src/Menu/MenuLista.cpp" />
 		<Unit filename="src/Menu/MenuTexto.cpp" />
+		<Unit filename="src/Personaje/Animacion.cpp" />
 		<Unit filename="src/Personaje/Barra.cpp" />
 		<Unit filename="src/Personaje/Condicion.cpp" />
 		<Unit filename="src/Personaje/Frame.cpp" />
