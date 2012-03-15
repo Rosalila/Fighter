@@ -1,3 +1,6 @@
+#ifndef PERSONAJE_H
+#define PERSONAJE_H
+
 #include "Personaje/Movimiento.h"
 #include "Personaje/InputMovimiento.h"
 #include "Personaje/Proyectil.h"
@@ -18,6 +21,7 @@ class Personaje
     int comparacion_hp_contrario;
     int numero;
     int combo;
+    int px_colision,py_colision;
 
     //efecto
     vector<Imagen>sombra;
@@ -107,3 +111,5 @@ class Personaje
     bool cumpleCondicion(Condicion* condicion);
     bool inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer);
 };
+
+#endif

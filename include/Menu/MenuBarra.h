@@ -1,3 +1,6 @@
+#ifndef MENUBARRA_H
+#define MENUBARRA_H
+
 #include "Menu/Elemento.h"
 
 class MenuBarra:Elemento
@@ -25,3 +28,5 @@ public:
     bool getSeleccionado();
     void setSeleccionado(bool seleccionado);
 };
+
+#endif

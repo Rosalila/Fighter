@@ -1,3 +1,6 @@
+#ifndef PROYECTIL_H
+#define PROYECTIL_H
+
 #include "Grafico/Grafico.h"
 #include "Personaje/Imagen.h"
 #include "Personaje/Frame.h"
@@ -26,3 +29,5 @@ int frame_actual,tiempo_transcurrido,damage;
     Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage);
     void avanzarFrame();
 };
+
+#endif

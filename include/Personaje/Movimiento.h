@@ -1,3 +1,6 @@
+#ifndef MOVIMIENTO_H
+#define MOVIMIENTO_H
+
 #include "Grafico/Grafico.h"
 #include "Personaje/Frame.h"
 
@@ -14,3 +17,5 @@ class Movimiento
     void agregarCondicion(vector<Condicion*> condicion,int frame);
     //void agregarCondicion(int posicion,Condicion condicion,int frame);
 };
+
+#endif

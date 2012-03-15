@@ -1,21 +1,39 @@
 #include "../include/Fighter.h"
-Fighter::Fighter()
+Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage)
 {
-    //Creadas abierto
-    receiver=new Receiver();
-    //this->inputa=(Input*)new InputXml(1,receiver);
-    //this->inputb=(Input*)new InputXml(2,receiver);
-    this->inputa=new Input();
-    this->inputb=new Input();
-    //this->inputa->cargarIAXML(1);
-    this->inputa->cargarDesdeXML(1,receiver);
-    this->inputb->cargarDesdeXML(2,receiver);
+    duracion_ko=30;
+    tiempo_actual_ko=0;
+    pos_imagen_ko=0;
+    ko.push_back(Imagen(grafico->getTexture("misc/ko/1.png"),1,0,0));
+    ko.push_back(Imagen(grafico->getTexture("misc/ko/2.png"),1,0,0));
+    ko.push_back(Imagen(grafico->getTexture("misc/ko/3.png"),1,0,0));
 
 
-    //Parte de la clase
-    this->grafico=new Grafico(receiver);
-    this->sonido = new Sonido();
-    stage=new Stage(grafico,sonido);
+    duracion_intro=30;
+    tiempo_actual_intro=0;
+    pos_imagen_intro=0;
+    match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/1.png"),1,0,0));
+    match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/2.png"),1,0,0));
+    match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/3.png"),1,0,0));
+//    //Creadas abierto
+//    receiver=new Receiver();
+//    //this->inputa=(Input*)new InputXml(1,receiver);
+//    //this->inputb=(Input*)new InputXml(2,receiver);
+//    this->inputa=new Input();
+//    this->inputb=new Input();
+//    //this->inputa->cargarIAXML(1);
+//    this->inputa->cargarDesdeXML(1,receiver);
+//    this->inputb->cargarDesdeXML(2,receiver);
+//
+//
+//    //Parte de la clase
+//    this->grafico=new Grafico(receiver);
+//    this->sonido = new Sonido();
+    //Engines
+    this->sonido=sonido;
+    this->grafico=grafico;
+    this->receiver=receiver;
+    //stage=new Stage(grafico,sonido);
 
     //stage->cargarDesdeXML((char*)"Stage1");
     pos_stage=0;
@@ -27,10 +45,46 @@ Fighter::Fighter()
 //    setPaActual(new Personaje(grafico,sonido,1));
 //    setPbActual(new Personaje(grafico,sonido,2));
 
-    menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
+    //menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
     pause_menu=new Menu(grafico,receiver,sonido,(char*)"menu/pause_menu.xml");
 
     //escribirInputsXML();
+
+
+//        menu->pa.clear();
+//        menu->pb.clear();
+//
+//        menu->loopMenu();
+//        if(menu->getExitSignal())
+//            exit(0);
+//
+//        pa.clear();
+//        pa.push_back(menu->pa[0]);
+//        if(menu->pa.size()>=2)
+//            pa.push_back(menu->pa[1]);
+//        if(menu->pa.size()==3)
+//            pa.push_back(menu->pa[2]);
+//
+//        pb.clear();
+//        pb.push_back(menu->pb[0]);
+//        if(menu->pb.size()>=2)
+//            pb.push_back(menu->pb[1]);
+//        if(menu->pb.size()==3)
+//            pb.push_back(menu->pb[2]);
+//
+////        setPaActual(menu->pa[0]);
+////        setPbActual(menu->pb[0]);
+//        stage=menu->stage;
+//        inputa=menu->inputa;
+//        inputb=menu->inputb;
+        pos_stage=0;
+        this->pa=pa;
+        this->pb=pb;
+        this->stage=stage;
+        //Juego
+        pa[0]->setString("movimiento_actual","intro");
+        pb[0]->setString("movimiento_actual","intro");
+        loopJuego();
 }
 
 Personaje* Fighter::getPaActual()
@@ -95,35 +149,35 @@ void Fighter::mainLoop()
 {
     for(;;)
     {
-        menu->pa.clear();
-        menu->pb.clear();
-
-        menu->loopMenu();
-        if(menu->getExitSignal())
-            break;
-
-        pa.clear();
-        pa.push_back(menu->pa[0]);
-        if(menu->pa.size()>=2)
-            pa.push_back(menu->pa[1]);
-        if(menu->pa.size()==3)
-            pa.push_back(menu->pa[2]);
-
-        pb.clear();
-        pb.push_back(menu->pb[0]);
-        if(menu->pb.size()>=2)
-            pb.push_back(menu->pb[1]);
-        if(menu->pb.size()==3)
-            pb.push_back(menu->pb[2]);
-
-//        setPaActual(menu->pa[0]);
-//        setPbActual(menu->pb[0]);
-        stage=menu->stage;
-//        inputa=menu->inputa;
-//        inputb=menu->inputb;
-        pos_stage=0;
-        //Juego
-        loopJuego();
+//        menu->pa.clear();
+//        menu->pb.clear();
+//
+//        menu->loopMenu();
+//        if(menu->getExitSignal())
+//            break;
+//
+//        pa.clear();
+//        pa.push_back(menu->pa[0]);
+//        if(menu->pa.size()>=2)
+//            pa.push_back(menu->pa[1]);
+//        if(menu->pa.size()==3)
+//            pa.push_back(menu->pa[2]);
+//
+//        pb.clear();
+//        pb.push_back(menu->pb[0]);
+//        if(menu->pb.size()>=2)
+//            pb.push_back(menu->pb[1]);
+//        if(menu->pb.size()==3)
+//            pb.push_back(menu->pb[2]);
+//
+////        setPaActual(menu->pa[0]);
+////        setPbActual(menu->pb[0]);
+//        stage=menu->stage;
+////        inputa=menu->inputa;
+////        inputb=menu->inputb;
+//        pos_stage=0;
+//        //Juego
+//        loopJuego();
     }
     //Drops
     sonido->drop();
@@ -141,17 +195,34 @@ bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,in
     int x2a=hb_azul.p2x+atacado_x;
     int y2a=hb_azul.p2y+atacado_y;
 
-    return (
-            (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
-            (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
-            (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
-            (x1a<=x1r && x1r<=x2a && x2a<=x2r)
-            )&&(
-            (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
-            (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
-            (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
-            (y1a<=y1r && y1r<=y2a && y2a<=y2r)
-            );
+    bool hay_colision=(
+                          (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
+                          (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
+                          (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
+                          (x1a<=x1r && x1r<=x2a && x2a<=x2r)
+                      )&&(
+                          (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
+                          (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
+                          (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
+                          (y1a<=y1r && y1r<=y2a && y2a<=y2r)
+                      );
+
+    if(hay_colision)
+    {
+        int x1,x2,y1,y2;
+        if(x1a>x1r)x1=x1a;else x1=x1r;
+        if(x2a<x2r)x2=x2a;else x2=x2r;
+
+        if(y1a>y1r)y1=y1a;else y1=y1r;
+        if(y2a<y2r)y2=y2a;else y2=y2r;
+
+        px_colision=x1+((x2-x1)/2);
+        py_colision=y1+((y2-y1)/2);
+//        getPbActual()->setEntero("Colision.x",x1+((x2-x1)/2));
+//        getPbActual()->setEntero("Colision.y",y1+((y2-y1)/2));
+    }
+
+    return hay_colision;
 }
 
 bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
@@ -160,21 +231,21 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,
     vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
     if(atacante->getString("orientacion")=="i")
-    for(int i=0;i<(int)hb_rojas.size();i++)
-    {
-        int a=hb_rojas[i].p1x;
-        int b=hb_rojas[i].p2x;
-        hb_rojas[i].p1x=-b;
-        hb_rojas[i].p2x=-a;
-    }
+        for(int i=0; i<(int)hb_rojas.size(); i++)
+        {
+            int a=hb_rojas[i].p1x;
+            int b=hb_rojas[i].p2x;
+            hb_rojas[i].p1x=-b;
+            hb_rojas[i].p2x=-a;
+        }
     if(atacado->getString("orientacion")=="i")
-    for(int i=0;i<(int)hb_azules.size();i++)
-    {
-        int a=hb_azules[i].p1x;
-        int b=hb_azules[i].p2x;
-        hb_azules[i].p1x=-b;
-        hb_azules[i].p2x=-a;
-    }
+        for(int i=0; i<(int)hb_azules.size(); i++)
+        {
+            int a=hb_azules[i].p1x;
+            int b=hb_azules[i].p2x;
+            hb_azules[i].p1x=-b;
+            hb_azules[i].p2x=-a;
+        }
 
 
     int ax=atacado_x;
@@ -182,8 +253,8 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,
     int rx=atacante_x;
     int ry=atacante_y;
 
-    for(int a=0;a<(int)hb_azules.size();a++)
-        for(int r=0;r<(int)hb_rojas.size();r++)
+    for(int a=0; a<(int)hb_azules.size(); a++)
+        for(int r=0; r<(int)hb_rojas.size(); r++)
             if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
                 return true;
     return false;
@@ -195,21 +266,21 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,
     vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
     if(atacante->getString("orientacion")=="i")
-    for(int i=0;i<(int)hb_rojas.size();i++)
-    {
-        int a=hb_rojas[i].p1x;
-        int b=hb_rojas[i].p2x;
-        hb_rojas[i].p1x=-b;
-        hb_rojas[i].p2x=-a;
-    }
+        for(int i=0; i<(int)hb_rojas.size(); i++)
+        {
+            int a=hb_rojas[i].p1x;
+            int b=hb_rojas[i].p2x;
+            hb_rojas[i].p1x=-b;
+            hb_rojas[i].p2x=-a;
+        }
     if(atacado->getString("orientacion")=="i")
-    for(int i=0;i<(int)hb_azules.size();i++)
-    {
-        int a=hb_azules[i].p1x;
-        int b=hb_azules[i].p2x;
-        hb_azules[i].p1x=-b;
-        hb_azules[i].p2x=-a;
-    }
+        for(int i=0; i<(int)hb_azules.size(); i++)
+        {
+            int a=hb_azules[i].p1x;
+            int b=hb_azules[i].p2x;
+            hb_azules[i].p1x=-b;
+            hb_azules[i].p2x=-a;
+        }
 
 
     int ax=atacado->getEntero("posicion_x");
@@ -217,8 +288,8 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,
     int rx=atacante->getEntero("posicion_x");
     int ry=atacante->getEntero("posicion_y");
 
-    for(int a=0;a<(int)hb_azules.size();a++)
-        for(int r=0;r<(int)hb_rojas.size();r++)
+    for(int a=0; a<(int)hb_azules.size(); a++)
+        for(int r=0; r<(int)hb_rojas.size(); r++)
             if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
                 return true;
     return false;
@@ -240,6 +311,8 @@ void Fighter::logicaPersonaje(Personaje* p)
         {
             p->setString("hit","yes");
             m->ya_pego=true;
+            p->personaje_contrario->setEntero("Colision.x",px_colision);
+            p->personaje_contrario->setEntero("Colision.y",py_colision);
         }
     }
     else
@@ -263,7 +336,8 @@ void Fighter::logicaPersonaje(Personaje* p)
             pa[pa_actual]->setEntero("posicion_y",pa[p_anterior]->getEntero("posicion_y"));
             p->setString("change_char","off");
             p=pa[pa_actual];
-        }else
+        }
+        else
         {
             int p_anterior=pb_actual;
             pb_actual++;
@@ -292,27 +366,29 @@ void Fighter::logicaPersonaje(Personaje* p)
     else
         p->strings["orientacion"]="d";
     //get input
-    stringw str_movimiento=p->mapInputToMovimiento();
+    stringw str_movimiento="5";
+    if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
+        str_movimiento=p->mapInputToMovimiento();
 
     //ejecutar cancel
     if(str_movimiento!="")
-    if(p->cumpleCondiciones(str_movimiento))
-    {
-        Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
-        p->setString("movimiento_actual",str_movimiento);
-        sonido->reproducirSonido(str_movimiento);
-    }
+        if(p->cumpleCondiciones(str_movimiento))
+        {
+            Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+            m->frame_actual=0;
+            m->tiempo_transcurrido=0;
+            m->ya_pego=false;
+            p->setString("movimiento_actual",str_movimiento);
+            sonido->reproducirSonido(str_movimiento);
+        }
     //Movimientos continuos
-      //agregar nuevos
-    for(int i=0;i<(int)p->inputs.size();i++)//for each movimiento
+    //agregar nuevos
+    for(int i=0; i<(int)p->inputs.size(); i++) //for each movimiento
         if(p->inputs[i].input[0]=="*")//buscar los constantes
             if(p->cumpleCondiciones(p->inputs[i].movimiento))//si cumple
             {
                 bool existe=false;
-                for(int j=0;j<(int)p->movimientos_constantes_actuales.size();j++)//for each movimiento
+                for(int j=0; j<(int)p->movimientos_constantes_actuales.size(); j++) //for each movimiento
                     if(p->movimientos_constantes_actuales[j]->nombre==p->inputs[i].movimiento)
                     {
                         existe=true;
@@ -340,7 +416,7 @@ void Fighter::logicaPersonaje(Personaje* p)
             }
 
     //Agregar Proyectiles
-    for(int i=0;i<(int)p->proyectiles_actuales.size();i++)
+    for(int i=0; i<(int)p->proyectiles_actuales.size(); i++)
     {
         Proyectil*proyectil=p->proyectiles_actuales[i];
         if(p->cumpleCondiciones(proyectil->frames[0].condiciones))//si cumple
@@ -369,20 +445,27 @@ void Fighter::aplicarModificadores(Personaje *p)
     {
         m->frame_actual++;
         m->tiempo_transcurrido=0;
-    }else
+    }
+    else
         m->tiempo_transcurrido++;
     //verificar fin de movimiento
     if(m->frame_actual==(int)m->frames.size())
     {
-        m->frame_actual=0;
         m->ya_pego=false;
         if(p->getString("movimiento_actual")=="recibir")
             p->combo=0;
-        p->setString("movimiento_actual","5");
+        if(p->getString("movimiento_actual")!="ko")
+        {
+            m->frame_actual=0;
+            p->setString("movimiento_actual","5");
+        }else
+        {
+            m->frame_actual--;
+        }
     }
     //Movimientos continuos
-      //ejecutar existentes
-    for(int i=0;i<(int)p->movimientos_constantes_actuales.size();i++)
+    //ejecutar existentes
+    for(int i=0; i<(int)p->movimientos_constantes_actuales.size(); i++)
     {
         Movimiento* mc=p->movimientos_constantes_actuales[i];
         Frame* fc=&mc->frames[mc->frame_actual];
@@ -393,7 +476,8 @@ void Fighter::aplicarModificadores(Personaje *p)
         {
             mc->frame_actual++;
             mc->tiempo_transcurrido=0;
-        }else
+        }
+        else
             mc->tiempo_transcurrido++;
         //verificar fin de movimiento
         if(mc->frame_actual==(int)mc->frames.size())
@@ -414,10 +498,10 @@ void Fighter::logicaStagePersonaje(Personaje* p)
 
     desplazamiento=sub_borde_izq-p->getEntero("posicion_x");
     if(desplazamiento>0
-       && p->getEntero("posicion_x")<p->personaje_contrario->getEntero("posicion_x")
-       && p->getEntero("posicion_x")>borde_izq-desplazamiento
-       && p->personaje_contrario->getEntero("posicion_x")<borde_der-desplazamiento
-       && pos_stage<stage->size/2-grafico->ventana_x/2)
+            && p->getEntero("posicion_x")<p->personaje_contrario->getEntero("posicion_x")
+            && p->getEntero("posicion_x")>borde_izq-desplazamiento
+            && p->personaje_contrario->getEntero("posicion_x")<borde_der-desplazamiento
+            && pos_stage<stage->size/2-grafico->ventana_x/2)
     {
         p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
         p->setEntero("posicion_x",p->getEntero("posicion_x")+desplazamiento);
@@ -426,10 +510,10 @@ void Fighter::logicaStagePersonaje(Personaje* p)
 
     desplazamiento=p->getEntero("posicion_x")-sub_borde_der;
     if(desplazamiento>0
-       && p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x")
-       && p->getEntero("posicion_x")<borde_der+desplazamiento
-       && p->personaje_contrario->getEntero("posicion_x")>borde_izq+desplazamiento
-       && pos_stage>-stage->size/2+grafico->ventana_x/2)
+            && p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x")
+            && p->getEntero("posicion_x")<borde_der+desplazamiento
+            && p->personaje_contrario->getEntero("posicion_x")>borde_izq+desplazamiento
+            && pos_stage>-stage->size/2+grafico->ventana_x/2)
     {
         p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
         p->setEntero("posicion_x",p->getEntero("posicion_x")-desplazamiento);
@@ -489,13 +573,13 @@ void Fighter::loopJuego()
 
     sonido->reproducirSonido("Stage.music");
     u32 anterior=grafico->device->getTimer()->getTime();
-	for (;;)
-	{
-	    //receiver->endEventProcess();
-	    grafico->device->run();
-	    //cout<<grafico->device->getTimer()->getTime()<<endl;
-	    //setear frames a "60"
-	    if(grafico->device->getTimer()->getTime()<anterior+16)
+    for (;;)
+    {
+        //receiver->endEventProcess();
+        grafico->device->run();
+        //cout<<grafico->device->getTimer()->getTime()<<endl;
+        //setear frames a "60"
+        if(grafico->device->getTimer()->getTime()<anterior+16)
             continue;
 
         if(receiver->IsKeyPressed(irr::KEY_ESCAPE))///!!!
@@ -513,41 +597,46 @@ void Fighter::loopJuego()
         //render
         render();
         //receiver->startEventProcess();
-	}
-	sonido->pararSonido("Stage.music");
+    }
+    sonido->pararSonido("Stage.music");
 }
 
-void itoa(int n, char *s, int b) {
-	static char digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-	int i=0, sign;
+void itoa(int n, char *s, int b)
+{
+    static char digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
+    int i=0, sign;
 
-	if ((sign = n) < 0)
-		n = -n;
+    if ((sign = n) < 0)
+        n = -n;
 
-	do {
-		s[i++] = digits[n % b];
-	} while ((n /= b) > 0);
+    do
+    {
+        s[i++] = digits[n % b];
+    }
+    while ((n /= b) > 0);
 
-	if (sign < 0)
-		s[i++] = '-';
-	s[i] = '\0';
+    if (sign < 0)
+        s[i++] = '-';
+    s[i] = '\0';
 
-	//return strrev(s);
+    //return strrev(s);
 }
 
-char *strrev(char *str) {
-	char *p1, *p2;
+char *strrev(char *str)
+{
+    char *p1, *p2;
 
-	if (!str || !*str)
-		return str;
+    if (!str || !*str)
+        return str;
 
-	for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2) {
-		*p1 ^= *p2;
-		*p2 ^= *p1;
-		*p1 ^= *p2;
-	}
+    for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
+    {
+        *p1 ^= *p2;
+        *p2 ^= *p1;
+        *p1 ^= *p2;
+    }
 
-	return str;
+    return str;
 }
 
 void Fighter::dibujarBarra()
@@ -585,10 +674,13 @@ bool Fighter::render()
         getPbActual()->dibujarAnimacionesFront();
 
         //Hit Boxes
-//        pa->dibujarHitBoxes("azules","resources/blue.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
-//        pb->dibujarHitBoxes("azules","resources/blue.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
-//        pa->dibujarHitBoxes("rojas","resources/red.png",pa->getString("orientacion")=="i",pa->getEntero("posicion_x"),pa->getEntero("posicion_y"));
-//        pb->dibujarHitBoxes("rojas","resources/red.png",pb->getString("orientacion")=="i",pb->getEntero("posicion_x"),pb->getEntero("posicion_y"));
+        if(receiver->IsKeyDownn(irr::KEY_KEY_H))
+        {
+            getPaActual()->dibujarHitBoxes("azules","",getPaActual()->getString("orientacion")=="i",getPaActual()->getEntero("posicion_x"),getPaActual()->getEntero("posicion_y"));
+            getPbActual()->dibujarHitBoxes("azules","",getPbActual()->getString("orientacion")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
+            getPaActual()->dibujarHitBoxes("rojas","",getPaActual()->getString("orientacion")=="i",getPaActual()->getEntero("posicion_x"),getPaActual()->getEntero("posicion_y"));
+            getPbActual()->dibujarHitBoxes("rojas","",getPbActual()->getString("orientacion")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
+        }
 
         getPaActual()->dibujarProyectiles();
         getPbActual()->dibujarProyectiles();
@@ -609,20 +701,102 @@ bool Fighter::render()
 //        pa->dibujarBarra("hp",312-70,50);
 //        pb->dibujarBarra("hp",512+45,50);
 
-        if(getPaActual()->getEntero("hp.current_value")<=0 || getPbActual()->getEntero("hp.current_value")<=0)
+        bool game_over_a=true;
+        for(int i=0;i<(int)pa.size();i++)
+            if(pa[i]->getEntero("hp.current_value")>0)
+                game_over_a=false;
+
+        bool game_over_b=true;
+        for(int i=0;i<(int)pb.size();i++)
+            if(pb[i]->getEntero("hp.current_value")>0)
+                game_over_b=false;
+
+        if(game_over_a && getPaActual()->getString("movimiento_actual")!="ko")
         {
-            irr::video::ITexture* texture_game_over=grafico->getTexture("misc/ko.png");
+            getPaActual()->setString("movimiento_actual","ko");
+        }
+
+        if(game_over_b && getPbActual()->getString("movimiento_actual")!="ko")
+        {
+            getPbActual()->setString("movimiento_actual","ko");
+        }
+
+        if(game_over_a || game_over_b)
+        {
+            //irr::video::ITexture* texture_gameover=grafico->getTexture("misc/ko/1.png");
+            irr::video::ITexture* texture_gameover=ko[pos_imagen_ko].imagen;
+            tiempo_actual_ko++;
+            if(tiempo_actual_ko==duracion_ko)
+            {
+                pos_imagen_ko++;
+                tiempo_actual_ko=0;
+            }
+            if(pos_imagen_ko>=(int)ko.size())
+                pos_imagen_ko=0;
+            int width=texture_gameover->getOriginalSize().Width;
+            int height=texture_gameover->getOriginalSize().Height;
             grafico->draw2DImage
-            (   texture_game_over,
-                irr::core::dimension2d<irr::f32> (500,500),
-                irr::core::rect<irr::f32>(0,0,500,500),
-                irr::core::position2d<irr::f32>(0,0),
+            (   texture_gameover,
+                irr::core::dimension2d<irr::f32> (width,height),
+                irr::core::rect<irr::f32>(0,0,width,height),
+                irr::core::position2d<irr::f32>((1024-width)/2,(600-height)/2),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
                 true,
                 irr::video::SColor(255,255,255,255),
                 false,
                 false);
+        }
+
+
+        if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("movimiento_actual")=="5" && pb[0]->getString("movimiento_actual")=="5")
+        {
+            //irr::video::ITexture* texture_gameover=grafico->getTexture("misc/ko/1.png");
+            irr::video::ITexture* texture_gameover=match_intro[pos_imagen_intro].imagen;
+            tiempo_actual_intro++;
+            if(tiempo_actual_intro==duracion_intro)
+            {
+                pos_imagen_intro++;
+                tiempo_actual_intro=0;
+            }
+            //if(pos_imagen_intro>=(int)ko.size())
+            //    pos_imagen_intro=0;
+            int width=texture_gameover->getOriginalSize().Width;
+            int height=texture_gameover->getOriginalSize().Height;
+            grafico->draw2DImage
+            (   texture_gameover,
+                irr::core::dimension2d<irr::f32> (width,height),
+                irr::core::rect<irr::f32>(0,0,width,height),
+                irr::core::position2d<irr::f32>((1024-width)/2,(600-height)/2),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::f32(0), irr::core::vector2df (0,0),
+                true,
+                irr::video::SColor(255,255,255,255),
+                false,
+                false);
+        }
+
+
+
+        if(getPaActual()->getEntero("hp.current_value")<=0)
+        {
+            getPaActual()->setString("change_char","on");
+//            irr::video::ITexture* texture_game_over=grafico->getTexture("misc/ko.png");
+//            grafico->draw2DImage
+//            (   texture_game_over,
+//                irr::core::dimension2d<irr::f32> (500,500),
+//                irr::core::rect<irr::f32>(0,0,500,500),
+//                irr::core::position2d<irr::f32>(0,0),
+//                irr::core::position2d<irr::f32>(0,0),
+//                irr::f32(0), irr::core::vector2df (0,0),
+//                true,
+//                irr::video::SColor(255,255,255,255),
+//                false,
+//                false);
+        }
+        if(getPbActual()->getEntero("hp.current_value")<=0 && !(game_over_a || game_over_b))
+        {
+            getPbActual()->setString("change_char","on");
         }
         stage->dibujarFront(pos_stage);
 

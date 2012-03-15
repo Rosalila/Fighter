@@ -41,6 +41,17 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
     }
     if(resultado=="")
         resultado="5";
+
+    if(stringw(strings->operator[]("orientacion"))==stringw("i"))
+    {
+        for(int i=0;i<(int)resultado.size();i++)
+        {
+            if(resultado[i]=='4')resultado[i]='6';
+            else if(resultado[i]=='6')resultado[i]='4';
+            else if(resultado[i]=='3')resultado[i]='1';
+            else if(resultado[i]=='1')resultado[i]='3';
+        }
+    }
     buffer_inputs.insert(buffer_inputs.begin(),resultado);
     buffer_inputs.pop_back();
 }

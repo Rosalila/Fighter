@@ -1,3 +1,6 @@
+#ifndef STAGE_H
+#define STAGE_H
+
 #include "Grafico/Grafico.h"
 #include "Sonido/Sonido.h"
 
@@ -28,3 +31,5 @@ class Stage
     void dibujarFront(int pos);
     void cargarDesdeXML(char* archivo);
 };
+
+#endif

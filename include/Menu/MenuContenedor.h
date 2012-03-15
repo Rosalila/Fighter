@@ -1,3 +1,6 @@
+#ifndef MENUCONTENEDOR_H
+#define MENUCONTENEDOR_H
+
 #include "Menu/Elemento.h"
 #include "Menu/MenuLista.h"
 #include "Menu/MenuBarra.h"
@@ -19,3 +22,5 @@ public:
     void retroceder();
     Elemento* getElementoSeleccionado();
 };
+
+#endif

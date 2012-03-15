@@ -1,3 +1,6 @@
+#ifndef MENUIMAGEN_H
+#define MENUIMAGEN_H
+
 #include "Menu/Elemento.h"
 
 class MenuImagen:Elemento
@@ -11,3 +14,5 @@ public:
     virtual void dibujar();
     virtual void dibujar(int alineacion_x,int alineacion_y);
 };
+
+#endif

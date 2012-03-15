@@ -1,9 +1,13 @@
+#ifndef MENUTEST_H
+#define MENUTEST_H
+
 #include "Stage/Stage.h"
 #include "Grafico/Grafico.h"
 #include "irrKlang/irrKlang.h"
 #include "Personaje/Personaje.h"
 #include "Menu/MenuContenedor.h"
 #include "Sonido/Sonido.h"
+#include "Fighter.h"
 using namespace irrklang;
 
 class Menu
@@ -27,6 +31,7 @@ public:
     vector<Personaje*>pa;
     vector<Personaje*>pb;
     Stage* stage;
+    Menu(){}
     Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo);
     void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
     void loopMenu();
@@ -39,4 +44,7 @@ public:
     stringw getInputPressed();
     void llenarInputsBotones();
     irr::EKEY_CODE toKeyCode(stringw str);
+    void printVsScreen(int char_num);
 };
+
+#endif

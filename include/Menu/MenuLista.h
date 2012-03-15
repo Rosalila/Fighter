@@ -1,3 +1,6 @@
+#ifndef MENULISTA_H
+#define MENULISTA_H
+
 #include "Menu/Elemento.h"
 
 class MenuLista:Elemento
@@ -28,3 +31,5 @@ public:
     bool estaSeleccionado();
     void setSeleccionado(bool seleccionado);
 };
+
+#endif

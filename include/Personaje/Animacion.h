@@ -1,3 +1,6 @@
+#ifndef ANIMACION_H
+#define ANIMACION_H
+
 #include "Grafico/Grafico.h"
 #include "Personaje/Imagen.h"
 
@@ -12,3 +15,5 @@ public:
     bool personaje_contrario;
     Animacion(stringw nombre,vector<Imagen>sprites,stringw posicion_x,stringw posicion_y,int duracion,bool personaje_contrario);
 };
+
+#endif

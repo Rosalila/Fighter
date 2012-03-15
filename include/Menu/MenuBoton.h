@@ -1,3 +1,6 @@
+#ifndef MENUBOTON_H
+#define MENUBOTON_H
+
 #include "Menu/Elemento.h"
 
 class MenuBoton:Elemento
@@ -29,3 +32,5 @@ public:
     bool estaSeleccionado();
     void setSeleccionado(bool seleccionado);
 };
+
+#endif

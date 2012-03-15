@@ -34,6 +34,8 @@ void Personaje::dibujar()
             int dimension_y=sombra[i].dimension_y;
             int alineacion_x=sombra[i].alineacion_x;
             int alineacion_y=sombra[i].alineacion_y;
+            if(flip_sombra[i])
+                alineacion_x=-alineacion_x;
         //    u32 t=grafico->device->getTimer()->getTime();
         //    int t2=t%255;
             grafico->draw2DImage
@@ -58,6 +60,9 @@ void Personaje::dibujar()
     int alineacion_y=getImagen("imagen_personaje").alineacion_y;
     u32 t=grafico->device->getTimer()->getTime();
     int tr=255,tg=255,tb=255;
+
+    if(getString("orientacion")=="i")
+        alineacion_x=-alineacion_x;
 
     if(violet)
     {
@@ -996,6 +1001,9 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     setString("effect.green","off");
     setString("effect.blue","off");
 
+    setEntero("Colision.x",0);
+    setEntero("Colision.y",0);
+
     setEntero("posicion_x",px);
     setEntero("posicion_y",py);
 
@@ -1190,6 +1198,8 @@ void Personaje::logicaProyectiles()
             proyectil->frame_actual=0;
             personaje_contrario->setString("hit","yes");
             setString(proyectil->estado,"off");
+            setEntero("Colision.x",px_colision);
+            setEntero("Colision.y",py_colision);
         }
     }
 }
@@ -1206,17 +1216,34 @@ bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,
     int x2a=hb_azul.p2x+atacado_x;
     int y2a=hb_azul.p2y+atacado_y;
 
-    return (
-            (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
-            (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
-            (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
-            (x1a<=x1r && x1r<=x2a && x2a<=x2r)
-            )&&(
-            (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
-            (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
-            (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
-            (y1a<=y1r && y1r<=y2a && y2a<=y2r)
-            );
+    bool hay_colision=(
+                          (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
+                          (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
+                          (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
+                          (x1a<=x1r && x1r<=x2a && x2a<=x2r)
+                      )&&(
+                          (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
+                          (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
+                          (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
+                          (y1a<=y1r && y1r<=y2a && y2a<=y2r)
+                      );
+
+    if(hay_colision)
+    {
+        int x1,x2,y1,y2;
+        if(x1a>x1r)x1=x1a;else x1=x1r;
+        if(x2a<x2r)x2=x2a;else x2=x2r;
+
+        if(y1a>y1r)y1=y1a;else y1=y1r;
+        if(y2a<y2r)y2=y2a;else y2=y2r;
+
+        px_colision=x1+((x2-x1)/2);
+        py_colision=y1+((y2-y1)/2);
+//        getPbActual()->setEntero("Colision.x",x1+((x2-x1)/2));
+//        getPbActual()->setEntero("Colision.y",y1+((y2-y1)/2));
+    }
+
+    return hay_colision;
 }
 
 bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
@@ -1235,7 +1262,7 @@ void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int 
     (   texture,
         irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
         irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-        irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x,posicion_y+imagen.alineacion_y),
+        irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
         true,

@@ -1,25 +1,35 @@
+#ifndef FIGHTER_H
+#define FIGHTER_H
+
 #include "TinyXml/tinyxml.h"
 #include "Menu/Menu.h"
 #include <stdio.h>
+
+class Menu;
 
 class Fighter
 {
 public:
     //Logica
     Input*inputa,*inputb;
-    Menu *menu,*pause_menu;
+    Menu* pause_menu;
     Stage* stage;
     int pos_stage;
+    int px_colision,py_colision;
     vector<Personaje*>pa;
     vector<Personaje*>pb;
     int pa_actual,pb_actual;
+    vector<Imagen>ko;
+    int pos_imagen_ko,duracion_ko,tiempo_actual_ko;
+    vector<Imagen>match_intro;
+    int pos_imagen_intro,duracion_intro,tiempo_actual_intro;
 
     //Engines
     Sonido* sonido;
     Grafico* grafico;
     Receiver* receiver;
 
-    Fighter();
+    Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage);
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado);
@@ -43,3 +53,5 @@ public:
     void setPaActual(Personaje* p);
     void setPbActual(Personaje* p);
 };
+
+#endif

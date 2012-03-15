@@ -12,7 +12,18 @@ using namespace std;
 
 int main()
 {
-    Fighter *fighter=new Fighter();
-    fighter->mainLoop();
+    //Creadas abierto
+    Receiver* receiver=new Receiver();
+    Input*inputa=new Input();
+    Input*inputb=new Input();
+    inputa->cargarDesdeXML(1,receiver);
+    inputb->cargarDesdeXML(2,receiver);
+    Grafico*grafico=new Grafico(receiver);
+    Sonido*sonido = new Sonido();
+
+    Menu* menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
+    menu->loopMenu();
+    //Fighter *fighter=new Fighter();
+    //fighter->mainLoop();
     return 0;
 }
