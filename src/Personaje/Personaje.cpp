@@ -52,16 +52,16 @@ void Personaje::dibujar()
         }
     }
 
-    if(getImagen("imagen_personaje").imagen==NULL)
+    if(getImagen("current_image").imagen==NULL)
         return;
-    int dimension_x=getImagen("imagen_personaje").dimension_x;
-    int dimension_y=getImagen("imagen_personaje").dimension_y;
-    int alineacion_x=getImagen("imagen_personaje").alineacion_x;
-    int alineacion_y=getImagen("imagen_personaje").alineacion_y;
+    int dimension_x=getImagen("current_image").dimension_x;
+    int dimension_y=getImagen("current_image").dimension_y;
+    int alineacion_x=getImagen("current_image").alineacion_x;
+    int alineacion_y=getImagen("current_image").alineacion_y;
     u32 t=grafico->device->getTimer()->getTime();
     int tr=255,tg=255,tb=255;
 
-    if(getString("orientacion")=="i")
+    if(getString("orientation")=="i")
         alineacion_x=-alineacion_x;
 
     if(violet)
@@ -84,26 +84,26 @@ void Personaje::dibujar()
         tg=t%255;
     }
     grafico->draw2DImage
-    (   getImagen("imagen_personaje").imagen,
+    (   getImagen("current_image").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x*getImagen("imagen_personaje").escala/2)+alineacion_x,getEntero("posicion_y")-(dimension_y*getImagen("imagen_personaje").escala/2)-alineacion_y),
+        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x,getEntero("posicion_y")-(dimension_y*getImagen("current_image").escala/2)-alineacion_y),
         irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (getImagen("imagen_personaje").escala,getImagen("imagen_personaje").escala),
+        irr::f32(0), irr::core::vector2df (getImagen("current_image").escala,getImagen("current_image").escala),
         true,
         irr::video::SColor(255,tr,tg,tb),
-        getString("orientacion")=="i",
+        getString("orientation")=="i",
         false);
 
-    sombra.push_back(getImagen("imagen_personaje"));
+    sombra.push_back(getImagen("current_image"));
     sombra_x.push_back(getEntero("posicion_x"));
     sombra_y.push_back(getEntero("posicion_y"));
-    flip_sombra.push_back(getString("orientacion")=="i");
+    flip_sombra.push_back(getString("orientation")=="i");
 }
 void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y)
 {
     vector <HitBox> hitbox=getHitBoxes(variable);
-    if(getString("orientacion")=="i")
+    if(getString("orientation")=="i")
     for(int i=0;i<(int)hitbox.size();i++)
     {
         int a=hitbox[i].p1x;
@@ -113,7 +113,7 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
     }
     for(int i=0;i<(int)hitbox.size();i++)
     {
-        if(variable=="azules")
+        if(variable=="blue")
             grafico->draw2DRectangle(irr::video::SColor(100,0,0,100),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
         else
             grafico->draw2DRectangle(irr::video::SColor(100,100,0,0),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
@@ -254,7 +254,7 @@ void Personaje::dibujarProyectiles()
 //GETS shortcuts
 Movimiento* Personaje::getMovimientoActual()
 {
-    return movimientos[getString("movimiento_actual")];
+    return movimientos[getString("current_move")];
 }
 Frame Personaje::getFrameActual()
 {
@@ -422,7 +422,7 @@ void Personaje::aplicarModificador(ModificadorString* ms)
 
 void Personaje::flipHitBoxes()
 {
-    vector<HitBox> hb=getHitBoxes("azules");
+    vector<HitBox> hb=getHitBoxes("blue");
     for(int i=0;i<(int)hb.size();i++)
     {
         int a=hb[i].p1x;
@@ -430,9 +430,9 @@ void Personaje::flipHitBoxes()
         hb[i].p1x=-b;
         hb[i].p2x=-a;
     }
-    setHitBoxes("azules",hb);
+    setHitBoxes("blue",hb);
 
-    hb=getHitBoxes("rojas");
+    hb=getHitBoxes("red");
     for(int i=0;i<(int)hb.size();i++)
     {
         int a=hb[i].p1x;
@@ -440,7 +440,7 @@ void Personaje::flipHitBoxes()
         hb[i].p1x=-b;
         hb[i].p2x=-a;
     }
-    setHitBoxes("rojas",hb);
+    setHitBoxes("red",hb);
 }
 
 void Personaje::aplicarModificador(ModificadorHitboxes* mh)
@@ -599,9 +599,65 @@ void Personaje::aplicarModificadores(vector<Modificador> modificadores,bool flip
 
 void Personaje::cargarArchivo(char* archivo_xml)
 {
-    //Desde Xml
-    //Abrir personaje.xml
-    TiXmlDocument doc_t( archivo_xml );
+}
+
+void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
+{
+    this->input=input;
+    this->grafico=grafico;
+    this->char_name=stringw(nombre);
+    this->char_name_ptr=nombre;
+
+    setString("effect.shadow","off");
+    setString("effect.violet","off");
+    setString("effect.red","off");
+    setString("effect.green","off");
+    setString("effect.blue","off");
+
+    setEntero("Colision.x",0);
+    setEntero("Colision.y",0);
+
+    setEntero("posicion_x",px);
+    setEntero("posicion_y",py);
+
+    cargarMain();
+
+    cargarVars();
+
+    cargarInputs();
+
+    cargarTriggers();
+
+    cargarSprites();
+
+    cargarHitboxes();
+
+    cargarSfx();
+
+    cargarAnimations();
+}
+
+void Personaje::logicaBarras()
+{
+    for(int i=0;i<(int)barras.size();i++)
+    {
+        if(barras[i].procesarTiempo(getEntero(barras[i].periodo)))
+            setEntero(barras[i].valor_actual,getEntero(barras[i].valor_actual)+getEntero(barras[i].modificador_periodico));
+        if(getEntero(barras[i].valor_actual)>getEntero(barras[i].valor_maximo))
+            setEntero(barras[i].valor_actual,getEntero(barras[i].valor_maximo));
+        if(getEntero(barras[i].valor_actual)<0)
+            setEntero(barras[i].valor_actual,0);
+    }
+}
+
+void Personaje::cargarMain()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/main.xml\0");
+
+    TiXmlDocument doc_t(path);
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -800,6 +856,20 @@ void Personaje::cargarArchivo(char* archivo_xml)
 //                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),NULL));
             }
     }
+}
+
+void Personaje::cargarVars()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/vars.xml\0");
+
+    TiXmlDocument doc_t(path);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
     for(TiXmlNode* nodo=doc->FirstChild("Move");
             nodo!=NULL;
             nodo=nodo->NextSibling("Move"))
@@ -807,20 +877,7 @@ void Personaje::cargarArchivo(char* archivo_xml)
         TiXmlElement *elemento=nodo->ToElement();
         stringw nombre(elemento->Attribute("name"));
         //For each Input
-        for(TiXmlNode* nodo_input=nodo->FirstChild("Input");
-                nodo_input!=NULL;
-                nodo_input=nodo_input->NextSibling("Input"))
-        {
-            vector<stringw> lista_botones;
-            for(TiXmlElement *elemento_boton=nodo_input->FirstChild("button")->ToElement();
-                    elemento_boton!=NULL;
-                    elemento_boton=elemento_boton->NextSiblingElement("button"))
-            {
-                stringw boton(elemento_boton->Attribute("value"));
-                lista_botones.push_back(boton);
-            }
-            agregarInput(lista_botones,nombre);
-        }
+
         //For each Frame
         for(TiXmlNode* nodo_frame=nodo->FirstChild("Frame");
                 nodo_frame!=NULL;
@@ -831,56 +888,6 @@ void Personaje::cargarArchivo(char* archivo_xml)
             //For each Modificador
             if(!nodo_frame->NoChildren())
             {
-                if(nodo_frame->FirstChild("Hitboxes")!=NULL)
-                {
-                    for(TiXmlElement *e=nodo_frame->FirstChild("Hitboxes")->ToElement();
-                            e!=NULL;
-                            e=e->NextSiblingElement("Hitboxes"))
-                    {
-                        vector <HitBox> hitbox;
-                        stringw str_variable(e->Attribute("variable"));
-                        stringw str_contrario(e->Attribute("to_opponent"));
-                        bool contrario=(str_contrario=="yes");
-                        if(!e->NoChildren())
-                        {
-                            for(TiXmlElement *elemento_hitbox=e->FirstChild("Hitbox")->ToElement();
-                                    elemento_hitbox!=NULL;
-                                    elemento_hitbox=elemento_hitbox->NextSiblingElement("Hitbox"))
-                            {
-                                int x1=atoi(elemento_hitbox->Attribute("x1"));
-                                int y1=atoi(elemento_hitbox->Attribute("y1"));
-                                int x2=atoi(elemento_hitbox->Attribute("x2"));
-                                int y2=atoi(elemento_hitbox->Attribute("y2"));
-                                hitbox.push_back(HitBox(x1,y1,x2,y2));
-                            }
-                        }
-                        agregarModificador(nombre,frame,str_variable,hitbox,contrario);
-                    }
-                }
-
-                if(nodo_frame->FirstChild("Sprite")!=NULL)
-                {
-                    for(TiXmlElement *e=nodo_frame->FirstChild("Sprite")->ToElement();
-                            e!=NULL;
-                            e=e->NextSiblingElement("Sprite"))
-                    {
-                        stringw str_variable(e->Attribute("variable"));
-                        stringw path(e->Attribute("path"));
-                        stringw dir("chars/");
-                        path=dir+char_name+"/"+path;
-                        int escala=atoi(e->Attribute("scale"));
-                        int alineacion_x=atoi(e->Attribute("align_x"));
-                        int alineacion_y=atoi(e->Attribute("align_y"));
-                        stringw str_contrario(e->Attribute("to_opponent"));
-                        bool contrario=(str_contrario=="si");
-
-                        if(ignore_color==NULL)
-                            agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path)),escala,alineacion_x,alineacion_y),contrario);
-                        else
-                            agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path),ignore_color),escala,alineacion_x,alineacion_y),contrario);
-                    }
-                }
-//
                 if(nodo_frame->FirstChild("Variable")!=NULL)
                 {
                     for(TiXmlElement *e=nodo_frame->FirstChild("Variable")->ToElement();
@@ -917,7 +924,6 @@ void Personaje::cargarArchivo(char* archivo_xml)
                         agregarModificador(nombre,frame,str_variable,valor,relativo,contrario,flipeable);
                     }
                 }
-
                 if(nodo_frame->FirstChild("String")!=NULL)
                 {
                     for(TiXmlElement *e=nodo_frame->FirstChild("String")->ToElement();
@@ -934,6 +940,101 @@ void Personaje::cargarArchivo(char* archivo_xml)
             }
         }
         //For each Condiciones
+    }
+}
+
+void Personaje::cargarInputs()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/input.xml\0");
+
+    TiXmlDocument doc_t(path);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+
+    for(TiXmlNode* nodo_input=doc->FirstChild("Input");
+            nodo_input!=NULL;
+            nodo_input=nodo_input->NextSibling("Input"))
+    {
+        stringw move_name=(nodo_input->ToElement()->Attribute("move_name"));
+        vector<stringw> lista_botones;
+        for(TiXmlElement *elemento_boton=nodo_input->FirstChild("button")->ToElement();
+                elemento_boton!=NULL;
+                elemento_boton=elemento_boton->NextSiblingElement("button"))
+        {
+            stringw boton(elemento_boton->Attribute("value"));
+            if(boton[0]=='*' && boton.size()>1)
+            {
+                boton[0]='1';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='2';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='3';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='4';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='6';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='7';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='8';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='9';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[0]='5';
+                stringw str_temp="";
+                for(int i=1;i<boton.size();i--)
+                    str_temp+=boton[i];
+                lista_botones.clear();
+                lista_botones.push_back(str_temp);
+                agregarInput(lista_botones,move_name);
+            }else
+            {
+                lista_botones.push_back(boton);
+            }
+        }
+        agregarInput(lista_botones,move_name);
+    }
+}
+
+void Personaje::cargarTriggers()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/triggers.xml\0");
+
+    TiXmlDocument doc_t(path);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+    for(TiXmlNode* nodo=doc->FirstChild("Move");
+            nodo!=NULL;
+            nodo=nodo->NextSibling("Move"))
+    {
+        TiXmlElement *elemento=nodo->ToElement();
+        stringw nombre(elemento->Attribute("name"));
         for(TiXmlNode* nodo_condiciones=nodo->FirstChild("Trigger");
                 nodo_condiciones!=NULL;
                 nodo_condiciones=nodo_condiciones->NextSibling("Trigger"))
@@ -965,7 +1066,128 @@ void Personaje::cargarArchivo(char* archivo_xml)
             agregarCondicion(nombre,0,condiciones_temp);
         }
     }
-    //For each Sound
+}
+
+void Personaje::cargarSprites()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/sprites.xml\0");
+
+    TiXmlDocument doc_t(path);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+    TiXmlNode* ignore_color_node=doc->FirstChild("IgnoreColor");
+    irr::video::SColor ignore_color=NULL;
+    if(ignore_color_node!=NULL)
+    {
+        ignore_color=irr::video::SColor(0,atoi(ignore_color_node->ToElement()->Attribute("red")),
+                                        atoi(ignore_color_node->ToElement()->Attribute("green")),
+                                        atoi(ignore_color_node->ToElement()->Attribute("blue")));
+    }
+    for(TiXmlNode* nodo=doc->FirstChild("Move");
+            nodo!=NULL;
+            nodo=nodo->NextSibling("Move"))
+    {
+        TiXmlElement *elemento=nodo->ToElement();
+        stringw nombre(elemento->Attribute("name"));
+
+        if(nodo->FirstChild("Sprite")!=NULL)
+        {
+            for(TiXmlElement *e=nodo->FirstChild("Sprite")->ToElement();
+                    e!=NULL;
+                    e=e->NextSiblingElement("Sprite"))
+            {
+                int frame=atoi(e->Attribute("frame_number"))-1;
+                stringw str_variable(e->Attribute("variable"));
+                stringw path(e->Attribute("path"));
+                stringw dir("chars/");
+                path=dir+char_name+"/"+path;
+                int escala=atoi(e->Attribute("scale"));
+                int alineacion_x=atoi(e->Attribute("align_x"));
+                int alineacion_y=atoi(e->Attribute("align_y"));
+                stringw str_contrario(e->Attribute("to_opponent"));
+                bool contrario=(str_contrario=="si");
+
+                if(ignore_color==NULL)
+                    agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path)),escala,alineacion_x,alineacion_y),contrario);
+                else
+                    agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path),ignore_color),escala,alineacion_x,alineacion_y),contrario);
+            }
+        }
+    }
+}
+
+void Personaje::cargarHitboxes()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/hitboxes.xml\0");
+
+    TiXmlDocument doc_t(path);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+    for(TiXmlNode* nodo=doc->FirstChild("Move");
+            nodo!=NULL;
+            nodo=nodo->NextSibling("Move"))
+    {
+        TiXmlElement *elemento=nodo->ToElement();
+        stringw nombre(elemento->Attribute("name"));
+        for(TiXmlNode* nodo_frame=nodo->FirstChild("Frame");
+                nodo_frame!=NULL;
+                nodo_frame=nodo_frame->NextSibling("Frame"))
+        {
+            TiXmlElement *elemento_frame=nodo_frame->ToElement();
+            int frame=atoi(elemento_frame->Attribute("number"))-1;
+            if(nodo_frame->FirstChild("Hitboxes")!=NULL)
+            {
+                for(TiXmlElement *e=nodo_frame->FirstChild("Hitboxes")->ToElement();
+                        e!=NULL;
+                        e=e->NextSiblingElement("Hitboxes"))
+                {
+                    vector <HitBox> hitbox;
+                    stringw str_variable(e->Attribute("variable"));
+                    stringw str_contrario(e->Attribute("to_opponent"));
+                    bool contrario=(str_contrario=="yes");
+                    if(!e->NoChildren())
+                    {
+                        for(TiXmlElement *elemento_hitbox=e->FirstChild("Hitbox")->ToElement();
+                                elemento_hitbox!=NULL;
+                                elemento_hitbox=elemento_hitbox->NextSiblingElement("Hitbox"))
+                        {
+                            int x1=atoi(elemento_hitbox->Attribute("x1"));
+                            int y1=atoi(elemento_hitbox->Attribute("y1"));
+                            int x2=atoi(elemento_hitbox->Attribute("x2"));
+                            int y2=atoi(elemento_hitbox->Attribute("y2"));
+                            hitbox.push_back(HitBox(x1,y1,x2,y2));
+                        }
+                    }
+                    agregarModificador(nombre,frame,str_variable,hitbox,contrario);
+                }
+            }
+        }
+
+    }
+}
+
+void Personaje::cargarSfx()
+{
+    char* path=new char[255];
+    strcpy(path,"chars/");
+    strcat(path,char_name_ptr);
+    strcat(path,"/sfx.xml\0");
+
+    TiXmlDocument doc_t(path);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
     for(TiXmlNode* nodo_sonido=doc->FirstChild("Sound");
             nodo_sonido!=NULL;
             nodo_sonido=nodo_sonido->NextSibling("Sound"))
@@ -987,72 +1209,14 @@ void Personaje::cargarArchivo(char* archivo_xml)
         strcat(file,elemento_sonido->Attribute("file"));
         sonido->agregarSonido(move,file);
     }
+
 }
 
-void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
+void Personaje::cargarAnimations()
 {
-    this->input=input;
-    this->grafico=grafico;
-    this->char_name=stringw(nombre);
-
-    setString("effect.shadow","off");
-    setString("effect.violet","off");
-    setString("effect.red","off");
-    setString("effect.green","off");
-    setString("effect.blue","off");
-
-    setEntero("Colision.x",0);
-    setEntero("Colision.y",0);
-
-    setEntero("posicion_x",px);
-    setEntero("posicion_y",py);
-
-    char *path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/main.xml\0");
-    cargarArchivo(path);
-
-    path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/vars.xml\0");
-    cargarArchivo(path);
-
-    path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/input.xml\0");
-    cargarArchivo(path);
-
-    path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/triggers.xml\0");
-    cargarArchivo(path);
-
-    path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/sprites.xml\0");
-    cargarArchivo(path);
-
-    path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/hitboxes.xml\0");
-    cargarArchivo(path);
-
-    path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,nombre);
-    strcat(path,"/sfx.xml\0");
-    cargarArchivo(path);
-
-    //Cargar animations
     char* path_animations=new char[255];
     strcpy(path_animations,"chars/");
-    strcat(path_animations,nombre);
+    strcat(path_animations,char_name_ptr);
     strcat(path_animations,"/animations.xml");
     TiXmlDocument doc_t(path_animations);
     doc_t.LoadFile();
@@ -1145,20 +1309,6 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
         setString(stringw("Animation.")+name,"off");
 
     }
-
-}
-
-void Personaje::logicaBarras()
-{
-    for(int i=0;i<(int)barras.size();i++)
-    {
-        if(barras[i].procesarTiempo(getEntero(barras[i].periodo)))
-            setEntero(barras[i].valor_actual,getEntero(barras[i].valor_actual)+getEntero(barras[i].modificador_periodico));
-        if(getEntero(barras[i].valor_actual)>getEntero(barras[i].valor_maximo))
-            setEntero(barras[i].valor_actual,getEntero(barras[i].valor_maximo));
-        if(getEntero(barras[i].valor_actual)<0)
-            setEntero(barras[i].valor_actual,0);
-    }
 }
 
 void Personaje::logicaProyectiles()
@@ -1192,7 +1342,7 @@ void Personaje::logicaProyectiles()
             proyectil->frame_actual=0;
             setString(proyectil->estado,"off");
         }
-        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("azules"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("posicion_x"),personaje_contrario->getEntero("posicion_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
+        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("posicion_x"),personaje_contrario->getEntero("posicion_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
         {
             personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
             proyectil->frame_actual=0;

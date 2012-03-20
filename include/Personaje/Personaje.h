@@ -17,6 +17,7 @@ class Personaje
     Sonido* sonido;
 
     stringw char_name;
+    char* char_name_ptr;
     int comparacion_hp;
     int comparacion_hp_contrario;
     int numero;
@@ -51,9 +52,18 @@ class Personaje
     irr::core::map<stringw,Movimiento*> movimientos;
 
     Personaje(Grafico* grafico,Sonido* sonido,int numero);
+    //Cargares
     void cargarDesdeXML(int px,int py,Input* input,char* nombre);
     void cargarArchivo(char* archivo_xml);
-    //DIBUJAR
+    void cargarMain();
+    void cargarVars();
+    void cargarInputs();
+    void cargarTriggers();
+    void cargarSprites();
+    void cargarHitboxes();
+    void cargarSfx();
+    void cargarAnimations();
+    //Dibujares
     void dibujar();
     void dibujarImagen(Grafico*grafico,Imagen imagen,int posicion_x,int posicion_y);
     void dibujarAnimacionesBack();

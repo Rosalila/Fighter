@@ -1,0 +1,17 @@
+<Chars>
+	<char nombre="Evilken" />
+	<char nombre="Potemkin" />
+	<char nombre="Morrigan" />
+	<char nombre="RyuSF2v1" />
+	<char nombre="RyuSF2v2" />
+	<char nombre="RyuSF2v3" />
+	<char nombre="RyuSF2" />
+	<char nombre="StickMan" />
+	<char nombre="p3" />
+</Chars>
+<Stages>
+	<stage nombre="Stage4" />
+	<stage nombre="Stage1" />
+	<stage nombre="Stage2" />
+	<stage nombre="Stage3" />
+</Stages>

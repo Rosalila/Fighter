@@ -42,7 +42,7 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
     if(resultado=="")
         resultado="5";
 
-    if(stringw(strings->operator[]("orientacion"))==stringw("i"))
+    if(stringw(strings->operator[]("orientation"))==stringw("i"))
     {
         for(int i=0;i<(int)resultado.size();i++)
         {

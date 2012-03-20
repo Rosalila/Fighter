@@ -82,8 +82,8 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
         this->pb=pb;
         this->stage=stage;
         //Juego
-        pa[0]->setString("movimiento_actual","intro");
-        pb[0]->setString("movimiento_actual","intro");
+        pa[0]->setString("current_move","intro");
+        pb[0]->setString("current_move","intro");
         loopJuego();
 }
 
@@ -230,7 +230,7 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,
     vector <HitBox> hb_azules=atacado->getHitBoxes(variable_atacado);
     vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
-    if(atacante->getString("orientacion")=="i")
+    if(atacante->getString("orientation")=="i")
         for(int i=0; i<(int)hb_rojas.size(); i++)
         {
             int a=hb_rojas[i].p1x;
@@ -238,7 +238,7 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,
             hb_rojas[i].p1x=-b;
             hb_rojas[i].p2x=-a;
         }
-    if(atacado->getString("orientacion")=="i")
+    if(atacado->getString("orientation")=="i")
         for(int i=0; i<(int)hb_azules.size(); i++)
         {
             int a=hb_azules[i].p1x;
@@ -265,7 +265,7 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,
     vector <HitBox> hb_azules=atacado->getHitBoxes(variable_atacado);
     vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
-    if(atacante->getString("orientacion")=="i")
+    if(atacante->getString("orientation")=="i")
         for(int i=0; i<(int)hb_rojas.size(); i++)
         {
             int a=hb_rojas[i].p1x;
@@ -273,7 +273,7 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,
             hb_rojas[i].p1x=-b;
             hb_rojas[i].p2x=-a;
         }
-    if(atacado->getString("orientacion")=="i")
+    if(atacado->getString("orientation")=="i")
         for(int i=0; i<(int)hb_azules.size(); i++)
         {
             int a=hb_azules[i].p1x;
@@ -302,11 +302,19 @@ void Fighter::logicaPersonaje(Personaje* p)
     if(distancia<0)
         distancia=-distancia;
     p->setEntero("distance",distancia);
-    //verificar colision de hitboxes
-    if(getColisionHitBoxes(p->personaje_contrario,"rojas",p,"azules"))
+    //verificar si esta atacando
+    if(p->getHitBoxes("red").size()>0)
     {
-        p->setString("colision_hitboxes","si");
-        Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("movimiento_actual")];
+        p->setString("attacking","yes");
+    }else
+    {
+        p->setString("attacking","no");
+    }
+    //verificar colision de hitboxes
+    if(getColisionHitBoxes(p->personaje_contrario,"red",p,"blue"))
+    {
+        p->setString("colision.red_hitboxes","si");
+        Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
         if(!m->ya_pego)
         {
             p->setString("hit","yes");
@@ -316,12 +324,12 @@ void Fighter::logicaPersonaje(Personaje* p)
         }
     }
     else
-        p->setString("colision_hitboxes","no");
+        p->setString("colision.red_hitboxes","no");
 
-    if(getColisionHitBoxes(p->personaje_contrario,"azules",p,"azules"))
-        p->setString("colision_hitboxes_azules","si");
+    if(getColisionHitBoxes(p->personaje_contrario,"blue",p,"blue"))
+        p->setString("colision.blue_hitboxes","si");
     else
-        p->setString("colision_hitboxes_azules","no");
+        p->setString("colision.blue_hitboxes","no");
 
     //Change char
     if(stringw("on")==p->getString("change_char"))
@@ -353,18 +361,18 @@ void Fighter::logicaPersonaje(Personaje* p)
         pb[pb_actual]->personaje_contrario=pa[pa_actual];
 
         //aplicar movimiento entrance
-        Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+        Movimiento* m=p->movimientos[p->getString("current_move")];
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
-        p->setString("movimiento_actual","entrance");
+        p->setString("current_move","entrance");
         sonido->reproducirSonido("entrance");
     }
 
     //verificar flip
     if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x"))
-        p->strings["orientacion"]="i";
+        p->strings["orientation"]="i";
     else
-        p->strings["orientacion"]="d";
+        p->strings["orientation"]="d";
     //get input
     stringw str_movimiento="5";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
@@ -374,11 +382,11 @@ void Fighter::logicaPersonaje(Personaje* p)
     if(str_movimiento!="")
         if(p->cumpleCondiciones(str_movimiento))
         {
-            Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+            Movimiento* m=p->movimientos[p->getString("current_move")];
             m->frame_actual=0;
             m->tiempo_transcurrido=0;
             m->ya_pego=false;
-            p->setString("movimiento_actual",str_movimiento);
+            p->setString("current_move",str_movimiento);
             sonido->reproducirSonido(str_movimiento);
         }
     //Movimientos continuos
@@ -397,15 +405,15 @@ void Fighter::logicaPersonaje(Personaje* p)
                 {
                     if(p->inputs[i].movimiento=="recibir")
                     {
-                        if(p->getString("movimiento_actual")=="recibir")
+                        if(p->getString("current_move")=="recibir")
                         {
                             p->combo++;
                         }
-                        Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+                        Movimiento* m=p->movimientos[p->getString("current_move")];
                         m->frame_actual=0;
                         m->tiempo_transcurrido=0;
                         m->ya_pego=false;
-                        p->setString("movimiento_actual","recibir");
+                        p->setString("current_move","recibir");
                         sonido->reproducirSonido(str_movimiento);
                     }
                     else
@@ -423,7 +431,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         {
             p->setImagen(proyectil->imagen,proyectil->sprites[0]);
             p->setString(proyectil->estado,"on");
-            p->setString(proyectil->orientacion,p->getString("orientacion"));
+            p->setString(proyectil->orientacion,p->getString("orientation"));
             proyectil->frame_actual=0;
             proyectil->sprite_actual=0;
             proyectil->tiempo_transcurrido=0;
@@ -435,11 +443,11 @@ void Fighter::logicaPersonaje(Personaje* p)
 void Fighter::aplicarModificadores(Personaje *p)
 {
     //get movimiento y frame
-    Movimiento* m=p->movimientos[p->getString("movimiento_actual")];
+    Movimiento* m=p->movimientos[p->getString("current_move")];
     Frame* f=&m->frames[m->frame_actual];
     //aplicar modificadores
     if(m->tiempo_transcurrido==0)
-        p->aplicarModificadores(f->modificadores,p->getString("orientacion")=="i");
+        p->aplicarModificadores(f->modificadores,p->getString("orientation")=="i");
     //avanzar frame
     if(m->tiempo_transcurrido==f->duracion)
     {
@@ -452,12 +460,12 @@ void Fighter::aplicarModificadores(Personaje *p)
     if(m->frame_actual==(int)m->frames.size())
     {
         m->ya_pego=false;
-        if(p->getString("movimiento_actual")=="recibir")
+        if(p->getString("current_move")=="recibir")
             p->combo=0;
-        if(p->getString("movimiento_actual")!="ko")
+        if(p->getString("current_move")!="ko")
         {
             m->frame_actual=0;
-            p->setString("movimiento_actual","5");
+            p->setString("current_move","5");
         }else
         {
             m->frame_actual--;
@@ -470,7 +478,7 @@ void Fighter::aplicarModificadores(Personaje *p)
         Movimiento* mc=p->movimientos_constantes_actuales[i];
         Frame* fc=&mc->frames[mc->frame_actual];
         if(mc->tiempo_transcurrido==0)
-            p->aplicarModificadores(fc->modificadores,p->getString("orientacion")=="i");
+            p->aplicarModificadores(fc->modificadores,p->getString("orientation")=="i");
         //avanzar frame
         if(mc->tiempo_transcurrido==fc->duracion)
         {
@@ -676,10 +684,10 @@ bool Fighter::render()
         //Hit Boxes
         if(receiver->IsKeyDownn(irr::KEY_KEY_H))
         {
-            getPaActual()->dibujarHitBoxes("azules","",getPaActual()->getString("orientacion")=="i",getPaActual()->getEntero("posicion_x"),getPaActual()->getEntero("posicion_y"));
-            getPbActual()->dibujarHitBoxes("azules","",getPbActual()->getString("orientacion")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
-            getPaActual()->dibujarHitBoxes("rojas","",getPaActual()->getString("orientacion")=="i",getPaActual()->getEntero("posicion_x"),getPaActual()->getEntero("posicion_y"));
-            getPbActual()->dibujarHitBoxes("rojas","",getPbActual()->getString("orientacion")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
+            getPaActual()->dibujarHitBoxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("posicion_x"),getPaActual()->getEntero("posicion_y"));
+            getPbActual()->dibujarHitBoxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
+            getPaActual()->dibujarHitBoxes("red","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("posicion_x"),getPaActual()->getEntero("posicion_y"));
+            getPbActual()->dibujarHitBoxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
         }
 
         getPaActual()->dibujarProyectiles();
@@ -711,14 +719,14 @@ bool Fighter::render()
             if(pb[i]->getEntero("hp.current_value")>0)
                 game_over_b=false;
 
-        if(game_over_a && getPaActual()->getString("movimiento_actual")!="ko")
+        if(game_over_a && getPaActual()->getString("current_move")!="ko")
         {
-            getPaActual()->setString("movimiento_actual","ko");
+            getPaActual()->setString("current_move","ko");
         }
 
-        if(game_over_b && getPbActual()->getString("movimiento_actual")!="ko")
+        if(game_over_b && getPbActual()->getString("current_move")!="ko")
         {
-            getPbActual()->setString("movimiento_actual","ko");
+            getPbActual()->setString("current_move","ko");
         }
 
         if(game_over_a || game_over_b)
@@ -749,7 +757,7 @@ bool Fighter::render()
         }
 
 
-        if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("movimiento_actual")=="5" && pb[0]->getString("movimiento_actual")=="5")
+        if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("current_move")=="5" && pb[0]->getString("current_move")=="5")
         {
             //irr::video::ITexture* texture_gameover=grafico->getTexture("misc/ko/1.png");
             irr::video::ITexture* texture_gameover=match_intro[pos_imagen_intro].imagen;
@@ -809,13 +817,13 @@ bool Fighter::render()
 //
 //
         //Movimento actual
-        //grafico->drawText(pa->getString("movimiento_actual"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
+        //grafico->drawText(pa->getString("current_move"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
 
-//        stringw str=pb->getString("movimiento_actual")+","+pb->getString("estado_posicion")+": ";
+//        stringw str=pb->getString("current_move")+","+pb->getString("estado_posicion")+": ";
 //        for(int i=0;i<(int)pb->input->getBufferInputs().size();i++)
 //            str+=pb->input->getBufferInputs()[i]+"-";
 //        grafico->device->setWindowCaption(str.c_str());
-//        grafico->device->setWindowCaption(pb->getString("colision_hitboxes").c_str());
+//        grafico->device->setWindowCaption(pb->getString("colision.red_hitboxes").c_str());
 //	int num = pa->getEntero("posicion_y");
 //	char buf[5];
 
