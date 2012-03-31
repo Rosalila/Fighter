@@ -690,6 +690,16 @@ bool Fighter::render()
             getPbActual()->dibujarHitBoxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("posicion_x"),getPbActual()->getEntero("posicion_y"));
         }
 
+        if(receiver->IsKeyDownn(irr::KEY_KEY_2))
+        {
+            getPaActual()->rango++;
+        }
+        if(receiver->IsKeyDownn(irr::KEY_KEY_1))
+        {
+            getPaActual()->rango--;
+        }
+
+
         getPaActual()->dibujarProyectiles();
         getPbActual()->dibujarProyectiles();
 

@@ -60,6 +60,8 @@ bool Grafico::run()
 irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo,video::SColor color_a_ignorar)
 {
     irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
+    //irr::video::ITexture* texture=driver->addRenderTargetTexture(dimension2d<u32>(1024,600), irr::io::path(archivo));
+    //irr::video::ITexture* texture=driver->addTexture(irr::core::dimension2d<unsigned int>(1024,600),irr::io::path(archivo),ECF_UNKNOWN);
     driver->makeColorKeyTexture(texture,color_a_ignorar);
     return texture;
 }
@@ -67,6 +69,7 @@ irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo,video::SCol
 irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo)
 {
     irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
+    //irr::video::ITexture* texture=driver->addRenderTargetTexture(dimension2d<u32>(1024,600), irr::io::path(archivo));
     return texture;
 }
 

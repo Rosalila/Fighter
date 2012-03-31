@@ -6,6 +6,7 @@
 #include "irrKlang/irrKlang.h"
 #include "Personaje/Personaje.h"
 #include "Menu/MenuContenedor.h"
+#include "Menu/MenuCharSelect.h"
 #include "Sonido/Sonido.h"
 #include "Fighter.h"
 using namespace irrklang;
@@ -25,7 +26,7 @@ private:
     vector<int> pos_pb;
     int pos_stage,pos_ia_lvl;
     bool exit_signal,save_inputs_signal;
-
+    MenuCharSelect* char_select;
 public:
     Input *inputa,*inputb;
     vector<Personaje*>pa;

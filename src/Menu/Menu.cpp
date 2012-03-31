@@ -10,6 +10,7 @@ Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo)
     this->sonido=sonido;
     this->exit_signal=false;
     this->save_inputs_signal=false;
+    this->char_select=NULL;
 
         TiXmlDocument doc_t((char*)"config.xml");
         doc_t.LoadFile();
@@ -50,6 +51,11 @@ void Menu::loopMenu()
     sonido->reproducirSonido(stringw("Menu.music"));
 
     llenarInputsBotones();
+    inputa=new Input();
+    inputb=new Input();
+    inputa->cargarDesdeXML(1,receiver);
+    inputb->cargarDesdeXML(2,receiver);
+    bool tecla_arriba_p1=true;
     //inicio
 	for (;;)
 	{
@@ -62,6 +68,52 @@ void Menu::loopMenu()
             grafico->device->getTimer()->tick()
          );
         dibujarMenu();
+        inputa->actualizarBuffer();
+        if(inputa->getBufferInputs()[0]!="6"
+           && inputa->getBufferInputs()[0]!="4"
+           && inputa->getBufferInputs()[0]!="2"
+           && inputa->getBufferInputs()[0]!="8"
+           && inputa->getBufferInputs()[0]!="a"
+           )
+        {
+            tecla_arriba_p1=true;
+        }
+        if(char_select!=NULL && tecla_arriba_p1)
+        {
+            if(inputa->getBufferInputs()[0]=="6")
+            {
+                char_select->select_p1_x++;
+                if(char_select->select_p1_x>=char_select->size_x)
+                    char_select->select_p1_x=0;
+                tecla_arriba_p1=false;
+            }else if(inputa->getBufferInputs()[0]=="4")
+            {
+                char_select->select_p1_x--;
+                if(char_select->select_p1_x<0)
+                    char_select->select_p1_x=char_select->size_x-1;
+                tecla_arriba_p1=false;
+            }
+            else if(inputa->getBufferInputs()[0]=="2")
+            {
+                char_select->select_p1_y++;
+                if(char_select->select_p1_y>=char_select->size_y)
+                    char_select->select_p1_y=0;
+                tecla_arriba_p1=false;
+            }
+            else if(inputa->getBufferInputs()[0]=="8")
+            {
+                char_select->select_p1_y--;
+                if(char_select->select_p1_y<0)
+                    char_select->select_p1_y=char_select->size_y-1;
+                tecla_arriba_p1=false;
+            }
+            else if(inputa->getBufferInputs()[0]=="a")
+            {
+                char_select->lockPA();
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+        }
         if(!receiver->IsKeyDownn(irr::KEY_LEFT)
            && !receiver->IsKeyDownn(irr::KEY_RIGHT)
            && !receiver->IsKeyDownn(irr::KEY_UP)
@@ -449,7 +501,19 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             elemento=elemento->NextSibling())
     {
         TiXmlElement* e=elemento->ToElement();
-        if(strcmp(e->Value(),"Image")==0)
+        if(strcmp(e->Value(),"CharSelect")==0)
+        {
+            stringw path(e->Attribute("path"));
+            stringw dir("menu/");
+            path=dir+path;
+            char_select=new MenuCharSelect(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),
+                                                          atoi(e->Attribute("size_x")),atoi(e->Attribute("size_y")),atoi(e->Attribute("box_size_x")),atoi(e->Attribute("box_size_y")),
+                                                          atoi(e->Attribute("box_separation_x")),atoi(e->Attribute("box_separation_y")),
+                                                          atoi(e->Attribute("chars_player1")),atoi(e->Attribute("chars_player2")),
+                                                          chars
+                                                          );
+            elementos.push_back((Elemento*)char_select);
+        }else if(strcmp(e->Value(),"Image")==0)
         {
             stringw path(e->Attribute("path"));
             stringw dir("menu/");

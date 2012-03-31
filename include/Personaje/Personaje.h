@@ -10,6 +10,8 @@
 class Personaje
 {
     public:
+    //a borrar
+    int rango;
     //Otras
     Personaje *personaje_contrario;
     Grafico* grafico;

@@ -56,6 +56,41 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
     buffer_inputs.pop_back();
 }
 
+void Input::actualizarBuffer()
+{
+    stringw resultado="";
+
+    for(int i=0;i<(int)cruz.size();i++)
+        if(cruz[i].estaPresionado())
+            resultado+=cruz[i].getMapeo();
+    if(resultado=="24" || resultado=="42")
+        resultado="1";
+    if(resultado=="26" || resultado=="62")
+        resultado="3";
+    if(resultado=="84" || resultado=="48")
+        resultado="7";
+    if(resultado=="68" || resultado=="86")
+        resultado="9";
+    if(tecla_arriba)
+    {
+        tecla_arriba=false;
+        for(int i=0;i<(int)botones.size();i++)
+            if(botones[i].estaPresionado())
+                resultado+=botones[i].getMapeo();
+    }
+    bool flag=false;
+    for(int i=0;i<(int)botones.size();i++)
+        if(botones[i].estaPresionado())
+            flag=true;
+    if(!flag)
+        tecla_arriba=true;
+    if(resultado=="")
+        resultado="5";
+
+    buffer_inputs.insert(buffer_inputs.begin(),resultado);
+    buffer_inputs.pop_back();
+}
+
 vector<stringw> Input::getBufferInputs()
 {
     return buffer_inputs;
