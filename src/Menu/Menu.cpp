@@ -1,10 +1,10 @@
 #include "Menu/Menu.h"
 Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo)
 {
-    for(int i=0;i<3;i++)
-        pos_pa.push_back(0);
-    for(int i=0;i<3;i++)
-        pos_pb.push_back(0);
+//    for(int i=0;i<3;i++)
+//        pos_pa.push_back(0);
+//    for(int i=0;i<3;i++)
+//        pos_pb.push_back(0);
     this->grafico=grafico;
     this->receiver=receiver;
     this->sonido=sonido;
@@ -56,6 +56,7 @@ void Menu::loopMenu()
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
     bool tecla_arriba_p1=true;
+    bool tecla_arriba_p2=true;
     //inicio
 	for (;;)
 	{
@@ -80,7 +81,9 @@ void Menu::loopMenu()
         }
         if(char_select!=NULL && tecla_arriba_p1)
         {
-            if(inputa->getBufferInputs()[0]=="6")
+            if(char_select->listoPA())
+            {
+            }else if(inputa->getBufferInputs()[0]=="6")
             {
                 char_select->select_p1_x++;
                 if(char_select->select_p1_x>=char_select->size_x)
@@ -111,6 +114,55 @@ void Menu::loopMenu()
             {
                 char_select->lockPA();
                 tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+        }
+
+        inputb->actualizarBuffer();
+        if(inputb->getBufferInputs()[0]!="6"
+           && inputb->getBufferInputs()[0]!="4"
+           && inputb->getBufferInputs()[0]!="2"
+           && inputb->getBufferInputs()[0]!="8"
+           && inputb->getBufferInputs()[0]!="a"
+           )
+        {
+            tecla_arriba_p2=true;
+        }
+        if(char_select!=NULL && tecla_arriba_p2)
+        {
+            if(char_select->listoPB())
+            {
+            }else if(inputb->getBufferInputs()[0]=="6")
+            {
+                char_select->select_p2_x++;
+                if(char_select->select_p2_x>=char_select->size_x)
+                    char_select->select_p2_x=0;
+                tecla_arriba_p2=false;
+            }else if(inputb->getBufferInputs()[0]=="4")
+            {
+                char_select->select_p2_x--;
+                if(char_select->select_p2_x<0)
+                    char_select->select_p2_x=char_select->size_x-1;
+                tecla_arriba_p2=false;
+            }
+            else if(inputb->getBufferInputs()[0]=="2")
+            {
+                char_select->select_p2_y++;
+                if(char_select->select_p2_y>=char_select->size_y)
+                    char_select->select_p2_y=0;
+                tecla_arriba_p2=false;
+            }
+            else if(inputb->getBufferInputs()[0]=="8")
+            {
+                char_select->select_p2_y--;
+                if(char_select->select_p2_y<0)
+                    char_select->select_p2_y=char_select->size_y-1;
+                tecla_arriba_p2=false;
+            }
+            else if(inputb->getBufferInputs()[0]=="a")
+            {
+                char_select->lockPB();
+                tecla_arriba_p2=false;
                 //seleccionar jugador en la posicion actual si es jugador
             }
         }
@@ -160,72 +212,78 @@ void Menu::loopMenu()
                     MenuBoton*mb=((MenuBoton*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
                     if(mb->getAccion()==0)
                     {
-                        printVsScreen(1);
+                        if(char_select->listo())
+                        {
+                            printVsScreen(1);
 
-                        inputa=new Input();
-                        inputb=new Input();
-                        //this->inputa->cargarIAXML(1);
-                        inputa->cargarDesdeXML(1,receiver);
-                        inputb->cargarDesdeXML(2,receiver);
-                        char *path_s=new char[255];
-                        strcpy(path_s,"");
-                        strcat(path_s,(char*)getStage());
+                            inputa=new Input();
+                            inputb=new Input();
+                            //this->inputa->cargarIAXML(1);
+                            inputa->cargarDesdeXML(1,receiver);
+                            inputb->cargarDesdeXML(2,receiver);
+                            char *path_s=new char[255];
+                            strcpy(path_s,"");
+                            strcat(path_s,(char*)getStage());
 
-                        Personaje* p1a=getPersonajeA(0,false);
-                        Personaje* p1b=getPersonajeB(0,false);
-                        p1a->personaje_contrario=p1b;
-                        p1b->personaje_contrario=p1a;
+                            Personaje* p1a=getPersonajeA(0,false);
+                            Personaje* p1b=getPersonajeB(0,false);
+                            p1a->personaje_contrario=p1b;
+                            p1b->personaje_contrario=p1a;
 
-                        pa.clear();
-                        pa.push_back(p1a);
+                            pa.clear();
+                            pa.push_back(p1a);
 
-                        pb.clear();
-                        pb.push_back(p1b);
+                            pb.clear();
+                            pb.push_back(p1b);
 
-                        stage=new Stage(grafico,sonido);
-                        stage->cargarDesdeXML((char*)path_s);
-                        Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            stage=new Stage(grafico,sonido);
+                            stage->cargarDesdeXML((char*)path_s);
+                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
-                        break;
+                            break;
+                        }
                     }
 
                     if(mb->getAccion()==1)
                     {
-                        printVsScreen(3);
+                        if(char_select->listo())
+                        {
+                            printVsScreen(3);
 
-                        char *path_s=new char[255];
-                        strcpy(path_s,"");
-                        strcat(path_s,(char*)getStage());
+                            char *path_s=new char[255];
+                            strcpy(path_s,"");
+                            strcat(path_s,(char*)getStage());
 
-                        Personaje* p1a=getPersonajeA(0,false);
-                        Personaje* p1b=getPersonajeB(0,true);
-                        p1a->personaje_contrario=p1b;
-                        p1b->personaje_contrario=p1a;
+                            Personaje* p1a=getPersonajeA(0,false);
+                            Personaje* p1b=getPersonajeB(0,true);
+                            p1a->personaje_contrario=p1b;
+                            p1b->personaje_contrario=p1a;
 
-                        Personaje* p2a=getPersonajeA(1,false);
-                        Personaje* p2b=getPersonajeB(1,true);
-                        p2a->personaje_contrario=p1b;
-                        p2b->personaje_contrario=p1a;
+                            Personaje* p2a=getPersonajeA(1,false);
+                            Personaje* p2b=getPersonajeB(1,true);
+                            p2a->personaje_contrario=p1b;
+                            p2b->personaje_contrario=p1a;
 
-                        Personaje* p3a=getPersonajeA(2,false);
-                        Personaje* p3b=getPersonajeB(2,true);
-                        p3a->personaje_contrario=p1b;
-                        p3b->personaje_contrario=p1a;
+                            Personaje* p3a=getPersonajeA(2,false);
+                            Personaje* p3b=getPersonajeB(2,true);
+                            p3a->personaje_contrario=p1b;
+                            p3b->personaje_contrario=p1a;
 
-                        pa.push_back(p1a);
-                        pa.push_back(p2a);
-                        pa.push_back(p3a);
+                            pa.push_back(p1a);
+                            pa.push_back(p2a);
+                            pa.push_back(p3a);
 
-                        pb.push_back(p1b);
-                        pb.push_back(p2b);
-                        pb.push_back(p3b);
+                            pb.push_back(p1b);
+                            pb.push_back(p2b);
+                            pb.push_back(p3b);
 
-                        stage=new Stage(grafico,sonido);
-                        stage->cargarDesdeXML((char*)path_s);
+                            stage=new Stage(grafico,sonido);
+                            stage->cargarDesdeXML((char*)path_s);
 
-                        Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
-                        break;
+                            break;
+                        }
                     }
                     if(mb->getAccion()==2)
                     {
@@ -243,137 +301,148 @@ void Menu::loopMenu()
                     }
                     if(mb->getAccion()==5)
                     {
-                        printVsScreen(3);
+                        if(char_select->listo())
+                        {
+                            printVsScreen(3);
 
-                        char *path_s=new char[255];
-                        strcpy(path_s,"");
-                        strcat(path_s,(char*)getStage());
+                            char *path_s=new char[255];
+                            strcpy(path_s,"");
+                            strcat(path_s,(char*)getStage());
 
-                        Personaje* p1a=getPersonajeA(0,false);
-                        Personaje* p1b=getPersonajeB(0,true);
-                        p1a->personaje_contrario=p1b;
-                        p1b->personaje_contrario=p1a;
-                        p1b->setEntero("hp.periodic_modifier",1);
-                        p1b->setEntero("hp.period",1);
-                        Input*i_temp=new Input();
-                        i_temp->cargarIAXML(2,(char*)"");
-                        p1b->input=i_temp;
+                            Personaje* p1a=getPersonajeA(0,false);
+                            Personaje* p1b=getPersonajeB(0,true);
+                            p1a->personaje_contrario=p1b;
+                            p1b->personaje_contrario=p1a;
+                            p1b->setEntero("hp.periodic_modifier",1);
+                            p1b->setEntero("hp.period",1);
+                            Input*i_temp=new Input();
+                            i_temp->cargarIAXML(2,(char*)"");
+                            p1b->input=i_temp;
 
-                        Personaje* p2a=getPersonajeA(1,false);
-                        Personaje* p2b=getPersonajeB(1,true);
-                        p2a->personaje_contrario=p1b;
-                        p2b->personaje_contrario=p1a;
-                        p2b->setEntero("hp.periodic_modifier",1);
-                        p2b->setEntero("hp.period",1);
-                        i_temp=new Input();
-                        i_temp->cargarIAXML(2,(char*)"");
-                        p2b->input=i_temp;
+                            Personaje* p2a=getPersonajeA(1,false);
+                            Personaje* p2b=getPersonajeB(1,true);
+                            p2a->personaje_contrario=p1b;
+                            p2b->personaje_contrario=p1a;
+                            p2b->setEntero("hp.periodic_modifier",1);
+                            p2b->setEntero("hp.period",1);
+                            i_temp=new Input();
+                            i_temp->cargarIAXML(2,(char*)"");
+                            p2b->input=i_temp;
 
-                        Personaje* p3a=getPersonajeA(2,false);
-                        Personaje* p3b=getPersonajeB(2,true);
-                        p3a->personaje_contrario=p1b;
-                        p3b->personaje_contrario=p1a;
-                        p3b->setEntero("hp.periodic_modifier",1);
-                        p3b->setEntero("hp.period",1);
-                        i_temp=new Input();
-                        i_temp->cargarIAXML(2,(char*)"");
-                        p3b->input=i_temp;
+                            Personaje* p3a=getPersonajeA(2,false);
+                            Personaje* p3b=getPersonajeB(2,true);
+                            p3a->personaje_contrario=p1b;
+                            p3b->personaje_contrario=p1a;
+                            p3b->setEntero("hp.periodic_modifier",1);
+                            p3b->setEntero("hp.period",1);
+                            i_temp=new Input();
+                            i_temp->cargarIAXML(2,(char*)"");
+                            p3b->input=i_temp;
 
-                        pa.push_back(p1a);
-                        pa.push_back(p2a);
-                        pa.push_back(p3a);
+                            pa.push_back(p1a);
+                            pa.push_back(p2a);
+                            pa.push_back(p3a);
 
-                        pb.push_back(p1b);
-                        pb.push_back(p2b);
-                        pb.push_back(p3b);
+                            pb.push_back(p1b);
+                            pb.push_back(p2b);
+                            pb.push_back(p3b);
 
-                        stage=new Stage(grafico,sonido);
-                        stage->cargarDesdeXML((char*)path_s);
+                            stage=new Stage(grafico,sonido);
+                            stage->cargarDesdeXML((char*)path_s);
 
-                        Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
-                        break;
+                            break;
+                        }
                     }
                     if(mb->getAccion()==6)
                     {
-                        printVsScreen(2);
+                        if(char_select->listo())
+                        {
+                            printVsScreen(2);
 
-                        inputa=new Input();
-                        inputb=new Input();
-                        //this->inputa->cargarIAXML(1);
-                        inputa->cargarDesdeXML(1,receiver);
-                        inputb->cargarDesdeXML(2,receiver);
+                            inputa=new Input();
+                            inputb=new Input();
+                            //this->inputa->cargarIAXML(1);
+                            inputa->cargarDesdeXML(1,receiver);
+                            inputb->cargarDesdeXML(2,receiver);
 
-                        char *path_s=new char[255];
-                        strcpy(path_s,"");
-                        strcat(path_s,(char*)getStage());
+                            char *path_s=new char[255];
+                            strcpy(path_s,"");
+                            strcat(path_s,(char*)getStage());
 
-                        Personaje* p1a=getPersonajeA(0,false);
-                        Personaje* p1b=getPersonajeB(0,false);
-                        p1a->personaje_contrario=p1b;
-                        p1b->personaje_contrario=p1a;
+                            Personaje* p1a=getPersonajeA(0,false);
+                            Personaje* p1b=getPersonajeB(0,false);
+                            p1a->personaje_contrario=p1b;
+                            p1b->personaje_contrario=p1a;
 
-                        Personaje* p2a=getPersonajeA(1,false);
-                        Personaje* p2b=getPersonajeB(1,false);
-                        p2a->personaje_contrario=p1b;
-                        p2b->personaje_contrario=p1a;
+                            Personaje* p2a=getPersonajeA(1,false);
+                            Personaje* p2b=getPersonajeB(1,false);
+                            p2a->personaje_contrario=p1b;
+                            p2b->personaje_contrario=p1a;
 
-                        pa.push_back(p1a);
-                        pa.push_back(p2a);
+                            pa.push_back(p1a);
+                            pa.push_back(p2a);
 
-                        pb.push_back(p1b);
-                        pb.push_back(p2b);
+                            pb.push_back(p1b);
+                            pb.push_back(p2b);
 
-                        stage=new Stage(grafico,sonido);
-                        stage->cargarDesdeXML((char*)path_s);
+                            stage=new Stage(grafico,sonido);
+                            stage->cargarDesdeXML((char*)path_s);
 
-                        Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
-                        break;
+                            break;
+
+                        }
                     }
                     if(mb->getAccion()==7)
                     {
-                        printVsScreen(3);
+                        if(char_select->listo())
+                        {
+                            printVsScreen(3);
 
-                        inputa=new Input();
-                        inputb=new Input();
-                        //this->inputa->cargarIAXML(1);
-                        inputa->cargarDesdeXML(1,receiver);
-                        inputb->cargarDesdeXML(2,receiver);
+                            inputa=new Input();
+                            inputb=new Input();
+                            //this->inputa->cargarIAXML(1);
+                            inputa->cargarDesdeXML(1,receiver);
+                            inputb->cargarDesdeXML(2,receiver);
 
-                        char *path_s=new char[255];
-                        strcpy(path_s,"");
-                        strcat(path_s,(char*)getStage());
+                            char *path_s=new char[255];
+                            strcpy(path_s,"");
+                            strcat(path_s,(char*)getStage());
 
-                        Personaje* p1a=getPersonajeA(0,false);
-                        Personaje* p1b=getPersonajeB(0,false);
-                        p1a->personaje_contrario=p1b;
-                        p1b->personaje_contrario=p1a;
+                            Personaje* p1a=getPersonajeA(0,false);
+                            Personaje* p1b=getPersonajeB(0,false);
+                            p1a->personaje_contrario=p1b;
+                            p1b->personaje_contrario=p1a;
 
-                        Personaje* p2a=getPersonajeA(1,false);
-                        Personaje* p2b=getPersonajeB(1,false);
-                        p2a->personaje_contrario=p1b;
-                        p2b->personaje_contrario=p1a;
+                            Personaje* p2a=getPersonajeA(1,false);
+                            Personaje* p2b=getPersonajeB(1,false);
+                            p2a->personaje_contrario=p1b;
+                            p2b->personaje_contrario=p1a;
 
-                        Personaje* p3a=getPersonajeA(2,false);
-                        Personaje* p3b=getPersonajeB(2,false);
-                        p3a->personaje_contrario=p1b;
-                        p3b->personaje_contrario=p1a;
+                            Personaje* p3a=getPersonajeA(2,false);
+                            Personaje* p3b=getPersonajeB(2,false);
+                            p3a->personaje_contrario=p1b;
+                            p3b->personaje_contrario=p1a;
 
-                        pa.push_back(p1a);
-                        pa.push_back(p2a);
-                        pa.push_back(p3a);
+                            pa.push_back(p1a);
+                            pa.push_back(p2a);
+                            pa.push_back(p3a);
 
-                        pb.push_back(p1b);
-                        pb.push_back(p2b);
-                        pb.push_back(p3b);
+                            pb.push_back(p1b);
+                            pb.push_back(p2b);
+                            pb.push_back(p3b);
 
-                        stage=new Stage(grafico,sonido);
-                        stage->cargarDesdeXML((char*)path_s);
+                            stage=new Stage(grafico,sonido);
+                            stage->cargarDesdeXML((char*)path_s);
 
-                        Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
-                        break;
+                            break;
+
+                        }
                     }
                     if(mb->getAccion()>=10 && mb->getAccion()<=29)
                     {
@@ -510,6 +579,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                                           atoi(e->Attribute("size_x")),atoi(e->Attribute("size_y")),atoi(e->Attribute("box_size_x")),atoi(e->Attribute("box_size_y")),
                                                           atoi(e->Attribute("box_separation_x")),atoi(e->Attribute("box_separation_y")),
                                                           atoi(e->Attribute("chars_player1")),atoi(e->Attribute("chars_player2")),
+                                                          atoi(e->Attribute("preview_player1_x")),atoi(e->Attribute("preview_player1_y")),
+                                                          atoi(e->Attribute("preview_player2_x")),atoi(e->Attribute("preview_player2_y")),
                                                           chars
                                                           );
             elementos.push_back((Elemento*)char_select);
@@ -519,7 +590,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             stringw dir("menu/");
             path=dir+path;
             elementos.push_back((Elemento*)new MenuImagen(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
-                                                          grafico->getTexture(irr::io::path(path))));
+                                                          grafico->getTexture(irr::io::path(path)),""
+                                                          ));
         }else if(strcmp(e->Value(),"Text")==0)
         {
                 elementos.push_back((Elemento*)new MenuTexto(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
@@ -636,16 +708,17 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             stringw dir("menu/");
                             path=dir+path;
                             elem_lista.push_back((Elemento*)new MenuImagen(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                                          grafico->getTexture(irr::io::path(path))));
+                                                                          grafico->getTexture(irr::io::path(path)),""
+                                                                           ));
                         }
                         if(strcmp(el->Value(),"chars")==0)
                         {
-                            int player=atoi(el->Attribute("player"));
-                            int pos=atoi(el->Attribute("number"));
-                            if(player==1)
-                                pos_pa[pos]=elementos_contenedor.size();
-                            if(player==2)
-                                pos_pb[pos]=elementos_contenedor.size();
+//                            int player=atoi(el->Attribute("player"));
+//                            int pos=atoi(el->Attribute("number"));
+//                            if(player==1)
+//                                pos_pa[pos]=elementos_contenedor.size();
+//                            if(player==2)
+//                                pos_pb[pos]=elementos_contenedor.size();
                             for(int i=0;i<(int)chars.size();i++)
                             elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                              chars[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
@@ -655,9 +728,12 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         {
                             pos_stage=elementos_contenedor.size();
                             for(int i=0;i<(int)stages.size();i++)
-                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                             stages[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
-                                                             ));
+                            elem_lista.push_back((Elemento*)new MenuImagen(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
+                                                                          grafico->getTexture(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png"))),stages[i]
+                                                                           ));
+//                            elem_lista.push_back((Elemento*)new MenuTexto(grafico,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
+//                                                             stages[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
+//                                                             ));
                         }
                     }
                     elementos_contenedor.push_back((Elemento*)new MenuLista(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
@@ -680,10 +756,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
 Personaje* Menu::getPersonajeA(int num,bool ia)
 {
     //get string
-    MenuContenedor *mc=contenedor_actual;
-    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa[num]];
-    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-    stringw s2=mt->texto;
+//    MenuContenedor *mc=contenedor_actual;
+//    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa[num]];
+//    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
+//    stringw s2=mt->texto;
+    stringw s2=char_select->getLockedNamesPA()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
 
@@ -715,10 +792,11 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 Personaje* Menu::getPersonajeB(int num,bool ia)
 {
     //get string
-    MenuContenedor *mc=contenedor_actual;
-    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb[num]];
-    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-    stringw s2=mt->texto;
+//    MenuContenedor *mc=contenedor_actual;
+//    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb[num]];
+//    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
+//    stringw s2=mt->texto;
+    stringw s2=char_select->getLockedNamesPB()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
 
@@ -752,8 +830,8 @@ char* Menu::getStage()
     //!
     MenuContenedor *mc=((MenuContenedor*)contenedor_actual);
     MenuLista *ml=(MenuLista*)mc->elementos[pos_stage];
-    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-    stringw s2=mt->texto;
+    MenuImagen *mt=(MenuImagen*)ml->elementos[ml->actual];
+    stringw s2=mt->value;
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
     return str;

@@ -23,7 +23,10 @@ private:
     int separacion_x,separacion_y;
     int max_locked_chars_pa;
     int max_locked_chars_pb;
+    int preview_pa_x,preview_pa_y;
+    int preview_pb_x,preview_pb_y;
     vector<irr::video::ITexture*>portraits;
+    vector<irr::video::ITexture*>previews;
     vector<stringw>names;
     vector<LockedChar>locks_pa;
     vector<LockedChar>locks_pb;
@@ -31,6 +34,7 @@ private:
     irr::video::ITexture* selected_char_p2;
     irr::video::ITexture* locked_char_p1;
     irr::video::ITexture* locked_char_p2;
+    irr::video::ITexture* no_portrait;
 public:
     int select_p1_x,select_p1_y;
     int select_p2_x,select_p2_y;
@@ -40,12 +44,16 @@ public:
                    int size_cuadro_x,int size_cuadro_y,
                    int separacion_x,int  separacion_y,
                    int max_locked_chars_pa,int max_locked_chars_pb,
+                   int preview_pa_x,int preview_pa_y,
+                   int preview_pb_x,int preview_pb_y,
                    vector<stringw>names);
     void lockPA();
     void lockPB();
     vector<stringw> getLockedNamesPA();
     vector<stringw> getLockedNamesPB();
     bool listo();
+    bool listoPA();
+    bool listoPB();
     virtual int getTipo();
     virtual void dibujar();
     virtual void dibujar(int alineacion_x,int alineacion_y);

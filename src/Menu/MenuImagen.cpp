@@ -1,6 +1,6 @@
 #include "Menu/MenuImagen.h"
 
-MenuImagen::MenuImagen(Grafico*grafico,int x, int y, int width, int height,bool visible,irr::video::ITexture* imagen)
+MenuImagen::MenuImagen(Grafico*grafico,int x, int y, int width, int height,bool visible,irr::video::ITexture* imagen,stringw value)
 {
     this->x=x;
     this->y=y;
@@ -9,6 +9,7 @@ MenuImagen::MenuImagen(Grafico*grafico,int x, int y, int width, int height,bool 
     this->visible=visible;
     this->imagen=imagen;
     this->grafico=grafico;
+    this->value=value;
 }
 
 int MenuImagen::getTipo()
