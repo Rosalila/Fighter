@@ -6,6 +6,7 @@
 #include "Personaje/Proyectil.h"
 #include "Sonido/Sonido.h"
 #include "Personaje/Animacion.h"
+#include "Personaje/Paleta.h"
 
 class Personaje
 {
@@ -31,6 +32,7 @@ class Personaje
     vector<int>sombra_x;
     vector<int>sombra_y;
     vector<bool>flip_sombra;
+    Paleta paleta;
 
     //Otros vectores
     vector<Animacion>animaciones_back;
@@ -53,7 +55,7 @@ class Personaje
     //movimientos
     irr::core::map<stringw,Movimiento*> movimientos;
 
-    Personaje(Grafico* grafico,Sonido* sonido,int numero);
+    Personaje(Grafico* grafico,Sonido* sonido,int numero,int paleta);
     //Cargares
     void cargarDesdeXML(int px,int py,Input* input,char* nombre);
     void cargarArchivo(char* archivo_xml);

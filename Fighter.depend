@@ -1072,7 +1072,7 @@
 	<irrlicht/irrlicht.h>
 	"Input/Input.h"
 
-1332667255 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
+1333389016 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
 	"Grafico/Grafico.h"
 
 1329338981 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
@@ -1085,10 +1085,10 @@
 	"Input/Input.h"
 	<sstream>
 
-1333217368 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1333443724 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
-1333210394 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
+1333397963 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
 	"Stage/Stage.h"
 	"Grafico/Grafico.h"
 	"irrKlang/irrKlang.h"
@@ -1246,7 +1246,7 @@
 1330201250 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1332857502 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1333402204 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1329450439 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
@@ -1307,6 +1307,9 @@
 	<vector>
 	"Sonido/Reproduccion.h"
 
-1333217444 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
+1333401904 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
+
+1333443762 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Paleta.cpp
+	"Personaje/Paleta.h"
 

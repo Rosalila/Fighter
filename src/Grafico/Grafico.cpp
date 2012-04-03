@@ -207,3 +207,23 @@ void Grafico::draw2DImage
    driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
    //driver->drawPixel(100,100,color);
 }
+
+video::IImage* Grafico::TextureImage(video::ITexture* texture) {
+
+   video::IImage* image = driver->createImageFromData (
+      texture->getColorFormat(),
+      texture->getSize(),
+      texture->lock(),
+      false  //copy mem
+      );
+
+   texture->unlock();
+   return image;
+}
+
+video::ITexture* Grafico::ImageTexture(video::IImage* image, core::stringc name) {
+
+   video::ITexture* texture = driver->addTexture(name.c_str(),image);
+   texture->grab();
+   return texture;
+}

@@ -112,7 +112,49 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="a")
             {
-                char_select->lockPA();
+                char_select->lockPA(0);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="b")
+            {
+                char_select->lockPA(1);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="c")
+            {
+                char_select->lockPA(2);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="d")
+            {
+                char_select->lockPA(3);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="e")
+            {
+                char_select->lockPA(4);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="f")
+            {
+                char_select->lockPA(5);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="g")
+            {
+                char_select->lockPA(6);
+                tecla_arriba_p1=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputa->getBufferInputs()[0]=="h")
+            {
+                char_select->lockPA(7);
                 tecla_arriba_p1=false;
                 //seleccionar jugador en la posicion actual si es jugador
             }
@@ -161,7 +203,49 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="a")
             {
-                char_select->lockPB();
+                char_select->lockPB(0);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="b")
+            {
+                char_select->lockPB(1);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="c")
+            {
+                char_select->lockPB(2);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="d")
+            {
+                char_select->lockPB(3);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="e")
+            {
+                char_select->lockPB(4);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="f")
+            {
+                char_select->lockPB(5);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="g")
+            {
+                char_select->lockPB(6);
+                tecla_arriba_p2=false;
+                //seleccionar jugador en la posicion actual si es jugador
+            }
+            else if(inputb->getBufferInputs()[0]=="h")
+            {
+                char_select->lockPB(7);
                 tecla_arriba_p2=false;
                 //seleccionar jugador en la posicion actual si es jugador
             }
@@ -761,6 +845,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 //    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
 //    stringw s2=mt->texto;
     stringw s2=char_select->getLockedNamesPA()[num];
+    int num_paleta=char_select->getLockedPalettesPA()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
 
@@ -784,7 +869,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     }
 
     //get char
-    Personaje* p=new Personaje(grafico,sonido,1);
+    Personaje* p=new Personaje(grafico,sonido,1,num_paleta);
     p->cargarDesdeXML(300,270,inputa,(char *)path_a);
     return p;
 }
@@ -797,6 +882,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 //    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
 //    stringw s2=mt->texto;
     stringw s2=char_select->getLockedNamesPB()[num];
+    int num_paleta=char_select->getLockedPalettesPB()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
 
@@ -820,7 +906,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     }
 
     //get char
-    Personaje* p=new Personaje(grafico,sonido,2);
+    Personaje* p=new Personaje(grafico,sonido,2,num_paleta);
     p->cargarDesdeXML(524,270,inputb,(char *)path_b);
     return p;
 }

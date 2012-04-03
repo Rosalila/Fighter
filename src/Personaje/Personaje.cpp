@@ -1,12 +1,13 @@
 #include "Personaje/Personaje.h"
 
-Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero)
+Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
 {
     rango=10;
     this->grafico=grafico;
     this->sonido=sonido;
     this->numero=numero;
     this->combo=0;
+    paleta.cargarXML("chars/Evilken/palettes.xml",num_paleta);
 }
 //DIBUJAR
 void Personaje::dibujar()
@@ -85,64 +86,9 @@ void Personaje::dibujar()
         tg=t%255;
     }
 
-
-
-
-
     video::ITexture* texture=getImagen("current_image").imagen;
-    // set color for texture
-    SColor base(255,238,167,34);
-    int modificacion_r=10;
-    int modificacion_g=-60;
-    int modificacion_b=100;
-
-    int r_min=base.getRed()-rango;
-    int r_max=base.getRed()+rango;
-    int g_min=base.getGreen()-rango;
-    int g_max=base.getGreen()+rango;
-    int b_min=base.getBlue()-rango;
-    int b_max=base.getBlue()+rango;
-
-    if(r_min<0)r_min=0;
-    if(r_max>255)r_max=255;
-    if(g_min<0)g_min=0;
-    if(g_max>255)g_max=255;
-    if(b_min<0)b_min=0;
-    if(b_max>255)b_max=255;
-
-    if(this->numero==1)
-    {
-        // update texture with color
-        s32* p = (s32*)texture->lock();
-        for(s32 i=0; i<texture->getSize().Width*texture->getSize().Height; i++)
-        {
-
-            //verficacion
-            SColor actual(p[i]);
-
-           if(actual.getRed()>=r_min && actual.getRed()<=r_max
-              && actual.getGreen()>=g_min && actual.getGreen()<=g_max
-              && actual.getBlue()>=b_min && actual.getBlue()<=b_max
-              )
-           {
-               int nuevo_r=actual.getRed()+modificacion_r;
-               int nuevo_g=actual.getGreen()+modificacion_g;
-               int nuevo_b=actual.getBlue()+modificacion_b;
-               if(nuevo_r<0)nuevo_r=0;
-               if(nuevo_g<0)nuevo_g=0;
-               if(nuevo_b<0)nuevo_b=0;
-               if(nuevo_r>255)nuevo_r=255;
-               if(nuevo_g>255)nuevo_g=255;
-               if(nuevo_b>255)nuevo_b=255;
-               actual.setRed(nuevo_r);
-               actual.setGreen(nuevo_g);
-               actual.setBlue(nuevo_b);
-
-               p[i]=actual.color;
-           }
-        }
-        texture->unlock();
-    }
+    //if(numero==1)
+        //paleta.paintTexture(texture);
 
     grafico->draw2DImage
     (   getImagen("current_image").imagen,
@@ -155,39 +101,8 @@ void Personaje::dibujar()
         irr::video::SColor(255,tr,tg,tb),
         getString("orientation")=="i",
         false);
-
-    if(this->numero==1)
-    {
-        // update texture with color
-        s32* p = (s32*)texture->lock();
-        for(s32 i=0; i<texture->getSize().Width*texture->getSize().Height; i++)
-        {
-            //verficacion
-            SColor actual(p[i]);
-
-           if(actual.getRed()>=r_min+modificacion_r && actual.getRed()<=r_max+modificacion_r
-              && actual.getGreen()>=g_min+modificacion_g && actual.getGreen()<=g_max+modificacion_g
-              && actual.getBlue()>=b_min+modificacion_b && actual.getBlue()<=b_max+modificacion_b
-              )
-           {
-               int nuevo_r=actual.getRed()-modificacion_r;
-               int nuevo_g=actual.getGreen()-modificacion_g;
-               int nuevo_b=actual.getBlue()-modificacion_b;
-               if(nuevo_r<0)nuevo_r=0;
-               if(nuevo_g<0)nuevo_g=0;
-               if(nuevo_b<0)nuevo_b=0;
-               if(nuevo_r>255)nuevo_r=255;
-               if(nuevo_g>255)nuevo_g=255;
-               if(nuevo_b>255)nuevo_b=255;
-               actual.setRed(nuevo_r);
-               actual.setGreen(nuevo_g);
-               actual.setBlue(nuevo_b);
-
-               p[i]=actual.color;
-           }
-        }
-        texture->unlock();
-    }
+//    if(numero==1)
+        //paleta.restoreTexture(texture);
 
     sombra.push_back(getImagen("current_image"));
     sombra_x.push_back(getEntero("posicion_x"));
@@ -1207,9 +1122,22 @@ void Personaje::cargarSprites()
                 bool contrario=(str_contrario=="si");
 
                 if(ignore_color==NULL)
-                    agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path)),escala,alineacion_x,alineacion_y),contrario);
+                {
+                    ITexture* texture=grafico->getTexture(irr::io::path(path));
+                    paleta.paintTexture(texture);
+                    agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
+                    paleta.restoreTexture(texture);
+                }
                 else
-                    agregarModificador(nombre,frame,str_variable,Imagen(grafico->getTexture(irr::io::path(path),ignore_color),escala,alineacion_x,alineacion_y),contrario);
+                {
+                    video::IImage* image = grafico->driver->createImageFromFile(path);
+
+                    video::ITexture* texture = grafico->driver->addTexture("test",image);
+                    grafico->driver->makeColorKeyTexture(texture,ignore_color);
+
+                    paleta.paintTexture(texture);
+                    agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
+                }
             }
         }
     }
@@ -1483,8 +1411,6 @@ bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,
 
         px_colision=x1+((x2-x1)/2);
         py_colision=y1+((y2-y1)/2);
-//        getPbActual()->setEntero("Colision.x",x1+((x2-x1)/2));
-//        getPbActual()->setEntero("Colision.y",y1+((y2-y1)/2));
     }
 
     return hay_colision;

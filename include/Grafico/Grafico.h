@@ -9,9 +9,10 @@ using namespace irr;
 
 class Grafico
 {
-    video::IVideoDriver* driver;
+
     gui::IGUIFont* font;
     public:
+    video::IVideoDriver* driver;
     int ventana_x,ventana_y;
     IrrlichtDevice *device;
     Grafico(Receiver* receiver);
@@ -35,6 +36,12 @@ class Grafico
 				 irr::video::SColor color,
 				 bool flipHorizontally,
 				 bool flipVertically);
+
+//! Convert a texture to an image. Remember to drop the returned pointer
+video::IImage* TextureImage(video::ITexture* texture);
+
+//! Convert an image to a texture. Remember to drop the returned pointer
+video::ITexture* ImageTexture(video::IImage* image, core::stringc name=core::stringc(""));
 };
 
 #endif

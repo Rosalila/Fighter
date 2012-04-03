@@ -31,8 +31,8 @@
 	<File name="include/Menu/Elemento.h" open="0" top="0" tabpos="0">
 		<Cursor position="96" topLine="6" />
 	</File>
-	<File name="include/Menu/Menu.h" open="1" top="0" tabpos="1">
-		<Cursor position="582" topLine="17" />
+	<File name="include/Menu/Menu.h" open="0" top="0" tabpos="1">
+		<Cursor position="582" topLine="0" />
 	</File>
 	<File name="include/Menu/MenuBarra.h" open="0" top="0" tabpos="0">
 		<Cursor position="327" topLine="11" />
@@ -40,8 +40,8 @@
 	<File name="include/Menu/MenuBoton.h" open="0" top="0" tabpos="0">
 		<Cursor position="819" topLine="9" />
 	</File>
-	<File name="include/Menu/MenuCharSelect.h" open="1" top="0" tabpos="3">
-		<Cursor position="594" topLine="24" />
+	<File name="include/Menu/MenuCharSelect.h" open="0" top="0" tabpos="3">
+		<Cursor position="1602" topLine="0" />
 	</File>
 	<File name="include/Menu/MenuContenedor.h" open="0" top="0" tabpos="0">
 		<Cursor position="319" topLine="4" />
@@ -85,8 +85,11 @@
 	<File name="include/Personaje/Movimiento.h" open="0" top="0" tabpos="0">
 		<Cursor position="256" topLine="0" />
 	</File>
-	<File name="include/Personaje/Personaje.h" open="0" top="0" tabpos="1">
-		<Cursor position="468" topLine="43" />
+	<File name="include/Personaje/Paleta.h" open="1" top="0" tabpos="3">
+		<Cursor position="689" topLine="22" />
+	</File>
+	<File name="include/Personaje/Personaje.h" open="1" top="0" tabpos="1">
+		<Cursor position="234" topLine="6" />
 	</File>
 	<File name="include/Personaje/Proyectil.h" open="0" top="0" tabpos="0">
 		<Cursor position="253" topLine="2" />
@@ -95,7 +98,7 @@
 		<Cursor position="10" topLine="0" />
 	</File>
 	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="0">
-		<Cursor position="465" topLine="4" />
+		<Cursor position="465" topLine="0" />
 	</File>
 	<File name="include/Stage/Stage.h" open="0" top="0" tabpos="3">
 		<Cursor position="499" topLine="12" />
@@ -107,7 +110,7 @@
 		<Cursor position="11636" topLine="753" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="2129" topLine="66" />
+		<Cursor position="2129" topLine="93" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3142" topLine="2" />
@@ -133,8 +136,8 @@
 	<File name="src/Menu/Elemento.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="246" topLine="0" />
 	</File>
-	<File name="src/Menu/Menu.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="3785" topLine="96" />
+	<File name="src/Menu/Menu.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="20176" topLine="492" />
 	</File>
 	<File name="src/Menu/MenuBarra.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="5001" topLine="18" />
@@ -142,8 +145,8 @@
 	<File name="src/Menu/MenuBoton.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="404" topLine="18" />
 	</File>
-	<File name="src/Menu/MenuCharSelect.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="1417" topLine="48" />
+	<File name="src/Menu/MenuCharSelect.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="2964" topLine="72" />
 	</File>
 	<File name="src/Menu/MenuContenedor.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="890" topLine="15" />
@@ -184,8 +187,11 @@
 	<File name="src/Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="172" topLine="0" />
 	</File>
-	<File name="src/Personaje/Personaje.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="4085" topLine="111" />
+	<File name="src/Personaje/Paleta.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="3208" topLine="82" />
+	</File>
+	<File name="src/Personaje/Personaje.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="43829" topLine="1127" />
 	</File>
 	<File name="src/Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="589" topLine="10" />
@@ -197,6 +203,6 @@
 		<Cursor position="793" topLine="24" />
 	</File>
 	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="3792" topLine="93" />
+		<Cursor position="3291" topLine="93" />
 	</File>
 </CodeBlocks_layout_file>

@@ -8,11 +8,13 @@ class LockedChar
 public:
     int x,y;
     stringw name;
-    LockedChar(int x,int y,stringw name)
+    int num_paleta;
+    LockedChar(int x,int y,stringw name,int num_paleta)
     {
         this->x=x;
         this->y=y;
         this->name=name;
+        this->num_paleta=num_paleta;
     }
 };
 
@@ -47,10 +49,12 @@ public:
                    int preview_pa_x,int preview_pa_y,
                    int preview_pb_x,int preview_pb_y,
                    vector<stringw>names);
-    void lockPA();
-    void lockPB();
+    void lockPA(int num_paleta);
+    void lockPB(int num_paleta);
     vector<stringw> getLockedNamesPA();
     vector<stringw> getLockedNamesPB();
+    vector<int> getLockedPalettesPA();
+    vector<int> getLockedPalettesPB();
     bool listo();
     bool listoPA();
     bool listoPB();

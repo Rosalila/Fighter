@@ -65,6 +65,7 @@
 		<Unit filename="include/Personaje/ModificadorPorVariable.h" />
 		<Unit filename="include/Personaje/ModificadorString.h" />
 		<Unit filename="include/Personaje/Movimiento.h" />
+		<Unit filename="include/Personaje/Paleta.h" />
 		<Unit filename="include/Personaje/Personaje.h" />
 		<Unit filename="include/Personaje/Proyectil.h" />
 		<Unit filename="include/Sonido/Reproduccion.h" />
@@ -106,6 +107,7 @@
 		<Unit filename="src/Personaje/ModificadorPorVariable.cpp" />
 		<Unit filename="src/Personaje/ModificadorString.cpp" />
 		<Unit filename="src/Personaje/Movimiento.cpp" />
+		<Unit filename="src/Personaje/Paleta.cpp" />
 		<Unit filename="src/Personaje/Personaje.cpp" />
 		<Unit filename="src/Personaje/Proyectil.cpp" />
 		<Unit filename="src/Sonido/Reproduccion.cpp" />
