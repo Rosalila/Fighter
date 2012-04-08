@@ -92,8 +92,8 @@ void Personaje::dibujar()
         //paleta.paintTexture(texture);
 
     //get pos
-    int pos_x=getEntero("posicion_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
-    int pos_y=-getEntero("posicion_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+grafico->ventana_y-stage_piso;
+    int pos_x=getEntero("position_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
+    int pos_y=-getEntero("position_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+grafico->ventana_y-stage_piso;
 
 
     grafico->draw2DImageCameraAlign
@@ -111,8 +111,8 @@ void Personaje::dibujar()
         //paleta.restoreTexture(texture);
 
     sombra.push_back(getImagen("current_image"));
-    sombra_x.push_back(getEntero("posicion_x"));
-    sombra_y.push_back(getEntero("posicion_y"));
+    sombra_x.push_back(getEntero("position_x"));
+    sombra_y.push_back(getEntero("position_y"));
     flip_sombra.push_back(getString("orientation")=="i");
 }
 void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y)
@@ -288,6 +288,12 @@ Frame Personaje::getFrameActual()
 //GETS variables
 int Personaje::getEntero(stringw variable)
 {
+    if(enteros.find(variable)==0)
+    {
+        cout<<"Error variable not defined: "<<endl;
+        cout.flush();
+        return 1;
+    }
     return enteros[variable];
 }
 Barra Personaje::getBarra(stringw variable)
@@ -642,8 +648,8 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     setEntero("Colision.x",0);
     setEntero("Colision.y",0);
 
-    setEntero("posicion_x",px);
-    setEntero("posicion_y",py);
+    setEntero("position_x",px);
+    setEntero("position_y",py);
 
     cargarMain();
 
@@ -715,13 +721,13 @@ void Personaje::cargarMain()
                 {
                     int desplazamiento=atoi(elemento_imagen->Attribute("move_x"));
                     for(int i=0;i<frames;i++)
-                        agregarModificador(nombre,i,"posicion_x",desplazamiento,true,false,true);
+                        agregarModificador(nombre,i,"position_x",desplazamiento,true,false,true);
                 }
                 if(elemento_imagen->Attribute("move_y")!=NULL)
                 {
                     int desplazamiento=atoi(elemento_imagen->Attribute("move_y"));
                     for(int i=0;i<frames;i++)
-                        agregarModificador(nombre,i,"posicion_y",desplazamiento,true,false,false);
+                        agregarModificador(nombre,i,"position_y",desplazamiento,true,false,false);
                 }
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("projectile")->ToElement();
@@ -796,9 +802,9 @@ void Personaje::cargarMain()
 
                 //Modificadores
                 proyectil->frames[0].agregarModificador("off",nombre+".trigger",false);
-                proyectil->frames[0].agregarModificador("entero","posicion_x",nombre+".position_x",false,false,false);
+                proyectil->frames[0].agregarModificador("entero","position_x",nombre+".position_x",false,false,false);
                 proyectil->frames[0].agregarModificador(posicion_x,nombre+".position_x",true,false,true);
-                proyectil->frames[0].agregarModificador("entero","posicion_y",nombre+".position_y",false,false,false);
+                proyectil->frames[0].agregarModificador("entero","position_y",nombre+".position_y",false,false,false);
                 proyectil->frames[0].agregarModificador(-posicion_y,nombre+".position_y",true,false,false);
 
                 //Triggers
@@ -836,6 +842,7 @@ void Personaje::cargarMain()
                 stringw valor(elemento_imagen->Attribute("value"));
                 setString(variable,valor);
             }
+            if(nodo->FirstChild("integer")!=NULL)
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("integer")->ToElement();
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("integer"))
@@ -1395,7 +1402,7 @@ void Personaje::logicaProyectiles()
             setString(proyectil->estado,"off");
         }
         //hit
-        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("posicion_x"),personaje_contrario->getEntero("posicion_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
+        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("position_x"),personaje_contrario->getEntero("position_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
         {
             personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
             proyectil->frame_actual=0;
