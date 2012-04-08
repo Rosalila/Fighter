@@ -254,9 +254,9 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,stringw variable_atacante,
 
 
     int ax=atacado_x;
-    int ay=atacado_y;
+    int ay=-atacado_y;
     int rx=atacante_x;
-    int ry=atacante_y;
+    int ry=-atacante_y;
 
     for(int a=0; a<(int)hb_azules.size(); a++)
         for(int r=0; r<(int)hb_rojas.size(); r++)
@@ -289,9 +289,9 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,
 
 
     int ax=atacado->getEntero("posicion_x");
-    int ay=atacado->getEntero("posicion_y");
+    int ay=-atacado->getEntero("posicion_y");
     int rx=atacante->getEntero("posicion_x");
-    int ry=atacante->getEntero("posicion_y");
+    int ry=-atacante->getEntero("posicion_y");
 
     for(int a=0; a<(int)hb_azules.size(); a++)
         for(int r=0; r<(int)hb_rojas.size(); r++)

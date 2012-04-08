@@ -128,10 +128,14 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
     }
     for(int i=0;i<(int)hitbox.size();i++)
     {
+        int p1x=x+hitbox[i].p1x;
+        int p1y=-y+hitbox[i].p1y+grafico->ventana_y-stage_piso;
+        int p2x=x+hitbox[i].p2x;
+        int p2y=-y+hitbox[i].p2y+grafico->ventana_y-stage_piso;
         if(variable=="blue")
-            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
+            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(p1x,p1y,p2x,p2y));
         else
-            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
+            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(p1x,p1y,p2x,p2y));
     }
 }
 
@@ -252,18 +256,24 @@ void Personaje::dibujarProyectiles()
         if(getString(proyectiles_actuales[i]->estado)!="on")
             continue;
         Imagen imagen=getImagen(proyectiles_actuales[i]->imagen);
+        int pos_x=getEntero(proyectiles_actuales[i]->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x;
+        int pos_y=getEntero(proyectiles_actuales[i]->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y+grafico->ventana_y-stage_piso;
         grafico->draw2DImageCameraAlign
         (   imagen.imagen,
             irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
             irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
-            irr::core::position2d<irr::f32>(getEntero(proyectiles_actuales[i]->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x,getEntero(proyectiles_actuales[i]->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y),
+            irr::core::position2d<irr::f32>(pos_x,pos_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
             true,
             irr::video::SColor(255,255,255,255),
             getString(proyectiles_actuales[i]->orientacion)=="i",
             false);
-        //dibujarHitBoxes("hadouken hitboxes","resources/red.png",getString("hadouken orientacion")=="i",getEntero("hadouken posicion x"),getEntero("hadouken posicion y"));
+        stringw nombre=proyectiles_actuales[i]->nombre;
+//        dibujarHitBoxes(nombre+".hitboxes","resources/red.png",
+//                        getString(nombre+".orientation")=="i",
+//                        getEntero(nombre+".position_x"),
+//                        getEntero(nombre+".position_y"));
     }
 }
 //GETS shortcuts
@@ -728,7 +738,7 @@ void Personaje::cargarMain()
                 setEntero(nombre+".position_y",0);
 
                 setString(nombre+".state","");
-                setString(nombre+".orientacion","");
+                setString(nombre+".orientation","");
 
                 //Sprites
                 vector<Imagen>sprites;
@@ -794,7 +804,7 @@ void Personaje::cargarMain()
                 //Triggers
                 setString(nombre+".trigger","off");
                 vector<Condicion*>cond_temp;
-                cond_temp.push_back(new Condicion("hadouken.trigger","=","on",false));
+                cond_temp.push_back(new Condicion(nombre+".trigger","=","on",false));
                 proyectil->agregarCondicion(cond_temp,0);
 
                 //Listo
@@ -1354,6 +1364,7 @@ void Personaje::cargarAnimations()
 
 void Personaje::logicaProyectiles()
 {
+    bool pego=false;
     for(int i=0;i<(int)proyectiles_actuales.size();i++)
     {
         Proyectil* proyectil=proyectiles_actuales[i];
@@ -1383,16 +1394,21 @@ void Personaje::logicaProyectiles()
             proyectil->frame_actual=0;
             setString(proyectil->estado,"off");
         }
+        //hit
         if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("posicion_x"),personaje_contrario->getEntero("posicion_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
         {
             personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
             proyectil->frame_actual=0;
-            personaje_contrario->setString("hit","yes");
+            pego=true;
             setString(proyectil->estado,"off");
             setEntero("Colision.x",px_colision);
             setEntero("Colision.y",py_colision);
         }
     }
+    if(pego)
+        personaje_contrario->setString("projectile_hit","yes");
+    else
+        personaje_contrario->setString("projectile_hit","no");
 }
 
 bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
@@ -1447,11 +1463,9 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
 void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
 {
     irr::video::ITexture *texture=imagen.imagen;
-//    int pos_x=getEntero("posicion_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
-//    int pos_y=-getEntero("posicion_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+grafico->ventana_y;
 
-int pos_x=posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2;
-int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+grafico->ventana_y-stage_piso;
+    int pos_x=posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2;
+    int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+grafico->ventana_y-stage_piso;
 
     grafico->draw2DImageCameraAlign
     (   texture,
