@@ -25,6 +25,7 @@ class Stage
     Grafico* grafico;
     Sonido* sonido;
     int size;
+    int pos_piso;
     Stage(Grafico* grafico,Sonido* sonido);
     void dibujarBackground();
     void dibujarBack(int pos);

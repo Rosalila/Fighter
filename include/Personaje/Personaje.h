@@ -25,6 +25,7 @@ class Personaje
     int comparacion_hp_contrario;
     int numero;
     int combo;
+    int stage_piso;
     int px_colision,py_colision;
 
     //efecto

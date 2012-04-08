@@ -1,10 +1,10 @@
 #include "IA/Automata.h"
 
-Automata::Automata(char* archivo)
+Automata::Automata(char* archivo,char* archivo_default)
 {
     estado_actual="S";
     estados["S"]=new Estado(vector<Transicion*>());
-    cargarDesdeXML(archivo);
+    cargarDesdeXML(archivo,archivo_default);
     transicion_a_recompenzar=NULL;
 }
 
@@ -38,10 +38,15 @@ stringw Automata::getNextInput(irr::core::map<stringw,stringw>*strings,
     }
 }
 
-void Automata::cargarDesdeXML(char* archivo)
+void Automata::cargarDesdeXML(char* archivo,char* archivo_default)
 {
     TiXmlDocument doc_t(archivo);
-    doc_t.LoadFile();
+    bool loadOkay = doc_t.LoadFile();
+    if(!loadOkay)
+    {
+        doc_t=TiXmlDocument(archivo_default);
+        loadOkay=doc_t.LoadFile();
+    }
     TiXmlDocument *doc;
     doc=&doc_t;
 
@@ -96,7 +101,6 @@ void Automata::cargarDesdeXML(char* archivo)
                     transicion->agregarCondicion(Condicion2(exp_i,op,exp_d,contrario));
                 }
             }
-
             transiciones.push_back(transicion);
         }
         estados[stringw(nodo->ToElement()->Attribute("name"))]=new Estado(transiciones);

@@ -16,7 +16,7 @@ vector<Boton> botones;
 vector<Boton> cruz;
     Input(){}
     void cargarDesdeXML(int jugador,Receiver* receiver);
-    void cargarIAXML(int jugador,char* archivo);
+    void cargarIAXML(int jugador,char* archivo,char* archivo_default);
     TiXmlDocument* getXML(TiXmlDocument *doc);
     void actualizarBuffer();
     void actualizarBuffer(irr::core::map<stringw,stringw>*strings,

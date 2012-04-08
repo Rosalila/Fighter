@@ -17,14 +17,14 @@ class Automata
     int wait;
 public:
 Transicion *transicion_a_recompenzar;
-    Automata(char* archivo);
+    Automata(char* archivo,char* archivo_default);
     Estado* getEstadoInicial();
     stringw getNextInput(irr::core::map<stringw,stringw>*strings,
                          irr::core::map<stringw,stringw>*strings_contrario,
                          irr::core::map<stringw,int>*enteros,
                          irr::core::map<stringw,int>*enteros_contrario
                          );
-    void cargarDesdeXML(char* archivo);
+    void cargarDesdeXML(char* archivo,char* archivo_default);
 };
 
 #endif

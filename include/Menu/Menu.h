@@ -27,6 +27,9 @@ private:
     int pos_stage,pos_ia_lvl;
     bool exit_signal,save_inputs_signal;
     MenuCharSelect* char_select;
+
+    //config vars
+    int ai_level,time,rounds;
 public:
     Input *inputa,*inputb;
     vector<Personaje*>pa;
@@ -35,6 +38,7 @@ public:
     Menu(){}
     Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo);
     void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
+    void cargarConfig();
     void loopMenu();
     Personaje* getPersonajeA(int num,bool ia);
     Personaje* getPersonajeB(int num,bool ia);

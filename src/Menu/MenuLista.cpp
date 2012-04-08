@@ -3,7 +3,7 @@
 MenuLista::MenuLista(Grafico*grafico,int x, int y, int width, int height,bool visible,
           int flecha_izq_x,int flecha_izq_y,irr::video::ITexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,irr::video::ITexture*flecha_derecha,
           int flecha_izq_x_sel,int flecha_izq_y_sel,irr::video::ITexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,irr::video::ITexture*flecha_derecha_sel,
-          vector<Elemento*>elementos
+          vector<Elemento*>elementos,int accion
           )
 {
     this->x=x;
@@ -28,6 +28,7 @@ MenuLista::MenuLista(Grafico*grafico,int x, int y, int width, int height,bool vi
 
     this->elementos=elementos;
     actual=0;
+    this->accion=accion;
     seleccionado=false;
     this->grafico=grafico;
 }
@@ -171,4 +172,14 @@ bool MenuLista::estaSeleccionado()
 void MenuLista::setSeleccionado(bool seleccionado)
 {
     this->seleccionado=seleccionado;
+}
+
+int MenuLista::getAccion()
+{
+    return accion;
+}
+
+Elemento* MenuLista::getElementoActual()
+{
+    return elementos[actual];
 }

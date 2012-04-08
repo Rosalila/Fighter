@@ -50,6 +50,8 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
             else if(resultado[i]=='6')resultado[i]='4';
             else if(resultado[i]=='3')resultado[i]='1';
             else if(resultado[i]=='1')resultado[i]='3';
+            else if(resultado[i]=='7')resultado[i]='9';
+            else if(resultado[i]=='9')resultado[i]='7';
         }
     }
     buffer_inputs.insert(buffer_inputs.begin(),resultado);
@@ -171,14 +173,14 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
     }
 }
 
-void Input::cargarIAXML(int jugador,char* archivo)
+void Input::cargarIAXML(int jugador,char* archivo,char* archivo_default)
 {
     this->jugador=jugador;
     this->inteligencia_artificial=true;
     tecla_arriba=true;
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
-    ia=new IA(archivo);
+    ia=new IA(archivo,archivo_default);
 }
 TiXmlDocument* Input::getXML(TiXmlDocument *doc)
 {

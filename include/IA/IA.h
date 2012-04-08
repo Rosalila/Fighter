@@ -14,7 +14,7 @@ class IA
     Automata *automata;
 public:
     Transicion *transicion_a_recompenzar;
-    IA(char* archivo);
+    IA(char* archivo,char* archivo_default);
     stringw getInput(irr::core::map<stringw,stringw>*strings,
                      irr::core::map<stringw,stringw>*strings_contrario,
                      irr::core::map<stringw,int>*enteros,

@@ -272,22 +272,74 @@ void Menu::loopMenu()
             {
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
-                    ((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado())->avanzar();
+                    MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    ml->avanzar();
+                    if(ml->getAccion()==0)
+                    {
+                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+                        //convert to char*
+                        size_t count = 255;
+                        c8* str_ptr= (char*)malloc( 255 );
+                        wcstombs(str_ptr, mt->texto.c_str(), count);
+
+                        time=atoi(str_ptr);
+                    }
+                    if(ml->getAccion()==1)
+                    {
+                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+                        //convert to char*
+                        size_t count = 255;
+                        c8* str_ptr= (char*)malloc( 255 );
+                        wcstombs(str_ptr, mt->texto.c_str(), count);
+
+                        rounds=atoi(str_ptr);
+                    }
                 }
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==6)
                 {
-                    ((MenuBarra*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado())->avanzar();
+                    MenuBarra* mb=((MenuBarra*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    mb->avanzar();
+                    if(mb->getAccion()==0)
+                    {
+                        ai_level=mb->actual;
+                    }
                 }
             }
             else if(receiver->IsKeyDownn(irr::KEY_LEFT))
             {
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
-                    ((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado())->retroceder();
+                    MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    ml->retroceder();
+                    if(ml->getAccion()==0)
+                    {
+                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+                        //convert to char*
+                        size_t count = 255;
+                        c8* str_ptr= (char*)malloc( 255 );
+                        wcstombs(str_ptr, mt->texto.c_str(), count);
+
+                        time=atoi(str_ptr);
+                    }
+                    if(ml->getAccion()==1)
+                    {
+                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+                        //convert to char*
+                        size_t count = 255;
+                        c8* str_ptr= (char*)malloc( 255 );
+                        wcstombs(str_ptr, mt->texto.c_str(), count);
+
+                        rounds=atoi(str_ptr);
+                    }
                 }
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==6)
                 {
-                    ((MenuBarra*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado())->retroceder();
+                    MenuBarra* mb=((MenuBarra*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
+                    mb->retroceder();
+                    if(mb->getAccion()==0)
+                    {
+                        ai_level=mb->actual;
+                    }
                 }
             }else if(receiver->IsKeyPressed(irr::KEY_RETURN))
             {
@@ -400,8 +452,8 @@ void Menu::loopMenu()
                             p1b->setEntero("hp.periodic_modifier",1);
                             p1b->setEntero("hp.period",1);
                             Input*i_temp=new Input();
-                            i_temp->cargarIAXML(2,(char*)"");
-                            p1b->input=i_temp;
+//                            i_temp->cargarIAXML(2,(char*)"");
+//                            p1b->input=i_temp;
 
                             Personaje* p2a=getPersonajeA(1,false);
                             Personaje* p2b=getPersonajeB(1,true);
@@ -410,8 +462,8 @@ void Menu::loopMenu()
                             p2b->setEntero("hp.periodic_modifier",1);
                             p2b->setEntero("hp.period",1);
                             i_temp=new Input();
-                            i_temp->cargarIAXML(2,(char*)"");
-                            p2b->input=i_temp;
+//                            i_temp->cargarIAXML(2,(char*)"");
+//                            p2b->input=i_temp;
 
                             Personaje* p3a=getPersonajeA(2,false);
                             Personaje* p3b=getPersonajeB(2,true);
@@ -420,8 +472,8 @@ void Menu::loopMenu()
                             p3b->setEntero("hp.periodic_modifier",1);
                             p3b->setEntero("hp.period",1);
                             i_temp=new Input();
-                            i_temp->cargarIAXML(2,(char*)"");
-                            p3b->input=i_temp;
+//                            i_temp->cargarIAXML(2,(char*)"");
+//                            p3b->input=i_temp;
 
                             pa.push_back(p1a);
                             pa.push_back(p2a);
@@ -443,14 +495,13 @@ void Menu::loopMenu()
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(2);
+                            printVsScreen(1);
 
                             inputa=new Input();
                             inputb=new Input();
                             //this->inputa->cargarIAXML(1);
                             inputa->cargarDesdeXML(1,receiver);
                             inputb->cargarDesdeXML(2,receiver);
-
                             char *path_s=new char[255];
                             strcpy(path_s,"");
                             strcat(path_s,(char*)getStage());
@@ -460,38 +511,37 @@ void Menu::loopMenu()
                             p1a->personaje_contrario=p1b;
                             p1b->personaje_contrario=p1a;
 
-                            Personaje* p2a=getPersonajeA(1,false);
-                            Personaje* p2b=getPersonajeB(1,false);
-                            p2a->personaje_contrario=p1b;
-                            p2b->personaje_contrario=p1a;
+                            Personaje* p2a=getPersonajeA(0,false);
+                            Personaje* p2b=getPersonajeB(0,false);
+                            p2a->personaje_contrario=p2b;
+                            p2b->personaje_contrario=p2a;
 
+                            pa.clear();
                             pa.push_back(p1a);
                             pa.push_back(p2a);
 
+                            pb.clear();
                             pb.push_back(p1b);
                             pb.push_back(p2b);
 
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
-
                             Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
                             break;
-
                         }
                     }
                     if(mb->getAccion()==7)
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(3);
+                            printVsScreen(1);
 
                             inputa=new Input();
                             inputb=new Input();
                             //this->inputa->cargarIAXML(1);
                             inputa->cargarDesdeXML(1,receiver);
                             inputb->cargarDesdeXML(2,receiver);
-
                             char *path_s=new char[255];
                             strcpy(path_s,"");
                             strcat(path_s,(char*)getStage());
@@ -501,32 +551,52 @@ void Menu::loopMenu()
                             p1a->personaje_contrario=p1b;
                             p1b->personaje_contrario=p1a;
 
-                            Personaje* p2a=getPersonajeA(1,false);
-                            Personaje* p2b=getPersonajeB(1,false);
-                            p2a->personaje_contrario=p1b;
-                            p2b->personaje_contrario=p1a;
+                            Personaje* p2a=getPersonajeA(0,false);
+                            Personaje* p2b=getPersonajeB(0,false);
+                            p2a->personaje_contrario=p2b;
+                            p2b->personaje_contrario=p2a;
 
-                            Personaje* p3a=getPersonajeA(2,false);
-                            Personaje* p3b=getPersonajeB(2,false);
-                            p3a->personaje_contrario=p1b;
-                            p3b->personaje_contrario=p1a;
+                            Personaje* p3a=getPersonajeA(0,false);
+                            Personaje* p3b=getPersonajeB(0,false);
+                            p3a->personaje_contrario=p3b;
+                            p3b->personaje_contrario=p3a;
 
+                            pa.clear();
                             pa.push_back(p1a);
                             pa.push_back(p2a);
                             pa.push_back(p3a);
 
+                            pb.clear();
                             pb.push_back(p1b);
                             pb.push_back(p2b);
                             pb.push_back(p3b);
 
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
-
                             Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
 
                             break;
-
                         }
+                    }
+                    if(mb->getAccion()==8)//save config
+                    {
+                        TiXmlDocument *doc=new TiXmlDocument();
+                        TiXmlDeclaration* decl = new TiXmlDeclaration( "1.0", "", "" );
+                        doc->LinkEndChild( decl );
+
+                        TiXmlElement * root = new TiXmlElement("ConfigFile");
+                        TiXmlElement * ai = new TiXmlElement("AILevel");
+                        ai->SetDoubleAttribute("level",ai_level);
+                        TiXmlElement * mt = new TiXmlElement("MatchTime");
+                        mt->SetDoubleAttribute("seconds",time);
+                        TiXmlElement * r = new TiXmlElement("Rounds");
+                        r->SetDoubleAttribute("rounds",rounds);
+                        root->LinkEndChild(ai);
+                        root->LinkEndChild(mt);
+                        root->LinkEndChild(r);
+                        doc->LinkEndChild(root);
+
+                        doc->SaveFile("misc/config.xml");
                     }
                     if(mb->getAccion()>=10 && mb->getAccion()<=29)
                     {
@@ -632,7 +702,6 @@ void Menu::dibujarMenu()
     if (grafico->isWindowActive())
     {
         grafico->beginScene();
-
         for(int i=0;i<(int)elementos.size();i++)
             elementos[i]->dibujar();
         grafico->endScene();
@@ -640,8 +709,26 @@ void Menu::dibujarMenu()
     grafico->run();
 }
 
+void Menu::cargarConfig()
+{
+    TiXmlDocument doc_t("misc/config.xml");
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+    TiXmlNode* node=doc->FirstChild("ConfigFile");
+    TiXmlElement* ai_elem=node->FirstChild("AILevel")->ToElement();
+    TiXmlElement* time_elem=node->FirstChild("MatchTime")->ToElement();
+    TiXmlElement* rounds_elem=node->FirstChild("Rounds")->ToElement();
+
+    ai_level=atoi(ai_elem->Attribute("level"));
+    time=atoi(time_elem->Attribute("seconds"));
+    rounds=atoi(rounds_elem->Attribute("rounds"));
+}
+
 void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> stages)
 {
+    cargarConfig();
+
     TiXmlDocument doc_t( archivo );
     doc_t.LoadFile();
     TiXmlDocument *doc;
@@ -708,6 +795,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         action=6;
                     if(strcmp(ec->Attribute("action"),"3v3")==0)
                         action=7;
+                    if(strcmp(ec->Attribute("action"),"Save Config")==0)
+                        action=8;
 
 
                     if(strcmp(ec->Attribute("action"),"Player1.KeyConfig:up")==0)
@@ -768,10 +857,23 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                 }
                 if(strcmp(ec->Value(),"Bar")==0)
                 {
+                    int accion=-1;
+                    int default_value=atoi(ec->Attribute("default_value"));
+                    if(ec->Attribute("action")!=NULL)
+                    {
+                        if(strcmp(ec->Attribute("action"),"AI level")==0)
+                        {
+                            accion=0;
+                            default_value=ai_level;
+                        }
+                    }
+                        accion=atoi(ec->Attribute("action"));
                     elementos_contenedor.push_back((Elemento*)new MenuBarra(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
                                                                             grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_bg"))),atoi(ec->Attribute("bar_x")),atoi(ec->Attribute("bar_y")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path"))),
                                                                             grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_bg_selected"))),atoi(ec->Attribute("bar_x_selected")),atoi(ec->Attribute("bar_y_selected")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_selected"))),
-                                                                            atoi(ec->Attribute("max")),atoi(ec->Attribute("default_value"))));
+                                                                            atoi(ec->Attribute("max")),default_value,accion
+                                                                            )
+                                                   );
                 }
                 if(strcmp(ec->Value(),"List")==0)
                 {
@@ -820,14 +922,24 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
 //                                                             ));
                         }
                     }
+                    int accion=-1;
+                    if(ec->Attribute("action")!=NULL)
+                    {
+                        if(strcmp(ec->Attribute("action"),"Time")==0)
+                            accion=0;
+                        if(strcmp(ec->Attribute("action"),"Rounds")==0)
+                            accion=1;
+                    }
                     elementos_contenedor.push_back((Elemento*)new MenuLista(grafico,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
                                                                             atoi(ec->Attribute("arrow_left_x")),atoi(ec->Attribute("arrow_left_y")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_left"))),
                                                                             atoi(ec->Attribute("arrow_right_x")),atoi(ec->Attribute("arrow_right_y")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_right"))),
                                                                             //atoi(ec->Attribute("arrow_right_x")),0,grafico->getTexture("menu/flecha_izq2.png"),150,0,grafico->getTexture("menu/flecha_der2.png"),
                                                                             atoi(ec->Attribute("arrow_left_x_selected")),atoi(ec->Attribute("arrow_left_y_selected")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_left_selected"))),
                                                                             atoi(ec->Attribute("arrow_right_x_selected")),atoi(ec->Attribute("arrow_right_y_selected")),grafico->getTexture(stringw("menu/")+stringw(ec->Attribute("path_right_selected"))),
-                                                                            elem_lista
-                                                                            ));
+                                                                            elem_lista,
+                                                                            accion
+                                                                            )
+                                                   );
                 }
             }
             contenedor_actual=new MenuContenedor(grafico,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")
@@ -861,7 +973,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
         strcpy(file_ia,"chars/");
         strcat(file_ia,path_a);
         strcat(file_ia,"/ia.xml");
-        inputa->cargarIAXML(2,file_ia);
+        inputa->cargarIAXML(2,file_ia,"");
     }else
     {
         inputa=new Input();
@@ -870,7 +982,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(grafico,sonido,1,num_paleta);
-    p->cargarDesdeXML(300,270,inputa,(char *)path_a);
+    p->cargarDesdeXML(300,0,inputa,(char *)path_a);
     return p;
 }
 
@@ -895,10 +1007,23 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     {
         inputb=new Input();
         char*file_ia=new char[255];
+        char*file_ia_default=new char[255];
         strcpy(file_ia,"chars/");
+        strcpy(file_ia_default,"chars/");
         strcat(file_ia,path_b);
-        strcat(file_ia,"/ai.xml");
-        inputb->cargarIAXML(2,file_ia);
+        strcat(file_ia_default,path_b);
+        strcat(file_ia_default,"/ai/default.xml");
+        if(ai_level==1)
+            strcat(file_ia,"/ai/level 1.xml");
+        if(ai_level==2)
+            strcat(file_ia,"/ai/level 2.xml");
+        if(ai_level==3)
+            strcat(file_ia,"/ai/level 3.xml");
+        if(ai_level==4)
+            strcat(file_ia,"/ai/level 4.xml");
+        if(ai_level==5)
+            strcat(file_ia,"/ai/level 5.xml");
+        inputb->cargarIAXML(2,file_ia,file_ia_default);
     }else
     {
         inputb=new Input();
@@ -907,7 +1032,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(grafico,sonido,2,num_paleta);
-    p->cargarDesdeXML(524,270,inputb,(char *)path_b);
+    p->cargarDesdeXML(524,0,inputb,(char *)path_b);
     return p;
 }
 

@@ -15,6 +15,11 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
     match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/1.png"),1,0,0));
     match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/2.png"),1,0,0));
     match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/3.png"),1,0,0));
+
+    for(int i=0;i<(int)pa.size();i++)
+        pa[i]->stage_piso=stage->pos_piso;
+    for(int i=0;i<(int)pb.size();i++)
+        pb[i]->stage_piso=stage->pos_piso;
 //    //Creadas abierto
 //    receiver=new Receiver();
 //    //this->inputa=(Input*)new InputXml(1,receiver);
@@ -311,9 +316,10 @@ void Fighter::logicaPersonaje(Personaje* p)
         p->setString("attacking","no");
     }
     //verificar colision de hitboxes
+    p->setString("hit","no");
     if(getColisionHitBoxes(p->personaje_contrario,"red",p,"blue"))
     {
-        p->setString("colision.red_hitboxes","si");
+        p->setString("colision.red_hitboxes","yes");
         Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
         if(!m->ya_pego)
         {
@@ -327,7 +333,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         p->setString("colision.red_hitboxes","no");
 
     if(getColisionHitBoxes(p->personaje_contrario,"blue",p,"blue"))
-        p->setString("colision.blue_hitboxes","si");
+        p->setString("colision.blue_hitboxes","yes");
     else
         p->setString("colision.blue_hitboxes","no");
 
@@ -342,6 +348,7 @@ void Fighter::logicaPersonaje(Personaje* p)
                 pa_actual=0;
             pa[pa_actual]->setEntero("posicion_x",pa[p_anterior]->getEntero("posicion_x"));
             pa[pa_actual]->setEntero("posicion_y",pa[p_anterior]->getEntero("posicion_y"));
+            pa[pa_actual]->setString("orientation",pa[p_anterior]->getString("orientation"));
             p->setString("change_char","off");
             p=pa[pa_actual];
         }
@@ -353,6 +360,7 @@ void Fighter::logicaPersonaje(Personaje* p)
                 pb_actual=0;
             pb[pb_actual]->setEntero("posicion_x",pb[p_anterior]->getEntero("posicion_x"));
             pb[pb_actual]->setEntero("posicion_y",pb[p_anterior]->getEntero("posicion_y"));
+            pb[pb_actual]->setString("orientation",pb[p_anterior]->getString("orientation"));
             p->setString("change_char","off");
             p=pb[pb_actual];
             p->setString("change_char","off");
@@ -365,14 +373,15 @@ void Fighter::logicaPersonaje(Personaje* p)
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
         p->setString("current_move","entrance");
+        p->setString("isActive.entrance","yes");
         sonido->reproducirSonido("entrance");
     }
 
     //verificar flip
-    if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x"))
-        p->strings["orientation"]="i";
-    else
-        p->strings["orientation"]="d";
+    if(p->getEntero("posicion_x")>p->personaje_contrario->getEntero("posicion_x") && p->getString("current_move")=="5" && p->getString("state")=="standing")
+        p->setString("orientation","i");
+    if(p->getEntero("posicion_x")<p->personaje_contrario->getEntero("posicion_x") && p->getString("current_move")=="5" && p->getString("state")=="standing")
+        p->setString("orientation","d");
     //get input
     stringw str_movimiento="5";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
@@ -388,6 +397,8 @@ void Fighter::logicaPersonaje(Personaje* p)
             m->ya_pego=false;
             p->setString("current_move",str_movimiento);
             sonido->reproducirSonido(str_movimiento);
+            //setear isActive.
+            p->setString(stringw("isActive.")+str_movimiento,"yes");
         }
     //Movimientos continuos
     //agregar nuevos
@@ -403,9 +414,9 @@ void Fighter::logicaPersonaje(Personaje* p)
                     }
                 if(!existe)
                 {
-                    if(p->inputs[i].movimiento=="recibir")
+                    if(p->inputs[i].movimiento.subString(0,7)=="on_hit.")
                     {
-                        if(p->getString("current_move")=="recibir")
+                        if(p->getString("current_move").subString(0,7)=="on_hit.")
                         {
                             p->combo++;
                         }
@@ -413,12 +424,15 @@ void Fighter::logicaPersonaje(Personaje* p)
                         m->frame_actual=0;
                         m->tiempo_transcurrido=0;
                         m->ya_pego=false;
-                        p->setString("current_move","recibir");
+                        p->setString("current_move",p->inputs[i].movimiento);
+                        p->setString(stringw("isActive.")+p->inputs[i].movimiento,"yes");
                         sonido->reproducirSonido(str_movimiento);
                     }
                     else
                     {
-                        p->movimientos_constantes_actuales.push_back(p->movimientos[p->inputs[i].movimiento]);
+                        stringw movimiento_temp=p->inputs[i].movimiento;
+                        p->setString(stringw("isActive.")+movimiento_temp,"yes");
+                        p->movimientos_constantes_actuales.push_back(p->movimientos[movimiento_temp]);
                     }
                 }
             }
@@ -442,6 +456,10 @@ void Fighter::logicaPersonaje(Personaje* p)
 
 void Fighter::aplicarModificadores(Personaje *p)
 {
+    //verificar q no se salgan de la pantalla
+    int temp_pos_x=p->getEntero("posicion_x");
+    int temp_pos_x_c=p->personaje_contrario->getEntero("posicion_x");
+
     //get movimiento y frame
     Movimiento* m=p->movimientos[p->getString("current_move")];
     Frame* f=&m->frames[m->frame_actual];
@@ -460,22 +478,38 @@ void Fighter::aplicarModificadores(Personaje *p)
     if(m->frame_actual==(int)m->frames.size())
     {
         m->ya_pego=false;
-        if(p->getString("current_move")=="recibir")
+        if(p->getString("current_move").subString(0,7)=="on_hit.")
             p->combo=0;
         if(p->getString("current_move")!="ko")
         {
             m->frame_actual=0;
+            p->setString(stringw("isActive.")+p->getString("current_move"),"no");
             p->setString("current_move","5");
         }else
         {
             m->frame_actual--;
         }
     }
+    //verificar cancel de isActive.
+    if(p->getString(stringw("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="5")
+    {
+            m->frame_actual=0;
+            p->setString(stringw("isActive.")+p->getString("current_move"),"no");
+            p->setString("current_move","5");
+    }
     //Movimientos continuos
     //ejecutar existentes
     for(int i=0; i<(int)p->movimientos_constantes_actuales.size(); i++)
     {
         Movimiento* mc=p->movimientos_constantes_actuales[i];
+        if(p->getString(stringw("isActive.")+p->movimientos_constantes_actuales[i]->nombre)=="no")
+        {
+            mc->frame_actual=0;
+            mc->ya_pego=false;
+            p->movimientos_constantes_actuales.erase(p->movimientos_constantes_actuales.begin()+i);
+            i--;
+            continue;
+        }
         Frame* fc=&mc->frames[mc->frame_actual];
         if(mc->tiempo_transcurrido==0)
             p->aplicarModificadores(fc->modificadores,p->getString("orientation")=="i");
@@ -492,10 +526,29 @@ void Fighter::aplicarModificadores(Personaje *p)
         {
             mc->frame_actual=0;
             mc->ya_pego=false;
+            //pos_a_borrar.push_back(i);
+            p->setString(stringw("isActive.")+p->movimientos_constantes_actuales[i]->nombre,"no");
             p->movimientos_constantes_actuales.erase(p->movimientos_constantes_actuales.begin()+i);
+            i--;
         }
     }
+
+    //logica de barras
     p->logicaBarras();
+
+    //corregir si se sale x
+    int distancia=p->getEntero("posicion_x")-p->personaje_contrario->getEntero("posicion_x");
+    if(distancia>=1000 || distancia<=-1000 )
+    {
+        p->setEntero("posicion_x",temp_pos_x);
+        p->personaje_contrario->setEntero("posicion_x",temp_pos_x_c);
+    }
+
+    //corregir si se sale y
+    if(p->getEntero("posicion_y")<0)
+    {
+        p->setEntero("posicion_y",0);
+    }
 }
 
 void Fighter::logicaStagePersonaje(Personaje* p)
@@ -513,7 +566,8 @@ void Fighter::logicaStagePersonaje(Personaje* p)
     {
         p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")+desplazamiento);
         p->setEntero("posicion_x",p->getEntero("posicion_x")+desplazamiento);
-        pos_stage+=desplazamiento;
+        //pos_stage+=desplazamiento;
+        grafico->camera_x+=desplazamiento;
     }
 
     desplazamiento=p->getEntero("posicion_x")-sub_borde_der;
@@ -525,7 +579,8 @@ void Fighter::logicaStagePersonaje(Personaje* p)
     {
         p->personaje_contrario->setEntero("posicion_x",p->personaje_contrario->getEntero("posicion_x")-desplazamiento);
         p->setEntero("posicion_x",p->getEntero("posicion_x")-desplazamiento);
-        pos_stage-=desplazamiento;
+        //pos_stage-=desplazamiento;
+        grafico->camera_x-=desplazamiento;
     }
 
     if(p->getEntero("posicion_x")<borde_izq)
@@ -541,24 +596,94 @@ void Fighter::logicaStagePersonaje(Personaje* p)
 
 void Fighter::logicaStage()
 {
-    //Validaciones de stage
-    logicaStagePersonaje(getPaActual());
-    logicaStagePersonaje(getPbActual());
+    int pa_x=getPaActual()->getEntero("posicion_x");
+    int pb_x=getPbActual()->getEntero("posicion_x");
 
-    if(pos_stage>stage->size/2-grafico->ventana_x/2)
+    //verificar q los personajes no se salgan
+    if(pa_x<-stage->size/2+grafico->ventana_x/2)//pa borde izquierdo
     {
-        int dif=pos_stage-(stage->size/2-grafico->ventana_x/2);
-        pos_stage=stage->size/2-grafico->ventana_x/2;
-        getPaActual()->setEntero("posicion_x",getPaActual()->getEntero("posicion_x")-dif);
-        getPbActual()->setEntero("posicion_x",getPbActual()->getEntero("posicion_x")-dif);
+        pa_x=-stage->size/2+grafico->ventana_x/2;
+        getPaActual()->setEntero("posicion_x",pa_x);
     }
-    if(pos_stage<-stage->size/2+grafico->ventana_x/2)
+    if(pa_x>stage->size/2+grafico->ventana_x/2)//papa borde derecho
     {
-        int dif=pos_stage-(-stage->size/2+grafico->ventana_x/2);
-        pos_stage=-stage->size/2+grafico->ventana_x/2;
-        getPaActual()->setEntero("posicion_x",getPaActual()->getEntero("posicion_x")-dif);
-        getPbActual()->setEntero("posicion_x",getPbActual()->getEntero("posicion_x")-dif);
+        pa_x=stage->size/2+grafico->ventana_x/2;
+        getPaActual()->setEntero("posicion_x",pa_x);
     }
+    if(pb_x<-stage->size/2+grafico->ventana_x/2)//pb borde izquierdo
+    {
+        pb_x=-stage->size/2+grafico->ventana_x/2;
+        getPbActual()->setEntero("posicion_x",pb_x);
+    }
+    if(pb_x>stage->size/2+grafico->ventana_x/2)//pb borde derecho
+    {
+        pb_x=stage->size/2+grafico->ventana_x/2;
+        getPbActual()->setEntero("posicion_x",pb_x);
+    }
+
+    //get una nueva posicion de la stage
+    int borde_izq=300;
+    int borde_der=700;
+
+    int pa_x_pantalla=pa_x+grafico->camera_x;
+    int pa_y_pantalla=pb_x+grafico->camera_x;
+    int nueva_pos=(pa_x+pb_x)/2-grafico->ventana_x/2;
+
+
+    //verificar q  el stage no se salga
+    if(nueva_pos>-stage->size/2+grafico->ventana_x/2
+       && nueva_pos<stage->size/2-grafico->ventana_x/2
+       )
+    {
+        grafico->camera_x=nueva_pos;
+    }
+
+
+    //Alineacion y
+    int y_max=getPaActual()->getEntero("posicion_y");
+    if(y_max<getPbActual()->getEntero("posicion_y"))
+        y_max=getPbActual()->getEntero("posicion_y");
+
+    grafico->camera_y=y_max/4;
+
+//    if(pa_x<grafico->camera_x)
+//        grafico->camera_x=pa_x;
+//
+//    if(pa_x>grafico->camera_x+grafico->ventana_x)
+//        grafico->camera_x=pa_x-grafico->ventana_x;
+//
+//    if(pb_x<grafico->camera_x)
+//        grafico->camera_x=pb_x;
+//
+//    if(pb_x>grafico->camera_x+grafico->ventana_x)
+//        grafico->camera_x=pb_x-grafico->ventana_x;
+
+//    if(pb_x<grafico->camera_x)
+//        grafico->camera_x=-pb_x;
+
+//    if(pa_x>grafico->camera_x+1024)
+//        grafico->camera_x=-pa_x;
+
+//    if(pb_x>grafico->camera_x+1024)
+//        grafico->camera_x=-pb_x;
+    //Validaciones de stage
+    //logicaStagePersonaje(getPaActual());
+    //logicaStagePersonaje(getPbActual());
+
+//    if(pos_stage>stage->size/2-grafico->ventana_x/2)
+//    {
+//        int dif=pos_stage-(stage->size/2-grafico->ventana_x/2);
+//        pos_stage=stage->size/2-grafico->ventana_x/2;
+//        getPaActual()->setEntero("posicion_x",getPaActual()->getEntero("posicion_x")-dif);
+//        getPbActual()->setEntero("posicion_x",getPbActual()->getEntero("posicion_x")-dif);
+//    }
+//    if(pos_stage<-stage->size/2+grafico->ventana_x/2)
+//    {
+//        int dif=pos_stage-(-stage->size/2+grafico->ventana_x/2);
+//        pos_stage=-stage->size/2+grafico->ventana_x/2;
+//        getPaActual()->setEntero("posicion_x",getPaActual()->getEntero("posicion_x")-dif);
+//        getPbActual()->setEntero("posicion_x",getPbActual()->getEntero("posicion_x")-dif);
+//    }
 }
 
 
@@ -732,11 +857,13 @@ bool Fighter::render()
         if(game_over_a && getPaActual()->getString("current_move")!="ko")
         {
             getPaActual()->setString("current_move","ko");
+            getPaActual()->setString("isActive.ko","yes");
         }
 
         if(game_over_b && getPbActual()->getString("current_move")!="ko")
         {
             getPbActual()->setString("current_move","ko");
+            getPbActual()->setString("isActive.ko","yes");
         }
 
         if(game_over_a || game_over_b)
@@ -757,7 +884,7 @@ bool Fighter::render()
             (   texture_gameover,
                 irr::core::dimension2d<irr::f32> (width,height),
                 irr::core::rect<irr::f32>(0,0,width,height),
-                irr::core::position2d<irr::f32>((1024-width)/2,(600-height)/2),
+                irr::core::position2d<irr::f32>((1024-width)/2,(grafico->ventana_y-height)/2),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
                 true,
@@ -785,7 +912,7 @@ bool Fighter::render()
             (   texture_gameover,
                 irr::core::dimension2d<irr::f32> (width,height),
                 irr::core::rect<irr::f32>(0,0,width,height),
-                irr::core::position2d<irr::f32>((1024-width)/2,(600-height)/2),
+                irr::core::position2d<irr::f32>((1024-width)/2,(grafico->ventana_y-height)/2),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
                 true,
@@ -795,22 +922,9 @@ bool Fighter::render()
         }
 
 
-
-        if(getPaActual()->getEntero("hp.current_value")<=0)
+        if(getPaActual()->getEntero("hp.current_value")<=0 && !(game_over_a || game_over_b))
         {
             getPaActual()->setString("change_char","on");
-//            irr::video::ITexture* texture_game_over=grafico->getTexture("misc/ko.png");
-//            grafico->draw2DImage
-//            (   texture_game_over,
-//                irr::core::dimension2d<irr::f32> (500,500),
-//                irr::core::rect<irr::f32>(0,0,500,500),
-//                irr::core::position2d<irr::f32>(0,0),
-//                irr::core::position2d<irr::f32>(0,0),
-//                irr::f32(0), irr::core::vector2df (0,0),
-//                true,
-//                irr::video::SColor(255,255,255,255),
-//                false,
-//                false);
         }
         if(getPbActual()->getEntero("hp.current_value")<=0 && !(game_over_a || game_over_b))
         {

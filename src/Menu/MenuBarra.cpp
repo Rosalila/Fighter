@@ -3,7 +3,7 @@
 MenuBarra::MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool visible,
           irr::video::ITexture*fondo,int barra_x,int barra_y,irr::video::ITexture*barra,
           irr::video::ITexture*fondo_sel,int barra_x_sel,int barra_y_sel,irr::video::ITexture*barra_sel,
-          int maximo,int actual)
+          int maximo,int actual,int accion)
 {
     this->x=x;
     this->y=y;
@@ -23,6 +23,7 @@ MenuBarra::MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool vi
 
     this->maximo=maximo;
     this->actual=actual;
+    this->accion=accion;
     this->seleccionado=false;
     this->grafico=grafico;
 }
@@ -158,4 +159,9 @@ bool MenuBarra::getSeleccionado()
 void MenuBarra::setSeleccionado(bool seleccionado)
 {
     this->seleccionado=seleccionado;
+}
+
+int MenuBarra::getAccion()
+{
+    return accion;
 }

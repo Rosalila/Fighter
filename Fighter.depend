@@ -836,7 +836,7 @@
 1317073425 source:/home/userr/ProyectosActuales/Fighter/src/AtributosPersonaje.cpp
 	"../include/AtributosPersonaje.h"
 
-1332855550 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1333862067 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1320696586 source:/home/userr/ProyectosActuales/Fighter/src/Grafico.cpp
@@ -1072,7 +1072,7 @@
 	<irrlicht/irrlicht.h>
 	"Input/Input.h"
 
-1333389016 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
+1333863259 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
 	"Grafico/Grafico.h"
 
 1329338981 source:/home/userr/ProyectosActuales/Fighter/src/Input/Receiver.cpp
@@ -1081,14 +1081,14 @@
 1328482638 source:/home/userr/ProyectosActuales/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1333138802 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
+1333761522 source:/home/userr/ProyectosActuales/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
 	<sstream>
 
-1333443724 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1333656352 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
-1333397963 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
+1333447798 /home/userr/ProyectosActuales/Fighter/include/Menu/Menu.h
 	"Stage/Stage.h"
 	"Grafico/Grafico.h"
 	"irrKlang/irrKlang.h"
@@ -1110,13 +1110,13 @@
 1333211904 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuImagen.cpp
 	"Menu/MenuImagen.h"
 
-1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
+1333458004 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuLista.cpp
 	"Menu/MenuLista.h"
 
 1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuTexto.cpp
 	"Menu/MenuTexto.h"
 
-1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
+1333455987 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
 	"Menu/MenuBarra.h"
 
 1327860973 source:/home/userr/ProyectosActuales/Fighter/src/TinyXml/tinystr.cpp
@@ -1246,7 +1246,7 @@
 1330201250 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1333402204 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1333863223 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1329450439 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
@@ -1258,10 +1258,10 @@
 1330718220 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1330175889 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
+1333653642 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
-1329991576 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
+1333450170 source:/home/userr/ProyectosActuales/Fighter/src/IA/IA.cpp
 	"IA/IA.h"
 
 1326602615 source:/home/userr/ProyectosActuales/Fighter/include/IA/IA.h
@@ -1275,7 +1275,7 @@
 1329991314 source:/home/userr/ProyectosActuales/Fighter/src/IA/Transicion.cpp
 	"IA/Transicion.h"
 
-1329992307 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
+1333455243 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
 	"IA/Automata.h"
 
 1330226089 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Animacion.cpp
@@ -1307,7 +1307,7 @@
 	<vector>
 	"Sonido/Reproduccion.h"
 
-1333401904 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
+1333444536 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
 
 1333443762 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Paleta.cpp

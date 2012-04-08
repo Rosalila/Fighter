@@ -1,8 +1,8 @@
 #include "IA/IA.h"
 
-IA::IA(char* archivo)
+IA::IA(char* archivo,char* archivo_default)
 {
-    automata=new Automata(archivo);
+    automata=new Automata(archivo,archivo_default);
     //transicion_a_recompenzar=automata->getEstadoInicial()->transiciones[0];
 }
 

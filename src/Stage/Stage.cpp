@@ -30,7 +30,7 @@ void Stage::dibujarBack(int pos)
     {
         int dimension_x=back[i].imagen->getOriginalSize().Width;
         int dimension_y=back[i].imagen->getOriginalSize().Height;
-        grafico->draw2DImage
+        grafico->draw2DImageCameraAlign
         (   back[i].imagen,
             irr::core::dimension2d<irr::f32> (back[i].size_x,back[i].size_y),
             irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -51,7 +51,7 @@ void Stage::dibujarFront(int pos)
     {
         int dimension_x=front[i].imagen->getOriginalSize().Width;
         int dimension_y=front[i].imagen->getOriginalSize().Height;
-        grafico->draw2DImage
+        grafico->draw2DImageCameraAlign
         (   front[i].imagen,
             irr::core::dimension2d<irr::f32> (front[i].size_x,front[i].size_y),
             irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -84,6 +84,9 @@ void Stage::cargarDesdeXML(char* path)
 
     TiXmlNode *nodo_ss=doc->FirstChild("StageSize");
     this->size=atoi(nodo_ss->ToElement()->Attribute("x"));
+
+    TiXmlNode *nodo_floor=doc->FirstChild("Floor");
+    this->pos_piso=atoi(nodo_floor->ToElement()->Attribute("position"));
 
     TiXmlNode *nodo_bg=doc->FirstChild("Background");
     char *bg=new char[255];

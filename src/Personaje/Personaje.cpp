@@ -8,6 +8,7 @@ Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
     this->numero=numero;
     this->combo=0;
     paleta.cargarXML("chars/Evilken/palettes.xml",num_paleta);
+    this->stage_piso=0;
 }
 //DIBUJAR
 void Personaje::dibujar()
@@ -40,7 +41,7 @@ void Personaje::dibujar()
                 alineacion_x=-alineacion_x;
         //    u32 t=grafico->device->getTimer()->getTime();
         //    int t2=t%255;
-            grafico->draw2DImage
+            grafico->draw2DImageCameraAlign
             (   sombra[i].imagen,
                 irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
                 irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -90,11 +91,16 @@ void Personaje::dibujar()
     //if(numero==1)
         //paleta.paintTexture(texture);
 
-    grafico->draw2DImage
+    //get pos
+    int pos_x=getEntero("posicion_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
+    int pos_y=-getEntero("posicion_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+grafico->ventana_y-stage_piso;
+
+
+    grafico->draw2DImageCameraAlign
     (   getImagen("current_image").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(getEntero("posicion_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x,getEntero("posicion_y")-(dimension_y*getImagen("current_image").escala/2)-alineacion_y),
+        irr::core::position2d<irr::f32>(pos_x,pos_y),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (getImagen("current_image").escala,getImagen("current_image").escala),
         true,
@@ -123,9 +129,9 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
     for(int i=0;i<(int)hitbox.size();i++)
     {
         if(variable=="blue")
-            grafico->draw2DRectangle(irr::video::SColor(100,0,0,100),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
+            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
         else
-            grafico->draw2DRectangle(irr::video::SColor(100,100,0,0),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
+            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(x+hitbox[i].p1x,y+hitbox[i].p1y,x+hitbox[i].p2x,y+hitbox[i].p2y));
     }
 }
 
@@ -246,7 +252,7 @@ void Personaje::dibujarProyectiles()
         if(getString(proyectiles_actuales[i]->estado)!="on")
             continue;
         Imagen imagen=getImagen(proyectiles_actuales[i]->imagen);
-        grafico->draw2DImage
+        grafico->draw2DImageCameraAlign
         (   imagen.imagen,
             irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
             irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
@@ -691,9 +697,22 @@ void Personaje::cargarMain()
                 stringw nombre(elemento_imagen->Attribute("name"));
                 int frames=atoi(elemento_imagen->Attribute("frames"));
                 int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
+                setString(stringw("isActive.")+nombre,"no");
                 agregarMovimiento(nombre);
                 for(int i=0;i<frames;i++)
                     agregarFrame(nombre,frame_duration);
+                if(elemento_imagen->Attribute("move_x")!=NULL)
+                {
+                    int desplazamiento=atoi(elemento_imagen->Attribute("move_x"));
+                    for(int i=0;i<frames;i++)
+                        agregarModificador(nombre,i,"posicion_x",desplazamiento,true,false,true);
+                }
+                if(elemento_imagen->Attribute("move_y")!=NULL)
+                {
+                    int desplazamiento=atoi(elemento_imagen->Attribute("move_y"));
+                    for(int i=0;i<frames;i++)
+                        agregarModificador(nombre,i,"posicion_y",desplazamiento,true,false,false);
+                }
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("projectile")->ToElement();
                     elemento_imagen!=NULL;
@@ -746,7 +765,7 @@ void Personaje::cargarMain()
                     int y1=atoi(elemento_hb->Attribute("y1"));
                     int x2=atoi(elemento_hb->Attribute("x2"));
                     int y2=atoi(elemento_hb->Attribute("y2"));
-                    hitboxes.push_back(HitBox(x1,y1,x2,y2));
+                    hitboxes.push_back(HitBox(x1,-y1,x2,-y2));
                 }
                 setHitBoxes(nombre+".hitboxes",hitboxes);
 
@@ -830,7 +849,7 @@ void Personaje::cargarMain()
                     int y1=atoi(elemento_hitbox->Attribute("y1"));
                     int x2=atoi(elemento_hitbox->Attribute("x2"));
                     int y2=atoi(elemento_hitbox->Attribute("y2"));
-                    hitbox.push_back(HitBox(x1,y1,x2,y2));
+                    hitbox.push_back(HitBox(x1,-y1,x2,-y2));
                 }
                 setHitBoxes(variable,hitbox);
             }
@@ -1012,7 +1031,7 @@ void Personaje::cargarInputs()
                 agregarInput(lista_botones,move_name);
                 boton[0]='5';
                 stringw str_temp="";
-                for(int i=1;i<boton.size();i--)
+                for(int i=1;i<boton.size();i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
                 lista_botones.push_back(str_temp);
@@ -1187,7 +1206,7 @@ void Personaje::cargarHitboxes()
                             int y1=atoi(elemento_hitbox->Attribute("y1"));
                             int x2=atoi(elemento_hitbox->Attribute("x2"));
                             int y2=atoi(elemento_hitbox->Attribute("y2"));
-                            hitbox.push_back(HitBox(x1,y1,x2,y2));
+                            hitbox.push_back(HitBox(x1,-y1,x2,-y2));
                         }
                     }
                     agregarModificador(nombre,frame,str_variable,hitbox,contrario);
@@ -1428,11 +1447,18 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
 void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
 {
     irr::video::ITexture *texture=imagen.imagen;
-    grafico->draw2DImage
+//    int pos_x=getEntero("posicion_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
+//    int pos_y=-getEntero("posicion_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+grafico->ventana_y;
+
+int pos_x=posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2;
+int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+grafico->ventana_y-stage_piso;
+
+    grafico->draw2DImageCameraAlign
     (   texture,
         irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
         irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-        irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
+        irr::core::position2d<irr::f32>(pos_x,pos_y),
+        //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
         true,
