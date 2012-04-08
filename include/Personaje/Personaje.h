@@ -98,7 +98,7 @@ class Personaje
     void agregarInput(stringw input,stringw movimiento);
     void agregarCondicion(stringw movimiento,int frame,vector<Condicion*> condicion);
     //void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
-    void agregarMovimiento(stringw movimiento);
+    void agregarMovimiento(stringw movimiento,int damage);
     void agregarProyectil(Proyectil* proyectil);
     void agregarFrame(stringw movimiento, int duracion);
     void agregarModificador(stringw movimiento,int frame,stringw variable,Imagen modificador,bool aplicar_a_contrario);

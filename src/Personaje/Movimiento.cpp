@@ -1,10 +1,11 @@
 #include "Personaje/Movimiento.h"
 
-Movimiento::Movimiento(stringw nombre)
+Movimiento::Movimiento(stringw nombre,int damage)
 {
     frame_actual=0;
     tiempo_transcurrido=0;
     this->nombre=nombre;
+    this->damage=damage;
     this->ya_pego=false;
 }
 Frame Movimiento::getFrameActual()

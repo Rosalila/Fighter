@@ -358,9 +358,9 @@ void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion*>
 //{
 //    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
 //}
-void Personaje::agregarMovimiento(stringw movimiento)
+void Personaje::agregarMovimiento(stringw movimiento,int damage)
 {
-    movimientos[movimiento]=new Movimiento(movimiento);
+    movimientos[movimiento]=new Movimiento(movimiento,damage);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -713,8 +713,11 @@ void Personaje::cargarMain()
                 stringw nombre(elemento_imagen->Attribute("name"));
                 int frames=atoi(elemento_imagen->Attribute("frames"));
                 int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
+                int damage=0;
+                if(elemento_imagen->Attribute("damage")!=NULL)
+                    damage=atoi(elemento_imagen->Attribute("damage"));
                 setString(stringw("isActive.")+nombre,"no");
-                agregarMovimiento(nombre);
+                agregarMovimiento(nombre,damage);
                 for(int i=0;i<frames;i++)
                     agregarFrame(nombre,frame_duration);
                 if(elemento_imagen->Attribute("move_x")!=NULL)

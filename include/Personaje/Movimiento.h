@@ -8,9 +8,10 @@ class Movimiento
 {
     public:
     stringw nombre;
+    int damage;
     int frame_actual,tiempo_transcurrido;
     vector <Frame> frames;
-    Movimiento(stringw nombre);
+    Movimiento(stringw nombre,int damage);
     Frame getFrameActual();
     bool ya_pego;
     void agregarFrame(int duracion);

@@ -421,6 +421,8 @@ void Fighter::logicaPersonaje(Personaje* p)
                             p->combo++;
                         }
                         Movimiento* m=p->movimientos[p->getString("current_move")];
+                        Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
+                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-m_contrario->damage);
                         m->frame_actual=0;
                         m->tiempo_transcurrido=0;
                         m->ya_pego=false;
