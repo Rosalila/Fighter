@@ -18,6 +18,7 @@ public:
     int px_colision,py_colision;
     vector<Personaje*>pa;
     vector<Personaje*>pb;
+    int pa_vivos,pb_vivos;
     int pa_actual,pb_actual;
     vector<Imagen>ko;
     int pos_imagen_ko,duracion_ko,tiempo_actual_ko;
@@ -42,7 +43,6 @@ public:
     void logica();
     bool render();
     void dibujarBarra();
-    void mainLoop();
     void escribirInputsXML();
     Personaje* getPaActual();
     Personaje* getPbActual();

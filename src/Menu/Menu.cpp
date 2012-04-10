@@ -511,8 +511,8 @@ void Menu::loopMenu()
                             p1a->personaje_contrario=p1b;
                             p1b->personaje_contrario=p1a;
 
-                            Personaje* p2a=getPersonajeA(0,false);
-                            Personaje* p2b=getPersonajeB(0,false);
+                            Personaje* p2a=getPersonajeA(1,false);
+                            Personaje* p2b=getPersonajeB(1,false);
                             p2a->personaje_contrario=p2b;
                             p2b->personaje_contrario=p2a;
 
@@ -551,13 +551,13 @@ void Menu::loopMenu()
                             p1a->personaje_contrario=p1b;
                             p1b->personaje_contrario=p1a;
 
-                            Personaje* p2a=getPersonajeA(0,false);
-                            Personaje* p2b=getPersonajeB(0,false);
+                            Personaje* p2a=getPersonajeA(1,false);
+                            Personaje* p2b=getPersonajeB(1,false);
                             p2a->personaje_contrario=p2b;
                             p2b->personaje_contrario=p2a;
 
-                            Personaje* p3a=getPersonajeA(0,false);
-                            Personaje* p3b=getPersonajeB(0,false);
+                            Personaje* p3a=getPersonajeA(2,false);
+                            Personaje* p3b=getPersonajeB(2,false);
                             p3a->personaje_contrario=p3b;
                             p3b->personaje_contrario=p3a;
 
@@ -961,6 +961,8 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
 
+    cout<<"A:"<<str<<num<<endl;
+
     //get cadena
     char *path_a=new char[255];
     strcpy(path_a,"");
@@ -997,6 +999,8 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     int num_paleta=char_select->getLockedPalettesPB()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
+
+    cout<<"B:"<<str<<num<<endl;
 
     //get string
     char *path_b=new char[255];

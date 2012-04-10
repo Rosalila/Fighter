@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include/Fighter.h" open="0" top="0" tabpos="4">
-		<Cursor position="38" topLine="18" />
+	<File name="include/Fighter.h" open="1" top="0" tabpos="1">
+		<Cursor position="334" topLine="9" />
 	</File>
 	<File name="include/Grafico/Grafico.h" open="0" top="0" tabpos="0">
 		<Cursor position="841" topLine="19" />
@@ -106,8 +106,8 @@
 	<File name="main.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="233" topLine="0" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="15368" topLine="451" />
+	<File name="src/Fighter.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="24203" topLine="699" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="3769" topLine="85" />
@@ -124,10 +124,10 @@
 	<File name="src/IA/Transicion.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="2923" topLine="0" />
 	</File>
-	<File name="src/Input/Boton.cpp" open="1" top="0" tabpos="4">
+	<File name="src/Input/Boton.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="311" topLine="0" />
 	</File>
-	<File name="src/Input/Input.cpp" open="1" top="0" tabpos="3">
+	<File name="src/Input/Input.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="2421" topLine="150" />
 	</File>
 	<File name="src/Input/Receiver.cpp" open="0" top="0" tabpos="0">
@@ -190,8 +190,8 @@
 	<File name="src/Personaje/Paleta.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="3208" topLine="82" />
 	</File>
-	<File name="src/Personaje/Personaje.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="24139" topLine="698" />
+	<File name="src/Personaje/Personaje.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="28354" topLine="683" />
 	</File>
 	<File name="src/Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="589" topLine="10" />

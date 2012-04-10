@@ -7,8 +7,8 @@ Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
     this->sonido=sonido;
     this->numero=numero;
     this->combo=0;
-    paleta.cargarXML("chars/Evilken/palettes.xml",num_paleta);
     this->stage_piso=0;
+    this->num_paleta=num_paleta;
 }
 //DIBUJAR
 void Personaje::dibujar()
@@ -651,6 +651,13 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     setEntero("position_x",px);
     setEntero("position_y",py);
 
+    char* path_palettes=new char[255];
+    strcpy(path_palettes,"chars/");
+    strcat(path_palettes,char_name_ptr);
+    strcat(path_palettes,"/palettes.xml\0");
+    paleta.cargarXML(path_palettes,num_paleta);
+    cout<<"!!!"<<path_palettes<<endl;cout.flush();
+
     cargarMain();
 
     cargarVars();
@@ -692,8 +699,9 @@ void Personaje::cargarMain()
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
+    TiXmlNode*main_file=doc->FirstChild("MainFile");
 
-    TiXmlNode* ignore_color_node=doc->FirstChild("IgnoreColor");
+    TiXmlNode* ignore_color_node=main_file->FirstChild("IgnoreColor");
     irr::video::SColor ignore_color=NULL;
     if(ignore_color_node!=NULL)
     {
@@ -702,7 +710,7 @@ void Personaje::cargarMain()
                                         atoi(ignore_color_node->ToElement()->Attribute("blue")));
     }
 
-    for(TiXmlNode* nodo=doc->FirstChild("Declarations");
+    for(TiXmlNode* nodo=main_file->FirstChild("Declarations");
             nodo!=NULL;
             nodo=nodo->NextSibling("Declarations"))
     {
@@ -918,7 +926,9 @@ void Personaje::cargarVars()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    for(TiXmlNode* nodo=doc->FirstChild("Move");
+    TiXmlNode*vars_file=doc->FirstChild("VarsFile");
+
+    for(TiXmlNode* nodo=vars_file->FirstChild("Move");
             nodo!=NULL;
             nodo=nodo->NextSibling("Move"))
     {
@@ -1003,8 +1013,9 @@ void Personaje::cargarInputs()
     TiXmlDocument *doc;
     doc=&doc_t;
 
+    TiXmlNode*input_file=doc->FirstChild("InputFile");
 
-    for(TiXmlNode* nodo_input=doc->FirstChild("Input");
+    for(TiXmlNode* nodo_input=input_file->FirstChild("Input");
             nodo_input!=NULL;
             nodo_input=nodo_input->NextSibling("Input"))
     {
@@ -1077,7 +1088,9 @@ void Personaje::cargarTriggers()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    for(TiXmlNode* nodo=doc->FirstChild("Move");
+    TiXmlNode*triggers_file=doc->FirstChild("TriggersFile");
+
+    for(TiXmlNode* nodo=triggers_file->FirstChild("Move");
             nodo!=NULL;
             nodo=nodo->NextSibling("Move"))
     {
@@ -1128,7 +1141,9 @@ void Personaje::cargarSprites()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    TiXmlNode* ignore_color_node=doc->FirstChild("IgnoreColor");
+    TiXmlNode*sprites_file=doc->FirstChild("SpritesFile");
+
+    TiXmlNode* ignore_color_node=sprites_file->FirstChild("IgnoreColor");
     irr::video::SColor ignore_color=NULL;
     if(ignore_color_node!=NULL)
     {
@@ -1136,7 +1151,7 @@ void Personaje::cargarSprites()
                                         atoi(ignore_color_node->ToElement()->Attribute("green")),
                                         atoi(ignore_color_node->ToElement()->Attribute("blue")));
     }
-    for(TiXmlNode* nodo=doc->FirstChild("Move");
+    for(TiXmlNode* nodo=sprites_file->FirstChild("Move");
             nodo!=NULL;
             nodo=nodo->NextSibling("Move"))
     {
@@ -1194,7 +1209,9 @@ void Personaje::cargarHitboxes()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    for(TiXmlNode* nodo=doc->FirstChild("Move");
+    TiXmlNode*hitboxes_file=doc->FirstChild("HitboxesFile");
+
+    for(TiXmlNode* nodo=hitboxes_file->FirstChild("Move");
             nodo!=NULL;
             nodo=nodo->NextSibling("Move"))
     {
@@ -1249,7 +1266,9 @@ void Personaje::cargarSfx()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    for(TiXmlNode* nodo_sonido=doc->FirstChild("Sound");
+    TiXmlNode*sfx_file=doc->FirstChild("SfxFile");
+
+    for(TiXmlNode* nodo_sonido=sfx_file->FirstChild("Sound");
             nodo_sonido!=NULL;
             nodo_sonido=nodo_sonido->NextSibling("Sound"))
     {
@@ -1284,8 +1303,10 @@ void Personaje::cargarAnimations()
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    TiXmlNode *back=doc->FirstChild("Back");
-    TiXmlNode *front=doc->FirstChild("Front");
+    TiXmlNode*animations_file=doc->FirstChild("AnimationsFile");
+
+    TiXmlNode *back=animations_file->FirstChild("Back");
+    TiXmlNode *front=animations_file->FirstChild("Front");
 
     //Back
     for(TiXmlNode* nodo=back->FirstChild("Animation");

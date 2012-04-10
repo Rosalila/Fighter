@@ -71,11 +71,11 @@ void MenuCharSelect::lockPA(int num_paleta)
 void MenuCharSelect::lockPB(int num_paleta)
 {
     //get name
-    int name_pos=select_p1_x+select_p1_y*size_x;
+    int name_pos=select_p2_x+select_p2_y*size_x;
     stringw name=names[name_pos];
     //la paleta es seleccionable?
-    for(int i=0;i<(int)locks_pa.size();i++)
-        if(locks_pa[i].name==name && locks_pa[i].num_paleta==num_paleta)
+    for(int i=0;i<(int)locks_pb.size();i++)
+        if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
             num_paleta++;
     if(num_paleta>=8)
         num_paleta=0;
@@ -83,6 +83,7 @@ void MenuCharSelect::lockPB(int num_paleta)
     if((int)locks_pb.size()<max_locked_chars_pb)
         if(name_pos<(int)names.size())
             locks_pb.push_back(LockedChar(select_p2_x,select_p2_y,name,num_paleta));
+
 }
 
 vector<stringw> MenuCharSelect::getLockedNamesPA()

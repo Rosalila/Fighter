@@ -27,6 +27,7 @@ class Personaje
     int combo;
     int stage_piso;
     int px_colision,py_colision;
+    int num_paleta;
 
     //efecto
     vector<Imagen>sombra;
