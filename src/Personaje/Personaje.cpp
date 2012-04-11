@@ -2,13 +2,13 @@
 
 Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
 {
-    rango=10;
     this->grafico=grafico;
     this->sonido=sonido;
     this->numero=numero;
     this->combo=0;
     this->stage_piso=0;
     this->num_paleta=num_paleta;
+    this->proyectiles_activos=0;
 }
 //DIBUJAR
 void Personaje::dibujar()
@@ -41,11 +41,13 @@ void Personaje::dibujar()
                 alineacion_x=-alineacion_x;
         //    u32 t=grafico->device->getTimer()->getTime();
         //    int t2=t%255;
+            int pos_x=sombra_x[i]-(dimension_x*sombra[i].escala/2)+alineacion_x;
+            int pos_y=-sombra_y[i]-(dimension_y*sombra[i].escala)-alineacion_y+grafico->ventana_y-stage_piso;
             grafico->draw2DImageCameraAlign
             (   sombra[i].imagen,
                 irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
                 irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-                irr::core::position2d<irr::f32>(sombra_x[i]-(dimension_x*sombra[i].escala/2)+alineacion_x,sombra_y[i]-(dimension_y*sombra[i].escala/2)-alineacion_y),
+                irr::core::position2d<irr::f32>(pos_x,pos_y),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (sombra[i].escala,sombra[i].escala),
                 true,
@@ -270,10 +272,10 @@ void Personaje::dibujarProyectiles()
             getString(proyectiles_actuales[i]->orientacion)=="i",
             false);
         stringw nombre=proyectiles_actuales[i]->nombre;
-//        dibujarHitBoxes(nombre+".hitboxes","resources/red.png",
-//                        getString(nombre+".orientation")=="i",
-//                        getEntero(nombre+".position_x"),
-//                        getEntero(nombre+".position_y"));
+        dibujarHitBoxes(nombre+".hitboxes","resources/red.png",
+                        getString(nombre+".orientation")=="i",
+                        getEntero(nombre+".position_x"),
+                        getEntero(nombre+".position_y"));
     }
 }
 //GETS shortcuts
@@ -358,9 +360,9 @@ void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion*>
 //{
 //    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
 //}
-void Personaje::agregarMovimiento(stringw movimiento,int damage)
+void Personaje::agregarMovimiento(stringw movimiento,int damage,bool multihit)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,multihit);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -724,8 +726,11 @@ void Personaje::cargarMain()
                 int damage=0;
                 if(elemento_imagen->Attribute("damage")!=NULL)
                     damage=atoi(elemento_imagen->Attribute("damage"));
+                bool multihit=false;
+                if(elemento_imagen->Attribute("multihit")!=NULL)
+                    multihit=strcmp(elemento_imagen->Attribute("multihit"),"yes")==0;
                 setString(stringw("isActive.")+nombre,"no");
-                agregarMovimiento(nombre,damage);
+                agregarMovimiento(nombre,damage,multihit);
                 for(int i=0;i<frames;i++)
                     agregarFrame(nombre,frame_duration);
                 if(elemento_imagen->Attribute("move_x")!=NULL)
@@ -1067,6 +1072,46 @@ void Personaje::cargarInputs()
                 lista_botones.clear();
                 lista_botones.push_back(str_temp);
                 agregarInput(lista_botones,move_name);
+            }else if(boton[boton.size()-1]=='*' && boton.size()>1)
+            {
+                boton[boton.size()-1]='a';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='b';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='c';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='d';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='e';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='f';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='g';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                boton[boton.size()-1]='h';
+                lista_botones.clear();
+                lista_botones.push_back(boton);
+                agregarInput(lista_botones,move_name);
+                stringw str_temp="";
+                for(int i=0;i<boton.size()-1;i++)
+                    str_temp+=boton[i];
+                lista_botones.clear();
+                lista_botones.push_back(str_temp);
+                agregarInput(lista_botones,move_name);
             }else
             {
                 lista_botones.push_back(boton);
@@ -1345,7 +1390,10 @@ void Personaje::cargarAnimations()
                                         pos_x,
                                         pos_y,
                                         atoi(elem_animation->Attribute("duration")),
-                                        to_oponent));
+                                        to_oponent,
+                                        strcmp(elem_animation->Attribute("use_camera"),"yes")==0
+                                        )
+                                   );
         setString(stringw("Animation.")+name,"off");
 
     }
@@ -1387,7 +1435,10 @@ void Personaje::cargarAnimations()
                                         pos_x,
                                         pos_y,
                                         atoi(elem_animation->Attribute("duration")),
-                                        to_oponent));
+                                        to_oponent,
+                                        strcmp(elem_animation->Attribute("use_camera"),"yes")==0
+                                        )
+                                    );
         setString(stringw("Animation.")+name,"off");
 
     }
@@ -1395,13 +1446,29 @@ void Personaje::cargarAnimations()
 
 void Personaje::logicaProyectiles()
 {
-    bool pego=false;
+    //Agregar Proyectiles
+    for(int i=0; i<(int)proyectiles_actuales.size(); i++)
+    {
+        Proyectil*proyectil=proyectiles_actuales[i];
+        if(cumpleCondiciones(proyectil->frames[0].condiciones))//si cumple
+        {
+            setImagen(proyectil->imagen,proyectil->sprites[0]);
+            setString(proyectil->estado,"on");
+            setString(proyectil->orientacion,getString("orientation"));
+            proyectil->frame_actual=0;
+            proyectil->sprite_actual=0;
+            proyectil->tiempo_transcurrido=0;
+        }
+    }
+
+    proyectiles_activos=0;
     for(int i=0;i<(int)proyectiles_actuales.size();i++)
     {
         Proyectil* proyectil=proyectiles_actuales[i];
 
         if(getString(proyectil->estado)!=stringw("on"))
             continue;
+        proyectiles_activos++;
 
         Frame* fc=&proyectil->frames[proyectil->frame_actual];
         if(proyectil->tiempo_transcurrido==0)
@@ -1425,21 +1492,45 @@ void Personaje::logicaProyectiles()
             proyectil->frame_actual=0;
             setString(proyectil->estado,"off");
         }
+    }
+}
+
+void Personaje::aplicarEfectosProyectiles()
+{
+    bool pego=false;
+    bool disolve=false;
+
+    for(int i=0;i<(int)proyectiles_actuales.size();i++)
+    {
+        Proyectil* proyectil=proyectiles_actuales[i];
+        if(getString(proyectil->estado)!=stringw("on"))
+            continue;
+
         //hit
         if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("position_x"),personaje_contrario->getEntero("position_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
         {
-            personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
             proyectil->frame_actual=0;
-            pego=true;
             setString(proyectil->estado,"off");
             setEntero("Colision.x",px_colision);
             setEntero("Colision.y",py_colision);
+            if(personaje_contrario->getString("current_move").subString(0,8)!=stringw("defense."))//hit player
+            {
+                personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
+                pego=true;
+            }else//hit defense
+            {
+                disolve=true;
+            }
         }
     }
     if(pego)
         personaje_contrario->setString("projectile_hit","yes");
     else
         personaje_contrario->setString("projectile_hit","no");
+    if(disolve)
+        personaje_contrario->setString("projectile_disolve","yes");
+    else
+        personaje_contrario->setString("projectile_disolve","no");
 }
 
 bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
@@ -1491,7 +1582,7 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
     return false;
 }
 
-void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
+void Personaje::dibujarImagenCameraAlign(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
 {
     irr::video::ITexture *texture=imagen.imagen;
 
@@ -1499,6 +1590,26 @@ void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int 
     int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+grafico->ventana_y-stage_piso;
 
     grafico->draw2DImageCameraAlign
+    (   texture,
+        irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
+        irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
+        irr::core::position2d<irr::f32>(pos_x,pos_y),
+        //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
+        irr::core::position2d<irr::f32>(0,0),
+        irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
+        true,
+        irr::video::SColor(255,255,255,255),
+        false,
+        false);
+}
+void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
+{
+    irr::video::ITexture *texture=imagen.imagen;
+
+    int pos_x=posicion_x+imagen.alineacion_x;
+    int pos_y=posicion_y+imagen.alineacion_y;
+
+    grafico->draw2DImage
     (   texture,
         irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
         irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
@@ -1524,7 +1635,14 @@ void Personaje::dibujarAnimacionesBack()
     for(int i=0;i<(int)animaciones_actuales_back.size();i++)
     {
         Animacion* animacion=&animaciones_actuales_back[i];
-        dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        if(animacion->usa_camara)
+        {
+            dibujarImagenCameraAlign(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        }else
+        {
+            dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        }
+
         if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
         {
             animacion->tiempo_transcurrido++;
@@ -1554,7 +1672,13 @@ void Personaje::dibujarAnimacionesFront()
     for(int i=0;i<(int)animaciones_actuales_front.size();i++)
     {
         Animacion* animacion=&animaciones_actuales_front[i];
-        dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        if(animacion->usa_camara)
+        {
+            dibujarImagenCameraAlign(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        }else
+        {
+            dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+        }
         if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
         {
             animacion->tiempo_transcurrido++;

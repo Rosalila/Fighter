@@ -229,16 +229,17 @@ void Fighter::logicaPersonaje(Personaje* p)
 {
     //verificar distancia entre chars
     int distancia=p->getEntero("position_x")-p->personaje_contrario->getEntero("position_x");
+    p->setEntero("distance",distancia);
     if(distancia<0)
         distancia=-distancia;
-    p->setEntero("distance",distancia);
+    p->setEntero("distance_absolute",distancia);
     //verificar colision de hitboxes
     p->setString("hit","no");
     if(getColisionHitBoxes(p->personaje_contrario,"red",p,"blue") && p->personaje_contrario->getString("current_move")!="5")
     {
         p->setString("colision.red_hitboxes","yes");
         Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
-        if(!m->ya_pego)
+        if(!m->ya_pego || m->multihit)
         {
             p->setString("hit","yes");
             m->ya_pego=true;
@@ -255,9 +256,9 @@ void Fighter::logicaPersonaje(Personaje* p)
         p->setString("colision.blue_hitboxes","no");
 
     //Change char
-    if(p->numero==1 && pa_vivos<=1)
+    if(p->numero==1 && pa_vivos<1)
         p->setString("change_char","off");
-    if(p->numero==2 && pb_vivos<=1)
+    if(p->numero==2 && pb_vivos<1)
         p->setString("change_char","off");
     if(stringw("on")==p->getString("change_char"))
     {
@@ -308,7 +309,7 @@ void Fighter::logicaPersonaje(Personaje* p)
             && (p->getString("state")=="standing" || p->getString("state")=="crouch"))
         p->setString("orientation","d");
     //get input
-    stringw str_movimiento="5";
+    stringw str_movimiento="";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
         str_movimiento=p->mapInputToMovimiento();
 
@@ -368,22 +369,6 @@ void Fighter::logicaPersonaje(Personaje* p)
                     }
                 }
             }
-
-    //Agregar Proyectiles
-    for(int i=0; i<(int)p->proyectiles_actuales.size(); i++)
-    {
-        Proyectil*proyectil=p->proyectiles_actuales[i];
-        if(p->cumpleCondiciones(proyectil->frames[0].condiciones))//si cumple
-        {
-            p->setImagen(proyectil->imagen,proyectil->sprites[0]);
-            p->setString(proyectil->estado,"on");
-            p->setString(proyectil->orientacion,p->getString("orientation"));
-            proyectil->frame_actual=0;
-            proyectil->sprite_actual=0;
-            proyectil->tiempo_transcurrido=0;
-        }
-    }
-    p->logicaProyectiles();
 }
 
 void Fighter::aplicarModificadores(Personaje *p)
@@ -466,7 +451,6 @@ void Fighter::aplicarModificadores(Personaje *p)
             i--;
         }
     }
-
     //logica de barras
     p->logicaBarras();
 
@@ -486,49 +470,6 @@ void Fighter::aplicarModificadores(Personaje *p)
     }
 }
 
-void Fighter::logicaStagePersonaje(Personaje* p)
-{
-    int borde_izq=0,borde_der=1024,desplazamiento;
-    int sub_borde_izq=256,sub_borde_der=768;
-    //int sub_borde_izq=256,sub_borde_der=1024;
-
-    desplazamiento=sub_borde_izq-p->getEntero("position_x");
-    if(desplazamiento>0
-            && p->getEntero("position_x")<p->personaje_contrario->getEntero("position_x")
-            && p->getEntero("position_x")>borde_izq-desplazamiento
-            && p->personaje_contrario->getEntero("position_x")<borde_der-desplazamiento
-            && pos_stage<stage->size/2-grafico->ventana_x/2)
-    {
-        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+desplazamiento);
-        p->setEntero("position_x",p->getEntero("position_x")+desplazamiento);
-        //pos_stage+=desplazamiento;
-        grafico->camera_x+=desplazamiento;
-    }
-
-    desplazamiento=p->getEntero("position_x")-sub_borde_der;
-    if(desplazamiento>0
-            && p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x")
-            && p->getEntero("position_x")<borde_der+desplazamiento
-            && p->personaje_contrario->getEntero("position_x")>borde_izq+desplazamiento
-            && pos_stage>-stage->size/2+grafico->ventana_x/2)
-    {
-        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")-desplazamiento);
-        p->setEntero("position_x",p->getEntero("position_x")-desplazamiento);
-        //pos_stage-=desplazamiento;
-        grafico->camera_x-=desplazamiento;
-    }
-
-    if(p->getEntero("position_x")<borde_izq)
-        p->setEntero("position_x",borde_izq+10);
-    if(p->getEntero("position_x")>borde_der)
-        p->setEntero("position_x",borde_der-10);
-
-    if(p->personaje_contrario->getEntero("position_x")<borde_izq)
-        p->personaje_contrario->setEntero("position_x",borde_izq+10);
-    if(p->personaje_contrario->getEntero("position_x")>borde_der)
-        p->personaje_contrario->setEntero("position_x",borde_der-10);
-}
-
 void Fighter::logicaStage()
 {
     int pa_x=getPaActual()->getEntero("position_x");
@@ -541,7 +482,7 @@ void Fighter::logicaStage()
         pa_x=-stage->size/2+grafico->ventana_x/2+marco_x;
         getPaActual()->setEntero("position_x",pa_x);
     }
-    if(pa_x>stage->size/2+grafico->ventana_x/2-marco_x)//papa borde derecho
+    if(pa_x>stage->size/2+grafico->ventana_x/2-marco_x)//pa borde derecho
     {
         pa_x=stage->size/2+grafico->ventana_x/2-marco_x;
         getPaActual()->setEntero("position_x",pa_x);
@@ -581,52 +522,17 @@ void Fighter::logicaStage()
         y_max=getPbActual()->getEntero("position_y");
 
     grafico->camera_y=y_max/4;
-
-//    if(pa_x<grafico->camera_x)
-//        grafico->camera_x=pa_x;
-//
-//    if(pa_x>grafico->camera_x+grafico->ventana_x)
-//        grafico->camera_x=pa_x-grafico->ventana_x;
-//
-//    if(pb_x<grafico->camera_x)
-//        grafico->camera_x=pb_x;
-//
-//    if(pb_x>grafico->camera_x+grafico->ventana_x)
-//        grafico->camera_x=pb_x-grafico->ventana_x;
-
-//    if(pb_x<grafico->camera_x)
-//        grafico->camera_x=-pb_x;
-
-//    if(pa_x>grafico->camera_x+1024)
-//        grafico->camera_x=-pa_x;
-
-//    if(pb_x>grafico->camera_x+1024)
-//        grafico->camera_x=-pb_x;
-    //Validaciones de stage
-    //logicaStagePersonaje(getPaActual());
-    //logicaStagePersonaje(getPbActual());
-
-//    if(pos_stage>stage->size/2-grafico->ventana_x/2)
-//    {
-//        int dif=pos_stage-(stage->size/2-grafico->ventana_x/2);
-//        pos_stage=stage->size/2-grafico->ventana_x/2;
-//        getPaActual()->setEntero("position_x",getPaActual()->getEntero("position_x")-dif);
-//        getPbActual()->setEntero("position_x",getPbActual()->getEntero("position_x")-dif);
-//    }
-//    if(pos_stage<-stage->size/2+grafico->ventana_x/2)
-//    {
-//        int dif=pos_stage-(-stage->size/2+grafico->ventana_x/2);
-//        pos_stage=-stage->size/2+grafico->ventana_x/2;
-//        getPaActual()->setEntero("position_x",getPaActual()->getEntero("position_x")-dif);
-//        getPbActual()->setEntero("position_x",getPbActual()->getEntero("position_x")-dif);
-//    }
 }
 
 
 void Fighter::logica()
 {
+    //logica proyectiles
+    getPaActual()->logicaProyectiles();
+    getPbActual()->logicaProyectiles();
     //verificar si estan atacando
-    if(getPaActual()->getHitBoxes("red").size()>0)
+    if(getPaActual()->getHitBoxes("red").size()>0
+       || getPaActual()->proyectiles_activos>0)
     {
         getPaActual()->setString("attacking","yes");
     }
@@ -634,7 +540,8 @@ void Fighter::logica()
     {
         getPaActual()->setString("attacking","no");
     }
-    if(getPbActual()->getHitBoxes("red").size()>0)
+    if(getPbActual()->getHitBoxes("red").size()>0
+       || getPbActual()->proyectiles_activos>0)
     {
         getPbActual()->setString("attacking","yes");
     }
@@ -643,8 +550,13 @@ void Fighter::logica()
         getPbActual()->setString("attacking","no");
     }
 
+    //LOGICAS PERSONAJE
     logicaPersonaje(getPaActual());
     logicaPersonaje(getPbActual());
+    //aplicar efectos proyectiles
+    getPaActual()->aplicarEfectosProyectiles();
+    getPbActual()->aplicarEfectosProyectiles();
+    //APLICAR MODIFICADORES
     aplicarModificadores(getPaActual());
     aplicarModificadores(getPbActual());
     logicaStage();
@@ -769,15 +681,6 @@ bool Fighter::render()
             getPbActual()->dibujarHitBoxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
         }
 
-        if(receiver->IsKeyDownn(irr::KEY_KEY_2))
-        {
-            getPaActual()->rango++;
-        }
-        if(receiver->IsKeyDownn(irr::KEY_KEY_1))
-        {
-            getPaActual()->rango--;
-        }
-
 
         getPaActual()->dibujarProyectiles();
         getPbActual()->dibujarProyectiles();
@@ -826,6 +729,7 @@ bool Fighter::render()
         if(game_over_a || game_over_b)
         {
             //irr::video::ITexture* texture_gameover=grafico->getTexture("misc/ko/1.png");
+
             irr::video::ITexture* texture_gameover=ko[pos_imagen_ko].imagen;
             tiempo_actual_ko++;
             if(tiempo_actual_ko==duracion_ko)
@@ -879,13 +783,21 @@ bool Fighter::render()
         }
 
 
-        if(getPaActual()->getEntero("hp.current_value")<=0 && !(game_over_a || game_over_b))
+        if(getPaActual()->getEntero("hp.current_value")<=0
+           && !(game_over_a || game_over_b)
+           && getPaActual()->getString("current_move")!="change_char"
+           )
         {
-            getPaActual()->setString("change_char","on");
+            getPaActual()->setString("current_move","change_char");
+            getPaActual()->setString("isActive.change_char","yes");
         }
-        if(getPbActual()->getEntero("hp.current_value")<=0 && !(game_over_a || game_over_b))
+        if(getPbActual()->getEntero("hp.current_value")<=0
+           && !(game_over_a || game_over_b)
+           && getPbActual()->getString("current_move")!="change_char"
+           )
         {
-            getPbActual()->setString("change_char","on");
+            getPbActual()->setString("current_move","change_char");
+            getPbActual()->setString("isActive.change_char","yes");
         }
         stage->dibujarFront(pos_stage);
 
@@ -895,43 +807,7 @@ bool Fighter::render()
             grafico->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,100,0,0),video::SColor (255,255,255,255));
         if(pb[pb_actual]->combo>0)
             grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(900,100,0,0),video::SColor (255,255,255,255));
-//
-//
-        //Movimento actual
-        //grafico->drawText(pa->getString("current_move"),irr::core::rect<irr::s32>(50,50,500,500),irr::video::ECP_GREEN);
 
-//        stringw str=pb->getString("current_move")+","+pb->getString("estado_posicion")+": ";
-//        for(int i=0;i<(int)pb->input->getBufferInputs().size();i++)
-//            str+=pb->input->getBufferInputs()[i]+"-";
-//        grafico->device->setWindowCaption(str.c_str());
-//        grafico->device->setWindowCaption(pb->getString("colision.red_hitboxes").c_str());
-//	int num = pa->getEntero("position_y");
-//	char buf[5];
-
-//	 convert 123 to string [buf]
-//	itoa(num, buf, 10);
-//	stringw str(strrev(buf));
-//grafico->device->setWindowCaption(str.c_str());
-//        grafico->device->setWindowCaption((pa->getEntero("position_x")+","+pa->getEntero("position_y")).c_str());
-
-//
-//        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(pa->getEntero("position_x"),pa->getEntero("position_y"),pa->getEntero("position_x")+100,pa->getEntero("position_y")+100));
-//
-//        int dimension_x=50;
-//        int dimension_y=50;
-//        grafico->draw2DImage
-//    (   grafico->getTexture("resources/green.png"),
-//        irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
-//        irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-//        irr::core::position2d<irr::f32>(pa->getEntero("position_x"),pa->getEntero("position_y")),
-//        irr::core::position2d<irr::f32>(0,0),
-//        irr::f32(0), irr::core::vector2df (1,1),
-//        true,
-//        irr::video::SColor(255,255,255,255),
-//        false,
-//        false);
-
-        //grafico->draw2DRectangle(SColor(1000,0,100,0),core::rect<s32>(0,0,1000,1000));
         grafico->endScene();
     }
     return grafico->run();

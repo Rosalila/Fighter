@@ -38,7 +38,6 @@ public:
     void loopJuego();
     void logicaPersonaje(Personaje *p);
     void logicaStage();
-    void logicaStagePersonaje(Personaje *p);
     void aplicarModificadores(Personaje *p);
     void logica();
     bool render();

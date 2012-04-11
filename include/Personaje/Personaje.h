@@ -11,8 +11,6 @@
 class Personaje
 {
     public:
-    //a borrar
-    int rango;
     //Otras
     Personaje *personaje_contrario;
     Grafico* grafico;
@@ -28,6 +26,7 @@ class Personaje
     int stage_piso;
     int px_colision,py_colision;
     int num_paleta;
+    int proyectiles_activos;
 
     //efecto
     vector<Imagen>sombra;
@@ -71,6 +70,7 @@ class Personaje
     void cargarAnimations();
     //Dibujares
     void dibujar();
+    void dibujarImagenCameraAlign(Grafico*grafico,Imagen imagen,int posicion_x,int posicion_y);
     void dibujarImagen(Grafico*grafico,Imagen imagen,int posicion_x,int posicion_y);
     void dibujarAnimacionesBack();
     void dibujarAnimacionesFront();
@@ -99,7 +99,7 @@ class Personaje
     void agregarInput(stringw input,stringw movimiento);
     void agregarCondicion(stringw movimiento,int frame,vector<Condicion*> condicion);
     //void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
-    void agregarMovimiento(stringw movimiento,int damage);
+    void agregarMovimiento(stringw movimiento,int damage,bool multihit);
     void agregarProyectil(Proyectil* proyectil);
     void agregarFrame(stringw movimiento, int duracion);
     void agregarModificador(stringw movimiento,int frame,stringw variable,Imagen modificador,bool aplicar_a_contrario);
@@ -108,12 +108,6 @@ class Personaje
     void agregarModificador(stringw movimiento,int frame,stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario);
     void agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario);
     void agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable,stringw variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
-    //Aplicar modificadores
-    void aplicarModificador(ModificadorImagen* mi);
-    void aplicarModificador(ModificadorEntero* me,bool flip);
-    void aplicarModificador(ModificadorString* ms);
-    void aplicarModificador(ModificadorHitboxes* mh);
-    void aplicarModificador(ModificadorPorVariable* mv);
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
@@ -126,6 +120,13 @@ class Personaje
     bool cumpleCondiciones(vector<vector<Condicion*> >);
     bool cumpleCondicion(Condicion* condicion);
     bool inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer);
+    //Aplicar modificadores
+    void aplicarModificador(ModificadorImagen* mi);
+    void aplicarModificador(ModificadorEntero* me,bool flip);
+    void aplicarModificador(ModificadorString* ms);
+    void aplicarModificador(ModificadorHitboxes* mh);
+    void aplicarModificador(ModificadorPorVariable* mv);
+    void aplicarEfectosProyectiles();
 };
 
 #endif
