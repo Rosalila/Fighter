@@ -26,6 +26,11 @@ class Stage
     Sonido* sonido;
     int size;
     int pos_piso;
+    //efecto terremoto
+    bool efecto_camara;
+    bool moviendo_derecha;
+    int movimiento;
+    int borde_efecto;
     Stage(Grafico* grafico,Sonido* sonido);
     void dibujarBackground();
     void dibujarBack(int pos);

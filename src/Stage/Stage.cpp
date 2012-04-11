@@ -4,6 +4,12 @@ Stage::Stage(Grafico* grafico,Sonido* sonido)
 {
     this->grafico=grafico;
     this->sonido=sonido;
+
+    //efecto
+    bool efecto_camara=true;
+    bool moviendo_derecha=true;
+    int movimiento=0;
+    int borde_efecto=30;
 }
 
 void Stage::dibujarBackground()
@@ -30,11 +36,29 @@ void Stage::dibujarBack(int pos)
     {
         int dimension_x=back[i].imagen->getOriginalSize().Width;
         int dimension_y=back[i].imagen->getOriginalSize().Height;
+
+//        if(moviendo_derecha)
+//        {
+//            movimiento++;
+//        }
+//        else
+//        {
+//            movimiento--;
+//        }
+//        if(moviendo_derecha&&movimiento>=borde_efecto)
+//        {
+//            moviendo_derecha=false;
+//        }else if(!moviendo_derecha&&movimiento<=-borde_efecto)
+//        {
+//            moviendo_derecha=true;
+//        }
+        int pos_x=pos-back[i].size_x/2+grafico->ventana_x/2;
+        int pos_y=grafico->ventana_y-back[i].size_y;
         grafico->draw2DImageCameraAlign
         (   back[i].imagen,
             irr::core::dimension2d<irr::f32> (back[i].size_x,back[i].size_y),
             irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-            irr::core::position2d<irr::f32>(pos-back[i].size_x/2+grafico->ventana_x/2,grafico->ventana_y-back[i].size_y),
+            irr::core::position2d<irr::f32>(pos_x,pos_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,

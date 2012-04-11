@@ -100,13 +100,13 @@
 	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="0">
 		<Cursor position="465" topLine="0" />
 	</File>
-	<File name="include/Stage/Stage.h" open="0" top="0" tabpos="3">
-		<Cursor position="499" topLine="12" />
+	<File name="include/Stage/Stage.h" open="1" top="0" tabpos="3">
+		<Cursor position="551" topLine="19" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="233" topLine="0" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="1" tabpos="2">
+	<File name="src/Fighter.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="24203" topLine="699" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="4">
@@ -202,7 +202,7 @@
 	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="793" topLine="24" />
 	</File>
-	<File name="src/Stage/Stage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="3291" topLine="93" />
+	<File name="src/Stage/Stage.cpp" open="1" top="1" tabpos="4">
+		<Cursor position="1530" topLine="36" />
 	</File>
 </CodeBlocks_layout_file>

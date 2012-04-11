@@ -6,6 +6,7 @@ Automata::Automata(char* archivo,char* archivo_default)
     estados["S"]=new Estado(vector<Transicion*>());
     cargarDesdeXML(archivo,archivo_default);
     transicion_a_recompenzar=NULL;
+    wait=0;
 }
 
 Estado* Automata::getEstadoInicial()
@@ -46,6 +47,7 @@ void Automata::cargarDesdeXML(char* archivo,char* archivo_default)
     {
         doc_t=TiXmlDocument(archivo_default);
         loadOkay=doc_t.LoadFile();
+        cout.flush();
     }
     TiXmlDocument *doc;
     doc=&doc_t;

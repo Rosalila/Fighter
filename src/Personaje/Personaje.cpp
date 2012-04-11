@@ -1340,8 +1340,13 @@ void Personaje::cargarSfx()
 void Personaje::cargarAnimations()
 {
     char* path_animations=new char[255];
+    char* path_archivos=new char[255];
     strcpy(path_animations,"chars/");
     strcat(path_animations,char_name_ptr);
+
+    strcpy(path_archivos,path_animations);
+    strcat(path_archivos,"/sprites/");
+
     strcat(path_animations,"/animations.xml");
     TiXmlDocument doc_t(path_animations);
     doc_t.LoadFile();
@@ -1364,7 +1369,7 @@ void Personaje::cargarAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            irr::video::ITexture *texture=grafico->getTexture(stringw(elem_frame->Attribute("path")));
+            irr::video::ITexture *texture=grafico->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1409,7 +1414,7 @@ void Personaje::cargarAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            irr::video::ITexture *texture=grafico->getTexture(stringw(elem_frame->Attribute("path")));
+            irr::video::ITexture *texture=grafico->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
