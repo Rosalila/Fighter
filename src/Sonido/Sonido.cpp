@@ -15,20 +15,20 @@ void Sonido::agregarSonido(stringw variable,const ik_c8* valor)
 }
 void Sonido::reproducirSonido(stringw variable)
 {
-//    if(sonidos.find(variable)==0)
-//        return;
-//    Reproduccion* rep=sonidos[variable];
-//    rep->sonido=engine->play2D(rep->source,false,false,true,true);
+    if(sonidos.find(variable)==0)
+        return;
+    Reproduccion* rep=sonidos[variable];
+    rep->sonido=engine->play2D(rep->source,false,false,true,true);
 }
 
 void Sonido::pararSonido(stringw variable)
 {
-//    if(sonidos.find(variable)==0)
-//        return;
-//    Reproduccion* rep=sonidos[variable];
-//    if(rep->sonido==NULL)
-//        return;
-//    rep->sonido->stop();
+    if(sonidos.find(variable)==0)
+        return;
+    Reproduccion* rep=sonidos[variable];
+    if(rep->sonido==NULL)
+        return;
+    rep->sonido->stop();
 }
 
 void Sonido::setVolumen(stringw variable,float volumen)

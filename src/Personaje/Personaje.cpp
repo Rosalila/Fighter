@@ -271,11 +271,11 @@ void Personaje::dibujarProyectiles()
             irr::video::SColor(255,255,255,255),
             getString(proyectiles_actuales[i]->orientacion)=="i",
             false);
-        stringw nombre=proyectiles_actuales[i]->nombre;
-        dibujarHitBoxes(nombre+".hitboxes","resources/red.png",
-                        getString(nombre+".orientation")=="i",
-                        getEntero(nombre+".position_x"),
-                        getEntero(nombre+".position_y"));
+//        stringw nombre=proyectiles_actuales[i]->nombre;
+//        dibujarHitBoxes(nombre+".hitboxes","resources/red.png",
+//                        getString(nombre+".orientation")=="i",
+//                        getEntero(nombre+".position_x"),
+//                        getEntero(nombre+".position_y"));
     }
 }
 //GETS shortcuts

@@ -54,6 +54,9 @@ void MenuCharSelect::lockPA(int num_paleta)
 {
     //get name
     int name_pos=select_p1_x+select_p1_y*size_x;
+    //si existe
+    if(name_pos>=names.size())
+        return;
     stringw name=names[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
@@ -72,6 +75,9 @@ void MenuCharSelect::lockPB(int num_paleta)
 {
     //get name
     int name_pos=select_p2_x+select_p2_y*size_x;
+    //si existe
+    if(name_pos>=names.size())
+        return;
     stringw name=names[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)

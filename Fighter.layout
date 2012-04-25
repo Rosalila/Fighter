@@ -101,16 +101,16 @@
 		<Cursor position="465" topLine="0" />
 	</File>
 	<File name="include/Stage/Stage.h" open="1" top="0" tabpos="3">
-		<Cursor position="551" topLine="19" />
+		<Cursor position="551" topLine="16" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="233" topLine="0" />
 	</File>
 	<File name="src/Fighter.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="24203" topLine="699" />
+		<Cursor position="27592" topLine="781" />
 	</File>
-	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="3769" topLine="85" />
+	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="137" topLine="1" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3142" topLine="2" />
@@ -146,7 +146,7 @@
 		<Cursor position="404" topLine="18" />
 	</File>
 	<File name="src/Menu/MenuCharSelect.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="2964" topLine="72" />
+		<Cursor position="2571" topLine="57" />
 	</File>
 	<File name="src/Menu/MenuContenedor.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="890" topLine="15" />
@@ -199,10 +199,10 @@
 	<File name="src/Sonido/Reproduccion.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="29" topLine="0" />
 	</File>
-	<File name="src/Sonido/Sonido.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="793" topLine="24" />
+	<File name="src/Sonido/Sonido.cpp" open="1" top="1" tabpos="5">
+		<Cursor position="247" topLine="3" />
 	</File>
-	<File name="src/Stage/Stage.cpp" open="1" top="1" tabpos="4">
+	<File name="src/Stage/Stage.cpp" open="1" top="0" tabpos="4">
 		<Cursor position="1530" topLine="36" />
 	</File>
 </CodeBlocks_layout_file>

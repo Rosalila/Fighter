@@ -5,11 +5,11 @@ Grafico::Grafico(Receiver* receiver)
     camera_x=0;
     camera_y=0;
     ventana_x=1024;
-    ventana_y=600;
+    ventana_y=500;
     video::E_DRIVER_TYPE driverType;
     driverType = video::EDT_OPENGL;
     //driverType = video::EDT_SOFTWARE;
-    device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,true, false, false,receiver);
+    device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,false, false, false,receiver);
     smgr = device->getSceneManager();
     //camera=smgr->addCameraSceneNode(0,vector3df(50,0,5),vector3df(50,0,0));
     camera=smgr->addCameraSceneNode();
@@ -82,6 +82,12 @@ void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColo
 {
 //    posicion.LowerRightCorner.X-=camera_x;
 //    posicion.LowerRightCorner.Y+=camera_y;
+    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,
+                             posicion.UpperLeftCorner.Y*escala_y,
+                             posicion.LowerRightCorner.X*escala_x,
+                             posicion.LowerRightCorner.Y*escala_y);
     font->draw(texto,posicion,color);
 }
 

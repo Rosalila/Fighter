@@ -48,7 +48,7 @@ Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo)
 void Menu::loopMenu()
 {
     bool tecla_arriba=true;
-    sonido->reproducirSonido(stringw("Menu.music"));
+    //sonido->reproducirSonido(stringw("Menu.music"));
 
     llenarInputsBotones();
     inputa=new Input();
@@ -694,7 +694,7 @@ void Menu::loopMenu()
             }
         }
 	}
-	sonido->pararSonido("Menu.music");
+	//sonido->pararSonido("Menu.music");
 }
 
 void Menu::dibujarMenu()

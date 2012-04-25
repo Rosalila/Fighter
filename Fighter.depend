@@ -7,7 +7,7 @@
 	"include/Fighter.h"
 	<iostream>
 
-1334062212 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
+1335189373 /home/userr/ProyectosActuales/Fighter/include/Fighter.h
 	"TinyXml/tinyxml.h"
 	"Menu/Menu.h"
 	<stdio.h>
@@ -37,10 +37,10 @@
 	"Sonido/Sonido.h"
 	"Fighter.h"
 
-1334112285 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1335275563 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
-1334129681 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
+1335272787 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
 	"Grafico/Grafico.h"
 
 1334127357 source:/home/userr/ProyectosActuales/Fighter/src/IA/Automata.cpp
@@ -68,7 +68,7 @@
 1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1333919798 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1334157705 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1333455987 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
@@ -77,7 +77,7 @@
 1330124084 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1333919221 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
+1335285550 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
 
 1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuContenedor.cpp
@@ -139,7 +139,7 @@
 1333443762 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Paleta.cpp
 	"Personaje/Paleta.h"
 
-1334118005 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1334158250 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1329450439 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
@@ -148,7 +148,7 @@
 1327860973 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Reproduccion.cpp
 	"Sonido/Reproduccion.h"
 
-1330718220 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
+1334157317 source:/home/userr/ProyectosActuales/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
 1334141912 source:/home/userr/ProyectosActuales/Fighter/src/Stage/Stage.cpp
