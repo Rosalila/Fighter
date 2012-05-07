@@ -5,11 +5,11 @@ Grafico::Grafico(Receiver* receiver)
     camera_x=0;
     camera_y=0;
     ventana_x=1024;
-    ventana_y=500;
+    ventana_y=600;
     video::E_DRIVER_TYPE driverType;
     driverType = video::EDT_OPENGL;
     //driverType = video::EDT_SOFTWARE;
-    device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,false, false, false,receiver);
+    device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,true, false, false,receiver);
     smgr = device->getSceneManager();
     //camera=smgr->addCameraSceneNode(0,vector3df(50,0,5),vector3df(50,0,0));
     camera=smgr->addCameraSceneNode();

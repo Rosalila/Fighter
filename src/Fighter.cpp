@@ -51,6 +51,15 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
     loopJuego();
 }
 
+Fighter::~Fighter()
+{
+    for(int i=0;i<(int)pa.size();i++)
+        delete pa[i];
+    for(int i=0;i<(int)pb.size();i++)
+        delete pb[i];
+}
+
+
 Personaje* Fighter::getPaActual()
 {
     return pa[pa_actual];
@@ -296,7 +305,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         m->tiempo_transcurrido=0;
         p->setString("current_move","entrance");
         p->setString("isActive.entrance","yes");
-        sonido->reproducirSonido("entrance");
+        sonido->reproducirSonido(p->char_name+"entrance");
     }
 
     //verificar flip
@@ -304,6 +313,7 @@ void Fighter::logicaPersonaje(Personaje* p)
             && (p->getString("current_move")=="5" || p->getString("current_move")=="2")
             && (p->getString("state")=="standing" || p->getString("state")=="crouch"))
         p->setString("orientation","i");
+
     if(p->getEntero("position_x")<p->personaje_contrario->getEntero("position_x")
             && (p->getString("current_move")=="5" || p->getString("current_move")=="2")
             && (p->getString("state")=="standing" || p->getString("state")=="crouch"))
@@ -312,6 +322,8 @@ void Fighter::logicaPersonaje(Personaje* p)
     stringw str_movimiento="";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
         str_movimiento=p->mapInputToMovimiento();
+    if(game_over_a||game_over_b)
+        str_movimiento="5";
 
     //ejecutar cancel
     if(str_movimiento!="")
@@ -326,7 +338,7 @@ void Fighter::logicaPersonaje(Personaje* p)
                 m->tiempo_transcurrido=0;
                 m->ya_pego=false;
                 p->setString("current_move",str_movimiento);
-                sonido->reproducirSonido(str_movimiento);
+                sonido->reproducirSonido(p->char_name+str_movimiento);
                 //setear isActive.
                 p->setString(stringw("isActive.")+str_movimiento,"yes");
             }
@@ -359,7 +371,7 @@ void Fighter::logicaPersonaje(Personaje* p)
                         m->ya_pego=false;
                         p->setString("current_move",p->inputs[i].movimiento);
                         p->setString(stringw("isActive.")+p->inputs[i].movimiento,"yes");
-                        sonido->reproducirSonido(str_movimiento);
+                        sonido->reproducirSonido(p->char_name+p->getString("current_move"));
                     }
                     else
                     {
@@ -574,6 +586,22 @@ void Fighter::loopJuego()
     u32 anterior=grafico->device->getTimer()->getTime();
     for (;;)
     {
+        //Salir con cualquier boton si ya termino la pelea
+        if(game_over_a || game_over_b)
+        {
+            stringw last_input=getPaActual()->input->getBufferInputs()[0];
+            if(last_input!="1"
+               && last_input!="2"
+               && last_input!="3"
+               && last_input!="4"
+               && last_input!="5"
+               && last_input!="6"
+               && last_input!="7"
+               && last_input!="8"
+               && last_input!="9"
+               && (getPaActual()->getString("current_move")=="5"||getPbActual()->getString("current_move")=="5"))
+                break;
+        }
         //receiver->endEventProcess();
         grafico->device->run();
         //cout<<grafico->device->getTimer()->getTime()<<endl;
@@ -711,25 +739,29 @@ bool Fighter::render()
             if(pb[i]->getEntero("hp.current_value")>0)
                 pb_vivos++;
 
-        bool game_over_a=pa_vivos<=0;
-        bool game_over_b=pb_vivos<=0;
+        game_over_a=pa_vivos<=0;
+        game_over_b=pb_vivos<=0;
 
         if(game_over_a && getPaActual()->getString("current_move")!="ko")
         {
             getPaActual()->setString("current_move","ko");
             getPaActual()->setString("isActive.ko","yes");
+
+            getPbActual()->setString("current_move","victory");
+            getPbActual()->setString("isActive.victory","yes");
         }
 
         if(game_over_b && getPbActual()->getString("current_move")!="ko")
         {
             getPbActual()->setString("current_move","ko");
             getPbActual()->setString("isActive.ko","yes");
+
+            getPaActual()->setString("current_move","victory");
+            getPaActual()->setString("isActive.victory","yes");
         }
 
         if(game_over_a || game_over_b)
         {
-            //irr::video::ITexture* texture_gameover=grafico->getTexture("misc/ko/1.png");
-
             irr::video::ITexture* texture_gameover=ko[pos_imagen_ko].imagen;
             tiempo_actual_ko++;
             if(tiempo_actual_ko==duracion_ko)
@@ -745,7 +777,7 @@ bool Fighter::render()
             (   texture_gameover,
                 irr::core::dimension2d<irr::f32> (width,height),
                 irr::core::rect<irr::f32>(0,0,width,height),
-                irr::core::position2d<irr::f32>((1024-width)/2,(grafico->ventana_y-height)/2),
+                irr::core::position2d<irr::f32>((grafico->ventana_x-width)/2,(grafico->ventana_y-height)/2),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
                 true,
@@ -773,7 +805,7 @@ bool Fighter::render()
             (   texture_gameover,
                 irr::core::dimension2d<irr::f32> (width,height),
                 irr::core::rect<irr::f32>(0,0,width,height),
-                irr::core::position2d<irr::f32>((1024-width)/2,(grafico->ventana_y-height)/2),
+                irr::core::position2d<irr::f32>((grafico->ventana_x-width)/2,(grafico->ventana_y-height)/2),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
                 true,
@@ -806,7 +838,7 @@ bool Fighter::render()
         if(pa[pa_actual]->combo>0)
             grafico->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,100,0,0),video::SColor (255,255,255,255));
         if(pb[pb_actual]->combo>0)
-            grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(900,100,0,0),video::SColor (255,255,255,255));
+            grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(grafico->ventana_x-124,100,0,0),video::SColor (255,255,255,255));
 
         grafico->endScene();
     }

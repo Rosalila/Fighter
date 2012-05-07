@@ -58,6 +58,7 @@ void MenuCharSelect::lockPA(int num_paleta)
     if(name_pos>=names.size())
         return;
     stringw name=names[name_pos];
+    irr::video::ITexture*preview=previews[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
         if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
@@ -68,7 +69,7 @@ void MenuCharSelect::lockPA(int num_paleta)
     //inicio lock
     if((int)locks_pa.size()<max_locked_chars_pa)
         if(name_pos<(int)names.size())
-            locks_pa.push_back(LockedChar(select_p1_x,select_p1_y,name,num_paleta));
+            locks_pa.push_back(LockedChar(select_p1_x,select_p1_y,name,num_paleta,preview));
 }
 
 void MenuCharSelect::lockPB(int num_paleta)
@@ -79,6 +80,7 @@ void MenuCharSelect::lockPB(int num_paleta)
     if(name_pos>=names.size())
         return;
     stringw name=names[name_pos];
+    irr::video::ITexture*preview=previews[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
         if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
@@ -88,8 +90,7 @@ void MenuCharSelect::lockPB(int num_paleta)
 
     if((int)locks_pb.size()<max_locked_chars_pb)
         if(name_pos<(int)names.size())
-            locks_pb.push_back(LockedChar(select_p2_x,select_p2_y,name,num_paleta));
-
+            locks_pb.push_back(LockedChar(select_p2_x,select_p2_y,name,num_paleta,preview));
 }
 
 vector<stringw> MenuCharSelect::getLockedNamesPA()
@@ -121,6 +122,22 @@ vector<int> MenuCharSelect::getLockedPalettesPB()
     vector<int>res;
     for(int i=0;i<(int)locks_pb.size();i++)
         res.push_back(locks_pb[i].num_paleta);
+    return res;
+}
+
+vector<irr::video::ITexture*> MenuCharSelect::getLockedPreviewsPA()
+{
+    vector<irr::video::ITexture*>res;
+    for(int i=0;i<(int)locks_pa.size();i++)
+        res.push_back(locks_pa[i].preview);
+    return res;
+}
+
+vector<irr::video::ITexture*> MenuCharSelect::getLockedPreviewsPB()
+{
+    vector<irr::video::ITexture*>res;
+    for(int i=0;i<(int)locks_pb.size();i++)
+        res.push_back(locks_pb[i].preview);
     return res;
 }
 

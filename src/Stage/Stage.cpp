@@ -10,6 +10,8 @@ Stage::Stage(Grafico* grafico,Sonido* sonido)
     bool moviendo_derecha=true;
     int movimiento=0;
     int borde_efecto=30;
+    pos_dibujando_back=0;
+    tiempo_transcurrido_back=0;
 }
 
 void Stage::dibujarBackground()
@@ -32,8 +34,18 @@ void Stage::dibujarBackground()
 void Stage::dibujarBack(int pos)
 {
     dibujarBackground();
-    for(int i=0;i<(int)back.size();i++)
+    if(tiempo_transcurrido_back>5)
     {
+        pos_dibujando_back++;
+        tiempo_transcurrido_back=0;
+    }
+    tiempo_transcurrido_back++;
+    if(pos_dibujando_back>=back.size())
+        pos_dibujando_back=0;
+    int i=pos_dibujando_back;
+
+    //for(int i=0;i<(int)back.size();i++)
+    //{
         int dimension_x=back[i].imagen->getOriginalSize().Width;
         int dimension_y=back[i].imagen->getOriginalSize().Height;
 
@@ -65,7 +77,7 @@ void Stage::dibujarBack(int pos)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-    }
+    //}
 }
 
 void Stage::dibujarFront(int pos)

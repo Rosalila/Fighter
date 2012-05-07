@@ -9,12 +9,14 @@ public:
     int x,y;
     stringw name;
     int num_paleta;
-    LockedChar(int x,int y,stringw name,int num_paleta)
+    irr::video::ITexture*preview;
+    LockedChar(int x,int y,stringw name,int num_paleta,irr::video::ITexture*preview)
     {
         this->x=x;
         this->y=y;
         this->name=name;
         this->num_paleta=num_paleta;
+        this->preview=preview;
     }
 };
 
@@ -55,6 +57,8 @@ public:
     vector<stringw> getLockedNamesPB();
     vector<int> getLockedPalettesPA();
     vector<int> getLockedPalettesPB();
+    vector<irr::video::ITexture*> getLockedPreviewsPA();
+    vector<irr::video::ITexture*> getLockedPreviewsPB();
     bool listo();
     bool listoPA();
     bool listoPB();

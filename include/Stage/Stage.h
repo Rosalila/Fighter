@@ -31,6 +31,8 @@ class Stage
     bool moviendo_derecha;
     int movimiento;
     int borde_efecto;
+    int pos_dibujando_back;
+    int tiempo_transcurrido_back;
     Stage(Grafico* grafico,Sonido* sonido);
     void dibujarBackground();
     void dibujarBack(int pos);

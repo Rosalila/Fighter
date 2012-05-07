@@ -45,6 +45,9 @@ class Personaje
     vector<Proyectil*> proyectiles_actuales;
     vector<Barra> barras;
 
+    //vectores potenciales
+    vector<video::ITexture*>textures;
+
     //strings
     irr::core::map<stringw,stringw> strings;
     //imagenes
@@ -57,6 +60,7 @@ class Personaje
     irr::core::map<stringw,Movimiento*> movimientos;
 
     Personaje(Grafico* grafico,Sonido* sonido,int numero,int paleta);
+    ~Personaje();
     //Cargares
     void cargarDesdeXML(int px,int py,Input* input,char* nombre);
     void cargarArchivo(char* archivo_xml);

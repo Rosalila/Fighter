@@ -350,7 +350,7 @@ void Menu::loopMenu()
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(1);
+                            printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
 
                             inputa=new Input();
                             inputb=new Input();
@@ -374,8 +374,10 @@ void Menu::loopMenu()
 
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
-                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
-
+                            sonido->pararSonido("Menu.music");
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            delete fighter;
+                            sonido->reproducirSonido(stringw("Menu.music"));
                             break;
                         }
                     }
@@ -384,7 +386,7 @@ void Menu::loopMenu()
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(3);
+                            printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
 
                             char *path_s=new char[255];
                             strcpy(path_s,"");
@@ -416,7 +418,10 @@ void Menu::loopMenu()
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
 
-                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            sonido->pararSonido("Menu.music");
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            delete fighter;
+                            sonido->reproducirSonido(stringw("Menu.music"));
 
                             break;
                         }
@@ -439,16 +444,19 @@ void Menu::loopMenu()
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(3);
+                            printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
 
                             char *path_s=new char[255];
                             strcpy(path_s,"");
                             strcat(path_s,(char*)getStage());
 
                             Personaje* p1a=getPersonajeA(0,false);
-                            Personaje* p1b=getPersonajeB(0,true);
+                            Personaje* p1b=getPersonajeB(0,false);
                             p1a->personaje_contrario=p1b;
                             p1b->personaje_contrario=p1a;
+
+                            p1a->setEntero("hp.periodic_modifier",1);
+                            p1a->setEntero("hp.period",1);
                             p1b->setEntero("hp.periodic_modifier",1);
                             p1b->setEntero("hp.period",1);
                             Input*i_temp=new Input();
@@ -456,9 +464,12 @@ void Menu::loopMenu()
 //                            p1b->input=i_temp;
 
                             Personaje* p2a=getPersonajeA(1,false);
-                            Personaje* p2b=getPersonajeB(1,true);
+                            Personaje* p2b=getPersonajeB(1,false);
                             p2a->personaje_contrario=p1b;
                             p2b->personaje_contrario=p1a;
+
+                            p2a->setEntero("hp.periodic_modifier",1);
+                            p2a->setEntero("hp.period",1);
                             p2b->setEntero("hp.periodic_modifier",1);
                             p2b->setEntero("hp.period",1);
                             i_temp=new Input();
@@ -466,9 +477,12 @@ void Menu::loopMenu()
 //                            p2b->input=i_temp;
 
                             Personaje* p3a=getPersonajeA(2,false);
-                            Personaje* p3b=getPersonajeB(2,true);
+                            Personaje* p3b=getPersonajeB(2,false);
                             p3a->personaje_contrario=p1b;
                             p3b->personaje_contrario=p1a;
+
+                            p3a->setEntero("hp.periodic_modifier",1);
+                            p3a->setEntero("hp.period",1);
                             p3b->setEntero("hp.periodic_modifier",1);
                             p3b->setEntero("hp.period",1);
                             i_temp=new Input();
@@ -486,7 +500,10 @@ void Menu::loopMenu()
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
 
-                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+                            sonido->pararSonido("Menu.music");
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            delete fighter;
+                            sonido->reproducirSonido(stringw("Menu.music"));
 
                             break;
                         }
@@ -495,7 +512,7 @@ void Menu::loopMenu()
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(1);
+                            printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
 
                             inputa=new Input();
                             inputb=new Input();
@@ -526,7 +543,11 @@ void Menu::loopMenu()
 
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
-                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+
+                            sonido->pararSonido("Menu.music");
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            delete fighter;
+                            sonido->reproducirSonido(stringw("Menu.music"));
 
                             break;
                         }
@@ -535,7 +556,7 @@ void Menu::loopMenu()
                     {
                         if(char_select->listo())
                         {
-                            printVsScreen(1);
+                            printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
 
                             inputa=new Input();
                             inputb=new Input();
@@ -573,7 +594,11 @@ void Menu::loopMenu()
 
                             stage=new Stage(grafico,sonido);
                             stage->cargarDesdeXML((char*)path_s);
-                            Fighter fighter(sonido,grafico,receiver,pa,pb,stage);
+
+                            sonido->pararSonido("Menu.music");
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            delete fighter;
+                            sonido->reproducirSonido(stringw("Menu.music"));
 
                             break;
                         }
@@ -961,8 +986,6 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
 
-    cout<<"A:"<<str<<num<<endl;
-
     //get cadena
     char *path_a=new char[255];
     strcpy(path_a,"");
@@ -999,8 +1022,6 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     int num_paleta=char_select->getLockedPalettesPB()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
-
-    cout<<"B:"<<str<<num<<endl;
 
     //get string
     char *path_b=new char[255];
@@ -1354,16 +1375,17 @@ void Menu::llenarInputsBotones()
     }
 }
 
-void Menu::printVsScreen(int char_num)
+void Menu::printVsScreen(vector<irr::video::ITexture*>pa_previews,vector<irr::video::ITexture*>pb_previews)
 {
     if (grafico->isWindowActive())
     {
         grafico->beginScene();
-            irr::video::ITexture* texture_game_over=grafico->getTexture("misc/vs_screen.png");
+
+            irr::video::ITexture* texture=grafico->getTexture("misc/vs_screen.png");
             grafico->draw2DImage
-            (   texture_game_over,
-                irr::core::dimension2d<irr::f32> (1024,600),
-                irr::core::rect<irr::f32>(0,0,1024,600),
+            (   texture,
+                irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
+                irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
@@ -1371,6 +1393,39 @@ void Menu::printVsScreen(int char_num)
                 irr::video::SColor(255,255,255,255),
                 false,
                 false);
+
+            for(int i=0;i<(int)pa_previews.size();i++)
+            {
+                irr::video::ITexture*texture=pa_previews[i];
+                grafico->draw2DImage
+                (   texture,
+                    irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
+                    irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
+                    irr::core::position2d<irr::f32>(i*200,0),
+                    irr::core::position2d<irr::f32>(0,0),
+                    irr::f32(0), irr::core::vector2df (0,0),
+                    true,
+                    irr::video::SColor(255,255,255,255),
+                    false,
+                    false);
+            }
+
+            for(int i=0;i<(int)pb_previews.size();i++)
+            {
+                irr::video::ITexture*texture=pb_previews[i];
+                grafico->draw2DImage
+                (   texture,
+                    irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
+                    irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
+                    irr::core::position2d<irr::f32>(grafico->ventana_x-(i+1)*200,grafico->ventana_y-150),
+                    irr::core::position2d<irr::f32>(0,0),
+                    irr::f32(0), irr::core::vector2df (0,0),
+                    true,
+                    irr::video::SColor(255,255,255,255),
+                    false,
+                    false);
+            }
+
         grafico->endScene();
         grafico->run();
     }

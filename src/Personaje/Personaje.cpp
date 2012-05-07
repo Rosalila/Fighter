@@ -10,6 +10,16 @@ Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
     this->num_paleta=num_paleta;
     this->proyectiles_activos=0;
 }
+Personaje::~Personaje()
+{
+    for(;!textures.empty();)
+    {
+        ITexture*texture=textures.back();
+        textures.pop_back();
+        grafico->driver->removeTexture(texture);
+        //texture->drop();
+    }
+}
 //DIBUJAR
 void Personaje::dibujar()
 {
@@ -145,6 +155,10 @@ void Personaje::dibujarBarra(Barra barra)
 {
     position2d<s32>punto1= barra.posicion.UpperLeftCorner;
     position2d<s32>punto2= barra.posicion.LowerRightCorner;
+    //resize 800x600
+    float w=grafico->ventana_x;
+    punto1.X*=w/1024.0;
+    punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
     float longitud_actual=((float)longitud_total/getEntero(barra.valor_maximo))*(float)getEntero(barra.valor_actual);
     float altura=(float)punto2.Y-(float)punto1.Y;
@@ -189,6 +203,10 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
 {
     position2d<s32>punto1= barra.posicion.UpperLeftCorner;
     position2d<s32>punto2= barra.posicion.LowerRightCorner;
+    //resize 800x600
+    float w=grafico->ventana_x;
+    punto1.X*=w/1024.0;
+    punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
     float longitud_actual=((float)longitud_total/getEntero(barra.valor_maximo))*(float)getEntero(barra.valor_actual);
     float altura=(float)punto2.Y-(float)punto1.Y;
@@ -572,10 +590,14 @@ bool Personaje::cumpleCondiciones(stringw str_movimiento)
         {
             Condicion* c_temp=(Condicion*)subcondiciones[j];
             if(!cumpleCondicion(c_temp))
+            {
                 flag=false;
+            }
         }
         if(flag)
+        {
             return true;
+        }
     }
     return false;
 }
@@ -647,6 +669,8 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     setString("effect.green","off");
     setString("effect.blue","off");
 
+    setString("attacking","no");
+
     setEntero("Colision.x",0);
     setEntero("Colision.y",0);
 
@@ -658,7 +682,6 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     strcat(path_palettes,char_name_ptr);
     strcat(path_palettes,"/palettes.xml\0");
     paleta.cargarXML(path_palettes,num_paleta);
-    cout<<"!!!"<<path_palettes<<endl;cout.flush();
 
     cargarMain();
 
@@ -1214,7 +1237,8 @@ void Personaje::cargarSprites()
                 stringw path(e->Attribute("path"));
                 stringw dir("chars/");
                 path=dir+char_name+"/"+path;
-                int escala=atoi(e->Attribute("scale"));
+                double escala;
+                e->QueryDoubleAttribute("scale",&escala);
                 int alineacion_x=atoi(e->Attribute("align_x"));
                 int alineacion_y=atoi(e->Attribute("align_y"));
                 stringw str_contrario(e->Attribute("to_opponent"));
@@ -1223,6 +1247,7 @@ void Personaje::cargarSprites()
                 if(ignore_color==NULL)
                 {
                     ITexture* texture=grafico->getTexture(irr::io::path(path));
+                    textures.push_back(texture);
                     paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
                     paleta.restoreTexture(texture);
@@ -1232,6 +1257,7 @@ void Personaje::cargarSprites()
                     video::IImage* image = grafico->driver->createImageFromFile(path);
 
                     video::ITexture* texture = grafico->driver->addTexture("test",image);
+                    textures.push_back(texture);
                     grafico->driver->makeColorKeyTexture(texture,ignore_color);
 
                     paleta.paintTexture(texture);
@@ -1332,7 +1358,7 @@ void Personaje::cargarSfx()
         strcat(file,(char*)c_name);
         strcat(file,"/sfx/");
         strcat(file,elemento_sonido->Attribute("file"));
-        sonido->agregarSonido(move,file);
+        sonido->agregarSonido(char_name+move,file);
     }
 
 }
@@ -1347,7 +1373,7 @@ void Personaje::cargarAnimations()
     strcpy(path_archivos,path_animations);
     strcat(path_archivos,"/sprites/");
 
-    strcat(path_animations,"/animations.xml");
+    strcat(path_animations,"/vfx.xml");
     TiXmlDocument doc_t(path_animations);
     doc_t.LoadFile();
     TiXmlDocument *doc;
@@ -1504,6 +1530,7 @@ void Personaje::aplicarEfectosProyectiles()
 {
     bool pego=false;
     bool disolve=false;
+    bool chip=false;
 
     for(int i=0;i<(int)proyectiles_actuales.size();i++)
     {
@@ -1512,7 +1539,40 @@ void Personaje::aplicarEfectosProyectiles()
             continue;
 
         //hit
-        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),getHitBoxes(proyectil->hitboxes),personaje_contrario->getEntero("position_x"),personaje_contrario->getEntero("position_y"),getEntero(proyectil->posicion_x),getEntero(proyectil->posicion_y)))
+        bool hit=false;
+        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),
+                               getHitBoxes(proyectil->hitboxes),
+                               personaje_contrario->getEntero("position_x"),
+                               personaje_contrario->getEntero("position_y"),
+                               getEntero(proyectil->posicion_x),
+                               getEntero(proyectil->posicion_y)))
+                               {
+                                   hit=true;
+                               }
+
+        //hit de proyectiles
+        bool colision_proyectiles=false;
+        Proyectil*proyectil_c;
+        for(int j=0;j<personaje_contrario->proyectiles_actuales.size();j++)
+        {
+            proyectil_c=personaje_contrario->proyectiles_actuales[j];
+            if(personaje_contrario->getString(proyectil_c->estado)!=stringw("on"))
+                continue;
+
+            if(getColisionHitBoxes(personaje_contrario->getHitBoxes(proyectil_c->hitboxes),
+                                   getHitBoxes(proyectil->hitboxes),
+                                   personaje_contrario->getEntero(proyectil_c->posicion_x),
+                                   personaje_contrario->getEntero(proyectil_c->posicion_y),
+                                   getEntero(proyectil->posicion_x),
+                                   getEntero(proyectil->posicion_y)))
+                                   {
+                                       colision_proyectiles=true;
+                                       break;
+                                   }
+        }
+
+        //acciones
+        if(hit)
         {
             proyectil->frame_actual=0;
             setString(proyectil->estado,"off");
@@ -1524,8 +1584,21 @@ void Personaje::aplicarEfectosProyectiles()
                 pego=true;
             }else//hit defense
             {
-                disolve=true;
+                chip=true;
             }
+        }else if(colision_proyectiles)
+        {
+            proyectil->frame_actual=0;
+            setString(proyectil->estado,"off");
+            setEntero("Colision.x",px_colision);
+            setEntero("Colision.y",py_colision);
+
+            proyectil_c->frame_actual=0;
+            personaje_contrario->setString(proyectil_c->estado,"off");
+            personaje_contrario->setEntero("Colision.x",px_colision);
+            personaje_contrario->setEntero("Colision.y",py_colision);
+
+            disolve=true;
         }
     }
     if(pego)
@@ -1536,6 +1609,10 @@ void Personaje::aplicarEfectosProyectiles()
         personaje_contrario->setString("projectile_disolve","yes");
     else
         personaje_contrario->setString("projectile_disolve","no");
+    if(chip)
+        personaje_contrario->setString("projectile_disolve_chip","yes");
+    else
+        personaje_contrario->setString("projectile_disolve_chip","no");
 }
 
 bool Personaje::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)

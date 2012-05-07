@@ -24,6 +24,8 @@ public:
     int pos_imagen_ko,duracion_ko,tiempo_actual_ko;
     vector<Imagen>match_intro;
     int pos_imagen_intro,duracion_intro,tiempo_actual_intro;
+    bool game_over_a;
+    bool game_over_b;
 
     //Engines
     Sonido* sonido;
@@ -31,6 +33,7 @@ public:
     Receiver* receiver;
 
     Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage);
+    ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado);

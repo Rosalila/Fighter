@@ -22,6 +22,7 @@ int main()
     Sonido*sonido = new Sonido();
 
     Menu* menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
+    sonido->reproducirSonido(stringw("Menu.music"));
     menu->loopMenu();
     //Fighter *fighter=new Fighter();
     //fighter->mainLoop();

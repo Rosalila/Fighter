@@ -49,7 +49,7 @@ public:
     stringw getInputPressed();
     void llenarInputsBotones();
     irr::EKEY_CODE toKeyCode(stringw str);
-    void printVsScreen(int char_num);
+    void printVsScreen(vector<irr::video::ITexture*>pa_previews,vector<irr::video::ITexture*>pb_previews);
 };
 
 #endif

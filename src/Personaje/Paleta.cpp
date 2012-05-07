@@ -24,7 +24,7 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
             TiXmlElement* min_color=c_change->FirstChild("MinColor")->ToElement();
             TiXmlElement* change=c_change->FirstChild("Change")->ToElement();
             CambioColor cambio_color(SColor(atoi(max_color->Attribute("alpha")),atoi(max_color->Attribute("red")),atoi(max_color->Attribute("green")),atoi(max_color->Attribute("blue"))),
-                                     SColor(atoi(max_color->Attribute("alpha")),atoi(min_color->Attribute("red")),atoi(min_color->Attribute("green")),atoi(min_color->Attribute("blue"))),
+                                     SColor(atoi(min_color->Attribute("alpha")),atoi(min_color->Attribute("red")),atoi(min_color->Attribute("green")),atoi(min_color->Attribute("blue"))),
                                      atoi(change->Attribute("alpha")),
                                      atoi(change->Attribute("red")),
                                      atoi(change->Attribute("green")),
@@ -42,7 +42,7 @@ ITexture* Paleta::paintTexture(ITexture* texture)
     {
         CambioColor cambio=cambios[i];
         int a_min=cambio.color_min.getAlpha();
-        int a_max=cambio.color_min.getAlpha();
+        int a_max=cambio.color_max.getAlpha();
         int r_min=cambio.color_min.getRed();
         int r_max=cambio.color_max.getRed();
         int g_min=cambio.color_min.getGreen();
