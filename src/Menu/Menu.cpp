@@ -255,12 +255,18 @@ void Menu::loopMenu()
            && !receiver->IsKeyDownn(irr::KEY_UP)
            && !receiver->IsKeyDownn(irr::KEY_DOWN)
            && !receiver->IsKeyDownn(irr::KEY_RETURN)
+           && !receiver->IsKeyDownn(irr::KEY_ESCAPE)
            )
             tecla_arriba=true;
         if(tecla_arriba)
         {
             tecla_arriba=false;
-            if(receiver->IsKeyDownn(irr::KEY_DOWN))
+            if(receiver->IsKeyDownn(irr::KEY_ESCAPE))
+            {
+                exit_signal=true;
+                break;
+            }
+            else if(receiver->IsKeyDownn(irr::KEY_DOWN))
             {
                 ((MenuContenedor*)contenedor_actual)->avanzar();
             }

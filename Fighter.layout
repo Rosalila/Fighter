@@ -4,8 +4,8 @@
 	<File name="include/Fighter.h" open="0" top="0" tabpos="1">
 		<Cursor position="334" topLine="9" />
 	</File>
-	<File name="include/Grafico/Grafico.h" open="0" top="0" tabpos="0">
-		<Cursor position="1229" topLine="37" />
+	<File name="include/Grafico/Grafico.h" open="1" top="0" tabpos="6">
+		<Cursor position="77" topLine="0" />
 	</File>
 	<File name="include/IA/Automata.h" open="0" top="0" tabpos="0">
 		<Cursor position="564" topLine="13" />
@@ -31,8 +31,8 @@
 	<File name="include/Menu/Elemento.h" open="0" top="0" tabpos="0">
 		<Cursor position="96" topLine="6" />
 	</File>
-	<File name="include/Menu/Menu.h" open="0" top="0" tabpos="1">
-		<Cursor position="1397" topLine="33" />
+	<File name="include/Menu/Menu.h" open="1" top="0" tabpos="5">
+		<Cursor position="40" topLine="0" />
 	</File>
 	<File name="include/Menu/MenuBarra.h" open="0" top="0" tabpos="0">
 		<Cursor position="327" topLine="11" />
@@ -110,7 +110,7 @@
 		<Cursor position="19144" topLine="568" />
 	</File>
 	<File name="src/Grafico/Grafico.cpp" open="1" top="1" tabpos="4">
-		<Cursor position="12300" topLine="283" />
+		<Cursor position="150" topLine="0" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3142" topLine="2" />
