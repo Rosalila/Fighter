@@ -317,15 +317,10 @@ void MenuCharSelect::dibujar()
 void MenuCharSelect::dibujar(int alineacion_x,int alineacion_y)
 {
     grafico->draw2DRectangle(irr::video::SColor(255,0,255,255),core::rect<s32>(0,0,50,50));
-//    grafico->draw2DImage
-//    (   imagen,
-//        irr::core::dimension2d<irr::f32> (width,height),
-//        irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-//        irr::core::position2d<irr::f32>(x+alineacion_x,y+alineacion_y),
-//        irr::core::position2d<irr::f32>(0,0),
-//        irr::f32(0), irr::core::vector2df (0,0),
-//        true,
-//        irr::video::SColor(255,255,255,255),
-//        false,
-//        false);
+}
+
+void MenuCharSelect::clearLocks()
+{
+    locks_pa.clear();
+    locks_pb.clear();
 }

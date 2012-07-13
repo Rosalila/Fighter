@@ -30,6 +30,8 @@ private:
 
     //config vars
     int ai_level,time,rounds;
+
+    void iniciarJuego(int num_personajes,bool inteligencia_artificial);
 public:
     Input *inputa,*inputb;
     vector<Personaje*>pa;

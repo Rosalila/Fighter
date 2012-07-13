@@ -65,6 +65,7 @@ public:
     virtual int getTipo();
     virtual void dibujar();
     virtual void dibujar(int alineacion_x,int alineacion_y);
+    void clearLocks();
 };
 
 #endif
