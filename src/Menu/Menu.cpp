@@ -47,7 +47,7 @@ Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo)
 
 void Menu::loopMenu()
 {
-    bool tecla_arriba=true;
+    bool tecla_arriba=false;
     //sonido->reproducirSonido(stringw("Menu.music"));
 
     llenarInputsBotones();
@@ -349,6 +349,41 @@ void Menu::loopMenu()
                 }
             }else if(receiver->IsKeyPressed(irr::KEY_RETURN))
             {
+                if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
+                {
+                        if(char_select->listo())
+                        {
+                            printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
+
+                            inputa=new Input();
+                            inputb=new Input();
+                            //this->inputa->cargarIAXML(1);
+                            inputa->cargarDesdeXML(1,receiver);
+                            inputb->cargarDesdeXML(2,receiver);
+                            char *path_s=new char[255];
+                            strcpy(path_s,"");
+                            strcat(path_s,(char*)getStage());
+
+                            Personaje* p1a=getPersonajeA(0,false);
+                            Personaje* p1b=getPersonajeB(0,false);
+                            p1a->personaje_contrario=p1b;
+                            p1b->personaje_contrario=p1a;
+
+                            pa.clear();
+                            pa.push_back(p1a);
+
+                            pb.clear();
+                            pb.push_back(p1b);
+
+                            stage=new Stage(grafico,sonido);
+                            stage->cargarDesdeXML((char*)path_s);
+                            sonido->pararSonido("Menu.music");
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            delete fighter;
+                            sonido->reproducirSonido(stringw("Menu.music"));
+                            break;
+                        }
+                }
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==4)
                 {
                     MenuBoton*mb=((MenuBoton*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());

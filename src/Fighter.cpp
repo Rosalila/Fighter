@@ -609,7 +609,7 @@ void Fighter::loopJuego()
         if(grafico->device->getTimer()->getTime()<anterior+16)
             continue;
 
-        if(receiver->IsKeyPressed(irr::KEY_ESCAPE))///!!!
+        if(receiver->IsKeyDownn(irr::KEY_ESCAPE))///!!!
         {
             pause_menu->loopMenu();
             if(pause_menu->getExitSignal())
