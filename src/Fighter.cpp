@@ -511,8 +511,8 @@ void Fighter::logicaStage()
     }
 
     //get una nueva posicion de la stage
-    int borde_izq=300;
-    int borde_der=700;
+    int borde_izq=500;
+    int borde_der=900;
 
     int pa_x_pantalla=pa_x+grafico->camera_x;
     int pa_y_pantalla=pb_x+grafico->camera_x;

@@ -273,27 +273,34 @@ void Personaje::dibujarProyectiles()
 {
     for(int i=0;i<(int)proyectiles_actuales.size();i++)
     {
-        if(getString(proyectiles_actuales[i]->estado)!="on")
+        Proyectil* proyectil=proyectiles_actuales[i];
+        if(getString(proyectil->estado)!="on")
             continue;
-        Imagen imagen=getImagen(proyectiles_actuales[i]->imagen);
-        int pos_x=getEntero(proyectiles_actuales[i]->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x;
-        int pos_y=getEntero(proyectiles_actuales[i]->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y+grafico->ventana_y-stage_piso;
-        grafico->draw2DImageCameraAlign
-        (   imagen.imagen,
-            irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
-            irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
-            irr::core::position2d<irr::f32>(pos_x,pos_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
-            true,
-            irr::video::SColor(255,255,255,255),
-            getString(proyectiles_actuales[i]->orientacion)=="i",
-            false);
-//        stringw nombre=proyectiles_actuales[i]->nombre;
-//        dibujarHitBoxes(nombre+".hitboxes","resources/red.png",
-//                        getString(nombre+".orientation")=="i",
-//                        getEntero(nombre+".position_x"),
-//                        getEntero(nombre+".position_y"));
+        if(proyectil->sprites.size()!=0)
+        {
+            Imagen imagen=getImagen(proyectil->imagen);
+            int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x;
+            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y+grafico->ventana_y-stage_piso;
+            grafico->draw2DImageCameraAlign
+            (   imagen.imagen,
+                irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
+                irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
+                irr::core::position2d<irr::f32>(pos_x,pos_y),
+                irr::core::position2d<irr::f32>(0,0),
+                irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
+                true,
+                irr::video::SColor(255,255,255,255),
+                getString(proyectil->orientacion)=="i",
+                false);
+                if(input->receiver->IsKeyDownn(irr::KEY_KEY_H) || true)
+                {
+                    stringw nombre=proyectil->nombre;
+                    dibujarHitBoxes(proyectil->hitboxes,"",
+                                getString(proyectil->orientacion)=="i",
+                                getEntero(proyectil->posicion_x),
+                                getEntero(proyectil->posicion_y));
+                }
+        }
     }
 }
 //GETS shortcuts
@@ -788,24 +795,28 @@ void Personaje::cargarMain()
                 //Sprites
                 vector<Imagen>sprites;
                 TiXmlNode *temp=elemento_imagen->FirstChild("Sprites");
-                for(TiXmlElement *elemento_sprite=temp->FirstChild("Sprite")->ToElement();
-                        elemento_sprite!=NULL;
-                        elemento_sprite=elemento_sprite->NextSiblingElement("Sprite"))
+                if(temp!=NULL)
                 {
-                    stringw path(elemento_sprite->Attribute("path"));
-                    stringw dir("chars/");
-                    path=dir+char_name+"/"+path;
-                    int escala=atoi(elemento_sprite->Attribute("scale"));
-                    int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
-                    int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
+                    if(!temp->NoChildren())
+                    for(TiXmlElement *elemento_sprite=temp->FirstChild("Sprite")->ToElement();
+                            elemento_sprite!=NULL;
+                            elemento_sprite=elemento_sprite->NextSiblingElement("Sprite"))
+                    {
+                        stringw path(elemento_sprite->Attribute("path"));
+                        stringw dir("chars/");
+                        path=dir+char_name+"/"+path;
+                        int escala=atoi(elemento_sprite->Attribute("scale"));
+                        int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
+                        int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
 
 
-                    irr::video::ITexture* texture;
-                    if(ignore_color==NULL)
-                        texture=grafico->getTexture(path);
-                    else
-                        texture=grafico->getTexture(path,ignore_color);
-                    sprites.push_back(Imagen(texture,escala,alineacion_x,alineacion_y));
+                        irr::video::ITexture* texture;
+                        if(ignore_color==NULL)
+                            texture=grafico->getTexture(path);
+                        else
+                            texture=grafico->getTexture(path,ignore_color);
+                        sprites.push_back(Imagen(texture,escala,alineacion_x,alineacion_y));
+                    }
                 }
 
                 //Hitboxes
@@ -1483,7 +1494,8 @@ void Personaje::logicaProyectiles()
         Proyectil*proyectil=proyectiles_actuales[i];
         if(cumpleCondiciones(proyectil->frames[0].condiciones))//si cumple
         {
-            setImagen(proyectil->imagen,proyectil->sprites[0]);
+            if(proyectil->sprites.size()!=0)
+                setImagen(proyectil->imagen,proyectil->sprites[0]);
             setString(proyectil->estado,"on");
             setString(proyectil->orientacion,getString("orientation"));
             proyectil->frame_actual=0;
@@ -1505,7 +1517,8 @@ void Personaje::logicaProyectiles()
         if(proyectil->tiempo_transcurrido==0)
         {
             aplicarModificadores(fc->modificadores,getString(proyectil->orientacion)=="i");
-            setImagen(proyectil->imagen,proyectil->sprites[proyectil->sprite_actual]);
+            if(proyectil->sprites.size()!=0)
+                setImagen(proyectil->imagen,proyectil->sprites[proyectil->sprite_actual]);
             proyectil->sprite_actual++;
             if(proyectil->sprite_actual>=(int)proyectil->sprites.size())
                 proyectil->sprite_actual=0;

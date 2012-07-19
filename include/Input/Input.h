@@ -7,8 +7,8 @@ protected:
     vector<stringw> buffer_inputs;
     int jugador;
 
-    Receiver* receiver;
 public:
+Receiver* receiver;
 bool tecla_arriba;
 IA *ia;
 bool inteligencia_artificial;

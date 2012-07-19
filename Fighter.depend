@@ -210,7 +210,7 @@
 	"Sonido/Sonido.h"
 	"Fighter.h"
 
-1342185461 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
+1342659361 source:/home/userr/ProyectosActuales/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Grafico/Grafico.cpp
@@ -241,7 +241,7 @@
 1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1342204623 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
+1342659155 source:/home/userr/ProyectosActuales/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Menu/MenuBarra.cpp
@@ -312,7 +312,7 @@
 1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Paleta.cpp
 	"Personaje/Paleta.h"
 
-1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
+1342572467 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1342183264 source:/home/userr/ProyectosActuales/Fighter/src/Personaje/Proyectil.cpp
