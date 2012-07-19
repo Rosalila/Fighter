@@ -17,6 +17,7 @@ int frame_actual,tiempo_transcurrido,damage;
     stringw hitboxes;
     stringw estado;
     stringw orientacion;
+    bool multihit;
 
     //logica
     vector<Imagen>sprites;
@@ -26,7 +27,7 @@ int frame_actual,tiempo_transcurrido,damage;
     void agregarCondicion(vector<Condicion*> condicion,int frame);
 
     int sprite_actual;
-    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage);
+    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage,bool multihit);
     void avanzarFrame();
 };
 

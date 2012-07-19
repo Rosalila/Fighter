@@ -276,6 +276,7 @@ void Personaje::dibujarProyectiles()
         Proyectil* proyectil=proyectiles_actuales[i];
         if(getString(proyectil->estado)!="on")
             continue;
+
         if(proyectil->sprites.size()!=0)
         {
             Imagen imagen=getImagen(proyectil->imagen);
@@ -292,14 +293,15 @@ void Personaje::dibujarProyectiles()
                 irr::video::SColor(255,255,255,255),
                 getString(proyectil->orientacion)=="i",
                 false);
-                if(input->receiver->IsKeyDownn(irr::KEY_KEY_H) || true)
-                {
-                    stringw nombre=proyectil->nombre;
-                    dibujarHitBoxes(proyectil->hitboxes,"",
-                                getString(proyectil->orientacion)=="i",
-                                getEntero(proyectil->posicion_x),
-                                getEntero(proyectil->posicion_y));
-                }
+        }
+        //Dibujar hitboxes
+        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
+        {
+            stringw nombre=proyectil->nombre;
+            dibujarHitBoxes(proyectil->hitboxes,"",
+                        getString(proyectil->orientacion)=="i",
+                        getEntero(proyectil->posicion_x),
+                        -getEntero(proyectil->posicion_y));
         }
     }
 }
@@ -787,6 +789,10 @@ void Personaje::cargarMain()
                 int speed_x(atoi(elemento_imagen->Attribute("speed_x")));
                 int speed_y(atoi(elemento_imagen->Attribute("speed_y")));
                 int damage(atoi(elemento_imagen->Attribute("damage")));
+                bool multihit=false;
+                if(elemento_imagen->Attribute("multihit")!=NULL)
+                    multihit=strcmp(elemento_imagen->Attribute("multihit"),"yes")==0;
+
                 setEntero(nombre+".position_x",0);
                 setEntero(nombre+".position_y",0);
 
@@ -821,7 +827,7 @@ void Personaje::cargarMain()
                 }
 
                 //Proyectil listo
-                Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage);
+                Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage,multihit);
 
                 //Frames
                 stringw prefijo="Projectile.";
@@ -1448,6 +1454,7 @@ void Personaje::cargarAnimations()
                                         )
                                    );
         setString(stringw("Animation.")+name,"off");
+        setString(stringw("Animation.")+stringw(name+".isActive"),"false");
 
     }
 
@@ -1493,6 +1500,7 @@ void Personaje::cargarAnimations()
                                         )
                                     );
         setString(stringw("Animation.")+name,"off");
+        setString(stringw("Animation.")+stringw(name+".isActive"),"false");
 
     }
 }
@@ -1598,8 +1606,11 @@ void Personaje::aplicarEfectosProyectiles()
         //acciones
         if(hit)
         {
-            proyectil->frame_actual=0;
-            setString(proyectil->estado,"off");
+            if(!proyectil->multihit)
+            {
+                proyectil->frame_actual=0;
+                setString(proyectil->estado,"off");
+            }
             setEntero("Colision.x",px_colision);
             setEntero("Colision.y",py_colision);
             if(personaje_contrario->getString("current_move").subString(0,8)!=stringw("defense."))//hit player
@@ -1736,6 +1747,7 @@ void Personaje::dibujarAnimacionesBack()
         {
             animaciones_actuales_back.push_back(animaciones_back[i]);
             setString(stringw(stringw("Animation.")+animaciones_back[i].nombre),"off");
+            setString(stringw("Animation.")+stringw(animaciones_back[i].nombre+".isActive"),"true");
         }
     }
     for(int i=0;i<(int)animaciones_actuales_back.size();i++)
@@ -1760,6 +1772,7 @@ void Personaje::dibujarAnimacionesBack()
         //Cuando termina
         if(animacion->imagen_actual>=(int)animacion->sprites.size())
         {
+            setString(stringw("Animation.")+stringw(animacion->nombre+".isActive"),"false");
             animaciones_actuales_back.erase(animaciones_actuales_back.begin()+i);
         }
     }
@@ -1773,6 +1786,7 @@ void Personaje::dibujarAnimacionesFront()
         {
             animaciones_actuales_front.push_back(animaciones_front[i]);
             setString(stringw(stringw("Animation.")+animaciones_front[i].nombre),"off");
+            setString(stringw("Animation.")+stringw(animaciones_front[i].nombre+".isActive"),"true");
         }
     }
     for(int i=0;i<(int)animaciones_actuales_front.size();i++)
@@ -1796,6 +1810,7 @@ void Personaje::dibujarAnimacionesFront()
         //Cuando termina
         if(animacion->imagen_actual>=(int)animacion->sprites.size())
         {
+            setString(stringw("Animation.")+stringw(animacion->nombre+".isActive"),"false");
             animaciones_actuales_front.erase(animaciones_actuales_front.begin()+i);
         }
     }
