@@ -776,6 +776,7 @@ void Personaje::cargarMain()
                         agregarModificador(nombre,i,"position_y",desplazamiento,true,false,false);
                 }
             }
+            if(nodo->FirstChild("projectile")!=NULL)
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("projectile")->ToElement();
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("projectile"))
@@ -819,22 +820,6 @@ void Personaje::cargarMain()
                     }
                 }
 
-                //Hitboxes
-                temp=elemento_imagen->FirstChild("Hitboxes");
-                vector<HitBox> hitboxes;
-                if(!temp->NoChildren())
-                for(TiXmlElement *elemento_hb=temp->FirstChild("Hitbox")->ToElement();
-                        elemento_hb!=NULL;
-                        elemento_hb=elemento_hb->NextSiblingElement("Hitbox"))
-                {
-                    int x1=atoi(elemento_hb->Attribute("x1"));
-                    int y1=atoi(elemento_hb->Attribute("y1"));
-                    int x2=atoi(elemento_hb->Attribute("x2"));
-                    int y2=atoi(elemento_hb->Attribute("y2"));
-                    hitboxes.push_back(HitBox(x1,-y1,x2,-y2));
-                }
-                setHitBoxes(nombre+".hitboxes",hitboxes);
-
                 //Proyectil listo
                 Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage);
 
@@ -848,6 +833,32 @@ void Personaje::cargarMain()
                     proyectil->agregarFrame(frame_duration);
                     proyectil->frames[i].agregarModificador(speed_x,nombre+".position_x",true,false,true);
                     proyectil->frames[i].agregarModificador(-speed_y,nombre+".position_y",true,false,false);
+//                    if(i==frames-1)
+//                        proyectil->frames[i].agregarModificador(hitboxes,nombre+".hitboxes",false);
+                }
+
+                //Hitboxes
+                vector<HitBox> hitboxes_vacia;
+                setHitBoxes(nombre+".hitboxes",hitboxes_vacia);
+                for(TiXmlElement *elemento_hitboxes=elemento_imagen->FirstChild("Hitboxes")->ToElement();
+                        elemento_hitboxes!=NULL;
+                        elemento_hitboxes=elemento_hitboxes->NextSiblingElement("Hitboxes"))
+                {
+                    int num_frame=atoi(elemento_hitboxes->Attribute("frame"));
+                    temp=elemento_hitboxes;
+                    vector<HitBox> hitboxes;
+                    if(!temp->NoChildren())
+                    for(TiXmlElement *elemento_hb=temp->FirstChild("Hitbox")->ToElement();
+                            elemento_hb!=NULL;
+                            elemento_hb=elemento_hb->NextSiblingElement("Hitbox"))
+                    {
+                        int x1=atoi(elemento_hb->Attribute("x1"));
+                        int y1=atoi(elemento_hb->Attribute("y1"));
+                        int x2=atoi(elemento_hb->Attribute("x2"));
+                        int y2=atoi(elemento_hb->Attribute("y2"));
+                        hitboxes.push_back(HitBox(x1,-y1,x2,-y2));
+                    }
+                    proyectil->frames[num_frame].agregarModificador(hitboxes,nombre+".hitboxes",false);
                 }
 
                 //Modificadores
