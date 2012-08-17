@@ -82,12 +82,12 @@ void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColo
 {
 //    posicion.LowerRightCorner.X-=camera_x;
 //    posicion.LowerRightCorner.Y+=camera_y;
-    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,
-                             posicion.UpperLeftCorner.Y*escala_y,
-                             posicion.LowerRightCorner.X*escala_x,
-                             posicion.LowerRightCorner.Y*escala_y);
+//    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+//    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+//    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,
+//                             posicion.UpperLeftCorner.Y*escala_y,
+//                             posicion.LowerRightCorner.X*escala_x,
+//                             posicion.LowerRightCorner.Y*escala_y);
     font->draw(texto,posicion,color);
 }
 

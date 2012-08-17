@@ -290,26 +290,26 @@ void Menu::loopMenu()
                 {
                     MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
                     ml->avanzar();
-                    if(ml->getAccion()==0)
-                    {
-                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-                        //convert to char*
-                        size_t count = 255;
-                        c8* str_ptr= (char*)malloc( 255 );
-                        wcstombs(str_ptr, mt->texto.c_str(), count);
-
-                        time=atoi(str_ptr);
-                    }
-                    if(ml->getAccion()==1)
-                    {
-                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-                        //convert to char*
-                        size_t count = 255;
-                        c8* str_ptr= (char*)malloc( 255 );
-                        wcstombs(str_ptr, mt->texto.c_str(), count);
-
-                        rounds=atoi(str_ptr);
-                    }
+//                    if(ml->getAccion()==0)
+//                    {
+//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+//                        //convert to char*
+//                        size_t count = 255;
+//                        c8* str_ptr= (char*)malloc( 255 );
+//                        wcstombs(str_ptr, mt->texto.c_str(), count);
+//
+//                        time=atoi(str_ptr);
+//                    }
+//                    if(ml->getAccion()==1)
+//                    {
+//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+//                        //convert to char*
+//                        size_t count = 255;
+//                        c8* str_ptr= (char*)malloc( 255 );
+//                        wcstombs(str_ptr, mt->texto.c_str(), count);
+//
+//                        rounds=atoi(str_ptr);
+//                    }
                 }
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==6)
                 {
@@ -327,26 +327,26 @@ void Menu::loopMenu()
                 {
                     MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
                     ml->retroceder();
-                    if(ml->getAccion()==0)
-                    {
-                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-                        //convert to char*
-                        size_t count = 255;
-                        c8* str_ptr= (char*)malloc( 255 );
-                        wcstombs(str_ptr, mt->texto.c_str(), count);
-
-                        time=atoi(str_ptr);
-                    }
-                    if(ml->getAccion()==1)
-                    {
-                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-                        //convert to char*
-                        size_t count = 255;
-                        c8* str_ptr= (char*)malloc( 255 );
-                        wcstombs(str_ptr, mt->texto.c_str(), count);
-
-                        rounds=atoi(str_ptr);
-                    }
+//                    if(ml->getAccion()==0)
+//                    {
+//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+//                        //convert to char*
+//                        size_t count = 255;
+//                        c8* str_ptr= (char*)malloc( 255 );
+//                        wcstombs(str_ptr, mt->texto.c_str(), count);
+//
+//                        time=atoi(str_ptr);
+//                    }
+//                    if(ml->getAccion()==1)
+//                    {
+//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
+//                        //convert to char*
+//                        size_t count = 255;
+//                        c8* str_ptr= (char*)malloc( 255 );
+//                        wcstombs(str_ptr, mt->texto.c_str(), count);
+//
+//                        rounds=atoi(str_ptr);
+//                    }
                 }
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==6)
                 {
@@ -972,7 +972,7 @@ char* Menu::getStage()
     //!
     MenuContenedor *mc=((MenuContenedor*)contenedor_actual);
     MenuLista *ml=(MenuLista*)mc->elementos[pos_stage];
-    MenuImagen *mt=(MenuImagen*)ml->elementos[ml->actual];
+    MenuImagen *mt=(MenuImagen*)ml->getElementoActual();
     stringw s2=mt->value;
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
@@ -1323,7 +1323,7 @@ void Menu::printVsScreen(vector<irr::video::ITexture*>pa_previews,vector<irr::vi
                 (   texture,
                     irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
                     irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(grafico->ventana_x-(i+1)*200,grafico->ventana_y-150),
+                    irr::core::position2d<irr::f32>(grafico->ventana_x-(i+1)*texture->getOriginalSize ().Width-50,grafico->ventana_y-texture->getOriginalSize ().Height-150),
                     irr::core::position2d<irr::f32>(0,0),
                     irr::f32(0), irr::core::vector2df (0,0),
                     true,

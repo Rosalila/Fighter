@@ -9,6 +9,12 @@ Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
     this->stage_piso=0;
     this->num_paleta=num_paleta;
     this->proyectiles_activos=0;
+
+    setString("player","0");
+    if(numero==1)
+        setString("player","1");
+    if(numero==2)
+        setString("player","2");
 }
 Personaje::~Personaje()
 {
@@ -160,6 +166,8 @@ void Personaje::dibujarBarra(Barra barra)
     punto1.X*=w/1024.0;
     punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
+    if(longitud_total<0)//if esta flipeada
+        longitud_total=-longitud_total;
     float longitud_actual=((float)longitud_total/getEntero(barra.valor_maximo))*(float)getEntero(barra.valor_actual);
     float altura=(float)punto2.Y-(float)punto1.Y;
 
@@ -171,10 +179,22 @@ void Personaje::dibujarBarra(Barra barra)
         p1y=punto1.Y;
         p2x=punto1.X+longitud_actual;
         p2y=punto2.Y;
+
+        if(punto1.X>punto2.X)
+        {
+            p1x=punto1.X-longitud_actual;
+            p2x=punto1.X;
+        }
     }else//flip if player 2
     {
         float temp_x2=grafico->ventana_x-punto1.X;
         float temp_x1=grafico->ventana_x-punto1.X-longitud_actual;
+
+        if(punto1.X>punto2.X)
+        {
+            temp_x2=grafico->ventana_x-punto1.X+longitud_actual;
+            temp_x1=grafico->ventana_x-punto1.X;
+        }
 
         p1x=temp_x1;
         p1y=punto1.Y;
@@ -183,6 +203,16 @@ void Personaje::dibujarBarra(Barra barra)
 
         player2=true;
     }
+    bool flip=false;
+    if(punto1.X>punto2.X&&!player2)
+    {
+        flip=true;
+    }
+    if(punto1.X>punto2.X==false&&player2)
+    {
+        flip=true;
+    }
+
     if(barra.imagen==NULL)
         grafico->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
     else
@@ -195,7 +225,7 @@ void Personaje::dibujarBarra(Barra barra)
             irr::f32(0), irr::core::vector2df (1,1),
             true,
             irr::video::SColor(255,255,255,255),
-            player2,
+            flip,
             false);
 }
 

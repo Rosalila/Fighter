@@ -40,14 +40,20 @@ int MenuLista::getTipo()
 
 void MenuLista::avanzar()
 {
-    if(actual<(int)elementos.size()-1)
-        actual++;
+    actual++;
+    if(actual>=(int)elementos.size())
+        actual=(int)elementos.size()-1;
+//    if(actual<(int)elementos.size()-1)
+//        actual++;
 }
 
 void MenuLista::retroceder()
 {
-    if(actual>0)
-        actual--;
+    actual--;
+    if(actual<0)
+        actual=0;
+//    if(actual>0)
+//        actual--;
 }
 
 void MenuLista::dibujar()

@@ -836,9 +836,9 @@ bool Fighter::render()
         dibujarBarra();
 
         if(pa[pa_actual]->combo>0)
-            grafico->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,100,0,0),video::SColor (255,255,255,255));
+            grafico->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,200,0,0),video::SColor (255,255,255,255));
         if(pb[pb_actual]->combo>0)
-            grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(grafico->ventana_x-124,100,0,0),video::SColor (255,255,255,255));
+            grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(grafico->ventana_x-300,200,0,0),video::SColor (255,255,255,255));
 
         grafico->endScene();
     }

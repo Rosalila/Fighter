@@ -200,7 +200,7 @@ void MenuCharSelect::dibujar()
                         irr::f32(0), irr::core::vector2df (0,0),
                         true,
                         irr::video::SColor(255,255,255,255),
-                        true,
+                        false,
                         false);
                 }
             }

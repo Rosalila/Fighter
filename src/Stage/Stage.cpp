@@ -34,7 +34,7 @@ void Stage::dibujarBackground()
 void Stage::dibujarBack(int pos)
 {
     dibujarBackground();
-    if(tiempo_transcurrido_back>5)
+    if(tiempo_transcurrido_back>3)
     {
         pos_dibujando_back++;
         tiempo_transcurrido_back=0;

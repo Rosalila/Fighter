@@ -181,6 +181,21 @@ void Input::cargarIAXML(int jugador,char* archivo,char* archivo_default)
     for(int i=0;i<20;i++)
         buffer_inputs.push_back("5");
     ia=new IA(archivo,archivo_default);
+
+    tecla_arriba=true;
+    for(int i=0;i<20;i++)
+        buffer_inputs.push_back("5");
+    for(int i=0;i<(int)botones.size();i++)
+    {
+        if(botones[i].getMapeo()=="2" || botones[i].getMapeo()=="4" || botones[i].getMapeo()=="6" || botones[i].getMapeo()=="8")
+        {
+            this->cruz.push_back(botones[i]);
+        }
+        else
+        {
+            this->botones.push_back(botones[i]);
+        }
+    }
 }
 TiXmlDocument* Input::getXML(TiXmlDocument *doc)
 {
