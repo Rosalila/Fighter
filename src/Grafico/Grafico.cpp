@@ -2,6 +2,18 @@
 
 Grafico::Grafico(Receiver* receiver)
 {
+    //get resulolution
+    char *archivo=new char[255];
+    strcpy(archivo,"config.xml");
+    TiXmlDocument doc_t( archivo );
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+    TiXmlElement *resolution_element=doc->FirstChild("Resolution")->ToElement();
+
+    int resolution_x=atoi(resolution_element->Attribute("x"));
+    int resolution_y=atoi(resolution_element->Attribute("y"));
+
     camera_x=0;
     camera_y=0;
     ventana_x=1280;
@@ -9,7 +21,10 @@ Grafico::Grafico(Receiver* receiver)
     video::E_DRIVER_TYPE driverType;
     driverType = video::EDT_OPENGL;
     //driverType = video::EDT_SOFTWARE;
-    device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,true, false, false,receiver);
+    //device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,true, false, false,receiver);
+    //device = createDevice(driverType,core::dimension2d<u32>(driver->getCurrentRenderTargetSize().Width,driver->getCurrentRenderTargetSize().Height),true ,true, false, false,receiver);
+    device = createDevice(driverType,core::dimension2d<u32>(resolution_x,resolution_y),true ,true, false, false,receiver);
+
     smgr = device->getSceneManager();
     //camera=smgr->addCameraSceneNode(0,vector3df(50,0,5),vector3df(50,0,0));
     camera=smgr->addCameraSceneNode();
@@ -80,14 +95,14 @@ irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo)
 
 void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColor color)
 {
-//    posicion.LowerRightCorner.X-=camera_x;
-//    posicion.LowerRightCorner.Y+=camera_y;
-//    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-//    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-//    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,
-//                             posicion.UpperLeftCorner.Y*escala_y,
-//                             posicion.LowerRightCorner.X*escala_x,
-//                             posicion.LowerRightCorner.Y*escala_y);
+    posicion.LowerRightCorner.X-=camera_x;
+    posicion.LowerRightCorner.Y+=camera_y;
+    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,
+                             posicion.UpperLeftCorner.Y*escala_y,
+                             posicion.LowerRightCorner.X*escala_x,
+                             posicion.LowerRightCorner.Y*escala_y);
     font->draw(texto,posicion,color);
 }
 
@@ -143,22 +158,34 @@ void Grafico::draw2DImage
 //    size.Width*=1.5;
 //    size.Height*=0.75;
    //inicio escala
-   float escala_x,escala_y;
-   if(scale.X!=0 && scale.Y!=0)
-   {
-//       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
-//       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
-       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
-       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
-   }else
-   {
-//       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
-//       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-   }
-
-   scale=irr::core::vector2df (escala_x,escala_y);
+//   float escala_x,escala_y;
+//   if(scale.X!=0 && scale.Y!=0)
+//   {
+////       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
+////       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
+//       //escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
+//       //escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
+//
+//       escala_x=(float)(driver->getScreenSize().Width/(float)ventana_x)*scale.X;
+//       escala_y=(float)(driver->getScreenSize().Height/(float)ventana_y)*scale.Y;
+//   }else
+//   {
+////       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
+////       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
+//       //escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+//       //escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+//
+//       escala_x=(float)driver->getScreenSize().Width/(float)ventana_x;
+//       escala_y=(float)driver->getScreenSize().Height/(float)ventana_y;
+//
+//       cout<<"paso"<<(float)driver->getScreenSize().Width<<endl;
+//   }
+//
+   if (scale.X==0)
+    scale.X=1;
+   if (scale.Y==0)
+    scale.Y=1;
+   //scale=irr::core::vector2df (0,0);
 
    //fin escala
    if(!texture)
@@ -298,14 +325,20 @@ void Grafico::draw2DImageCameraAlign
    {
 //       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
 //       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
-       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
-       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
+       //escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
+       //escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
+
+       escala_x=(float)(1)*scale.X;
+       escala_y=(float)(1)*scale.Y;
    }else
    {
 //       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
 //       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+       //escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+       //escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+
+       escala_x=(float)1;
+       escala_y=(float)1;
    }
 
    scale=irr::core::vector2df (escala_x,escala_y);
