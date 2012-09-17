@@ -701,6 +701,8 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
     this->grafico=grafico;
     this->char_name=stringw(nombre);
     this->char_name_ptr=nombre;
+    this->px_inicial=px;
+    this->py_inicial=py;
 
     setString("effect.shadow","off");
     setString("effect.violet","off");
@@ -1844,4 +1846,36 @@ void Personaje::dibujarAnimacionesFront()
             animaciones_actuales_front.erase(animaciones_actuales_front.begin()+i);
         }
     }
+}
+
+void Personaje::resetPersonaje()
+{
+    setEntero("hp.current_value",getEntero("hp.max_value"));
+    setEntero("position_x",px_inicial);
+    setEntero("position_y",py_inicial);
+
+    setString("effect.shadow","off");
+    setString("effect.violet","off");
+    setString("effect.red","off");
+    setString("effect.green","off");
+    setString("effect.blue","off");
+
+    setString("attacking","no");
+
+    setEntero("Colision.x",0);
+    setEntero("Colision.y",0);
+
+//    cargarMain();
+//
+//    cargarVars();
+//
+//    cargarInputs();
+//
+//    cargarTriggers();
+//
+//    cargarHitboxes();
+//
+//    cargarSfx();
+//
+//    cargarAnimations();
 }

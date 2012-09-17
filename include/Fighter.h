@@ -26,13 +26,22 @@ public:
     int pos_imagen_intro,duracion_intro,tiempo_actual_intro;
     bool game_over_a;
     bool game_over_b;
+    int victories_a;
+    int victories_b;
+    stringw move_cancel_pa;
+    stringw move_cancel_pb;
+
+    stringw hit_cancel_pa;
+    int hit_cancel_pa_damage;
+    stringw hit_cancel_pb;
+    int hit_cancel_pb_damage;
 
     //Engines
     Sonido* sonido;
     Grafico* grafico;
     Receiver* receiver;
 
-    Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage);
+    Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);

@@ -65,9 +65,60 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
     }
 
     sonido->pararSonido("Menu.music");
-    Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
-    char_select->clearLocks();
+
+    Fighter*fighter=NULL;
+
+    int pa_victories=0;
+    int pb_victories=0;
+
+    for(int current_round=0;;current_round++)
+    {
+        fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage,pa_victories,pb_victories);
+
+        if(fighter->game_over_a && fighter->game_over_b)
+        {
+            pa_victories++;
+            pb_victories++;
+        }
+        else if(fighter->game_over_a)
+            pb_victories++;
+        else if(fighter->game_over_b)
+            pa_victories++;
+        else//salir en el menu de pausa
+            break;
+
+        for(int i=0;i<num_personajes;i++)
+        {
+            Personaje* p1a=pa[i];
+            Personaje* p1b=pb[i];
+            p1a->resetPersonaje();
+            p1b->resetPersonaje();
+        }
+
+        //Finish game
+        if(pa_victories>=rounds && pb_victories>=rounds)
+        {
+            Menu *temp=new Menu(grafico,receiver,sonido,"menu/draw.xml");
+            temp->loopMenu();
+            break;
+        }
+        else if(pa_victories>=rounds)
+        {
+            Menu *temp=new Menu(grafico,receiver,sonido,"menu/pa_wins.xml");
+            temp->loopMenu();
+            break;
+        }
+        else if(pb_victories>=rounds)
+        {
+            Menu *temp=new Menu(grafico,receiver,sonido,"menu/pb_wins.xml");
+            temp->loopMenu();
+            break;
+        }
+    }
+
     delete fighter;
+
+    char_select->clearLocks();
     sonido->reproducirSonido(stringw("Menu.music"));
 }
 
@@ -474,7 +525,7 @@ void Menu::loopMenu()
                             stage->cargarDesdeXML((char*)path_s);
 
                             sonido->pararSonido("Menu.music");
-                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage);
+                            Fighter*fighter=new Fighter(sonido,grafico,receiver,pa,pb,stage,0,0);
                             delete fighter;
                             sonido->reproducirSonido(stringw("Menu.music"));
 

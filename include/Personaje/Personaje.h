@@ -27,6 +27,8 @@ class Personaje
     int px_colision,py_colision;
     int num_paleta;
     int proyectiles_activos;
+    int px_inicial;
+    int py_inicial;
 
     //efecto
     vector<Imagen>sombra;
@@ -124,6 +126,7 @@ class Personaje
     bool cumpleCondiciones(vector<vector<Condicion*> >);
     bool cumpleCondicion(Condicion* condicion);
     bool inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer);
+    void resetPersonaje();
     //Aplicar modificadores
     void aplicarModificador(ModificadorImagen* mi);
     void aplicarModificador(ModificadorEntero* me,bool flip);
