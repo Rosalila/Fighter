@@ -14,6 +14,10 @@ Grafico::Grafico(Receiver* receiver)
     int resolution_x=atoi(resolution_element->Attribute("x"));
     int resolution_y=atoi(resolution_element->Attribute("y"));
 
+    TiXmlElement *fullscreen_element=doc->FirstChild("Fullscreen")->ToElement();
+
+    bool fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
+
     camera_x=0;
     camera_y=0;
     ventana_x=1280;
@@ -23,7 +27,7 @@ Grafico::Grafico(Receiver* receiver)
     //driverType = video::EDT_SOFTWARE;
     //device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,true, false, false,receiver);
     //device = createDevice(driverType,core::dimension2d<u32>(driver->getCurrentRenderTargetSize().Width,driver->getCurrentRenderTargetSize().Height),true ,true, false, false,receiver);
-    device = createDevice(driverType,core::dimension2d<u32>(resolution_x,resolution_y),true ,true, false, false,receiver);
+    device = createDevice(driverType,core::dimension2d<u32>(resolution_x,resolution_y),true ,fullscreen, false, false,receiver);
 
     smgr = device->getSceneManager();
     //camera=smgr->addCameraSceneNode(0,vector3df(50,0,5),vector3df(50,0,0));
