@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="include/Fighter.h" open="1" top="0" tabpos="3">
+	<File name="include/Fighter.h" open="0" top="0" tabpos="3">
 		<Cursor position="778" topLine="23" />
 	</File>
 	<File name="include/Grafico/Grafico.h" open="0" top="0" tabpos="6">
@@ -25,14 +25,14 @@
 	<File name="include/Input/Input.h" open="0" top="0" tabpos="4">
 		<Cursor position="181" topLine="0" />
 	</File>
-	<File name="include/Input/Receiver.h" open="0" top="0" tabpos="0">
-		<Cursor position="1141" topLine="0" />
+	<File name="include/Input/Receiver.h" open="1" top="0" tabpos="2">
+		<Cursor position="1244" topLine="31" />
 	</File>
 	<File name="include/Menu/Elemento.h" open="0" top="0" tabpos="0">
 		<Cursor position="96" topLine="6" />
 	</File>
-	<File name="include/Menu/Menu.h" open="1" top="0" tabpos="4">
-		<Cursor position="680" topLine="27" />
+	<File name="include/Menu/Menu.h" open="0" top="0" tabpos="4">
+		<Cursor position="40" topLine="0" />
 	</File>
 	<File name="include/Menu/MenuBarra.h" open="0" top="0" tabpos="0">
 		<Cursor position="327" topLine="11" />
@@ -97,7 +97,7 @@
 	<File name="include/Sonido/Reproduccion.h" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
 	</File>
-	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="0">
+	<File name="include/Sonido/Sonido.h" open="0" top="0" tabpos="5">
 		<Cursor position="465" topLine="0" />
 	</File>
 	<File name="include/Stage/Stage.h" open="0" top="0" tabpos="3">
@@ -106,11 +106,11 @@
 	<File name="main.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="233" topLine="5" />
 	</File>
-	<File name="src/Fighter.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="16998" topLine="474" />
+	<File name="src/Fighter.cpp" open="1" top="1" tabpos="5">
+		<Cursor position="28423" topLine="807" />
 	</File>
-	<File name="src/Grafico/Grafico.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="465" topLine="75" />
+	<File name="src/Grafico/Grafico.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="2554" topLine="69" />
 	</File>
 	<File name="src/IA/Automata.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="3142" topLine="2" />
@@ -130,14 +130,14 @@
 	<File name="src/Input/Input.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="2421" topLine="150" />
 	</File>
-	<File name="src/Input/Receiver.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="3425" topLine="127" />
+	<File name="src/Input/Receiver.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="230" topLine="3" />
 	</File>
 	<File name="src/Menu/Elemento.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="249" topLine="0" />
 	</File>
-	<File name="src/Menu/Menu.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="2646" topLine="180" />
+	<File name="src/Menu/Menu.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="25783" topLine="658" />
 	</File>
 	<File name="src/Menu/MenuBarra.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="5001" topLine="18" />

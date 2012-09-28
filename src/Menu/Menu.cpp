@@ -669,6 +669,8 @@ void Menu::dibujarMenu()
 {
     if (grafico->isWindowActive())
     {
+        if(!grafico->device->run())
+            exit(0);
         grafico->beginScene();
         for(int i=0;i<(int)elementos.size();i++)
             elementos[i]->dibujar();

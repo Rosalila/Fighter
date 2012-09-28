@@ -818,6 +818,9 @@ bool Fighter::render()
 {
     if (grafico->isWindowActive())
     {
+        if(!grafico->device->run())
+            exit(0);
+
         grafico->beginScene();
         //Stage
         stage->dibujarBack(pos_stage);

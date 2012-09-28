@@ -22,6 +22,16 @@ bool Receiver::OnEvent(const SEvent& event)
       //////////////////////////////
       // Keyboard Input Event
       //////////////////////////////
+
+//if(event.EventType == EET_MOUSE_INPUT_EVENT)
+//{
+//    //if (id == 107)
+//    //{
+//        exit(0);
+//    //}
+//}
+
+
       if (event.EventType == EET_KEY_INPUT_EVENT)
       {
          if (processState == STARTED)
