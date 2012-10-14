@@ -43,6 +43,8 @@ Menu::Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo)
 
 void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
 {
+    if(inteligencia_artificial)
+        char_select->lockPB(0);
     printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
     char *path_s=new char[255];
     strcpy(path_s,"");
@@ -162,12 +164,14 @@ void Menu::loopMenu()
             {
             }else if(inputa->getBufferInputs()[0]=="6")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p1_x++;
                 if(char_select->select_p1_x>=char_select->size_x)
                     char_select->select_p1_x=0;
                 tecla_arriba_p1=false;
             }else if(inputa->getBufferInputs()[0]=="4")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p1_x--;
                 if(char_select->select_p1_x<0)
                     char_select->select_p1_x=char_select->size_x-1;
@@ -175,6 +179,7 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="2")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p1_y++;
                 if(char_select->select_p1_y>=char_select->size_y)
                     char_select->select_p1_y=0;
@@ -182,6 +187,7 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="8")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p1_y--;
                 if(char_select->select_p1_y<0)
                     char_select->select_p1_y=char_select->size_y-1;
@@ -189,41 +195,49 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="a")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(0);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="b")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(1);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="c")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(2);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="d")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(3);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="e")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(4);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="f")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(5);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="g")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(6);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="h")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPA(7);
                 tecla_arriba_p1=false;
             }
@@ -245,12 +259,14 @@ void Menu::loopMenu()
             {
             }else if(inputb->getBufferInputs()[0]=="6")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p2_x++;
                 if(char_select->select_p2_x>=char_select->size_x)
                     char_select->select_p2_x=0;
                 tecla_arriba_p2=false;
             }else if(inputb->getBufferInputs()[0]=="4")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p2_x--;
                 if(char_select->select_p2_x<0)
                     char_select->select_p2_x=char_select->size_x-1;
@@ -258,6 +274,7 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="2")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p2_y++;
                 if(char_select->select_p2_y>=char_select->size_y)
                     char_select->select_p2_y=0;
@@ -265,6 +282,7 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="8")
             {
+                sonido->reproducirSonido(stringw("Menu.move_char"));
                 char_select->select_p2_y--;
                 if(char_select->select_p2_y<0)
                     char_select->select_p2_y=char_select->size_y-1;
@@ -272,41 +290,49 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="a")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(0);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="b")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(1);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="c")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(2);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="d")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(3);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="e")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(4);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="f")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(5);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="g")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(6);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="h")
             {
+                sonido->reproducirSonido(stringw("Menu.select_char"));
                 char_select->lockPB(7);
                 tecla_arriba_p2=false;
             }
@@ -324,19 +350,23 @@ void Menu::loopMenu()
             tecla_arriba=false;
             if(receiver->IsKeyDownn(irr::KEY_ESCAPE))
             {
+                sonido->reproducirSonido(stringw("Menu.back"));
                 exit_signal=true;
                 break;
             }
             else if(receiver->IsKeyDownn(irr::KEY_DOWN))
             {
+                sonido->reproducirSonido(stringw("Menu.move"));
                 ((MenuContenedor*)contenedor_actual)->avanzar();
             }
             else if(receiver->IsKeyDownn(irr::KEY_UP))
             {
+                sonido->reproducirSonido(stringw("Menu.move"));
                 ((MenuContenedor*)contenedor_actual)->retroceder();
             }
             else if(receiver->IsKeyDownn(irr::KEY_RIGHT))
             {
+                sonido->reproducirSonido(stringw("Menu.move"));
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
                     MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
@@ -374,6 +404,7 @@ void Menu::loopMenu()
             }
             else if(receiver->IsKeyDownn(irr::KEY_LEFT))
             {
+                sonido->reproducirSonido(stringw("Menu.move"));
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
                     MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
@@ -410,6 +441,7 @@ void Menu::loopMenu()
                 }
             }else if(receiver->IsKeyPressed(irr::KEY_RETURN))
             {
+                sonido->reproducirSonido(stringw("Menu.select"));
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
                     MenuLista*ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
@@ -423,13 +455,13 @@ void Menu::loopMenu()
                         if(char_select->listo())
                             iniciarJuego(3,false);
                     if(ml->getAccion()==4)
-                        if(char_select->listo())
+                        if(char_select->listoPA())
                             iniciarJuego(1,true);
                     if(ml->getAccion()==5)
-                        if(char_select->listo())
+                        if(char_select->listoPA())
                             iniciarJuego(2,true);
                     if(ml->getAccion()==6)
-                        if(char_select->listo())
+                        if(char_select->listoPA())
                             iniciarJuego(3,true);
                 }
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==4)
@@ -704,7 +736,12 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    sonido->agregarSonido("Menu.music","menu/music.ogg");
+    sonido->agregarSonido("Menu.music","menu/audio/music.ogg");
+    sonido->agregarSonido("Menu.select","menu/audio/select.ogg");
+    sonido->agregarSonido("Menu.select_char","menu/audio/select_char.ogg");
+    sonido->agregarSonido("Menu.move","menu/audio/move.ogg");
+    sonido->agregarSonido("Menu.move_char","menu/audio/move_char.ogg");
+    sonido->agregarSonido("Menu.back","menu/audio/back.ogg");
 
     for(TiXmlNode* elemento=doc->FirstChild();
             elemento!=NULL;
@@ -722,7 +759,9 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                                           atoi(e->Attribute("chars_player1")),atoi(e->Attribute("chars_player2")),
                                                           atoi(e->Attribute("preview_player1_x")),atoi(e->Attribute("preview_player1_y")),
                                                           atoi(e->Attribute("preview_player2_x")),atoi(e->Attribute("preview_player2_y")),
-                                                          chars
+                                                          chars,
+                                                          atoi(e->Attribute("player1_cursor_x")),atoi(e->Attribute("player1_cursor_y")),
+                                                          atoi(e->Attribute("player2_cursor_x")),atoi(e->Attribute("player2_cursor_y"))
                                                           );
             elementos.push_back((Elemento*)char_select);
         }else if(strcmp(e->Value(),"Image")==0)

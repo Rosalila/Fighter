@@ -50,7 +50,9 @@ public:
                    int max_locked_chars_pa,int max_locked_chars_pb,
                    int preview_pa_x,int preview_pa_y,
                    int preview_pb_x,int preview_pb_y,
-                   vector<stringw>names);
+                   vector<stringw>names,
+                   int select_p1_x,int select_p1_y,
+                   int select_p2_x,int select_p2_y);
     void lockPA(int num_paleta);
     void lockPB(int num_paleta);
     vector<stringw> getLockedNamesPA();

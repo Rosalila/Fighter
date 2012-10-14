@@ -1,0 +1,36 @@
+<PalettesFile>
+	<Palette>
+		<ColorChange><!--White Shirt-->
+			<MaxColor alpha="255" red="255" green="255" blue="255"/>
+			<MinColor alpha="0" red="237" green="237" blue="255"/>
+			<Change alpha="0" red="-200" green="-70" blue="-200"/>
+		</ColorChange>
+		<ColorChange><!--White Skirte (blue shadow)-->
+			<MaxColor alpha="255" red="198" green="198" blue="247"/>
+			<MinColor alpha="0" red="149" green="149" blue="214"/>
+			<Change alpha="0" red="-200" green="-70" blue="-200"/>
+		</ColorChange>
+		<ColorChange><!--Green Skirt-->
+			<MaxColor alpha="255" red="168" green="201" blue="154"/>
+			<MinColor alpha="0" red="55" green="82" blue="46"/>
+			<Change alpha="0" red="70" green="20" blue="-50"/>
+		</ColorChange>
+	</Palette>
+	<Palette>
+		<ColorChange><!--Green Skirt-->
+			<MaxColor alpha="255" red="168" green="201" blue="154"/>
+			<MinColor alpha="0" red="55" green="82" blue="46"/>
+			<Change alpha="0" red="70" green="-80" blue="90"/>
+		</ColorChange>
+		<ColorChange><!--White Shirt-->
+			<MaxColor alpha="255" red="255" green="255" blue="255"/>
+			<MinColor alpha="0" red="237" green="237" blue="255"/>
+			<Change alpha="0" red="0" green="-70" blue="-200"/>
+		</ColorChange>
+		<ColorChange><!--White Skirte (blue shadow)-->
+			<MaxColor alpha="255" red="198" green="198" blue="247"/>
+			<MinColor alpha="0" red="149" green="149" blue="214"/>
+			<Change alpha="0" red="0" green="-70" blue="-200"/>
+		</ColorChange>
+	</Palette>
+</PalettesFile>

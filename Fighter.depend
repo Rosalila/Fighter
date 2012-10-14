@@ -353,7 +353,7 @@
 	"include/Fighter.h"
 	<iostream>
 
-1348532672 /home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
+1350005554 /home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
 	"TinyXml/tinyxml.h"
 	"Menu/Menu.h"
 	<stdio.h>
@@ -383,7 +383,7 @@
 	"Sonido/Sonido.h"
 	"Fighter.h"
 
-1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
+1350006065 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Grafico/Grafico.cpp
@@ -414,7 +414,7 @@
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1348707591 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
+1350250353 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
@@ -423,7 +423,7 @@
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
+1350250065 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
 
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
@@ -485,7 +485,7 @@
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
 	"Personaje/Paleta.h"
 
-1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
+1349595836 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1348532673 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp

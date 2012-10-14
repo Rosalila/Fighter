@@ -35,6 +35,8 @@ public:
     int hit_cancel_pa_damage;
     stringw hit_cancel_pb;
     int hit_cancel_pb_damage;
+    int victory_image_x;
+    int victory_image_y;
 
     //Engines
     Sonido* sonido;

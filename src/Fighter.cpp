@@ -3,19 +3,43 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
 {
     this->victories_a=victories_a;
     this->victories_b=victories_b;
-    duracion_ko=30;
-    tiempo_actual_ko=0;
-    pos_imagen_ko=0;
-    ko.push_back(Imagen(grafico->getTexture("misc/ko/1.png"),1,0,0));
-    ko.push_back(Imagen(grafico->getTexture("misc/ko/2.png"),1,0,0));
-    ko.push_back(Imagen(grafico->getTexture("misc/ko/3.png"),1,0,0));
 
-    duracion_intro=30;
+    //inicio intro y ko
+
+    TiXmlDocument doc_t((char*)"config.xml");
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+
+    TiXmlElement* elem_victory=doc->FirstChild("VictoryIcon")->ToElement();
+    victory_image_x=atoi(elem_victory->Attribute("x"));
+    victory_image_y=atoi(elem_victory->Attribute("y"));
+
+    TiXmlElement* elem_intro=doc->FirstChild("IntroAnimation")->ToElement();
+    int intro_frames=atoi(elem_intro->Attribute("frames"));
+    duracion_intro=atoi(elem_intro->Attribute("duration"));
+
+    TiXmlElement* elem_ko=doc->FirstChild("KOAnimation")->ToElement();
+    int ko_frames=atoi(elem_ko->Attribute("frames"));
+    duracion_ko=atoi(elem_ko->Attribute("duration"));
+
+
     tiempo_actual_intro=0;
     pos_imagen_intro=0;
-    match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/1.png"),1,0,0));
-    match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/2.png"),1,0,0));
-    match_intro.push_back(Imagen(grafico->getTexture("misc/match_intro/3.png"),1,0,0));
+    for(int i=0;i<intro_frames;i++)
+    {
+        match_intro.push_back(Imagen(grafico->getTexture(stringw("misc/match_intro/")+stringw(i+1)+stringw(".png")),1,0,0));
+    }
+
+    tiempo_actual_ko=0;
+    pos_imagen_ko=0;
+    for(int i=0;i<ko_frames;i++)
+    {
+        ko.push_back(Imagen(grafico->getTexture(stringw("misc/ko/")+stringw(i+1)+stringw(".png")),1,0,0));
+    }
+
+    //fin intro y ko
 
     for(int i=0; i<(int)pa.size(); i++)
         pa[i]->stage_piso=stage->pos_piso;
@@ -778,14 +802,12 @@ void Fighter::dibujarBarra()
     for(int i=0;i<victories_a;i++)
     {
         irr::video::ITexture* texture_victory=grafico->getTexture("misc/victory.png");
-        int offset_x=100;
-        int offset_y=175;
         int separation_x=texture_victory->getOriginalSize().Width;
         grafico->draw2DImage
         (   texture_victory,
             irr::core::dimension2d<irr::f32> (texture_victory->getOriginalSize ().Width,texture_victory->getOriginalSize ().Height),
             irr::core::rect<irr::f32>(0,0,texture_victory->getOriginalSize().Width,texture_victory->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_victory->getOriginalSize().Width/2-offset_x-i*separation_x,offset_y),
+            irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_victory->getOriginalSize().Width/2-victory_image_x-i*separation_x,victory_image_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,
@@ -797,14 +819,12 @@ void Fighter::dibujarBarra()
     for(int i=0;i<victories_b;i++)
     {
         irr::video::ITexture* texture_victory=grafico->getTexture("misc/victory.png");
-        int offset_x=100;
-        int offset_y=175;
         int separation_x=texture_victory->getOriginalSize().Width;
         grafico->draw2DImage
         (   texture_victory,
             irr::core::dimension2d<irr::f32> (texture_victory->getOriginalSize ().Width,texture_victory->getOriginalSize ().Height),
             irr::core::rect<irr::f32>(0,0,texture_victory->getOriginalSize().Width,texture_victory->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_victory->getOriginalSize().Width/2+offset_x+i*separation_x,offset_y),
+            irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_victory->getOriginalSize().Width/2+victory_image_x+i*separation_x,victory_image_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,
@@ -929,28 +949,31 @@ bool Fighter::render()
 
         if(game_over_a || game_over_b)
         {
-            irr::video::ITexture* texture_gameover=ko[pos_imagen_ko].imagen;
-            tiempo_actual_ko++;
-            if(tiempo_actual_ko==duracion_ko)
+            if(ko.size()>0)
             {
-                pos_imagen_ko++;
-                tiempo_actual_ko=0;
+                irr::video::ITexture* texture_gameover=ko[pos_imagen_ko].imagen;
+                tiempo_actual_ko++;
+                if(tiempo_actual_ko==duracion_ko)
+                {
+                    pos_imagen_ko++;
+                    tiempo_actual_ko=0;
+                }
+                if(pos_imagen_ko>=(int)ko.size())
+                    pos_imagen_ko=0;
+                int width=texture_gameover->getOriginalSize().Width;
+                int height=texture_gameover->getOriginalSize().Height;
+                grafico->draw2DImage
+                (   texture_gameover,
+                    irr::core::dimension2d<irr::f32> (width,height),
+                    irr::core::rect<irr::f32>(0,0,width,height),
+                    irr::core::position2d<irr::f32>((grafico->ventana_x-width)/2,(grafico->ventana_y-height)/2),
+                    irr::core::position2d<irr::f32>(0,0),
+                    irr::f32(0), irr::core::vector2df (0,0),
+                    true,
+                    irr::video::SColor(255,255,255,255),
+                    false,
+                    false);
             }
-            if(pos_imagen_ko>=(int)ko.size())
-                pos_imagen_ko=0;
-            int width=texture_gameover->getOriginalSize().Width;
-            int height=texture_gameover->getOriginalSize().Height;
-            grafico->draw2DImage
-            (   texture_gameover,
-                irr::core::dimension2d<irr::f32> (width,height),
-                irr::core::rect<irr::f32>(0,0,width,height),
-                irr::core::position2d<irr::f32>((grafico->ventana_x-width)/2,(grafico->ventana_y-height)/2),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::f32(0), irr::core::vector2df (0,0),
-                true,
-                irr::video::SColor(255,255,255,255),
-                false,
-                false);
         }
 
 

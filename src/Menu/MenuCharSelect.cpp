@@ -7,7 +7,9 @@ MenuCharSelect::MenuCharSelect(Grafico*grafico,int x, int y, int width, int heig
                    int max_locked_chars_pa,int max_locked_chars_pb,
                    int preview_pa_x,int preview_pa_y,
                    int preview_pb_x,int preview_pb_y,
-                   vector<stringw>names)
+                   vector<stringw>names,
+                   int select_p1_x,int select_p1_y,
+                   int select_p2_x,int select_p2_y)
 {
     this->x=x;
     this->y=y;
@@ -39,9 +41,10 @@ MenuCharSelect::MenuCharSelect(Grafico*grafico,int x, int y, int width, int heig
     }
     this->names=names;
 
-    select_p1_x=select_p1_y=0;
-    select_p2_y=0;
-    select_p2_x=size_x-1;
+    this->select_p1_x=select_p1_x;
+    this->select_p1_y=select_p1_y;
+    this->select_p2_x=select_p2_x;
+    this->select_p2_y=select_p2_y;
 
     selected_char_p1=grafico->getTexture("menu/selected_char_p1.png");
     selected_char_p2=grafico->getTexture("menu/selected_char_p2.png");
@@ -54,6 +57,12 @@ void MenuCharSelect::lockPA(int num_paleta)
 {
     //get name
     int name_pos=select_p1_x+select_p1_y*size_x;
+
+    if(name_pos>=(int)names.size())//random
+    {
+        //reget name
+        name_pos=rand()%5;
+    }
     //si existe
     if(name_pos>=names.size())
         return;
@@ -68,14 +77,21 @@ void MenuCharSelect::lockPA(int num_paleta)
 
     //inicio lock
     if((int)locks_pa.size()<max_locked_chars_pa)
-        if(name_pos<(int)names.size())
-            locks_pa.push_back(LockedChar(select_p1_x,select_p1_y,name,num_paleta,preview));
+    {
+        locks_pa.push_back(LockedChar(select_p1_x,select_p1_y,name,num_paleta,preview));
+    }
 }
 
 void MenuCharSelect::lockPB(int num_paleta)
 {
     //get name
     int name_pos=select_p2_x+select_p2_y*size_x;
+
+    if(name_pos>=(int)names.size())//random
+    {
+        //reget name
+        name_pos=rand()%5;
+    }
     //si existe
     if(name_pos>=names.size())
         return;
@@ -89,8 +105,9 @@ void MenuCharSelect::lockPB(int num_paleta)
         num_paleta=0;
 
     if((int)locks_pb.size()<max_locked_chars_pb)
-        if(name_pos<(int)names.size())
-            locks_pb.push_back(LockedChar(select_p2_x,select_p2_y,name,num_paleta,preview));
+    {
+        locks_pb.push_back(LockedChar(select_p2_x,select_p2_y,name,num_paleta,preview));
+    }
 }
 
 vector<stringw> MenuCharSelect::getLockedNamesPA()
