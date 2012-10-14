@@ -1,6 +1,12 @@
-Rosalila Fighter
-================
-PORHACER:
+Rosalila Fighing Enigne
 
--Portear a Android
--Portear a winnie
+Use codeblocks to complie
+=========================
+*Add in Settings>Compiler and debugger settings>Linker settings>link libraries
+X11
+GL
+lib/libIrrlicht.a
+lib/libIrrKlang.so
+
+*Add in Settings>Compiler and debugger settings>Search directories>Complier
+include
