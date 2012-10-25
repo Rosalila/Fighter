@@ -7,7 +7,7 @@ using namespace irr;
 #include "Input/Input.h"
 
 
-class Grafico
+class Painter
 {
     gui::IGUIFont* font;
     public:
@@ -17,7 +17,7 @@ class Grafico
     IrrlichtDevice *device;
     scene::ISceneManager* smgr;
     ICameraSceneNode* camera;
-    Grafico(Receiver* receiver);
+    Painter(Receiver* receiver);
     bool isWindowActive();
     void beginScene();
     void endScene();

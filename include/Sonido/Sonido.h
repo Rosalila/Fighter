@@ -18,7 +18,7 @@ public:
     Sonido();
     void drop();
     void agregarSonido(stringw variable,const ik_c8* valor);
-    void reproducirSonido(stringw variable);
+    void reproducirSonido(stringw variable,bool looped);
     void pararSonido(stringw variable);
     void setVolumen(stringw variable,float volumen);
 };

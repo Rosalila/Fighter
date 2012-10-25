@@ -1,7 +1,7 @@
 #ifndef STAGE_H
 #define STAGE_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 #include "Sonido/Sonido.h"
 
 class Layer
@@ -22,7 +22,7 @@ class Stage
     public:
     Layer* background;
     vector<Layer> back,front;
-    Grafico* grafico;
+    Painter* painter;
     Sonido* sonido;
     int size;
     int pos_piso;
@@ -33,11 +33,12 @@ class Stage
     int borde_efecto;
     int pos_dibujando_back;
     int tiempo_transcurrido_back;
-    Stage(Grafico* grafico,Sonido* sonido);
+    Stage(Painter* painter,Sonido* sonido);
     void dibujarBackground();
     void dibujarBack(int pos);
     void dibujarFront(int pos);
     void cargarDesdeXML(char* archivo);
+    ~Stage();
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include "Personaje/HitBox.h"
 #include "Personaje/Imagen.h"
 #include "Personaje/Barra.h"
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 
 class Modificador
 {

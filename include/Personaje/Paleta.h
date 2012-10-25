@@ -1,7 +1,7 @@
 #ifndef PALETA_H
 #define PALETA_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 using namespace irr;
 using namespace video;
 

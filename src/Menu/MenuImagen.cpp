@@ -1,6 +1,6 @@
 #include "Menu/MenuImagen.h"
 
-MenuImagen::MenuImagen(Grafico*grafico,int x, int y, int width, int height,bool visible,irr::video::ITexture* imagen,stringw value)
+MenuImagen::MenuImagen(Painter*painter,int x, int y, int width, int height,bool visible,irr::video::ITexture* imagen,stringw value)
 {
     this->x=x;
     this->y=y;
@@ -8,7 +8,7 @@ MenuImagen::MenuImagen(Grafico*grafico,int x, int y, int width, int height,bool 
     this->width=width;
     this->visible=visible;
     this->imagen=imagen;
-    this->grafico=grafico;
+    this->painter=painter;
     this->value=value;
 }
 
@@ -19,7 +19,7 @@ int MenuImagen::getTipo()
 
 void MenuImagen::dibujar()
 {
-    grafico->draw2DImage
+    painter->draw2DImage
     (   imagen,
         irr::core::dimension2d<irr::f32> (width,height),
         irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -34,7 +34,7 @@ void MenuImagen::dibujar()
 
 void MenuImagen::dibujar(int alineacion_x,int alineacion_y)
 {
-    grafico->draw2DImage
+    painter->draw2DImage
     (   imagen,
         irr::core::dimension2d<irr::f32> (width,height),
         irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),

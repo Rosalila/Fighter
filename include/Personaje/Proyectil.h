@@ -1,7 +1,7 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 #include "Personaje/Imagen.h"
 #include "Personaje/Frame.h"
 

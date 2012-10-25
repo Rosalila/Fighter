@@ -1,6 +1,6 @@
 #include "Menu/MenuBoton.h"
 
-MenuBoton::MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool visible,
+MenuBoton::MenuBoton(Painter*painter,int x, int y, int width, int height,bool visible,
           irr::video::ITexture* imagen,int alineacion_texto_x,int alineacion_texto_y, stringw texto,video::SColor color,
           irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel,
           int accion,char* load_menu
@@ -24,7 +24,7 @@ MenuBoton::MenuBoton(Grafico*grafico,int x, int y, int width, int height,bool vi
     this->seleccionado=false;
     this->accion=accion;
     this->load_menu=load_menu;
-    this->grafico=grafico;
+    this->painter=painter;
     this->input_config="not set";
 }
 
@@ -42,7 +42,7 @@ void MenuBoton::dibujar()
 {
     if(!seleccionado)
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   imagen,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -59,10 +59,10 @@ void MenuBoton::dibujar()
         {
             temp+=input_config;
         }
-        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x,y+alineacion_texto_y,x+width,y+height),color);
+        painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x,y+alineacion_texto_y,x+width,y+height),color);
     }else
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   imagen_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,imagen_sel->getOriginalSize().Width,imagen_sel->getOriginalSize().Height),
@@ -79,7 +79,7 @@ void MenuBoton::dibujar()
         {
             temp+=input_config;
         }
-        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel,y+alineacion_texto_y_sel,x+width,y+height),color_sel);
+        painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel,y+alineacion_texto_y_sel,x+width,y+height),color_sel);
     }
 }
 
@@ -87,7 +87,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
 {
     if(!seleccionado)
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   imagen,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -104,10 +104,10 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
         {
             temp+=input_config;
         }
-        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y+alineacion_y,x+width,y+height),color);
+        painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y+alineacion_y,x+width,y+height),color);
     }else
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   imagen_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,imagen_sel->getOriginalSize().Width,imagen_sel->getOriginalSize().Height),
@@ -124,7 +124,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
         {
             temp+=input_config;
         }
-        grafico->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel+alineacion_x,y+alineacion_texto_y_sel+alineacion_y,x+width,y+height),color_sel);
+        painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel+alineacion_x,y+alineacion_texto_y_sel+alineacion_y,x+width,y+height),color_sel);
     }
 }
 

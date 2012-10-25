@@ -1,6 +1,6 @@
 #include "Menu/MenuLista.h"
 
-MenuLista::MenuLista(Grafico*grafico,int x, int y, int width, int height,bool visible,
+MenuLista::MenuLista(Painter*painter,int x, int y, int width, int height,bool visible,
           int flecha_izq_x,int flecha_izq_y,irr::video::ITexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,irr::video::ITexture*flecha_derecha,
           int flecha_izq_x_sel,int flecha_izq_y_sel,irr::video::ITexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,irr::video::ITexture*flecha_derecha_sel,
           vector<Elemento*>elementos,int accion
@@ -30,7 +30,7 @@ MenuLista::MenuLista(Grafico*grafico,int x, int y, int width, int height,bool vi
     actual=0;
     this->accion=accion;
     seleccionado=false;
-    this->grafico=grafico;
+    this->painter=painter;
 }
 
 int MenuLista::getTipo()
@@ -62,7 +62,7 @@ void MenuLista::dibujar()
     {
         if(actual>=0 && actual<(int)elementos.size())
             elementos[actual]->dibujar(x,y);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_izquierda,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_izquierda->getOriginalSize().Width,flecha_izquierda->getOriginalSize().Height),
@@ -73,7 +73,7 @@ void MenuLista::dibujar()
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_derecha,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_derecha->getOriginalSize().Width,flecha_derecha->getOriginalSize().Height),
@@ -88,7 +88,7 @@ void MenuLista::dibujar()
     {
         if(actual>=0 && actual<(int)elementos.size())
             elementos[actual]->dibujar(x,y);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_izquierda_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_izquierda_sel->getOriginalSize().Width,flecha_izquierda_sel->getOriginalSize().Height),
@@ -99,7 +99,7 @@ void MenuLista::dibujar()
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_derecha_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_derecha_sel->getOriginalSize().Width,flecha_derecha_sel->getOriginalSize().Height),
@@ -119,7 +119,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
     {
         if(actual>=0 && actual<(int)elementos.size())
             elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_izquierda,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_izquierda->getOriginalSize().Width,flecha_izquierda->getOriginalSize().Height),
@@ -130,7 +130,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_derecha,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_derecha->getOriginalSize().Width,flecha_derecha->getOriginalSize().Height),
@@ -145,7 +145,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
     {
         if(actual>=0 && actual<(int)elementos.size())
             elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_izquierda_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_izquierda_sel->getOriginalSize().Width,flecha_izquierda_sel->getOriginalSize().Height),
@@ -156,7 +156,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   flecha_derecha_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,flecha_derecha_sel->getOriginalSize().Width,flecha_derecha_sel->getOriginalSize().Height),

@@ -2,7 +2,7 @@
 #define MENUTEST_H
 
 #include "Stage/Stage.h"
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 #include "irrKlang/irrKlang.h"
 #include "Personaje/Personaje.h"
 #include "Menu/MenuContenedor.h"
@@ -16,7 +16,7 @@ class Menu
 private:
     //Engines
     Sonido* sonido;
-    Grafico* grafico;
+    Painter* painter;
     Receiver* receiver;
     vector<Elemento*> elementos;
     MenuContenedor*contenedor_actual;
@@ -38,7 +38,7 @@ public:
     vector<Personaje*>pb;
     Stage* stage;
     Menu(){}
-    Menu(Grafico* grafico,Receiver* receiver,Sonido* sonido,char* archivo);
+    Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo);
     void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
     void cargarConfig();
     void loopMenu();

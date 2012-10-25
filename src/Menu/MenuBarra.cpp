@@ -1,6 +1,6 @@
 #include "Menu/MenuBarra.h"
 
-MenuBarra::MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool visible,
+MenuBarra::MenuBarra(Painter*painter,int x, int y, int width, int height,bool visible,
           irr::video::ITexture*fondo,int barra_x,int barra_y,irr::video::ITexture*barra,
           irr::video::ITexture*fondo_sel,int barra_x_sel,int barra_y_sel,irr::video::ITexture*barra_sel,
           int maximo,int actual,int accion)
@@ -25,7 +25,7 @@ MenuBarra::MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool vi
     this->actual=actual;
     this->accion=accion;
     this->seleccionado=false;
-    this->grafico=grafico;
+    this->painter=painter;
 }
 
 int MenuBarra::getTipo()
@@ -49,7 +49,7 @@ void MenuBarra::dibujar()
 {
     if(!seleccionado)
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   fondo,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,fondo->getOriginalSize().Width,fondo->getOriginalSize().Height),
@@ -60,7 +60,7 @@ void MenuBarra::dibujar()
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   barra,
             irr::core::dimension2d<irr::f32> (width*(actual/maximo),height),
             irr::core::rect<irr::f32>(0,0,barra->getOriginalSize().Width,barra->getOriginalSize().Height),
@@ -73,7 +73,7 @@ void MenuBarra::dibujar()
             false);
     }else
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   fondo_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,fondo_sel->getOriginalSize().Width,fondo_sel->getOriginalSize().Height),
@@ -84,7 +84,7 @@ void MenuBarra::dibujar()
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   barra_sel,
             irr::core::dimension2d<irr::f32> (width*(actual/maximo),height),
             irr::core::rect<irr::f32>(0,0,barra_sel->getOriginalSize().Width,barra_sel->getOriginalSize().Height),
@@ -102,7 +102,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
 {
     if(!seleccionado)
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   fondo,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,fondo->getOriginalSize().Width,fondo->getOriginalSize().Height),
@@ -113,7 +113,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   barra,
             irr::core::dimension2d<irr::f32> (width*((float)actual/(float)maximo),height),
             irr::core::rect<irr::f32>(0,0,barra->getOriginalSize().Width*((float)actual/(float)maximo),barra->getOriginalSize().Height),
@@ -126,7 +126,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             false);
     }else
     {
-        grafico->draw2DImage
+        painter->draw2DImage
         (   fondo_sel,
             irr::core::dimension2d<irr::f32> (width,height),
             irr::core::rect<irr::f32>(0,0,fondo_sel->getOriginalSize().Width,fondo_sel->getOriginalSize().Height),
@@ -137,7 +137,7 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             irr::video::SColor(255,255,255,255),
             false,
             false);
-        grafico->draw2DImage
+        painter->draw2DImage
         (   barra_sel,
             irr::core::dimension2d<irr::f32> (width*((float)actual/(float)maximo),height),
             irr::core::rect<irr::f32>(0,0,barra_sel->getOriginalSize().Width*((float)actual/(float)maximo),barra_sel->getOriginalSize().Height),

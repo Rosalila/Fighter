@@ -43,7 +43,7 @@ public:
     int select_p1_x,select_p1_y;
     int select_p2_x,select_p2_y;
     int size_x,size_y;
-    MenuCharSelect(Grafico*grafico,int x, int y, int width, int height,
+    MenuCharSelect(Painter*painter,int x, int y, int width, int height,
                    int size_x,int size_y,
                    int size_cuadro_x,int size_cuadro_y,
                    int separacion_x,int  separacion_y,

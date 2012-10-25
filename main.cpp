@@ -18,11 +18,11 @@ int main()
     Input*inputb=new Input();
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
-    Grafico*grafico=new Grafico(receiver);
+    Painter*painter=new Painter(receiver);
     Sonido*sonido = new Sonido();
 
-    Menu* menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
-    sonido->reproducirSonido(stringw("Menu.music"));
+    Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.xml");
+    sonido->reproducirSonido(stringw("Menu.music"),true);
     menu->loopMenu();
     //Fighter *fighter=new Fighter();
     //fighter->mainLoop();

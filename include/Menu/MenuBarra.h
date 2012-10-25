@@ -17,7 +17,7 @@ private:
 public:
     int actual;
     int maximo;
-    MenuBarra(Grafico*grafico,int x, int y, int width, int height,bool visible,
+    MenuBarra(Painter*painter,int x, int y, int width, int height,bool visible,
               irr::video::ITexture*fondo,int barra_x,int barra_y,irr::video::ITexture*barra,
               irr::video::ITexture*fondo_sel,int barra_x_sel,int barra_y_sel,irr::video::ITexture*barra_sel,
               int maximo,int actual,int accion);

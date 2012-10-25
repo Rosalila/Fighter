@@ -1,8 +1,8 @@
 #include "Stage/Stage.h"
 
-Stage::Stage(Grafico* grafico,Sonido* sonido)
+Stage::Stage(Painter* painter,Sonido* sonido)
 {
-    this->grafico=grafico;
+    this->painter=painter;
     this->sonido=sonido;
 
     //efecto
@@ -18,7 +18,7 @@ void Stage::dibujarBackground()
 {
     int dimension_x=background->imagen->getOriginalSize().Width;
     int dimension_y=background->imagen->getOriginalSize().Height;
-    grafico->draw2DImage
+    painter->draw2DImage
     (   background->imagen,
         irr::core::dimension2d<irr::f32> (background->size_x,background->size_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -64,9 +64,9 @@ void Stage::dibujarBack(int pos)
 //        {
 //            moviendo_derecha=true;
 //        }
-        int pos_x=pos-back[i].size_x/2+grafico->ventana_x/2;
-        int pos_y=grafico->ventana_y-back[i].size_y;
-        grafico->draw2DImageCameraAlign
+        int pos_x=pos-back[i].size_x/2+painter->ventana_x/2;
+        int pos_y=painter->ventana_y-back[i].size_y;
+        painter->draw2DImageCameraAlign
         (   back[i].imagen,
             irr::core::dimension2d<irr::f32> (back[i].size_x,back[i].size_y),
             irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -87,11 +87,11 @@ void Stage::dibujarFront(int pos)
     {
         int dimension_x=front[i].imagen->getOriginalSize().Width;
         int dimension_y=front[i].imagen->getOriginalSize().Height;
-        grafico->draw2DImageCameraAlign
+        painter->draw2DImageCameraAlign
         (   front[i].imagen,
             irr::core::dimension2d<irr::f32> (front[i].size_x,front[i].size_y),
             irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-            irr::core::position2d<irr::f32>(pos-front[i].size_x/2+grafico->ventana_x/2,grafico->ventana_y-front[i].size_y),
+            irr::core::position2d<irr::f32>(pos-front[i].size_x/2+painter->ventana_x/2,painter->ventana_y-front[i].size_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,
@@ -132,7 +132,7 @@ void Stage::cargarDesdeXML(char* path)
     strcat(bg,nodo_bg->ToElement()->Attribute("image"));
     int size_x=atoi(nodo_bg->ToElement()->Attribute("size_x"));
     int size_y=atoi(nodo_bg->ToElement()->Attribute("size_y"));
-    background=new Layer(grafico->getTexture(bg),size_x,size_y);
+    background=new Layer(painter->getTexture(bg),size_x,size_y);
 
     TiXmlNode *nodo_back=doc->FirstChild("Back");
     for(TiXmlNode* layer=nodo_back->FirstChild("layer");
@@ -146,7 +146,7 @@ void Stage::cargarDesdeXML(char* path)
         strcat(image,layer->ToElement()->Attribute("image"));
         int size_x=atoi(layer->ToElement()->Attribute("size_x"));
         int size_y=atoi(layer->ToElement()->Attribute("size_y"));
-        back.push_back(Layer(grafico->getTexture(image),size_x,size_y));
+        back.push_back(Layer(painter->getTexture(image),size_x,size_y));
     }
 
     TiXmlNode *nodo_front=doc->FirstChild("Front");
@@ -161,6 +161,25 @@ void Stage::cargarDesdeXML(char* path)
         strcat(image,layer->ToElement()->Attribute("image"));
         int size_x=atoi(layer->ToElement()->Attribute("size_x"));
         int size_y=atoi(layer->ToElement()->Attribute("size_y"));
-        front.push_back(Layer(grafico->getTexture(image),size_x,size_y));
+        front.push_back(Layer(painter->getTexture(image),size_x,size_y));
     }
+}
+
+Stage::~Stage()
+{
+//    for(;!textures.empty();)
+//    {
+//        ITexture*texture=textures.back();
+//        textures.pop_back();
+//        painter->driver->removeTexture(texture);
+//        //texture->drop();
+//    }
+
+//    background->imagen->drop();
+//    for(;!back.empty();)
+//    {
+//        Layer*layer=&back.back();
+//        back.pop_back();
+//        painter->driver->removeTexture(layer->imagen);
+//    }
 }

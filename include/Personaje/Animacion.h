@@ -1,7 +1,7 @@
 #ifndef ANIMACION_H
 #define ANIMACION_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 #include "Personaje/Imagen.h"
 
 class Animacion

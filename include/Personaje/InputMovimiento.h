@@ -1,7 +1,7 @@
 #ifndef INPUTMOVIMIENTO_H
 #define INPUTMOVIMIENTO_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 
 class InputMovimiento
 {

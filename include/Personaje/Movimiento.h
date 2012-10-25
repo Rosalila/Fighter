@@ -1,7 +1,7 @@
 #ifndef MOVIMIENTO_H
 #define MOVIMIENTO_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 #include "Personaje/Frame.h"
 
 class Movimiento

@@ -1,12 +1,12 @@
 #ifndef ELEMENTO_H
 #define ELEMENTO_H
 
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 
 class Elemento
 {
 protected:
-    Grafico*grafico;
+    Painter*painter;
 public:
     int x;
     int y;
@@ -14,7 +14,7 @@ public:
     int height;
     bool visible;
     Elemento(){}
-    Elemento(Grafico*grafico,int x, int y, int width, int height,bool visible);
+    Elemento(Painter*painter,int x, int y, int width, int height,bool visible);
     virtual void dibujar()=0;
     virtual void dibujar(int alineacion_x,int alineacion_y)=0;
     virtual int getTipo()=0;

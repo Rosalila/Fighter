@@ -1,6 +1,6 @@
 #include "Menu/MenuContenedor.h"
 
-MenuContenedor::MenuContenedor(Grafico*grafico,int x, int y, int width, int height,bool visible,vector<Elemento*> elementos)
+MenuContenedor::MenuContenedor(Painter*painter,int x, int y, int width, int height,bool visible,vector<Elemento*> elementos)
 {
     this->x=x;
     this->y=y;
@@ -21,7 +21,7 @@ MenuContenedor::MenuContenedor(Grafico*grafico,int x, int y, int width, int heig
             seleccionado=i;
             break;
         }
-    this->grafico=grafico;
+    this->painter=painter;
 }
 
 int MenuContenedor::getTipo()

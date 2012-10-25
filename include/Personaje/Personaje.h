@@ -13,7 +13,7 @@ class Personaje
     public:
     //Otras
     Personaje *personaje_contrario;
-    Grafico* grafico;
+    Painter* painter;
     Input* input;
     Sonido* sonido;
 
@@ -61,7 +61,7 @@ class Personaje
     //movimientos
     irr::core::map<stringw,Movimiento*> movimientos;
 
-    Personaje(Grafico* grafico,Sonido* sonido,int numero,int paleta);
+    Personaje(Painter* painter,Sonido* sonido,int numero,int paleta);
     ~Personaje();
     //Cargares
     void cargarDesdeXML(int px,int py,Input* input,char* nombre);
@@ -76,8 +76,8 @@ class Personaje
     void cargarAnimations();
     //Dibujares
     void dibujar();
-    void dibujarImagenCameraAlign(Grafico*grafico,Imagen imagen,int posicion_x,int posicion_y);
-    void dibujarImagen(Grafico*grafico,Imagen imagen,int posicion_x,int posicion_y);
+    void dibujarImagenCameraAlign(Painter*painter,Imagen imagen,int posicion_x,int posicion_y);
+    void dibujarImagen(Painter*painter,Imagen imagen,int posicion_x,int posicion_y);
     void dibujarAnimacionesBack();
     void dibujarAnimacionesFront();
     void dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y);

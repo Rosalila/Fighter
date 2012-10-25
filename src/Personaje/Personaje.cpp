@@ -1,8 +1,8 @@
 #include "Personaje/Personaje.h"
 
-Personaje::Personaje(Grafico* grafico,Sonido* sonido,int numero,int num_paleta)
+Personaje::Personaje(Painter* painter,Sonido* sonido,int numero,int num_paleta)
 {
-    this->grafico=grafico;
+    this->painter=painter;
     this->sonido=sonido;
     this->numero=numero;
     this->combo=0;
@@ -22,7 +22,7 @@ Personaje::~Personaje()
     {
         ITexture*texture=textures.back();
         textures.pop_back();
-        grafico->driver->removeTexture(texture);
+        painter->driver->removeTexture(texture);
         //texture->drop();
     }
 }
@@ -55,11 +55,11 @@ void Personaje::dibujar()
             int alineacion_y=sombra[i].alineacion_y;
             if(flip_sombra[i])
                 alineacion_x=-alineacion_x;
-        //    u32 t=grafico->device->getTimer()->getTime();
+        //    u32 t=painter->device->getTimer()->getTime();
         //    int t2=t%255;
             int pos_x=sombra_x[i]-(dimension_x*sombra[i].escala/2)+alineacion_x;
-            int pos_y=-sombra_y[i]-(dimension_y*sombra[i].escala)-alineacion_y+grafico->ventana_y-stage_piso;
-            grafico->draw2DImageCameraAlign
+            int pos_y=-sombra_y[i]-(dimension_y*sombra[i].escala)-alineacion_y+painter->ventana_y-stage_piso;
+            painter->draw2DImageCameraAlign
             (   sombra[i].imagen,
                 irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
                 irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -79,7 +79,7 @@ void Personaje::dibujar()
     int dimension_y=getImagen("current_image").dimension_y;
     int alineacion_x=getImagen("current_image").alineacion_x;
     int alineacion_y=getImagen("current_image").alineacion_y;
-    u32 t=grafico->device->getTimer()->getTime();
+    u32 t=painter->device->getTimer()->getTime();
     int tr=255,tg=255,tb=255;
 
     if(getString("orientation")=="i")
@@ -111,10 +111,10 @@ void Personaje::dibujar()
 
     //get pos
     int pos_x=getEntero("position_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
-    int pos_y=-getEntero("position_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+grafico->ventana_y-stage_piso;
+    int pos_y=-getEntero("position_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+painter->ventana_y-stage_piso;
 
 
-    grafico->draw2DImageCameraAlign
+    painter->draw2DImageCameraAlign
     (   getImagen("current_image").imagen,
         irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
@@ -147,13 +147,13 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
     for(int i=0;i<(int)hitbox.size();i++)
     {
         int p1x=x+hitbox[i].p1x;
-        int p1y=-y+hitbox[i].p1y+grafico->ventana_y-stage_piso;
+        int p1y=-y+hitbox[i].p1y+painter->ventana_y-stage_piso;
         int p2x=x+hitbox[i].p2x;
-        int p2y=-y+hitbox[i].p2y+grafico->ventana_y-stage_piso;
+        int p2y=-y+hitbox[i].p2y+painter->ventana_y-stage_piso;
         if(variable=="blue")
-            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(p1x,p1y,p2x,p2y));
+            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(p1x,p1y,p2x,p2y));
         else
-            grafico->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(p1x,p1y,p2x,p2y));
+            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(p1x,p1y,p2x,p2y));
     }
 }
 
@@ -162,7 +162,7 @@ void Personaje::dibujarBarra(Barra barra)
     position2d<s32>punto1= barra.posicion.UpperLeftCorner;
     position2d<s32>punto2= barra.posicion.LowerRightCorner;
     //resize 800x600
-    float w=grafico->ventana_x;
+    float w=painter->ventana_x;
     punto1.X*=w/1024.0;
     punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
@@ -187,13 +187,13 @@ void Personaje::dibujarBarra(Barra barra)
         }
     }else//flip if player 2
     {
-        float temp_x2=grafico->ventana_x-punto1.X;
-        float temp_x1=grafico->ventana_x-punto1.X-longitud_actual;
+        float temp_x2=painter->ventana_x-punto1.X;
+        float temp_x1=painter->ventana_x-punto1.X-longitud_actual;
 
         if(punto1.X>punto2.X)
         {
-            temp_x2=grafico->ventana_x-punto1.X+longitud_actual;
-            temp_x1=grafico->ventana_x-punto1.X;
+            temp_x2=painter->ventana_x-punto1.X+longitud_actual;
+            temp_x1=painter->ventana_x-punto1.X;
         }
 
         p1x=temp_x1;
@@ -214,9 +214,9 @@ void Personaje::dibujarBarra(Barra barra)
     }
 
     if(barra.imagen==NULL)
-        grafico->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+        painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
     else
-        grafico->draw2DImage
+        painter->draw2DImage
         (   barra.imagen,
             irr::core::dimension2d<irr::f32> (longitud_actual,altura),
             irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),
@@ -234,7 +234,7 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
     position2d<s32>punto1= barra.posicion.UpperLeftCorner;
     position2d<s32>punto2= barra.posicion.LowerRightCorner;
     //resize 800x600
-    float w=grafico->ventana_x;
+    float w=painter->ventana_x;
     punto1.X*=w/1024.0;
     punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
@@ -258,8 +258,8 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
         p2y-=(p2y-p1y)/2;
     }else//flip if player 2
     {
-        float temp_x2=grafico->ventana_x-punto1.X;
-        float temp_x1=grafico->ventana_x-punto1.X-longitud_actual;
+        float temp_x2=painter->ventana_x-punto1.X;
+        float temp_x1=painter->ventana_x-punto1.X-longitud_actual;
 
         p1x=temp_x1;
         p1y=punto1.Y;
@@ -276,9 +276,9 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
         player2=true;
     }
     if(barra.imagen==NULL)
-        grafico->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+        painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
     else
-        grafico->draw2DImage
+        painter->draw2DImage
         (   barra.imagen,
             irr::core::dimension2d<irr::f32> (longitud_actual,altura),
             irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),
@@ -311,8 +311,8 @@ void Personaje::dibujarProyectiles()
         {
             Imagen imagen=getImagen(proyectil->imagen);
             int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x;
-            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y+grafico->ventana_y-stage_piso;
-            grafico->draw2DImageCameraAlign
+            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y+painter->ventana_y-stage_piso;
+            painter->draw2DImageCameraAlign
             (   imagen.imagen,
                 irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
                 irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
@@ -565,14 +565,30 @@ void Personaje::aplicarModificador(ModificadorPorVariable* mv)
         {
             if(mv->aplicar_a_contrario)
             {
-                int temp_entero=personaje_contrario->getEntero(mv->modificador_string);
+                int temp_entero=0;
+                if(mv->modificador_string!="position_y")
+                {
+                    temp_entero=personaje_contrario->getEntero(mv->modificador_string);
+                }
+                else
+                {
+                    temp_entero=-personaje_contrario->getEntero(mv->modificador_string);
+                }
                 if(mv->flipeable)
                     temp_entero=-temp_entero;
                 personaje_contrario->setEntero(mv->variable,temp_entero);
             }
             else
             {
-                int temp_entero=getEntero(mv->modificador_string);
+                int temp_entero;
+                if(mv->modificador_string!="position_y")
+                {
+                    temp_entero=getEntero(mv->modificador_string);
+                }else
+                {
+                    temp_entero=-getEntero(mv->modificador_string);
+                }
+
                 if(mv->flipeable)
                     temp_entero=-temp_entero;
                 setEntero(mv->variable,temp_entero);
@@ -698,7 +714,7 @@ void Personaje::cargarArchivo(char* archivo_xml)
 void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
 {
     this->input=input;
-    this->grafico=grafico;
+    this->painter=painter;
     this->char_name=stringw(nombre);
     this->char_name_ptr=nombre;
     this->px_inicial=px;
@@ -851,9 +867,9 @@ void Personaje::cargarMain()
 
                         irr::video::ITexture* texture;
                         if(ignore_color==NULL)
-                            texture=grafico->getTexture(path);
+                            texture=painter->getTexture(path);
                         else
-                            texture=grafico->getTexture(path,ignore_color);
+                            texture=painter->getTexture(path,ignore_color);
                         sprites.push_back(Imagen(texture,escala,alineacion_x,alineacion_y));
                     }
                 }
@@ -929,9 +945,9 @@ void Personaje::cargarMain()
                 int alineacion_y=atoi(elemento_imagen->Attribute("align_y"));
 
                 if(ignore_color==NULL)
-                    setImagen(variable,Imagen(grafico->getTexture(path),escala,alineacion_x,alineacion_y));
+                    setImagen(variable,Imagen(painter->getTexture(path),escala,alineacion_x,alineacion_y));
                 else
-                    setImagen(variable,Imagen(grafico->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
+                    setImagen(variable,Imagen(painter->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
                     elemento_imagen!=NULL;
@@ -995,7 +1011,7 @@ void Personaje::cargarMain()
                 imagen=stringw("chars/")+char_name+stringw("/")+imagen;
 
                 if(imagen!=NULL)
-                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),grafico->getTexture(imagen)));
+                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),painter->getTexture(imagen)));
 //                else
 //                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),NULL));
             }
@@ -1306,7 +1322,7 @@ void Personaje::cargarSprites()
 
                 if(ignore_color==NULL)
                 {
-                    ITexture* texture=grafico->getTexture(irr::io::path(path));
+                    ITexture* texture=painter->getTexture(irr::io::path(path));
                     textures.push_back(texture);
                     paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
@@ -1314,11 +1330,11 @@ void Personaje::cargarSprites()
                 }
                 else
                 {
-                    video::IImage* image = grafico->driver->createImageFromFile(path);
+                    video::IImage* image = painter->driver->createImageFromFile(path);
 
-                    video::ITexture* texture = grafico->driver->addTexture("test",image);
+                    video::ITexture* texture = painter->driver->addTexture("test",image);
                     textures.push_back(texture);
-                    grafico->driver->makeColorKeyTexture(texture,ignore_color);
+                    painter->driver->makeColorKeyTexture(texture,ignore_color);
 
                     paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
@@ -1455,7 +1471,7 @@ void Personaje::cargarAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            irr::video::ITexture *texture=grafico->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
+            irr::video::ITexture *texture=painter->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1501,7 +1517,7 @@ void Personaje::cargarAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            irr::video::ITexture *texture=grafico->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
+            irr::video::ITexture *texture=painter->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1731,14 +1747,14 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
     return false;
 }
 
-void Personaje::dibujarImagenCameraAlign(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
+void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
     irr::video::ITexture *texture=imagen.imagen;
 
     int pos_x=posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2;
-    int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+grafico->ventana_y-stage_piso;
+    int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+painter->ventana_y-stage_piso;
 
-    grafico->draw2DImageCameraAlign
+    painter->draw2DImageCameraAlign
     (   texture,
         irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
         irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
@@ -1751,14 +1767,14 @@ void Personaje::dibujarImagenCameraAlign(Grafico* grafico,Imagen imagen,int posi
         false,
         false);
 }
-void Personaje::dibujarImagen(Grafico* grafico,Imagen imagen,int posicion_x,int posicion_y)
+void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
     irr::video::ITexture *texture=imagen.imagen;
 
     int pos_x=posicion_x+imagen.alineacion_x;
     int pos_y=posicion_y+imagen.alineacion_y;
 
-    grafico->draw2DImage
+    painter->draw2DImage
     (   texture,
         irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
         irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
@@ -1787,10 +1803,10 @@ void Personaje::dibujarAnimacionesBack()
         Animacion* animacion=&animaciones_actuales_back[i];
         if(animacion->usa_camara)
         {
-            dibujarImagenCameraAlign(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
         }else
         {
-            dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
         }
 
         if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
@@ -1826,10 +1842,10 @@ void Personaje::dibujarAnimacionesFront()
         Animacion* animacion=&animaciones_actuales_front[i];
         if(animacion->usa_camara)
         {
-            dibujarImagenCameraAlign(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
         }else
         {
-            dibujarImagen(grafico,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
         }
         if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
         {

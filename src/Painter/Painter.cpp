@@ -1,6 +1,6 @@
-#include "Grafico/Grafico.h"
+#include "Painter/Painter.h"
 
-Grafico::Grafico(Receiver* receiver)
+Painter::Painter(Receiver* receiver)
 {
     //get resulolution
     char *archivo=new char[255];
@@ -43,17 +43,17 @@ Grafico::Grafico(Receiver* receiver)
     font = device->getGUIEnvironment()->getFont("menu/font.png");
 }
 
-bool Grafico::isWindowActive()
+bool Painter::isWindowActive()
 {
     return device->isWindowActive();
 }
 
-void Grafico::beginScene()
+void Painter::beginScene()
 {
     driver->beginScene(true, true, video::SColor(255,255,255,255));
 }
 
-void Grafico::endScene()
+void Painter::endScene()
 {
     //FPS
     int lastFPS=-1;
@@ -76,12 +76,12 @@ void Grafico::endScene()
     driver->endScene();
 }
 
-bool Grafico::run()
+bool Painter::run()
 {
     return device->run() && driver;
 }
 
-irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo,video::SColor color_a_ignorar)
+irr::video::ITexture* Painter::getTexture(irr::core::stringw archivo,video::SColor color_a_ignorar)
 {
     irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
     //irr::video::ITexture* texture=driver->addRenderTargetTexture(dimension2d<u32>(1024,600), irr::io::path(archivo));
@@ -90,14 +90,14 @@ irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo,video::SCol
     return texture;
 }
 
-irr::video::ITexture* Grafico::getTexture(irr::core::stringw archivo)
+irr::video::ITexture* Painter::getTexture(irr::core::stringw archivo)
 {
     irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
     //irr::video::ITexture* texture=driver->addRenderTargetTexture(dimension2d<u32>(1024,600), irr::io::path(archivo));
     return texture;
 }
 
-void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColor color)
+void Painter::drawText(core::stringw texto,core::rect<s32> posicion,video::SColor color)
 {
     posicion.LowerRightCorner.X-=camera_x;
     posicion.LowerRightCorner.Y+=camera_y;
@@ -110,7 +110,7 @@ void Grafico::drawText(core::stringw texto,core::rect<s32> posicion,video::SColo
     font->draw(texto,posicion,color);
 }
 
-void Grafico::draw2DRectangle(irr::video::SColor color,core::rect<s32> posicion)
+void Painter::draw2DRectangle(irr::video::SColor color,core::rect<s32> posicion)
 {
 //    posicion.LowerRightCorner.X-=camera_x;
 //    posicion.LowerRightCorner.Y+=camera_y;
@@ -121,7 +121,7 @@ void Grafico::draw2DRectangle(irr::video::SColor color,core::rect<s32> posicion)
     posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,posicion.UpperLeftCorner.Y*escala_y,posicion.LowerRightCorner.X*escala_x,posicion.LowerRightCorner.Y*escala_y);
     driver->draw2DRectangle(color,posicion);
 }
-void Grafico::draw2DRectangleCameraAlign(irr::video::SColor color,core::rect<s32> posicion)
+void Painter::draw2DRectangleCameraAlign(irr::video::SColor color,core::rect<s32> posicion)
 {
     posicion.LowerRightCorner.X-=camera_x;
     posicion.LowerRightCorner.Y+=camera_y;
@@ -136,7 +136,7 @@ void Grafico::draw2DRectangleCameraAlign(irr::video::SColor color,core::rect<s32
     driver->draw2DRectangle(color,posicion);
 }
 
-void Grafico::draw2DImage
+void Painter::draw2DImage
                 (
 	             irr::video::ITexture* texture,
 				 irr::core::dimension2d<irr::f32> size,
@@ -298,7 +298,7 @@ void Grafico::draw2DImage
 }
 
 
-void Grafico::draw2DImageCameraAlign
+void Painter::draw2DImageCameraAlign
                 (
 	             irr::video::ITexture* texture,
 				 irr::core::dimension2d<irr::f32> size,
@@ -453,7 +453,7 @@ void Grafico::draw2DImageCameraAlign
    smgr->drawAll();
 }
 
-video::IImage* Grafico::TextureImage(video::ITexture* texture) {
+video::IImage* Painter::TextureImage(video::ITexture* texture) {
 
    video::IImage* image = driver->createImageFromData (
       texture->getColorFormat(),
@@ -466,7 +466,7 @@ video::IImage* Grafico::TextureImage(video::ITexture* texture) {
    return image;
 }
 
-video::ITexture* Grafico::ImageTexture(video::IImage* image, core::stringc name) {
+video::ITexture* Painter::ImageTexture(video::IImage* image, core::stringc name) {
 
    video::ITexture* texture = driver->addTexture(name.c_str(),image);
    texture->grab();

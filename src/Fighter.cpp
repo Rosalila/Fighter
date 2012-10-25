@@ -1,5 +1,5 @@
 #include "../include/Fighter.h"
-Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
+Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
 {
     this->victories_a=victories_a;
     this->victories_b=victories_b;
@@ -29,14 +29,14 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
     pos_imagen_intro=0;
     for(int i=0;i<intro_frames;i++)
     {
-        match_intro.push_back(Imagen(grafico->getTexture(stringw("misc/match_intro/")+stringw(i+1)+stringw(".png")),1,0,0));
+        match_intro.push_back(Imagen(painter->getTexture(stringw("misc/match_intro/")+stringw(i+1)+stringw(".png")),1,0,0));
     }
 
     tiempo_actual_ko=0;
     pos_imagen_ko=0;
     for(int i=0;i<ko_frames;i++)
     {
-        ko.push_back(Imagen(grafico->getTexture(stringw("misc/ko/")+stringw(i+1)+stringw(".png")),1,0,0));
+        ko.push_back(Imagen(painter->getTexture(stringw("misc/ko/")+stringw(i+1)+stringw(".png")),1,0,0));
     }
 
     //fin intro y ko
@@ -48,7 +48,7 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
 
     //Engines
     this->sonido=sonido;
-    this->grafico=grafico;
+    this->painter=painter;
     this->receiver=receiver;
     //stage=new Stage(grafico,sonido);
 
@@ -59,7 +59,7 @@ Fighter::Fighter(Sonido* sonido,Grafico* grafico,Receiver* receiver,vector<Perso
     this->pb_actual=0;
 
     //menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
-    pause_menu=new Menu(grafico,receiver,sonido,(char*)"menu/pause_menu.xml");
+    pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.xml");
 
     pos_stage=0;
     this->pa=pa;
@@ -83,6 +83,7 @@ Fighter::~Fighter()
         delete pa[i];
     for(int i=0;i<(int)pb.size();i++)
         delete pb[i];
+    //delete stage;
 }
 
 
@@ -331,7 +332,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         m->tiempo_transcurrido=0;
         p->setString("current_move","entrance");
         p->setString("isActive.entrance","yes");
-        sonido->reproducirSonido(p->char_name+"entrance");
+        sonido->reproducirSonido(p->char_name+"entrance",false);
     }
 
     //verificar flip
@@ -474,7 +475,7 @@ void Fighter::logica()
                 m->tiempo_transcurrido=0;
                 m->ya_pego=false;
                 p->setString("current_move",move_cancel_pa);
-                sonido->reproducirSonido(p->char_name+move_cancel_pa);
+                sonido->reproducirSonido(p->char_name+move_cancel_pa,false);
                 //setear isActive.
                 p->setString(stringw("isActive.")+move_cancel_pa,"yes");
     }
@@ -487,7 +488,7 @@ void Fighter::logica()
                 m->tiempo_transcurrido=0;
                 m->ya_pego=false;
                 p->setString("current_move",move_cancel_pb);
-                sonido->reproducirSonido(p->char_name+move_cancel_pb);
+                sonido->reproducirSonido(p->char_name+move_cancel_pb,false);
                 //setear isActive.
                 p->setString(stringw("isActive.")+move_cancel_pb,"yes");
     }
@@ -507,7 +508,7 @@ void Fighter::logica()
             m->ya_pego=false;
             p->setString("current_move",hit_cancel_pa);
             p->setString(stringw("isActive.")+hit_cancel_pa,"yes");
-            sonido->reproducirSonido(p->char_name+p->getString("current_move"));
+            sonido->reproducirSonido(p->char_name+p->getString("current_move"),false);
     }
 
     if(hit_cancel_pb!="")
@@ -525,7 +526,7 @@ void Fighter::logica()
             m->ya_pego=false;
             p->setString("current_move",hit_cancel_pb);
             p->setString(stringw("isActive.")+hit_cancel_pb,"yes");
-            sonido->reproducirSonido(p->char_name+p->getString("current_move"));
+            sonido->reproducirSonido(p->char_name+p->getString("current_move"),false);
     }
 
 
@@ -623,7 +624,7 @@ void Fighter::aplicarModificadores(Personaje *p)
 
     //corregir si se sale x
     int distancia=p->getEntero("position_x")-p->personaje_contrario->getEntero("position_x");
-    int dist_max=grafico->ventana_x-100;
+    int dist_max=painter->ventana_x-100;
     if(distancia>=dist_max|| distancia<=-dist_max)
     {
         p->setEntero("position_x",temp_pos_x);
@@ -644,24 +645,24 @@ void Fighter::logicaStage()
     int marco_x=50;
 
     //verificar q los personajes no se salgan
-    if(pa_x<-stage->size/2+grafico->ventana_x/2+marco_x)//pa borde izquierdo
+    if(pa_x<-stage->size/2+painter->ventana_x/2+marco_x)//pa borde izquierdo
     {
-        pa_x=-stage->size/2+grafico->ventana_x/2+marco_x;
+        pa_x=-stage->size/2+painter->ventana_x/2+marco_x;
         getPaActual()->setEntero("position_x",pa_x);
     }
-    if(pa_x>stage->size/2+grafico->ventana_x/2-marco_x)//pa borde derecho
+    if(pa_x>stage->size/2+painter->ventana_x/2-marco_x)//pa borde derecho
     {
-        pa_x=stage->size/2+grafico->ventana_x/2-marco_x;
+        pa_x=stage->size/2+painter->ventana_x/2-marco_x;
         getPaActual()->setEntero("position_x",pa_x);
     }
-    if(pb_x<-stage->size/2+grafico->ventana_x/2+marco_x)//pb borde izquierdo
+    if(pb_x<-stage->size/2+painter->ventana_x/2+marco_x)//pb borde izquierdo
     {
-        pb_x=-stage->size/2+grafico->ventana_x/2+marco_x;
+        pb_x=-stage->size/2+painter->ventana_x/2+marco_x;
         getPbActual()->setEntero("position_x",pb_x);
     }
-    if(pb_x>stage->size/2+grafico->ventana_x/2-marco_x)//pb borde derecho
+    if(pb_x>stage->size/2+painter->ventana_x/2-marco_x)//pb borde derecho
     {
-        pb_x=stage->size/2+grafico->ventana_x/2-marco_x;
+        pb_x=stage->size/2+painter->ventana_x/2-marco_x;
         getPbActual()->setEntero("position_x",pb_x);
     }
 
@@ -669,17 +670,17 @@ void Fighter::logicaStage()
     int borde_izq=500;
     int borde_der=900;
 
-    int pa_x_pantalla=pa_x+grafico->camera_x;
-    int pa_y_pantalla=pb_x+grafico->camera_x;
-    int nueva_pos=(pa_x+pb_x)/2-grafico->ventana_x/2;
+    int pa_x_pantalla=pa_x+painter->camera_x;
+    int pa_y_pantalla=pb_x+painter->camera_x;
+    int nueva_pos=(pa_x+pb_x)/2-painter->ventana_x/2;
 
 
     //verificar q  el stage no se salga
-    if(nueva_pos>-stage->size/2+grafico->ventana_x/2
-            && nueva_pos<stage->size/2-grafico->ventana_x/2
+    if(nueva_pos>-stage->size/2+painter->ventana_x/2
+            && nueva_pos<stage->size/2-painter->ventana_x/2
       )
     {
-        grafico->camera_x=nueva_pos;
+        painter->camera_x=nueva_pos;
     }
 
 
@@ -688,7 +689,7 @@ void Fighter::logicaStage()
     if(y_max<getPbActual()->getEntero("position_y"))
         y_max=getPbActual()->getEntero("position_y");
 
-    grafico->camera_y=y_max/4;
+    painter->camera_y=y_max/4;
 }
 
 void Fighter::loopJuego()
@@ -699,8 +700,8 @@ void Fighter::loopJuego()
     getPbActual()->comparacion_hp=getPbActual()->getEntero("hp.current_value");
     getPbActual()->comparacion_hp_contrario=getPbActual()->getEntero("hp.current_value");
 
-    sonido->reproducirSonido("Stage.music");
-    u32 anterior=grafico->device->getTimer()->getTime();
+    //sonido->reproducirSonido("Stage.music",true);
+    u32 anterior=painter->device->getTimer()->getTime();
     for (;;)
     {
         //Salir con cualquier boton si ya termino la pelea
@@ -721,10 +722,10 @@ void Fighter::loopJuego()
                 break;
         }
         //receiver->endEventProcess();
-        grafico->device->run();
+        painter->device->run();
         //cout<<grafico->device->getTimer()->getTime()<<endl;
         //setear frames a "60"
-        if(grafico->device->getTimer()->getTime()<anterior+16)
+        if(painter->device->getTimer()->getTime()<anterior+16)
             continue;
 
         if(receiver->IsKeyDownn(irr::KEY_ESCAPE))///!!!
@@ -734,7 +735,7 @@ void Fighter::loopJuego()
                 break;
         }
 
-        anterior=grafico->device->getTimer()->getTime();
+        anterior=painter->device->getTimer()->getTime();
 
         //logica
         logica();
@@ -743,7 +744,7 @@ void Fighter::loopJuego()
         render();
         //receiver->startEventProcess();
     }
-    sonido->pararSonido("Stage.music");
+    //sonido->pararSonido("Stage.music");
 }
 
 void itoa(int n, char *s, int b)
@@ -786,12 +787,12 @@ char *strrev(char *str)
 
 void Fighter::dibujarBarra()
 {
-    irr::video::ITexture* texture_bar=grafico->getTexture("misc/bar.png");
-    grafico->draw2DImage
+    irr::video::ITexture* texture_bar=painter->getTexture("misc/bar.png");
+    painter->draw2DImage
     (   texture_bar,
         irr::core::dimension2d<irr::f32> (texture_bar->getOriginalSize ().Width,texture_bar->getOriginalSize ().Height),
         irr::core::rect<irr::f32>(0,0,texture_bar->getOriginalSize().Width,texture_bar->getOriginalSize().Height),
-        irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_bar->getOriginalSize().Width/2,0),
+        irr::core::position2d<irr::f32>(painter->ventana_x/2-texture_bar->getOriginalSize().Width/2,0),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (0,0),
         true,
@@ -801,13 +802,13 @@ void Fighter::dibujarBarra()
 
     for(int i=0;i<victories_a;i++)
     {
-        irr::video::ITexture* texture_victory=grafico->getTexture("misc/victory.png");
+        irr::video::ITexture* texture_victory=painter->getTexture("misc/victory.png");
         int separation_x=texture_victory->getOriginalSize().Width;
-        grafico->draw2DImage
+        painter->draw2DImage
         (   texture_victory,
             irr::core::dimension2d<irr::f32> (texture_victory->getOriginalSize ().Width,texture_victory->getOriginalSize ().Height),
             irr::core::rect<irr::f32>(0,0,texture_victory->getOriginalSize().Width,texture_victory->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_victory->getOriginalSize().Width/2-victory_image_x-i*separation_x,victory_image_y),
+            irr::core::position2d<irr::f32>(painter->ventana_x/2-texture_victory->getOriginalSize().Width/2-victory_image_x-i*separation_x,victory_image_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,
@@ -818,13 +819,13 @@ void Fighter::dibujarBarra()
 
     for(int i=0;i<victories_b;i++)
     {
-        irr::video::ITexture* texture_victory=grafico->getTexture("misc/victory.png");
+        irr::video::ITexture* texture_victory=painter->getTexture("misc/victory.png");
         int separation_x=texture_victory->getOriginalSize().Width;
-        grafico->draw2DImage
+        painter->draw2DImage
         (   texture_victory,
             irr::core::dimension2d<irr::f32> (texture_victory->getOriginalSize ().Width,texture_victory->getOriginalSize ().Height),
             irr::core::rect<irr::f32>(0,0,texture_victory->getOriginalSize().Width,texture_victory->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(grafico->ventana_x/2-texture_victory->getOriginalSize().Width/2+victory_image_x+i*separation_x,victory_image_y),
+            irr::core::position2d<irr::f32>(painter->ventana_x/2-texture_victory->getOriginalSize().Width/2+victory_image_x+i*separation_x,victory_image_y),
             irr::core::position2d<irr::f32>(0,0),
             irr::f32(0), irr::core::vector2df (0,0),
             true,
@@ -836,12 +837,12 @@ void Fighter::dibujarBarra()
 
 bool Fighter::render()
 {
-    if (grafico->isWindowActive())
+    if (painter->isWindowActive())
     {
-        if(!grafico->device->run())
+        if(!painter->device->run())
             exit(0);
 
-        grafico->beginScene();
+        painter->beginScene();
         //Stage
         stage->dibujarBack(pos_stage);
 
@@ -962,11 +963,11 @@ bool Fighter::render()
                     pos_imagen_ko=0;
                 int width=texture_gameover->getOriginalSize().Width;
                 int height=texture_gameover->getOriginalSize().Height;
-                grafico->draw2DImage
+                painter->draw2DImage
                 (   texture_gameover,
                     irr::core::dimension2d<irr::f32> (width,height),
                     irr::core::rect<irr::f32>(0,0,width,height),
-                    irr::core::position2d<irr::f32>((grafico->ventana_x-width)/2,(grafico->ventana_y-height)/2),
+                    irr::core::position2d<irr::f32>((painter->ventana_x-width)/2,(painter->ventana_y-height)/2),
                     irr::core::position2d<irr::f32>(0,0),
                     irr::f32(0), irr::core::vector2df (0,0),
                     true,
@@ -991,11 +992,11 @@ bool Fighter::render()
             //    pos_imagen_intro=0;
             int width=texture_gameover->getOriginalSize().Width;
             int height=texture_gameover->getOriginalSize().Height;
-            grafico->draw2DImage
+            painter->draw2DImage
             (   texture_gameover,
                 irr::core::dimension2d<irr::f32> (width,height),
                 irr::core::rect<irr::f32>(0,0,width,height),
-                irr::core::position2d<irr::f32>((grafico->ventana_x-width)/2,(grafico->ventana_y-height)/2),
+                irr::core::position2d<irr::f32>((painter->ventana_x-width)/2,(painter->ventana_y-height)/2),
                 irr::core::position2d<irr::f32>(0,0),
                 irr::f32(0), irr::core::vector2df (0,0),
                 true,
@@ -1026,13 +1027,13 @@ bool Fighter::render()
         dibujarBarra();
 
         if(pa[pa_actual]->combo>0)
-            grafico->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,200,0,0),video::SColor (255,255,255,255));
+            painter->drawText(stringw(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,200,0,0),video::SColor (255,255,255,255));
         if(pb[pb_actual]->combo>0)
-            grafico->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(grafico->ventana_x-300,200,0,0),video::SColor (255,255,255,255));
+            painter->drawText(stringw(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(painter->ventana_x-300,200,0,0),video::SColor (255,255,255,255));
 
-        grafico->endScene();
+        painter->endScene();
     }
-    return grafico->run();
+    return painter->run();
     //return true;
 }
 

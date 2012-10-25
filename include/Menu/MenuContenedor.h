@@ -14,7 +14,7 @@ private:
     int seleccionado;
 public:
     vector<Elemento*> elementos;//!!!!!!!
-    MenuContenedor(Grafico*grafico,int x, int y, int width, int height,bool visible,vector<Elemento*> elementos);
+    MenuContenedor(Painter*painter,int x, int y, int width, int height,bool visible,vector<Elemento*> elementos);
     virtual int getTipo();
     virtual void dibujar();
     virtual void dibujar(int alineacion_x,int alineacion_y);

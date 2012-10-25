@@ -1,6 +1,6 @@
 #include "Menu/MenuCharSelect.h"
 
-MenuCharSelect::MenuCharSelect(Grafico*grafico,int x, int y, int width, int height,
+MenuCharSelect::MenuCharSelect(Painter*painter,int x, int y, int width, int height,
                    int size_x,int size_y,
                    int size_cuadro_x,int size_cuadro_y,
                    int separacion_x,int separacion_y,
@@ -16,7 +16,7 @@ MenuCharSelect::MenuCharSelect(Grafico*grafico,int x, int y, int width, int heig
     this->height=height;
     this->width=width;
     this->visible=visible;
-    this->grafico=grafico;
+    this->painter=painter;
 
     this->size_x=size_x;
     this->size_y=size_y;
@@ -36,8 +36,8 @@ MenuCharSelect::MenuCharSelect(Grafico*grafico,int x, int y, int width, int heig
 
     for(int i=0;i<(int)names.size();i++)
     {
-        portraits.push_back(grafico->getTexture(stringw("chars/")+names[i]+stringw("/portrait.png")));
-        previews.push_back(grafico->getTexture(stringw("chars/")+names[i]+stringw("/preview.png")));
+        portraits.push_back(painter->getTexture(stringw("chars/")+names[i]+stringw("/portrait.png")));
+        previews.push_back(painter->getTexture(stringw("chars/")+names[i]+stringw("/preview.png")));
     }
     this->names=names;
 
@@ -46,11 +46,11 @@ MenuCharSelect::MenuCharSelect(Grafico*grafico,int x, int y, int width, int heig
     this->select_p2_x=select_p2_x;
     this->select_p2_y=select_p2_y;
 
-    selected_char_p1=grafico->getTexture("menu/selected_char_p1.png");
-    selected_char_p2=grafico->getTexture("menu/selected_char_p2.png");
-    locked_char_p1=grafico->getTexture("menu/locked_char_p1.png");
-    locked_char_p2=grafico->getTexture("menu/locked_char_p2.png");
-    no_portrait=grafico->getTexture("menu/no_portrait.png");
+    selected_char_p1=painter->getTexture("menu/selected_char_p1.png");
+    selected_char_p2=painter->getTexture("menu/selected_char_p2.png");
+    locked_char_p1=painter->getTexture("menu/locked_char_p1.png");
+    locked_char_p2=painter->getTexture("menu/locked_char_p2.png");
+    no_portrait=painter->getTexture("menu/no_portrait.png");
 }
 
 void MenuCharSelect::lockPA(int num_paleta)
@@ -193,7 +193,7 @@ void MenuCharSelect::dibujar()
                 if(select_p1_x+select_p1_y*size_x==cont)
                 {
                     irr::video::ITexture *imagen=previews[cont];
-                    grafico->draw2DImage
+                    painter->draw2DImage
                     (   imagen,
                         irr::core::dimension2d<irr::f32> (imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
                         irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -208,7 +208,7 @@ void MenuCharSelect::dibujar()
                 if(select_p2_x+select_p2_y*size_x==cont)
                 {
                     irr::video::ITexture *imagen=previews[cont];
-                    grafico->draw2DImage
+                    painter->draw2DImage
                     (   imagen,
                         irr::core::dimension2d<irr::f32> (imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
                         irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -231,7 +231,7 @@ void MenuCharSelect::dibujar()
             if(cont>=(int)portraits.size())
             {
                 irr::video::ITexture *imagen=no_portrait;
-                grafico->draw2DImage
+                painter->draw2DImage
                 (   imagen,
                     irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
                     irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -245,7 +245,7 @@ void MenuCharSelect::dibujar()
             }else
             {
                 irr::video::ITexture *imagen=portraits[cont];
-                grafico->draw2DImage
+                painter->draw2DImage
                 (   imagen,
                     irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
                     irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -263,7 +263,7 @@ void MenuCharSelect::dibujar()
                 if(locks_pa[l].x==i && locks_pa[l].y==j)
                 {
                     irr::video::ITexture *imagen=locked_char_p1;
-                    grafico->draw2DImage
+                    painter->draw2DImage
                     (   imagen,
                         irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
                         irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -282,7 +282,7 @@ void MenuCharSelect::dibujar()
                 if(locks_pb[l].x==i && locks_pb[l].y==j)
                 {
                     irr::video::ITexture *imagen=locked_char_p2;
-                    grafico->draw2DImage
+                    painter->draw2DImage
                     (   imagen,
                         irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
                         irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -299,7 +299,7 @@ void MenuCharSelect::dibujar()
             if(select_p1_x==i&&select_p1_y==j && (int)locks_pa.size()<max_locked_chars_pa)
             {
                 irr::video::ITexture *imagen=selected_char_p1;
-                grafico->draw2DImage
+                painter->draw2DImage
                 (   imagen,
                     irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
                     irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -315,7 +315,7 @@ void MenuCharSelect::dibujar()
             if(select_p2_x==i&&select_p2_y==j && (int)locks_pb.size()<max_locked_chars_pb)
             {
                 irr::video::ITexture *imagen=selected_char_p2;
-                grafico->draw2DImage
+                painter->draw2DImage
                 (   imagen,
                     irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
                     irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
@@ -333,7 +333,7 @@ void MenuCharSelect::dibujar()
 
 void MenuCharSelect::dibujar(int alineacion_x,int alineacion_y)
 {
-    grafico->draw2DRectangle(irr::video::SColor(255,0,255,255),core::rect<s32>(0,0,50,50));
+    painter->draw2DRectangle(irr::video::SColor(255,0,255,255),core::rect<s32>(0,0,50,50));
 }
 
 void MenuCharSelect::clearLocks()
