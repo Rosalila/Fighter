@@ -1623,7 +1623,7 @@ void Personaje::aplicarEfectosProyectiles()
         if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),
                                getHitBoxes(proyectil->hitboxes),
                                personaje_contrario->getEntero("position_x"),
-                               personaje_contrario->getEntero("position_y"),
+                               -personaje_contrario->getEntero("position_y"),
                                getEntero(proyectil->posicion_x),
                                getEntero(proyectil->posicion_y)))
                                {
@@ -1764,7 +1764,7 @@ void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posi
         irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
         true,
         irr::video::SColor(255,255,255,255),
-        false,
+        getString("orientation")!="d",
         false);
 }
 void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
@@ -1784,7 +1784,7 @@ void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int 
         irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
         true,
         irr::video::SColor(255,255,255,255),
-        false,
+        getString("orientation")!="d",
         false);
 }
 void Personaje::dibujarAnimacionesBack()
@@ -1803,10 +1803,22 @@ void Personaje::dibujarAnimacionesBack()
         Animacion* animacion=&animaciones_actuales_back[i];
         if(animacion->usa_camara)
         {
-            dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            if(animacion->posicion_y=="position_y")
+            {
+                dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),-getEntero(animacion->posicion_y));
+            }else
+            {
+                dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            }
         }else
         {
-            dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            if(animacion->posicion_y=="position_y")
+            {
+                dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),-getEntero(animacion->posicion_y));
+            }else
+            {
+                dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            }
         }
 
         if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
@@ -1842,10 +1854,22 @@ void Personaje::dibujarAnimacionesFront()
         Animacion* animacion=&animaciones_actuales_front[i];
         if(animacion->usa_camara)
         {
-            dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            if(animacion->posicion_y=="position_y")
+            {
+                dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),-getEntero(animacion->posicion_y));
+            }else
+            {
+                dibujarImagenCameraAlign(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            }
         }else
         {
-            dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            if(animacion->posicion_y=="position_y")
+            {
+                dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),-getEntero(animacion->posicion_y));
+            }else
+            {
+                dibujarImagen(painter,animacion->sprites[animacion->imagen_actual],getEntero(animacion->posicion_x),getEntero(animacion->posicion_y));
+            }
         }
         if(animacion->tiempo_transcurrido<animacion->duracion)//si todavia no termina la frame
         {

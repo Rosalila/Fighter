@@ -518,3 +518,6 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
+1351062842 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+	"Painter/Painter.h"
+
