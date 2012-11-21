@@ -53,7 +53,6 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
     //stage=new Stage(grafico,sonido);
 
     //stage->cargarDesdeXML((char*)"Stage1");
-    pos_stage=0;
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
     this->pa_actual=0;
     this->pb_actual=0;
@@ -61,7 +60,6 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
     //menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
     pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.xml");
 
-    pos_stage=0;
     this->pa=pa;
     this->pb=pb;
     pa_vivos=(int)pa.size();
@@ -844,7 +842,7 @@ bool Fighter::render()
 
         painter->beginScene();
         //Stage
-        stage->dibujarBack(pos_stage);
+        stage->dibujarBack();
 
         //Animaciones back
         getPaActual()->dibujarAnimacionesBack();
@@ -1022,7 +1020,7 @@ bool Fighter::render()
             getPbActual()->setString("current_move","change_char");
             getPbActual()->setString("isActive.change_char","yes");
         }
-        stage->dibujarFront(pos_stage);
+        stage->dibujarFront();
 
         dibujarBarra();
 

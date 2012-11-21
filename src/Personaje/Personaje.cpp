@@ -325,14 +325,14 @@ void Personaje::dibujarProyectiles()
                 false);
         }
         //Dibujar hitboxes
-        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
-        {
-            stringw nombre=proyectil->nombre;
-            dibujarHitBoxes(proyectil->hitboxes,"",
-                        getString(proyectil->orientacion)=="i",
-                        getEntero(proyectil->posicion_x),
-                        -getEntero(proyectil->posicion_y));
-        }
+//        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
+//        {
+//            stringw nombre=proyectil->nombre;
+//            dibujarHitBoxes(proyectil->hitboxes,"",
+//                        getString(proyectil->orientacion)=="i",
+//                        getEntero(proyectil->posicion_x),
+//                        -getEntero(proyectil->posicion_y));
+//        }
     }
 }
 //GETS shortcuts

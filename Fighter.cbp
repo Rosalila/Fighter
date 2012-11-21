@@ -33,7 +33,6 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Fighter.h" />
-		<Unit filename="include/Grafico/Grafico.h" />
 		<Unit filename="include/IA/Automata.h" />
 		<Unit filename="include/IA/Estado.h" />
 		<Unit filename="include/IA/IA.h" />
@@ -50,6 +49,7 @@
 		<Unit filename="include/Menu/MenuImagen.h" />
 		<Unit filename="include/Menu/MenuLista.h" />
 		<Unit filename="include/Menu/MenuTexto.h" />
+		<Unit filename="include/Painter/Painter.h" />
 		<Unit filename="include/Personaje/Animacion.h" />
 		<Unit filename="include/Personaje/Barra.h" />
 		<Unit filename="include/Personaje/Condicion.h" />
@@ -75,7 +75,6 @@
 		<Unit filename="include/TinyXml/tinyxml.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Fighter.cpp" />
-		<Unit filename="src/Grafico/Grafico.cpp" />
 		<Unit filename="src/IA/Automata.cpp" />
 		<Unit filename="src/IA/Estado.cpp" />
 		<Unit filename="src/IA/IA.cpp" />
@@ -92,6 +91,7 @@
 		<Unit filename="src/Menu/MenuImagen.cpp" />
 		<Unit filename="src/Menu/MenuLista.cpp" />
 		<Unit filename="src/Menu/MenuTexto.cpp" />
+		<Unit filename="src/Painter/Painter.cpp" />
 		<Unit filename="src/Personaje/Animacion.cpp" />
 		<Unit filename="src/Personaje/Barra.cpp" />
 		<Unit filename="src/Personaje/Condicion.cpp" />
@@ -120,6 +120,7 @@
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

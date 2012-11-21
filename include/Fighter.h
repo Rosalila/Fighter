@@ -14,7 +14,6 @@ public:
     Input*inputa,*inputb;
     Menu* pause_menu;
     Stage* stage;
-    int pos_stage;
     int px_colision,py_colision;
     vector<Personaje*>pa;
     vector<Personaje*>pb;

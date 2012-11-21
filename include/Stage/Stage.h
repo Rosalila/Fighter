@@ -7,20 +7,31 @@
 class Layer
 {
 public:
-    video::ITexture* imagen;
-    int size_x,size_y;
-    Layer(video::ITexture* imagen,int size_x,int size_y)
+    vector <video::ITexture*> textures;
+    vector <int> textures_size_x;
+    vector <int> textures_size_y;
+    //External logic
+    int frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y;
+    //Internal logic
+    int current_frame,time_elapsed;
+    Layer(vector<video::ITexture*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y)
     {
-        this->imagen=imagen;
-        this->size_x=size_x;
-        this->size_y=size_y;
+        this->textures=textures;
+        this->textures_size_x=textures_size_x;
+        this->textures_size_y=textures_size_y;
+        this->frame_duration=frame_duration;
+        this->depth_effect_x=depth_effect_x;
+        this->depth_effect_y=depth_effect_y;
+        this->current_frame=0;
+        this->time_elapsed=0;
+        this->alignment_x=alignment_x;
+        this->alignment_y=alignment_y;
     }
 };
 
 class Stage
 {
     public:
-    Layer* background;
     vector<Layer> back,front;
     Painter* painter;
     Sonido* sonido;
@@ -31,12 +42,10 @@ class Stage
     bool moviendo_derecha;
     int movimiento;
     int borde_efecto;
-    int pos_dibujando_back;
-    int tiempo_transcurrido_back;
     Stage(Painter* painter,Sonido* sonido);
-    void dibujarBackground();
-    void dibujarBack(int pos);
-    void dibujarFront(int pos);
+    void dibujarBack();
+    void dibujarFront();
+    void drawLayer(Layer*layer);
     void cargarDesdeXML(char* archivo);
     ~Stage();
 };

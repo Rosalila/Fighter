@@ -10,94 +10,65 @@ Stage::Stage(Painter* painter,Sonido* sonido)
     bool moviendo_derecha=true;
     int movimiento=0;
     int borde_efecto=30;
-    pos_dibujando_back=0;
-    tiempo_transcurrido_back=0;
 }
 
-void Stage::dibujarBackground()
+void Stage::drawLayer(Layer* layer)
 {
-    int dimension_x=background->imagen->getOriginalSize().Width;
-    int dimension_y=background->imagen->getOriginalSize().Height;
-    painter->draw2DImage
-    (   background->imagen,
-        irr::core::dimension2d<irr::f32> (background->size_x,background->size_y),
+    //Animation speed
+    if(layer->time_elapsed>layer->frame_duration)
+    {
+        layer->current_frame++;
+        layer->time_elapsed=0;
+    }
+
+    //Loop animation
+    layer->time_elapsed++;
+    if(layer->current_frame>=layer->textures.size())
+        layer->current_frame=0;
+
+    //Get current image
+    video::ITexture* texture=layer->textures[layer->current_frame];
+
+    //Paint
+    int size_x=layer->textures_size_x[layer->current_frame];
+    int size_y=layer->textures_size_y[layer->current_frame];
+
+    int dimension_x=texture->getOriginalSize().Width;
+    int dimension_y=texture->getOriginalSize().Height;
+
+    int pos_x=-size_x/2+painter->ventana_x/2+layer->alignment_x;
+    int pos_y=painter->ventana_y-size_y-layer->alignment_y;
+
+    painter->draw2DImageCameraAlignDepthEffect
+    (   texture,
+        irr::core::dimension2d<irr::f32> (size_x,size_y),
         irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(0,0),
+        irr::core::position2d<irr::f32>(pos_x,pos_y),
         irr::core::position2d<irr::f32>(0,0),
         irr::f32(0), irr::core::vector2df (0,0),
         true,
         irr::video::SColor(255,255,255,255),
         false,
-        false);
+        false,
+        layer->depth_effect_x,
+        layer->depth_effect_y);
 }
 
-void Stage::dibujarBack(int pos)
+void Stage::dibujarBack()
 {
-    dibujarBackground();
-    if(tiempo_transcurrido_back>3)
+    for(int i=0;i<back.size();i++)
     {
-        pos_dibujando_back++;
-        tiempo_transcurrido_back=0;
+        Layer* layer=&back[i];
+        drawLayer(layer);
     }
-    tiempo_transcurrido_back++;
-    if(pos_dibujando_back>=back.size())
-        pos_dibujando_back=0;
-    int i=pos_dibujando_back;
-
-    //for(int i=0;i<(int)back.size();i++)
-    //{
-        int dimension_x=back[i].imagen->getOriginalSize().Width;
-        int dimension_y=back[i].imagen->getOriginalSize().Height;
-
-//        if(moviendo_derecha)
-//        {
-//            movimiento++;
-//        }
-//        else
-//        {
-//            movimiento--;
-//        }
-//        if(moviendo_derecha&&movimiento>=borde_efecto)
-//        {
-//            moviendo_derecha=false;
-//        }else if(!moviendo_derecha&&movimiento<=-borde_efecto)
-//        {
-//            moviendo_derecha=true;
-//        }
-        int pos_x=pos-back[i].size_x/2+painter->ventana_x/2;
-        int pos_y=painter->ventana_y-back[i].size_y;
-        painter->draw2DImageCameraAlign
-        (   back[i].imagen,
-            irr::core::dimension2d<irr::f32> (back[i].size_x,back[i].size_y),
-            irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-            irr::core::position2d<irr::f32>(pos_x,pos_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (0,0),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
-            false);
-    //}
 }
 
-void Stage::dibujarFront(int pos)
+void Stage::dibujarFront()
 {
-    //Barra
-    for(int i=0;i<(int)front.size();i++)
+    for(int i=0;i<front.size();i++)
     {
-        int dimension_x=front[i].imagen->getOriginalSize().Width;
-        int dimension_y=front[i].imagen->getOriginalSize().Height;
-        painter->draw2DImageCameraAlign
-        (   front[i].imagen,
-            irr::core::dimension2d<irr::f32> (front[i].size_x,front[i].size_y),
-            irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-            irr::core::position2d<irr::f32>(pos-front[i].size_x/2+painter->ventana_x/2,painter->ventana_y-front[i].size_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (0,0),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
-            false);
+        Layer* layer=&front[i];
+        drawLayer(layer);
     }
 }
 
@@ -112,74 +83,92 @@ void Stage::cargarDesdeXML(char* path)
     TiXmlDocument *doc;
     doc=&doc_t;
 
+    TiXmlNode *stage_file=doc->FirstChild("StageFile");
+
+    //Load settings
     char *music=new char[255];
     strcpy(music,"stages/");
     strcat(music,path);
     strcat(music,"/music.ogg");
     sonido->agregarSonido(stringw("Stage.music"),music);
 
-    TiXmlNode *nodo_ss=doc->FirstChild("StageSize");
+    TiXmlNode *nodo_ss=stage_file->FirstChild("StageSize");
     this->size=atoi(nodo_ss->ToElement()->Attribute("x"));
 
-    TiXmlNode *nodo_floor=doc->FirstChild("Floor");
+    TiXmlNode *nodo_floor=stage_file->FirstChild("Floor");
     this->pos_piso=atoi(nodo_floor->ToElement()->Attribute("position"));
 
-    TiXmlNode *nodo_bg=doc->FirstChild("Background");
-    char *bg=new char[255];
-    strcpy(bg,"stages/");
-    strcat(bg,path);
-    strcat(bg,"/images/");
-    strcat(bg,nodo_bg->ToElement()->Attribute("image"));
-    int size_x=atoi(nodo_bg->ToElement()->Attribute("size_x"));
-    int size_y=atoi(nodo_bg->ToElement()->Attribute("size_y"));
-    background=new Layer(painter->getTexture(bg),size_x,size_y);
-
-    TiXmlNode *nodo_back=doc->FirstChild("Back");
-    for(TiXmlNode* layer=nodo_back->FirstChild("layer");
-            layer!=NULL;
-            layer=layer->NextSibling("layer"))
+    //Load back layer
+    for(TiXmlNode *nodo_back=stage_file->FirstChild("BackLayer");
+            nodo_back!=NULL;
+            nodo_back=nodo_back->NextSibling("BackLayer"))
     {
-        char *image=new char[255];
-        strcpy(image,"stages/");
-        strcat(image,path);
-        strcat(image,"/images/");
-        strcat(image,layer->ToElement()->Attribute("image"));
-        int size_x=atoi(layer->ToElement()->Attribute("size_x"));
-        int size_y=atoi(layer->ToElement()->Attribute("size_y"));
-        back.push_back(Layer(painter->getTexture(image),size_x,size_y));
+        int frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
+        int depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
+        int depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
+        int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
+        int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
+
+        vector <video::ITexture*> textures;
+        vector <int> textures_size_x;
+        vector <int> textures_size_y;
+
+        for(TiXmlNode* layer=nodo_back->FirstChild("frame");
+                layer!=NULL;
+                layer=layer->NextSibling("frame"))
+        {
+            char *image=new char[255];
+            strcpy(image,"stages/");
+            strcat(image,path);
+            strcat(image,"/images/");
+            strcat(image,layer->ToElement()->Attribute("image_path"));
+            int size_x=atoi(layer->ToElement()->Attribute("size_x"));
+            int size_y=atoi(layer->ToElement()->Attribute("size_y"));
+
+            textures.push_back(painter->getTexture(image));
+            textures_size_x.push_back(size_x);
+            textures_size_y.push_back(size_y);
+        }
+
+        back.push_back(Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
     }
 
-    TiXmlNode *nodo_front=doc->FirstChild("Front");
-    for(TiXmlNode* layer=nodo_front->FirstChild("layer");
-            layer!=NULL;
-            layer=layer->NextSibling("layer"))
+    //Load front layer
+    for(TiXmlNode *nodo_back=stage_file->FirstChild("FrontLayer");
+            nodo_back!=NULL;
+            nodo_back=nodo_back->NextSibling("FrontLayer"))
     {
-        char *image=new char[255];
-        strcpy(image,"stages/");
-        strcat(image,path);
-        strcat(image,"/images/");
-        strcat(image,layer->ToElement()->Attribute("image"));
-        int size_x=atoi(layer->ToElement()->Attribute("size_x"));
-        int size_y=atoi(layer->ToElement()->Attribute("size_y"));
-        front.push_back(Layer(painter->getTexture(image),size_x,size_y));
+        int frame_duration=atoi(nodo_back->ToElement()->Attribute("frame_duration"));
+        int depth_effect_x=atoi(nodo_back->ToElement()->Attribute("depth_effect_x"));
+        int depth_effect_y=atoi(nodo_back->ToElement()->Attribute("depth_effect_y"));
+        int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
+        int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
+
+        vector <video::ITexture*> textures;
+        vector <int> textures_size_x;
+        vector <int> textures_size_y;
+
+        for(TiXmlNode* layer=nodo_back->FirstChild("frame");
+                layer!=NULL;
+                layer=layer->NextSibling("frame"))
+        {
+            char *image=new char[255];
+            strcpy(image,"stages/");
+            strcat(image,path);
+            strcat(image,"/images/");
+            strcat(image,layer->ToElement()->Attribute("image_path"));
+            int size_x=atoi(layer->ToElement()->Attribute("size_x"));
+            int size_y=atoi(layer->ToElement()->Attribute("size_y"));
+
+            textures.push_back(painter->getTexture(image));
+            textures_size_x.push_back(size_x);
+            textures_size_y.push_back(size_y);
+        }
+
+        front.push_back(Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
     }
 }
 
 Stage::~Stage()
 {
-//    for(;!textures.empty();)
-//    {
-//        ITexture*texture=textures.back();
-//        textures.pop_back();
-//        painter->driver->removeTexture(texture);
-//        //texture->drop();
-//    }
-
-//    background->imagen->drop();
-//    for(;!back.empty();)
-//    {
-//        Layer*layer=&back.back();
-//        back.pop_back();
-//        painter->driver->removeTexture(layer->imagen);
-//    }
 }

@@ -453,6 +453,178 @@ void Painter::draw2DImageCameraAlign
    smgr->drawAll();
 }
 
+void Painter::draw2DImageCameraAlignDepthEffect
+                (
+	             irr::video::ITexture* texture,
+				 irr::core::dimension2d<irr::f32> size,
+				 irr::core::rect<irr::f32> sourceRect,
+				 irr::core::position2d<irr::f32> position,
+				 irr::core::position2d<irr::f32> rotationPoint,
+				 irr::f32 rotation , irr::core::vector2df scale,
+				 bool useAlphaChannel,
+				 irr::video::SColor color ,
+				 bool flipHorizontally,
+				 bool flipVertically,
+				 int depth_effect_x,
+				 int depth_effect_y 	)
+{
+
+    if(depth_effect_x>0)
+    {
+        position.X-=camera_x/depth_effect_x;
+    }else if(depth_effect_x<0)
+    {
+        position.X-=camera_x*-depth_effect_x;
+    }
+
+    if(depth_effect_y>0)
+    {
+        position.Y+=camera_y/depth_effect_y;
+    }else if(depth_effect_y<0)
+    {
+        position.Y+=camera_y*-depth_effect_y;
+    }
+
+    //camera->setTarget(vector3df(0,0,5));
+   // Store and clear the projection matrix
+   irr::core::matrix4 oldProjMat = driver->getTransform(irr::video::ETS_PROJECTION);
+   driver->setTransform(irr::video::ETS_PROJECTION,irr::core::matrix4());
+
+   // Store and clear the view matrix
+   irr::core::matrix4 oldViewMat = driver->getTransform(irr::video::ETS_VIEW);
+   driver->setTransform(irr::video::ETS_VIEW,irr::core::matrix4());
+//    size.Width*=1.5;
+//    size.Height*=0.75;
+   //inicio escala
+   float escala_x,escala_y;
+   if(scale.X!=0 && scale.Y!=0)
+   {
+//       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
+//       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
+       //escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
+       //escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
+
+       escala_x=(float)(1)*scale.X;
+       escala_y=(float)(1)*scale.Y;
+   }else
+   {
+//       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
+//       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
+       //escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
+       //escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
+
+       escala_x=(float)1;
+       escala_y=(float)1;
+   }
+
+   scale=irr::core::vector2df (escala_x,escala_y);
+
+   //fin escala
+   if(!texture)
+	   return;
+
+   irr::video::SMaterial material;
+
+   irr::core::vector2df corner[4];
+
+   corner[0] = irr::core::vector2df(position.X,position.Y);
+   corner[1] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y);
+   corner[2] = irr::core::vector2df(position.X,position.Y+size.Height*scale.Y);
+   corner[3] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y+size.Height*scale.Y);
+
+
+   if (rotation != 0.0f)
+      for (int x = 0; x < 4; x++)
+         corner[x].rotateBy(rotation,irr::core::vector2df(rotationPoint.X, rotationPoint.Y));
+
+
+   //TODO: ver como mejorar esto
+   irr::core::vector2df uvCorner[4];
+
+   if(!flipVertically && !flipHorizontally)
+   {
+	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
+	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
+   }
+   else if(!flipVertically && flipHorizontally)
+   {
+	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
+	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
+   }
+   else if(flipVertically && !flipHorizontally)
+   {
+	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
+	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
+   }
+   else
+   {
+	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
+	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
+	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
+   }
+
+
+   for (int x = 0; x < 4; x++) {
+      float uvX = uvCorner[x].X/(float)texture->getSize().Width;
+      float uvY = uvCorner[x].Y/(float)texture->getSize().Height;
+      uvCorner[x] = irr::core::vector2df(uvX,uvY);
+   }
+
+
+   irr::video::S3DVertex vertices[4];
+   irr::u16 indices[6] = { 0, 1, 2, 3 ,2 ,1 };
+
+
+//   float screenWidth = (float)driver->getScreenSize().Width;
+//   float screenHeight = (float)driver->getScreenSize().Height;
+   float screenWidth = (float)ventana_x;
+   float screenHeight = (float)ventana_y;
+   for (int x = 0; x < 4; x++) {
+      float screenPosX = ((corner[x].X/screenWidth)-0.5f)*2.0f;
+      float screenPosY = ((corner[x].Y/screenHeight)-0.5f)*-2.0f;
+      vertices[x].Pos = irr::core::vector3df(screenPosX,screenPosY,1);
+      vertices[x].TCoords = uvCorner[x];
+      vertices[x].Color = color;
+   }
+//   material.Lighting = false;
+//   material.ZWriteEnable = false;
+//   material.TextureLayer[0].Texture = texture;
+//
+//   if (useAlphaChannel)
+//      material.MaterialType = irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL;
+//   else
+//      material.MaterialType = irr::video::EMT_SOLID;
+//
+//
+//   driver->setMaterial(material);
+//   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
+   material.Lighting = false;
+   material.ZWriteEnable = false;
+   material.ZBuffer = false;
+   material.TextureLayer[0].Texture = texture;
+   material.MaterialTypeParam = irr::video::pack_texureBlendFunc(irr::video::EBF_SRC_ALPHA, irr::video::EBF_ONE_MINUS_SRC_ALPHA, irr::video::EMFN_MODULATE_1X, irr::video::EAS_TEXTURE | irr::video::EAS_VERTEX_COLOR);
+
+   if (useAlphaChannel)
+      material.MaterialType = irr::video::EMT_ONETEXTURE_BLEND;
+   else
+      material.MaterialType = irr::video::EMT_SOLID;
+
+   driver->setMaterial(material);
+   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
+
+   // Restore projection and view matrices
+   driver->setTransform(irr::video::ETS_PROJECTION,oldProjMat);
+   driver->setTransform(irr::video::ETS_VIEW,oldViewMat);
+   smgr->drawAll();
+}
+
 video::IImage* Painter::TextureImage(video::ITexture* texture) {
 
    video::IImage* image = driver->createImageFromData (
