@@ -4,6 +4,13 @@
 #include <stdlib.h>
 #include <sstream>
 
+//SDL
+#include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
+#include "SDL/SDL_ttf.h"
+#include "SDL/SDL_mixer.h"
+#include <string>
+
 //#include "Input/Input.h"
 #include "include/Fighter.h"
 
@@ -22,7 +29,7 @@ int main()
     Sonido*sonido = new Sonido();
 
     Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.xml");
-    sonido->reproducirSonido(stringw("Menu.music"),true);
+    sonido->playMusic(menu->music_path);
     menu->loopMenu();
     //Fighter *fighter=new Fighter();
     //fighter->mainLoop();

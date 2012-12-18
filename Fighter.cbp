@@ -68,7 +68,6 @@
 		<Unit filename="include/Personaje/Paleta.h" />
 		<Unit filename="include/Personaje/Personaje.h" />
 		<Unit filename="include/Personaje/Proyectil.h" />
-		<Unit filename="include/Sonido/Reproduccion.h" />
 		<Unit filename="include/Sonido/Sonido.h" />
 		<Unit filename="include/Stage/Stage.h" />
 		<Unit filename="include/TinyXml/tinystr.h" />
@@ -110,7 +109,6 @@
 		<Unit filename="src/Personaje/Paleta.cpp" />
 		<Unit filename="src/Personaje/Personaje.cpp" />
 		<Unit filename="src/Personaje/Proyectil.cpp" />
-		<Unit filename="src/Sonido/Reproduccion.cpp" />
 		<Unit filename="src/Sonido/Sonido.cpp" />
 		<Unit filename="src/Stage/Stage.cpp" />
 		<Unit filename="src/TinyXml/tinystr.cpp" />

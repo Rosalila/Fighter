@@ -66,9 +66,9 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
         pb.push_back(p1b);
     }
 
-    sonido->pararSonido("Menu.music");
+    sonido->stopMusic();
 
-    sonido->reproducirSonido("Stage.music",true);
+    sonido->playMusic(stage->music_path);
 
     Fighter*fighter=NULL;
 
@@ -124,15 +124,14 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
 
     char_select->clearLocks();
 
-    sonido->pararSonido("Stage.music");
+    sonido->stopMusic();
 
-    sonido->reproducirSonido(stringw("Menu.music"),true);
+    sonido->playMusic((std::string)"menu/audio/music.ogg");
 }
 
 void Menu::loopMenu()
 {
     bool tecla_arriba=false;
-    //sonido->reproducirSonido(stringw("Menu.music"));
 
     llenarInputsBotones();
     inputa=new Input();
@@ -153,6 +152,23 @@ void Menu::loopMenu()
             painter->device->getTimer()->tick()
          );
         dibujarMenu();
+
+        //Move Elements
+        for(int i=0;i<(int)elementos.size();i++)
+        {
+            Elemento*e=elementos[i];
+            if(e->current_displacement_x<e->stop_displacement_x_at)
+            {
+                e->x+=e->displacement_x;
+                e->current_displacement_x++;
+            }
+            if(e->current_displacement_y<e->stop_displacement_y_at)
+            {
+                e->y+=e->displacement_y;
+                e->current_displacement_y++;
+            }
+        }
+
         inputa->actualizarBuffer();
         if(inputa->getBufferInputs()[0]!="6"
            && inputa->getBufferInputs()[0]!="4"
@@ -561,10 +577,10 @@ void Menu::loopMenu()
                             stage=new Stage(painter,sonido);
                             stage->cargarDesdeXML((char*)path_s);
 
-                            sonido->pararSonido("Menu.music");
+                            sonido->stopMusic();
                             Fighter*fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,0,0);
                             delete fighter;
-                            sonido->reproducirSonido(stringw("Menu.music"),true);
+                            sonido->playMusic("menu/audio/music.ogg");
 
                             break;
                         }
@@ -699,7 +715,6 @@ void Menu::loopMenu()
             }
         }
 	}
-	//sonido->pararSonido("Menu.music");
 }
 
 void Menu::dibujarMenu()
@@ -734,6 +749,8 @@ void Menu::cargarConfig()
 
 void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> stages)
 {
+    music_path="menu/audio/music.ogg";
+
     cargarConfig();
 
     TiXmlDocument doc_t( archivo );
@@ -741,7 +758,6 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    sonido->agregarSonido("Menu.music","menu/audio/music.ogg");
     sonido->agregarSonido("Menu.select","menu/audio/select.ogg");
     sonido->agregarSonido("Menu.select_char","menu/audio/select_char.ogg");
     sonido->agregarSonido("Menu.move","menu/audio/move.ogg");
@@ -774,7 +790,19 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             stringw path(e->Attribute("path"));
             stringw dir("menu/");
             path=dir+path;
-            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
+            int displacement_x=0;
+            int displacement_y=0;
+            int stop_displacement_x_at=0;
+            int stop_displacement_y_at=0;
+            if(e->Attribute("displacement_x")!=NULL)
+                displacement_x=atoi(e->Attribute("displacement_x"));
+            if(e->Attribute("displacement_y")!=NULL)
+                displacement_y=atoi(e->Attribute("displacement_y"));
+            if(e->Attribute("stop_displacement_x_at")!=NULL)
+                stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
+            if(e->Attribute("stop_displacement_y_at")!=NULL)
+                stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
+            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
                                                           painter->getTexture(irr::io::path(path)),""
                                                           ));
         }else if(strcmp(e->Value(),"Text")==0)
@@ -907,7 +935,20 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             stringw path(el->Attribute("path"));
                             stringw dir("menu/");
                             path=dir+path;
-                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
+
+                            int displacement_x=0;
+                            int displacement_y=0;
+                            int stop_displacement_x_at=0;
+                            int stop_displacement_y_at=0;
+                            if(e->Attribute("displacement_x")!=NULL)
+                                displacement_x=atoi(e->Attribute("displacement_x"));
+                            if(e->Attribute("displacement_y")!=NULL)
+                                displacement_y=atoi(e->Attribute("displacement_y"));
+                            if(e->Attribute("stop_displacement_x_at")!=NULL)
+                                stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
+                            if(e->Attribute("stop_displacement_y_at")!=NULL)
+                                stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
+                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                                           painter->getTexture(irr::io::path(path)),""
                                                                            ));
                         }
@@ -928,9 +969,24 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         {
                             pos_stage=elementos_contenedor.size();
                             for(int i=0;i<(int)stages.size();i++)
-                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                                          painter->getTexture(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png"))),stages[i]
-                                                                           ));
+                            {
+                                int displacement_x=0;
+                                int displacement_y=0;
+                                int stop_displacement_x_at=0;
+                                int stop_displacement_y_at=0;
+                                if(e->Attribute("displacement_x")!=NULL)
+                                    displacement_x=atoi(e->Attribute("displacement_x"));
+                                if(e->Attribute("displacement_y")!=NULL)
+                                    displacement_y=atoi(e->Attribute("displacement_y"));
+                                if(e->Attribute("stop_displacement_x_at")!=NULL)
+                                    stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
+                                if(e->Attribute("stop_displacement_y_at")!=NULL)
+                                    stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
+
+                                elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
+                                                                              painter->getTexture(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png"))),stages[i]
+                                                                               ));
+                            }
 //                            elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
 //                                                             stages[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
 //                                                             ));

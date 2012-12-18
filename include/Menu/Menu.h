@@ -11,6 +11,7 @@
 #include "Fighter.h"
 using namespace irrklang;
 
+
 class Menu
 {
 private:
@@ -33,6 +34,7 @@ private:
 
     void iniciarJuego(int num_personajes,bool inteligencia_artificial);
 public:
+    std::string music_path;
     Input *inputa,*inputb;
     vector<Personaje*>pa;
     vector<Personaje*>pb;

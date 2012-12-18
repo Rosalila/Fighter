@@ -1434,7 +1434,7 @@ void Personaje::cargarSfx()
         strcat(file,(char*)c_name);
         strcat(file,"/sfx/");
         strcat(file,elemento_sonido->Attribute("file"));
-        sonido->agregarSonido(char_name+move,file);
+        sonido->agregarSonido(char_name+move,(std::string)file);
     }
 
 }

@@ -90,7 +90,7 @@ void Stage::cargarDesdeXML(char* path)
     strcpy(music,"stages/");
     strcat(music,path);
     strcat(music,"/music.ogg");
-    sonido->agregarSonido(stringw("Stage.music"),music);
+    music_path=(std::string)music;
 
     TiXmlNode *nodo_ss=stage_file->FirstChild("StageSize");
     this->size=atoi(nodo_ss->ToElement()->Attribute("x"));

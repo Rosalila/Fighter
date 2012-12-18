@@ -10,7 +10,7 @@ private:
     irr::video::ITexture* imagen_seleccionado;
 public:
     stringw value;
-    MenuImagen(Painter*painter,int x, int y, int width, int height,bool visible,irr::video::ITexture* imagen,stringw value);
+    MenuImagen(Painter*painter,int x, int y, int displacement_x, int displacement_y,int stop_displacement_x_at,int stop_displacement_y_at,int width, int height,bool visible,irr::video::ITexture* imagen,stringw value);
     virtual int getTipo();
     virtual void dibujar();
     virtual void dibujar(int alineacion_x,int alineacion_y);

@@ -2,43 +2,55 @@
 
 Sonido::Sonido()
 {
-    engine=createIrrKlangDevice();
+    cout<<"Initializing SLD sound engine."<<endl;cout.flush();
+    if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
+    {
+        cout<<"Failed."<<endl;cout.flush();
+        return;
+    }
+    cout<<"Success!"<<endl;cout.flush();
 }
+
 void Sonido::drop()
 {
-    engine->drop();
+    //TODO for each chunk
+    //Mix_FreeChunk( chunk );
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
 }
-void Sonido::agregarSonido(stringw variable,const ik_c8* valor)
+void Sonido::agregarSonido(stringw variable,std::string valor)
 {
     if(sonidos.find(variable)==0)
-        sonidos[variable]=new Reproduccion(engine->addSoundSourceFromFile(valor));
+        sonidos[variable]=Mix_LoadWAV(valor.c_str());
 }
 void Sonido::reproducirSonido(stringw variable,bool looped)
 {
     if(sonidos.find(variable)==0)
         return;
-    Reproduccion* rep=sonidos[variable];
-    rep->sonido=engine->play2D(rep->source,false,false,true,true);
-    if(looped)
-        rep->sonido->setIsLooped(true);
+
+    if(sonidos[variable]!=NULL)
+    {
+        if(looped)
+            Mix_PlayChannel( -1, sonidos[variable], -1 );
+        else
+            Mix_PlayChannel( -1, sonidos[variable], 0 );
+    }
 }
 
-void Sonido::pararSonido(stringw variable)
+void Sonido::playMusic(std::string path)
 {
-    if(sonidos.find(variable)==0)
-        return;
-    Reproduccion* rep=sonidos[variable];
-    if(rep->sonido==NULL)
-        return;
-    rep->sonido->stop();
+    stopMusic();
+    cout<<"Playing music: "<<path<<endl;cout.flush();
+    music = Mix_LoadMUS(path.c_str());
+    Mix_PlayMusic(music,-1);
 }
 
-void Sonido::setVolumen(stringw variable,float volumen)
+void Sonido::stopMusic()
 {
-    if(sonidos.find(variable)==0)
-        return;
-    Reproduccion* rep=sonidos[variable];
-    if(rep->sonido==NULL)
-        return;
-    rep->sonido->setVolume(volumen);
+    if(music!=NULL)
+    {
+        Mix_HaltMusic();
+        Mix_FreeMusic(music);
+        music=NULL;
+    }
 }

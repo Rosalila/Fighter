@@ -10,6 +10,7 @@ public:
     vector <video::ITexture*> textures;
     vector <int> textures_size_x;
     vector <int> textures_size_y;
+
     //External logic
     int frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y;
     //Internal logic
@@ -33,6 +34,7 @@ class Stage
 {
     public:
     vector<Layer> back,front;
+    std::string music_path;
     Painter* painter;
     Sonido* sonido;
     int size;
