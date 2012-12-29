@@ -71,6 +71,9 @@ video::IImage* TextureImage(video::ITexture* texture);
 
 //! Convert an image to a texture. Remember to drop the returned pointer
 video::ITexture* ImageTexture(video::IImage* image, core::stringc name=core::stringc(""));
+
+//! Set alpha?
+bool setAlpha(u8 Alpha, video::ITexture* tex, video::ITexture* original_tex);
 };
 
 #endif

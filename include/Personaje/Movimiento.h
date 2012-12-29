@@ -9,9 +9,13 @@ class Movimiento
     public:
     stringw nombre;
     int damage;
+    int chip_damage;
+    bool unblockable_low;
+    bool unblockable_high;
+    bool unblockable_air;
     int frame_actual,tiempo_transcurrido;
     vector <Frame> frames;
-    Movimiento(stringw nombre,int damage,bool multihit);
+    Movimiento(stringw nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
     Frame getFrameActual();
     bool ya_pego;
     bool multihit;

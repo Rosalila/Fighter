@@ -157,6 +157,17 @@ void Menu::loopMenu()
         for(int i=0;i<(int)elementos.size();i++)
         {
             Elemento*e=elementos[i];
+            if(e->getTipo()==2)//Is MenuImagen
+            {
+                MenuImagen* mi=(MenuImagen*)e;
+                if(mi->fade_in_current!=-1)
+                {
+                    painter->setAlpha(mi->fade_in_current,mi->imagen,mi->original_image);
+                    mi->fade_in_current+=mi->fade_in_speed;
+                    if(mi->fade_in_current>255)
+                        mi->fade_in_current=255;
+                }
+            }
             if(e->current_displacement_x<e->stop_displacement_x_at)
             {
                 e->x+=e->displacement_x;
@@ -794,6 +805,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             int displacement_y=0;
             int stop_displacement_x_at=0;
             int stop_displacement_y_at=0;
+            int fade_in_initial=-1;
+            int fade_in_speed=0;
             if(e->Attribute("displacement_x")!=NULL)
                 displacement_x=atoi(e->Attribute("displacement_x"));
             if(e->Attribute("displacement_y")!=NULL)
@@ -802,8 +815,21 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                 stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
             if(e->Attribute("stop_displacement_y_at")!=NULL)
                 stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
-            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
-                                                          painter->getTexture(irr::io::path(path)),""
+            if(e->Attribute("fade_in_initial")!=NULL)
+                fade_in_initial=atoi(e->Attribute("fade_in_initial"));
+            if(e->Attribute("fade_in_speed")!=NULL)
+                fade_in_speed=atoi(e->Attribute("fade_in_speed"));
+
+            video::IImage* iimage_original_image = painter->driver->createImageFromFile(irr::io::path(path));
+            video::IImage* iimage_image = painter->driver->createImageFromFile(irr::io::path(path));
+            irr::video::ITexture*original_image=painter->driver->addTexture("test",iimage_original_image);
+            irr::video::ITexture*image=painter->driver->addTexture("test",iimage_image);
+
+            if(fade_in_initial!=-1)
+                painter->setAlpha(fade_in_initial,image,original_image);
+
+            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
+                                                          image,original_image,""
                                                           ));
         }else if(strcmp(e->Value(),"Text")==0)
         {
@@ -940,6 +966,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             int displacement_y=0;
                             int stop_displacement_x_at=0;
                             int stop_displacement_y_at=0;
+                            int fade_in_initial=-1;
+                            int fade_in_speed=0;
                             if(e->Attribute("displacement_x")!=NULL)
                                 displacement_x=atoi(e->Attribute("displacement_x"));
                             if(e->Attribute("displacement_y")!=NULL)
@@ -948,8 +976,21 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                 stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
                             if(e->Attribute("stop_displacement_y_at")!=NULL)
                                 stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
-                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                                          painter->getTexture(irr::io::path(path)),""
+                            if(e->Attribute("fade_in_initial")!=NULL)
+                                fade_in_initial=atoi(e->Attribute("fade_in_initial"));
+                            if(e->Attribute("fade_in_speed")!=NULL)
+                                fade_in_speed=atoi(e->Attribute("fade_in_speed"));
+
+                            video::IImage* iimage_original_image = painter->driver->createImageFromFile(irr::io::path(path));
+                            video::IImage* iimage_image = painter->driver->createImageFromFile(irr::io::path(path));
+                            irr::video::ITexture*original_image=painter->driver->addTexture("test",iimage_original_image);
+                            irr::video::ITexture*image=painter->driver->addTexture("test",iimage_image);
+
+                            if(fade_in_initial!=-1)
+                                painter->setAlpha(fade_in_initial,image,original_image);
+
+                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
+                                                                          image,original_image,""
                                                                            ));
                         }
                         if(strcmp(el->Value(),"chars")==0)
@@ -974,6 +1015,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                 int displacement_y=0;
                                 int stop_displacement_x_at=0;
                                 int stop_displacement_y_at=0;
+                                int fade_in_initial=-1;
+                                int fade_in_speed=0;
                                 if(e->Attribute("displacement_x")!=NULL)
                                     displacement_x=atoi(e->Attribute("displacement_x"));
                                 if(e->Attribute("displacement_y")!=NULL)
@@ -982,9 +1025,21 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                     stop_displacement_x_at=atoi(e->Attribute("stop_displacement_x_at"));
                                 if(e->Attribute("stop_displacement_y_at")!=NULL)
                                     stop_displacement_y_at=atoi(e->Attribute("stop_displacement_y_at"));
+                                if(e->Attribute("fade_in_initial")!=NULL)
+                                    fade_in_initial=atoi(e->Attribute("fade_in_initial"));
+                                if(e->Attribute("fade_in_speed")!=NULL)
+                                    fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                                elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                                              painter->getTexture(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png"))),stages[i]
+                                video::IImage* iimage_original_image = painter->driver->createImageFromFile(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png")));
+                                video::IImage* iimage_image = painter->driver->createImageFromFile(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png")));
+                                irr::video::ITexture*original_image=painter->driver->addTexture("test",iimage_original_image);
+                                irr::video::ITexture*image=painter->driver->addTexture("test",iimage_image);
+
+                                if(fade_in_initial!=-1)
+                                    painter->setAlpha(fade_in_initial,image,original_image);
+
+                                elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
+                                                                              image,original_image,stages[i]
                                                                                ));
                             }
 //                            elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,

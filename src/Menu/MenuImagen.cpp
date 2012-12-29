@@ -1,6 +1,6 @@
 #include "Menu/MenuImagen.h"
 
-MenuImagen::MenuImagen(Painter*painter,int x, int y, int displacement_x, int displacement_y,int stop_displacement_x_at,int stop_displacement_y_at, int width, int height,bool visible,irr::video::ITexture* imagen,stringw value)
+MenuImagen::MenuImagen(Painter*painter,int x, int y, int displacement_x, int displacement_y,int stop_displacement_x_at,int stop_displacement_y_at, int fade_in_initial,int fade_in_speed, int width, int height,bool visible,irr::video::ITexture* imagen,irr::video::ITexture* original_image,stringw value)
 {
     this->x=x;
     this->y=y;
@@ -8,10 +8,13 @@ MenuImagen::MenuImagen(Painter*painter,int x, int y, int displacement_x, int dis
     this->displacement_y=displacement_y;
     this->stop_displacement_x_at=stop_displacement_x_at;
     this->stop_displacement_y_at=stop_displacement_y_at;
+    this->fade_in_current=fade_in_initial;
+    this->fade_in_speed=fade_in_speed;
     this->height=height;
     this->width=width;
     this->visible=visible;
     this->imagen=imagen;
+    this->original_image=original_image;
     this->painter=painter;
     this->value=value;
 }

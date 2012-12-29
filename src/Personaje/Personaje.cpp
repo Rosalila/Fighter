@@ -417,9 +417,9 @@ void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion*>
 //{
 //    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
 //}
-void Personaje::agregarMovimiento(stringw movimiento,int damage,bool multihit)
+void Personaje::agregarMovimiento(stringw movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,multihit);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -803,14 +803,33 @@ void Personaje::cargarMain()
                 stringw nombre(elemento_imagen->Attribute("name"));
                 int frames=atoi(elemento_imagen->Attribute("frames"));
                 int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
+
                 int damage=0;
                 if(elemento_imagen->Attribute("damage")!=NULL)
                     damage=atoi(elemento_imagen->Attribute("damage"));
+
+                int chip_damage=0;
+                if(elemento_imagen->Attribute("chip_damage")!=NULL)
+                    chip_damage=atoi(elemento_imagen->Attribute("chip_damage"));
+
                 bool multihit=false;
                 if(elemento_imagen->Attribute("multihit")!=NULL)
                     multihit=strcmp(elemento_imagen->Attribute("multihit"),"yes")==0;
+
+                bool unblockable_air=false;
+                if(elemento_imagen->Attribute("unblockable_air")!=NULL)
+                    unblockable_air=strcmp(elemento_imagen->Attribute("unblockable_air"),"yes")==0;
+
+                bool unblockable_high=false;
+                if(elemento_imagen->Attribute("unblockable_high")!=NULL)
+                    unblockable_high=strcmp(elemento_imagen->Attribute("unblockable_high"),"yes")==0;
+
+                bool unblockable_low=false;
+                if(elemento_imagen->Attribute("unblockable_low")!=NULL)
+                    unblockable_low=strcmp(elemento_imagen->Attribute("unblockable_low"),"yes")==0;
+
                 setString(stringw("isActive.")+nombre,"no");
-                agregarMovimiento(nombre,damage,multihit);
+                agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
                 for(int i=0;i<frames;i++)
                     agregarFrame(nombre,frame_duration);
                 if(elemento_imagen->Attribute("move_x")!=NULL)

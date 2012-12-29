@@ -30,10 +30,19 @@ public:
     stringw move_cancel_pa;
     stringw move_cancel_pb;
 
+    //hit cancel control
     stringw hit_cancel_pa;
     int hit_cancel_pa_damage;
+    int hit_cancel_pa_chip_damage;
+    bool hit_cancel_pa_unblockable_air;
+    bool hit_cancel_pa_unblockable_high;
+    bool hit_cancel_pa_unblockable_low;
     stringw hit_cancel_pb;
     int hit_cancel_pb_damage;
+    int hit_cancel_pb_chip_damage;
+    bool hit_cancel_pb_unblockable_air;
+    bool hit_cancel_pb_unblockable_high;
+    bool hit_cancel_pb_unblockable_low;
     int victory_image_x;
     int victory_image_y;
 

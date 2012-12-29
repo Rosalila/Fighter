@@ -644,3 +644,53 @@ video::ITexture* Painter::ImageTexture(video::IImage* image, core::stringc name)
    texture->grab();
    return texture;
 }
+
+bool Painter::setAlpha(u8 Alpha, video::ITexture* tex,video::ITexture* original_tex)
+{
+    if(!tex)
+    {
+        printf("texPointer == NULL\n");
+        return false;
+    };
+
+    u32 size = tex->getSize().Width*tex->getSize().Height;  // get Texture Size
+
+    switch(tex->getColorFormat()) //getTexture Format, (nly 2 support alpha)
+    {
+        case video::ECF_A1R5G5B5: //see video::ECOLOR_FORMAT for more information on the texture formats.
+        {
+          //  printf("16BIT\n");
+            u16* Data = (u16*)tex->lock(); //get Data for 16-bit Texture
+            u16* original_Data = (u16*)original_tex->lock(); //get Data for 16-bit Texture
+            for(u32 i = 0; i < size ; i++)
+            {
+                if(video::getBlue(original_Data[i])-255+Alpha<0)
+                    Data[i] = video::RGBA16(video::getRed(Data[i]), video::getGreen(Data[i]), video::getBlue(Data[i]), 0);
+                else
+                    Data[i] = video::RGBA16(video::getRed(Data[i]), video::getGreen(Data[i]), video::getBlue(Data[i]), video::getBlue(original_Data[i])-255+Alpha);
+            }
+            //printf("AlphaValueOfTexture(16bit): %i\n", (Data[0] & 0x80) << 8);
+            tex->unlock();
+            break;
+        };
+        case video::ECF_A8R8G8B8:
+        {
+           // printf("32BIT\n");
+            u32* Data = (u32*)tex->lock();
+            u32* original_Data = (u32*)original_tex->lock();
+            for( u32 i = 0 ; i < size ; i++)
+            {
+                if(((u8*)&original_Data[i])[3]-255+Alpha<0)
+                    ((u8*)&Data[i])[3] = 0;//get Data for 32-bit Texture
+                else
+                    ((u8*)&Data[i])[3] = ((u8*)&original_Data[i])[3]-255+Alpha;//get Data for 32-bit Texture
+            }
+            //printf("AlphaValueOfTexture(32bit): %i\n", ((u8*)&Data[0])[3]);
+            tex->unlock();
+            break;
+        };
+        default: printf("Seems Like There is no Alpha Channel Supported\n");
+            return false;
+    };
+    return true;
+};

@@ -1,13 +1,17 @@
 #include "Personaje/Movimiento.h"
 
-Movimiento::Movimiento(stringw nombre,int damage,bool multihit)
+Movimiento::Movimiento(stringw nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
 {
     frame_actual=0;
     tiempo_transcurrido=0;
     this->nombre=nombre;
     this->damage=damage;
+    this->chip_damage=chip_damage;
     this->ya_pego=false;
     this->multihit=multihit;
+    this->unblockable_air=unblockable_air;
+    this->unblockable_high=unblockable_high;
+    this->unblockable_low=unblockable_low;
 }
 Frame Movimiento::getFrameActual()
 {
