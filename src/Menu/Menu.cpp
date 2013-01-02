@@ -8,35 +8,37 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo)
     this->save_inputs_signal=false;
     this->char_select=NULL;
 
-        TiXmlDocument doc_t((char*)"config.xml");
-        doc_t.LoadFile();
-        TiXmlDocument *doc;
-        doc=&doc_t;
+    vs_screen=painter->getTexture("misc/vs_screen.png");
 
-        vector<stringw> chars,stages;
-		for(TiXmlNode* node_chars=doc->FirstChild("Chars");
-                node_chars!=NULL;
-                node_chars=node_chars->NextSibling("Chars"))
-        {
-            for(TiXmlNode* node_chars2=node_chars->FirstChild("char");
-                    node_chars2!=NULL;
-                    node_chars2=node_chars2->NextSibling("char"))
-            {
-                chars.push_back(stringw(node_chars2->ToElement()->Attribute("nombre")));
-            }
-        }
+    TiXmlDocument doc_t((char*)"config.xml");
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
 
-		for(TiXmlNode* node_chars=doc->FirstChild("Stages");
-                node_chars!=NULL;
-                node_chars=node_chars->NextSibling("Stages"))
+    std::vector<std::string> chars,stages;
+    for(TiXmlNode* node_chars=doc->FirstChild("Chars");
+            node_chars!=NULL;
+            node_chars=node_chars->NextSibling("Chars"))
+    {
+        for(TiXmlNode* node_chars2=node_chars->FirstChild("char");
+                node_chars2!=NULL;
+                node_chars2=node_chars2->NextSibling("char"))
         {
-            for(TiXmlNode* node_chars2=node_chars->FirstChild("stage");
-                    node_chars2!=NULL;
-                    node_chars2=node_chars2->NextSibling("stage"))
-            {
-                stages.push_back(stringw(node_chars2->ToElement()->Attribute("nombre")));
-            }
+            chars.push_back(std::string(node_chars2->ToElement()->Attribute("nombre")));
         }
+    }
+
+    for(TiXmlNode* node_chars=doc->FirstChild("Stages");
+            node_chars!=NULL;
+            node_chars=node_chars->NextSibling("Stages"))
+    {
+        for(TiXmlNode* node_chars2=node_chars->FirstChild("stage");
+                node_chars2!=NULL;
+                node_chars2=node_chars2->NextSibling("stage"))
+        {
+            stages.push_back(std::string(node_chars2->ToElement()->Attribute("nombre")));
+        }
+    }
 
     cargarDesdeXml(archivo,chars,stages);
 }
@@ -146,11 +148,11 @@ void Menu::loopMenu()
 	    receiver->endEventProcess();
 	    receiver->startEventProcess();
 	    //setear frames a "60"
-	    painter->device->getTimer()->start();
-	    for(u32 t=painter->device->getTimer()->getTime();
-            t+16>painter->device->getTimer()->getTime();
-            painter->device->getTimer()->tick()
-         );
+//	    painter->device->getTimer()->start();//!!60 FPS
+//	    for(u32 t=painter->device->getTimer()->getTime();
+//            t+16>painter->device->getTimer()->getTime();
+//            painter->device->getTimer()->tick()
+//         );
         dibujarMenu();
 
         //Move Elements
@@ -162,7 +164,7 @@ void Menu::loopMenu()
                 MenuImagen* mi=(MenuImagen*)e;
                 if(mi->fade_in_current!=-1)
                 {
-                    painter->setAlpha(mi->fade_in_current,mi->imagen,mi->original_image);
+                    //painter->setAlpha(mi->fade_in_current,mi->imagen,mi->original_image); //!!SET ALPHA
                     mi->fade_in_current+=mi->fade_in_speed;
                     if(mi->fade_in_current>255)
                         mi->fade_in_current=255;
@@ -196,14 +198,14 @@ void Menu::loopMenu()
             {
             }else if(inputa->getBufferInputs()[0]=="6")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p1_x++;
                 if(char_select->select_p1_x>=char_select->size_x)
                     char_select->select_p1_x=0;
                 tecla_arriba_p1=false;
             }else if(inputa->getBufferInputs()[0]=="4")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p1_x--;
                 if(char_select->select_p1_x<0)
                     char_select->select_p1_x=char_select->size_x-1;
@@ -211,7 +213,7 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="2")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p1_y++;
                 if(char_select->select_p1_y>=char_select->size_y)
                     char_select->select_p1_y=0;
@@ -219,7 +221,7 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="8")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p1_y--;
                 if(char_select->select_p1_y<0)
                     char_select->select_p1_y=char_select->size_y-1;
@@ -227,49 +229,49 @@ void Menu::loopMenu()
             }
             else if(inputa->getBufferInputs()[0]=="a")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(0);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="b")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(1);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="c")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(2);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="d")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(3);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="e")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(4);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="f")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(5);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="g")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(6);
                 tecla_arriba_p1=false;
             }
             else if(inputa->getBufferInputs()[0]=="h")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPA(7);
                 tecla_arriba_p1=false;
             }
@@ -291,14 +293,14 @@ void Menu::loopMenu()
             {
             }else if(inputb->getBufferInputs()[0]=="6")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p2_x++;
                 if(char_select->select_p2_x>=char_select->size_x)
                     char_select->select_p2_x=0;
                 tecla_arriba_p2=false;
             }else if(inputb->getBufferInputs()[0]=="4")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p2_x--;
                 if(char_select->select_p2_x<0)
                     char_select->select_p2_x=char_select->size_x-1;
@@ -306,7 +308,7 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="2")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p2_y++;
                 if(char_select->select_p2_y>=char_select->size_y)
                     char_select->select_p2_y=0;
@@ -314,7 +316,7 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="8")
             {
-                sonido->reproducirSonido(stringw("Menu.move_char"),false);
+                sonido->reproducirSonido(std::string("Menu.move_char"),false);
                 char_select->select_p2_y--;
                 if(char_select->select_p2_y<0)
                     char_select->select_p2_y=char_select->size_y-1;
@@ -322,49 +324,49 @@ void Menu::loopMenu()
             }
             else if(inputb->getBufferInputs()[0]=="a")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(0);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="b")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(1);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="c")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(2);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="d")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(3);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="e")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(4);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="f")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(5);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="g")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(6);
                 tecla_arriba_p2=false;
             }
             else if(inputb->getBufferInputs()[0]=="h")
             {
-                sonido->reproducirSonido(stringw("Menu.select_char"),false);
+                sonido->reproducirSonido(std::string("Menu.select_char"),false);
                 char_select->lockPB(7);
                 tecla_arriba_p2=false;
             }
@@ -382,23 +384,23 @@ void Menu::loopMenu()
             tecla_arriba=false;
             if(receiver->IsKeyDownn(irr::KEY_ESCAPE))
             {
-                sonido->reproducirSonido(stringw("Menu.back"),false);
+                sonido->reproducirSonido(std::string("Menu.back"),false);
                 exit_signal=true;
                 break;
             }
             else if(receiver->IsKeyDownn(irr::KEY_DOWN))
             {
-                sonido->reproducirSonido(stringw("Menu.move"),false);
+                sonido->reproducirSonido(std::string("Menu.move"),false);
                 ((MenuContenedor*)contenedor_actual)->avanzar();
             }
             else if(receiver->IsKeyDownn(irr::KEY_UP))
             {
-                sonido->reproducirSonido(stringw("Menu.move"),false);
+                sonido->reproducirSonido(std::string("Menu.move"),false);
                 ((MenuContenedor*)contenedor_actual)->retroceder();
             }
             else if(receiver->IsKeyDownn(irr::KEY_RIGHT))
             {
-                sonido->reproducirSonido(stringw("Menu.move"),false);
+                sonido->reproducirSonido(std::string("Menu.move"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
                     MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
@@ -436,7 +438,7 @@ void Menu::loopMenu()
             }
             else if(receiver->IsKeyDownn(irr::KEY_LEFT))
             {
-                sonido->reproducirSonido(stringw("Menu.move"),false);
+                sonido->reproducirSonido(std::string("Menu.move"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
                     MenuLista* ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
@@ -473,7 +475,7 @@ void Menu::loopMenu()
                 }
             }else if(receiver->IsKeyPressed(irr::KEY_RETURN))
             {
-                sonido->reproducirSonido(stringw("Menu.select"),false);
+                sonido->reproducirSonido(std::string("Menu.select"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
                     MenuLista*ml=((MenuLista*)((MenuContenedor*)contenedor_actual)->getElementoSeleccionado());
@@ -633,7 +635,7 @@ void Menu::loopMenu()
                     if(mb->getAccion()>=10 && mb->getAccion()<=29)
                     {
                         int player;
-                        stringw mapeo="";
+                        std::string mapeo="";
                         int accion=mb->getAccion();
                         if(accion>=10 && accion<=19)
                             player=1;
@@ -662,7 +664,7 @@ void Menu::loopMenu()
                         if(accion==19||accion==29)mapeo="f";
 
                         mb->input_config="";
-                        stringw str_input=getInputPressed();
+                        std::string str_input=getInputPressed();
                         //key
                         if((char)str_input[0]!='j')
                         {
@@ -730,16 +732,9 @@ void Menu::loopMenu()
 
 void Menu::dibujarMenu()
 {
-    if (painter->isWindowActive())
-    {
-        if(!painter->device->run())
-            exit(0);
-        painter->beginScene();
-        for(int i=0;i<(int)elementos.size();i++)
-            elementos[i]->dibujar();
-        painter->endScene();
-    }
-    painter->run();
+    for(int i=0;i<(int)elementos.size();i++)
+        elementos[i]->dibujar();
+    painter->updateScreen();
 }
 
 void Menu::cargarConfig()
@@ -758,7 +753,7 @@ void Menu::cargarConfig()
     rounds=atoi(rounds_elem->Attribute("rounds"));
 }
 
-void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> stages)
+void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::string> stages)
 {
     music_path="menu/audio/music.ogg";
 
@@ -782,8 +777,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
         TiXmlElement* e=elemento->ToElement();
         if(strcmp(e->Value(),"CharSelect")==0)
         {
-            stringw path(e->Attribute("path"));
-            stringw dir("menu/");
+            std::string path(e->Attribute("path"));
+            std::string dir("menu/");
             path=dir+path;
             char_select=new MenuCharSelect(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),
                                                           atoi(e->Attribute("size_x")),atoi(e->Attribute("size_y")),atoi(e->Attribute("box_size_x")),atoi(e->Attribute("box_size_y")),
@@ -798,8 +793,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             elementos.push_back((Elemento*)char_select);
         }else if(strcmp(e->Value(),"Image")==0)
         {
-            stringw path(e->Attribute("path"));
-            stringw dir("menu/");
+            std::string path(e->Attribute("path"));
+            std::string dir("menu/");
             path=dir+path;
             int displacement_x=0;
             int displacement_y=0;
@@ -820,13 +815,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-            video::IImage* iimage_original_image = painter->driver->createImageFromFile(irr::io::path(path));
-            video::IImage* iimage_image = painter->driver->createImageFromFile(irr::io::path(path));
-            irr::video::ITexture*original_image=painter->driver->addTexture("test",iimage_original_image);
-            irr::video::ITexture*image=painter->driver->addTexture("test",iimage_image);
+            SDL_Surface* original_image=painter->getTexture(path);
+            SDL_Surface* image=painter->getTexture(path);
 
-            if(fade_in_initial!=-1)
-                painter->setAlpha(fade_in_initial,image,original_image);
+//            if(fade_in_initial!=-1)//!!SET ALPHA
+//                painter->setAlpha(fade_in_initial,image,original_image);
 
             elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
                                                           image,original_image,""
@@ -834,11 +827,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
         }else if(strcmp(e->Value(),"Text")==0)
         {
                 elementos.push_back((Elemento*)new MenuTexto(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
-                                                             e->Attribute("text"),video::SColor(atoi(e->Attribute("alpha")),atoi(e->Attribute("red")),atoi(e->Attribute("green")),atoi(e->Attribute("blue")))
+                                                             e->Attribute("text")
                                                              ));
         }else if(strcmp(e->Value(),"Container")==0)
         {
-            vector<Elemento*>elementos_contenedor;
+            std::vector<Elemento*>elementos_contenedor;
             for(TiXmlNode* elem_container=elemento->FirstChild();
                     elem_container!=NULL;
                     elem_container=elem_container->NextSibling())
@@ -918,8 +911,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                     }
 
                     elementos_contenedor.push_back((Elemento*)new MenuBoton(painter,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
-                                                                            painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path"))),atoi(ec->Attribute("text_x")),atoi(ec->Attribute("text_y")),ec->Attribute("text"),video::SColor(atoi(ec->Attribute("alpha")),atoi(ec->Attribute("red")),atoi(ec->Attribute("green")),atoi(ec->Attribute("blue"))),
-                                                                            painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_selected"))),atoi(ec->Attribute("text_x_selected")),atoi(ec->Attribute("text_y_selected")),ec->Attribute("text_selected"),video::SColor(atoi(ec->Attribute("alpha_selected")),atoi(ec->Attribute("red_selected")),atoi(ec->Attribute("green_selected")),atoi(ec->Attribute("blue_selected"))),
+                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path"))),atoi(ec->Attribute("text_x")),atoi(ec->Attribute("text_y")),ec->Attribute("text"),
+                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_selected"))),atoi(ec->Attribute("text_x_selected")),atoi(ec->Attribute("text_y_selected")),ec->Attribute("text_selected"),
                                                                             action,menu_load
                                                                             ));
                 }
@@ -937,15 +930,15 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                     }
                         accion=atoi(ec->Attribute("action"));
                     elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
-                                                                            painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_bg"))),atoi(ec->Attribute("bar_x")),atoi(ec->Attribute("bar_y")),painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path"))),
-                                                                            painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_bg_selected"))),atoi(ec->Attribute("bar_x_selected")),atoi(ec->Attribute("bar_y_selected")),painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_selected"))),
+                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_bg"))),atoi(ec->Attribute("bar_x")),atoi(ec->Attribute("bar_y")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path"))),
+                                                                            painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_bg_selected"))),atoi(ec->Attribute("bar_x_selected")),atoi(ec->Attribute("bar_y_selected")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_selected"))),
                                                                             atoi(ec->Attribute("max")),default_value,accion
                                                                             )
                                                    );
                 }
                 if(strcmp(ec->Value(),"List")==0)
                 {
-                    vector<Elemento*>elem_lista;
+                    std::vector<Elemento*>elem_lista;
 
                     for(TiXmlNode* elem_list=elem_container->FirstChild();
                             elem_list!=NULL;
@@ -954,12 +947,12 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                         TiXmlElement* el=elem_list->ToElement();
                         if(strcmp(el->Value(),"Text")==0)
                             elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(ec->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                             el->Attribute("text"),video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
+                                                             el->Attribute("text")
                                                              ));
                         if(strcmp(el->Value(),"Image")==0)
                         {
-                            stringw path(el->Attribute("path"));
-                            stringw dir("menu/");
+                            std::string path(el->Attribute("path"));
+                            std::string dir("menu/");
                             path=dir+path;
 
                             int displacement_x=0;
@@ -981,13 +974,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             if(e->Attribute("fade_in_speed")!=NULL)
                                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                            video::IImage* iimage_original_image = painter->driver->createImageFromFile(irr::io::path(path));
-                            video::IImage* iimage_image = painter->driver->createImageFromFile(irr::io::path(path));
-                            irr::video::ITexture*original_image=painter->driver->addTexture("test",iimage_original_image);
-                            irr::video::ITexture*image=painter->driver->addTexture("test",iimage_image);
+                            SDL_Surface*original_image=painter->getTexture(path);
+                            SDL_Surface*image=painter->getTexture(path);
 
-                            if(fade_in_initial!=-1)
-                                painter->setAlpha(fade_in_initial,image,original_image);
+//                            if(fade_in_initial!=-1)//!!SET APLHA
+//                                painter->setAlpha(fade_in_initial,image,original_image);
 
                             elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                                           image,original_image,""
@@ -1003,7 +994,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
 //                                pos_pb[pos]=elementos_contenedor.size();
                             for(int i=0;i<(int)chars.size();i++)
                             elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                             chars[i],video::SColor(atoi(el->Attribute("alpha")),atoi(el->Attribute("red")),atoi(el->Attribute("green")),atoi(el->Attribute("blue")))
+                                                             chars[i]
                                                              ));
                         }
                         if(strcmp(el->Value(),"stage")==0)
@@ -1030,13 +1021,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                                 if(e->Attribute("fade_in_speed")!=NULL)
                                     fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                                video::IImage* iimage_original_image = painter->driver->createImageFromFile(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png")));
-                                video::IImage* iimage_image = painter->driver->createImageFromFile(irr::io::path(stringw("stages/")+stages[i]+stringw("/images/preview.png")));
-                                irr::video::ITexture*original_image=painter->driver->addTexture("test",iimage_original_image);
-                                irr::video::ITexture*image=painter->driver->addTexture("test",iimage_image);
+                                SDL_Surface*original_image=painter->getTexture(std::string("stages/")+std::string(stages[i])+std::string("/images/preview.png"));
+                                SDL_Surface*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
-                                if(fade_in_initial!=-1)
-                                    painter->setAlpha(fade_in_initial,image,original_image);
+//                                if(fade_in_initial!=-1)//!!SET ALPHA
+//                                    painter->setAlpha(fade_in_initial,image,original_image);
 
                                 elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
                                                                               image,original_image,stages[i]
@@ -1070,11 +1059,10 @@ void Menu::cargarDesdeXml(char* archivo,vector<stringw> chars,vector<stringw> st
                             accion=6;
                     }
                     elementos_contenedor.push_back((Elemento*)new MenuLista(painter,atoi(ec->Attribute("x")),atoi(ec->Attribute("y")),atoi(ec->Attribute("width")),atoi(ec->Attribute("height")),strcmp(ec->Attribute("visible"),"true")==0,
-                                                                            atoi(ec->Attribute("arrow_left_x")),atoi(ec->Attribute("arrow_left_y")),painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_left"))),
-                                                                            atoi(ec->Attribute("arrow_right_x")),atoi(ec->Attribute("arrow_right_y")),painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_right"))),
-                                                                            //atoi(ec->Attribute("arrow_right_x")),0,painter->getTexture("menu/flecha_izq2.png"),150,0,painter->getTexture("menu/flecha_der2.png"),
-                                                                            atoi(ec->Attribute("arrow_left_x_selected")),atoi(ec->Attribute("arrow_left_y_selected")),painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_left_selected"))),
-                                                                            atoi(ec->Attribute("arrow_right_x_selected")),atoi(ec->Attribute("arrow_right_y_selected")),painter->getTexture(stringw("menu/")+stringw(ec->Attribute("path_right_selected"))),
+                                                                            atoi(ec->Attribute("arrow_left_x")),atoi(ec->Attribute("arrow_left_y")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_left"))),
+                                                                            atoi(ec->Attribute("arrow_right_x")),atoi(ec->Attribute("arrow_right_y")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_right"))),
+                                                                            atoi(ec->Attribute("arrow_left_x_selected")),atoi(ec->Attribute("arrow_left_y_selected")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_left_selected"))),
+                                                                            atoi(ec->Attribute("arrow_right_x_selected")),atoi(ec->Attribute("arrow_right_y_selected")),painter->getTexture(std::string("menu/")+std::string(ec->Attribute("path_right_selected"))),
                                                                             elem_lista,
                                                                             accion
                                                                             )
@@ -1094,8 +1082,8 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 //    MenuContenedor *mc=contenedor_actual;
 //    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa[num]];
 //    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-//    stringw s2=mt->texto;
-    stringw s2=char_select->getLockedNamesPA()[num];
+//    std::string s2=mt->texto;
+    std::string s2=char_select->getLockedNamesPA()[num];
     int num_paleta=char_select->getLockedPalettesPA()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
@@ -1121,7 +1109,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(painter,sonido,1,num_paleta);
-    p->cargarDesdeXML(stage->size/2-painter->ventana_x/4-200,0,inputa,(char *)path_a);
+    p->cargarDesdeXML(stage->size/2-painter->screen_width/4-200,0,inputa,(char *)path_a);
     return p;
 }
 
@@ -1131,8 +1119,8 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 //    MenuContenedor *mc=contenedor_actual;
 //    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb[num]];
 //    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-//    stringw s2=mt->texto;
-    stringw s2=char_select->getLockedNamesPB()[num];
+//    std::string s2=mt->texto;
+    std::string s2=char_select->getLockedNamesPB()[num];
     int num_paleta=char_select->getLockedPalettesPB()[num];
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
@@ -1171,7 +1159,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(painter,sonido,2,num_paleta);
-    p->cargarDesdeXML(stage->size/2-painter->ventana_x/4+200,0,inputb,(char *)path_b);
+    p->cargarDesdeXML(stage->size/2-painter->screen_width/4+200,0,inputb,(char *)path_b);
     return p;
 }
 
@@ -1181,7 +1169,7 @@ char* Menu::getStage()
     MenuContenedor *mc=((MenuContenedor*)contenedor_actual);
     MenuLista *ml=(MenuLista*)mc->elementos[pos_stage];
     MenuImagen *mt=(MenuImagen*)ml->getElementoActual();
-    stringw s2=mt->value;
+    std::string s2=mt->value;
     char *str = new char[255];
     sprintf(str,"%ls",s2.c_str());
     return str;
@@ -1208,18 +1196,18 @@ void Menu::escribirInputsXML(Input* ia,Input* ib)
     doc->SaveFile( "misc/inputs.xml" );
 }
 
-stringw Menu::getInputPressed()
+std::string Menu::getInputPressed()
 {
     while(true)
     {
         receiver->endEventProcess();
         receiver->startEventProcess();
         //setear frames a "60"
-        painter->device->getTimer()->start();
-        for(u32 t=painter->device->getTimer()->getTime();
-            t+16>painter->device->getTimer()->getTime();
-            painter->device->getTimer()->tick()
-         );
+//        painter->device->getTimer()->start();//!!60 FPS
+//        for(u32 t=painter->device->getTimer()->getTime();
+//            t+16>painter->device->getTimer()->getTime();
+//            painter->device->getTimer()->tick()
+//         );
         dibujarMenu();
         if(receiver->IsKeyDownn(irr::KEY_KEY_Q))
             return "Q";
@@ -1338,59 +1326,59 @@ stringw Menu::getInputPressed()
     }
 }
 
-irr::EKEY_CODE Menu::toKeyCode(stringw str)
+irr::EKEY_CODE Menu::toKeyCode(std::string str)
 {
-    if(str==stringw("Q"))
+    if(str==std::string("Q"))
         return irr::KEY_KEY_Q;
-    if(str==stringw("W"))
+    if(str==std::string("W"))
         return irr::KEY_KEY_W;
-    if(str==stringw("E"))
+    if(str==std::string("E"))
         return irr::KEY_KEY_E;
-    if(str==stringw("R"))
+    if(str==std::string("R"))
         return irr::KEY_KEY_R;
-    if(str==stringw("T"))
+    if(str==std::string("T"))
         return irr::KEY_KEY_T;
-    if(str==stringw("Y"))
+    if(str==std::string("Y"))
         return irr::KEY_KEY_Y;
-    if(str==stringw("U"))
+    if(str==std::string("U"))
         return irr::KEY_KEY_U;
-    if(str==stringw("I"))
+    if(str==std::string("I"))
         return irr::KEY_KEY_I;
-    if(str==stringw("O"))
+    if(str==std::string("O"))
         return irr::KEY_KEY_O;
-    if(str==stringw("P"))
+    if(str==std::string("P"))
         return irr::KEY_KEY_P;
-    if(str==stringw("A"))
+    if(str==std::string("A"))
         return irr::KEY_KEY_A;
-    if(str==stringw("S"))
+    if(str==std::string("S"))
         return irr::KEY_KEY_S;
-    if(str==stringw("D"))
+    if(str==std::string("D"))
         return irr::KEY_KEY_D;
-    if(str==stringw("F"))
+    if(str==std::string("F"))
         return irr::KEY_KEY_F;
-    if(str==stringw("G"))
+    if(str==std::string("G"))
         return irr::KEY_KEY_G;
-    if(str==stringw("H"))
+    if(str==std::string("H"))
         return irr::KEY_KEY_H;
-    if(str==stringw("J"))
+    if(str==std::string("J"))
         return irr::KEY_KEY_J;
-    if(str==stringw("K"))
+    if(str==std::string("K"))
         return irr::KEY_KEY_K;
-    if(str==stringw("L"))
+    if(str==std::string("L"))
         return irr::KEY_KEY_L;
-    if(str==stringw("Z"))
+    if(str==std::string("Z"))
         return irr::KEY_KEY_Z;
-    if(str==stringw("X"))
+    if(str==std::string("X"))
         return irr::KEY_KEY_X;
-    if(str==stringw("C"))
+    if(str==std::string("C"))
         return irr::KEY_KEY_C;
-    if(str==stringw("V"))
+    if(str==std::string("V"))
         return irr::KEY_KEY_V;
-    if(str==stringw("B"))
+    if(str==std::string("B"))
         return irr::KEY_KEY_B;
-    if(str==stringw("N"))
+    if(str==std::string("N"))
         return irr::KEY_KEY_N;
-    if(str==stringw("M"))
+    if(str==std::string("M"))
         return irr::KEY_KEY_M;
     return irr::KEY_ESCAPE;
 }
@@ -1406,7 +1394,7 @@ void Menu::llenarInputsBotones()
             if(mb->getAccion()>=10 && mb->getAccion()<=29)
             {
                 int player;
-                stringw mapeo="";
+                std::string mapeo="";
                 int accion=mb->getAccion();
                 if(accion>=10 && accion<=19)
                     player=1;
@@ -1464,83 +1452,60 @@ void Menu::llenarInputsBotones()
                 if(pos!=-1)
                 {
                     mb->input_config+=" j";
-                    mb->input_config+=stringw((int)temp->botones[pos].getNumJoystick());
-                    mb->input_config+=stringw((int)temp->botones[pos].joystick);
+                    mb->input_config+=painter->convertInt((int)temp->botones[pos].getNumJoystick());
+                    mb->input_config+=painter->convertInt((int)temp->botones[pos].joystick);
                 }
 
                 if(posc!=-1)
                 {
                     mb->input_config+=" j";
-                    mb->input_config+=stringw((int)temp->cruz[posc].getNumJoystick());
+                    mb->input_config+=painter->convertInt((int)temp->cruz[posc].getNumJoystick());
                     mb->input_config+="-";
                     if(temp->cruz[posc].joystick==-8)
-                        mb->input_config+=stringw("up");
+                        mb->input_config+=std::string("up");
                     else if(temp->cruz[posc].joystick==-2)
-                        mb->input_config+=stringw("down");
+                        mb->input_config+=std::string("down");
                     else if(temp->cruz[posc].joystick==-4)
-                        mb->input_config+=stringw("left");
+                        mb->input_config+=std::string("left");
                     else if(temp->cruz[posc].joystick==-6)
-                        mb->input_config+=stringw("right");
+                        mb->input_config+=std::string("right");
                     else
-                        mb->input_config+=stringw((int)temp->cruz[posc].joystick);
+                        mb->input_config+=painter->convertInt((int)temp->cruz[posc].joystick);
                 }
             }
         }
     }
 }
 
-void Menu::printVsScreen(vector<irr::video::ITexture*>pa_previews,vector<irr::video::ITexture*>pb_previews)
+void Menu::printVsScreen(vector<SDL_Surface*>pa_previews,vector<SDL_Surface*>pb_previews)
 {
-    if (painter->isWindowActive())
+    painter->draw2DImage
+    (   vs_screen,
+        vs_screen->w,vs_screen->h,
+        0,0,
+        0,
+        false);
+
+    for(int i=0;i<(int)pa_previews.size();i++)
     {
-        painter->beginScene();
-
-            irr::video::ITexture* texture=painter->getTexture("misc/vs_screen.png");
-            painter->draw2DImage
-            (   texture,
-                irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
-                irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::f32(0), irr::core::vector2df (0,0),
-                true,
-                irr::video::SColor(255,255,255,255),
-                false,
-                false);
-
-            for(int i=0;i<(int)pa_previews.size();i++)
-            {
-                irr::video::ITexture*texture=pa_previews[i];
-                painter->draw2DImage
-                (   texture,
-                    irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
-                    irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(i*200,painter->ventana_y-texture->getOriginalSize ().Height-150),
-                    irr::core::position2d<irr::f32>(0,0),
-                    irr::f32(0), irr::core::vector2df (0,0),
-                    true,
-                    irr::video::SColor(255,255,255,255),
-                    false,
-                    false);
-            }
-
-            for(int i=0;i<(int)pb_previews.size();i++)
-            {
-                irr::video::ITexture*texture=pb_previews[i];
-                painter->draw2DImage
-                (   texture,
-                    irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
-                    irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(painter->ventana_x-(i+1)*texture->getOriginalSize ().Width-50,painter->ventana_y-texture->getOriginalSize ().Height-150),
-                    irr::core::position2d<irr::f32>(0,0),
-                    irr::f32(0), irr::core::vector2df (0,0),
-                    true,
-                    irr::video::SColor(255,255,255,255),
-                    false,
-                    false);
-            }
-
-        painter->endScene();
-        painter->run();
+        SDL_Surface*texture=pa_previews[i];
+        painter->draw2DImage
+        (   texture,
+            texture->w,texture->h,
+            i*200,painter->screen_height-texture->h-150,
+            0,
+            false);
     }
+
+    for(int i=0;i<(int)pb_previews.size();i++)
+    {
+        SDL_Surface*texture=pb_previews[i];
+        painter->draw2DImage
+        (   texture,
+            texture->w,texture->h,
+            painter->screen_width-(i+1)*texture->w-50,painter->screen_height-texture->h-150,
+            0,
+            false);
+    }
+    painter->updateScreen();
 }

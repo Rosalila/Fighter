@@ -1,6 +1,6 @@
 #include "IA/Transicion.h"
 
-Transicion::Transicion(stringw input,stringw destino,bool recompensable)
+Transicion::Transicion(std::string input,std::string destino,bool recompensable)
 {
     this->input=input;
     this->destino=destino;
@@ -24,12 +24,12 @@ void Transicion::setWait(int wait)
     this->wait=wait;
 }
 
-stringw Transicion::getInput()
+std::string Transicion::getInput()
 {
     return input;
 }
 
-stringw Transicion::getDestino()
+std::string Transicion::getDestino()
 {
     return destino;
 }
@@ -44,10 +44,10 @@ int Transicion::getRecompensa()
     return recompensa;
 }
 
-bool Transicion::cumpleCondiciones(irr::core::map<stringw,stringw>*strings,
-                                   irr::core::map<stringw,stringw>*strings_contrario,
-                                   irr::core::map<stringw,int>*enteros,
-                                   irr::core::map<stringw,int>*enteros_contrario
+bool Transicion::cumpleCondiciones(irr::core::map<std::string,std::string>*strings,
+                                   irr::core::map<std::string,std::string>*strings_contrario,
+                                   irr::core::map<std::string,int>*enteros,
+                                   irr::core::map<std::string,int>*enteros_contrario
                                    )
 {
     for(int i=0;i<(int)condiciones.size();i++)
@@ -65,14 +65,14 @@ bool Transicion::cumpleCondiciones(irr::core::map<stringw,stringw>*strings,
     return true;
 }
 
-bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,stringw>*strings,irr::core::map<stringw,stringw>*strings_contrario)
+bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<std::string,std::string>*strings,irr::core::map<std::string,std::string>*strings_contrario)
 {
     if(condicion.personaje_contrario)
         return condicion.comparar(strings_contrario->operator[](condicion.variable));
     return condicion.comparar(strings->operator[](condicion.variable));
 }
 
-bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,int>*enteros,irr::core::map<stringw,int>*enteros_contrario)
+bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<std::string,int>*enteros,irr::core::map<std::string,int>*enteros_contrario)
 {
     if(condicion.personaje_contrario)
         return condicion.comparar(enteros_contrario->operator[](condicion.variable));
@@ -83,18 +83,18 @@ bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<stringw,int
 ///////////////////////////////////////////////7
 
 
-Condicion2::Condicion2(stringw variable,stringw comparacion,int entero,bool personaje_contrario)
+Condicion2::Condicion2(std::string variable,std::string comparacion,int entero,bool personaje_contrario)
 {
-    tipo=L"entero";
+    tipo="entero";
     this->variable=variable;
     this->comparacion=comparacion;
     this->entero=entero;
     this->personaje_contrario=personaje_contrario;
 }
 
-Condicion2::Condicion2(stringw variable,stringw comparacion,stringw cadena,bool personaje_contrario)
+Condicion2::Condicion2(std::string variable,std::string comparacion,std::string cadena,bool personaje_contrario)
 {
-    tipo=L"cadena";
+    tipo="cadena";
     this->variable=variable;
     this->comparacion=comparacion;
     this->cadena=cadena;
@@ -118,7 +118,7 @@ bool Condicion2::comparar(int c)
     return false;
 }
 
-bool Condicion2::comparar(stringw s)
+bool Condicion2::comparar(std::string s)
 {
     if(comparacion=="=")
         return s==cadena;

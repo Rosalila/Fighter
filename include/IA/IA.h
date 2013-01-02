@@ -15,10 +15,10 @@ class IA
 public:
     Transicion *transicion_a_recompenzar;
     IA(char* archivo,char* archivo_default);
-    stringw getInput(irr::core::map<stringw,stringw>*strings,
-                     irr::core::map<stringw,stringw>*strings_contrario,
-                     irr::core::map<stringw,int>*enteros,
-                     irr::core::map<stringw,int>*enteros_contrario
+    std::string getInput(irr::core::map<std::string,std::string>*strings,
+                     irr::core::map<std::string,std::string>*strings_contrario,
+                     irr::core::map<std::string,int>*enteros,
+                     irr::core::map<std::string,int>*enteros_contrario
                      );
     void darRecompensa();
     void quitarRecompensa();

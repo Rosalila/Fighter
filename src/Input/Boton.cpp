@@ -1,6 +1,6 @@
 #include "Input/Boton.h"
 
-Boton::Boton(Receiver* receiver,irr::EKEY_CODE teclado,stringw mapeo)
+Boton::Boton(Receiver* receiver,irr::EKEY_CODE teclado,std::string mapeo)
 {
     this->teclado=teclado;
     this->mapeo=mapeo;
@@ -9,7 +9,7 @@ Boton::Boton(Receiver* receiver,irr::EKEY_CODE teclado,stringw mapeo)
     //this->joystick=999;
 }
 
-Boton::Boton(Receiver* receiver,int joystick,int num_joystick,stringw mapeo)
+Boton::Boton(Receiver* receiver,int joystick,int num_joystick,std::string mapeo)
 {
     this->num_joystick=num_joystick;
     this->joystick=joystick;
@@ -32,33 +32,49 @@ bool Boton::estaPresionado()
     return false;
 }
 
-stringw Boton::getMapeo()
+std::string Boton::getMapeo()
 {
     return mapeo;
 }
 
-stringw Boton::getInput()
+std::string convertInt(int number)
+{
+    if (number == 0)
+        return "0";
+    std::string temp="";
+    std::string returnvalue="";
+    while (number>0)
+    {
+        temp+=number%10+48;
+        number/=10;
+    }
+    for (int i=0;i<temp.length();i++)
+        returnvalue+=temp[temp.length()-i-1];
+    return returnvalue;
+}
+
+std::string Boton::getInput()
 {
     if(usando_joystick)
     {
         if(joystick>=0)
-            return stringw(joystick);
+            return convertInt(joystick);
         if(joystick==-8)
-            return stringw("up");
+            return std::string("up");
         if(joystick==-2)
-            return stringw("down");
+            return std::string("down");
         if(joystick==-4)
-            return stringw("left");
+            return std::string("left");
         if(joystick==-6)
-            return stringw("right");
-        return stringw("d");
+            return std::string("right");
+        return std::string("d");
     }else
     {
-        return stringw(keyToString());
+        return std::string(keyToString());
     }
 }
 
-stringw Boton::keyToString()
+std::string Boton::keyToString()
 {
     if(teclado==irr::KEY_KEY_Q)
         return "Q";

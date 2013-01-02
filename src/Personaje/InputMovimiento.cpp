@@ -1,6 +1,6 @@
 #include "Personaje/InputMovimiento.h"
 
-InputMovimiento::InputMovimiento(vector<stringw> input,stringw movimiento)
+InputMovimiento::InputMovimiento(std::vector<std::string> input,std::string movimiento)
 {
     this->input=input;
     this->movimiento=movimiento;

@@ -19,12 +19,12 @@ private:
     Sonido* sonido;
     Painter* painter;
     Receiver* receiver;
-    vector<Elemento*> elementos;
+    std::vector<Elemento*> elementos;
     MenuContenedor*contenedor_actual;
     TiXmlDocument abrirXml(char* archivo);
     void dibujarMenu();
-//    vector<int> pos_pa;
-//    vector<int> pos_pb;
+//    std::vector<int> pos_pa;
+//    std::vector<int> pos_pb;
     int pos_stage,pos_ia_lvl;
     bool exit_signal,save_inputs_signal;
     MenuCharSelect* char_select;
@@ -36,12 +36,16 @@ private:
 public:
     std::string music_path;
     Input *inputa,*inputb;
-    vector<Personaje*>pa;
-    vector<Personaje*>pb;
+    std::vector<Personaje*>pa;
+    std::vector<Personaje*>pb;
     Stage* stage;
+
+    //Misc
+    SDL_Surface* vs_screen;
+
     Menu(){}
     Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo);
-    void cargarDesdeXml(char*archivo,vector<stringw> chars,vector<stringw> stages);
+    void cargarDesdeXml(char*archivo,vector<std::string> chars,vector<std::string> stages);
     void cargarConfig();
     void loopMenu();
     Personaje* getPersonajeA(int num,bool ia);
@@ -50,10 +54,10 @@ public:
     bool getExitSignal();
     bool getSaveInputsSignal();
     void escribirInputsXML(Input* ia,Input* ib);
-    stringw getInputPressed();
+    std::string getInputPressed();
     void llenarInputsBotones();
-    irr::EKEY_CODE toKeyCode(stringw str);
-    void printVsScreen(vector<irr::video::ITexture*>pa_previews,vector<irr::video::ITexture*>pb_previews);
+    irr::EKEY_CODE toKeyCode(std::string str);
+    void printVsScreen(vector<SDL_Surface*>pa_previews,vector<SDL_Surface*>pb_previews);
 };
 
 #endif

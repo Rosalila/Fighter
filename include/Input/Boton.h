@@ -10,14 +10,14 @@ private:
     Receiver* receiver;
 public:
 int joystick;
-stringw mapeo;
+std::string mapeo;
 irr::EKEY_CODE teclado;
-    Boton(Receiver* receiver,irr::EKEY_CODE teclado,stringw mapeo);
-    Boton(Receiver* receiver,int joystick,int num_joystick,stringw mapeo);
+    Boton(Receiver* receiver,irr::EKEY_CODE teclado,std::string mapeo);
+    Boton(Receiver* receiver,int joystick,int num_joystick,std::string mapeo);
     bool estaPresionado();
-    stringw getMapeo();
-    stringw getInput();
+    std::string getMapeo();
+    std::string getInput();
     int getNumJoystick();
     bool usaJoystick();
-    stringw keyToString();
+    std::string keyToString();
 };

@@ -13,20 +13,20 @@
 class Frame
 {
     public:
-    vector <Modificador> modificadores;
-    vector < vector<Condicion*> > condiciones;
+    std::vector <Modificador> modificadores;
+    std::vector < std::vector<Condicion*> > condiciones;
     int duracion;
     Frame(int duracion);
     //modificadores
-    void agregarModificador(Imagen modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(int modificador,stringw variable,bool relativo,bool aplicar_a_contrario,bool flipeable);
-    void agregarModificador(Barra modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(vector <HitBox> modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw tipo,stringw variable_modificador,stringw variable,bool relativo,bool aplicar_a_contrario,bool flipeable);
+    void agregarModificador(Imagen modificador,std::string variable,bool aplicar_a_contrario);
+    void agregarModificador(int modificador,std::string variable,bool relativo,bool aplicar_a_contrario,bool flipeable);
+    void agregarModificador(Barra modificador,std::string variable,bool aplicar_a_contrario);
+    void agregarModificador(std::vector <HitBox> modificador,std::string variable,bool aplicar_a_contrario);
+    void agregarModificador(std::string modificador,std::string variable,bool aplicar_a_contrario);
+    void agregarModificador(std::string tipo,std::string variable_modificador,std::string variable,bool relativo,bool aplicar_a_contrario,bool flipeable);
 
     //condiciones
-    void agregarCondicion(vector<Condicion*> condicion);
+    void agregarCondicion(std::vector<Condicion*> condicion);
     //void agregarCondicion(int posicion,Condicion condicion);
 };
 

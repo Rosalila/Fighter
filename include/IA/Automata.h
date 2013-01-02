@@ -12,17 +12,17 @@ using namespace std;
 
 class Automata
 {
-    irr::core::map<stringw,Estado*> estados;
-    stringw estado_actual;
+    irr::core::map<std::string,Estado*> estados;
+    std::string estado_actual;
     int wait;
 public:
 Transicion *transicion_a_recompenzar;
     Automata(char* archivo,char* archivo_default);
     Estado* getEstadoInicial();
-    stringw getNextInput(irr::core::map<stringw,stringw>*strings,
-                         irr::core::map<stringw,stringw>*strings_contrario,
-                         irr::core::map<stringw,int>*enteros,
-                         irr::core::map<stringw,int>*enteros_contrario
+    std::string getNextInput(irr::core::map<std::string,std::string>*strings,
+                         irr::core::map<std::string,std::string>*strings_contrario,
+                         irr::core::map<std::string,int>*enteros,
+                         irr::core::map<std::string,int>*enteros_contrario
                          );
     void cargarDesdeXML(char* archivo,char* archivo_default);
 };

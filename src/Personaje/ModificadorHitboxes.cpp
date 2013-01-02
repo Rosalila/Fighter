@@ -1,6 +1,6 @@
 #include "Personaje/ModificadorHitboxes.h"
 
-ModificadorHitboxes::ModificadorHitboxes(stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario)
+ModificadorHitboxes::ModificadorHitboxes(std::string variable,std::vector <HitBox> modificador,bool aplicar_a_contrario)
 {
     tipo="hitboxes";
     this->variable=variable;

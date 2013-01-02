@@ -1,13 +1,13 @@
 #include "Input/Input.h"
 #include <sstream>
 
-void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
-                             irr::core::map<stringw,stringw>*strings_contrario,
-                             irr::core::map<stringw,int>*enteros,
-                             irr::core::map<stringw,int>*enteros_contrario
+void Input::actualizarBuffer(irr::core::map<std::string,std::string>*strings,
+                             irr::core::map<std::string,std::string>*strings_contrario,
+                             irr::core::map<std::string,int>*enteros,
+                             irr::core::map<std::string,int>*enteros_contrario
                              )
 {
-    stringw resultado="";
+    std::string resultado="";
     if(!inteligencia_artificial)
     {
         for(int i=0;i<(int)cruz.size();i++)
@@ -42,7 +42,7 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
     if(resultado=="")
         resultado="5";
 
-    if(stringw(strings->operator[]("orientation"))==stringw("i"))
+    if(std::string(strings->operator[]("orientation"))==std::string("i"))
     {
         for(int i=0;i<(int)resultado.size();i++)
         {
@@ -60,7 +60,7 @@ void Input::actualizarBuffer(irr::core::map<stringw,stringw>*strings,
 
 void Input::actualizarBuffer()
 {
-    stringw resultado="";
+    std::string resultado="";
 
     for(int i=0;i<(int)cruz.size();i++)
         if(cruz[i].estaPresionado())
@@ -93,7 +93,7 @@ void Input::actualizarBuffer()
     buffer_inputs.pop_back();
 }
 
-vector<stringw> Input::getBufferInputs()
+vector<std::string> Input::getBufferInputs()
 {
     return buffer_inputs;
 }
@@ -116,7 +116,7 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    vector<Boton> botones;
+    std::vector<Boton> botones;
     for(TiXmlNode* input=doc->FirstChild("Input");
             input!=NULL;
             input=input->NextSibling("Input"))
@@ -130,7 +130,7 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
                         boton!=NULL;
                         boton=boton->NextSibling("button"))
                 {
-                    botones.push_back(Boton(receiver,(irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],stringw(boton->ToElement()->Attribute("map"))));
+                    botones.push_back(Boton(receiver,(irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],std::string(boton->ToElement()->Attribute("map"))));
                 }
             }
             //Joy

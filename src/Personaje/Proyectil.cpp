@@ -1,6 +1,6 @@
 #include "Personaje/Proyectil.h"
 
-Proyectil::Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage,bool multihit)
+Proyectil::Proyectil(std::string nombre,std::string posicion_x,std::string posicion_y,std::string imagen,std::string hitboxes,std::string estado,std::string orientacion,std::vector<Imagen>sprites,int damage,bool multihit)
 {
     this->nombre=nombre;
     this->posicion_x=posicion_x;
@@ -34,7 +34,7 @@ void Proyectil::agregarFrame(int duracion)
     frames.push_back(Frame(duracion));
 }
 
-void Proyectil::agregarCondicion(vector<Condicion*> condicion,int frame)
+void Proyectil::agregarCondicion(std::vector<Condicion*> condicion,int frame)
 {
     frames[frame].condiciones.push_back(condicion);
 }

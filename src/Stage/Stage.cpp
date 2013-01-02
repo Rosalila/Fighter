@@ -27,31 +27,27 @@ void Stage::drawLayer(Layer* layer)
         layer->current_frame=0;
 
     //Get current image
-    video::ITexture* texture=layer->textures[layer->current_frame];
+    SDL_Surface* texture=layer->textures[layer->current_frame];
 
     //Paint
     int size_x=layer->textures_size_x[layer->current_frame];
     int size_y=layer->textures_size_y[layer->current_frame];
 
-    int dimension_x=texture->getOriginalSize().Width;
-    int dimension_y=texture->getOriginalSize().Height;
+    int dimension_x=texture->w;
+    int dimension_y=texture->h;
 
-    int pos_x=-size_x/2+painter->ventana_x/2+layer->alignment_x;
-    int pos_y=painter->ventana_y-size_y-layer->alignment_y;
+    int pos_x=-size_x/2+painter->screen_width/2+layer->alignment_x;
+    int pos_y=painter->screen_height-size_y-layer->alignment_y;
 
-    painter->draw2DImageCameraAlignDepthEffect
-    (   texture,
-        irr::core::dimension2d<irr::f32> (size_x,size_y),
-        irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(pos_x,pos_y),
-        irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (0,0),
-        true,
-        irr::video::SColor(255,255,255,255),
-        false,
-        false,
-        layer->depth_effect_x,
-        layer->depth_effect_y);
+//    painter->draw2DImageCameraAlignDepthEffect//!!DEPTH EFFECT
+//    (   texture,
+//        size_x,size_y,
+//        pos_x,pos_y,
+//        0,
+//        false,
+//        false,
+//        layer->depth_effect_x,
+//        layer->depth_effect_y);
 }
 
 void Stage::dibujarBack()
@@ -109,9 +105,9 @@ void Stage::cargarDesdeXML(char* path)
         int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
         int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
 
-        vector <video::ITexture*> textures;
-        vector <int> textures_size_x;
-        vector <int> textures_size_y;
+        std::vector <SDL_Surface*> textures;
+        std::vector <int> textures_size_x;
+        std::vector <int> textures_size_y;
 
         for(TiXmlNode* layer=nodo_back->FirstChild("frame");
                 layer!=NULL;
@@ -144,9 +140,9 @@ void Stage::cargarDesdeXML(char* path)
         int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
         int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
 
-        vector <video::ITexture*> textures;
-        vector <int> textures_size_x;
-        vector <int> textures_size_y;
+        std::vector <SDL_Surface*> textures;
+        std::vector <int> textures_size_x;
+        std::vector <int> textures_size_y;
 
         for(TiXmlNode* layer=nodo_back->FirstChild("frame");
                 layer!=NULL;

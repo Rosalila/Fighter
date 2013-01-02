@@ -6,7 +6,7 @@
 class ModificadorBarra : public Modificador
 {
     public:
-    ModificadorBarra(stringw variable,Barra modificador,bool aplicar_a_contrario);
+    ModificadorBarra(std::string variable,Barra modificador,bool aplicar_a_contrario);
 };
 
 #endif

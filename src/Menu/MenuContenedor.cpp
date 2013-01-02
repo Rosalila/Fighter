@@ -1,6 +1,6 @@
 #include "Menu/MenuContenedor.h"
 
-MenuContenedor::MenuContenedor(Painter*painter,int x, int y, int width, int height,bool visible,vector<Elemento*> elementos)
+MenuContenedor::MenuContenedor(Painter*painter,int x, int y, int width, int height,bool visible,std::vector<Elemento*> elementos)
 {
     this->x=x;
     this->y=y;

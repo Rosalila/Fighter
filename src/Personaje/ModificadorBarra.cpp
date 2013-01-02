@@ -1,6 +1,6 @@
 #include "Personaje/ModificadorBarra.h"
 
-ModificadorBarra::ModificadorBarra(stringw variable,Barra modificador,bool aplicar_a_contrario)
+ModificadorBarra::ModificadorBarra(std::string variable,Barra modificador,bool aplicar_a_contrario)
 {
     tipo="barra";
     this->variable=variable;

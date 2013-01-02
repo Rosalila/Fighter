@@ -1,6 +1,6 @@
 #include "Personaje/ModificadorString.h"
 
-ModificadorString::ModificadorString(stringw variable,stringw modificador,bool aplicar_a_contrario)
+ModificadorString::ModificadorString(std::string variable,std::string modificador,bool aplicar_a_contrario)
 {
     tipo="string";
     this->variable=variable;

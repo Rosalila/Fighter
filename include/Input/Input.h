@@ -4,7 +4,7 @@
 class Input
 {
 protected:
-    vector<stringw> buffer_inputs;
+    std::vector<std::string> buffer_inputs;
     int jugador;
 
 public:
@@ -19,12 +19,12 @@ vector<Boton> cruz;
     void cargarIAXML(int jugador,char* archivo,char* archivo_default);
     TiXmlDocument* getXML(TiXmlDocument *doc);
     void actualizarBuffer();
-    void actualizarBuffer(irr::core::map<stringw,stringw>*strings,
-                          irr::core::map<stringw,stringw>*strings_contrario,
-                          irr::core::map<stringw,int>*enteros,
-                          irr::core::map<stringw,int>*enteros_contrario
+    void actualizarBuffer(irr::core::map<std::string,std::string>*strings,
+                          irr::core::map<std::string,std::string>*strings_contrario,
+                          irr::core::map<std::string,int>*enteros,
+                          irr::core::map<std::string,int>*enteros_contrario
                           );
-    vector<stringw> getBufferInputs();
+    std::vector<std::string> getBufferInputs();
     void endEventProcess();
     void startEventProcess();
 };

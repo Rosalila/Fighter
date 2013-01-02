@@ -1,696 +1,112 @@
 #include "Painter/Painter.h"
 
-Painter::Painter(Receiver* receiver)
+Painter::Painter()
 {
-    //get resulolution
-    char *archivo=new char[255];
-    strcpy(archivo,"config.xml");
-    TiXmlDocument doc_t( archivo );
-    doc_t.LoadFile();
-    TiXmlDocument *doc;
-    doc=&doc_t;
-    TiXmlElement *resolution_element=doc->FirstChild("Resolution")->ToElement();
+    screen_width = 640;
+    screen_height = 480;
+    screen_bpp = 32;
+    camera_x=camera_y=0;
 
-    int resolution_x=atoi(resolution_element->Attribute("x"));
-    int resolution_y=atoi(resolution_element->Attribute("y"));
-
-    TiXmlElement *fullscreen_element=doc->FirstChild("Fullscreen")->ToElement();
-
-    bool fullscreen=strcmp(fullscreen_element->Attribute("enabled"),"yes")==0;
-
-    camera_x=0;
-    camera_y=0;
-    ventana_x=1280;
-    ventana_y=800;
-    video::E_DRIVER_TYPE driverType;
-    driverType = video::EDT_OPENGL;
-    //driverType = video::EDT_SOFTWARE;
-    //device = createDevice(driverType,core::dimension2d<u32>(ventana_x,ventana_y),true ,true, false, false,receiver);
-    //device = createDevice(driverType,core::dimension2d<u32>(driver->getCurrentRenderTargetSize().Width,driver->getCurrentRenderTargetSize().Height),true ,true, false, false,receiver);
-    device = createDevice(driverType,core::dimension2d<u32>(resolution_x,resolution_y),true ,fullscreen, false, false,receiver);
-
-    smgr = device->getSceneManager();
-    //camera=smgr->addCameraSceneNode(0,vector3df(50,0,5),vector3df(50,0,0));
-    camera=smgr->addCameraSceneNode();
-    if (device == 0)
-        return; // could not create selected driver.
-    core::array<SJoystickInfo> joystickInfo;
-    device->activateJoysticks(joystickInfo);
-    //device->setWindowCaption(L"Fighter");
-    driver = device->getVideoDriver();
-
-    //init fonts
-    font = device->getGUIEnvironment()->getFont("menu/font.png");
-}
-
-bool Painter::isWindowActive()
-{
-    return device->isWindowActive();
-}
-
-void Painter::beginScene()
-{
-    driver->beginScene(true, true, video::SColor(255,255,255,255));
-}
-
-void Painter::endScene()
-{
-    //FPS
-    int lastFPS=-1;
-    int fps = driver->getFPS();
-    if (lastFPS != fps)
+    //Initialize all SDL subsystems
+    if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
     {
-        core::stringw str = L"Rosalila Fighter  [";
-        str += driver->getName();
-        str += "] FPSS:";
-        str += fps;
-        str += " ";
-        str += driver->getCurrentRenderTargetSize().Width;
-        str += ",";
-        str += driver->getCurrentRenderTargetSize().Height;
-        str += "  ==>  ";
-        str += (float)ventana_y/(float)driver->getCurrentRenderTargetSize().Height;
-        //device->setWindowCaption(str.c_str());
-        lastFPS = fps;
-    }
-    driver->endScene();
-}
-
-bool Painter::run()
-{
-    return device->run() && driver;
-}
-
-irr::video::ITexture* Painter::getTexture(irr::core::stringw archivo,video::SColor color_a_ignorar)
-{
-    irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
-    //irr::video::ITexture* texture=driver->addRenderTargetTexture(dimension2d<u32>(1024,600), irr::io::path(archivo));
-    //irr::video::ITexture* texture=driver->addTexture(irr::core::dimension2d<unsigned int>(1024,600),irr::io::path(archivo),ECF_UNKNOWN);
-    driver->makeColorKeyTexture(texture,color_a_ignorar);
-    return texture;
-}
-
-irr::video::ITexture* Painter::getTexture(irr::core::stringw archivo)
-{
-    irr::video::ITexture* texture=driver->getTexture(irr::io::path(archivo));
-    //irr::video::ITexture* texture=driver->addRenderTargetTexture(dimension2d<u32>(1024,600), irr::io::path(archivo));
-    return texture;
-}
-
-void Painter::drawText(core::stringw texto,core::rect<s32> posicion,video::SColor color)
-{
-    posicion.LowerRightCorner.X-=camera_x;
-    posicion.LowerRightCorner.Y+=camera_y;
-    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,
-                             posicion.UpperLeftCorner.Y*escala_y,
-                             posicion.LowerRightCorner.X*escala_x,
-                             posicion.LowerRightCorner.Y*escala_y);
-    font->draw(texto,posicion,color);
-}
-
-void Painter::draw2DRectangle(irr::video::SColor color,core::rect<s32> posicion)
-{
-//    posicion.LowerRightCorner.X-=camera_x;
-//    posicion.LowerRightCorner.Y+=camera_y;
-//    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
-//    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,posicion.UpperLeftCorner.Y*escala_y,posicion.LowerRightCorner.X*escala_x,posicion.LowerRightCorner.Y*escala_y);
-    driver->draw2DRectangle(color,posicion);
-}
-void Painter::draw2DRectangleCameraAlign(irr::video::SColor color,core::rect<s32> posicion)
-{
-    posicion.LowerRightCorner.X-=camera_x;
-    posicion.LowerRightCorner.Y+=camera_y;
-
-    posicion.UpperLeftCorner.X-=camera_x;
-    posicion.UpperLeftCorner.Y+=camera_y;
-//    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
-//    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-    float escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-    float escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-    posicion=core::rect<s32>(posicion.UpperLeftCorner.X*escala_x,posicion.UpperLeftCorner.Y*escala_y,posicion.LowerRightCorner.X*escala_x,posicion.LowerRightCorner.Y*escala_y);
-    driver->draw2DRectangle(color,posicion);
-}
-
-void Painter::draw2DImage
-                (
-	             irr::video::ITexture* texture,
-				 irr::core::dimension2d<irr::f32> size,
-				 irr::core::rect<irr::f32> sourceRect,
-				 irr::core::position2d<irr::f32> position,
-				 irr::core::position2d<irr::f32> rotationPoint,
-				 irr::f32 rotation , irr::core::vector2df scale,
-				 bool useAlphaChannel,
-				 irr::video::SColor color ,
-				 bool flipHorizontally,
-				 bool flipVertically 	)
-{
-//    position.X-=camera_x;
-//    position.Y+=camera_y;
-    //camera->setTarget(vector3df(0,0,5));
-   // Store and clear the projection matrix
-   irr::core::matrix4 oldProjMat = driver->getTransform(irr::video::ETS_PROJECTION);
-   driver->setTransform(irr::video::ETS_PROJECTION,irr::core::matrix4());
-
-   // Store and clear the view matrix
-   irr::core::matrix4 oldViewMat = driver->getTransform(irr::video::ETS_VIEW);
-   driver->setTransform(irr::video::ETS_VIEW,irr::core::matrix4());
-//    size.Width*=1.5;
-//    size.Height*=0.75;
-   //inicio escala
-//   float escala_x,escala_y;
-//   if(scale.X!=0 && scale.Y!=0)
-//   {
-////       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
-////       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
-//       //escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
-//       //escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
-//
-//       escala_x=(float)(driver->getScreenSize().Width/(float)ventana_x)*scale.X;
-//       escala_y=(float)(driver->getScreenSize().Height/(float)ventana_y)*scale.Y;
-//   }else
-//   {
-////       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
-////       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-//       //escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-//       //escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-//
-//       escala_x=(float)driver->getScreenSize().Width/(float)ventana_x;
-//       escala_y=(float)driver->getScreenSize().Height/(float)ventana_y;
-//
-//       cout<<"paso"<<(float)driver->getScreenSize().Width<<endl;
-//   }
-//
-   if (scale.X==0)
-    scale.X=1;
-   if (scale.Y==0)
-    scale.Y=1;
-   //scale=irr::core::vector2df (0,0);
-
-   //fin escala
-   if(!texture)
-	   return;
-
-   irr::video::SMaterial material;
-
-   irr::core::vector2df corner[4];
-
-   corner[0] = irr::core::vector2df(position.X,position.Y);
-   corner[1] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y);
-   corner[2] = irr::core::vector2df(position.X,position.Y+size.Height*scale.Y);
-   corner[3] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y+size.Height*scale.Y);
-
-
-   if (rotation != 0.0f)
-      for (int x = 0; x < 4; x++)
-         corner[x].rotateBy(rotation,irr::core::vector2df(rotationPoint.X, rotationPoint.Y));
-
-
-   //TODO: ver como mejorar esto
-   irr::core::vector2df uvCorner[4];
-
-   if(!flipVertically && !flipHorizontally)
-   {
-	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else if(!flipVertically && flipHorizontally)
-   {
-	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else if(flipVertically && !flipHorizontally)
-   {
-	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else
-   {
-	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-
-
-   for (int x = 0; x < 4; x++) {
-      float uvX = uvCorner[x].X/(float)texture->getSize().Width;
-      float uvY = uvCorner[x].Y/(float)texture->getSize().Height;
-      uvCorner[x] = irr::core::vector2df(uvX,uvY);
-   }
-
-
-   irr::video::S3DVertex vertices[4];
-   irr::u16 indices[6] = { 0, 1, 2, 3 ,2 ,1 };
-
-
-//   float screenWidth = (float)driver->getScreenSize().Width;
-//   float screenHeight = (float)driver->getScreenSize().Height;
-   float screenWidth = (float)ventana_x;
-   float screenHeight = (float)ventana_y;
-   for (int x = 0; x < 4; x++) {
-      float screenPosX = ((corner[x].X/screenWidth)-0.5f)*2.0f;
-      float screenPosY = ((corner[x].Y/screenHeight)-0.5f)*-2.0f;
-      vertices[x].Pos = irr::core::vector3df(screenPosX,screenPosY,1);
-      vertices[x].TCoords = uvCorner[x];
-      vertices[x].Color = color;
-   }
-//   material.Lighting = false;
-//   material.ZWriteEnable = false;
-//   material.TextureLayer[0].Texture = texture;
-//
-//   if (useAlphaChannel)
-//      material.MaterialType = irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL;
-//   else
-//      material.MaterialType = irr::video::EMT_SOLID;
-//
-//
-//   driver->setMaterial(material);
-//   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
-   material.Lighting = false;
-   material.ZWriteEnable = false;
-   material.ZBuffer = false;
-   material.TextureLayer[0].Texture = texture;
-   material.MaterialTypeParam = irr::video::pack_texureBlendFunc(irr::video::EBF_SRC_ALPHA, irr::video::EBF_ONE_MINUS_SRC_ALPHA, irr::video::EMFN_MODULATE_1X, irr::video::EAS_TEXTURE | irr::video::EAS_VERTEX_COLOR);
-
-   if (useAlphaChannel)
-      material.MaterialType = irr::video::EMT_ONETEXTURE_BLEND;
-   else
-      material.MaterialType = irr::video::EMT_SOLID;
-
-   driver->setMaterial(material);
-   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
-
-   // Restore projection and view matrices
-   driver->setTransform(irr::video::ETS_PROJECTION,oldProjMat);
-   driver->setTransform(irr::video::ETS_VIEW,oldViewMat);
-   smgr->drawAll();
-}
-
-
-void Painter::draw2DImageCameraAlign
-                (
-	             irr::video::ITexture* texture,
-				 irr::core::dimension2d<irr::f32> size,
-				 irr::core::rect<irr::f32> sourceRect,
-				 irr::core::position2d<irr::f32> position,
-				 irr::core::position2d<irr::f32> rotationPoint,
-				 irr::f32 rotation , irr::core::vector2df scale,
-				 bool useAlphaChannel,
-				 irr::video::SColor color ,
-				 bool flipHorizontally,
-				 bool flipVertically 	)
-{
-    position.X-=camera_x;
-    position.Y+=camera_y;
-    //camera->setTarget(vector3df(0,0,5));
-   // Store and clear the projection matrix
-   irr::core::matrix4 oldProjMat = driver->getTransform(irr::video::ETS_PROJECTION);
-   driver->setTransform(irr::video::ETS_PROJECTION,irr::core::matrix4());
-
-   // Store and clear the view matrix
-   irr::core::matrix4 oldViewMat = driver->getTransform(irr::video::ETS_VIEW);
-   driver->setTransform(irr::video::ETS_VIEW,irr::core::matrix4());
-//    size.Width*=1.5;
-//    size.Height*=0.75;
-   //inicio escala
-   float escala_x,escala_y;
-   if(scale.X!=0 && scale.Y!=0)
-   {
-//       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
-//       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
-       //escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
-       //escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
-
-       escala_x=(float)(1)*scale.X;
-       escala_y=(float)(1)*scale.Y;
-   }else
-   {
-//       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
-//       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-       //escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-       //escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-
-       escala_x=(float)1;
-       escala_y=(float)1;
-   }
-
-   scale=irr::core::vector2df (escala_x,escala_y);
-
-   //fin escala
-   if(!texture)
-	   return;
-
-   irr::video::SMaterial material;
-
-   irr::core::vector2df corner[4];
-
-   corner[0] = irr::core::vector2df(position.X,position.Y);
-   corner[1] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y);
-   corner[2] = irr::core::vector2df(position.X,position.Y+size.Height*scale.Y);
-   corner[3] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y+size.Height*scale.Y);
-
-
-   if (rotation != 0.0f)
-      for (int x = 0; x < 4; x++)
-         corner[x].rotateBy(rotation,irr::core::vector2df(rotationPoint.X, rotationPoint.Y));
-
-
-   //TODO: ver como mejorar esto
-   irr::core::vector2df uvCorner[4];
-
-   if(!flipVertically && !flipHorizontally)
-   {
-	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else if(!flipVertically && flipHorizontally)
-   {
-	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else if(flipVertically && !flipHorizontally)
-   {
-	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else
-   {
-	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-
-
-   for (int x = 0; x < 4; x++) {
-      float uvX = uvCorner[x].X/(float)texture->getSize().Width;
-      float uvY = uvCorner[x].Y/(float)texture->getSize().Height;
-      uvCorner[x] = irr::core::vector2df(uvX,uvY);
-   }
-
-
-   irr::video::S3DVertex vertices[4];
-   irr::u16 indices[6] = { 0, 1, 2, 3 ,2 ,1 };
-
-
-//   float screenWidth = (float)driver->getScreenSize().Width;
-//   float screenHeight = (float)driver->getScreenSize().Height;
-   float screenWidth = (float)ventana_x;
-   float screenHeight = (float)ventana_y;
-   for (int x = 0; x < 4; x++) {
-      float screenPosX = ((corner[x].X/screenWidth)-0.5f)*2.0f;
-      float screenPosY = ((corner[x].Y/screenHeight)-0.5f)*-2.0f;
-      vertices[x].Pos = irr::core::vector3df(screenPosX,screenPosY,1);
-      vertices[x].TCoords = uvCorner[x];
-      vertices[x].Color = color;
-   }
-//   material.Lighting = false;
-//   material.ZWriteEnable = false;
-//   material.TextureLayer[0].Texture = texture;
-//
-//   if (useAlphaChannel)
-//      material.MaterialType = irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL;
-//   else
-//      material.MaterialType = irr::video::EMT_SOLID;
-//
-//
-//   driver->setMaterial(material);
-//   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
-   material.Lighting = false;
-   material.ZWriteEnable = false;
-   material.ZBuffer = false;
-   material.TextureLayer[0].Texture = texture;
-   material.MaterialTypeParam = irr::video::pack_texureBlendFunc(irr::video::EBF_SRC_ALPHA, irr::video::EBF_ONE_MINUS_SRC_ALPHA, irr::video::EMFN_MODULATE_1X, irr::video::EAS_TEXTURE | irr::video::EAS_VERTEX_COLOR);
-
-   if (useAlphaChannel)
-      material.MaterialType = irr::video::EMT_ONETEXTURE_BLEND;
-   else
-      material.MaterialType = irr::video::EMT_SOLID;
-
-   driver->setMaterial(material);
-   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
-
-   // Restore projection and view matrices
-   driver->setTransform(irr::video::ETS_PROJECTION,oldProjMat);
-   driver->setTransform(irr::video::ETS_VIEW,oldViewMat);
-   smgr->drawAll();
-}
-
-void Painter::draw2DImageCameraAlignDepthEffect
-                (
-	             irr::video::ITexture* texture,
-				 irr::core::dimension2d<irr::f32> size,
-				 irr::core::rect<irr::f32> sourceRect,
-				 irr::core::position2d<irr::f32> position,
-				 irr::core::position2d<irr::f32> rotationPoint,
-				 irr::f32 rotation , irr::core::vector2df scale,
-				 bool useAlphaChannel,
-				 irr::video::SColor color ,
-				 bool flipHorizontally,
-				 bool flipVertically,
-				 int depth_effect_x,
-				 int depth_effect_y 	)
-{
-
-    if(depth_effect_x>0)
-    {
-        position.X-=camera_x/depth_effect_x;
-    }else if(depth_effect_x<0)
-    {
-        position.X-=camera_x*-depth_effect_x;
+        std::cout<<"Error: Could not initialize SDL.";
+        return;
     }
 
-    if(depth_effect_y>0)
+    //Set up the screen
+    screen = SDL_SetVideoMode( screen_width, screen_height, screen_bpp, SDL_SWSURFACE );
+
+    //If there was an error in setting up the screen
+    if( screen == NULL )
     {
-        position.Y+=camera_y/depth_effect_y;
-    }else if(depth_effect_y<0)
-    {
-        position.Y+=camera_y*-depth_effect_y;
+        std::cout<<"Error: Could not initialize SDL screen.";
+        return;
     }
 
-    //camera->setTarget(vector3df(0,0,5));
-   // Store and clear the projection matrix
-   irr::core::matrix4 oldProjMat = driver->getTransform(irr::video::ETS_PROJECTION);
-   driver->setTransform(irr::video::ETS_PROJECTION,irr::core::matrix4());
+    //Set the window caption
+    SDL_WM_SetCaption( "Rosalila fighter engine", NULL );
 
-   // Store and clear the view matrix
-   irr::core::matrix4 oldViewMat = driver->getTransform(irr::video::ETS_VIEW);
-   driver->setTransform(irr::video::ETS_VIEW,irr::core::matrix4());
-//    size.Width*=1.5;
-//    size.Height*=0.75;
-   //inicio escala
-   float escala_x,escala_y;
-   if(scale.X!=0 && scale.Y!=0)
-   {
-//       escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width)*scale.X;
-//       escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height)*scale.Y;
-       //escala_x=(float)(driver->getCurrentRenderTargetSize().Width/(float)ventana_x)*scale.X;
-       //escala_y=(float)(driver->getCurrentRenderTargetSize().Height/(float)ventana_y)*scale.Y;
-
-       escala_x=(float)(1)*scale.X;
-       escala_y=(float)(1)*scale.Y;
-   }else
-   {
-//       escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)driver->getScreenSize().Width;
-//       escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)driver->getScreenSize().Height;
-       //escala_x=(float)driver->getCurrentRenderTargetSize().Width/(float)ventana_x;
-       //escala_y=(float)driver->getCurrentRenderTargetSize().Height/(float)ventana_y;
-
-       escala_x=(float)1;
-       escala_y=(float)1;
-   }
-
-   scale=irr::core::vector2df (escala_x,escala_y);
-
-   //fin escala
-   if(!texture)
-	   return;
-
-   irr::video::SMaterial material;
-
-   irr::core::vector2df corner[4];
-
-   corner[0] = irr::core::vector2df(position.X,position.Y);
-   corner[1] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y);
-   corner[2] = irr::core::vector2df(position.X,position.Y+size.Height*scale.Y);
-   corner[3] = irr::core::vector2df(position.X+size.Width*scale.X,position.Y+size.Height*scale.Y);
-
-
-   if (rotation != 0.0f)
-      for (int x = 0; x < 4; x++)
-         corner[x].rotateBy(rotation,irr::core::vector2df(rotationPoint.X, rotationPoint.Y));
-
-
-   //TODO: ver como mejorar esto
-   irr::core::vector2df uvCorner[4];
-
-   if(!flipVertically && !flipHorizontally)
-   {
-	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else if(!flipVertically && flipHorizontally)
-   {
-	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else if(flipVertically && !flipHorizontally)
-   {
-	   uvCorner[2] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[3] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-   else
-   {
-	   uvCorner[3] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[2] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.UpperLeftCorner.Y);
-	   uvCorner[1] = irr::core::vector2df(sourceRect.UpperLeftCorner.X,sourceRect.LowerRightCorner.Y);
-	   uvCorner[0] = irr::core::vector2df(sourceRect.LowerRightCorner.X,sourceRect.LowerRightCorner.Y);
-   }
-
-
-   for (int x = 0; x < 4; x++) {
-      float uvX = uvCorner[x].X/(float)texture->getSize().Width;
-      float uvY = uvCorner[x].Y/(float)texture->getSize().Height;
-      uvCorner[x] = irr::core::vector2df(uvX,uvY);
-   }
-
-
-   irr::video::S3DVertex vertices[4];
-   irr::u16 indices[6] = { 0, 1, 2, 3 ,2 ,1 };
-
-
-//   float screenWidth = (float)driver->getScreenSize().Width;
-//   float screenHeight = (float)driver->getScreenSize().Height;
-   float screenWidth = (float)ventana_x;
-   float screenHeight = (float)ventana_y;
-   for (int x = 0; x < 4; x++) {
-      float screenPosX = ((corner[x].X/screenWidth)-0.5f)*2.0f;
-      float screenPosY = ((corner[x].Y/screenHeight)-0.5f)*-2.0f;
-      vertices[x].Pos = irr::core::vector3df(screenPosX,screenPosY,1);
-      vertices[x].TCoords = uvCorner[x];
-      vertices[x].Color = color;
-   }
-//   material.Lighting = false;
-//   material.ZWriteEnable = false;
-//   material.TextureLayer[0].Texture = texture;
-//
-//   if (useAlphaChannel)
-//      material.MaterialType = irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL;
-//   else
-//      material.MaterialType = irr::video::EMT_SOLID;
-//
-//
-//   driver->setMaterial(material);
-//   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
-   material.Lighting = false;
-   material.ZWriteEnable = false;
-   material.ZBuffer = false;
-   material.TextureLayer[0].Texture = texture;
-   material.MaterialTypeParam = irr::video::pack_texureBlendFunc(irr::video::EBF_SRC_ALPHA, irr::video::EBF_ONE_MINUS_SRC_ALPHA, irr::video::EMFN_MODULATE_1X, irr::video::EAS_TEXTURE | irr::video::EAS_VERTEX_COLOR);
-
-   if (useAlphaChannel)
-      material.MaterialType = irr::video::EMT_ONETEXTURE_BLEND;
-   else
-      material.MaterialType = irr::video::EMT_SOLID;
-
-   driver->setMaterial(material);
-   driver->drawIndexedTriangleList(&vertices[0],4,&indices[0],2);
-
-   // Restore projection and view matrices
-   driver->setTransform(irr::video::ETS_PROJECTION,oldProjMat);
-   driver->setTransform(irr::video::ETS_VIEW,oldViewMat);
-   smgr->drawAll();
+    //If everything initialized fine
+    std::cout<<"Success! SDL initialized.";
+    return;
 }
 
-video::IImage* Painter::TextureImage(video::ITexture* texture) {
-
-   video::IImage* image = driver->createImageFromData (
-      texture->getColorFormat(),
-      texture->getSize(),
-      texture->lock(),
-      false  //copy mem
-      );
-
-   texture->unlock();
-   return image;
-}
-
-video::ITexture* Painter::ImageTexture(video::IImage* image, core::stringc name) {
-
-   video::ITexture* texture = driver->addTexture(name.c_str(),image);
-   texture->grab();
-   return texture;
-}
-
-bool Painter::setAlpha(u8 Alpha, video::ITexture* tex,video::ITexture* original_tex)
+Painter::~Painter()
 {
-    if(!tex)
-    {
-        printf("texPointer == NULL\n");
-        return false;
-    };
+    //Free the surface
+    SDL_FreeSurface( screen );
 
-    u32 size = tex->getSize().Width*tex->getSize().Height;  // get Texture Size
+    //Quit SDL
+    SDL_Quit();
+}
 
-    switch(tex->getColorFormat()) //getTexture Format, (nly 2 support alpha)
+
+SDL_Surface* Painter::getTexture(std::string filename)
+{
+    //The image that's loaded
+    SDL_Surface* loadedImage = NULL;
+
+    //The optimized image that will be used
+    SDL_Surface* optimizedImage = NULL;
+
+    //Load the image using SDL_image
+    loadedImage = IMG_Load( filename.c_str() );
+
+    //If the image loaded
+    if( loadedImage != NULL )
     {
-        case video::ECF_A1R5G5B5: //see video::ECOLOR_FORMAT for more information on the texture formats.
-        {
-          //  printf("16BIT\n");
-            u16* Data = (u16*)tex->lock(); //get Data for 16-bit Texture
-            u16* original_Data = (u16*)original_tex->lock(); //get Data for 16-bit Texture
-            for(u32 i = 0; i < size ; i++)
-            {
-                if(video::getBlue(original_Data[i])-255+Alpha<0)
-                    Data[i] = video::RGBA16(video::getRed(Data[i]), video::getGreen(Data[i]), video::getBlue(Data[i]), 0);
-                else
-                    Data[i] = video::RGBA16(video::getRed(Data[i]), video::getGreen(Data[i]), video::getBlue(Data[i]), video::getBlue(original_Data[i])-255+Alpha);
-            }
-            //printf("AlphaValueOfTexture(16bit): %i\n", (Data[0] & 0x80) << 8);
-            tex->unlock();
-            break;
-        };
-        case video::ECF_A8R8G8B8:
-        {
-           // printf("32BIT\n");
-            u32* Data = (u32*)tex->lock();
-            u32* original_Data = (u32*)original_tex->lock();
-            for( u32 i = 0 ; i < size ; i++)
-            {
-                if(((u8*)&original_Data[i])[3]-255+Alpha<0)
-                    ((u8*)&Data[i])[3] = 0;//get Data for 32-bit Texture
-                else
-                    ((u8*)&Data[i])[3] = ((u8*)&original_Data[i])[3]-255+Alpha;//get Data for 32-bit Texture
-            }
-            //printf("AlphaValueOfTexture(32bit): %i\n", ((u8*)&Data[0])[3]);
-            tex->unlock();
-            break;
-        };
-        default: printf("Seems Like There is no Alpha Channel Supported\n");
-            return false;
-    };
-    return true;
-};
+        //Create an optimized image
+        optimizedImage = SDL_DisplayFormat( loadedImage );
+
+        //Free the old image
+        SDL_FreeSurface( loadedImage );
+    }
+
+    //Return the optimized image
+    return optimizedImage;
+}
+
+void Painter::draw2DImage	(
+             SDL_Surface* texture,
+             int size_x,int size_y,
+             int position_x,int position_y,
+             int scale,
+             bool flipHorizontally)
+{
+    //Rectangle to hold the offsets
+    SDL_Rect offset;
+
+    //Get offsets
+    offset.x = position_x;
+    offset.y = position_y;
+
+    //Blit the surface
+    SDL_BlitSurface( texture, NULL, screen, &offset );
+}
+
+void Painter::draw2DImageCameraAlign	(
+             SDL_Surface* texture,
+             int size_x,int size_y,
+             int position_x,int position_y,
+             int scale,
+             bool flipHorizontally)
+{
+    //Rectangle to hold the offsets
+    SDL_Rect offset;
+
+    //Get offsets
+    offset.x = position_x+camera_x;
+    offset.y = position_y+camera_y;
+
+    //Blit the surface
+    SDL_BlitSurface( texture, NULL, screen, &offset );
+}
+
+void Painter::updateScreen()
+{
+    if( SDL_Flip( screen ) == -1 )
+    {
+        std::cout<<"Error: Could not update screen.";
+    }
+}

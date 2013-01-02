@@ -3,21 +3,24 @@
 
 #include "Painter/Painter.h"
 
+#include <irrlicht/irrlicht.h>
+using namespace irr;
+
 class Barra
 {
 public:
     int tiempo;
-    stringw nombre;
-    stringw valor_maximo;
-    stringw valor_actual;
-    stringw modificador_periodico;
-    stringw periodo;
+    std::string nombre;
+    std::string valor_maximo;
+    std::string valor_actual;
+    std::string modificador_periodico;
+    std::string periodo;
     video::SColor color;
     core::rect<s32> posicion;
-    irr::video::ITexture* imagen;
+    SDL_Surface* imagen;
 
     Barra(){}
-    Barra(stringw nombre,stringw valor_maximo,stringw valor_actual,stringw modificador_periodico,stringw periodo,video::SColor color,core::rect<s32> posicion,irr::video::ITexture* imagen);
+    Barra(std::string nombre,std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,video::SColor color,core::rect<s32> posicion,SDL_Surface* imagen);
     bool procesarTiempo(int periodo);
 };
 

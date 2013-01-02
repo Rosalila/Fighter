@@ -1,16 +1,17 @@
 #ifndef MENUCHARSELECT_H
 #define MENUCHARSELECT_H
 
+#include <vector>
 #include "Menu/Elemento.h"
 
 class LockedChar
 {
 public:
     int x,y;
-    stringw name;
+    std::string name;
     int num_paleta;
-    irr::video::ITexture*preview;
-    LockedChar(int x,int y,stringw name,int num_paleta,irr::video::ITexture*preview)
+    SDL_Surface*preview;
+    LockedChar(int x,int y,std::string name,int num_paleta,SDL_Surface*preview)
     {
         this->x=x;
         this->y=y;
@@ -29,16 +30,16 @@ private:
     int max_locked_chars_pb;
     int preview_pa_x,preview_pa_y;
     int preview_pb_x,preview_pb_y;
-    vector<irr::video::ITexture*>portraits;
-    vector<irr::video::ITexture*>previews;
-    vector<stringw>names;
-    vector<LockedChar>locks_pa;
-    vector<LockedChar>locks_pb;
-    irr::video::ITexture* selected_char_p1;
-    irr::video::ITexture* selected_char_p2;
-    irr::video::ITexture* locked_char_p1;
-    irr::video::ITexture* locked_char_p2;
-    irr::video::ITexture* no_portrait;
+    std::vector<SDL_Surface*>portraits;
+    std::vector<SDL_Surface*>previews;
+    std::vector<std::string>names;
+    std::vector<LockedChar>locks_pa;
+    std::vector<LockedChar>locks_pb;
+    SDL_Surface* selected_char_p1;
+    SDL_Surface* selected_char_p2;
+    SDL_Surface* locked_char_p1;
+    SDL_Surface* locked_char_p2;
+    SDL_Surface* no_portrait;
 public:
     int select_p1_x,select_p1_y;
     int select_p2_x,select_p2_y;
@@ -50,17 +51,17 @@ public:
                    int max_locked_chars_pa,int max_locked_chars_pb,
                    int preview_pa_x,int preview_pa_y,
                    int preview_pb_x,int preview_pb_y,
-                   vector<stringw>names,
+                   std::vector<std::string>names,
                    int select_p1_x,int select_p1_y,
                    int select_p2_x,int select_p2_y);
     void lockPA(int num_paleta);
     void lockPB(int num_paleta);
-    vector<stringw> getLockedNamesPA();
-    vector<stringw> getLockedNamesPB();
-    vector<int> getLockedPalettesPA();
-    vector<int> getLockedPalettesPB();
-    vector<irr::video::ITexture*> getLockedPreviewsPA();
-    vector<irr::video::ITexture*> getLockedPreviewsPB();
+    std::vector<std::string> getLockedNamesPA();
+    std::vector<std::string> getLockedNamesPB();
+    std::vector<int> getLockedPalettesPA();
+    std::vector<int> getLockedPalettesPB();
+    std::vector<SDL_Surface*> getLockedPreviewsPA();
+    std::vector<SDL_Surface*> getLockedPreviewsPB();
     bool listo();
     bool listoPA();
     bool listoPB();

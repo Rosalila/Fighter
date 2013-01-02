@@ -1,28 +1,29 @@
 #ifndef MENULISTA_H
 #define MENULISTA_H
 
+#include <vector>
 #include "Menu/Elemento.h"
 
 class MenuLista:Elemento
 {
 private:
-    irr::video::ITexture*flecha_izquierda;
-    irr::video::ITexture*flecha_derecha;
+    SDL_Surface*flecha_izquierda;
+    SDL_Surface*flecha_derecha;
     int flecha_izq_x_sel,flecha_izq_y;
     int flecha_der_x_sel,flecha_der_y;
-    irr::video::ITexture*flecha_izquierda_sel;
-    irr::video::ITexture*flecha_derecha_sel;
+    SDL_Surface*flecha_izquierda_sel;
+    SDL_Surface*flecha_derecha_sel;
     int flecha_izq_x,flecha_izq_y_sel;
     int flecha_der_x,flecha_der_y_sel;
     bool seleccionado;
     int accion;
     int actual;//!!!!!!!
-    vector<Elemento*>elementos;//!!!!!!!
+    std::vector<Elemento*>elementos;//!!!!!!!
 public:
     MenuLista(Painter*painter,int x, int y, int width, int height,bool visible,
-              int flecha_izq_x,int flecha_izq_y,irr::video::ITexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,irr::video::ITexture*flecha_derecha,
-              int flecha_izq_x_sel,int flecha_izq_y_sel,irr::video::ITexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,irr::video::ITexture*flecha_derecha_sel,
-              vector<Elemento*>elementos,int accion
+              int flecha_izq_x,int flecha_izq_y,SDL_Surface*flecha_izquierda,int flecha_der_x,int flecha_der_y,SDL_Surface*flecha_derecha,
+              int flecha_izq_x_sel,int flecha_izq_y_sel,SDL_Surface*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,SDL_Surface*flecha_derecha_sel,
+              std::vector<Elemento*>elementos,int accion
               );
     virtual int getTipo();
     void avanzar();

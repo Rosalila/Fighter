@@ -1,6 +1,6 @@
 #include "Personaje/ModificadorEntero.h"
 
-ModificadorEntero::ModificadorEntero(stringw variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
+ModificadorEntero::ModificadorEntero(std::string variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {
     tipo="entero";
     this->variable=variable;

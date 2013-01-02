@@ -6,7 +6,7 @@
 class ModificadorEntero : public Modificador
 {
     public:
-    ModificadorEntero(stringw variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
+    ModificadorEntero(std::string variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
 };
 
 #endif

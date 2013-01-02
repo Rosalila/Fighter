@@ -1,21 +1,22 @@
 #ifndef STAGE_H
 #define STAGE_H
 
+#include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
 #include "Sonido/Sonido.h"
 
 class Layer
 {
 public:
-    vector <video::ITexture*> textures;
-    vector <int> textures_size_x;
-    vector <int> textures_size_y;
+    std::vector <SDL_Surface*> textures;
+    std::vector <int> textures_size_x;
+    std::vector <int> textures_size_y;
 
     //External logic
     int frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y;
     //Internal logic
     int current_frame,time_elapsed;
-    Layer(vector<video::ITexture*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y)
+    Layer(vector<SDL_Surface*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y)
     {
         this->textures=textures;
         this->textures_size_x=textures_size_x;
@@ -33,7 +34,7 @@ public:
 class Stage
 {
     public:
-    vector<Layer> back,front;
+    std::vector<Layer> back,front;
     std::string music_path;
     Painter* painter;
     Sonido* sonido;

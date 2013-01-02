@@ -8,10 +8,10 @@ class Imagen
 public:
     int dimension_x,dimension_y,alineacion_x,alineacion_y;
     float escala;
-    video::ITexture* imagen;
+    SDL_Surface* imagen;
 
-    Imagen(video::ITexture* imagen,float escala,int alineacion_x,int alineacion_y);
-    Imagen(video::ITexture* imagen,int alineacion_x,int alineacion_y);
+    Imagen(SDL_Surface* imagen,float escala,int alineacion_x,int alineacion_y);
+    Imagen(SDL_Surface* imagen,int alineacion_x,int alineacion_y);
     Imagen();
 };
 

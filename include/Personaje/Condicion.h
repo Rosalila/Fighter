@@ -7,18 +7,18 @@ class Condicion
 {
 private:
     //entero
-    stringw comparacion;
+    std::string comparacion;
     int entero;
     //cadena
-    stringw cadena;
+    std::string cadena;
 public:
-    stringw tipo;
+    std::string tipo;
     bool personaje_contrario;
-    stringw variable;
-    Condicion(stringw variable,stringw comparacion,int entero,bool personaje_contrario);
-    Condicion(stringw variable,stringw comparacion,stringw cadena,bool personaje_contrario);
+    std::string variable;
+    Condicion(std::string variable,std::string comparacion,int entero,bool personaje_contrario);
+    Condicion(std::string variable,std::string comparacion,std::string cadena,bool personaje_contrario);
     bool comparar(int c);
-    bool comparar(stringw s);
+    bool comparar(std::string s);
 };
 
 #endif

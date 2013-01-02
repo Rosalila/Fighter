@@ -14,10 +14,10 @@ Estado* Automata::getEstadoInicial()
     return estados["S"];
 }
 
-stringw Automata::getNextInput(irr::core::map<stringw,stringw>*strings,
-                               irr::core::map<stringw,stringw>*strings_contrario,
-                               irr::core::map<stringw,int>*enteros,
-                               irr::core::map<stringw,int>*enteros_contrario
+std::string Automata::getNextInput(irr::core::map<std::string,std::string>*strings,
+                               irr::core::map<std::string,std::string>*strings_contrario,
+                               irr::core::map<std::string,int>*enteros,
+                               irr::core::map<std::string,int>*enteros_contrario
                                )
 {
     if(wait>0)
@@ -56,7 +56,7 @@ void Automata::cargarDesdeXML(char* archivo,char* archivo_default)
             nodo!=NULL;
             nodo=nodo->NextSibling("State"))
     {
-        vector<Transicion*> transiciones;
+        std::vector<Transicion*> transiciones;
         for(TiXmlElement *e_action=nodo->FirstChild("Action")->ToElement();
                 e_action!=NULL;
                 e_action=e_action->NextSiblingElement("Action"))
@@ -80,10 +80,10 @@ void Automata::cargarDesdeXML(char* archivo,char* archivo_default)
                         elemento_condicion!=NULL;
                         elemento_condicion=elemento_condicion->NextSiblingElement("condition"))
                 {
-                    stringw exp_i(elemento_condicion->Attribute("left_exp"));
-                    stringw op(elemento_condicion->Attribute("relational_op"));
-                    stringw exp_d(elemento_condicion->Attribute("right_exp"));
-                    stringw str_contrario(elemento_condicion->Attribute("to_opponent"));
+                    std::string exp_i(elemento_condicion->Attribute("left_exp"));
+                    std::string op(elemento_condicion->Attribute("relational_op"));
+                    std::string exp_d(elemento_condicion->Attribute("right_exp"));
+                    std::string str_contrario(elemento_condicion->Attribute("to_opponent"));
                     bool contrario=(str_contrario=="yes");
                     transicion->agregarCondicion(Condicion2(exp_i,op,exp_d,contrario));
                 }
@@ -95,16 +95,16 @@ void Automata::cargarDesdeXML(char* archivo,char* archivo_default)
                         elemento_condicion!=NULL;
                         elemento_condicion=elemento_condicion->NextSiblingElement("condition_integer"))
                 {
-                    stringw exp_i(elemento_condicion->Attribute("left_exp"));
-                    stringw op(elemento_condicion->Attribute("relational_op"));
+                    std::string exp_i(elemento_condicion->Attribute("left_exp"));
+                    std::string op(elemento_condicion->Attribute("relational_op"));
                     int exp_d=atoi(elemento_condicion->Attribute("right_exp"));
-                    stringw str_contrario(elemento_condicion->Attribute("to_opponent"));
+                    std::string str_contrario(elemento_condicion->Attribute("to_opponent"));
                     bool contrario=(str_contrario=="yes");
                     transicion->agregarCondicion(Condicion2(exp_i,op,exp_d,contrario));
                 }
             }
             transiciones.push_back(transicion);
         }
-        estados[stringw(nodo->ToElement()->Attribute("name"))]=new Estado(transiciones);
+        estados[std::string(nodo->ToElement()->Attribute("name"))]=new Estado(transiciones);
     }
 }

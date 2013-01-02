@@ -1,6 +1,6 @@
 #include "Personaje/Animacion.h"
 
-Animacion::Animacion(stringw nombre,vector<Imagen>sprites,stringw posicion_x,stringw posicion_y,int duracion,bool personaje_contrario,bool usa_camara)
+Animacion::Animacion(std::string nombre,std::vector<Imagen>sprites,std::string posicion_x,std::string posicion_y,int duracion,bool personaje_contrario,bool usa_camara)
 {
     this->nombre=nombre;
     this->sprites=sprites;

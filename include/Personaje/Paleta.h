@@ -1,6 +1,8 @@
 #ifndef PALETA_H
 #define PALETA_H
 
+#include <vector>
+#include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
 using namespace irr;
 using namespace video;
@@ -26,12 +28,12 @@ public:
 class Paleta
 {
 public:
-    vector<CambioColor>cambios;
+    std::vector<CambioColor>cambios;
     s32 *copia;
     Paleta(){}
     void cargarXML(char* archivo,int num_paleta);
-    ITexture* paintTexture(ITexture* texture);
-    ITexture* restoreTexture(ITexture* texture);
+    SDL_Surface* paintTexture(SDL_Surface* texture);
+    SDL_Surface* restoreTexture(SDL_Surface* texture);
 };
 
 #endif

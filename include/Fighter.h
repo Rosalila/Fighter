@@ -15,29 +15,29 @@ public:
     Menu* pause_menu;
     Stage* stage;
     int px_colision,py_colision;
-    vector<Personaje*>pa;
-    vector<Personaje*>pb;
+    std::vector<Personaje*>pa;
+    std::vector<Personaje*>pb;
     int pa_vivos,pb_vivos;
     int pa_actual,pb_actual;
-    vector<Imagen>ko;
+    std::vector<Imagen>ko;
     int pos_imagen_ko,duracion_ko,tiempo_actual_ko;
-    vector<Imagen>match_intro;
+    std::vector<Imagen>match_intro;
     int pos_imagen_intro,duracion_intro,tiempo_actual_intro;
     bool game_over_a;
     bool game_over_b;
     int victories_a;
     int victories_b;
-    stringw move_cancel_pa;
-    stringw move_cancel_pb;
+    std::string move_cancel_pa;
+    std::string move_cancel_pb;
 
     //hit cancel control
-    stringw hit_cancel_pa;
+    std::string hit_cancel_pa;
     int hit_cancel_pa_damage;
     int hit_cancel_pa_chip_damage;
     bool hit_cancel_pa_unblockable_air;
     bool hit_cancel_pa_unblockable_high;
     bool hit_cancel_pa_unblockable_low;
-    stringw hit_cancel_pb;
+    std::string hit_cancel_pb;
     int hit_cancel_pb_damage;
     int hit_cancel_pb_chip_damage;
     bool hit_cancel_pb_unblockable_air;
@@ -51,12 +51,16 @@ public:
     Painter* painter;
     Receiver* receiver;
 
+    //Misc
+    SDL_Surface* texture_bar;
+    SDL_Surface* texture_victory;
+
     Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
-    bool getColisionHitBoxes(Personaje *atacante,stringw variable_atacante,Personaje* atacado,stringw variable_atacado);
-    bool getColisionHitBoxes(Personaje*atacante,stringw variable_atacante,Personaje*atacado,stringw variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
+    bool getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado);
+    bool getColisionHitBoxes(Personaje*atacante,std::string variable_atacante,Personaje*atacado,std::string variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     void loopJuego();
     void logicaPersonaje(Personaje *p);
     void logicaStage();

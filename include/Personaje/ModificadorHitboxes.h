@@ -6,7 +6,7 @@
 class ModificadorHitboxes : public Modificador
 {
     public:
-    ModificadorHitboxes(stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario);
+    ModificadorHitboxes(std::string variable,std::vector <HitBox> modificador,bool aplicar_a_contrario);
 };
 
 #endif

@@ -1,17 +1,17 @@
 #include "Personaje/Condicion.h"
 
-Condicion::Condicion(stringw variable,stringw comparacion,int entero,bool personaje_contrario)
+Condicion::Condicion(std::string variable,std::string comparacion,int entero,bool personaje_contrario)
 {
-    tipo=L"entero";
+    tipo="entero";
     this->variable=variable;
     this->comparacion=comparacion;
     this->entero=entero;
     this->personaje_contrario=personaje_contrario;
 }
 
-Condicion::Condicion(stringw variable,stringw comparacion,stringw cadena,bool personaje_contrario)
+Condicion::Condicion(std::string variable,std::string comparacion,std::string cadena,bool personaje_contrario)
 {
-    tipo=L"cadena";
+    tipo="cadena";
     this->variable=variable;
     this->comparacion=comparacion;
     this->cadena=cadena;
@@ -36,7 +36,7 @@ bool Condicion::comparar(int c)
     return false;
 }
 
-bool Condicion::comparar(stringw s)
+bool Condicion::comparar(std::string s)
 {
     if(comparacion=="=")
         return s==cadena;

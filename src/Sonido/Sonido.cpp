@@ -18,12 +18,12 @@ void Sonido::drop()
     Mix_FreeMusic(music);
     Mix_CloseAudio();
 }
-void Sonido::agregarSonido(stringw variable,std::string valor)
+void Sonido::agregarSonido(std::string variable,std::string valor)
 {
     if(sonidos.find(variable)==0)
         sonidos[variable]=Mix_LoadWAV(valor.c_str());
 }
-void Sonido::reproducirSonido(stringw variable,bool looped)
+void Sonido::reproducirSonido(std::string variable,bool looped)
 {
     if(sonidos.find(variable)==0)
         return;

@@ -20,20 +20,19 @@ Personaje::~Personaje()
 {
     for(;!textures.empty();)
     {
-        ITexture*texture=textures.back();
+        SDL_Surface*texture=textures.back();
         textures.pop_back();
-        painter->driver->removeTexture(texture);
-        //texture->drop();
+        SDL_FreeSurface(texture);
     }
 }
 //DIBUJAR
 void Personaje::dibujar()
 {
-    bool shadow=getString("effect.shadow")==stringw("on");
-    bool violet=getString("effect.violet")==stringw("on");
-    bool red=getString("effect.red")==stringw("on");
-    bool green=getString("effect.green")==stringw("on");
-    bool blue=getString("effect.blue")==stringw("on");
+    bool shadow=getString("effect.shadow")==std::string("on");
+    bool violet=getString("effect.violet")==std::string("on");
+    bool red=getString("effect.red")==std::string("on");
+    bool green=getString("effect.green")==std::string("on");
+    bool blue=getString("effect.blue")==std::string("on");
     if(sombra.size()>20)
     {
         sombra.erase (sombra.begin());
@@ -58,18 +57,14 @@ void Personaje::dibujar()
         //    u32 t=painter->device->getTimer()->getTime();
         //    int t2=t%255;
             int pos_x=sombra_x[i]-(dimension_x*sombra[i].escala/2)+alineacion_x;
-            int pos_y=-sombra_y[i]-(dimension_y*sombra[i].escala)-alineacion_y+painter->ventana_y-stage_piso;
+            int pos_y=-sombra_y[i]-(dimension_y*sombra[i].escala)-alineacion_y+painter->screen_height-stage_piso;
             painter->draw2DImageCameraAlign
             (   sombra[i].imagen,
-                irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
-                irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-                irr::core::position2d<irr::f32>(pos_x,pos_y),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::f32(0), irr::core::vector2df (sombra[i].escala,sombra[i].escala),
-                true,
-                irr::video::SColor(255,0,0,255),
-                flip_sombra[i],
-                false);
+                dimension_x,dimension_y,
+                pos_x,pos_y,
+                sombra[i].escala,
+                flip_sombra[i]
+                );
         }
     }
 
@@ -79,52 +74,48 @@ void Personaje::dibujar()
     int dimension_y=getImagen("current_image").dimension_y;
     int alineacion_x=getImagen("current_image").alineacion_x;
     int alineacion_y=getImagen("current_image").alineacion_y;
-    u32 t=painter->device->getTimer()->getTime();
+    //u32 t=painter->device->getTimer()->getTime();//!!COOL VFX
     int tr=255,tg=255,tb=255;
 
     if(getString("orientation")=="i")
         alineacion_x=-alineacion_x;
 
-    if(violet)
-    {
-        tg=t%255;
-    }
-    if(red)
-    {
-        tg=t%255;
-        tb=t%255;
-    }
-    if(green)
-    {
-        tr=t%255;
-        tb=t%255;
-    }
-    if(blue)
-    {
-        tr=t%255;
-        tg=t%255;
-    }
+//    if(violet)//!!COOL VFX
+//    {
+//        tg=t%255;
+//    }
+//    if(red)
+//    {
+//        tg=t%255;
+//        tb=t%255;
+//    }
+//    if(green)
+//    {
+//        tr=t%255;
+//        tb=t%255;
+//    }
+//    if(blue)
+//    {
+//        tr=t%255;
+//        tg=t%255;
+//    }
 
-    video::ITexture* texture=getImagen("current_image").imagen;
+    SDL_Surface* texture=getImagen("current_image").imagen;
     //if(numero==1)
         //paleta.paintTexture(texture);
 
     //get pos
     int pos_x=getEntero("position_x")-(dimension_x*getImagen("current_image").escala/2)+alineacion_x;
-    int pos_y=-getEntero("position_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+painter->ventana_y-stage_piso;
+    int pos_y=-getEntero("position_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+painter->screen_height-stage_piso;
 
 
     painter->draw2DImageCameraAlign
     (   getImagen("current_image").imagen,
-        irr::core::dimension2d<irr::f32> (dimension_x,dimension_y),
-        irr::core::rect<irr::f32>(0,0,dimension_x,dimension_y),
-        irr::core::position2d<irr::f32>(pos_x,pos_y),
-        irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (getImagen("current_image").escala,getImagen("current_image").escala),
-        true,
-        irr::video::SColor(255,tr,tg,tb),
-        getString("orientation")=="i",
-        false);
+        dimension_x,dimension_y,
+        pos_x,pos_y,
+        getImagen("current_image").escala,
+        getString("orientation")=="i"
+        );
 //    if(numero==1)
         //paleta.restoreTexture(texture);
 
@@ -133,9 +124,9 @@ void Personaje::dibujar()
     sombra_y.push_back(getEntero("position_y"));
     flip_sombra.push_back(getString("orientation")=="i");
 }
-void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y)
+void Personaje::dibujarHitBoxes(std::string variable,std::string path,bool izquierda,int x,int y)
 {
-    vector <HitBox> hitbox=getHitBoxes(variable);
+    std::vector <HitBox> hitbox=getHitBoxes(variable);
     if(getString("orientation")=="i")
     for(int i=0;i<(int)hitbox.size();i++)
     {
@@ -147,13 +138,13 @@ void Personaje::dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int
     for(int i=0;i<(int)hitbox.size();i++)
     {
         int p1x=x+hitbox[i].p1x;
-        int p1y=-y+hitbox[i].p1y+painter->ventana_y-stage_piso;
+        int p1y=-y+hitbox[i].p1y+painter->screen_height-stage_piso;
         int p2x=x+hitbox[i].p2x;
-        int p2y=-y+hitbox[i].p2y+painter->ventana_y-stage_piso;
-        if(variable=="blue")
-            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(p1x,p1y,p2x,p2y));
-        else
-            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(p1x,p1y,p2x,p2y));
+        int p2y=-y+hitbox[i].p2y+painter->screen_height-stage_piso;
+//        if(variable=="blue")//!!DRAW RECT
+//            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(p1x,p1y,p2x,p2y));
+//        else
+//            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(p1x,p1y,p2x,p2y));
     }
 }
 
@@ -162,7 +153,7 @@ void Personaje::dibujarBarra(Barra barra)
     position2d<s32>punto1= barra.posicion.UpperLeftCorner;
     position2d<s32>punto2= barra.posicion.LowerRightCorner;
     //resize 800x600
-    float w=painter->ventana_x;
+    float w=painter->screen_width;
     punto1.X*=w/1024.0;
     punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
@@ -187,13 +178,13 @@ void Personaje::dibujarBarra(Barra barra)
         }
     }else//flip if player 2
     {
-        float temp_x2=painter->ventana_x-punto1.X;
-        float temp_x1=painter->ventana_x-punto1.X-longitud_actual;
+        float temp_x2=painter->screen_width-punto1.X;
+        float temp_x1=painter->screen_width-punto1.X-longitud_actual;
 
         if(punto1.X>punto2.X)
         {
-            temp_x2=painter->ventana_x-punto1.X+longitud_actual;
-            temp_x1=painter->ventana_x-punto1.X;
+            temp_x2=painter->screen_width-punto1.X+longitud_actual;
+            temp_x1=painter->screen_width-punto1.X;
         }
 
         p1x=temp_x1;
@@ -213,20 +204,17 @@ void Personaje::dibujarBarra(Barra barra)
         flip=true;
     }
 
-    if(barra.imagen==NULL)
-        painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+//    if(barra.imagen==NULL)//!!DRAW RECT
+//        painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
     else
         painter->draw2DImage
         (   barra.imagen,
-            irr::core::dimension2d<irr::f32> (longitud_actual,altura),
-            irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(p1x,p1y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            flip,
-            false);
+            longitud_actual,altura,
+            //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
+            p1x,p1y,
+            0,
+            flip
+            );
 }
 
 void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
@@ -234,7 +222,7 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
     position2d<s32>punto1= barra.posicion.UpperLeftCorner;
     position2d<s32>punto2= barra.posicion.LowerRightCorner;
     //resize 800x600
-    float w=painter->ventana_x;
+    float w=painter->screen_width;
     punto1.X*=w/1024.0;
     punto2.X*=w/1024.0;
     float longitud_total=(float)punto2.X-(float)punto1.X;
@@ -258,8 +246,8 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
         p2y-=(p2y-p1y)/2;
     }else//flip if player 2
     {
-        float temp_x2=painter->ventana_x-punto1.X;
-        float temp_x1=painter->ventana_x-punto1.X-longitud_actual;
+        float temp_x2=painter->screen_width-punto1.X;
+        float temp_x1=painter->screen_width-punto1.X-longitud_actual;
 
         p1x=temp_x1;
         p1y=punto1.Y;
@@ -276,19 +264,18 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
         player2=true;
     }
     if(barra.imagen==NULL)
-        painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+    {
+        //painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));//!!DRAW RECT
+    }
     else
         painter->draw2DImage
         (   barra.imagen,
-            irr::core::dimension2d<irr::f32> (longitud_actual,altura),
-            irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(p1x,p1y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            player2,
-            false);
+            longitud_actual,altura,
+            //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
+            p1x,p1y,
+            0,
+            player2
+            );
 }
 
 void Personaje::dibujarBarras()
@@ -310,24 +297,20 @@ void Personaje::dibujarProyectiles()
         if(proyectil->sprites.size()!=0)
         {
             Imagen imagen=getImagen(proyectil->imagen);
-            int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->getSize().Width*imagen.escala/2)+imagen.alineacion_x;
-            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->getSize().Height*imagen.escala/2)+imagen.alineacion_y+painter->ventana_y-stage_piso;
+            int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->w*imagen.escala/2)+imagen.alineacion_x;
+            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->h*imagen.escala/2)+imagen.alineacion_y+painter->screen_height-stage_piso;
             painter->draw2DImageCameraAlign
             (   imagen.imagen,
-                irr::core::dimension2d<irr::f32> (imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
-                irr::core::rect<irr::f32>(0,0,imagen.imagen->getSize().Width,imagen.imagen->getSize().Height),
-                irr::core::position2d<irr::f32>(pos_x,pos_y),
-                irr::core::position2d<irr::f32>(0,0),
-                irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
-                true,
-                irr::video::SColor(255,255,255,255),
-                getString(proyectil->orientacion)=="i",
-                false);
+                imagen.imagen->w,imagen.imagen->h,
+                pos_x,pos_y,
+                imagen.escala,
+                getString(proyectil->orientacion)=="i"
+                );
         }
         //Dibujar hitboxes
 //        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
 //        {
-//            stringw nombre=proyectil->nombre;
+//            std::string nombre=proyectil->nombre;
 //            dibujarHitBoxes(proyectil->hitboxes,"",
 //                        getString(proyectil->orientacion)=="i",
 //                        getEntero(proyectil->posicion_x),
@@ -345,7 +328,7 @@ Frame Personaje::getFrameActual()
     return getMovimientoActual()->getFrameActual();
 }
 //GETS variables
-int Personaje::getEntero(stringw variable)
+int Personaje::getEntero(std::string variable)
 {
     if(enteros.find(variable)==0)
     {
@@ -355,31 +338,31 @@ int Personaje::getEntero(stringw variable)
     }
     return enteros[variable];
 }
-Barra Personaje::getBarra(stringw variable)
+Barra Personaje::getBarra(std::string variable)
 {
     for(int i=0;i<(int)barras.size();i++)
         if(barras[i].nombre==variable)
             return barras[i];
     return Barra("error","","","","",video::SColor(0,0,0,0),core::rect<s32> (0,0,0,0),NULL);
 }
-vector<HitBox> Personaje::getHitBoxes(stringw variable)
+vector<HitBox> Personaje::getHitBoxes(std::string variable)
 {
     return hitboxes[variable];
 }
-Imagen Personaje::getImagen(stringw variable)
+Imagen Personaje::getImagen(std::string variable)
 {
     return imagenes[variable];
 }
-stringw Personaje::getString(stringw variable)
+std::string Personaje::getString(std::string variable)
 {
     return strings[variable];
 }
 //SETS variables
-void Personaje::setImagen(stringw variable,Imagen valor)
+void Personaje::setImagen(std::string variable,Imagen valor)
 {
     imagenes[variable]=valor;
 }
-void Personaje::setEntero(stringw variable,int valor)
+void Personaje::setEntero(std::string variable,int valor)
 {
     enteros[variable]=valor;
 }
@@ -387,37 +370,37 @@ void Personaje::agregarBarra(Barra valor)
 {
     barras.push_back(valor);
 }
-void Personaje::setHitBoxes(stringw variable,vector<HitBox> valor)
+void Personaje::setHitBoxes(std::string variable,vector<HitBox> valor)
 {
     hitboxes[variable]=valor;
 }
-void Personaje::setString(stringw variable,stringw valor)
+void Personaje::setString(std::string variable,std::string valor)
 {
     strings[variable]=valor;
 }
 
 //Agregares
-void Personaje::agregarInput(vector<stringw> input,stringw movimiento)
+void Personaje::agregarInput(vector<std::string> input,std::string movimiento)
 {
     inputs.push_back(InputMovimiento(input,movimiento));
 }
 
-void Personaje::agregarInput(stringw input,stringw movimiento)
+void Personaje::agregarInput(std::string input,std::string movimiento)
 {
-    vector<stringw> lista_input;
+    std::vector<std::string> lista_input;
     lista_input.push_back(input);
     inputs.push_back(InputMovimiento(lista_input,movimiento));
 }
 
-void Personaje::agregarCondicion(stringw movimiento,int frame,vector<Condicion*> condicion)
+void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condicion*> condicion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
-//void Personaje::agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion)
+//void Personaje::agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion)
 //{
 //    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
 //}
-void Personaje::agregarMovimiento(stringw movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
 {
     movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
 }
@@ -425,31 +408,31 @@ void Personaje::agregarProyectil(Proyectil* proyectil)
 {
     proyectiles_actuales.push_back(proyectil);
 }
-void Personaje::agregarFrame(stringw movimiento, int duracion)
+void Personaje::agregarFrame(std::string movimiento, int duracion)
 {
     ((Movimiento*)movimientos[movimiento])->agregarFrame(duracion);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,Imagen modificador,bool aplicar_a_contrario)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,Imagen modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,relativo,aplicar_a_contrario,flipeable);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,Barra modificador,bool aplicar_a_contrario)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,Barra modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,vector <HitBox> modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw variable,stringw modificador,bool aplicar_a_contrario)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,std::string modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable,stringw variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string tipo,std::string variable,std::string variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame].agregarModificador(tipo,variable_modificador,variable,relativo,aplicar_a_contrario,flipeable);
 }
@@ -512,7 +495,7 @@ void Personaje::aplicarModificador(ModificadorString* ms)
 
 void Personaje::flipHitBoxes()
 {
-    vector<HitBox> hb=getHitBoxes("blue");
+    std::vector<HitBox> hb=getHitBoxes("blue");
     for(int i=0;i<(int)hb.size();i++)
     {
         int a=hb[i].p1x;
@@ -598,7 +581,7 @@ void Personaje::aplicarModificador(ModificadorPorVariable* mv)
 }
 
 //Logica
-stringw Personaje::mapInputToMovimiento()
+std::string Personaje::mapInputToMovimiento()
 {
     if(comparacion_hp>getEntero("hp.current_value") && input->inteligencia_artificial)
     {
@@ -618,7 +601,7 @@ stringw Personaje::mapInputToMovimiento()
                 return inputs[i].movimiento;
     return "";
 }
-bool Personaje::inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer)
+bool Personaje::inputEstaEnBuffer(vector<std::string> input,vector<std::string> buffer)
 {
     if(input.size()==1)
         return input[0]==buffer[0];
@@ -632,14 +615,14 @@ bool Personaje::inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer)
     }
     return false;
 }
-bool Personaje::cumpleCondiciones(stringw str_movimiento)
+bool Personaje::cumpleCondiciones(std::string str_movimiento)
 {
     Movimiento*movimiento=movimientos[str_movimiento];
     Frame *frame=&movimiento->frames[0];
-    vector<vector<Condicion*> > condiciones=frame->condiciones;
+    std::vector<vector<Condicion*> > condiciones=frame->condiciones;
     for(int i=0;i<(int)condiciones.size();i++)
     {
-        vector<Condicion*> subcondiciones=condiciones[i];
+        std::vector<Condicion*> subcondiciones=condiciones[i];
         bool flag=true;
         for(int j=0;j<(int)subcondiciones.size();j++)
         {
@@ -660,7 +643,7 @@ bool Personaje::cumpleCondiciones(vector<vector<Condicion*> >condiciones)
 {
     for(int i=0;i<(int)condiciones.size();i++)
     {
-        vector<Condicion*> subcondiciones=condiciones[i];
+        std::vector<Condicion*> subcondiciones=condiciones[i];
         bool flag=true;
         for(int j=0;j<(int)subcondiciones.size();j++)
         {
@@ -715,7 +698,7 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
 {
     this->input=input;
     this->painter=painter;
-    this->char_name=stringw(nombre);
+    this->char_name=std::string(nombre);
     this->char_name_ptr=nombre;
     this->px_inicial=px;
     this->py_inicial=py;
@@ -800,7 +783,7 @@ void Personaje::cargarMain()
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("Move"))
             {
-                stringw nombre(elemento_imagen->Attribute("name"));
+                std::string nombre(elemento_imagen->Attribute("name"));
                 int frames=atoi(elemento_imagen->Attribute("frames"));
                 int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
 
@@ -828,7 +811,7 @@ void Personaje::cargarMain()
                 if(elemento_imagen->Attribute("unblockable_low")!=NULL)
                     unblockable_low=strcmp(elemento_imagen->Attribute("unblockable_low"),"yes")==0;
 
-                setString(stringw("isActive.")+nombre,"no");
+                setString(std::string("isActive.")+nombre,"no");
                 agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
                 for(int i=0;i<frames;i++)
                     agregarFrame(nombre,frame_duration);
@@ -850,7 +833,7 @@ void Personaje::cargarMain()
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("projectile"))
             {
-                stringw nombre(elemento_imagen->Attribute("name"));
+                std::string nombre(elemento_imagen->Attribute("name"));
                 int posicion_x(atoi(elemento_imagen->Attribute("position_x")));
                 int posicion_y(atoi(elemento_imagen->Attribute("position_y")));
                 int speed_x(atoi(elemento_imagen->Attribute("speed_x")));
@@ -867,7 +850,7 @@ void Personaje::cargarMain()
                 setString(nombre+".orientation","");
 
                 //Sprites
-                vector<Imagen>sprites;
+                std::vector<Imagen>sprites;
                 TiXmlNode *temp=elemento_imagen->FirstChild("Sprites");
                 if(temp!=NULL)
                 {
@@ -876,19 +859,19 @@ void Personaje::cargarMain()
                             elemento_sprite!=NULL;
                             elemento_sprite=elemento_sprite->NextSiblingElement("Sprite"))
                     {
-                        stringw path(elemento_sprite->Attribute("path"));
-                        stringw dir("chars/");
+                        std::string path(elemento_sprite->Attribute("path"));
+                        std::string dir("chars/");
                         path=dir+char_name+"/"+path;
                         int escala=atoi(elemento_sprite->Attribute("scale"));
                         int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
                         int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
 
 
-                        irr::video::ITexture* texture;
+                        SDL_Surface* texture;
                         if(ignore_color==NULL)
                             texture=painter->getTexture(path);
-                        else
-                            texture=painter->getTexture(path,ignore_color);
+//                        else//!!IGNORE COLOR
+//                            texture=painter->getTexture(path,ignore_color);
                         sprites.push_back(Imagen(texture,escala,alineacion_x,alineacion_y));
                     }
                 }
@@ -897,7 +880,7 @@ void Personaje::cargarMain()
                 Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage,multihit);
 
                 //Frames
-                stringw prefijo="Projectile.";
+                std::string prefijo="Projectile.";
                 int frames=atoi(elemento_imagen->Attribute("frames"));
                 int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
 
@@ -911,7 +894,7 @@ void Personaje::cargarMain()
                 }
 
                 //Hitboxes
-                vector<HitBox> hitboxes_vacia;
+                std::vector<HitBox> hitboxes_vacia;
                 setHitBoxes(nombre+".hitboxes",hitboxes_vacia);
                 for(TiXmlElement *elemento_hitboxes=elemento_imagen->FirstChild("Hitboxes")->ToElement();
                         elemento_hitboxes!=NULL;
@@ -919,7 +902,7 @@ void Personaje::cargarMain()
                 {
                     int num_frame=atoi(elemento_hitboxes->Attribute("frame"));
                     temp=elemento_hitboxes;
-                    vector<HitBox> hitboxes;
+                    std::vector<HitBox> hitboxes;
                     if(!temp->NoChildren())
                     for(TiXmlElement *elemento_hb=temp->FirstChild("Hitbox")->ToElement();
                             elemento_hb!=NULL;
@@ -943,7 +926,7 @@ void Personaje::cargarMain()
 
                 //Triggers
                 setString(nombre+".trigger","off");
-                vector<Condicion*>cond_temp;
+                std::vector<Condicion*>cond_temp;
                 cond_temp.push_back(new Condicion(nombre+".trigger","=","on",false));
                 proyectil->agregarCondicion(cond_temp,0);
 
@@ -955,9 +938,9 @@ void Personaje::cargarMain()
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("sprite"))
             {
-                stringw variable(elemento_imagen->Attribute("variable"));
-                stringw path(elemento_imagen->Attribute("path"));
-                stringw dir("chars/");
+                std::string variable(elemento_imagen->Attribute("variable"));
+                std::string path(elemento_imagen->Attribute("path"));
+                std::string dir("chars/");
                 path=dir+char_name+"/"+path;
                 int escala=atoi(elemento_imagen->Attribute("scale"));
                 int alineacion_x=atoi(elemento_imagen->Attribute("align_x"));
@@ -965,15 +948,15 @@ void Personaje::cargarMain()
 
                 if(ignore_color==NULL)
                     setImagen(variable,Imagen(painter->getTexture(path),escala,alineacion_x,alineacion_y));
-                else
-                    setImagen(variable,Imagen(painter->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
+//                else//!!IGNORE COLOR
+//                    setImagen(variable,Imagen(painter->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
             }
             for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("string"))
             {
-                stringw variable(elemento_imagen->Attribute("variable"));
-                stringw valor(elemento_imagen->Attribute("value"));
+                std::string variable(elemento_imagen->Attribute("variable"));
+                std::string valor(elemento_imagen->Attribute("value"));
                 setString(variable,valor);
             }
             if(nodo->FirstChild("integer")!=NULL)
@@ -981,7 +964,7 @@ void Personaje::cargarMain()
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("integer"))
             {
-                stringw variable(elemento_imagen->Attribute("variable"));
+                std::string variable(elemento_imagen->Attribute("variable"));
                 int valor=atoi(elemento_imagen->Attribute("value"));
                 setEntero(variable,valor);
             }
@@ -989,8 +972,8 @@ void Personaje::cargarMain()
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("hitboxes"))
             {
-                stringw variable(elemento_imagen->Attribute("variable"));
-                vector<HitBox> hitbox;
+                std::string variable(elemento_imagen->Attribute("variable"));
+                std::vector<HitBox> hitbox;
                 if(!elemento_imagen->NoChildren())
                 for(TiXmlElement *elemento_hitbox=elemento_imagen->FirstChild("Hitbox")->ToElement();
                         elemento_hitbox!=NULL;
@@ -1008,7 +991,7 @@ void Personaje::cargarMain()
                     elemento_imagen!=NULL;
                     elemento_imagen=elemento_imagen->NextSiblingElement("bar"))
             {
-                stringw variable(elemento_imagen->Attribute("variable"));
+                std::string variable(elemento_imagen->Attribute("variable"));
                 int valor_maximo(atoi(elemento_imagen->Attribute("max_value")));
                 int valor_actual(atoi(elemento_imagen->Attribute("current_value")));
                 int modificador_periodico(atoi(elemento_imagen->Attribute("periodic_modifier")));
@@ -1026,13 +1009,16 @@ void Personaje::cargarMain()
                 int y1=atoi(elemento_imagen->Attribute("y1"));
                 int x2=atoi(elemento_imagen->Attribute("x2"));
                 int y2=atoi(elemento_imagen->Attribute("y2"));
-                stringw imagen(elemento_imagen->Attribute("image"));
-                imagen=stringw("chars/")+char_name+stringw("/")+imagen;
 
-                if(imagen!=NULL)
+                if(elemento_imagen->Attribute("image")!=NULL)
+                {
+                    std::string imagen(elemento_imagen->Attribute("image"));
+                    imagen=std::string("chars/")+char_name+std::string("/")+imagen;
+
                     agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),painter->getTexture(imagen)));
-//                else
-//                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),NULL));
+                }
+                else
+                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),NULL));
             }
     }
 }
@@ -1056,7 +1042,7 @@ void Personaje::cargarVars()
             nodo=nodo->NextSibling("Move"))
     {
         TiXmlElement *elemento=nodo->ToElement();
-        stringw nombre(elemento->Attribute("name"));
+        std::string nombre(elemento->Attribute("name"));
         //For each Input
 
         //For each Frame
@@ -1075,12 +1061,12 @@ void Personaje::cargarVars()
                             e!=NULL;
                             e=e->NextSiblingElement("Variable"))
                     {
-                        stringw str_tipo(e->Attribute("type"));
-                        stringw str_variable(e->Attribute("variable"));
-                        stringw str_valor(e->Attribute("value"));
-                        stringw str_contrario(e->Attribute("to_opponent"));
-                        stringw str_relativo(e->Attribute("relative"));
-                        stringw str_flipeable(e->Attribute("flipable"));
+                        std::string str_tipo(e->Attribute("type"));
+                        std::string str_variable(e->Attribute("variable"));
+                        std::string str_valor(e->Attribute("value"));
+                        std::string str_contrario(e->Attribute("to_opponent"));
+                        std::string str_relativo(e->Attribute("relative"));
+                        std::string str_flipeable(e->Attribute("flipable"));
                         bool contrario=(str_contrario=="yes");
                         bool relativo=(str_relativo=="yes");
                         bool flipeable=(str_flipeable=="yes");
@@ -1094,10 +1080,10 @@ void Personaje::cargarVars()
                             e!=NULL;
                             e=e->NextSiblingElement("Integer"))
                     {
-                        stringw str_variable(e->Attribute("variable"));
-                        stringw str_contrario(e->Attribute("to_opponent"));
-                        stringw str_relativo(e->Attribute("relative"));
-                        stringw str_flipeable(e->Attribute("flipable"));
+                        std::string str_variable(e->Attribute("variable"));
+                        std::string str_contrario(e->Attribute("to_opponent"));
+                        std::string str_relativo(e->Attribute("relative"));
+                        std::string str_flipeable(e->Attribute("flipable"));
                         int valor=atoi(e->Attribute("value"));
                         bool contrario=(str_contrario=="yes");
                         bool relativo=(str_relativo=="yes");
@@ -1111,9 +1097,9 @@ void Personaje::cargarVars()
                             e!=NULL;
                             e=e->NextSiblingElement("String"))
                     {
-                        stringw str_variable(e->Attribute("variable"));
-                        stringw str_contrario(e->Attribute("to_opponent"));
-                        stringw str_valor(e->Attribute("value"));
+                        std::string str_variable(e->Attribute("variable"));
+                        std::string str_contrario(e->Attribute("to_opponent"));
+                        std::string str_valor(e->Attribute("value"));
                         bool contrario=(str_contrario=="yes");
                         agregarModificador(nombre,frame,str_variable,str_valor,contrario);
                     }
@@ -1142,13 +1128,13 @@ void Personaje::cargarInputs()
             nodo_input!=NULL;
             nodo_input=nodo_input->NextSibling("Input"))
     {
-        stringw move_name=(nodo_input->ToElement()->Attribute("move_name"));
-        vector<stringw> lista_botones;
+        std::string move_name=(nodo_input->ToElement()->Attribute("move_name"));
+        std::vector<std::string> lista_botones;
         for(TiXmlElement *elemento_boton=nodo_input->FirstChild("button")->ToElement();
                 elemento_boton!=NULL;
                 elemento_boton=elemento_boton->NextSiblingElement("button"))
         {
-            stringw boton(elemento_boton->Attribute("value"));
+            std::string boton(elemento_boton->Attribute("value"));
             if(boton[0]=='*' && boton.size()>1)
             {
                 boton[0]='1';
@@ -1184,7 +1170,7 @@ void Personaje::cargarInputs()
                 lista_botones.push_back(boton);
                 agregarInput(lista_botones,move_name);
                 boton[0]='5';
-                stringw str_temp="";
+                std::string str_temp="";
                 for(int i=1;i<boton.size();i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
@@ -1224,7 +1210,7 @@ void Personaje::cargarInputs()
                 lista_botones.clear();
                 lista_botones.push_back(boton);
                 agregarInput(lista_botones,move_name);
-                stringw str_temp="";
+                std::string str_temp="";
                 for(int i=0;i<boton.size()-1;i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
@@ -1258,25 +1244,25 @@ void Personaje::cargarTriggers()
             nodo=nodo->NextSibling("Move"))
     {
         TiXmlElement *elemento=nodo->ToElement();
-        stringw nombre(elemento->Attribute("name"));
+        std::string nombre(elemento->Attribute("name"));
         for(TiXmlNode* nodo_condiciones=nodo->FirstChild("Trigger");
                 nodo_condiciones!=NULL;
                 nodo_condiciones=nodo_condiciones->NextSibling("Trigger"))
         {
-            vector<Condicion*> condiciones_temp;
+            std::vector<Condicion*> condiciones_temp;
             if(nodo_condiciones->FirstChild("condition")!=NULL)
             {
                 for(TiXmlElement *elemento_condicion=nodo_condiciones->FirstChild("condition")->ToElement();
                         elemento_condicion!=NULL;
                         elemento_condicion=elemento_condicion->NextSiblingElement("condition"))
                 {
-                    stringw exp_i(elemento_condicion->Attribute("left_exp"));
-                    stringw op(elemento_condicion->Attribute("relational_op"));
-                    stringw exp_d(elemento_condicion->Attribute("right_exp"));
+                    std::string exp_i(elemento_condicion->Attribute("left_exp"));
+                    std::string op(elemento_condicion->Attribute("relational_op"));
+                    std::string exp_d(elemento_condicion->Attribute("right_exp"));
                     bool es_entero=false;
                     if(enteros.find(exp_i)!=0)
                         es_entero=true;
-                    stringw str_contrario(elemento_condicion->Attribute("to_opponent"));
+                    std::string str_contrario(elemento_condicion->Attribute("to_opponent"));
                     bool contrario=(str_contrario=="yes");
                     if(es_entero)
                     {
@@ -1319,7 +1305,7 @@ void Personaje::cargarSprites()
             nodo=nodo->NextSibling("Move"))
     {
         TiXmlElement *elemento=nodo->ToElement();
-        stringw nombre(elemento->Attribute("name"));
+        std::string nombre(elemento->Attribute("name"));
 
         if(nodo->FirstChild("Sprite")!=NULL)
         {
@@ -1328,36 +1314,36 @@ void Personaje::cargarSprites()
                     e=e->NextSiblingElement("Sprite"))
             {
                 int frame=atoi(e->Attribute("frame_number"))-1;
-                stringw str_variable(e->Attribute("variable"));
-                stringw path(e->Attribute("path"));
-                stringw dir("chars/");
+                std::string str_variable(e->Attribute("variable"));
+                std::string path(e->Attribute("path"));
+                std::string dir("chars/");
                 path=dir+char_name+"/"+path;
                 double escala;
                 e->QueryDoubleAttribute("scale",&escala);
                 int alineacion_x=atoi(e->Attribute("align_x"));
                 int alineacion_y=atoi(e->Attribute("align_y"));
-                stringw str_contrario(e->Attribute("to_opponent"));
+                std::string str_contrario(e->Attribute("to_opponent"));
                 bool contrario=(str_contrario=="si");
 
                 if(ignore_color==NULL)
                 {
-                    ITexture* texture=painter->getTexture(irr::io::path(path));
+                    SDL_Surface* texture=painter->getTexture(path);
                     textures.push_back(texture);
                     paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
                     paleta.restoreTexture(texture);
                 }
-                else
-                {
-                    video::IImage* image = painter->driver->createImageFromFile(path);
-
-                    video::ITexture* texture = painter->driver->addTexture("test",image);
-                    textures.push_back(texture);
-                    painter->driver->makeColorKeyTexture(texture,ignore_color);
-
-                    paleta.paintTexture(texture);
-                    agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
-                }
+//                else//!!IGNORE COLOR
+//                {
+//                    video::IImage* image = painter->driver->createImageFromFile(path);
+//
+//                    video::SDL_Surface* texture = painter->driver->addTexture("test",image);
+//                    textures.push_back(texture);
+//                    painter->driver->makeColorKeyTexture(texture,ignore_color);
+//
+//                    paleta.paintTexture(texture);
+//                    agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
+//                }
             }
         }
     }
@@ -1382,7 +1368,7 @@ void Personaje::cargarHitboxes()
             nodo=nodo->NextSibling("Move"))
     {
         TiXmlElement *elemento=nodo->ToElement();
-        stringw nombre(elemento->Attribute("name"));
+        std::string nombre(elemento->Attribute("name"));
         for(TiXmlNode* nodo_frame=nodo->FirstChild("Frame");
                 nodo_frame!=NULL;
                 nodo_frame=nodo_frame->NextSibling("Frame"))
@@ -1395,9 +1381,9 @@ void Personaje::cargarHitboxes()
                         e!=NULL;
                         e=e->NextSiblingElement("Hitboxes"))
                 {
-                    vector <HitBox> hitbox;
-                    stringw str_variable(e->Attribute("variable"));
-                    stringw str_contrario(e->Attribute("to_opponent"));
+                    std::vector <HitBox> hitbox;
+                    std::string str_variable(e->Attribute("variable"));
+                    std::string str_contrario(e->Attribute("to_opponent"));
                     bool contrario=(str_contrario=="yes");
                     if(!e->NoChildren())
                     {
@@ -1439,21 +1425,21 @@ void Personaje::cargarSfx()
             nodo_sonido=nodo_sonido->NextSibling("Sound"))
     {
         TiXmlElement* elemento_sonido=nodo_sonido->ToElement();
-        stringw move(elemento_sonido->Attribute("move"));
+        std::string move(elemento_sonido->Attribute("move"));
 
         char*file=new char[255];
         strcpy(file,"chars/");
 
         //convert char_name to char*
-        size_t count = 255;
-        c8* c_name = (char*)malloc( 255 );
-        wcstombs(c_name, char_name.c_str(), count);
+//        size_t count = 255;
+//        c8* c_name = (char*)malloc( 255 );
+//        wcstombs(c_name, char_name.c_str(), count);
 
 
-        strcat(file,(char*)c_name);
-        strcat(file,"/sfx/");
-        strcat(file,elemento_sonido->Attribute("file"));
-        sonido->agregarSonido(char_name+move,(std::string)file);
+//        strcat(file,(char*)char_name);
+//        strcat(file,"/sfx/");
+//        strcat(file,elemento_sonido->Attribute("file"));
+        sonido->agregarSonido(char_name+move,std::string("chars/")+char_name+std::string("/sfx/")+std::string(elemento_sonido->Attribute("file")));
     }
 
 }
@@ -1484,13 +1470,13 @@ void Personaje::cargarAnimations()
             nodo!=NULL;
             nodo=nodo->NextSibling("Animation"))
     {
-        vector<Imagen>i_temp;
+        std::vector<Imagen>i_temp;
         for(TiXmlNode* nodo_frame=nodo->FirstChild("Sprite");
         nodo_frame!=NULL;
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            irr::video::ITexture *texture=painter->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
+            SDL_Surface *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1498,17 +1484,17 @@ void Personaje::cargarAnimations()
         }
         TiXmlElement *elem_animation=nodo->ToElement();
         bool to_oponent=strcmp(elem_animation->Attribute("to_opponent"),"i")==0;
-        stringw name=stringw(elem_animation->Attribute("name"));
-        stringw pos_x=stringw(elem_animation->Attribute("position_x"));
-        stringw pos_y=stringw(elem_animation->Attribute("position_y"));
+        std::string name=std::string(elem_animation->Attribute("name"));
+        std::string pos_x=std::string(elem_animation->Attribute("position_x"));
+        std::string pos_y=std::string(elem_animation->Attribute("position_y"));
         if(enteros.find(pos_x)==0)
         {
-            pos_x=stringw("Animation.")+name+stringw(".x");
+            pos_x=std::string("Animation.")+name+std::string(".x");
             setEntero(pos_x,atoi(elem_animation->Attribute("position_x")));
         }
         if(enteros.find(pos_y)==0)
         {
-            pos_y=stringw("Animation.")+name+stringw(".y");
+            pos_y=std::string("Animation.")+name+std::string(".y");
             setEntero(pos_y,atoi(elem_animation->Attribute("position_y")));
         }
         animaciones_back.push_back(Animacion(name,
@@ -1520,8 +1506,8 @@ void Personaje::cargarAnimations()
                                         strcmp(elem_animation->Attribute("use_camera"),"yes")==0
                                         )
                                    );
-        setString(stringw("Animation.")+name,"off");
-        setString(stringw("Animation.")+stringw(name+".isActive"),"false");
+        setString(std::string("Animation.")+name,"off");
+        setString(std::string("Animation.")+std::string(name+".isActive"),"false");
 
     }
 
@@ -1530,13 +1516,13 @@ void Personaje::cargarAnimations()
             nodo!=NULL;
             nodo=nodo->NextSibling("Animation"))
     {
-        vector<Imagen>i_temp;
+        std::vector<Imagen>i_temp;
         for(TiXmlNode* nodo_frame=nodo->FirstChild("Sprite");
         nodo_frame!=NULL;
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            irr::video::ITexture *texture=painter->getTexture(stringw(path_archivos)+stringw(elem_frame->Attribute("path")));
+            SDL_Surface *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1544,17 +1530,17 @@ void Personaje::cargarAnimations()
         }
         TiXmlElement *elem_animation=nodo->ToElement();
         bool to_oponent=strcmp(elem_animation->Attribute("to_opponent"),"i")==0;
-        stringw name=stringw(elem_animation->Attribute("name"));
-        stringw pos_x=stringw(elem_animation->Attribute("position_x"));
-        stringw pos_y=stringw(elem_animation->Attribute("position_y"));
+        std::string name=std::string(elem_animation->Attribute("name"));
+        std::string pos_x=std::string(elem_animation->Attribute("position_x"));
+        std::string pos_y=std::string(elem_animation->Attribute("position_y"));
         if(enteros.find(pos_x)==0)
         {
-            pos_x=stringw("Animation.")+name+stringw(".x");
+            pos_x=std::string("Animation.")+name+std::string(".x");
             setEntero(pos_x,atoi(elem_animation->Attribute("position_x")));
         }
         if(enteros.find(pos_y)==0)
         {
-            pos_y=stringw("Animation.")+name+stringw(".y");
+            pos_y=std::string("Animation.")+name+std::string(".y");
             setEntero(pos_y,atoi(elem_animation->Attribute("position_y")));
         }
         animaciones_front.push_back(Animacion(name,
@@ -1566,8 +1552,8 @@ void Personaje::cargarAnimations()
                                         strcmp(elem_animation->Attribute("use_camera"),"yes")==0
                                         )
                                     );
-        setString(stringw("Animation.")+name,"off");
-        setString(stringw("Animation.")+stringw(name+".isActive"),"false");
+        setString(std::string("Animation.")+name,"off");
+        setString(std::string("Animation.")+std::string(name+".isActive"),"false");
 
     }
 }
@@ -1595,7 +1581,7 @@ void Personaje::logicaProyectiles()
     {
         Proyectil* proyectil=proyectiles_actuales[i];
 
-        if(getString(proyectil->estado)!=stringw("on"))
+        if(getString(proyectil->estado)!=std::string("on"))
             continue;
         proyectiles_activos++;
 
@@ -1634,7 +1620,7 @@ void Personaje::aplicarEfectosProyectiles()
     for(int i=0;i<(int)proyectiles_actuales.size();i++)
     {
         Proyectil* proyectil=proyectiles_actuales[i];
-        if(getString(proyectil->estado)!=stringw("on"))
+        if(getString(proyectil->estado)!=std::string("on"))
             continue;
 
         //hit
@@ -1655,7 +1641,7 @@ void Personaje::aplicarEfectosProyectiles()
         for(int j=0;j<personaje_contrario->proyectiles_actuales.size();j++)
         {
             proyectil_c=personaje_contrario->proyectiles_actuales[j];
-            if(personaje_contrario->getString(proyectil_c->estado)!=stringw("on"))
+            if(personaje_contrario->getString(proyectil_c->estado)!=std::string("on"))
                 continue;
 
             if(getColisionHitBoxes(personaje_contrario->getHitBoxes(proyectil_c->hitboxes),
@@ -1680,7 +1666,7 @@ void Personaje::aplicarEfectosProyectiles()
             }
             setEntero("Colision.x",px_colision);
             setEntero("Colision.y",py_colision);
-            if(personaje_contrario->getString("current_move").subString(0,8)!=stringw("defense."))//hit player
+            if(personaje_contrario->getString("current_move").substr(0,8)!=std::string("defense."))//hit player
             {
                 personaje_contrario->setEntero("hp.current_value",personaje_contrario->getEntero("hp.current_value")-proyectil->damage);
                 pego=true;
@@ -1768,53 +1754,45 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
 
 void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
-    irr::video::ITexture *texture=imagen.imagen;
+    SDL_Surface *texture=imagen.imagen;
 
-    int pos_x=posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2;
-    int pos_y=posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2+painter->ventana_y-stage_piso;
+    int pos_x=posicion_x+imagen.alineacion_x-(texture->w*imagen.escala)/2;
+    int pos_y=posicion_y+imagen.alineacion_y-(texture->h*imagen.escala)/2+painter->screen_height-stage_piso;
 
     painter->draw2DImageCameraAlign
     (   texture,
-        irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
-        irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-        irr::core::position2d<irr::f32>(pos_x,pos_y),
+        texture->w,texture->h,
+        pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
-        irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
-        true,
-        irr::video::SColor(255,255,255,255),
-        getString("orientation")!="d",
-        false);
+        imagen.escala,
+        getString("orientation")!="d"
+        );
 }
 void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
-    irr::video::ITexture *texture=imagen.imagen;
+    SDL_Surface *texture=imagen.imagen;
 
     int pos_x=posicion_x+imagen.alineacion_x;
     int pos_y=posicion_y+imagen.alineacion_y;
 
     painter->draw2DImage
     (   texture,
-        irr::core::dimension2d<irr::f32> (texture->getOriginalSize ().Width,texture->getOriginalSize ().Height),
-        irr::core::rect<irr::f32>(0,0,texture->getOriginalSize().Width,texture->getOriginalSize().Height),
-        irr::core::position2d<irr::f32>(pos_x,pos_y),
+        texture->w,texture->h,
+        pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
-        irr::core::position2d<irr::f32>(0,0),
-        irr::f32(0), irr::core::vector2df (imagen.escala,imagen.escala),
-        true,
-        irr::video::SColor(255,255,255,255),
-        getString("orientation")!="d",
-        false);
+        imagen.escala,
+        getString("orientation")!="d"
+        );
 }
 void Personaje::dibujarAnimacionesBack()
 {
     for(int i=0;i<(int)animaciones_back.size();i++)
     {
-        if(getString(stringw(stringw("Animation.")+animaciones_back[i].nombre))=="on")
+        if(getString(std::string(std::string("Animation.")+animaciones_back[i].nombre))=="on")
         {
             animaciones_actuales_back.push_back(animaciones_back[i]);
-            setString(stringw(stringw("Animation.")+animaciones_back[i].nombre),"off");
-            setString(stringw("Animation.")+stringw(animaciones_back[i].nombre+".isActive"),"true");
+            setString(std::string(std::string("Animation.")+animaciones_back[i].nombre),"off");
+            setString(std::string("Animation.")+std::string(animaciones_back[i].nombre+".isActive"),"true");
         }
     }
     for(int i=0;i<(int)animaciones_actuales_back.size();i++)
@@ -1851,7 +1829,7 @@ void Personaje::dibujarAnimacionesBack()
         //Cuando termina
         if(animacion->imagen_actual>=(int)animacion->sprites.size())
         {
-            setString(stringw("Animation.")+stringw(animacion->nombre+".isActive"),"false");
+            setString(std::string("Animation.")+std::string(animacion->nombre+".isActive"),"false");
             animaciones_actuales_back.erase(animaciones_actuales_back.begin()+i);
         }
     }
@@ -1861,11 +1839,11 @@ void Personaje::dibujarAnimacionesFront()
 {
     for(int i=0;i<(int)animaciones_front.size();i++)
     {
-        if(getString(stringw(stringw("Animation.")+animaciones_front[i].nombre))=="on")
+        if(getString(std::string(std::string("Animation.")+animaciones_front[i].nombre))=="on")
         {
             animaciones_actuales_front.push_back(animaciones_front[i]);
-            setString(stringw(stringw("Animation.")+animaciones_front[i].nombre),"off");
-            setString(stringw("Animation.")+stringw(animaciones_front[i].nombre+".isActive"),"true");
+            setString(std::string(std::string("Animation.")+animaciones_front[i].nombre),"off");
+            setString(std::string("Animation.")+std::string(animaciones_front[i].nombre+".isActive"),"true");
         }
     }
     for(int i=0;i<(int)animaciones_actuales_front.size();i++)
@@ -1901,7 +1879,7 @@ void Personaje::dibujarAnimacionesFront()
         //Cuando termina
         if(animacion->imagen_actual>=(int)animacion->sprites.size())
         {
-            setString(stringw("Animation.")+stringw(animacion->nombre+".isActive"),"false");
+            setString(std::string("Animation.")+std::string(animacion->nombre+".isActive"),"false");
             animaciones_actuales_front.erase(animaciones_actuales_front.begin()+i);
         }
     }

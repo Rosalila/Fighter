@@ -1,9 +1,9 @@
 #include "Menu/MenuLista.h"
 
 MenuLista::MenuLista(Painter*painter,int x, int y, int width, int height,bool visible,
-          int flecha_izq_x,int flecha_izq_y,irr::video::ITexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,irr::video::ITexture*flecha_derecha,
-          int flecha_izq_x_sel,int flecha_izq_y_sel,irr::video::ITexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,irr::video::ITexture*flecha_derecha_sel,
-          vector<Elemento*>elementos,int accion
+          int flecha_izq_x,int flecha_izq_y,SDL_Surface*flecha_izquierda,int flecha_der_x,int flecha_der_y,SDL_Surface*flecha_derecha,
+          int flecha_izq_x_sel,int flecha_izq_y_sel,SDL_Surface*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,SDL_Surface*flecha_derecha_sel,
+          std::vector<Elemento*>elementos,int accion
           )
 {
     this->x=x;
@@ -64,25 +64,15 @@ void MenuLista::dibujar()
             elementos[actual]->dibujar(x,y);
         painter->draw2DImage
         (   flecha_izquierda,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_izquierda->getOriginalSize().Width,flecha_izquierda->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_izq_x,y+flecha_izq_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_izq_x,y+flecha_izq_y,
+            0,
             false);
         painter->draw2DImage
         (   flecha_derecha,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_derecha->getOriginalSize().Width,flecha_derecha->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_der_x,y+flecha_der_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_der_x,y+flecha_der_y,
+            0,
             false);
     }else
     {
@@ -90,25 +80,15 @@ void MenuLista::dibujar()
             elementos[actual]->dibujar(x,y);
         painter->draw2DImage
         (   flecha_izquierda_sel,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_izquierda_sel->getOriginalSize().Width,flecha_izquierda_sel->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_izq_x_sel,y+flecha_izq_y_sel),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_izq_x_sel,y+flecha_izq_y_sel,
+            0,
             false);
         painter->draw2DImage
         (   flecha_derecha_sel,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_derecha_sel->getOriginalSize().Width,flecha_derecha_sel->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_der_x_sel,y+flecha_der_y_sel),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_der_x_sel,y+flecha_der_y_sel,
+            0,
             false);
     }
 }
@@ -121,25 +101,15 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y);
         painter->draw2DImage
         (   flecha_izquierda,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_izquierda->getOriginalSize().Width,flecha_izquierda->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_izq_x+alineacion_x,y+flecha_izq_y+alineacion_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_izq_x+alineacion_x,y+flecha_izq_y+alineacion_y,
+            0,
             false);
         painter->draw2DImage
         (   flecha_derecha,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_derecha->getOriginalSize().Width,flecha_derecha->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_der_x+alineacion_x,y+flecha_der_y+alineacion_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_der_x+alineacion_x,y+flecha_der_y+alineacion_y,
+            0,
             false);
     }else
     {
@@ -147,25 +117,15 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             elementos[actual]->dibujar(x+alineacion_x,y+alineacion_y);
         painter->draw2DImage
         (   flecha_izquierda_sel,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_izquierda_sel->getOriginalSize().Width,flecha_izquierda_sel->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_izq_x_sel+alineacion_x,y+flecha_izq_y_sel+alineacion_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_izq_x_sel+alineacion_x,y+flecha_izq_y_sel+alineacion_y,
+            0,
             false);
         painter->draw2DImage
         (   flecha_derecha_sel,
-            irr::core::dimension2d<irr::f32> (width,height),
-            irr::core::rect<irr::f32>(0,0,flecha_derecha_sel->getOriginalSize().Width,flecha_derecha_sel->getOriginalSize().Height),
-            irr::core::position2d<irr::f32>(x+flecha_der_x_sel+alineacion_x,y+flecha_der_y_sel+alineacion_y),
-            irr::core::position2d<irr::f32>(0,0),
-            irr::f32(0), irr::core::vector2df (1,1),
-            true,
-            irr::video::SColor(255,255,255,255),
-            false,
+            width,height,
+            x+flecha_der_x_sel+alineacion_x,y+flecha_der_y_sel+alineacion_y,
+            0,
             false);
     }
 }

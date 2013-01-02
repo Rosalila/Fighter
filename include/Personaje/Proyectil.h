@@ -10,24 +10,24 @@ class Proyectil
 public:
 int frame_actual,tiempo_transcurrido,damage;
     //variables
-    stringw nombre;
-    stringw posicion_x;
-    stringw posicion_y;
-    stringw imagen;
-    stringw hitboxes;
-    stringw estado;
-    stringw orientacion;
+    std::string nombre;
+    std::string posicion_x;
+    std::string posicion_y;
+    std::string imagen;
+    std::string hitboxes;
+    std::string estado;
+    std::string orientacion;
     bool multihit;
 
     //logica
-    vector<Imagen>sprites;
-    vector <Frame> frames;
+    std::vector<Imagen>sprites;
+    std::vector <Frame> frames;
     Frame getFrameActual();
     void agregarFrame(int duracion);
-    void agregarCondicion(vector<Condicion*> condicion,int frame);
+    void agregarCondicion(std::vector<Condicion*> condicion,int frame);
 
     int sprite_actual;
-    Proyectil(stringw nombre,stringw posicion_x,stringw posicion_y,stringw imagen,stringw hitboxes,stringw estado,stringw orientacion,vector<Imagen>sprites,int damage,bool multihit);
+    Proyectil(std::string nombre,std::string posicion_x,std::string posicion_y,std::string imagen,std::string hitboxes,std::string estado,std::string orientacion,std::vector<Imagen>sprites,int damage,bool multihit);
     void avanzarFrame();
 };
 

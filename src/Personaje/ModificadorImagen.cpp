@@ -1,6 +1,6 @@
 #include "Personaje/ModificadorImagen.h"
 
-ModificadorImagen::ModificadorImagen(stringw variable,Imagen modificador,bool aplicar_a_contrario)
+ModificadorImagen::ModificadorImagen(std::string variable,Imagen modificador,bool aplicar_a_contrario)
 {
     tipo="imagen";
     this->variable=variable;

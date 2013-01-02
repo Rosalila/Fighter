@@ -8,21 +8,19 @@ class MenuBoton:Elemento
 private:
     bool seleccionado;
     int accion;
-    irr::video::ITexture* imagen;
-    stringw texto;
-    video::SColor color;
+    SDL_Surface* imagen;
+    std::string texto;
     int alineacion_texto_x,alineacion_texto_y;
-    irr::video::ITexture* imagen_sel;
-    stringw texto_sel;
-    video::SColor color_sel;
+    SDL_Surface* imagen_sel;
+    std::string texto_sel;
     int alineacion_texto_x_sel,alineacion_texto_y_sel;
     //otra
 public:
     char* load_menu;
-    stringw input_config;
+    std::string input_config;
     MenuBoton(Painter*painter,int x, int y, int width, int height,bool visible,
-              irr::video::ITexture* imagen,int alineacion_texto_x,int alineacion_texto_y, stringw texto,video::SColor color,
-              irr::video::ITexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, stringw texto_sel,video::SColor color_sel,
+              SDL_Surface* imagen,int alineacion_texto_x,int alineacion_texto_y, std::string texto,
+              SDL_Surface* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, std::string texto_sel,
               int accion,char* load_menu
               );
     int getAccion();

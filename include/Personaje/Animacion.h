@@ -1,20 +1,21 @@
 #ifndef ANIMACION_H
 #define ANIMACION_H
 
+#include <vector>
 #include "Painter/Painter.h"
 #include "Personaje/Imagen.h"
 
 class Animacion
 {
 public:
-    stringw nombre;
-    vector<Imagen>sprites;
+    std::string nombre;
+    std::vector<Imagen>sprites;
     int duracion,tiempo_transcurrido;
     int imagen_actual;
-    stringw posicion_x,posicion_y;
+    std::string posicion_x,posicion_y;
     bool personaje_contrario;
     bool usa_camara;
-    Animacion(stringw nombre,vector<Imagen>sprites,stringw posicion_x,stringw posicion_y,int duracion,bool personaje_contrario,bool usa_camara);
+    Animacion(std::string nombre,std::vector<Imagen>sprites,std::string posicion_x,std::string posicion_y,int duracion,bool personaje_contrario,bool usa_camara);
 };
 
 #endif

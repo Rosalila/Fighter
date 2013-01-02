@@ -18,13 +18,13 @@ using namespace std;
 
 class Sonido
 {
-    irr::core::map<stringw,Mix_Chunk*> sonidos;
+    irr::core::map<std::string,Mix_Chunk*> sonidos;
     Mix_Music *music = NULL;
 public:
     Sonido();
     void drop();
-    void agregarSonido(stringw variable,std::string valor);
-    void reproducirSonido(stringw variable,bool looped);
+    void agregarSonido(std::string variable,std::string valor);
+    void reproducirSonido(std::string variable,bool looped);
     void playMusic(std::string variable);
     void stopMusic();
 };

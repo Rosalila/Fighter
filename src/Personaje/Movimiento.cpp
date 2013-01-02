@@ -1,6 +1,6 @@
 #include "Personaje/Movimiento.h"
 
-Movimiento::Movimiento(stringw nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
+Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
 {
     frame_actual=0;
     tiempo_transcurrido=0;
@@ -22,7 +22,7 @@ void Movimiento::agregarFrame(int duracion)
     frames.push_back(Frame(duracion));
 }
 
-void Movimiento::agregarCondicion(vector<Condicion*> condicion,int frame)
+void Movimiento::agregarCondicion(std::vector<Condicion*> condicion,int frame)
 {
     frames[frame].condiciones.push_back(condicion);
 }

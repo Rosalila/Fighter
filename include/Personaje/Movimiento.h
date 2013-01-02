@@ -7,20 +7,20 @@
 class Movimiento
 {
     public:
-    stringw nombre;
+    std::string nombre;
     int damage;
     int chip_damage;
     bool unblockable_low;
     bool unblockable_high;
     bool unblockable_air;
     int frame_actual,tiempo_transcurrido;
-    vector <Frame> frames;
-    Movimiento(stringw nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
+    std::vector <Frame> frames;
+    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
     Frame getFrameActual();
     bool ya_pego;
     bool multihit;
     void agregarFrame(int duracion);
-    void agregarCondicion(vector<Condicion*> condicion,int frame);
+    void agregarCondicion(std::vector<Condicion*> condicion,int frame);
     //void agregarCondicion(int posicion,Condicion condicion,int frame);
 };
 

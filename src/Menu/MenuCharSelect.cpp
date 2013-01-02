@@ -7,7 +7,7 @@ MenuCharSelect::MenuCharSelect(Painter*painter,int x, int y, int width, int heig
                    int max_locked_chars_pa,int max_locked_chars_pb,
                    int preview_pa_x,int preview_pa_y,
                    int preview_pb_x,int preview_pb_y,
-                   vector<stringw>names,
+                   std::vector<std::string>names,
                    int select_p1_x,int select_p1_y,
                    int select_p2_x,int select_p2_y)
 {
@@ -36,8 +36,8 @@ MenuCharSelect::MenuCharSelect(Painter*painter,int x, int y, int width, int heig
 
     for(int i=0;i<(int)names.size();i++)
     {
-        portraits.push_back(painter->getTexture(stringw("chars/")+names[i]+stringw("/portrait.png")));
-        previews.push_back(painter->getTexture(stringw("chars/")+names[i]+stringw("/preview.png")));
+        portraits.push_back(painter->getTexture(std::string("chars/")+names[i]+std::string("/portrait.png")));
+        previews.push_back(painter->getTexture(std::string("chars/")+names[i]+std::string("/preview.png")));
     }
     this->names=names;
 
@@ -66,8 +66,8 @@ void MenuCharSelect::lockPA(int num_paleta)
     //si existe
     if(name_pos>=names.size())
         return;
-    stringw name=names[name_pos];
-    irr::video::ITexture*preview=previews[name_pos];
+    std::string name=names[name_pos];
+    SDL_Surface*preview=previews[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
         if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
@@ -95,8 +95,8 @@ void MenuCharSelect::lockPB(int num_paleta)
     //si existe
     if(name_pos>=names.size())
         return;
-    stringw name=names[name_pos];
-    irr::video::ITexture*preview=previews[name_pos];
+    std::string name=names[name_pos];
+    SDL_Surface*preview=previews[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
         if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
@@ -110,49 +110,49 @@ void MenuCharSelect::lockPB(int num_paleta)
     }
 }
 
-vector<stringw> MenuCharSelect::getLockedNamesPA()
+std::vector<std::string> MenuCharSelect::getLockedNamesPA()
 {
-    vector<stringw>res;
+    std::vector<std::string>res;
     for(int i=0;i<(int)locks_pa.size();i++)
         res.push_back(locks_pa[i].name);
     return res;
 }
 
-vector<stringw> MenuCharSelect::getLockedNamesPB()
+std::vector<std::string> MenuCharSelect::getLockedNamesPB()
 {
-    vector<stringw>res;
+    std::vector<std::string>res;
     for(int i=0;i<(int)locks_pb.size();i++)
         res.push_back(locks_pb[i].name);
     return res;
 }
 
-vector<int> MenuCharSelect::getLockedPalettesPA()
+std::vector<int> MenuCharSelect::getLockedPalettesPA()
 {
-    vector<int>res;
+    std::vector<int>res;
     for(int i=0;i<(int)locks_pa.size();i++)
         res.push_back(locks_pa[i].num_paleta);
     return res;
 }
 
-vector<int> MenuCharSelect::getLockedPalettesPB()
+std::vector<int> MenuCharSelect::getLockedPalettesPB()
 {
-    vector<int>res;
+    std::vector<int>res;
     for(int i=0;i<(int)locks_pb.size();i++)
         res.push_back(locks_pb[i].num_paleta);
     return res;
 }
 
-vector<irr::video::ITexture*> MenuCharSelect::getLockedPreviewsPA()
+std::vector<SDL_Surface*> MenuCharSelect::getLockedPreviewsPA()
 {
-    vector<irr::video::ITexture*>res;
+    std::vector<SDL_Surface*>res;
     for(int i=0;i<(int)locks_pa.size();i++)
         res.push_back(locks_pa[i].preview);
     return res;
 }
 
-vector<irr::video::ITexture*> MenuCharSelect::getLockedPreviewsPB()
+std::vector<SDL_Surface*> MenuCharSelect::getLockedPreviewsPB()
 {
-    vector<irr::video::ITexture*>res;
+    std::vector<SDL_Surface*>res;
     for(int i=0;i<(int)locks_pb.size();i++)
         res.push_back(locks_pb[i].preview);
     return res;
@@ -186,38 +186,28 @@ void MenuCharSelect::dibujar()
     for(int j=0;j<size_y;j++)
         for(int i=0;i<size_x;i++)
         {
-            //dibujar portraits
+            //draw portraits
             if(cont<(int)portraits.size())
             {
-                //dibujar preview pa
+                //draw preview pa
                 if(select_p1_x+select_p1_y*size_x==cont)
                 {
-                    irr::video::ITexture *imagen=previews[cont];
+                    SDL_Surface *image=previews[cont];
                     painter->draw2DImage
-                    (   imagen,
-                        irr::core::dimension2d<irr::f32> (imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                        irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                        irr::core::position2d<irr::f32>(preview_pa_x,preview_pa_y),
-                        irr::core::position2d<irr::f32>(0,0),
-                        irr::f32(0), irr::core::vector2df (0,0),
-                        true,
-                        irr::video::SColor(255,255,255,255),
-                        false,
+                    (   image,
+                        image->w,image->h,
+                        preview_pa_x,preview_pa_y,
+                        0,
                         false);
                 }
                 if(select_p2_x+select_p2_y*size_x==cont)
                 {
-                    irr::video::ITexture *imagen=previews[cont];
+                    SDL_Surface *image=previews[cont];
                     painter->draw2DImage
-                    (   imagen,
-                        irr::core::dimension2d<irr::f32> (imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                        irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                        irr::core::position2d<irr::f32>(preview_pb_x,preview_pb_y),
-                        irr::core::position2d<irr::f32>(0,0),
-                        irr::f32(0), irr::core::vector2df (0,0),
-                        true,
-                        irr::video::SColor(255,255,255,255),
-                        false,
+                    (   image,
+                        image->w,image->h,
+                        preview_pb_x,preview_pb_y,
+                        0,
                         false);
                 }
             }
@@ -230,31 +220,21 @@ void MenuCharSelect::dibujar()
             //dibujar portraits
             if(cont>=(int)portraits.size())
             {
-                irr::video::ITexture *imagen=no_portrait;
+                SDL_Surface *image=no_portrait;
                 painter->draw2DImage
-                (   imagen,
-                    irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
-                    irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y)),
-                    irr::core::position2d<irr::f32>(0,0),
-                    irr::f32(0), irr::core::vector2df (0,0),
-                    true,
-                    irr::video::SColor(255,255,255,255),
-                    false,
+                (   image,
+                    size_cuadro_x,size_cuadro_y,
+                    x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
+                    0,
                     false);
             }else
             {
-                irr::video::ITexture *imagen=portraits[cont];
+                SDL_Surface *image=portraits[cont];
                 painter->draw2DImage
-                (   imagen,
-                    irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
-                    irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y)),
-                    irr::core::position2d<irr::f32>(0,0),
-                    irr::f32(0), irr::core::vector2df (0,0),
-                    true,
-                    irr::video::SColor(255,255,255,255),
-                    false,
+                (   image,
+                    size_cuadro_x,size_cuadro_y,
+                    x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
+                    0,
                     false);
             }
             //dibjuar locks pa
@@ -262,17 +242,12 @@ void MenuCharSelect::dibujar()
             {
                 if(locks_pa[l].x==i && locks_pa[l].y==j)
                 {
-                    irr::video::ITexture *imagen=locked_char_p1;
+                    SDL_Surface *image=locked_char_p1;
                     painter->draw2DImage
-                    (   imagen,
-                        irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
-                        irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                        irr::core::position2d<irr::f32>(x+locks_pa[l].x*(size_cuadro_x+separacion_x),y+locks_pa[l].y*(size_cuadro_y+separacion_y)),
-                        irr::core::position2d<irr::f32>(0,0),
-                        irr::f32(0), irr::core::vector2df (0,0),
-                        true,
-                        irr::video::SColor(255,255,255,255),
-                        false,
+                    (   image,
+                        size_cuadro_x,size_cuadro_y,
+                        x+locks_pa[l].x*(size_cuadro_x+separacion_x),y+locks_pa[l].y*(size_cuadro_y+separacion_y),
+                        0,
                         false);
                 }
             }
@@ -281,50 +256,35 @@ void MenuCharSelect::dibujar()
             {
                 if(locks_pb[l].x==i && locks_pb[l].y==j)
                 {
-                    irr::video::ITexture *imagen=locked_char_p2;
+                    SDL_Surface *image=locked_char_p2;
                     painter->draw2DImage
-                    (   imagen,
-                        irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
-                        irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                        irr::core::position2d<irr::f32>(x+locks_pb[l].x*(size_cuadro_x+separacion_x),y+locks_pb[l].y*(size_cuadro_y+separacion_y)),
-                        irr::core::position2d<irr::f32>(0,0),
-                        irr::f32(0), irr::core::vector2df (0,0),
-                        true,
-                        irr::video::SColor(255,255,255,255),
-                        false,
+                    (   image,
+                        size_cuadro_x,size_cuadro_y,
+                        x+locks_pb[l].x*(size_cuadro_x+separacion_x),y+locks_pb[l].y*(size_cuadro_y+separacion_y),
+                        0,
                         false);
                 }
             }
             //dibjujar cursor PA
             if(select_p1_x==i&&select_p1_y==j && (int)locks_pa.size()<max_locked_chars_pa)
             {
-                irr::video::ITexture *imagen=selected_char_p1;
+                SDL_Surface*image=selected_char_p1;
                 painter->draw2DImage
-                (   imagen,
-                    irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
-                    irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y)),
-                    irr::core::position2d<irr::f32>(0,0),
-                    irr::f32(0), irr::core::vector2df (0,0),
-                    true,
-                    irr::video::SColor(255,255,255,255),
-                    false,
+                (   image,
+                    size_cuadro_x,size_cuadro_y,
+                    x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
+                    0,
                     false);
             }
             //dibjujar cursor PB
             if(select_p2_x==i&&select_p2_y==j && (int)locks_pb.size()<max_locked_chars_pb)
             {
-                irr::video::ITexture *imagen=selected_char_p2;
+                SDL_Surface *image=selected_char_p2;
                 painter->draw2DImage
-                (   imagen,
-                    irr::core::dimension2d<irr::f32> (size_cuadro_x,size_cuadro_y),
-                    irr::core::rect<irr::f32>(0,0,imagen->getOriginalSize().Width,imagen->getOriginalSize().Height),
-                    irr::core::position2d<irr::f32>(x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y)),
-                    irr::core::position2d<irr::f32>(0,0),
-                    irr::f32(0), irr::core::vector2df (0,0),
-                    true,
-                    irr::video::SColor(255,255,255,255),
-                    false,
+                (   image,
+                    size_cuadro_x,size_cuadro_y,
+                    x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
+                    0,
                     false);
             }
             cont++;
@@ -333,7 +293,7 @@ void MenuCharSelect::dibujar()
 
 void MenuCharSelect::dibujar(int alineacion_x,int alineacion_y)
 {
-    painter->draw2DRectangle(irr::video::SColor(255,0,255,255),core::rect<s32>(0,0,50,50));
+    //painter->draw2DRectangle(irr::video::SColor(255,0,255,255),core::rect<s32>(0,0,50,50));//!!DRAW RECT
 }
 
 void MenuCharSelect::clearLocks()

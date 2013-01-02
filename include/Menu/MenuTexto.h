@@ -6,10 +6,10 @@
 class MenuTexto:Elemento
 {
 private:
-    video::SColor color;
+    //video::SColor color;//!! DRAW TEXT
 public:
-    stringw texto;//!!!!!!!!
-    MenuTexto(Painter*painter,int x, int y, int width, int height,bool visible,stringw texto,video::SColor color);
+    std::string texto;
+    MenuTexto(Painter*painter,int x, int y, int width, int height,bool visible,std::string texto);//!! DRAW TEXT color
     virtual int getTipo();
     virtual void dibujar();
     virtual void dibujar(int alineacion_x,int alineacion_y);

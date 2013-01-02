@@ -25,7 +25,7 @@ int main()
     Input*inputb=new Input();
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
-    Painter*painter=new Painter(receiver);
+    Painter*painter=new Painter();
     Sonido*sonido = new Sonido();
 
     Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.xml");

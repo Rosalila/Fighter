@@ -7,6 +7,7 @@
 #include "Sonido/Sonido.h"
 #include "Personaje/Animacion.h"
 #include "Personaje/Paleta.h"
+#include "Input/Input.h"
 
 class Personaje
 {
@@ -17,7 +18,7 @@ class Personaje
     Input* input;
     Sonido* sonido;
 
-    stringw char_name;
+    std::string char_name;
     char* char_name_ptr;
     int comparacion_hp;
     int comparacion_hp_contrario;
@@ -31,35 +32,35 @@ class Personaje
     int py_inicial;
 
     //efecto
-    vector<Imagen>sombra;
-    vector<int>sombra_x;
-    vector<int>sombra_y;
-    vector<bool>flip_sombra;
+    std::vector<Imagen>sombra;
+    std::vector<int>sombra_x;
+    std::vector<int>sombra_y;
+    std::vector<bool>flip_sombra;
     Paleta paleta;
 
-    //Otros vectores
-    vector<Animacion>animaciones_back;
-    vector<Animacion>animaciones_front;
-    vector<Animacion>animaciones_actuales_back;
-    vector<Animacion>animaciones_actuales_front;
-    vector<InputMovimiento>inputs;
-    vector<Movimiento*> movimientos_constantes_actuales;
-    vector<Proyectil*> proyectiles_actuales;
-    vector<Barra> barras;
+    //Otros std::vectores
+    std::vector<Animacion>animaciones_back;
+    std::vector<Animacion>animaciones_front;
+    std::vector<Animacion>animaciones_actuales_back;
+    std::vector<Animacion>animaciones_actuales_front;
+    std::vector<InputMovimiento>inputs;
+    std::vector<Movimiento*> movimientos_constantes_actuales;
+    std::vector<Proyectil*> proyectiles_actuales;
+    std::vector<Barra> barras;
 
     //vectores potenciales
-    vector<video::ITexture*>textures;
+    std::vector<SDL_Surface*>textures;
 
     //strings
-    irr::core::map<stringw,stringw> strings;
+    irr::core::map<std::string,std::string> strings;
     //imagenes
-    irr::core::map<stringw,Imagen> imagenes;
+    irr::core::map<std::string,Imagen> imagenes;
     //ints
-    irr::core::map<stringw,int> enteros;
+    irr::core::map<std::string,int> enteros;
     //hitboxes
-    irr::core::map<stringw,vector<HitBox> > hitboxes;
+    irr::core::map<std::string,vector<HitBox> > hitboxes;
     //movimientos
-    irr::core::map<stringw,Movimiento*> movimientos;
+    irr::core::map<std::string,Movimiento*> movimientos;
 
     Personaje(Painter* painter,Sonido* sonido,int numero,int paleta);
     ~Personaje();
@@ -80,7 +81,7 @@ class Personaje
     void dibujarImagen(Painter*painter,Imagen imagen,int posicion_x,int posicion_y);
     void dibujarAnimacionesBack();
     void dibujarAnimacionesFront();
-    void dibujarHitBoxes(stringw variable,stringw path,bool izquierda,int x,int y);
+    void dibujarHitBoxes(std::string variable,std::string path,bool izquierda,int x,int y);
     void dibujarBarras();
     void dibujarBarra(Barra barra);
     void dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y);
@@ -89,31 +90,31 @@ class Personaje
     Movimiento* getMovimientoActual();
     Frame getFrameActual();
     //GETS variables
-    int getEntero(stringw variable);
-    Barra getBarra(stringw variable);
-    vector<HitBox> getHitBoxes(stringw variable);
-    Imagen getImagen(stringw variable);
-    stringw getString(stringw variable);
+    int getEntero(std::string variable);
+    Barra getBarra(std::string variable);
+    std::vector<HitBox> getHitBoxes(std::string variable);
+    Imagen getImagen(std::string variable);
+    std::string getString(std::string variable);
     //SETS variables
-    void setImagen(stringw variable,Imagen valor);
-    void setEntero(stringw variable,int valor);
+    void setImagen(std::string variable,Imagen valor);
+    void setEntero(std::string variable,int valor);
     void agregarBarra(Barra valor);
-    void setHitBoxes(stringw variable,vector<HitBox> valor);
-    void setString(stringw variable,stringw valor);
+    void setHitBoxes(std::string variable,vector<HitBox> valor);
+    void setString(std::string variable,std::string valor);
     //Agregares
-    void agregarInput(vector<stringw> input,stringw movimiento);
-    void agregarInput(stringw input,stringw movimiento);
-    void agregarCondicion(stringw movimiento,int frame,vector<Condicion*> condicion);
-    //void agregarCondicion(stringw movimiento,int frame,int posicion,Condicion condicion);
-    void agregarMovimiento(stringw movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
+    void agregarInput(vector<std::string> input,std::string movimiento);
+    void agregarInput(std::string input,std::string movimiento);
+    void agregarCondicion(std::string movimiento,int frame,vector<Condicion*> condicion);
+    //void agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion);
+    void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
     void agregarProyectil(Proyectil* proyectil);
-    void agregarFrame(stringw movimiento, int duracion);
-    void agregarModificador(stringw movimiento,int frame,stringw variable,Imagen modificador,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,stringw variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
-    void agregarModificador(stringw movimiento,int frame,stringw variable,Barra modificador,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,stringw variable,vector <HitBox> modificador,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,stringw modificador,stringw variable,bool aplicar_a_contrario);
-    void agregarModificador(stringw movimiento,int frame,stringw tipo,stringw variable,stringw variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
+    void agregarFrame(std::string movimiento, int duracion);
+    void agregarModificador(std::string movimiento,int frame,std::string variable,Imagen modificador,bool aplicar_a_contrario);
+    void agregarModificador(std::string movimiento,int frame,std::string variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
+    void agregarModificador(std::string movimiento,int frame,std::string variable,Barra modificador,bool aplicar_a_contrario);
+    void agregarModificador(std::string movimiento,int frame,std::string variable,vector <HitBox> modificador,bool aplicar_a_contrario);
+    void agregarModificador(std::string movimiento,int frame,std::string modificador,std::string variable,bool aplicar_a_contrario);
+    void agregarModificador(std::string movimiento,int frame,std::string tipo,std::string variable,std::string variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
     //Logica
     bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
@@ -121,11 +122,11 @@ class Personaje
     void logicaProyectiles();
     void aplicarModificadores(vector<Modificador>,bool flip);
     void flipHitBoxes();
-    stringw mapInputToMovimiento();
-    bool cumpleCondiciones(stringw str_movimiento);
+    std::string mapInputToMovimiento();
+    bool cumpleCondiciones(std::string str_movimiento);
     bool cumpleCondiciones(vector<vector<Condicion*> >);
     bool cumpleCondicion(Condicion* condicion);
-    bool inputEstaEnBuffer(vector<stringw> input,vector<stringw> buffer);
+    bool inputEstaEnBuffer(vector<std::string> input,vector<std::string> buffer);
     void resetPersonaje();
     //Aplicar modificadores
     void aplicarModificador(ModificadorImagen* mi);
