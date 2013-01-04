@@ -41,7 +41,7 @@ public:
     Stage* stage;
 
     //Misc
-    SDL_Surface* vs_screen;
+    LTexture* vs_screen;
 
     Menu(){}
     Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo);
@@ -57,7 +57,7 @@ public:
     std::string getInputPressed();
     void llenarInputsBotones();
     irr::EKEY_CODE toKeyCode(std::string str);
-    void printVsScreen(vector<SDL_Surface*>pa_previews,vector<SDL_Surface*>pb_previews);
+    void printVsScreen(vector<LTexture*>pa_previews,vector<LTexture*>pb_previews);
 };
 
 #endif

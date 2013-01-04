@@ -1,6 +1,6 @@
 #include "Personaje/Barra.h"
 
-Barra::Barra(std::string nombre, std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,video::SColor color,core::rect<s32> posicion,SDL_Surface* imagen)
+Barra::Barra(std::string nombre, std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,video::SColor color,core::rect<s32> posicion,LTexture* imagen)
 {
     this->tiempo=0;
     this->nombre=nombre;

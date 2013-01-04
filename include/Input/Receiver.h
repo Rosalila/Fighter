@@ -9,6 +9,7 @@ using namespace std;
 
 #include <irrlicht/irrlicht.h>
 #include "../include/TinyXml/tinyxml.h"
+#include "SDL/SDL.h"
 
 using namespace irr;
 using namespace core;
@@ -40,11 +41,15 @@ private:
     int joystick;
 public:
     Receiver();
-    bool IsKeyDownn(char keycode);
-    bool IsKeyPressed(char keycode);
+    bool IsKeyDownn(int keycode);
+    bool IsKeyPressed(int keycode);
     bool IsJoyDown(int joyCode,int joystick);
     void endEventProcess();
     void startEventProcess();
+    //SDL
+    bool KEYS[322];//key pressed
+    Uint8 *keystates;//key down
+    void updateInputs();
 };
 
 #endif // MYEVENTRECEIVER_H>

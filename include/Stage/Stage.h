@@ -8,7 +8,7 @@
 class Layer
 {
 public:
-    std::vector <SDL_Surface*> textures;
+    std::vector <LTexture*> textures;
     std::vector <int> textures_size_x;
     std::vector <int> textures_size_y;
 
@@ -16,7 +16,7 @@ public:
     int frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y;
     //Internal logic
     int current_frame,time_elapsed;
-    Layer(vector<SDL_Surface*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y)
+    Layer(vector<LTexture*> textures,vector <int> textures_size_x,vector <int> textures_size_y,int frame_duration,int depth_effect_x,int depth_effect_y,int alignment_x,int alignment_y)
     {
         this->textures=textures;
         this->textures_size_x=textures_size_x;

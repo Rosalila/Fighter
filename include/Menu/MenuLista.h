@@ -7,12 +7,12 @@
 class MenuLista:Elemento
 {
 private:
-    SDL_Surface*flecha_izquierda;
-    SDL_Surface*flecha_derecha;
+    LTexture*flecha_izquierda;
+    LTexture*flecha_derecha;
     int flecha_izq_x_sel,flecha_izq_y;
     int flecha_der_x_sel,flecha_der_y;
-    SDL_Surface*flecha_izquierda_sel;
-    SDL_Surface*flecha_derecha_sel;
+    LTexture*flecha_izquierda_sel;
+    LTexture*flecha_derecha_sel;
     int flecha_izq_x,flecha_izq_y_sel;
     int flecha_der_x,flecha_der_y_sel;
     bool seleccionado;
@@ -21,8 +21,8 @@ private:
     std::vector<Elemento*>elementos;//!!!!!!!
 public:
     MenuLista(Painter*painter,int x, int y, int width, int height,bool visible,
-              int flecha_izq_x,int flecha_izq_y,SDL_Surface*flecha_izquierda,int flecha_der_x,int flecha_der_y,SDL_Surface*flecha_derecha,
-              int flecha_izq_x_sel,int flecha_izq_y_sel,SDL_Surface*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,SDL_Surface*flecha_derecha_sel,
+              int flecha_izq_x,int flecha_izq_y,LTexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,LTexture*flecha_derecha,
+              int flecha_izq_x_sel,int flecha_izq_y_sel,LTexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,LTexture*flecha_derecha_sel,
               std::vector<Elemento*>elementos,int accion
               );
     virtual int getTipo();

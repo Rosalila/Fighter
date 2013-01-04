@@ -371,35 +371,39 @@ void Menu::loopMenu()
                 tecla_arriba_p2=false;
             }
         }
-        if(!receiver->IsKeyDownn(irr::KEY_LEFT)
-           && !receiver->IsKeyDownn(irr::KEY_RIGHT)
-           && !receiver->IsKeyDownn(irr::KEY_UP)
-           && !receiver->IsKeyDownn(irr::KEY_DOWN)
-           && !receiver->IsKeyDownn(irr::KEY_RETURN)
-           && !receiver->IsKeyDownn(irr::KEY_ESCAPE)
+        if(!receiver->IsKeyDownn(SDLK_LEFT)
+           && !receiver->IsKeyDownn(SDLK_RIGHT)
+           && !receiver->IsKeyDownn(SDLK_UP)
+           && !receiver->IsKeyDownn(SDLK_DOWN)
+           && !receiver->IsKeyDownn(SDLK_RETURN)
+           && !receiver->IsKeyDownn(SDLK_ESCAPE)
            )
             tecla_arriba=true;
         if(tecla_arriba)
         {
             tecla_arriba=false;
-            if(receiver->IsKeyDownn(irr::KEY_ESCAPE))
+            if(receiver->IsKeyDownn(SDLK_ESCAPE))
             {
+                cout<<"0"<<endl;
                 sonido->reproducirSonido(std::string("Menu.back"),false);
                 exit_signal=true;
                 break;
             }
-            else if(receiver->IsKeyDownn(irr::KEY_DOWN))
+            else if(receiver->IsKeyDownn(SDLK_DOWN))
             {
+                cout<<"A"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 ((MenuContenedor*)contenedor_actual)->avanzar();
             }
-            else if(receiver->IsKeyDownn(irr::KEY_UP))
+            else if(receiver->IsKeyDownn(SDLK_UP))
             {
+                cout<<"B"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 ((MenuContenedor*)contenedor_actual)->retroceder();
             }
-            else if(receiver->IsKeyDownn(irr::KEY_RIGHT))
+            else if(receiver->IsKeyDownn(SDLK_RIGHT))
             {
+                cout<<"C"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
@@ -436,8 +440,9 @@ void Menu::loopMenu()
                     }
                 }
             }
-            else if(receiver->IsKeyDownn(irr::KEY_LEFT))
+            else if(receiver->IsKeyDownn(SDLK_LEFT))
             {
+                cout<<"D"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
@@ -473,8 +478,9 @@ void Menu::loopMenu()
                         ai_level=mb->actual;
                     }
                 }
-            }else if(receiver->IsKeyPressed(irr::KEY_RETURN))
+            }else if(receiver->IsKeyPressed(SDLK_RETURN))
             {
+                cout<<"Paso"<<endl;cout.flush();
                 sonido->reproducirSonido(std::string("Menu.select"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
@@ -734,6 +740,8 @@ void Menu::dibujarMenu()
 {
     for(int i=0;i<(int)elementos.size();i++)
         elementos[i]->dibujar();
+
+    receiver->updateInputs();
     painter->updateScreen();
 }
 
@@ -815,8 +823,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-            SDL_Surface* original_image=painter->getTexture(path);
-            SDL_Surface* image=painter->getTexture(path);
+            LTexture* original_image=painter->getTexture(path);
+            LTexture* image=painter->getTexture(path);
 
 //            if(fade_in_initial!=-1)//!!SET ALPHA
 //                painter->setAlpha(fade_in_initial,image,original_image);
@@ -974,8 +982,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                             if(e->Attribute("fade_in_speed")!=NULL)
                                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                            SDL_Surface*original_image=painter->getTexture(path);
-                            SDL_Surface*image=painter->getTexture(path);
+                            LTexture*original_image=painter->getTexture(path);
+                            LTexture*image=painter->getTexture(path);
 
 //                            if(fade_in_initial!=-1)//!!SET APLHA
 //                                painter->setAlpha(fade_in_initial,image,original_image);
@@ -1021,8 +1029,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                 if(e->Attribute("fade_in_speed")!=NULL)
                                     fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                                SDL_Surface*original_image=painter->getTexture(std::string("stages/")+std::string(stages[i])+std::string("/images/preview.png"));
-                                SDL_Surface*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
+                                LTexture*original_image=painter->getTexture(std::string("stages/")+std::string(stages[i])+std::string("/images/preview.png"));
+                                LTexture*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
 //                                if(fade_in_initial!=-1)//!!SET ALPHA
 //                                    painter->setAlpha(fade_in_initial,image,original_image);
@@ -1477,33 +1485,33 @@ void Menu::llenarInputsBotones()
     }
 }
 
-void Menu::printVsScreen(vector<SDL_Surface*>pa_previews,vector<SDL_Surface*>pb_previews)
+void Menu::printVsScreen(vector<LTexture*>pa_previews,vector<LTexture*>pb_previews)
 {
     painter->draw2DImage
     (   vs_screen,
-        vs_screen->w,vs_screen->h,
+        vs_screen->width(),vs_screen->height(),
         0,0,
         0,
         false);
 
     for(int i=0;i<(int)pa_previews.size();i++)
     {
-        SDL_Surface*texture=pa_previews[i];
+        LTexture*texture=pa_previews[i];
         painter->draw2DImage
         (   texture,
-            texture->w,texture->h,
-            i*200,painter->screen_height-texture->h-150,
+            texture->width(),texture->height(),
+            i*200,painter->screen_height-texture->height()-150,
             0,
             false);
     }
 
     for(int i=0;i<(int)pb_previews.size();i++)
     {
-        SDL_Surface*texture=pb_previews[i];
+        LTexture*texture=pb_previews[i];
         painter->draw2DImage
         (   texture,
-            texture->w,texture->h,
-            painter->screen_width-(i+1)*texture->w-50,painter->screen_height-texture->h-150,
+            texture->width(),texture->height(),
+            painter->screen_width-(i+1)*texture->width()-50,painter->screen_height-texture->height()-150,
             0,
             false);
     }

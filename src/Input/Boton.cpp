@@ -26,7 +26,7 @@ bool Boton::estaPresionado()
             return true;
     }else
     {
-        if (receiver->IsKeyDownn(teclado))
+        if (receiver->IsKeyDownn((int)teclado))
             return true;
     }
     return false;

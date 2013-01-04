@@ -9,6 +9,10 @@ Receiver::Receiver()
          keyState[i] = UP;
       }
 
+    for(int i = 0; i < 322; i++) { // init them all to false
+       KEYS[i] = false;
+    }
+    SDL_EnableKeyRepeat(0,0);
 }
 
 bool Receiver::OnEvent(const SEvent& event)
@@ -94,21 +98,19 @@ const SEvent::SJoystickEvent & Receiver::GetJoystickState(void) const
 //    return KeyIsDown[keyCode];
 //}
 
-bool Receiver::IsKeyPressed(char keycode)
+bool Receiver::IsKeyPressed(int keycode)
 {
-  if (keyState[(int)keycode] == PRESSED)
+  if(KEYS[keycode])
   {
-     return true;
+      KEYS[keycode]=false;
+      return true;
   }
-  else
-  {
-     return false;
-  }
+  return false;
 }
 
-bool Receiver::IsKeyDownn(char keycode)
+bool Receiver::IsKeyDownn(int keycode)
 {
-  if (keyState[(int)keycode] == DOWN || keyState[(int)keycode] == PRESSED)
+  if (keystates[keycode])
   {
      return true;
   }
@@ -164,3 +166,27 @@ bool Receiver::IsJoyDown(int joyCode,int joystick)
           }
 
        }
+
+void Receiver::updateInputs()
+{
+    //While there's events to handle
+    SDL_Event event;
+    while( SDL_PollEvent( &event ) )
+    {
+        //If the user has Xed out the window
+        if( event.type == SDL_QUIT )
+        {
+            //Quit the program
+            //quit = true;
+        }
+        if( event.type == SDL_KEYDOWN )
+        {
+            KEYS[event.key.keysym.sym] = true;
+        }
+        if( event.type == SDL_KEYUP )
+        {
+            KEYS[event.key.keysym.sym] = false;
+        }
+    }
+    keystates = SDL_GetKeyState( NULL );
+}

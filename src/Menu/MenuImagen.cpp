@@ -1,6 +1,6 @@
 #include "Menu/MenuImagen.h"
 
-MenuImagen::MenuImagen(Painter*painter,int x, int y, int displacement_x, int displacement_y,int stop_displacement_x_at,int stop_displacement_y_at, int fade_in_initial,int fade_in_speed, int width, int height,bool visible,SDL_Surface* imagen,SDL_Surface* original_image,std::string value)
+MenuImagen::MenuImagen(Painter*painter,int x, int y, int displacement_x, int displacement_y,int stop_displacement_x_at,int stop_displacement_y_at, int fade_in_initial,int fade_in_speed, int width, int height,bool visible,LTexture* imagen,LTexture* original_image,std::string value)
 {
     this->x=x;
     this->y=y;

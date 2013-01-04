@@ -27,14 +27,14 @@ void Stage::drawLayer(Layer* layer)
         layer->current_frame=0;
 
     //Get current image
-    SDL_Surface* texture=layer->textures[layer->current_frame];
+    LTexture* texture=layer->textures[layer->current_frame];
 
     //Paint
     int size_x=layer->textures_size_x[layer->current_frame];
     int size_y=layer->textures_size_y[layer->current_frame];
 
-    int dimension_x=texture->w;
-    int dimension_y=texture->h;
+    int dimension_x=texture->width();
+    int dimension_y=texture->height();
 
     int pos_x=-size_x/2+painter->screen_width/2+layer->alignment_x;
     int pos_y=painter->screen_height-size_y-layer->alignment_y;
@@ -105,7 +105,7 @@ void Stage::cargarDesdeXML(char* path)
         int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
         int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
 
-        std::vector <SDL_Surface*> textures;
+        std::vector <LTexture*> textures;
         std::vector <int> textures_size_x;
         std::vector <int> textures_size_y;
 
@@ -140,7 +140,7 @@ void Stage::cargarDesdeXML(char* path)
         int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
         int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
 
-        std::vector <SDL_Surface*> textures;
+        std::vector <LTexture*> textures;
         std::vector <int> textures_size_x;
         std::vector <int> textures_size_y;
 

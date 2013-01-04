@@ -10,8 +10,8 @@ public:
     int x,y;
     std::string name;
     int num_paleta;
-    SDL_Surface*preview;
-    LockedChar(int x,int y,std::string name,int num_paleta,SDL_Surface*preview)
+    LTexture*preview;
+    LockedChar(int x,int y,std::string name,int num_paleta,LTexture*preview)
     {
         this->x=x;
         this->y=y;
@@ -30,16 +30,16 @@ private:
     int max_locked_chars_pb;
     int preview_pa_x,preview_pa_y;
     int preview_pb_x,preview_pb_y;
-    std::vector<SDL_Surface*>portraits;
-    std::vector<SDL_Surface*>previews;
+    std::vector<LTexture*>portraits;
+    std::vector<LTexture*>previews;
     std::vector<std::string>names;
     std::vector<LockedChar>locks_pa;
     std::vector<LockedChar>locks_pb;
-    SDL_Surface* selected_char_p1;
-    SDL_Surface* selected_char_p2;
-    SDL_Surface* locked_char_p1;
-    SDL_Surface* locked_char_p2;
-    SDL_Surface* no_portrait;
+    LTexture* selected_char_p1;
+    LTexture* selected_char_p2;
+    LTexture* locked_char_p1;
+    LTexture* locked_char_p2;
+    LTexture* no_portrait;
 public:
     int select_p1_x,select_p1_y;
     int select_p2_x,select_p2_y;
@@ -60,8 +60,8 @@ public:
     std::vector<std::string> getLockedNamesPB();
     std::vector<int> getLockedPalettesPA();
     std::vector<int> getLockedPalettesPB();
-    std::vector<SDL_Surface*> getLockedPreviewsPA();
-    std::vector<SDL_Surface*> getLockedPreviewsPB();
+    std::vector<LTexture*> getLockedPreviewsPA();
+    std::vector<LTexture*> getLockedPreviewsPB();
     bool listo();
     bool listoPA();
     bool listoPB();

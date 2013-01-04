@@ -1,8 +1,8 @@
 #include "Menu/MenuBoton.h"
 
 MenuBoton::MenuBoton(Painter*painter,int x, int y, int width, int height,bool visible,
-          SDL_Surface* imagen,int alineacion_texto_x,int alineacion_texto_y, std::string texto,
-          SDL_Surface* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, std::string texto_sel,
+          LTexture* imagen,int alineacion_texto_x,int alineacion_texto_y, std::string texto,
+          LTexture* imagen_sel,int alineacion_texto_x_sel,int alineacion_texto_y_sel, std::string texto_sel,
           int accion,char* load_menu
           )
 {

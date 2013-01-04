@@ -17,10 +17,10 @@ public:
     std::string periodo;
     video::SColor color;
     core::rect<s32> posicion;
-    SDL_Surface* imagen;
+    LTexture* imagen;
 
     Barra(){}
-    Barra(std::string nombre,std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,video::SColor color,core::rect<s32> posicion,SDL_Surface* imagen);
+    Barra(std::string nombre,std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,video::SColor color,core::rect<s32> posicion,LTexture* imagen);
     bool procesarTiempo(int periodo);
 };
 

@@ -52,8 +52,8 @@ public:
     Receiver* receiver;
 
     //Misc
-    SDL_Surface* texture_bar;
-    SDL_Surface* texture_victory;
+    LTexture* texture_bar;
+    LTexture* texture_victory;
 
     Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();

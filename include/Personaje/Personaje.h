@@ -49,7 +49,7 @@ class Personaje
     std::vector<Barra> barras;
 
     //vectores potenciales
-    std::vector<SDL_Surface*>textures;
+    std::vector<LTexture*>textures;
 
     //strings
     irr::core::map<std::string,std::string> strings;

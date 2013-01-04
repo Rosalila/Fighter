@@ -17,7 +17,7 @@
 #include <iostream>
 using namespace std;
 
-int main()
+int main( int argc, char* args[] )
 {
     //Creadas abierto
     Receiver* receiver=new Receiver();
@@ -25,13 +25,12 @@ int main()
     Input*inputb=new Input();
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
-    Painter*painter=new Painter();
-    Sonido*sonido = new Sonido();
 
+    Painter*painter=new Painter( &argc, args );
+    Sonido*sonido = new Sonido();
     Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.xml");
     sonido->playMusic(menu->music_path);
+
     menu->loopMenu();
-    //Fighter *fighter=new Fighter();
-    //fighter->mainLoop();
     return 0;
 }

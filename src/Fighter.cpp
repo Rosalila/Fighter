@@ -829,7 +829,7 @@ void Fighter::loopJuego()
 //        if(painter->device->getTimer()->getTime()<anterior+16)
 //            continue;
 
-        if(receiver->IsKeyDownn(irr::KEY_ESCAPE))///!!!
+        if(receiver->IsKeyDownn(SDLK_ESCAPE))///!!!
         {
             pause_menu->loopMenu();
             if(pause_menu->getExitSignal())
@@ -890,29 +890,29 @@ void Fighter::dibujarBarra()
 {
     painter->draw2DImage
     (   texture_bar,
-        texture_bar->w,texture_bar->h,
-        painter->screen_width/2,-texture_bar->w/2,
+        texture_bar->width(),texture_bar->height(),
+        painter->screen_width/2,-texture_bar->width()/2,
         0,
         false);
 
     for(int i=0;i<victories_a;i++)
     {
-        int separation_x=texture_victory->w;
+        int separation_x=texture_victory->width();
         painter->draw2DImage
         (   texture_victory,
-            texture_victory->w,texture_victory->h,
-            painter->screen_width/2-texture_victory->w/2-victory_image_x-i*separation_x,victory_image_y,
+            texture_victory->width(),texture_victory->height(),
+            painter->screen_width/2-texture_victory->width()/2-victory_image_x-i*separation_x,victory_image_y,
             0,
             false);
     }
 
     for(int i=0;i<victories_b;i++)
     {
-        int separation_x=texture_victory->w;
+        int separation_x=texture_victory->width();
         painter->draw2DImage
         (   texture_victory,
-            texture_victory->w,texture_victory->h,
-            painter->screen_width/2-texture_victory->w/2+victory_image_x+i*separation_x,victory_image_y,
+            texture_victory->width(),texture_victory->height(),
+            painter->screen_width/2-texture_victory->width()/2+victory_image_x+i*separation_x,victory_image_y,
             0,
             false);
     }
@@ -1029,7 +1029,7 @@ bool Fighter::render()
     {
         if(ko.size()>0)
         {
-            SDL_Surface* texture_gameover=ko[pos_imagen_ko].imagen;
+            LTexture* texture_gameover=ko[pos_imagen_ko].imagen;
             tiempo_actual_ko++;
             if(tiempo_actual_ko==duracion_ko)
             {
@@ -1040,8 +1040,8 @@ bool Fighter::render()
                 pos_imagen_ko=0;
             painter->draw2DImage
             (   texture_gameover,
-                texture_gameover->w,texture_gameover->h,
-                (painter->screen_width-texture_gameover->w)/2,(painter->screen_height-texture_gameover->h)/2,
+                texture_gameover->width(),texture_gameover->height(),
+                (painter->screen_width-texture_gameover->width())/2,(painter->screen_height-texture_gameover->height())/2,
                 0,
                 false);
         }
@@ -1050,8 +1050,8 @@ bool Fighter::render()
 
     if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("current_move")=="5" && pb[0]->getString("current_move")=="5")
     {
-        //SDL_Surface* texture_gameover=grafico->getTexture("misc/ko/1.png");
-        SDL_Surface* texture_gameover=match_intro[pos_imagen_intro].imagen;
+        //LTexture* texture_gameover=grafico->getTexture("misc/ko/1.png");
+        LTexture* texture_gameover=match_intro[pos_imagen_intro].imagen;
         tiempo_actual_intro++;
         if(tiempo_actual_intro==duracion_intro)
         {
@@ -1060,8 +1060,8 @@ bool Fighter::render()
         }
         painter->draw2DImage
         (   texture_gameover,
-            texture_gameover->w,texture_gameover->h,
-            (painter->screen_width-texture_gameover->w)/2,(painter->screen_height-texture_gameover->h)/2,
+            texture_gameover->width(),texture_gameover->height(),
+            (painter->screen_width-texture_gameover->width())/2,(painter->screen_height-texture_gameover->height())/2,
             0,
             false);
     }
