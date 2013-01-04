@@ -6,11 +6,11 @@
 class MenuBarra:Elemento
 {
 private:
-    LTexture*fondo;
-    LTexture*barra;
+    Image*fondo;
+    Image*barra;
     int barra_x,barra_y;
-    LTexture*fondo_sel;
-    LTexture*barra_sel;
+    Image*fondo_sel;
+    Image*barra_sel;
     int barra_x_sel,barra_y_sel;
     bool seleccionado;
     int accion;
@@ -18,8 +18,8 @@ public:
     int actual;
     int maximo;
     MenuBarra(Painter*painter,int x, int y, int width, int height,bool visible,
-              LTexture*fondo,int barra_x,int barra_y,LTexture*barra,
-              LTexture*fondo_sel,int barra_x_sel,int barra_y_sel,LTexture*barra_sel,
+              Image*fondo,int barra_x,int barra_y,Image*barra,
+              Image*fondo_sel,int barra_x_sel,int barra_y_sel,Image*barra_sel,
               int maximo,int actual,int accion);
     virtual int getTipo();
     virtual void dibujar();

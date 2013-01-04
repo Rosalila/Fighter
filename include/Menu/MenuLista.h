@@ -7,12 +7,12 @@
 class MenuLista:Elemento
 {
 private:
-    LTexture*flecha_izquierda;
-    LTexture*flecha_derecha;
+    Image*flecha_izquierda;
+    Image*flecha_derecha;
     int flecha_izq_x_sel,flecha_izq_y;
     int flecha_der_x_sel,flecha_der_y;
-    LTexture*flecha_izquierda_sel;
-    LTexture*flecha_derecha_sel;
+    Image*flecha_izquierda_sel;
+    Image*flecha_derecha_sel;
     int flecha_izq_x,flecha_izq_y_sel;
     int flecha_der_x,flecha_der_y_sel;
     bool seleccionado;
@@ -21,8 +21,8 @@ private:
     std::vector<Elemento*>elementos;//!!!!!!!
 public:
     MenuLista(Painter*painter,int x, int y, int width, int height,bool visible,
-              int flecha_izq_x,int flecha_izq_y,LTexture*flecha_izquierda,int flecha_der_x,int flecha_der_y,LTexture*flecha_derecha,
-              int flecha_izq_x_sel,int flecha_izq_y_sel,LTexture*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,LTexture*flecha_derecha_sel,
+              int flecha_izq_x,int flecha_izq_y,Image*flecha_izquierda,int flecha_der_x,int flecha_der_y,Image*flecha_derecha,
+              int flecha_izq_x_sel,int flecha_izq_y_sel,Image*flecha_izquierda_sel,int flecha_der_x_sel,int flecha_der_y_sel,Image*flecha_derecha_sel,
               std::vector<Elemento*>elementos,int accion
               );
     virtual int getTipo();

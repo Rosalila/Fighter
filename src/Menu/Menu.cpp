@@ -823,8 +823,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-            LTexture* original_image=painter->getTexture(path);
-            LTexture* image=painter->getTexture(path);
+            Image* original_image=painter->getTexture(path);
+            Image* image=painter->getTexture(path);
 
 //            if(fade_in_initial!=-1)//!!SET ALPHA
 //                painter->setAlpha(fade_in_initial,image,original_image);
@@ -982,8 +982,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                             if(e->Attribute("fade_in_speed")!=NULL)
                                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                            LTexture*original_image=painter->getTexture(path);
-                            LTexture*image=painter->getTexture(path);
+                            Image*original_image=painter->getTexture(path);
+                            Image*image=painter->getTexture(path);
 
 //                            if(fade_in_initial!=-1)//!!SET APLHA
 //                                painter->setAlpha(fade_in_initial,image,original_image);
@@ -1029,8 +1029,8 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                 if(e->Attribute("fade_in_speed")!=NULL)
                                     fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                                LTexture*original_image=painter->getTexture(std::string("stages/")+std::string(stages[i])+std::string("/images/preview.png"));
-                                LTexture*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
+                                Image*original_image=painter->getTexture(std::string("stages/")+std::string(stages[i])+std::string("/images/preview.png"));
+                                Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
 //                                if(fade_in_initial!=-1)//!!SET ALPHA
 //                                    painter->setAlpha(fade_in_initial,image,original_image);
@@ -1485,33 +1485,33 @@ void Menu::llenarInputsBotones()
     }
 }
 
-void Menu::printVsScreen(vector<LTexture*>pa_previews,vector<LTexture*>pb_previews)
+void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
 {
     painter->draw2DImage
     (   vs_screen,
-        vs_screen->width(),vs_screen->height(),
+        vs_screen->getWidth(),vs_screen->getHeight(),
         0,0,
         0,
         false);
 
     for(int i=0;i<(int)pa_previews.size();i++)
     {
-        LTexture*texture=pa_previews[i];
+        Image*texture=pa_previews[i];
         painter->draw2DImage
         (   texture,
-            texture->width(),texture->height(),
-            i*200,painter->screen_height-texture->height()-150,
+            texture->getWidth(),texture->getHeight(),
+            i*200,painter->screen_height-texture->getHeight()-150,
             0,
             false);
     }
 
     for(int i=0;i<(int)pb_previews.size();i++)
     {
-        LTexture*texture=pb_previews[i];
+        Image*texture=pb_previews[i];
         painter->draw2DImage
         (   texture,
-            texture->width(),texture->height(),
-            painter->screen_width-(i+1)*texture->width()-50,painter->screen_height-texture->height()-150,
+            texture->getWidth(),texture->getHeight(),
+            painter->screen_width-(i+1)*texture->getWidth()-50,painter->screen_height-texture->getHeight()-150,
             0,
             false);
     }

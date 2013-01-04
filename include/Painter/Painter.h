@@ -3,48 +3,40 @@
 
 #include <iostream>
 #include "SDL/SDL_image.h"
-#include "SDL/SDL_opengl.h"
-
-#include <irrlicht/irrlicht.h>
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <stdio.h>
 
-#include "Painter/LTexture.h"
+#include <irrlicht/irrlicht.h>
 
-
+#include "Painter/Image.h"
 using namespace irr;
 
 class Painter
 {
-
     public:
-    bool renderQuad;
-    LTexture* screen = NULL;
+    SDL_Surface* screen = NULL;
     int screen_width;
     int screen_height;
     int screen_bpp;
     int camera_x,camera_y;
-    Painter(int *argcp, char **argv);
+    Painter();
     ~Painter();
-    LTexture* getTexture(std::string filename);
+    Image* getTexture(std::string filename);
     void draw2DImage	(
-	             LTexture* texture,
+	             Image* texture,
 				 int size_x,int size_y,
 				 int position_x,int position_y,
 				 int scale,
 				 bool flipHorizontally);
     void draw2DImageCameraAlign	(
-	             LTexture* texture,
+	             Image* texture,
 				 int size_x,int size_y,
 				 int position_x,int position_y,
 				 int scale,
 				 bool flipHorizontally);
     void updateScreen();
-
-
-
 
 std::string convertInt(int number)
 {

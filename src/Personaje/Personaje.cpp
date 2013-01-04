@@ -20,9 +20,9 @@ Personaje::~Personaje()
 {
     for(;!textures.empty();)
     {
-        LTexture*texture=textures.back();
+        Image*texture=textures.back();
         textures.pop_back();
-        texture->freeTexture();
+        //texture->freeTexture();
     }
 }
 //DIBUJAR
@@ -100,7 +100,7 @@ void Personaje::dibujar()
 //        tg=t%255;
 //    }
 
-    LTexture* texture=getImagen("current_image").imagen;
+    Image* texture=getImagen("current_image").imagen;
     //if(numero==1)
         //paleta.paintTexture(texture);
 
@@ -297,11 +297,11 @@ void Personaje::dibujarProyectiles()
         if(proyectil->sprites.size()!=0)
         {
             Imagen imagen=getImagen(proyectil->imagen);
-            int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->width()*imagen.escala/2)+imagen.alineacion_x;
-            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->height()*imagen.escala/2)+imagen.alineacion_y+painter->screen_height-stage_piso;
+            int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->getWidth()*imagen.escala/2)+imagen.alineacion_x;
+            int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->getHeight()*imagen.escala/2)+imagen.alineacion_y+painter->screen_height-stage_piso;
             painter->draw2DImageCameraAlign
             (   imagen.imagen,
-                imagen.imagen->width(),imagen.imagen->height(),
+                imagen.imagen->getWidth(),imagen.imagen->getHeight(),
                 pos_x,pos_y,
                 imagen.escala,
                 getString(proyectil->orientacion)=="i"
@@ -311,7 +311,7 @@ void Personaje::dibujarProyectiles()
 //        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
 //        {
 //            std::string nombre=proyectil->nombre;
-//            dibujarHitBoxes(proyectil->height()itboxes,"",
+//            dibujarHitBoxes(proyectil->getHeight()itboxes,"",
 //                        getString(proyectil->orientacion)=="i",
 //                        getEntero(proyectil->posicion_x),
 //                        -getEntero(proyectil->posicion_y));
@@ -867,7 +867,7 @@ void Personaje::cargarMain()
                         int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
 
 
-                        LTexture* texture;
+                        Image* texture;
                         if(ignore_color==NULL)
                             texture=painter->getTexture(path);
 //                        else//!!IGNORE COLOR
@@ -1327,7 +1327,7 @@ void Personaje::cargarSprites()
 
                 if(ignore_color==NULL)
                 {
-                    LTexture* texture=painter->getTexture(path);
+                    Image* texture=painter->getTexture(path);
                     textures.push_back(texture);
                     paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
@@ -1337,7 +1337,7 @@ void Personaje::cargarSprites()
 //                {
 //                    video::IImage* image = painter->driver->createImageFromFile(path);
 //
-//                    video::LTexture* texture = painter->driver->addTexture("test",image);
+//                    video::Image* texture = painter->driver->addTexture("test",image);
 //                    textures.push_back(texture);
 //                    painter->driver->makeColorKeyTexture(texture,ignore_color);
 //
@@ -1476,7 +1476,7 @@ void Personaje::cargarAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            LTexture *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
+            Image *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1522,7 +1522,7 @@ void Personaje::cargarAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            LTexture *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
+            Image *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
             i_temp.push_back(Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1754,14 +1754,14 @@ bool Personaje::getColisionHitBoxes(vector<HitBox> hb_azules,vector<HitBox> hb_r
 
 void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
-    LTexture *texture=imagen.imagen;
+    Image *texture=imagen.imagen;
 
-    int pos_x=posicion_x+imagen.alineacion_x-(texture->width()*imagen.escala)/2;
-    int pos_y=posicion_y+imagen.alineacion_y-(texture->height()*imagen.escala)/2+painter->screen_height-stage_piso;
+    int pos_x=posicion_x+imagen.alineacion_x-(texture->getWidth()*imagen.escala)/2;
+    int pos_y=posicion_y+imagen.alineacion_y-(texture->getHeight()*imagen.escala)/2+painter->screen_height-stage_piso;
 
     painter->draw2DImageCameraAlign
     (   texture,
-        texture->width(),texture->height(),
+        texture->getWidth(),texture->getHeight(),
         pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         imagen.escala,
@@ -1770,14 +1770,14 @@ void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posi
 }
 void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
-    LTexture *texture=imagen.imagen;
+    Image *texture=imagen.imagen;
 
     int pos_x=posicion_x+imagen.alineacion_x;
     int pos_y=posicion_y+imagen.alineacion_y;
 
     painter->draw2DImage
     (   texture,
-        texture->width(),texture->height(),
+        texture->getWidth(),texture->getHeight(),
         pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         imagen.escala,

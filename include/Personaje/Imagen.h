@@ -8,10 +8,10 @@ class Imagen
 public:
     int dimension_x,dimension_y,alineacion_x,alineacion_y;
     float escala;
-    LTexture* imagen;
+    Image* imagen;
 
-    Imagen(LTexture* imagen,float escala,int alineacion_x,int alineacion_y);
-    Imagen(LTexture* imagen,int alineacion_x,int alineacion_y);
+    Imagen(Image* imagen,float escala,int alineacion_x,int alineacion_y);
+    Imagen(Image* imagen,int alineacion_x,int alineacion_y);
     Imagen();
 };
 

@@ -52,8 +52,8 @@ public:
     Receiver* receiver;
 
     //Misc
-    LTexture* texture_bar;
-    LTexture* texture_victory;
+    Image* texture_bar;
+    Image* texture_victory;
 
     Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();

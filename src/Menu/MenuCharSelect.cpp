@@ -67,7 +67,7 @@ void MenuCharSelect::lockPA(int num_paleta)
     if(name_pos>=names.size())
         return;
     std::string name=names[name_pos];
-    LTexture*preview=previews[name_pos];
+    Image*preview=previews[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
         if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
@@ -96,7 +96,7 @@ void MenuCharSelect::lockPB(int num_paleta)
     if(name_pos>=names.size())
         return;
     std::string name=names[name_pos];
-    LTexture*preview=previews[name_pos];
+    Image*preview=previews[name_pos];
     //la paleta es seleccionable?
     for(int i=0;i<(int)locks_pb.size();i++)
         if(locks_pb[i].name==name && locks_pb[i].num_paleta==num_paleta)
@@ -142,17 +142,17 @@ std::vector<int> MenuCharSelect::getLockedPalettesPB()
     return res;
 }
 
-std::vector<LTexture*> MenuCharSelect::getLockedPreviewsPA()
+std::vector<Image*> MenuCharSelect::getLockedPreviewsPA()
 {
-    std::vector<LTexture*>res;
+    std::vector<Image*>res;
     for(int i=0;i<(int)locks_pa.size();i++)
         res.push_back(locks_pa[i].preview);
     return res;
 }
 
-std::vector<LTexture*> MenuCharSelect::getLockedPreviewsPB()
+std::vector<Image*> MenuCharSelect::getLockedPreviewsPB()
 {
-    std::vector<LTexture*>res;
+    std::vector<Image*>res;
     for(int i=0;i<(int)locks_pb.size();i++)
         res.push_back(locks_pb[i].preview);
     return res;
@@ -192,20 +192,20 @@ void MenuCharSelect::dibujar()
                 //draw preview pa
                 if(select_p1_x+select_p1_y*size_x==cont)
                 {
-                    LTexture *image=previews[cont];
+                    Image *image=previews[cont];
                     painter->draw2DImage
                     (   image,
-                        image->width(),image->height(),
+                        image->getWidth(),image->getHeight(),
                         preview_pa_x,preview_pa_y,
                         0,
                         false);
                 }
                 if(select_p2_x+select_p2_y*size_x==cont)
                 {
-                    LTexture *image=previews[cont];
+                    Image *image=previews[cont];
                     painter->draw2DImage
                     (   image,
-                        image->width(),image->height(),
+                        image->getWidth(),image->getHeight(),
                         preview_pb_x,preview_pb_y,
                         0,
                         false);
@@ -220,7 +220,7 @@ void MenuCharSelect::dibujar()
             //dibujar portraits
             if(cont>=(int)portraits.size())
             {
-                LTexture *image=no_portrait;
+                Image *image=no_portrait;
                 painter->draw2DImage
                 (   image,
                     size_cuadro_x,size_cuadro_y,
@@ -229,7 +229,7 @@ void MenuCharSelect::dibujar()
                     false);
             }else
             {
-                LTexture *image=portraits[cont];
+                Image *image=portraits[cont];
                 painter->draw2DImage
                 (   image,
                     size_cuadro_x,size_cuadro_y,
@@ -242,7 +242,7 @@ void MenuCharSelect::dibujar()
             {
                 if(locks_pa[l].x==i && locks_pa[l].y==j)
                 {
-                    LTexture *image=locked_char_p1;
+                    Image *image=locked_char_p1;
                     painter->draw2DImage
                     (   image,
                         size_cuadro_x,size_cuadro_y,
@@ -256,7 +256,7 @@ void MenuCharSelect::dibujar()
             {
                 if(locks_pb[l].x==i && locks_pb[l].y==j)
                 {
-                    LTexture *image=locked_char_p2;
+                    Image *image=locked_char_p2;
                     painter->draw2DImage
                     (   image,
                         size_cuadro_x,size_cuadro_y,
@@ -268,7 +268,7 @@ void MenuCharSelect::dibujar()
             //dibjujar cursor PA
             if(select_p1_x==i&&select_p1_y==j && (int)locks_pa.size()<max_locked_chars_pa)
             {
-                LTexture*image=selected_char_p1;
+                Image*image=selected_char_p1;
                 painter->draw2DImage
                 (   image,
                     size_cuadro_x,size_cuadro_y,
@@ -279,7 +279,7 @@ void MenuCharSelect::dibujar()
             //dibjujar cursor PB
             if(select_p2_x==i&&select_p2_y==j && (int)locks_pb.size()<max_locked_chars_pb)
             {
-                LTexture *image=selected_char_p2;
+                Image *image=selected_char_p2;
                 painter->draw2DImage
                 (   image,
                     size_cuadro_x,size_cuadro_y,

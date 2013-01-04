@@ -1,8 +1,8 @@
 #include "Menu/MenuBarra.h"
 
 MenuBarra::MenuBarra(Painter*painter,int x, int y, int width, int height,bool visible,
-          LTexture*fondo,int barra_x,int barra_y,LTexture*barra,
-          LTexture*fondo_sel,int barra_x_sel,int barra_y_sel,LTexture*barra_sel,
+          Image*fondo,int barra_x,int barra_y,Image*barra,
+          Image*fondo_sel,int barra_x_sel,int barra_y_sel,Image*barra_sel,
           int maximo,int actual,int accion)
 {
     this->x=x;

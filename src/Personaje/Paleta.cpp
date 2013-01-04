@@ -36,7 +36,7 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
     }
 }
 
-LTexture* Paleta::paintTexture(LTexture* texture)
+Image* Paleta::paintTexture(Image* texture)
 {
 //    for(int i=0;i<(int)cambios.size();i++)//!!PALETTES
 //    {
@@ -64,10 +64,10 @@ LTexture* Paleta::paintTexture(LTexture* texture)
 //        if(b_min<0)b_min=0;
 //        if(b_max>255)b_max=255;
 //
-//        copia=new s32[texture->width()*texture->height()];
+//        copia=new s32[texture->*texture->getHeight()];
 //        // update texture with color
 //        s32* p = (s32*)texture->lock();
-//        for(s32 i=0; i<texture->width()*texture->height(); i++)
+//        for(s32 i=0; i<texture->*texture->getHeight(); i++)
 //        {
 //            copia[i]=p[i];
 //            //verficacion
@@ -103,7 +103,7 @@ LTexture* Paleta::paintTexture(LTexture* texture)
 //    }
 }
 
-LTexture* Paleta::restoreTexture(LTexture* texture)
+Image* Paleta::restoreTexture(Image* texture)
 {
 //    s32* p = (s32*)texture->lock();//!!PALLETTES
 //    p=copia;

@@ -32,8 +32,8 @@ public:
     s32 *copia;
     Paleta(){}
     void cargarXML(char* archivo,int num_paleta);
-    LTexture* paintTexture(LTexture* texture);
-    LTexture* restoreTexture(LTexture* texture);
+    Image* paintTexture(Image* texture);
+    Image* restoreTexture(Image* texture);
 };
 
 #endif
