@@ -345,7 +345,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1357505221 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
+1357509886 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -356,6 +356,7 @@
 	"SDL/SDL_mixer.h"
 	<string>
 	"include/Fighter.h"
+	"Log/Log.h"
 	<iostream>
 
 1357272646 /home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
@@ -388,7 +389,7 @@
 	"Sonido/Sonido.h"
 	"Fighter.h"
 
-1357507825 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
+1357507887 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1351051182 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Grafico/Grafico.cpp
@@ -499,7 +500,7 @@
 1354848831 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
 	"Sonido/Reproduccion.h"
 
-1357507802 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
+1357510356 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
 1357492859 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
@@ -523,7 +524,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1357507759 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+1357510401 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
 1357279159 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
@@ -718,4 +719,7 @@
 
 1357276802 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
 	"Painter/Painter.h"
+
+1357509747 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Log/Log.cpp
+	"Log/Log.h"
 

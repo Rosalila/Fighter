@@ -11,6 +11,12 @@
 #include <irrlicht/irrlicht.h>
 
 #include "Painter/Image.h"
+#include "Log/Log.h"
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
 using namespace irr;
 
 class Painter

@@ -13,12 +13,14 @@
 
 //#include "Input/Input.h"
 #include "include/Fighter.h"
+#include "Log/Log.h"
 
 #include <iostream>
 using namespace std;
 
 int main(int argc, char *argv[])
 {
+    clearLog();
     //Creadas abierto
     Receiver* receiver=new Receiver();
     Input*inputa=new Input();

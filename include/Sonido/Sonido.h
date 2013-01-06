@@ -16,6 +16,8 @@ using namespace std;
 #include "SDL/SDL_ttf.h"
 #include "SDL/SDL_mixer.h"
 
+#include "Log/Log.h"
+
 class Sonido
 {
     irr::core::map<std::string,Mix_Chunk*> sonidos;

@@ -12,7 +12,7 @@ Painter::Painter()
     //Initialize all SDL subsystems
     if( SDL_Init( SDL_INIT_EVERYTHING ) == -1 )
     {
-        std::cout<<"Error: Could not initialize SDL.";
+        writeLogLine(SDL_GetError());
         return;
     }
 
@@ -43,7 +43,7 @@ Painter::Painter()
     //If there was an error in setting up the screen
     if( screen == NULL )
     {
-        std::cout<<"Error: Could not initialize SDL screen.";
+        writeLogLine("Error: Could not initialize SDL screen.");
         return;
     }
 
@@ -51,7 +51,7 @@ Painter::Painter()
     SDL_WM_SetCaption( "Rosalila fighter engine", NULL );
 
     //If everything initialized fine
-    std::cout<<"Success! SDL initialized.";
+    writeLogLine("Success! SDL initialized.");
     return;
 }
 
@@ -67,8 +67,6 @@ Painter::~Painter()
 
 Image* Painter::getTexture(std::string filename)
 {
-std::cout<<filename<<std::endl;std::cout.flush();
-
     SDL_Surface *surface;
     GLenum texture_format;
     GLint  nOfColors;
@@ -91,7 +89,7 @@ std::cout<<filename<<std::endl;std::cout.flush();
                     //else
                             //texture_format = GL_BGR;
             } else {
-                    printf("warning: the image is not truecolor..  this will probably break\n");
+                writeLogLine("Warning: the image is not truecolor. This will probably break.");
                     // this error should not go unhandled
             }
 
@@ -110,9 +108,10 @@ std::cout<<filename<<std::endl;std::cout.flush();
                           texture_format, GL_UNSIGNED_BYTE, surface->pixels );
     }
     else {
-        printf("SDL could not load bag.png: %s\n", SDL_GetError());
+        std::string sdl_error=SDL_GetError();
+        writeLogLine("SDL could not load bag.png: "+sdl_error);
         SDL_Quit();
-        //return 1;
+        return NULL;
     }
 
 
@@ -125,6 +124,8 @@ std::cout<<filename<<std::endl;std::cout.flush();
     if ( surface ) {
         SDL_FreeSurface( surface );
     }
+
+    writeLogLine(filename+" loaded");
 
     return image;
 }

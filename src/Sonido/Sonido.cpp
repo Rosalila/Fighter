@@ -4,13 +4,13 @@ Sonido::Sonido()
 {
     music=NULL;
 
-    cout<<"Initializing SLD sound engine."<<endl;cout.flush();
+    writeLogLine("Initializing SLD sound engine.");
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
     {
-        cout<<"Failed."<<endl;cout.flush();
+        writeLogLine("Failed. :(");
         return;
     }
-    cout<<"Success!"<<endl;cout.flush();
+    writeLogLine("Success!");
 }
 
 void Sonido::drop()
@@ -42,7 +42,7 @@ void Sonido::reproducirSonido(std::string variable,bool looped)
 void Sonido::playMusic(std::string path)
 {
     stopMusic();
-    cout<<"Playing music: "<<path<<endl;cout.flush();
+    writeLogLine("Playing music: "+path);
     music = Mix_LoadMUS(path.c_str());
     Mix_PlayMusic(music,-1);
 }
