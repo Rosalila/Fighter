@@ -29,13 +29,10 @@ class Painter
 				 int size_x,int size_y,
 				 int position_x,int position_y,
 				 int scale,
-				 bool flipHorizontally);
-    void draw2DImageCameraAlign	(
-	             Image* texture,
-				 int size_x,int size_y,
-				 int position_x,int position_y,
-				 int scale,
-				 bool flipHorizontally);
+				 bool flipHorizontally,
+				 int depth_effect_x,
+				 int depth_effect_y,
+				 bool camera_align);
     void updateScreen();
 
 std::string convertInt(int number)

@@ -848,44 +848,6 @@ void Fighter::loopJuego()
     //sonido->pararSonido("Stage.music");
 }
 
-void itoa(int n, char *s, int b)
-{
-    static char digits[] = "0123456789abcdefghijklmnopqrstuvwxyz";
-    int i=0, sign;
-
-    if ((sign = n) < 0)
-        n = -n;
-
-    do
-    {
-        s[i++] = digits[n % b];
-    }
-    while ((n /= b) > 0);
-
-    if (sign < 0)
-        s[i++] = '-';
-    s[i] = '\0';
-
-    //return strrev(s);
-}
-
-char *strrev(char *str)
-{
-    char *p1, *p2;
-
-    if (!str || !*str)
-        return str;
-
-    for (p1 = str, p2 = str + strlen(str) - 1; p2 > p1; ++p1, --p2)
-    {
-        *p1 ^= *p2;
-        *p2 ^= *p1;
-        *p1 ^= *p2;
-    }
-
-    return str;
-}
-
 void Fighter::dibujarBarra()
 {
     painter->draw2DImage
@@ -893,6 +855,8 @@ void Fighter::dibujarBarra()
         texture_bar->getWidth(),texture_bar->getHeight(),
         painter->screen_width/2,-texture_bar->getWidth()/2,
         0,
+        false,
+        0,0,
         false);
 
     for(int i=0;i<victories_a;i++)
@@ -903,6 +867,8 @@ void Fighter::dibujarBarra()
             texture_victory->getWidth(),texture_victory->getHeight(),
             painter->screen_width/2-texture_victory->getWidth()/2-victory_image_x-i*separation_x,victory_image_y,
             0,
+            false,
+            0,0,
             false);
     }
 
@@ -914,6 +880,8 @@ void Fighter::dibujarBarra()
             texture_victory->getWidth(),texture_victory->getHeight(),
             painter->screen_width/2-texture_victory->getWidth()/2+victory_image_x+i*separation_x,victory_image_y,
             0,
+            false,
+            0,0,
             false);
     }
 }
@@ -946,20 +914,20 @@ bool Fighter::render()
     getPaActual()->dibujarProyectiles();
     getPbActual()->dibujarProyectiles();
 
-    //HP
-    getPaActual()->dibujarBarras();
-    getPbActual()->dibujarBarras();
-
-    if(pa.size()>=2)
-        get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
-    if(pa.size()==3)
-        get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
-
-    if(pb.size()>=2)
-        get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
-    if(pb.size()==3)
-        get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
-//        pa->dibujarBarra("hp",312-70,50);
+//    //HP
+//    getPaActual()->dibujarBarras();
+//    getPbActual()->dibujarBarras();
+//
+//    if(pa.size()>=2)
+//        get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
+//    if(pa.size()==3)
+//        get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
+//
+//    if(pb.size()>=2)
+//        get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
+//    if(pb.size()==3)
+//        get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
+////        pa->dibujarBarra("hp",312-70,50);
 //        pb->dibujarBarra("hp",512+45,50);
 
     pa_vivos=0;
@@ -1043,6 +1011,8 @@ bool Fighter::render()
                 texture_gameover->getWidth(),texture_gameover->getHeight(),
                 (painter->screen_width-texture_gameover->getWidth())/2,(painter->screen_height-texture_gameover->getHeight())/2,
                 0,
+                false,
+                0,0,
                 false);
         }
     }
@@ -1063,6 +1033,8 @@ bool Fighter::render()
             texture_gameover->getWidth(),texture_gameover->getHeight(),
             (painter->screen_width-texture_gameover->getWidth())/2,(painter->screen_height-texture_gameover->getHeight())/2,
             0,
+            false,
+            0,0,
             false);
     }
 
@@ -1091,6 +1063,7 @@ bool Fighter::render()
 //        painter->drawText(std::string(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,200,0,0),video::SColor (255,255,255,255));
 //    if(pb[pb_actual]->combo>0)
 //        painter->drawText(std::string(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(painter->screen_width-300,200,0,0),video::SColor (255,255,255,255));
+    receiver->updateInputs();
     painter->updateScreen();
 }
 

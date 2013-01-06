@@ -65,6 +65,7 @@ void Input::actualizarBuffer()
     for(int i=0;i<(int)cruz.size();i++)
         if(cruz[i].estaPresionado())
             resultado+=cruz[i].getMapeo();
+
     if(resultado=="24" || resultado=="42")
         resultado="1";
     if(resultado=="26" || resultado=="62")
@@ -130,7 +131,61 @@ void Input::cargarDesdeXML(int jugador,Receiver* receiver)
                         boton!=NULL;
                         boton=boton->NextSibling("button"))
                 {
-                    botones.push_back(Boton(receiver,(irr::EKEY_CODE)boton->ToElement()->Attribute("input")[0],std::string(boton->ToElement()->Attribute("map"))));
+                    int key=0;
+                    if(boton->ToElement()->Attribute("input")[0]=='Q' || boton->ToElement()->Attribute("input")[0]=='q')
+                        key=SDLK_q;
+                    if(boton->ToElement()->Attribute("input")[0]=='W' || boton->ToElement()->Attribute("input")[0]=='w')
+                        key=SDLK_w;
+                    if(boton->ToElement()->Attribute("input")[0]=='E' || boton->ToElement()->Attribute("input")[0]=='e')
+                        key=SDLK_e;
+                    if(boton->ToElement()->Attribute("input")[0]=='R' || boton->ToElement()->Attribute("input")[0]=='r')
+                        key=SDLK_r;
+                    if(boton->ToElement()->Attribute("input")[0]=='T' || boton->ToElement()->Attribute("input")[0]=='t')
+                        key=SDLK_t;
+                    if(boton->ToElement()->Attribute("input")[0]=='Y' || boton->ToElement()->Attribute("input")[0]=='y')
+                        key=SDLK_y;
+                    if(boton->ToElement()->Attribute("input")[0]=='U' || boton->ToElement()->Attribute("input")[0]=='u')
+                        key=SDLK_u;
+                    if(boton->ToElement()->Attribute("input")[0]=='I' || boton->ToElement()->Attribute("input")[0]=='i')
+                        key=SDLK_i;
+                    if(boton->ToElement()->Attribute("input")[0]=='O' || boton->ToElement()->Attribute("input")[0]=='o')
+                        key=SDLK_o;
+                    if(boton->ToElement()->Attribute("input")[0]=='P' || boton->ToElement()->Attribute("input")[0]=='p')
+                        key=SDLK_p;
+                    if(boton->ToElement()->Attribute("input")[0]=='A' || boton->ToElement()->Attribute("input")[0]=='a')
+                        key=SDLK_a;
+                    if(boton->ToElement()->Attribute("input")[0]=='S' || boton->ToElement()->Attribute("input")[0]=='s')
+                        key=SDLK_s;
+                    if(boton->ToElement()->Attribute("input")[0]=='D' || boton->ToElement()->Attribute("input")[0]=='d')
+                        key=SDLK_d;
+                    if(boton->ToElement()->Attribute("input")[0]=='F' || boton->ToElement()->Attribute("input")[0]=='f')
+                        key=SDLK_f;
+                    if(boton->ToElement()->Attribute("input")[0]=='G' || boton->ToElement()->Attribute("input")[0]=='g')
+                        key=SDLK_g;
+                    if(boton->ToElement()->Attribute("input")[0]=='H' || boton->ToElement()->Attribute("input")[0]=='h')
+                        key=SDLK_h;
+                    if(boton->ToElement()->Attribute("input")[0]=='J' || boton->ToElement()->Attribute("input")[0]=='j')
+                        key=SDLK_j;
+                    if(boton->ToElement()->Attribute("input")[0]=='K' || boton->ToElement()->Attribute("input")[0]=='k')
+                        key=SDLK_k;
+                    if(boton->ToElement()->Attribute("input")[0]=='L' || boton->ToElement()->Attribute("input")[0]=='l')
+                        key=SDLK_l;
+                    if(boton->ToElement()->Attribute("input")[0]=='Z' || boton->ToElement()->Attribute("input")[0]=='z')
+                        key=SDLK_z;
+                    if(boton->ToElement()->Attribute("input")[0]=='X' || boton->ToElement()->Attribute("input")[0]=='x')
+                        key=SDLK_x;
+                    if(boton->ToElement()->Attribute("input")[0]=='C' || boton->ToElement()->Attribute("input")[0]=='c')
+                        key=SDLK_c;
+                    if(boton->ToElement()->Attribute("input")[0]=='V' || boton->ToElement()->Attribute("input")[0]=='v')
+                        key=SDLK_v;
+                    if(boton->ToElement()->Attribute("input")[0]=='B' || boton->ToElement()->Attribute("input")[0]=='b')
+                        key=SDLK_b;
+                    if(boton->ToElement()->Attribute("input")[0]=='N' || boton->ToElement()->Attribute("input")[0]=='n')
+                        key=SDLK_n;
+                    if(boton->ToElement()->Attribute("input")[0]=='M' || boton->ToElement()->Attribute("input")[0]=='m')
+                        key=SDLK_m;
+
+                    botones.push_back(Boton(receiver,key,std::string(boton->ToElement()->Attribute("map"))));
                 }
             }
             //Joy

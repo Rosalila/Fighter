@@ -58,13 +58,14 @@ void Personaje::dibujar()
         //    int t2=t%255;
             int pos_x=sombra_x[i]-(dimension_x*sombra[i].escala/2)+alineacion_x;
             int pos_y=-sombra_y[i]-(dimension_y*sombra[i].escala)-alineacion_y+painter->screen_height-stage_piso;
-            painter->draw2DImageCameraAlign
+            painter->draw2DImage
             (   sombra[i].imagen,
                 dimension_x,dimension_y,
                 pos_x,pos_y,
                 sombra[i].escala,
-                flip_sombra[i]
-                );
+                flip_sombra[i],
+                0,0,
+                true);
         }
     }
 
@@ -109,13 +110,14 @@ void Personaje::dibujar()
     int pos_y=-getEntero("position_y")-(dimension_y*getImagen("current_image").escala)-alineacion_y+painter->screen_height-stage_piso;
 
 
-    painter->draw2DImageCameraAlign
+    painter->draw2DImage
     (   getImagen("current_image").imagen,
         dimension_x,dimension_y,
         pos_x,pos_y,
         getImagen("current_image").escala,
-        getString("orientation")=="i"
-        );
+        getString("orientation")=="i",
+        0,0,
+        true);
 //    if(numero==1)
         //paleta.restoreTexture(texture);
 
@@ -213,8 +215,9 @@ void Personaje::dibujarBarra(Barra barra)
             //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
             p1x,p1y,
             0,
-            flip
-            );
+            flip,
+            0,0,
+            false);
 }
 
 void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
@@ -274,8 +277,9 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
             //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
             p1x,p1y,
             0,
-            player2
-            );
+            player2,
+            0,0,
+            false);
 }
 
 void Personaje::dibujarBarras()
@@ -299,13 +303,14 @@ void Personaje::dibujarProyectiles()
             Imagen imagen=getImagen(proyectil->imagen);
             int pos_x=getEntero(proyectil->posicion_x)-(imagen.imagen->getWidth()*imagen.escala/2)+imagen.alineacion_x;
             int pos_y=getEntero(proyectil->posicion_y)-(imagen.imagen->getHeight()*imagen.escala/2)+imagen.alineacion_y+painter->screen_height-stage_piso;
-            painter->draw2DImageCameraAlign
+            painter->draw2DImage
             (   imagen.imagen,
                 imagen.imagen->getWidth(),imagen.imagen->getHeight(),
                 pos_x,pos_y,
                 imagen.escala,
-                getString(proyectil->orientacion)=="i"
-                );
+                getString(proyectil->orientacion)=="i",
+                0,0,
+                true);
         }
         //Dibujar hitboxes
 //        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
@@ -1759,14 +1764,15 @@ void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posi
     int pos_x=posicion_x+imagen.alineacion_x-(texture->getWidth()*imagen.escala)/2;
     int pos_y=posicion_y+imagen.alineacion_y-(texture->getHeight()*imagen.escala)/2+painter->screen_height-stage_piso;
 
-    painter->draw2DImageCameraAlign
+    painter->draw2DImage
     (   texture,
         texture->getWidth(),texture->getHeight(),
         pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         imagen.escala,
-        getString("orientation")!="d"
-        );
+        getString("orientation")!="d",
+        0,0,
+        false);
 }
 void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
@@ -1781,8 +1787,9 @@ void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int 
         pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         imagen.escala,
-        getString("orientation")!="d"
-        );
+        getString("orientation")!="d",
+        0,0,
+        false);
 }
 void Personaje::dibujarAnimacionesBack()
 {

@@ -45,6 +45,8 @@ void MenuBoton::dibujar()
             width,height,
             x,y,
             0,
+            false,
+            0,0,
             false);
 
         std::string temp=texto;
@@ -60,6 +62,8 @@ void MenuBoton::dibujar()
             width,height,
             x,y,
             0,
+            false,
+            0,0,
             false);
 
         std::string temp=texto_sel;
@@ -80,6 +84,8 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
             width,height,
             x+alineacion_x,y+alineacion_y,
             0,
+            false,
+            0,0,
             false);
 
         std::string temp=texto;
@@ -95,6 +101,8 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
             width,height,
             x+alineacion_x,y+alineacion_y,
             0,
+            false,
+            0,0,
             false);
 
         std::string temp=texto_sel;

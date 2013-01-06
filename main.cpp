@@ -17,7 +17,7 @@
 #include <iostream>
 using namespace std;
 
-int main( int argc, char* args[] )
+int main(int argc, char *argv[])
 {
     //Creadas abierto
     Receiver* receiver=new Receiver();

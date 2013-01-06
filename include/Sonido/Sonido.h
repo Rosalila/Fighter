@@ -19,7 +19,7 @@ using namespace std;
 class Sonido
 {
     irr::core::map<std::string,Mix_Chunk*> sonidos;
-    Mix_Music *music = NULL;
+    Mix_Music *music;
 public:
     Sonido();
     void drop();

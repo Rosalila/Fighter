@@ -49,9 +49,7 @@
 		<Unit filename="include/Menu/MenuImagen.h" />
 		<Unit filename="include/Menu/MenuLista.h" />
 		<Unit filename="include/Menu/MenuTexto.h" />
-		<Unit filename="include/Painter/LOpenGL.h" />
-		<Unit filename="include/Painter/LTexture.h" />
-		<Unit filename="include/Painter/LUtil.h" />
+		<Unit filename="include/Painter/Image.h" />
 		<Unit filename="include/Painter/Painter.h" />
 		<Unit filename="include/Personaje/Animacion.h" />
 		<Unit filename="include/Personaje/Barra.h" />
@@ -93,8 +91,7 @@
 		<Unit filename="src/Menu/MenuImagen.cpp" />
 		<Unit filename="src/Menu/MenuLista.cpp" />
 		<Unit filename="src/Menu/MenuTexto.cpp" />
-		<Unit filename="src/Painter/LTexture.cpp" />
-		<Unit filename="src/Painter/LUtil.cpp" />
+		<Unit filename="src/Painter/Image.cpp" />
 		<Unit filename="src/Painter/Painter.cpp" />
 		<Unit filename="src/Personaje/Animacion.cpp" />
 		<Unit filename="src/Personaje/Barra.cpp" />

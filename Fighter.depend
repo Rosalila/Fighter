@@ -345,7 +345,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1357279159 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
+1357505221 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -378,7 +378,7 @@
 	<assert.h>
 	<string.h>
 
-1357272646 /home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
+1357456435 /home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
 	"Stage/Stage.h"
 	"Painter/Painter.h"
 	"irrKlang/irrKlang.h"
@@ -388,7 +388,7 @@
 	"Sonido/Sonido.h"
 	"Fighter.h"
 
-1357272966 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
+1357507825 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
 1351051182 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Grafico/Grafico.cpp
@@ -406,10 +406,10 @@
 1357272989 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
 	"IA/Transicion.h"
 
-1357192722 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
+1357434355 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1357120543 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
+1357434345 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
 	<sstream>
 
@@ -419,25 +419,25 @@
 1357273019 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1357272966 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
+1357492349 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
-1357273034 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
+1357492409 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
 	"Menu/MenuBarra.h"
 
-1357273045 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
+1357492432 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1357273059 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
+1357492506 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
 
 1357273071 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
 	"Menu/MenuContenedor.h"
 
-1357273107 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
+1357492522 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
 	"Menu/MenuImagen.h"
 
-1357273116 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
+1357492557 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
 	"Menu/MenuLista.h"
 
 1357273124 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
@@ -490,7 +490,7 @@
 1357272944 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
 	"Personaje/Paleta.h"
 
-1357274183 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
+1357492832 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
 1357274193 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
@@ -499,10 +499,10 @@
 1354848831 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
 	"Sonido/Reproduccion.h"
 
-1357120054 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
+1357507802 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1357272966 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
+1357492859 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
 1354848831 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinystr.cpp
@@ -523,10 +523,10 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1357280421 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+1357507759 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
-1355086005 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
+1357279159 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -539,7 +539,7 @@
 	"include/Fighter.h"
 	<iostream>
 
-1354848830 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
+1357272646 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Fighter.h
 	"TinyXml/tinyxml.h"
 	"Menu/Menu.h"
 	<stdio.h>
@@ -559,7 +559,7 @@
 	<assert.h>
 	<string.h>
 
-1355086004 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
+1357456435 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/include/Menu/Menu.h
 	"Stage/Stage.h"
 	"Painter/Painter.h"
 	"irrKlang/irrKlang.h"
@@ -569,118 +569,118 @@
 	"Sonido/Sonido.h"
 	"Fighter.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
+1357493471 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Fighter.cpp
 	"../include/Fighter.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Automata.cpp
+1357120543 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Automata.cpp
 	"IA/Automata.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Estado.cpp
+1357120543 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Estado.cpp
 	"IA/Estado.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/IA.cpp
+1357119415 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/IA.cpp
 	"IA/IA.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
+1357272989 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/IA/Transicion.cpp
 	"IA/Transicion.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
+1357434355 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Boton.cpp
 	"Input/Boton.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
+1357434345 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Input.cpp
 	"Input/Input.h"
 	<sstream>
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
+1357269280 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
 	"Input/Receiver.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
+1357273019 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
 	"Menu/Elemento.h"
 
-1355085963 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
+1357492349 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Menu.cpp
 	"Menu/Menu.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
+1357492409 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBarra.cpp
 	"Menu/MenuBarra.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
+1357492432 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuBoton.cpp
 	"Menu/MenuBoton.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
+1357492506 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuCharSelect.cpp
 	"Menu/MenuCharSelect.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
+1357273071 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuContenedor.cpp
 	"Menu/MenuContenedor.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
+1357492522 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuImagen.cpp
 	"Menu/MenuImagen.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
+1357492557 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuLista.cpp
 	"Menu/MenuLista.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
+1357273124 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/MenuTexto.cpp
 	"Menu/MenuTexto.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Animacion.cpp
+1357119726 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Animacion.cpp
 	"Personaje/Animacion.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Barra.cpp
+1357272646 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Barra.cpp
 	"Personaje/Barra.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Condicion.cpp
+1357120225 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Condicion.cpp
 	"Personaje/Condicion.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Frame.cpp
+1357120330 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Frame.cpp
 	"Personaje/Frame.h"
 
 1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/HitBox.cpp
 	"Personaje/HitBox.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Imagen.cpp
+1357272966 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Imagen.cpp
 	"Personaje/Imagen.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/InputMovimiento.cpp
+1357120364 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/InputMovimiento.cpp
 	"Personaje/InputMovimiento.h"
 
 1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Modificador.cpp
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorBarra.cpp
+1357120054 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorBarra.cpp
 	"Personaje/ModificadorBarra.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorEntero.cpp
+1357120054 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorEntero.cpp
 	"Personaje/ModificadorEntero.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorHitboxes.cpp
+1357120374 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorHitboxes.cpp
 	"Personaje/ModificadorHitboxes.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorImagen.cpp
+1357120054 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorImagen.cpp
 	"Personaje/ModificadorImagen.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorPorVariable.cpp
+1357120054 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorPorVariable.cpp
 	"Personaje/ModificadorPorVariable.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorString.cpp
+1357120054 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/ModificadorString.cpp
 	"Personaje/ModificadorString.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Movimiento.cpp
+1357120405 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Movimiento.cpp
 	"Personaje/Movimiento.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
+1357272944 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Paleta.cpp
 	"Personaje/Paleta.h"
 
-1355082612 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
+1357492832 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Personaje.cpp
 	"Personaje/Personaje.h"
 
-1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
+1357274193 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Personaje/Proyectil.cpp
 	"Personaje/Proyectil.h"
 
 1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Reproduccion.cpp
 	"Sonido/Reproduccion.h"
 
-1355085224 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
+1357120054 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Sonido/Sonido.cpp
 	"Sonido/Sonido.h"
 
-1355083483 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
+1357492859 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Stage/Stage.cpp
 	"Stage/Stage.h"
 
 1354848831 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/TinyXml/tinystr.cpp
@@ -701,7 +701,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1354854565 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+1357493215 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
 1357262070 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/LTexture.cpp
@@ -714,5 +714,8 @@
 	"Painter/LTexture.h"
 
 1357276802 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
+	"Painter/Painter.h"
+
+1357276802 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Image.cpp
 	"Painter/Painter.h"
 

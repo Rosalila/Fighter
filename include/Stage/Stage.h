@@ -49,7 +49,7 @@ class Stage
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);
-    void cargarDesdeXML(char* archivo);
+    void cargarDesdeXML(std::string archivo);
     ~Stage();
 };
 

@@ -50,13 +50,13 @@ public:
     void loopMenu();
     Personaje* getPersonajeA(int num,bool ia);
     Personaje* getPersonajeB(int num,bool ia);
-    char* getStage();
+    std::string getStage();
     bool getExitSignal();
     bool getSaveInputsSignal();
     void escribirInputsXML(Input* ia,Input* ib);
     std::string getInputPressed();
     void llenarInputsBotones();
-    irr::EKEY_CODE toKeyCode(std::string str);
+    int toKeyCode(std::string str);
     void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
 };
 

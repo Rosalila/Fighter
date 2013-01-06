@@ -11,8 +11,8 @@ private:
 public:
 int joystick;
 std::string mapeo;
-irr::EKEY_CODE teclado;
-    Boton(Receiver* receiver,irr::EKEY_CODE teclado,std::string mapeo);
+int teclado;
+    Boton(Receiver* receiver,int teclado,std::string mapeo);
     Boton(Receiver* receiver,int joystick,int num_joystick,std::string mapeo);
     bool estaPresionado();
     std::string getMapeo();

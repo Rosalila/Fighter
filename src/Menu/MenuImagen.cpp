@@ -31,6 +31,8 @@ void MenuImagen::dibujar()
         width,height,
         x,y,
         0,
+        false,
+        0,0,
         false);
 }
 
@@ -41,5 +43,7 @@ void MenuImagen::dibujar(int alineacion_x,int alineacion_y)
         width,height,
         x+alineacion_x,y+alineacion_y,
         0,
+        false,
+        0,0,
         false);
 }

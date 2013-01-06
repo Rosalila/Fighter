@@ -54,12 +54,16 @@ void MenuBarra::dibujar()
             width,height,
             x,y,
             0,
+            false,
+            0,0,
             false);
         painter->draw2DImage
         (   barra,
             width*(actual/maximo),height,
             x+barra_x,y+barra_y,
             0,
+            false,
+            0,0,
             false);
     }else
     {
@@ -68,12 +72,16 @@ void MenuBarra::dibujar()
             width,height,
             x,y,
             0,
+            false,
+            0,0,
             false);
         painter->draw2DImage
         (   barra_sel,
             width*(actual/maximo),height,
             x+barra_x_sel,y+barra_y_sel,
             0,
+            false,
+            0,0,
             false);
     }
 }
@@ -87,12 +95,16 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             width,height,
             x+alineacion_x,y+alineacion_y,
             0,
+            false,
+            0,0,
             false);
         painter->draw2DImage
         (   barra,
             width*((float)actual/(float)maximo),height,
             x+barra_x+alineacion_x,y+barra_y+alineacion_y,
             0,
+            false,
+            0,0,
             false);
     }else
     {
@@ -101,12 +113,16 @@ void MenuBarra::dibujar(int alineacion_x,int alineacion_y)
             width,height,
             x+alineacion_x,y+alineacion_y,
             0,
+            false,
+            0,0,
             false);
         painter->draw2DImage
         (   barra_sel,
             width*((float)actual/(float)maximo),height,
             x+barra_x_sel+alineacion_x,y+barra_y_sel+alineacion_y,
             0,
+            false,
+            0,0,
             false);
     }
 }

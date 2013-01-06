@@ -39,15 +39,15 @@ void Stage::drawLayer(Layer* layer)
     int pos_x=-size_x/2+painter->screen_width/2+layer->alignment_x;
     int pos_y=painter->screen_height-size_y-layer->alignment_y;
 
-//    painter->draw2DImageCameraAlignDepthEffect//!!DEPTH EFFECT
-//    (   texture,
-//        size_x,size_y,
-//        pos_x,pos_y,
-//        0,
-//        false,
-//        false,
-//        layer->depth_effect_x,
-//        layer->depth_effect_y);
+    painter->draw2DImage
+    (   texture,
+        size_x,size_y,
+        pos_x,pos_y,
+        0,
+        false,
+        layer->depth_effect_x,
+        layer->depth_effect_y,
+        true);
 }
 
 void Stage::dibujarBack()
@@ -68,11 +68,11 @@ void Stage::dibujarFront()
     }
 }
 
-void Stage::cargarDesdeXML(char* path)
+void Stage::cargarDesdeXML(std::string path)
 {
     char *archivo=new char[255];
     strcpy(archivo,"stages/");
-    strcat(archivo,path);
+    strcat(archivo,path.c_str());
     strcat(archivo,"/main.xml");
     TiXmlDocument doc_t( archivo );
     doc_t.LoadFile();
@@ -84,7 +84,7 @@ void Stage::cargarDesdeXML(char* path)
     //Load settings
     char *music=new char[255];
     strcpy(music,"stages/");
-    strcat(music,path);
+    strcat(music,path.c_str());
     strcat(music,"/music.ogg");
     music_path=(std::string)music;
 
@@ -115,7 +115,7 @@ void Stage::cargarDesdeXML(char* path)
         {
             char *image=new char[255];
             strcpy(image,"stages/");
-            strcat(image,path);
+            strcat(image,path.c_str());
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
             int size_x=atoi(layer->ToElement()->Attribute("size_x"));
@@ -150,7 +150,7 @@ void Stage::cargarDesdeXML(char* path)
         {
             char *image=new char[255];
             strcpy(image,"stages/");
-            strcat(image,path);
+            strcat(image,path.c_str());
             strcat(image,"/images/");
             strcat(image,layer->ToElement()->Attribute("image_path"));
             int size_x=atoi(layer->ToElement()->Attribute("size_x"));

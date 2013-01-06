@@ -48,15 +48,12 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
     if(inteligencia_artificial)
         char_select->lockPB(0);
     printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
-    char *path_s=new char[255];
-    strcpy(path_s,"");
-    strcat(path_s,(char*)getStage());
 
     pa.clear();
     pb.clear();
 
     stage=new Stage(painter,sonido);
-    stage->cargarDesdeXML((char*)path_s);
+    stage->cargarDesdeXML(getStage());
 
     for(int i=0;i<num_personajes;i++)
     {
@@ -384,26 +381,22 @@ void Menu::loopMenu()
             tecla_arriba=false;
             if(receiver->IsKeyDownn(SDLK_ESCAPE))
             {
-                cout<<"0"<<endl;
                 sonido->reproducirSonido(std::string("Menu.back"),false);
                 exit_signal=true;
                 break;
             }
             else if(receiver->IsKeyDownn(SDLK_DOWN))
             {
-                cout<<"A"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 ((MenuContenedor*)contenedor_actual)->avanzar();
             }
             else if(receiver->IsKeyDownn(SDLK_UP))
             {
-                cout<<"B"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 ((MenuContenedor*)contenedor_actual)->retroceder();
             }
             else if(receiver->IsKeyDownn(SDLK_RIGHT))
             {
-                cout<<"C"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
@@ -442,7 +435,6 @@ void Menu::loopMenu()
             }
             else if(receiver->IsKeyDownn(SDLK_LEFT))
             {
-                cout<<"D"<<endl;
                 sonido->reproducirSonido(std::string("Menu.move"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
@@ -480,7 +472,6 @@ void Menu::loopMenu()
                 }
             }else if(receiver->IsKeyPressed(SDLK_RETURN))
             {
-                cout<<"Paso"<<endl;cout.flush();
                 sonido->reproducirSonido(std::string("Menu.select"),false);
                 if(((MenuContenedor*)contenedor_actual)->getElementoSeleccionado()->getTipo()==5)
                 {
@@ -542,10 +533,6 @@ void Menu::loopMenu()
                         {
                             printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
 
-                            char *path_s=new char[255];
-                            strcpy(path_s,"");
-                            strcat(path_s,(char*)getStage());
-
                             Personaje* p1a=getPersonajeA(0,false);
                             Personaje* p1b=getPersonajeB(0,false);
                             p1a->personaje_contrario=p1b;
@@ -594,7 +581,7 @@ void Menu::loopMenu()
                             pb.push_back(p3b);
 
                             stage=new Stage(painter,sonido);
-                            stage->cargarDesdeXML((char*)path_s);
+                            stage->cargarDesdeXML(getStage());
 
                             sonido->stopMusic();
                             Fighter*fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,0,0);
@@ -785,9 +772,6 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
         TiXmlElement* e=elemento->ToElement();
         if(strcmp(e->Value(),"CharSelect")==0)
         {
-            std::string path(e->Attribute("path"));
-            std::string dir("menu/");
-            path=dir+path;
             char_select=new MenuCharSelect(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),atoi(e->Attribute("width")),atoi(e->Attribute("height")),
                                                           atoi(e->Attribute("size_x")),atoi(e->Attribute("size_y")),atoi(e->Attribute("box_size_x")),atoi(e->Attribute("box_size_y")),
                                                           atoi(e->Attribute("box_separation_x")),atoi(e->Attribute("box_separation_y")),
@@ -1091,15 +1075,13 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 //    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa[num]];
 //    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
 //    std::string s2=mt->texto;
-    std::string s2=char_select->getLockedNamesPA()[num];
+    std::string char_name=char_select->getLockedNamesPA()[num];
     int num_paleta=char_select->getLockedPalettesPA()[num];
-    char *str = new char[255];
-    sprintf(str,"%ls",s2.c_str());
 
     //get cadena
     char *path_a=new char[255];
     strcpy(path_a,"");
-    strcat(path_a,str);
+    strcat(path_a,char_name.c_str());
 
     if(ia)
     {
@@ -1128,15 +1110,13 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 //    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb[num]];
 //    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
 //    std::string s2=mt->texto;
-    std::string s2=char_select->getLockedNamesPB()[num];
+    std::string char_name=char_select->getLockedNamesPB()[num];
     int num_paleta=char_select->getLockedPalettesPB()[num];
-    char *str = new char[255];
-    sprintf(str,"%ls",s2.c_str());
 
     //get string
     char *path_b=new char[255];
     strcpy(path_b,"");
-    strcat(path_b,str);
+    strcat(path_b,char_name.c_str());
 
     if(ia)
     {
@@ -1171,15 +1151,14 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     return p;
 }
 
-char* Menu::getStage()
+std::string Menu::getStage()
 {
     //!
     MenuContenedor *mc=((MenuContenedor*)contenedor_actual);
     MenuLista *ml=(MenuLista*)mc->elementos[pos_stage];
     MenuImagen *mt=(MenuImagen*)ml->getElementoActual();
-    std::string s2=mt->value;
-    char *str = new char[255];
-    sprintf(str,"%ls",s2.c_str());
+    std::string str=mt->value;
+
     return str;
 }
 
@@ -1219,7 +1198,7 @@ std::string Menu::getInputPressed()
         dibujarMenu();
         if(receiver->IsKeyDownn(irr::KEY_KEY_Q))
             return "Q";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_W))
+        if(receiver->IsKeyDownn(SDLK_w))
             return "W";
         if(receiver->IsKeyDownn(irr::KEY_KEY_E))
             return "E";
@@ -1334,12 +1313,12 @@ std::string Menu::getInputPressed()
     }
 }
 
-irr::EKEY_CODE Menu::toKeyCode(std::string str)
+int Menu::toKeyCode(std::string str)
 {
     if(str==std::string("Q"))
         return irr::KEY_KEY_Q;
     if(str==std::string("W"))
-        return irr::KEY_KEY_W;
+        return SDLK_w;
     if(str==std::string("E"))
         return irr::KEY_KEY_E;
     if(str==std::string("R"))
@@ -1492,6 +1471,8 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         vs_screen->getWidth(),vs_screen->getHeight(),
         0,0,
         0,
+        false,
+        0,0,
         false);
 
     for(int i=0;i<(int)pa_previews.size();i++)
@@ -1502,6 +1483,8 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             texture->getWidth(),texture->getHeight(),
             i*200,painter->screen_height-texture->getHeight()-150,
             0,
+            false,
+            0,0,
             false);
     }
 
@@ -1513,6 +1496,8 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             texture->getWidth(),texture->getHeight(),
             painter->screen_width-(i+1)*texture->getWidth()-50,painter->screen_height-texture->getHeight()-150,
             0,
+            false,
+            0,0,
             false);
     }
     painter->updateScreen();

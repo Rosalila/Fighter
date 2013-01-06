@@ -2,6 +2,8 @@
 
 Painter::Painter()
 {
+    screen=NULL;
+
     screen_width = 1024;
     screen_height = 600;
     screen_bpp = 16;
@@ -65,6 +67,8 @@ Painter::~Painter()
 
 Image* Painter::getTexture(std::string filename)
 {
+std::cout<<filename<<std::endl;std::cout.flush();
+
     SDL_Surface *surface;
     GLenum texture_format;
     GLint  nOfColors;
@@ -130,91 +134,51 @@ void Painter::draw2DImage	(
              int size_x,int size_y,
              int position_x,int position_y,
              int scale,
-             bool flipHorizontally)
+             bool flipHorizontally,
+             int depth_effect_x,
+             int depth_effect_y,
+             bool camera_align)
 {
 //   // Clear the screen before drawing
 //	glClear( GL_COLOR_BUFFER_BIT );
-//
-//    // Bind the texture to which subsequent calls refer to
-//    glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
-//
-//    glBegin( GL_QUADS );
-//        // Top-left vertex (corner)
-//        glTexCoord2i( 0, 0 );
-//        glVertex3f( position_x, position_y, 0 );
-//
-//        // Bottom-left vertex (corner)
-//        glTexCoord2i( 1, 0 );
-//        glVertex3f( position_x, position_y+size_y, 0 );
-//
-//        // Bottom-right vertex (corner)
-//        glTexCoord2i( 1, 1 );
-//        glVertex3f( position_x+size_x, position_y+size_y, 0 );
-//
-//        // Top-right vertex (corner)
-//        glTexCoord2i( 0, 1 );
-//        glVertex3f( position_x+size_x, position_y, 0 );
-//    glEnd();
+    GLfloat x1=0.f+position_x;
+    GLfloat y1=0.f+position_y;
+    GLfloat x2=0.f+position_x+size_x;
+    GLfloat y2=0.f+position_y+size_y;
 
+    if(flipHorizontally)
+    {
+        GLfloat temp=x1;
+        x1=x2;
+        x2=temp;
+    }
 
-  // Clear the screen before drawing
-//	glClear( GL_COLOR_BUFFER_BIT );
-
-    // Bind the texture to which subsequent calls refer to
-
+    if(camera_align)
+    {
+        x1+=camera_x;
+        y1+=camera_y;
+        x2+=camera_x;
+        y2+=camera_y;
+    }
 
     glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
 
     glBegin( GL_QUADS );
         //Bottom-left vertex (corner)
         glTexCoord2i( 0, 0 );
-        glVertex3f( 0.f+position_x, 0.f+position_y, 0.0f );
+        glVertex3f( x1, y1, 0.0f );
 
         //Bottom-right vertex (corner)
         glTexCoord2i( 1, 0 );
-        glVertex3f( 0.f+position_x+size_x, 0.f+position_y, 0.f );
+        glVertex3f( x2, y1, 0.f );
 
         //Top-right vertex (corner)
         glTexCoord2i( 1, 1 );
-        glVertex3f( 0.f+position_x+size_x, 0.f+position_y+size_y, 0.f );
+        glVertex3f( x2, y2, 0.f );
 
         //Top-left vertex (corner)
         glTexCoord2i( 0, 1 );
-        glVertex3f( 0.f+position_x, 0.f+position_y+size_y, 0.f );
-    glEnd();
-
-//    glutSwapBuffers();
-}
-
-void Painter::draw2DImageCameraAlign	(
-             Image* texture,
-             int size_x,int size_y,
-             int position_x,int position_y,
-             int scale,
-             bool flipHorizontally)
-{
-   // Clear the screen before drawing
-//	glClear( GL_COLOR_BUFFER_BIT );
-
-    // Bind the texture to which subsequent calls refer to
-    glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
-
-    glBegin( GL_QUADS );
-        // Top-left vertex (corner)
-        glTexCoord2i( 0, 0 );
-        glVertex3f( 100, 100, 0 );
-
-        // Bottom-left vertex (corner)
-        glTexCoord2i( 1, 0 );
-        glVertex3f( 228, 100, 0 );
-
-        // Bottom-right vertex (corner)
-        glTexCoord2i( 1, 1 );
-        glVertex3f( 228, 228, 0 );
-
-        // Top-right vertex (corner)
-        glTexCoord2i( 0, 1 );
-        glVertex3f( 100, 228, 0 );
+        glVertex3f( x1, y2, 0.f );
     glEnd();
 }
 

@@ -2,6 +2,8 @@
 
 Sonido::Sonido()
 {
+    music=NULL;
+
     cout<<"Initializing SLD sound engine."<<endl;cout.flush();
     if( Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096 ) == -1 )
     {

@@ -1,6 +1,6 @@
 #include "Input/Boton.h"
 
-Boton::Boton(Receiver* receiver,irr::EKEY_CODE teclado,std::string mapeo)
+Boton::Boton(Receiver* receiver,int teclado,std::string mapeo)
 {
     this->teclado=teclado;
     this->mapeo=mapeo;
@@ -26,7 +26,7 @@ bool Boton::estaPresionado()
             return true;
     }else
     {
-        if (receiver->IsKeyDownn((int)teclado))
+        if (receiver->IsKeyDownn(teclado))
             return true;
     }
     return false;

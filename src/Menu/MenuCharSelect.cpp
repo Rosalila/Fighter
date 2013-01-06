@@ -198,6 +198,8 @@ void MenuCharSelect::dibujar()
                         image->getWidth(),image->getHeight(),
                         preview_pa_x,preview_pa_y,
                         0,
+                        false,
+                        0,0,
                         false);
                 }
                 if(select_p2_x+select_p2_y*size_x==cont)
@@ -208,6 +210,8 @@ void MenuCharSelect::dibujar()
                         image->getWidth(),image->getHeight(),
                         preview_pb_x,preview_pb_y,
                         0,
+                        false,
+                        0,0,
                         false);
                 }
             }
@@ -226,6 +230,8 @@ void MenuCharSelect::dibujar()
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
                     0,
+                    false,
+                    0,0,
                     false);
             }else
             {
@@ -235,6 +241,8 @@ void MenuCharSelect::dibujar()
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
                     0,
+                    false,
+                    0,0,
                     false);
             }
             //dibjuar locks pa
@@ -248,6 +256,8 @@ void MenuCharSelect::dibujar()
                         size_cuadro_x,size_cuadro_y,
                         x+locks_pa[l].x*(size_cuadro_x+separacion_x),y+locks_pa[l].y*(size_cuadro_y+separacion_y),
                         0,
+                        false,
+                        0,0,
                         false);
                 }
             }
@@ -262,6 +272,8 @@ void MenuCharSelect::dibujar()
                         size_cuadro_x,size_cuadro_y,
                         x+locks_pb[l].x*(size_cuadro_x+separacion_x),y+locks_pb[l].y*(size_cuadro_y+separacion_y),
                         0,
+                        false,
+                        0,0,
                         false);
                 }
             }
@@ -274,6 +286,8 @@ void MenuCharSelect::dibujar()
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
                     0,
+                    false,
+                    0,0,
                     false);
             }
             //dibjujar cursor PB
@@ -285,6 +299,8 @@ void MenuCharSelect::dibujar()
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
                     0,
+                    false,
+                    0,0,
                     false);
             }
             cont++;
