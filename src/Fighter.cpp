@@ -902,7 +902,7 @@ bool Fighter::render()
     getPbActual()->dibujarAnimacionesFront();
 
     //Hit Boxes
-    if(receiver->IsKeyDownn(irr::KEY_KEY_H))
+    if(receiver->IsKeyDownn(SDLK_h))
     {
         getPaActual()->dibujarHitBoxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
         getPbActual()->dibujarHitBoxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
@@ -914,21 +914,19 @@ bool Fighter::render()
     getPaActual()->dibujarProyectiles();
     getPbActual()->dibujarProyectiles();
 
-//    //HP
-//    getPaActual()->dibujarBarras();
-//    getPbActual()->dibujarBarras();
-//
-//    if(pa.size()>=2)
-//        get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
-//    if(pa.size()==3)
-//        get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
-//
-//    if(pb.size()>=2)
-//        get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
-//    if(pb.size()==3)
-//        get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
-////        pa->dibujarBarra("hp",312-70,50);
-//        pb->dibujarBarra("hp",512+45,50);
+    //HP
+    getPaActual()->dibujarBarras();
+    getPbActual()->dibujarBarras();
+
+    if(pa.size()>=2)
+        get2doPa()->dibujarBarraPequena(get2doPa()->getBarra("hp"),50,100);
+    if(pa.size()==3)
+        get3erPa()->dibujarBarraPequena(get3erPa()->getBarra("hp"),50,150);
+
+    if(pb.size()>=2)
+        get2doPb()->dibujarBarraPequena(get2doPb()->getBarra("hp"),50,100);
+    if(pb.size()==3)
+        get3erPb()->dibujarBarraPequena(get3erPb()->getBarra("hp"),50,150);
 
     pa_vivos=0;
     for(int i=0; i<(int)pa.size(); i++)

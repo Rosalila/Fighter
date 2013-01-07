@@ -4,8 +4,12 @@ Painter::Painter()
 {
     screen=NULL;
 
-    screen_width = 1024;
-    screen_height = 600;
+    screen_width = 1280;
+    screen_height = 800;
+
+    int screen_resized_width=1024;
+    int screen_resized_height=600;
+
     screen_bpp = 16;
     camera_x=camera_y=0;
 
@@ -19,7 +23,7 @@ Painter::Painter()
     SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 ); // *new*
 
     //Set up the screen
-    screen = SDL_SetVideoMode( screen_width, screen_height, screen_bpp, SDL_OPENGL /*| SDL_FULLSCREEN */);
+    screen = SDL_SetVideoMode( screen_resized_width, screen_resized_height, screen_bpp, SDL_OPENGL /*| SDL_FULLSCREEN */);
 
     //Set the openGL state?
     glEnable( GL_TEXTURE_2D );
@@ -28,14 +32,14 @@ Painter::Painter()
 
     glClearColor( 0.0f, 0.0f, 0.0f, 0.0f );
 
-    glViewport( 0, 0, screen_width, screen_height );
+    glViewport( 0, 0, screen_resized_width, screen_resized_height );
 
     glClear( GL_COLOR_BUFFER_BIT );
 
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
 
-    glOrtho(0.0f, screen_width, screen_height, 0.0f, -1.0f, 1.0f);
+    glOrtho(0.0f, 1280, 800, 0.0f, -1.0f, 1.0f);
 
     glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
@@ -140,8 +144,8 @@ void Painter::draw2DImage	(
              int depth_effect_y,
              bool camera_align)
 {
-//   // Clear the screen before drawing
-//	glClear( GL_COLOR_BUFFER_BIT );
+    glEnable( GL_TEXTURE_2D );
+
     GLfloat x1=0.f+position_x;
     GLfloat y1=0.f+position_y;
     GLfloat x2=0.f+position_x+size_x;
@@ -156,14 +160,14 @@ void Painter::draw2DImage	(
 
     if(camera_align)
     {
-        x1+=camera_x;
+        x1-=camera_x;
         y1+=camera_y;
-        x2+=camera_x;
+        x2-=camera_x;
         y2+=camera_y;
     }
 
     glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
-
+    glColor3ub(255, 255, 255);
     glBegin( GL_QUADS );
         //Bottom-left vertex (corner)
         glTexCoord2i( 0, 0 );
@@ -180,10 +184,27 @@ void Painter::draw2DImage	(
         //Top-left vertex (corner)
         glTexCoord2i( 0, 1 );
         glVertex3f( x1, y2, 0.f );
+
     glEnd();
+}
+
+void Painter::drawRectangle(int x,int y,int width,int height,int red,int green,int blue,int alpha,bool camera_align)
+{
+    glDisable(GL_TEXTURE_2D);
+    GLubyte r=red;
+    GLubyte g=green;
+    GLubyte b=blue;
+    GLubyte a=alpha;
+    glColor4ub(r, g, b,a);
+    if(camera_align)
+        glRecti(x-camera_x, y+camera_y, width+x-camera_x, height+y+camera_y);
+    else
+        glRecti(x, y, width+x, height+y);
+    glFlush();
 }
 
 void Painter::updateScreen()
 {
     SDL_GL_SwapBuffers();
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }

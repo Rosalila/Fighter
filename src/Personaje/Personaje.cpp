@@ -143,10 +143,10 @@ void Personaje::dibujarHitBoxes(std::string variable,std::string path,bool izqui
         int p1y=-y+hitbox[i].p1y+painter->screen_height-stage_piso;
         int p2x=x+hitbox[i].p2x;
         int p2y=-y+hitbox[i].p2y+painter->screen_height-stage_piso;
-//        if(variable=="blue")//!!DRAW RECT
-//            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,0,0,100),core::rect<s32>(p1x,p1y,p2x,p2y));
-//        else
-//            painter->draw2DRectangleCameraAlign(irr::video::SColor(100,100,0,0),core::rect<s32>(p1x,p1y,p2x,p2y));
+        if(variable=="blue")
+            painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,0,0,100,127,true);
+        else
+            painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,100,0,0,127,true);
     }
 }
 
@@ -206,8 +206,8 @@ void Personaje::dibujarBarra(Barra barra)
         flip=true;
     }
 
-//    if(barra.imagen==NULL)//!!DRAW RECT
-//        painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));
+    if(barra.imagen==NULL)
+        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,barra.color.getRed(),barra.color.getGreen(),barra.color.getBlue(),barra.color.getAlpha(),false);
     else
         painter->draw2DImage
         (   barra.imagen,
@@ -268,7 +268,7 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
     }
     if(barra.imagen==NULL)
     {
-        //painter->draw2DRectangle(barra.color,core::rect<s32>(p1x,p1y,p2x,p2y));//!!DRAW RECT
+        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,barra.color.getRed(),barra.color.getGreen(),barra.color.getBlue(),barra.color.getAlpha(),false);
     }
     else
         painter->draw2DImage
@@ -313,14 +313,14 @@ void Personaje::dibujarProyectiles()
                 true);
         }
         //Dibujar hitboxes
-//        if(input->receiver->IsKeyDownn(irr::KEY_KEY_H))
-//        {
-//            std::string nombre=proyectil->nombre;
-//            dibujarHitBoxes(proyectil->getHeight()itboxes,"",
-//                        getString(proyectil->orientacion)=="i",
-//                        getEntero(proyectil->posicion_x),
-//                        -getEntero(proyectil->posicion_y));
-//        }
+        if(input->receiver->IsKeyDownn(SDLK_h))
+        {
+            std::string nombre=proyectil->nombre;
+            dibujarHitBoxes(proyectil->hitboxes,"",
+                        getString(proyectil->orientacion)=="i",
+                        getEntero(proyectil->posicion_x),
+                        -getEntero(proyectil->posicion_y));
+        }
     }
 }
 //GETS shortcuts
@@ -348,7 +348,7 @@ Barra Personaje::getBarra(std::string variable)
     for(int i=0;i<(int)barras.size();i++)
         if(barras[i].nombre==variable)
             return barras[i];
-    return Barra("error","","","","",video::SColor(0,0,0,0),core::rect<s32> (0,0,0,0),NULL);
+    return Barra("error","","","","",Color(0,0,0,0),core::rect<s32> (0,0,0,0),NULL);
 }
 vector<HitBox> Personaje::getHitBoxes(std::string variable)
 {
@@ -1020,10 +1020,10 @@ void Personaje::cargarMain()
                     std::string imagen(elemento_imagen->Attribute("image"));
                     imagen=std::string("chars/")+char_name+std::string("/")+imagen;
 
-                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),painter->getTexture(imagen)));
+                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),core::rect<s32>(x1,y1,x2,y2),painter->getTexture(imagen)));
                 }
                 else
-                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",video::SColor(alpha,r,g,b),core::rect<s32>(x1,y1,x2,y2),NULL));
+                    agregarBarra(Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),core::rect<s32>(x1,y1,x2,y2),NULL));
             }
     }
 }
@@ -1338,8 +1338,13 @@ void Personaje::cargarSprites()
                     agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
                     paleta.restoreTexture(texture);
                 }
-//                else//!!IGNORE COLOR
-//                {
+                else//!!IGNORE COLOR
+                {
+                    Image* texture=painter->getTexture(path);
+                    textures.push_back(texture);
+                    paleta.paintTexture(texture);
+                    agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
+                    paleta.restoreTexture(texture);
 //                    video::IImage* image = painter->driver->createImageFromFile(path);
 //
 //                    video::Image* texture = painter->driver->addTexture("test",image);
@@ -1348,7 +1353,7 @@ void Personaje::cargarSprites()
 //
 //                    paleta.paintTexture(texture);
 //                    agregarModificador(nombre,frame,str_variable,Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
-//                }
+                }
             }
         }
     }

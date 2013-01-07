@@ -19,6 +19,52 @@ using namespace std;
 
 using namespace irr;
 
+
+class Color
+{
+public:
+    int red;
+    int green;
+    int blue;
+    int alpha;
+
+    Color()
+    {
+        this->red=0;
+        this->green=0;
+        this->blue=0;
+        this->alpha=0;
+    }
+
+    Color(int red,int green,int blue,int alpha)
+    {
+        this->red=red;
+        this->green=green;
+        this->blue=blue;
+        this->alpha=alpha;
+    }
+
+    int getRed()
+    {
+        return red;
+    }
+
+    int getGreen()
+    {
+        return green;
+    }
+
+    int getBlue()
+    {
+        return blue;
+    }
+
+    int getAlpha()
+    {
+        return alpha;
+    }
+};
+
 class Painter
 {
     public:
@@ -39,6 +85,7 @@ class Painter
 				 int depth_effect_x,
 				 int depth_effect_y,
 				 bool camera_align);
+    void drawRectangle(int x,int y,int width,int height,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
 
 std::string convertInt(int number)

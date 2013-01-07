@@ -309,7 +309,6 @@ void MenuCharSelect::dibujar()
 
 void MenuCharSelect::dibujar(int alineacion_x,int alineacion_y)
 {
-    //painter->draw2DRectangle(irr::video::SColor(255,0,255,255),core::rect<s32>(0,0,50,50));//!!DRAW RECT
 }
 
 void MenuCharSelect::clearLocks()
