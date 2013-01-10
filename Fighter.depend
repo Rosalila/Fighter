@@ -414,7 +414,7 @@
 	"Input/Input.h"
 	<sstream>
 
-1357269280 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
+1357805132 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Input/Receiver.cpp
 	"Input/Receiver.h"
 
 1357273019 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Menu/Elemento.cpp
@@ -524,7 +524,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1357800230 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
+1357801880 source:/home/turupawn/Projects/CodeBlocks/Fighter/src/Painter/Painter.cpp
 	"Painter/Painter.h"
 
 1357689268 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp

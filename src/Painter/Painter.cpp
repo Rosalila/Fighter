@@ -25,6 +25,8 @@ Painter::Painter()
 
     //Internal initializations
     screen=NULL;
+    joystick_1 = NULL;
+    joystick_2 = NULL;
 
     screen_width = 1280;
     screen_height = 800;
@@ -83,7 +85,7 @@ Painter::Painter()
     glLoadIdentity();
 
     //Fps cap
-    frames_per_seccond = 200;
+    frames_per_seccond = 60;
     frame = 0;
     fps=new Timer();
     update=new Timer();
@@ -99,6 +101,31 @@ Painter::Painter()
 
     //Set the window caption
     SDL_WM_SetCaption( "Rosalila fighter engine", NULL );
+
+    //Init joysticks
+    if( SDL_NumJoysticks() == 1 )
+    {
+        writeLogLine("1 joystick was found.");
+        joystick_1 = SDL_JoystickOpen( 0 );
+        if(joystick_1 != NULL)
+            writeLogLine("Joystick for player 1 initialized succesfully.");
+        else
+            writeLogLine("Error initializing joystick for player 1.");
+    }
+    if( SDL_NumJoysticks() == 2 )
+    {
+        writeLogLine("2 joysticks were found.");
+        joystick_1 = SDL_JoystickOpen( 0 );
+        if(joystick_1 != NULL)
+            writeLogLine("Joystick for player 1 initialized succesfully.");
+        else
+            writeLogLine("Error initializing joystick for player 1.");
+        joystick_2 = SDL_JoystickOpen( 1 );
+        if(joystick_2 != NULL)
+            writeLogLine("Joystick for player 2 initialized succesfully.");
+        else
+            writeLogLine("Error initializing joystick for player 2.");
+    }
 
     //If everything initialized fine
     writeLogLine("Success! SDL initialized.");

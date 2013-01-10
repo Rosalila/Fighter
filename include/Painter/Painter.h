@@ -78,6 +78,8 @@ class Painter
     int screen_height;
     int screen_bpp;
     int camera_x,camera_y;
+    SDL_Joystick *joystick_1;
+    SDL_Joystick *joystick_2;
 
     //Set fps
     int frames_per_seccond;
