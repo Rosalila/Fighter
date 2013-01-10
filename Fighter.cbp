@@ -9,7 +9,7 @@
 			<Target title="Debug">
 				<Option output="bin/Debug/Fighter2" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
@@ -18,7 +18,7 @@
 			<Target title="Release">
 				<Option output="bin/Release/Fighter2" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -40,6 +40,7 @@
 		<Unit filename="include/Input/Boton.h" />
 		<Unit filename="include/Input/Input.h" />
 		<Unit filename="include/Input/Receiver.h" />
+		<Unit filename="include/Log/Log.h" />
 		<Unit filename="include/Menu/Elemento.h" />
 		<Unit filename="include/Menu/Menu.h" />
 		<Unit filename="include/Menu/MenuBarra.h" />
@@ -51,6 +52,7 @@
 		<Unit filename="include/Menu/MenuTexto.h" />
 		<Unit filename="include/Painter/Image.h" />
 		<Unit filename="include/Painter/Painter.h" />
+		<Unit filename="include/Painter/Timer.h" />
 		<Unit filename="include/Personaje/Animacion.h" />
 		<Unit filename="include/Personaje/Barra.h" />
 		<Unit filename="include/Personaje/Condicion.h" />
@@ -82,6 +84,7 @@
 		<Unit filename="src/Input/Boton.cpp" />
 		<Unit filename="src/Input/Input.cpp" />
 		<Unit filename="src/Input/Receiver.cpp" />
+		<Unit filename="src/Log/Log.cpp" />
 		<Unit filename="src/Menu/Elemento.cpp" />
 		<Unit filename="src/Menu/Menu.cpp" />
 		<Unit filename="src/Menu/MenuBarra.cpp" />
@@ -93,6 +96,7 @@
 		<Unit filename="src/Menu/MenuTexto.cpp" />
 		<Unit filename="src/Painter/Image.cpp" />
 		<Unit filename="src/Painter/Painter.cpp" />
+		<Unit filename="src/Painter/Timer.cpp" />
 		<Unit filename="src/Personaje/Animacion.cpp" />
 		<Unit filename="src/Personaje/Barra.cpp" />
 		<Unit filename="src/Personaje/Condicion.cpp" />

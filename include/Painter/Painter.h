@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "SDL/SDL_image.h"
+#include "SDL/SDL_ttf.h"
+#include "TinyXml/tinyxml.h"
 
 #include <GL/freeglut.h>
 #include <GL/gl.h>
@@ -11,6 +13,7 @@
 #include <irrlicht/irrlicht.h>
 
 #include "Painter/Image.h"
+#include "Painter/Timer.h"
 #include "Log/Log.h"
 
 #include <iostream>
@@ -68,25 +71,36 @@ public:
 class Painter
 {
     public:
-    SDL_Surface* screen = NULL;
+    SDL_Surface* screen;
+    TTF_Font* font;
+    SDL_Color textColor;
     int screen_width;
     int screen_height;
     int screen_bpp;
     int camera_x,camera_y;
+
+    //Set fps
+    int frames_per_seccond;
+    int frame;
+    Timer *fps;
+    Timer *update;
+
     Painter();
     ~Painter();
     Image* getTexture(std::string filename);
-    void draw2DImage	(
+    void draw2DImage(
 	             Image* texture,
 				 int size_x,int size_y,
 				 int position_x,int position_y,
-				 int scale,
+				 float scale,
 				 bool flipHorizontally,
 				 int depth_effect_x,
 				 int depth_effect_y,
 				 bool camera_align);
+    void drawText(std::string text,int position_x,int position_y);
     void drawRectangle(int x,int y,int width,int height,int red,int green,int blue,int alpha,bool camera_align);
     void updateScreen();
+    void frameCap();
 
 std::string convertInt(int number)
 {

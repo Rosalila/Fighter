@@ -197,7 +197,7 @@ void MenuCharSelect::dibujar()
                     (   image,
                         image->getWidth(),image->getHeight(),
                         preview_pa_x,preview_pa_y,
-                        0,
+                        1.0,
                         false,
                         0,0,
                         false);
@@ -209,7 +209,7 @@ void MenuCharSelect::dibujar()
                     (   image,
                         image->getWidth(),image->getHeight(),
                         preview_pb_x,preview_pb_y,
-                        0,
+                        1.0,
                         false,
                         0,0,
                         false);
@@ -229,7 +229,7 @@ void MenuCharSelect::dibujar()
                 (   image,
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
-                    0,
+                    1.0,
                     false,
                     0,0,
                     false);
@@ -240,7 +240,7 @@ void MenuCharSelect::dibujar()
                 (   image,
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
-                    0,
+                    1.0,
                     false,
                     0,0,
                     false);
@@ -255,7 +255,7 @@ void MenuCharSelect::dibujar()
                     (   image,
                         size_cuadro_x,size_cuadro_y,
                         x+locks_pa[l].x*(size_cuadro_x+separacion_x),y+locks_pa[l].y*(size_cuadro_y+separacion_y),
-                        0,
+                        1.0,
                         false,
                         0,0,
                         false);
@@ -271,7 +271,7 @@ void MenuCharSelect::dibujar()
                     (   image,
                         size_cuadro_x,size_cuadro_y,
                         x+locks_pb[l].x*(size_cuadro_x+separacion_x),y+locks_pb[l].y*(size_cuadro_y+separacion_y),
-                        0,
+                        1.0,
                         false,
                         0,0,
                         false);
@@ -285,7 +285,7 @@ void MenuCharSelect::dibujar()
                 (   image,
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
-                    0,
+                    1.0,
                     false,
                     0,0,
                     false);
@@ -298,7 +298,7 @@ void MenuCharSelect::dibujar()
                 (   image,
                     size_cuadro_x,size_cuadro_y,
                     x+i*(size_cuadro_x+separacion_x),y+j*(size_cuadro_y+separacion_y),
-                    0,
+                    1.0,
                     false,
                     0,0,
                     false);

@@ -44,7 +44,7 @@ void MenuBoton::dibujar()
         (   imagen,
             width,height,
             x,y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -54,14 +54,14 @@ void MenuBoton::dibujar()
         {
             temp+=input_config;
         }
-        //painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x,y+alineacion_texto_y,x+width,y+height),color);//!!DRAW TEXT
+        painter->drawText(temp,x+alineacion_texto_x,y+alineacion_texto_y);
     }else
     {
         painter->draw2DImage
         (   imagen_sel,
             width,height,
             x,y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -71,7 +71,7 @@ void MenuBoton::dibujar()
         {
             temp+=input_config;
         }
-        //painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel,y+alineacion_texto_y_sel,x+width,y+height),color_sel);//!!DRAW TEXT
+        painter->drawText(temp,x+alineacion_texto_x_sel,y+alineacion_texto_y_sel);
     }
 }
 
@@ -83,7 +83,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
         (   imagen,
             width,height,
             x+alineacion_x,y+alineacion_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -93,14 +93,14 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
         {
             temp+=input_config;
         }
-        //painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y+alineacion_y,x+width,y+height),color);//!!DRAW TEXT
+        painter->drawText(temp,x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y);
     }else
     {
         painter->draw2DImage
         (   imagen_sel,
             width,height,
             x+alineacion_x,y+alineacion_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -110,7 +110,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
         {
             temp+=input_config;
         }
-        //painter->drawText(temp,core::rect<s32>(x+alineacion_texto_x_sel+alineacion_x,y+alineacion_texto_y_sel+alineacion_y,x+width,y+height),color_sel);//!!DRAW TEXT
+        painter->drawText(temp,x+alineacion_texto_x_sel+alineacion_x,y+alineacion_texto_y_sel+alineacion_y);
     }
 }
 

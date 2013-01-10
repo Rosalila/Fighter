@@ -43,11 +43,11 @@ void Stage::drawLayer(Layer* layer)
     (   texture,
         size_x,size_y,
         pos_x,pos_y,
-        0,
+        1.0,
         false,
         layer->depth_effect_x,
         layer->depth_effect_y,
-        true);
+        false);
 }
 
 void Stage::dibujarBack()

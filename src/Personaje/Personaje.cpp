@@ -214,7 +214,7 @@ void Personaje::dibujarBarra(Barra barra)
             longitud_actual,altura,
             //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
             p1x,p1y,
-            0,
+            1.0,
             flip,
             0,0,
             false);
@@ -276,7 +276,7 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
             longitud_actual,altura,
             //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
             p1x,p1y,
-            0,
+            1.0,
             player2,
             0,0,
             false);

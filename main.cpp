@@ -29,6 +29,11 @@ int main(int argc, char *argv[])
     inputb->cargarDesdeXML(2,receiver);
 
     Painter*painter=new Painter();
+
+//painter->update.start();
+//painter->fps.start();
+
+
     Sonido*sonido = new Sonido();
     Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.xml");
     sonido->playMusic(menu->music_path);

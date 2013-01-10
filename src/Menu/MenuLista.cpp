@@ -66,7 +66,7 @@ void MenuLista::dibujar()
         (   flecha_izquierda,
             width,height,
             x+flecha_izq_x,y+flecha_izq_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -74,7 +74,7 @@ void MenuLista::dibujar()
         (   flecha_derecha,
             width,height,
             x+flecha_der_x,y+flecha_der_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -86,7 +86,7 @@ void MenuLista::dibujar()
         (   flecha_izquierda_sel,
             width,height,
             x+flecha_izq_x_sel,y+flecha_izq_y_sel,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -94,7 +94,7 @@ void MenuLista::dibujar()
         (   flecha_derecha_sel,
             width,height,
             x+flecha_der_x_sel,y+flecha_der_y_sel,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -111,7 +111,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
         (   flecha_izquierda,
             width,height,
             x+flecha_izq_x+alineacion_x,y+flecha_izq_y+alineacion_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -119,7 +119,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
         (   flecha_derecha,
             width,height,
             x+flecha_der_x+alineacion_x,y+flecha_der_y+alineacion_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -131,7 +131,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
         (   flecha_izquierda_sel,
             width,height,
             x+flecha_izq_x_sel+alineacion_x,y+flecha_izq_y_sel+alineacion_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -139,7 +139,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
         (   flecha_derecha_sel,
             width,height,
             x+flecha_der_x_sel+alineacion_x,y+flecha_der_y_sel+alineacion_y,
-            0,
+            1.0,
             false,
             0,0,
             false);

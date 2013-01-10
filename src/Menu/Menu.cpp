@@ -144,12 +144,7 @@ void Menu::loopMenu()
 	{
 	    receiver->endEventProcess();
 	    receiver->startEventProcess();
-	    //setear frames a "60"
-//	    painter->device->getTimer()->start();//!!60 FPS
-//	    for(u32 t=painter->device->getTimer()->getTime();
-//            t+16>painter->device->getTimer()->getTime();
-//            painter->device->getTimer()->tick()
-//         );
+
         dibujarMenu();
 
         //Move Elements
@@ -1189,12 +1184,7 @@ std::string Menu::getInputPressed()
     {
         receiver->endEventProcess();
         receiver->startEventProcess();
-        //setear frames a "60"
-//        painter->device->getTimer()->start();//!!60 FPS
-//        for(u32 t=painter->device->getTimer()->getTime();
-//            t+16>painter->device->getTimer()->getTime();
-//            painter->device->getTimer()->tick()
-//         );
+
         dibujarMenu();
         if(receiver->IsKeyDownn(irr::KEY_KEY_Q))
             return "Q";
@@ -1470,7 +1460,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
     (   vs_screen,
         vs_screen->getWidth(),vs_screen->getHeight(),
         0,0,
-        0,
+        1.0,
         false,
         0,0,
         false);
@@ -1482,7 +1472,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         (   texture,
             texture->getWidth(),texture->getHeight(),
             i*200,painter->screen_height-texture->getHeight()-150,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -1495,7 +1485,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         (   texture,
             texture->getWidth(),texture->getHeight(),
             painter->screen_width-(i+1)*texture->getWidth()-50,painter->screen_height-texture->getHeight()-150,
-            0,
+            1.0,
             false,
             0,0,
             false);

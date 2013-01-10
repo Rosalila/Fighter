@@ -854,7 +854,7 @@ void Fighter::dibujarBarra()
     (   texture_bar,
         texture_bar->getWidth(),texture_bar->getHeight(),
         painter->screen_width/2,-texture_bar->getWidth()/2,
-        0,
+        1.0,
         false,
         0,0,
         false);
@@ -866,7 +866,7 @@ void Fighter::dibujarBarra()
         (   texture_victory,
             texture_victory->getWidth(),texture_victory->getHeight(),
             painter->screen_width/2-texture_victory->getWidth()/2-victory_image_x-i*separation_x,victory_image_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -879,7 +879,7 @@ void Fighter::dibujarBarra()
         (   texture_victory,
             texture_victory->getWidth(),texture_victory->getHeight(),
             painter->screen_width/2-texture_victory->getWidth()/2+victory_image_x+i*separation_x,victory_image_y,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -1008,7 +1008,7 @@ bool Fighter::render()
             (   texture_gameover,
                 texture_gameover->getWidth(),texture_gameover->getHeight(),
                 (painter->screen_width-texture_gameover->getWidth())/2,(painter->screen_height-texture_gameover->getHeight())/2,
-                0,
+                1.0,
                 false,
                 0,0,
                 false);
@@ -1030,7 +1030,7 @@ bool Fighter::render()
         (   texture_gameover,
             texture_gameover->getWidth(),texture_gameover->getHeight(),
             (painter->screen_width-texture_gameover->getWidth())/2,(painter->screen_height-texture_gameover->getHeight())/2,
-            0,
+            1.0,
             false,
             0,0,
             false);
@@ -1057,10 +1057,11 @@ bool Fighter::render()
 
     dibujarBarra();
 
-//    if(pa[pa_actual]->combo>0) //!!DRAW TEXT
-//        painter->drawText(std::string(pa[pa_actual]->combo+1)+" hits",core::rect<s32>(50,200,0,0),video::SColor (255,255,255,255));
-//    if(pb[pb_actual]->combo>0)
-//        painter->drawText(std::string(pb[pb_actual]->combo+1)+" hits",core::rect<s32>(painter->screen_width-300,200,0,0),video::SColor (255,255,255,255));
+    if(pa[pa_actual]->combo>0)
+        painter->drawText(painter->convertInt(pa[pa_actual]->combo+1)+" hits",50,200);
+    if(pb[pb_actual]->combo>0)
+        painter->drawText(painter->convertInt(pb[pb_actual]->combo+1)+" hits",painter->screen_width-300,200);
+
     receiver->updateInputs();
     painter->updateScreen();
 }
