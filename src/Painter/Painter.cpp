@@ -215,6 +215,7 @@ void Painter::draw2DImage	(
              bool flipHorizontally,
              int depth_effect_x,
              int depth_effect_y,
+             Color color_effects,
              bool camera_align)
 {
     glEnable( GL_TEXTURE_2D );
@@ -257,7 +258,7 @@ void Painter::draw2DImage	(
 
     //OpenGL draw
     glBindTexture( GL_TEXTURE_2D, texture->getTexture() );
-    glColor3ub(255, 255, 255);
+    glColor4ub(color_effects.getRed(), color_effects.getGreen(), color_effects.getBlue(),color_effects.getAlpha());
     glEnable(GL_BLEND);
     glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
     glBegin( GL_QUADS );

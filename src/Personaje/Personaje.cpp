@@ -22,6 +22,7 @@ Personaje::~Personaje()
     {
         Image*texture=textures.back();
         textures.pop_back();
+        //!!RELEASE MEMORY
         //texture->freeTexture();
     }
 }
@@ -65,6 +66,7 @@ void Personaje::dibujar()
                 sombra[i].escala,
                 flip_sombra[i],
                 0,0,
+                Color(255,255,255,255),
                 true);
         }
     }
@@ -76,30 +78,31 @@ void Personaje::dibujar()
     int alineacion_x=getImagen("current_image").alineacion_x;
     int alineacion_y=getImagen("current_image").alineacion_y;
     //u32 t=painter->device->getTimer()->getTime();//!!COOL VFX
+    int t=painter->fps->get_ticks();
     int tr=255,tg=255,tb=255;
 
     if(getString("orientation")=="i")
         alineacion_x=-alineacion_x;
 
-//    if(violet)//!!COOL VFX
-//    {
-//        tg=t%255;
-//    }
-//    if(red)
-//    {
-//        tg=t%255;
-//        tb=t%255;
-//    }
-//    if(green)
-//    {
-//        tr=t%255;
-//        tb=t%255;
-//    }
-//    if(blue)
-//    {
-//        tr=t%255;
-//        tg=t%255;
-//    }
+    if(violet)//!!COOL VFX
+    {
+        tg=t%255;
+    }
+    if(red)
+    {
+        tg=t%255;
+        tb=t%255;
+    }
+    if(green)
+    {
+        tr=t%255;
+        tb=t%255;
+    }
+    if(blue)
+    {
+        tr=t%255;
+        tg=t%255;
+    }
 
     Image* texture=getImagen("current_image").imagen;
     //if(numero==1)
@@ -117,6 +120,7 @@ void Personaje::dibujar()
         getImagen("current_image").escala,
         getString("orientation")=="i",
         0,0,
+        Color(tr,tg,tb,255),
         true);
 //    if(numero==1)
         //paleta.restoreTexture(texture);
@@ -217,6 +221,7 @@ void Personaje::dibujarBarra(Barra barra)
             1.0,
             flip,
             0,0,
+            Color(255,255,255,255),
             false);
 }
 
@@ -279,6 +284,7 @@ void Personaje::dibujarBarraPequena(Barra barra,int cambio_x,int cambio_y)
             1.0,
             player2,
             0,0,
+            Color(255,255,255,255),
             false);
 }
 
@@ -310,6 +316,7 @@ void Personaje::dibujarProyectiles()
                 imagen.escala,
                 getString(proyectil->orientacion)=="i",
                 0,0,
+                Color(255,255,255,255),
                 true);
         }
         //Dibujar hitboxes
@@ -401,10 +408,7 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
 {
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
-//void Personaje::agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion)
-//{
-//    ((Movimiento*)movimientos[movimiento])->agregarCondicion(posicion,condicion,frame);
-//}
+
 void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
 {
     movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
@@ -1439,16 +1443,6 @@ void Personaje::cargarSfx()
 
         char*file=new char[255];
         strcpy(file,"chars/");
-
-        //convert char_name to char*
-//        size_t count = 255;
-//        c8* c_name = (char*)malloc( 255 );
-//        wcstombs(c_name, char_name.c_str(), count);
-
-
-//        strcat(file,(char*)char_name);
-//        strcat(file,"/sfx/");
-//        strcat(file,elemento_sonido->Attribute("file"));
         sonido->agregarSonido(char_name+move,std::string("chars/")+char_name+std::string("/sfx/")+std::string(elemento_sonido->Attribute("file")));
     }
 
@@ -1777,7 +1771,8 @@ void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen imagen,int posi
         imagen.escala,
         getString("orientation")!="d",
         0,0,
-        false);
+        Color(255,255,255,255),
+        true);
 }
 void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int posicion_y)
 {
@@ -1794,6 +1789,7 @@ void Personaje::dibujarImagen(Painter* painter,Imagen imagen,int posicion_x,int 
         imagen.escala,
         getString("orientation")!="d",
         0,0,
+        Color(255,255,255,255),
         false);
 }
 void Personaje::dibujarAnimacionesBack()

@@ -38,32 +38,37 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
 
 Image* Paleta::paintTexture(Image* texture)
 {
-//    for(int i=0;i<(int)cambios.size();i++)//!!PALETTES
-//    {
-//        CambioColor cambio=cambios[i];
-//        int a_min=cambio.color_min.getAlpha();
-//        int a_max=cambio.color_max.getAlpha();
-//        int r_min=cambio.color_min.getRed();
-//        int r_max=cambio.color_max.getRed();
-//        int g_min=cambio.color_min.getGreen();
-//        int g_max=cambio.color_max.getGreen();
-//        int b_min=cambio.color_min.getBlue();
-//        int b_max=cambio.color_max.getBlue();
-//
-//        int modificacion_a=cambio.cambio_a;
-//        int modificacion_r=cambio.cambio_r;
-//        int modificacion_g=cambio.cambio_g;
-//        int modificacion_b=cambio.cambio_b;
-//
-//        if(r_min<0)r_min=0;
-//        if(r_max>255)r_max=255;
-//        if(a_min<0)a_min=0;
-//        if(a_max>255)a_max=255;
-//        if(g_min<0)g_min=0;
-//        if(g_max>255)g_max=255;
-//        if(b_min<0)b_min=0;
-//        if(b_max>255)b_max=255;
-//
+    for(int i=0;i<(int)cambios.size();i++)//!!PALETTES
+    {
+        CambioColor cambio=cambios[i];
+        int a_min=cambio.color_min.getAlpha();
+        int a_max=cambio.color_max.getAlpha();
+        int r_min=cambio.color_min.getRed();
+        int r_max=cambio.color_max.getRed();
+        int g_min=cambio.color_min.getGreen();
+        int g_max=cambio.color_max.getGreen();
+        int b_min=cambio.color_min.getBlue();
+        int b_max=cambio.color_max.getBlue();
+
+        int modificacion_a=cambio.cambio_a;
+        int modificacion_r=cambio.cambio_r;
+        int modificacion_g=cambio.cambio_g;
+        int modificacion_b=cambio.cambio_b;
+
+        if(r_min<0)r_min=0;
+        if(r_max>255)r_max=255;
+        if(a_min<0)a_min=0;
+        if(a_max>255)a_max=255;
+        if(g_min<0)g_min=0;
+        if(g_max>255)g_max=255;
+        if(b_min<0)b_min=0;
+        if(b_max>255)b_max=255;
+
+        GLuint*p = &texture->texture;
+
+        for(int i=0;i<100;i++)
+            p[i]=100;
+
 //        copia=new s32[texture->*texture->getHeight()];
 //        // update texture with color
 //        s32* p = (s32*)texture->lock();
@@ -100,7 +105,7 @@ Image* Paleta::paintTexture(Image* texture)
 //           }
 //        }
 //        texture->unlock();
-//    }
+    }
 }
 
 Image* Paleta::restoreTexture(Image* texture)

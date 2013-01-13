@@ -13,7 +13,7 @@ class MenuContenedor:Elemento
 private:
     int seleccionado;
 public:
-    std::vector<Elemento*> elementos;//!!!!!!!
+    std::vector<Elemento*> elementos;
     MenuContenedor(Painter*painter,int x, int y, int width, int height,bool visible,std::vector<Elemento*> elementos);
     virtual int getTipo();
     virtual void dibujar();

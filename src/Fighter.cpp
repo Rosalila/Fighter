@@ -853,10 +853,11 @@ void Fighter::dibujarBarra()
     painter->draw2DImage
     (   texture_bar,
         texture_bar->getWidth(),texture_bar->getHeight(),
-        painter->screen_width/2,-texture_bar->getWidth()/2,
+        painter->screen_width/2-texture_bar->getWidth()/2,0,
         1.0,
         false,
         0,0,
+        Color(255,255,255,255),
         false);
 
     for(int i=0;i<victories_a;i++)
@@ -869,6 +870,7 @@ void Fighter::dibujarBarra()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
 
@@ -882,6 +884,7 @@ void Fighter::dibujarBarra()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
 }
@@ -1011,6 +1014,7 @@ bool Fighter::render()
                 1.0,
                 false,
                 0,0,
+                Color(255,255,255,255),
                 false);
         }
     }
@@ -1033,6 +1037,7 @@ bool Fighter::render()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
 

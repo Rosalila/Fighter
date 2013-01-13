@@ -69,6 +69,7 @@ void MenuLista::dibujar()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
         painter->draw2DImage
         (   flecha_derecha,
@@ -77,6 +78,7 @@ void MenuLista::dibujar()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }else
     {
@@ -89,6 +91,7 @@ void MenuLista::dibujar()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
         painter->draw2DImage
         (   flecha_derecha_sel,
@@ -97,6 +100,7 @@ void MenuLista::dibujar()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
 }
@@ -114,6 +118,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
         painter->draw2DImage
         (   flecha_derecha,
@@ -122,6 +127,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }else
     {
@@ -134,6 +140,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
         painter->draw2DImage
         (   flecha_derecha_sel,
@@ -142,6 +149,7 @@ void MenuLista::dibujar(int alineacion_x,int alineacion_y)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
 }

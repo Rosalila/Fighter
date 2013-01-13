@@ -200,6 +200,7 @@ void MenuCharSelect::dibujar()
                         1.0,
                         false,
                         0,0,
+                        Color(255,255,255,255),
                         false);
                 }
                 if(select_p2_x+select_p2_y*size_x==cont)
@@ -212,6 +213,7 @@ void MenuCharSelect::dibujar()
                         1.0,
                         false,
                         0,0,
+                        Color(255,255,255,255),
                         false);
                 }
             }
@@ -232,6 +234,7 @@ void MenuCharSelect::dibujar()
                     1.0,
                     false,
                     0,0,
+                    Color(255,255,255,255),
                     false);
             }else
             {
@@ -243,6 +246,7 @@ void MenuCharSelect::dibujar()
                     1.0,
                     false,
                     0,0,
+                    Color(255,255,255,255),
                     false);
             }
             //dibjuar locks pa
@@ -258,6 +262,7 @@ void MenuCharSelect::dibujar()
                         1.0,
                         false,
                         0,0,
+                        Color(255,255,255,255),
                         false);
                 }
             }
@@ -274,6 +279,7 @@ void MenuCharSelect::dibujar()
                         1.0,
                         false,
                         0,0,
+                        Color(255,255,255,255),
                         false);
                 }
             }
@@ -288,6 +294,7 @@ void MenuCharSelect::dibujar()
                     1.0,
                     false,
                     0,0,
+                    Color(255,255,255,255),
                     false);
             }
             //dibjujar cursor PB
@@ -301,6 +308,7 @@ void MenuCharSelect::dibujar()
                     1.0,
                     false,
                     0,0,
+                    Color(255,255,255,255),
                     false);
             }
             cont++;

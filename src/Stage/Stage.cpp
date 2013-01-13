@@ -47,6 +47,7 @@ void Stage::drawLayer(Layer* layer)
         false,
         layer->depth_effect_x,
         layer->depth_effect_y,
+        Color(255,255,255,255),
         false);
 }
 

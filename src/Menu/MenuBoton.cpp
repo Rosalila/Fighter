@@ -47,6 +47,7 @@ void MenuBoton::dibujar()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
 
         std::string temp=texto;
@@ -64,6 +65,7 @@ void MenuBoton::dibujar()
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
 
         std::string temp=texto_sel;
@@ -86,6 +88,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
 
         std::string temp=texto;
@@ -93,7 +96,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
         {
             temp+=input_config;
         }
-        painter->drawText(temp,x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y);
+        painter->drawText(temp,x+alineacion_texto_x+alineacion_x,y+alineacion_texto_y+alineacion_y);
     }else
     {
         painter->draw2DImage
@@ -103,6 +106,7 @@ void MenuBoton::dibujar(int alineacion_x,int alineacion_y)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
 
         std::string temp=texto_sel;

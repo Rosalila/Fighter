@@ -156,7 +156,6 @@ void Menu::loopMenu()
                 MenuImagen* mi=(MenuImagen*)e;
                 if(mi->fade_in_current!=-1)
                 {
-                    //painter->setAlpha(mi->fade_in_current,mi->imagen,mi->original_image); //!!SET ALPHA
                     mi->fade_in_current+=mi->fade_in_speed;
                     if(mi->fade_in_current>255)
                         mi->fade_in_current=255;
@@ -802,14 +801,10 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-            Image* original_image=painter->getTexture(path);
             Image* image=painter->getTexture(path);
 
-//            if(fade_in_initial!=-1)//!!SET ALPHA
-//                painter->setAlpha(fade_in_initial,image,original_image);
-
-            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,
-                                                          image,original_image,""
+            elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
+                                                          atoi(e->Attribute("width")),atoi(e->Attribute("height")),strcmp(e->Attribute("visible"),"true")==0,image,""
                                                           ));
         }else if(strcmp(e->Value(),"Text")==0)
         {
@@ -961,14 +956,13 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                             if(e->Attribute("fade_in_speed")!=NULL)
                                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                            Image*original_image=painter->getTexture(path);
                             Image*image=painter->getTexture(path);
 
 //                            if(fade_in_initial!=-1)//!!SET APLHA
 //                                painter->setAlpha(fade_in_initial,image,original_image);
 
-                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                                          image,original_image,""
+                            elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
+                                                                           atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,image,""
                                                                            ));
                         }
                         if(strcmp(el->Value(),"chars")==0)
@@ -1008,14 +1002,11 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
                                 if(e->Attribute("fade_in_speed")!=NULL)
                                     fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                                Image*original_image=painter->getTexture(std::string("stages/")+std::string(stages[i])+std::string("/images/preview.png"));
                                 Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
 
-//                                if(fade_in_initial!=-1)//!!SET ALPHA
-//                                    painter->setAlpha(fade_in_initial,image,original_image);
 
-                                elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
-                                                                              image,original_image,stages[i]
+                                elem_lista.push_back((Elemento*)new MenuImagen(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
+                                                                               atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,image,stages[i]
                                                                                ));
                             }
 //                            elem_lista.push_back((Elemento*)new MenuTexto(painter,atoi(el->Attribute("x")),atoi(el->Attribute("y")),atoi(el->Attribute("width")),atoi(el->Attribute("height")),strcmp(el->Attribute("visible"),"true")==0,
@@ -1066,10 +1057,6 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 Personaje* Menu::getPersonajeA(int num,bool ia)
 {
     //get string
-//    MenuContenedor *mc=contenedor_actual;
-//    MenuLista *ml=(MenuLista*)mc->elementos[pos_pa[num]];
-//    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-//    std::string s2=mt->texto;
     std::string char_name=char_select->getLockedNamesPA()[num];
     int num_paleta=char_select->getLockedPalettesPA()[num];
 
@@ -1101,10 +1088,6 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 Personaje* Menu::getPersonajeB(int num,bool ia)
 {
     //get string
-//    MenuContenedor *mc=contenedor_actual;
-//    MenuLista *ml=(MenuLista*)mc->elementos[pos_pb[num]];
-//    MenuTexto *mt=(MenuTexto*)ml->elementos[ml->actual];
-//    std::string s2=mt->texto;
     std::string char_name=char_select->getLockedNamesPB()[num];
     int num_paleta=char_select->getLockedPalettesPB()[num];
 
@@ -1463,6 +1446,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         1.0,
         false,
         0,0,
+        Color(255,255,255,255),
         false);
 
     for(int i=0;i<(int)pa_previews.size();i++)
@@ -1475,6 +1459,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
 
@@ -1488,6 +1473,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             1.0,
             false,
             0,0,
+            Color(255,255,255,255),
             false);
     }
     painter->updateScreen();
