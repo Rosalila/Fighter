@@ -135,13 +135,9 @@ chars/Mole/sprites/animations/hit/5.png loaded
 Playing music: stages/CastleSuzaku/music.ogg
 misc/bar.png loaded
 misc/victory.png loaded
-Warning: misc/match_intro/1.png is not truecolor. This will probably break.
 misc/match_intro/1.png loaded
-Warning: misc/match_intro/2.png is not truecolor. This will probably break.
 misc/match_intro/2.png loaded
-Warning: misc/match_intro/3.png is not truecolor. This will probably break.
 misc/match_intro/3.png loaded
-Warning: misc/match_intro/4.png is not truecolor. This will probably break.
 misc/match_intro/4.png loaded
 misc/match_intro/5.png loaded
 misc/match_intro/6.png loaded
@@ -165,3 +161,129 @@ menu/boton1.png loaded
 menu/boton2.png loaded
 menu/boton1.png loaded
 menu/boton2.png loaded
+Playing music: menu/audio/music.ogg
+stages/Yamaku/images/1.png loaded
+chars/Mole/sprites/displacement/standing/1.png loaded
+chars/Mole/misc/bars/hp.png loaded
+chars/Mole/sprites/displacement/standing/1.png loaded
+chars/Mole/sprites/displacement/standing/1.png loaded
+chars/Mole/sprites/displacement/standing/2.png loaded
+chars/Mole/sprites/displacement/standing/3.png loaded
+chars/Mole/sprites/displacement/standing/4.png loaded
+chars/Mole/sprites/displacement/walk back/1.png loaded
+chars/Mole/sprites/displacement/walk back/2.png loaded
+chars/Mole/sprites/displacement/walk back/3.png loaded
+chars/Mole/sprites/displacement/walk back/4.png loaded
+chars/Mole/sprites/displacement/walk forward/1.png loaded
+chars/Mole/sprites/displacement/walk forward/2.png loaded
+chars/Mole/sprites/displacement/walk forward/3.png loaded
+chars/Mole/sprites/displacement/walk forward/4.png loaded
+chars/Mole/sprites/displacement/crouching/1.png loaded
+chars/Mole/sprites/displacement/crouching/2.png loaded
+chars/Mole/sprites/normal/slash/1.png loaded
+chars/Mole/sprites/normal/slash/2.png loaded
+chars/Mole/sprites/normal/slash/3.png loaded
+chars/Mole/sprites/normal/slash/4.png loaded
+chars/Mole/sprites/normal/slash/5.png loaded
+chars/Mole/sprites/normal/low slash/1.png loaded
+chars/Mole/sprites/normal/low slash/2.png loaded
+chars/Mole/sprites/normal/low slash/3.png loaded
+chars/Mole/sprites/normal/low slash/4.png loaded
+chars/Mole/sprites/normal/overhead slash/1.png loaded
+chars/Mole/sprites/normal/overhead slash/2.png loaded
+chars/Mole/sprites/normal/overhead slash/3.png loaded
+chars/Mole/sprites/normal/overhead slash/4.png loaded
+chars/Mole/sprites/normal/overhead slash/5.png loaded
+chars/Mole/sprites/normal/overhead slash/6.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/hit/1.png loaded
+chars/Mole/sprites/animations/hit/2.png loaded
+chars/Mole/sprites/animations/hit/3.png loaded
+chars/Mole/sprites/animations/hit/4.png loaded
+chars/Mole/sprites/animations/hit/5.png loaded
+chars/Mole/sprites/displacement/standing/1.png loaded
+chars/Mole/misc/bars/hp.png loaded
+chars/Mole/sprites/displacement/standing/1.png loaded
+chars/Mole/sprites/displacement/standing/1.png loaded
+chars/Mole/sprites/displacement/standing/2.png loaded
+chars/Mole/sprites/displacement/standing/3.png loaded
+chars/Mole/sprites/displacement/standing/4.png loaded
+chars/Mole/sprites/displacement/walk back/1.png loaded
+chars/Mole/sprites/displacement/walk back/2.png loaded
+chars/Mole/sprites/displacement/walk back/3.png loaded
+chars/Mole/sprites/displacement/walk back/4.png loaded
+chars/Mole/sprites/displacement/walk forward/1.png loaded
+chars/Mole/sprites/displacement/walk forward/2.png loaded
+chars/Mole/sprites/displacement/walk forward/3.png loaded
+chars/Mole/sprites/displacement/walk forward/4.png loaded
+chars/Mole/sprites/displacement/crouching/1.png loaded
+chars/Mole/sprites/displacement/crouching/2.png loaded
+chars/Mole/sprites/normal/slash/1.png loaded
+chars/Mole/sprites/normal/slash/2.png loaded
+chars/Mole/sprites/normal/slash/3.png loaded
+chars/Mole/sprites/normal/slash/4.png loaded
+chars/Mole/sprites/normal/slash/5.png loaded
+chars/Mole/sprites/normal/low slash/1.png loaded
+chars/Mole/sprites/normal/low slash/2.png loaded
+chars/Mole/sprites/normal/low slash/3.png loaded
+chars/Mole/sprites/normal/low slash/4.png loaded
+chars/Mole/sprites/normal/overhead slash/1.png loaded
+chars/Mole/sprites/normal/overhead slash/2.png loaded
+chars/Mole/sprites/normal/overhead slash/3.png loaded
+chars/Mole/sprites/normal/overhead slash/4.png loaded
+chars/Mole/sprites/normal/overhead slash/5.png loaded
+chars/Mole/sprites/normal/overhead slash/6.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/super/1.png loaded
+chars/Mole/sprites/animations/super/2.png loaded
+chars/Mole/sprites/animations/hit/1.png loaded
+chars/Mole/sprites/animations/hit/2.png loaded
+chars/Mole/sprites/animations/hit/3.png loaded
+chars/Mole/sprites/animations/hit/4.png loaded
+chars/Mole/sprites/animations/hit/5.png loaded
+Playing music: stages/Yamaku/music.ogg
+misc/bar.png loaded
+misc/victory.png loaded
+misc/match_intro/1.png loaded
+misc/match_intro/2.png loaded
+misc/match_intro/3.png loaded
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton2.png loaded
+menu/boton1.png loaded
+menu/boton2.png loaded
+Playing music: menu/audio/music.ogg

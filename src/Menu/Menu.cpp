@@ -142,8 +142,6 @@ void Menu::loopMenu()
     //inicio
 	for (;;)
 	{
-	    receiver->endEventProcess();
-	    receiver->startEventProcess();
 
         dibujarMenu();
 
@@ -1165,8 +1163,6 @@ std::string Menu::getInputPressed()
 {
     while(true)
     {
-        receiver->endEventProcess();
-        receiver->startEventProcess();
 
         dibujarMenu();
         if(receiver->IsKeyDownn(irr::KEY_KEY_Q))

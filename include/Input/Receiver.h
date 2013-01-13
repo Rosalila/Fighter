@@ -20,7 +20,7 @@ using namespace gui;
 
 const int max_joystick_inputs=50;
 
-class Receiver : public IEventReceiver
+class Receiver
 {
 private:
     f32 moveHorizontal;
@@ -37,9 +37,6 @@ private:
        keyStatesENUM keyState[KEY_KEY_CODES_COUNT];
        processStateENUM processState; // STARTED = handling events, ENDED = not handling events
 
-
-    virtual bool OnEvent(const SEvent& event);
-    const SEvent::SJoystickEvent & GetJoystickState(void) const;
     int joystick;
 public:
     Receiver();
