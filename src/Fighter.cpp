@@ -1,10 +1,11 @@
 #include "../include/Fighter.h"
 Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
 {
+//    writeLogLine("Initializing fighter.");
     this->victories_a=victories_a;
     this->victories_b=victories_b;
 
-    //inicio intro y ko
+//    writeLogLine("Loading misc config.");
 
     TiXmlDocument doc_t((char*)"config.xml");
     doc_t.LoadFile();
@@ -32,17 +33,17 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
     pos_imagen_intro=0;
     for(int i=0;i<intro_frames;i++)
     {
-        match_intro.push_back(Imagen(painter->getTexture(std::string("misc/match_intro/")+painter->convertInt(i+1)+std::string(".png")),1,0,0));
+        match_intro.push_back(new Imagen(painter->getTexture(std::string("misc/match_intro/")+painter->convertInt(i+1)+std::string(".png")),1,0,0));
     }
 
     tiempo_actual_ko=0;
     pos_imagen_ko=0;
     for(int i=0;i<ko_frames;i++)
     {
-        ko.push_back(Imagen(painter->getTexture(std::string("misc/ko/")+painter->convertInt(i+1)+std::string(".png")),1,0,0));
+        ko.push_back(new Imagen(painter->getTexture(std::string("misc/ko/")+painter->convertInt(i+1)+std::string(".png")),1,0,0));
     }
 
-    //fin intro y ko
+    writeLogLine("Loading stage misc.");
 
     for(int i=0; i<(int)pa.size(); i++)
         pa[i]->stage_piso=stage->pos_piso;
@@ -57,11 +58,13 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
 
     //stage->cargarDesdeXML((char*)"Stage1");
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
-    this->pa_actual=0;
-    this->pb_actual=0;
+    this->pa_actual=NULL;
+    this->pb_actual=NULL;
 
-    //menu=new Menu(grafico,receiver,sonido,(char*)"menu/main_menu.xml");
+//    writeLogLine("Initializing pause menu.");
     pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.xml");
+
+//    writeLogLine("Setting player misc.");
 
     this->pa=pa;
     this->pb=pb;
@@ -75,6 +78,9 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
     getPbActual()->setString("isActive.intro","yes");
     getPaActual()->setString("orientation","d");
     getPbActual()->setString("orientation","i");
+
+//    writeLogLine("Entering game loop.");
+
     loopJuego();
 }
 
@@ -84,7 +90,23 @@ Fighter::~Fighter()
         delete pa[i];
     for(int i=0;i<(int)pb.size();i++)
         delete pb[i];
-    //delete stage;
+    delete stage;
+
+    for(;!ko.empty();)
+    {
+        Imagen*imagen=ko.back();
+        ko.pop_back();
+        delete imagen;
+    }
+
+    for(;!match_intro.empty();)
+    {
+        Imagen*imagen=match_intro.back();
+        match_intro.pop_back();
+        delete imagen;
+    }
+    delete texture_bar;
+    delete texture_victory;
 }
 
 
@@ -146,17 +168,17 @@ void Fighter::setPbActual(Personaje* p)
         pb[pb_actual]=p;
 }
 
-bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+bool Fighter::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
 {
-    int x1r=hb_roja.p1x+atacante_x;
-    int y1r=hb_roja.p1y+atacante_y;
-    int x2r=hb_roja.p2x+atacante_x;
-    int y2r=hb_roja.p2y+atacante_y;
+    int x1r=hb_roja->p1x+atacante_x;
+    int y1r=hb_roja->p1y+atacante_y;
+    int x2r=hb_roja->p2x+atacante_x;
+    int y2r=hb_roja->p2y+atacante_y;
 
-    int x1a=hb_azul.p1x+atacado_x;
-    int y1a=hb_azul.p1y+atacado_y;
-    int x2a=hb_azul.p2x+atacado_x;
-    int y2a=hb_azul.p2y+atacado_y;
+    int x1a=hb_azul->p1x+atacado_x;
+    int y1a=hb_azul->p1y+atacado_y;
+    int x2a=hb_azul->p2x+atacado_x;
+    int y2a=hb_azul->p2y+atacado_y;
 
     bool hay_colision=(
                           (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
@@ -194,24 +216,24 @@ bool Fighter::getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,in
 
 bool Fighter::getColisionHitBoxes(Personaje* atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
 {
-    std::vector <HitBox> hb_azules=atacado->getHitBoxes(variable_atacado);
-    std::vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
+    std::vector <HitBox*> hb_azules=atacado->getHitBoxes(variable_atacado);
+    std::vector <HitBox*> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
     if(atacante->getString("orientation")=="i")
         for(int i=0; i<(int)hb_rojas.size(); i++)
         {
-            int a=hb_rojas[i].p1x;
-            int b=hb_rojas[i].p2x;
-            hb_rojas[i].p1x=-b;
-            hb_rojas[i].p2x=-a;
+            int a=hb_rojas[i]->p1x;
+            int b=hb_rojas[i]->p2x;
+            hb_rojas[i]->p1x=-b;
+            hb_rojas[i]->p2x=-a;
         }
     if(atacado->getString("orientation")=="i")
         for(int i=0; i<(int)hb_azules.size(); i++)
         {
-            int a=hb_azules[i].p1x;
-            int b=hb_azules[i].p2x;
-            hb_azules[i].p1x=-b;
-            hb_azules[i].p2x=-a;
+            int a=hb_azules[i]->p1x;
+            int b=hb_azules[i]->p2x;
+            hb_azules[i]->p1x=-b;
+            hb_azules[i]->p2x=-a;
         }
 
 
@@ -229,24 +251,24 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,std::string variable_ataca
 
 bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado)
 {
-    std::vector <HitBox> hb_azules=atacado->getHitBoxes(variable_atacado);
-    std::vector <HitBox> hb_rojas=atacante->getHitBoxes(variable_atacante);
+    std::vector <HitBox*> hb_azules=atacado->getHitBoxes(variable_atacado);
+    std::vector <HitBox*> hb_rojas=atacante->getHitBoxes(variable_atacante);
 
     if(atacante->getString("orientation")=="i")
         for(int i=0; i<(int)hb_rojas.size(); i++)
         {
-            int a=hb_rojas[i].p1x;
-            int b=hb_rojas[i].p2x;
-            hb_rojas[i].p1x=-b;
-            hb_rojas[i].p2x=-a;
+            int a=hb_rojas[i]->p1x;
+            int b=hb_rojas[i]->p2x;
+            hb_rojas[i]->p1x=-b;
+            hb_rojas[i]->p2x=-a;
         }
     if(atacado->getString("orientation")=="i")
         for(int i=0; i<(int)hb_azules.size(); i++)
         {
-            int a=hb_azules[i].p1x;
-            int b=hb_azules[i].p2x;
-            hb_azules[i].p1x=-b;
-            hb_azules[i].p2x=-a;
+            int a=hb_azules[i]->p1x;
+            int b=hb_azules[i]->p2x;
+            hb_azules[i]->p1x=-b;
+            hb_azules[i]->p2x=-a;
         }
 
 
@@ -389,22 +411,22 @@ void Fighter::logicaPersonaje(Personaje* p)
     //Movimientos continuos
     //agregar nuevos
     for(int i=0; i<(int)p->inputs.size(); i++) //for each movimiento
-        if(p->inputs[i].input[0]=="*")//buscar los constantes
-            if(p->cumpleCondiciones(p->inputs[i].movimiento))//si cumple
+        if(p->inputs[i]->input[0]=="*")//buscar los constantes
+            if(p->cumpleCondiciones(p->inputs[i]->movimiento))//si cumple
             {
                 bool existe=false;
                 for(int j=0; j<(int)p->movimientos_constantes_actuales.size(); j++) //for each movimiento
-                    if(p->movimientos_constantes_actuales[j]->nombre==p->inputs[i].movimiento)
+                    if(p->movimientos_constantes_actuales[j]->nombre==p->inputs[i]->movimiento)
                     {
                         existe=true;
                     }
                 if(!existe)
                 {
-                    if(p->inputs[i].movimiento.substr(0,7)=="on_hit.")
+                    if(p->inputs[i]->movimiento.substr(0,7)=="on_hit.")
                     {
                         if(p->numero==1)
                         {
-                            hit_cancel_pa=p->inputs[i].movimiento;
+                            hit_cancel_pa=p->inputs[i]->movimiento;
                             Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
                             hit_cancel_pa_damage=m_contrario->damage;
                             hit_cancel_pa_chip_damage=m_contrario->chip_damage;
@@ -414,7 +436,7 @@ void Fighter::logicaPersonaje(Personaje* p)
                         }
                         if(p->numero==2)
                         {
-                            hit_cancel_pb=p->inputs[i].movimiento;
+                            hit_cancel_pb=p->inputs[i]->movimiento;
                             Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
                             hit_cancel_pb_damage=m_contrario->damage;
                             hit_cancel_pb_chip_damage=m_contrario->chip_damage;
@@ -438,7 +460,7 @@ void Fighter::logicaPersonaje(Personaje* p)
                     }
                     else
                     {
-                        std::string movimiento_temp=p->inputs[i].movimiento;
+                        std::string movimiento_temp=p->inputs[i]->movimiento;
                         p->setString(std::string("isActive.")+movimiento_temp,"yes");
                         p->movimientos_constantes_actuales.push_back(p->movimientos[movimiento_temp]);
                     }
@@ -648,7 +670,7 @@ void Fighter::aplicarModificadores(Personaje *p)
 
     //get movimiento y frame
     Movimiento* m=p->movimientos[p->getString("current_move")];
-    Frame* f=&m->frames[m->frame_actual];
+    Frame* f=m->frames[m->frame_actual];
     //aplicar modificadores
     if(m->tiempo_transcurrido==0)
         p->aplicarModificadores(f->modificadores,p->getString("orientation")=="i");
@@ -698,7 +720,7 @@ void Fighter::aplicarModificadores(Personaje *p)
             i--;
             continue;
         }
-        Frame* fc=&mc->frames[mc->frame_actual];
+        Frame* fc=mc->frames[mc->frame_actual];
         if(mc->tiempo_transcurrido==0)
             p->aplicarModificadores(fc->modificadores,p->getString("orientation")=="i");
         //avanzar frame
@@ -998,7 +1020,7 @@ bool Fighter::render()
     {
         if(ko.size()>0)
         {
-            Image* texture_gameover=ko[pos_imagen_ko].imagen;
+            Image* texture_gameover=ko[pos_imagen_ko]->imagen;
             tiempo_actual_ko++;
             if(tiempo_actual_ko==duracion_ko)
             {
@@ -1023,7 +1045,7 @@ bool Fighter::render()
     if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("current_move")=="5" && pb[0]->getString("current_move")=="5")
     {
         //Image* texture_gameover=grafico->getTexture("misc/ko/1.png");
-        Image* texture_gameover=match_intro[pos_imagen_intro].imagen;
+        Image* texture_gameover=match_intro[pos_imagen_intro]->imagen;
         tiempo_actual_intro++;
         if(tiempo_actual_intro==duracion_intro)
         {

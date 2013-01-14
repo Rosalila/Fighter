@@ -5,8 +5,6 @@
 #include "IA/Estado.h"
 #include "TinyXml/tinyxml.h"
 #include <irrlicht/irrlicht.h>
-using namespace irr;
-using namespace core;
 #include <vector>
 using namespace std;
 

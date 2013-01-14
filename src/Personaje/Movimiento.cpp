@@ -13,18 +13,18 @@ Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multih
     this->unblockable_high=unblockable_high;
     this->unblockable_low=unblockable_low;
 }
-Frame Movimiento::getFrameActual()
+Frame* Movimiento::getFrameActual()
 {
     return frames[frame_actual];
 }
 void Movimiento::agregarFrame(int duracion)
 {
-    frames.push_back(Frame(duracion));
+    frames.push_back(new Frame(duracion));
 }
 
 void Movimiento::agregarCondicion(std::vector<Condicion*> condicion,int frame)
 {
-    frames[frame].condiciones.push_back(condicion);
+    frames[frame]->condiciones.push_back(condicion);
 }
 
 //void Movimiento::agregarCondicion(int posicion,Condicion condicion,int frame)

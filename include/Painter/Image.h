@@ -12,6 +12,7 @@ public:
     int height;
 
     Image();
+    ~Image();
     int getWidth();
     int getHeight();
     GLuint getTexture();

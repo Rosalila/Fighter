@@ -20,9 +20,6 @@
 #include <fstream>
 using namespace std;
 
-using namespace irr;
-
-
 class Color
 {
 public:

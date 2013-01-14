@@ -2,8 +2,6 @@
 #define SONIDO_H
 
 #include <irrlicht/irrlicht.h>
-using namespace irr;
-using namespace core;
 #include <string>
 #include <vector>
 

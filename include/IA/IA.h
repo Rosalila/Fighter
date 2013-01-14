@@ -3,8 +3,6 @@
 
 #include "IA/Automata.h"
 #include <irrlicht/irrlicht.h>
-using namespace irr;
-using namespace core;
 #include <cstdlib>
 #include <iostream>
 using namespace std;

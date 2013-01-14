@@ -2,13 +2,6 @@
 
 Receiver::Receiver()
 {
-//    for (u32 i=0; i<KEY_KEY_CODES_COUNT; ++i)
-//        KeyIsDown[i] = false;
-      for (int i = 0; i <= KEY_KEY_CODES_COUNT; i++)
-      {
-         keyState[i] = UP;
-      }
-
     for(int i = 0; i < 322; i++) { // init them all to false
        KEYS[i] = false;
     }

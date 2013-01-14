@@ -2,32 +2,32 @@
 
 Frame::Frame(int duracion)
 {
-    this->modificadores=std::vector<Modificador>();
+    this->modificadores=std::vector<Modificador*>();
     this->duracion=duracion;
 }
-void Frame::agregarModificador(Imagen modificador,std::string variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(Imagen* modificador,std::string variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorImagen(variable,modificador,aplicar_a_contrario));
+    modificadores.push_back(new ModificadorImagen(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(int modificador,std::string variable,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {
-    modificadores.push_back(ModificadorEntero(variable,modificador,relativo,aplicar_a_contrario,flipeable));
+    modificadores.push_back(new ModificadorEntero(variable,modificador,relativo,aplicar_a_contrario,flipeable));
 }
 void Frame::agregarModificador(Barra modificador,std::string variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorBarra(variable,modificador,aplicar_a_contrario));
+    modificadores.push_back(new ModificadorBarra(variable,modificador,aplicar_a_contrario));
 }
-void Frame::agregarModificador(std::vector <HitBox> modificador,std::string variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(std::vector <HitBox*> modificador,std::string variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorHitboxes(variable,modificador,aplicar_a_contrario));
+    modificadores.push_back(new ModificadorHitboxes(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(std::string modificador,std::string variable,bool aplicar_a_contrario)
 {
-    modificadores.push_back(ModificadorString(variable,modificador,aplicar_a_contrario));
+    modificadores.push_back(new ModificadorString(variable,modificador,aplicar_a_contrario));
 }
 void Frame::agregarModificador(std::string tipo,std::string variable_modificador,std::string variable,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {
-    modificadores.push_back(ModificadorPorVariable(tipo,variable,variable_modificador,relativo,aplicar_a_contrario,flipeable));
+    modificadores.push_back(new ModificadorPorVariable(tipo,variable,variable_modificador,relativo,aplicar_a_contrario,flipeable));
 }
 void Frame::agregarCondicion(std::vector<Condicion*> condicion)
 {

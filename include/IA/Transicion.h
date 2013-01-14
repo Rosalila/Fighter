@@ -2,8 +2,6 @@
 #define TRANSICION_H
 
 #include <irrlicht/irrlicht.h>
-using namespace irr;
-using namespace core;
 #include <vector>
 #include <iostream>
 using namespace std;

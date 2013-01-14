@@ -24,3 +24,8 @@ Imagen::Imagen()
 {
 
 }
+
+Imagen::~Imagen()
+{
+    delete imagen;
+}

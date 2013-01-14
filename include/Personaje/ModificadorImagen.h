@@ -6,7 +6,7 @@
 class ModificadorImagen : public Modificador
 {
     public:
-    ModificadorImagen(std::string variable,Imagen modificador,bool aplicar_a_contrario);
+    ModificadorImagen(std::string variable,Imagen* modificador,bool aplicar_a_contrario);
 };
 
 #endif

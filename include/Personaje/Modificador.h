@@ -14,13 +14,13 @@ class Modificador
     bool aplicar_a_contrario;
     std::string tipo;
     std::string variable;
-    Imagen modificador_imagen;
+    Imagen* modificador_imagen;
 
     bool relativo;//solo para ints
     std::string tipo_variable;//solo para por variables
 
     Barra modificador_barra;
-    std::vector <HitBox> modificador_hitbox;
+    std::vector <HitBox*> modificador_hitbox;
     std::string modificador_string;
     int modificador_entero;
     bool flipeable;

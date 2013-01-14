@@ -4,16 +4,14 @@
 #include <vector>
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-using namespace irr;
-using namespace video;
 
 class CambioColor
 {
 public:
-    SColor color_max;
-    SColor color_min;
+    Color color_max;
+    Color color_min;
     int cambio_a,cambio_r,cambio_g,cambio_b;
-    CambioColor(SColor color_max,SColor color_min,
+    CambioColor(Color color_max,Color color_min,
                 int cambio_a,int cambio_r,int cambio_g,int cambio_b)
                 {
                     this->color_max=color_max;
@@ -29,7 +27,7 @@ class Paleta
 {
 public:
     std::vector<CambioColor>cambios;
-    s32 *copia;
+//    s32 *copia;
     Paleta(){}
     void cargarXML(char* archivo,int num_paleta);
     Image* paintTexture(Image* texture);

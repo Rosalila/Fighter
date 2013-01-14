@@ -29,12 +29,22 @@ public:
         this->alignment_x=alignment_x;
         this->alignment_y=alignment_y;
     }
+
+    ~Layer()
+    {
+        for(;!textures.empty();)
+        {
+            Image*image=textures.back();
+            textures.pop_back();
+            delete image;
+        }
+    }
 };
 
 class Stage
 {
     public:
-    std::vector<Layer> back,front;
+    std::vector<Layer*> back,front;
     std::string music_path;
     Painter* painter;
     Sonido* sonido;

@@ -19,9 +19,9 @@ public:
     std::vector<Personaje*>pb;
     int pa_vivos,pb_vivos;
     int pa_actual,pb_actual;
-    std::vector<Imagen>ko;
+    std::vector<Imagen*>ko;
     int pos_imagen_ko,duracion_ko,tiempo_actual_ko;
-    std::vector<Imagen>match_intro;
+    std::vector<Imagen*>match_intro;
     int pos_imagen_intro,duracion_intro,tiempo_actual_intro;
     bool game_over_a;
     bool game_over_b;
@@ -58,7 +58,7 @@ public:
     Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();
     //Logica
-    bool getColisionHitBoxes(HitBox hb_azul,HitBox hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
+    bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado);
     bool getColisionHitBoxes(Personaje*atacante,std::string variable_atacante,Personaje*atacado,std::string variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     void loopJuego();

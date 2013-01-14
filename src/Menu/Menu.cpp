@@ -45,6 +45,7 @@ Menu::Menu(Painter* painter,Receiver* receiver,Sonido* sonido,char* archivo)
 
 void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
 {
+    writeLogLine("Initializing game.");
     if(inteligencia_artificial)
         char_select->lockPB(0);
     printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
@@ -52,7 +53,10 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
     pa.clear();
     pb.clear();
 
+    writeLogLine("Initializing stage.");
+
     stage=new Stage(painter,sonido);
+
     stage->cargarDesdeXML(getStage());
 
     for(int i=0;i<num_personajes;i++)
@@ -1054,6 +1058,7 @@ void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::st
 
 Personaje* Menu::getPersonajeA(int num,bool ia)
 {
+    writeLogLine("Initializing player's 1 character #"+painter->convertInt(num)+".");
     //get string
     std::string char_name=char_select->getLockedNamesPA()[num];
     int num_paleta=char_select->getLockedPalettesPA()[num];
@@ -1065,6 +1070,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 
     if(ia)
     {
+        writeLogLine("Loading AI.");
         inputa=new Input();
         char*file_ia=new char[255];
         strcpy(file_ia,"chars/");
@@ -1073,6 +1079,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
         inputa->cargarIAXML(2,file_ia,"");
     }else
     {
+        writeLogLine("Loading inputs.");
         inputa=new Input();
         inputa->cargarDesdeXML(1,receiver);
     }
@@ -1080,11 +1087,13 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     //get char
     Personaje* p=new Personaje(painter,sonido,1,num_paleta);
     p->cargarDesdeXML(stage->size/2-painter->screen_width/4-200,0,inputa,(char *)path_a);
+    writeLogLine("Loaded successfully.");
     return p;
 }
 
 Personaje* Menu::getPersonajeB(int num,bool ia)
 {
+    writeLogLine("Initializing player's 1 character #"+painter->convertInt(num)+".");
     //get string
     std::string char_name=char_select->getLockedNamesPB()[num];
     int num_paleta=char_select->getLockedPalettesPB()[num];
@@ -1096,6 +1105,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 
     if(ia)
     {
+        writeLogLine("Loading AI.");
         inputb=new Input();
         char*file_ia=new char[255];
         char*file_ia_default=new char[255];
@@ -1117,6 +1127,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
         inputb->cargarIAXML(2,file_ia,file_ia_default);
     }else
     {
+        writeLogLine("Loading inputs.");
         inputb=new Input();
         inputb->cargarDesdeXML(2,receiver);
     }
@@ -1124,6 +1135,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     //get char
     Personaje* p=new Personaje(painter,sonido,2,num_paleta);
     p->cargarDesdeXML(stage->size/2-painter->screen_width/4+200,0,inputb,(char *)path_b);
+    writeLogLine("Loaded successfully.");
     return p;
 }
 

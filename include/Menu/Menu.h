@@ -9,8 +9,6 @@
 #include "Menu/MenuCharSelect.h"
 #include "Sonido/Sonido.h"
 #include "Fighter.h"
-using namespace irrklang;
-
 
 class Menu
 {

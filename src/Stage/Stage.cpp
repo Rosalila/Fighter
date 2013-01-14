@@ -55,7 +55,7 @@ void Stage::dibujarBack()
 {
     for(int i=0;i<back.size();i++)
     {
-        Layer* layer=&back[i];
+        Layer* layer=back[i];
         drawLayer(layer);
     }
 }
@@ -64,13 +64,15 @@ void Stage::dibujarFront()
 {
     for(int i=0;i<front.size();i++)
     {
-        Layer* layer=&front[i];
+        Layer* layer=front[i];
         drawLayer(layer);
     }
 }
 
 void Stage::cargarDesdeXML(std::string path)
 {
+    writeLogLine("Loading stage from XML.");
+
     char *archivo=new char[255];
     strcpy(archivo,"stages/");
     strcat(archivo,path.c_str());
@@ -94,6 +96,8 @@ void Stage::cargarDesdeXML(std::string path)
 
     TiXmlNode *nodo_floor=stage_file->FirstChild("Floor");
     this->pos_piso=atoi(nodo_floor->ToElement()->Attribute("position"));
+
+    writeLogLine("Loading stage's BackLayers.");
 
     //Load back layer
     for(TiXmlNode *nodo_back=stage_file->FirstChild("BackLayer");
@@ -127,8 +131,10 @@ void Stage::cargarDesdeXML(std::string path)
             textures_size_y.push_back(size_y);
         }
 
-        back.push_back(Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
+        back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
     }
+
+    writeLogLine("Loading stage's FrontLayers.");
 
     //Load front layer
     for(TiXmlNode *nodo_back=stage_file->FirstChild("FrontLayer");
@@ -162,10 +168,23 @@ void Stage::cargarDesdeXML(std::string path)
             textures_size_y.push_back(size_y);
         }
 
-        front.push_back(Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
+        front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
     }
+    writeLogLine("Stage loaded succesfully from XML.");
 }
 
 Stage::~Stage()
 {
+    for(;!back.empty();)
+    {
+        Layer*layer=back.back();
+        back.pop_back();
+        delete layer;
+    }
+    for(;!front.empty();)
+    {
+        Layer*layer=front.back();
+        front.pop_back();
+        delete layer;
+    }
 }

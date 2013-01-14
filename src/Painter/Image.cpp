@@ -34,3 +34,8 @@ void Image::setHeight(int height)
 {
     this->height=height;
 }
+
+Image::~Image()
+{
+    glDeleteTextures( 1, &texture );
+}

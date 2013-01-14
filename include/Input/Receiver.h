@@ -11,32 +11,12 @@ using namespace std;
 #include "../include/TinyXml/tinyxml.h"
 #include "SDL/SDL.h"
 
-using namespace irr;
-using namespace core;
-using namespace scene;
-using namespace video;
-using namespace io;
-using namespace gui;
 
 const int max_joystick_inputs=50;
 
 class Receiver
 {
 private:
-    f32 moveHorizontal;
-    f32 moveVertical;
-    SEvent::SJoystickEvent JoystickState0;
-    SEvent::SJoystickEvent JoystickState1;
-    //bool KeyIsDown[KEY_KEY_CODES_COUNT];
-       enum keyStatesENUM {UP, DOWN, PRESSED, RELEASED};
-
-       // Enumeration for Event Handling State.
-       enum processStateENUM {STARTED, ENDED};
-
-       // Keyboard key states.
-       keyStatesENUM keyState[KEY_KEY_CODES_COUNT];
-       processStateENUM processState; // STARTED = handling events, ENDED = not handling events
-
     int joystick;
 public:
     Receiver();

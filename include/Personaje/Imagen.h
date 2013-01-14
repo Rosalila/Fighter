@@ -13,6 +13,7 @@ public:
     Imagen(Image* imagen,float escala,int alineacion_x,int alineacion_y);
     Imagen(Image* imagen,int alineacion_x,int alineacion_y);
     Imagen();
+    ~Imagen();
 };
 
 #endif
