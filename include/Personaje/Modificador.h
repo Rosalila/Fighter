@@ -24,6 +24,16 @@ class Modificador
     std::string modificador_string;
     int modificador_entero;
     bool flipeable;
+    ~Modificador()
+    {
+//        delete modificador_imagen;
+//        for(;!modificadores.empty();)
+//        {
+//            Modificador*modificador=modificadores.back();
+//            modificadores.pop_back();
+//            delete modificador;
+//        }
+    }
 };
 
 #endif

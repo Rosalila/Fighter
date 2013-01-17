@@ -17,6 +17,7 @@ class Frame
     std::vector < std::vector<Condicion*> > condiciones;
     int duracion;
     Frame(int duracion);
+    ~Frame();
     //modificadores
     void agregarModificador(Imagen* modificador,std::string variable,bool aplicar_a_contrario);
     void agregarModificador(int modificador,std::string variable,bool relativo,bool aplicar_a_contrario,bool flipeable);

@@ -41,8 +41,8 @@ class Personaje
     //Otros std::vectores
     std::vector<Animacion*>animaciones_back;
     std::vector<Animacion*>animaciones_front;
-    std::vector<Animacion*>animaciones_actuales_back;
-    std::vector<Animacion*>animaciones_actuales_front;
+    std::vector<int>animaciones_actuales_back;
+    std::vector<int>animaciones_actuales_front;
     std::vector<InputMovimiento*>inputs;
     std::vector<Movimiento*> movimientos_constantes_actuales;
     std::vector<Proyectil*> proyectiles_actuales;

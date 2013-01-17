@@ -175,6 +175,7 @@ void Stage::cargarDesdeXML(std::string path)
 
 Stage::~Stage()
 {
+    writeLogLine("Deleting stage.");
     for(;!back.empty();)
     {
         Layer*layer=back.back();

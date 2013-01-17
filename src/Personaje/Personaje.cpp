@@ -19,11 +19,54 @@ Personaje::Personaje(Painter* painter,Sonido* sonido,int numero,int num_paleta)
 }
 Personaje::~Personaje()
 {
+    writeLogLine("Deleting character.");
     for(;!textures.empty();)
     {
         Image*image=textures.back();
         textures.pop_back();
         delete image;
+    }
+
+    for(;!animaciones_back.empty();)
+    {
+        Animacion*animacion=animaciones_back.back();
+        animaciones_back.pop_back();
+        delete animacion;
+    }
+
+    for(;!animaciones_front.empty();)
+    {
+        Animacion*animacion=animaciones_front.back();
+        animaciones_front.pop_back();
+        delete animacion;
+    }
+
+    for(;!inputs.empty();)
+    {
+        InputMovimiento*input_movimiento=inputs.back();
+        inputs.pop_back();
+        delete input_movimiento;
+    }
+
+    for(;!movimientos_constantes_actuales.empty();)
+    {
+        Movimiento*movimiento=movimientos_constantes_actuales.back();
+        movimientos_constantes_actuales.pop_back();
+        delete movimiento;
+    }
+
+    for(;!proyectiles_actuales.empty();)
+    {
+        Proyectil*proyectil=proyectiles_actuales.back();
+        proyectiles_actuales.pop_back();
+        delete proyectil;
+    }
+
+    for(;!barras.empty();)
+    {
+        Barra*barra=barras.back();
+        barras.pop_back();
+        delete barra;
     }
 }
 //DIBUJAR
@@ -344,9 +387,7 @@ int Personaje::getEntero(std::string variable)
 {
     if(enteros.find(variable)==0)
     {
-        cout<<"Error variable not defined: "<<endl;
-        cout.flush();
-        return 1;
+        writeLogLine("Integer error: "+variable+" not defined.");
     }
     return enteros[variable];
 }
@@ -355,19 +396,32 @@ Barra* Personaje::getBarra(std::string variable)
     for(int i=0;i<(int)barras.size();i++)
         if(barras[i]->nombre==variable)
             return barras[i];
+    writeLogLine("Bar error: "+variable+" not defined.");
     return NULL;
 //    return new Barra("error","","","","",Color(0,0,0,0),irr::core::rect<irr::s32> (0,0,0,0),NULL);
 }
 vector<HitBox*> Personaje::getHitBoxes(std::string variable)
 {
+    if(hitboxes.find(variable)==0)
+    {
+        writeLogLine("Hitbox error: "+variable+" not defined.");
+    }
     return hitboxes[variable];
 }
 Imagen* Personaje::getImagen(std::string variable)
 {
+    if(imagenes.find(variable)==0)
+    {
+        writeLogLine("Image error: "+variable+" not defined.");
+    }
     return imagenes[variable];
 }
 std::string Personaje::getString(std::string variable)
 {
+    if(strings.find(variable)==0)
+    {
+        writeLogLine("Strings error: "+variable+" not defined.");
+    }
     return strings[variable];
 }
 //SETS variables
@@ -1832,14 +1886,14 @@ void Personaje::dibujarAnimacionesBack()
     {
         if(getString(std::string(std::string("Animation.")+animaciones_back[i]->nombre))=="on")
         {
-            animaciones_actuales_back.push_back(animaciones_back[i]);
+            animaciones_actuales_back.push_back(i);
             setString(std::string(std::string("Animation.")+animaciones_back[i]->nombre),"off");
             setString(std::string("Animation.")+std::string(animaciones_back[i]->nombre+".isActive"),"true");
         }
     }
     for(int i=0;i<(int)animaciones_actuales_back.size();i++)
     {
-        Animacion* animacion=animaciones_actuales_back[i];
+        Animacion* animacion=animaciones_back[animaciones_actuales_back[i]];
         if(animacion->usa_camara)
         {
             if(animacion->posicion_y=="position_y")
@@ -1871,6 +1925,8 @@ void Personaje::dibujarAnimacionesBack()
         //Cuando termina
         if(animacion->imagen_actual>=(int)animacion->sprites.size())
         {
+            animacion->imagen_actual=0;
+            animacion->tiempo_transcurrido=0;
             setString(std::string("Animation.")+std::string(animacion->nombre+".isActive"),"false");
             animaciones_actuales_back.erase(animaciones_actuales_back.begin()+i);
         }
@@ -1883,14 +1939,14 @@ void Personaje::dibujarAnimacionesFront()
     {
         if(getString(std::string(std::string("Animation.")+animaciones_front[i]->nombre))=="on")
         {
-            animaciones_actuales_front.push_back(animaciones_front[i]);
+            animaciones_actuales_front.push_back(i);
             setString(std::string(std::string("Animation.")+animaciones_front[i]->nombre),"off");
             setString(std::string("Animation.")+std::string(animaciones_front[i]->nombre+".isActive"),"true");
         }
     }
     for(int i=0;i<(int)animaciones_actuales_front.size();i++)
     {
-        Animacion* animacion=animaciones_actuales_front[i];
+        Animacion* animacion=animaciones_front[animaciones_actuales_front[i]];
         if(animacion->usa_camara)
         {
             if(animacion->posicion_y=="position_y")
@@ -1921,6 +1977,8 @@ void Personaje::dibujarAnimacionesFront()
         //Cuando termina
         if(animacion->imagen_actual>=(int)animacion->sprites.size())
         {
+            animacion->imagen_actual=0;
+            animacion->tiempo_transcurrido=0;
             setString(std::string("Animation.")+std::string(animacion->nombre+".isActive"),"false");
             animaciones_actuales_front.erase(animaciones_actuales_front.begin()+i);
         }

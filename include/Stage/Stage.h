@@ -32,6 +32,7 @@ public:
 
     ~Layer()
     {
+        writeLogLine("Deleting layer.");
         for(;!textures.empty();)
         {
             Image*image=textures.back();

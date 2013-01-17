@@ -16,6 +16,7 @@ class Movimiento
     int frame_actual,tiempo_transcurrido;
     std::vector <Frame*> frames;
     Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
+    ~Movimiento();
     Frame* getFrameActual();
     bool ya_pego;
     bool multihit;

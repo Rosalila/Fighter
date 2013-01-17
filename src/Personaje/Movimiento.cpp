@@ -13,6 +13,17 @@ Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multih
     this->unblockable_high=unblockable_high;
     this->unblockable_low=unblockable_low;
 }
+
+Movimiento::~Movimiento()
+{
+    for(;!frames.empty();)
+    {
+        Frame*frame=frames.back();
+        frames.pop_back();
+        delete frame;
+    }
+}
+
 Frame* Movimiento::getFrameActual()
 {
     return frames[frame_actual];

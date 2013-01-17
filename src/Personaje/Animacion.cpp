@@ -12,3 +12,13 @@ Animacion::Animacion(std::string nombre,std::vector<Imagen*>sprites,std::string 
     this->tiempo_transcurrido=0;
     this->usa_camara=usa_camara;
 }
+
+Animacion::~Animacion()
+{
+    for(;!sprites.empty();)
+    {
+        Imagen*imagen=sprites.back();
+        sprites.pop_back();
+        delete imagen;
+    }
+}
