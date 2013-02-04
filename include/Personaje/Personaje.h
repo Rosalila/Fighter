@@ -8,6 +8,7 @@
 #include "Personaje/Animacion.h"
 #include "Personaje/Paleta.h"
 #include "Input/Input.h"
+#include <map>
 
 class Personaje
 {
@@ -52,15 +53,15 @@ class Personaje
     std::vector<Image*>textures;
 
     //strings
-    irr::core::map<std::string,std::string> strings;
+    std::map<std::string,std::string> strings;
     //imagenes
-    irr::core::map<std::string,Imagen*> imagenes;
+    std::map<std::string,Imagen*> imagenes;
     //ints
-    irr::core::map<std::string,int> enteros;
+    std::map<std::string,int> enteros;
     //hitboxes
-    irr::core::map<std::string,vector<HitBox*> > hitboxes;
+    std::map<std::string,vector<HitBox*> > hitboxes;
     //movimientos
-    irr::core::map<std::string,Movimiento*> movimientos;
+    std::map<std::string,Movimiento*> movimientos;
 
     Personaje(Painter* painter,Sonido* sonido,int numero,int paleta);
     ~Personaje();

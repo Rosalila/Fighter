@@ -3,7 +3,6 @@
 
 #include "Stage/Stage.h"
 #include "Painter/Painter.h"
-#include "irrKlang/irrKlang.h"
 #include "Personaje/Personaje.h"
 #include "Menu/MenuContenedor.h"
 #include "Menu/MenuCharSelect.h"

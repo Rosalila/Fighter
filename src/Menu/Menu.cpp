@@ -1178,57 +1178,57 @@ std::string Menu::getInputPressed()
     {
 
         dibujarMenu();
-        if(receiver->IsKeyDownn(irr::KEY_KEY_Q))
+        if(receiver->IsKeyDownn(SDLK_q))
             return "Q";
         if(receiver->IsKeyDownn(SDLK_w))
             return "W";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_E))
+        if(receiver->IsKeyDownn(SDLK_e))
             return "E";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_R))
+        if(receiver->IsKeyDownn(SDLK_r))
             return "R";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_T))
+        if(receiver->IsKeyDownn(SDLK_t))
             return "T";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_Y))
+        if(receiver->IsKeyDownn(SDLK_y))
             return "Y";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_U))
+        if(receiver->IsKeyDownn(SDLK_u))
             return "U";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_I))
+        if(receiver->IsKeyDownn(SDLK_i))
             return "I";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_O))
+        if(receiver->IsKeyDownn(SDLK_o))
             return "O";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_P))
+        if(receiver->IsKeyDownn(SDLK_p))
             return "P";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_A))
+        if(receiver->IsKeyDownn(SDLK_a))
             return "A";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_S))
+        if(receiver->IsKeyDownn(SDLK_s))
             return "S";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_D))
+        if(receiver->IsKeyDownn(SDLK_d))
             return "D";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_F))
+        if(receiver->IsKeyDownn(SDLK_f))
             return "F";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_G))
+        if(receiver->IsKeyDownn(SDLK_g))
             return "G";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_H))
+        if(receiver->IsKeyDownn(SDLK_h))
             return "H";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_J))
+        if(receiver->IsKeyDownn(SDLK_j))
             return "J";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_K))
+        if(receiver->IsKeyDownn(SDLK_k))
             return "K";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_L))
+        if(receiver->IsKeyDownn(SDLK_l))
             return "L";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_Z))
+        if(receiver->IsKeyDownn(SDLK_z))
             return "Z";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_X))
+        if(receiver->IsKeyDownn(SDLK_x))
             return "X";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_C))
+        if(receiver->IsKeyDownn(SDLK_c))
             return "C";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_V))
+        if(receiver->IsKeyDownn(SDLK_v))
             return "V";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_B))
+        if(receiver->IsKeyDownn(SDLK_b))
             return "B";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_N))
+        if(receiver->IsKeyDownn(SDLK_n))
             return "N";
-        if(receiver->IsKeyDownn(irr::KEY_KEY_M))
+        if(receiver->IsKeyDownn(SDLK_m))
             return "M";
 
         if(receiver->IsJoyDown(0,0))
@@ -1298,58 +1298,58 @@ std::string Menu::getInputPressed()
 int Menu::toKeyCode(std::string str)
 {
     if(str==std::string("Q"))
-        return irr::KEY_KEY_Q;
+        return SDLK_q;
     if(str==std::string("W"))
         return SDLK_w;
     if(str==std::string("E"))
-        return irr::KEY_KEY_E;
+        return SDLK_e;
     if(str==std::string("R"))
-        return irr::KEY_KEY_R;
+        return SDLK_r;
     if(str==std::string("T"))
-        return irr::KEY_KEY_T;
+        return SDLK_t;
     if(str==std::string("Y"))
-        return irr::KEY_KEY_Y;
+        return SDLK_y;
     if(str==std::string("U"))
-        return irr::KEY_KEY_U;
+        return SDLK_u;
     if(str==std::string("I"))
-        return irr::KEY_KEY_I;
+        return SDLK_i;
     if(str==std::string("O"))
-        return irr::KEY_KEY_O;
+        return SDLK_o;
     if(str==std::string("P"))
-        return irr::KEY_KEY_P;
+        return SDLK_p;
     if(str==std::string("A"))
-        return irr::KEY_KEY_A;
+        return SDLK_a;
     if(str==std::string("S"))
-        return irr::KEY_KEY_S;
+        return SDLK_s;
     if(str==std::string("D"))
-        return irr::KEY_KEY_D;
+        return SDLK_d;
     if(str==std::string("F"))
-        return irr::KEY_KEY_F;
+        return SDLK_f;
     if(str==std::string("G"))
-        return irr::KEY_KEY_G;
+        return SDLK_g;
     if(str==std::string("H"))
-        return irr::KEY_KEY_H;
+        return SDLK_h;
     if(str==std::string("J"))
-        return irr::KEY_KEY_J;
+        return SDLK_j;
     if(str==std::string("K"))
-        return irr::KEY_KEY_K;
+        return SDLK_k;
     if(str==std::string("L"))
-        return irr::KEY_KEY_L;
+        return SDLK_l;
     if(str==std::string("Z"))
-        return irr::KEY_KEY_Z;
+        return SDLK_z;
     if(str==std::string("X"))
-        return irr::KEY_KEY_X;
+        return SDLK_x;
     if(str==std::string("C"))
-        return irr::KEY_KEY_C;
+        return SDLK_c;
     if(str==std::string("V"))
-        return irr::KEY_KEY_V;
+        return SDLK_v;
     if(str==std::string("B"))
-        return irr::KEY_KEY_B;
+        return SDLK_b;
     if(str==std::string("N"))
-        return irr::KEY_KEY_N;
+        return SDLK_n;
     if(str==std::string("M"))
-        return irr::KEY_KEY_M;
-    return irr::KEY_ESCAPE;
+        return SDLK_m;
+    return SDLK_ESCAPE;
 }
 
 

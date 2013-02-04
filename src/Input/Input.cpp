@@ -1,10 +1,10 @@
 #include "Input/Input.h"
 #include <sstream>
 
-void Input::actualizarBuffer(irr::core::map<std::string,std::string>*strings,
-                             irr::core::map<std::string,std::string>*strings_contrario,
-                             irr::core::map<std::string,int>*enteros,
-                             irr::core::map<std::string,int>*enteros_contrario
+void Input::actualizarBuffer(std::map<std::string,std::string>*strings,
+                             std::map<std::string,std::string>*strings_contrario,
+                             std::map<std::string,int>*enteros,
+                             std::map<std::string,int>*enteros_contrario
                              )
 {
     std::string resultado="";
@@ -99,12 +99,12 @@ vector<std::string> Input::getBufferInputs()
     return buffer_inputs;
 }
 
-std::string stringw_to_stdstring(irr::core::stringw sw)
-{
-    std::stringstream ss;
-        ss << sw.c_str();
-        return ss.str();
-}
+//std::string stringw_to_stdstring(irr::core::stringw sw)
+//{
+//    std::stringstream ss;
+//        ss << sw.c_str();
+//        return ss.str();
+//}
 
 
 void Input::cargarDesdeXML(int jugador,Receiver* receiver)

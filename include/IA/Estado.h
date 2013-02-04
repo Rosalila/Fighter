@@ -7,17 +7,16 @@
 #include <vector>
 using namespace std;
 #include "IA/Estado.h"
-#include <irrlicht/irrlicht.h>
 
 class Estado
 {
 public:
     std::vector<Transicion*>transiciones;
     Estado(vector<Transicion*>transiciones);
-    Transicion* getNextTransicion(irr::core::map<std::string,std::string>*strings,
-                                  irr::core::map<std::string,std::string>*strings_contrario,
-                                  irr::core::map<std::string,int>*enteros,
-                                  irr::core::map<std::string,int>*enteros_contrario
+    Transicion* getNextTransicion(std::map<std::string,std::string>*strings,
+                                  std::map<std::string,std::string>*strings_contrario,
+                                  std::map<std::string,int>*enteros,
+                                  std::map<std::string,int>*enteros_contrario
                                   );
 };
 

@@ -19,10 +19,10 @@ vector<Boton> cruz;
     void cargarIAXML(int jugador,char* archivo,char* archivo_default);
     TiXmlDocument* getXML(TiXmlDocument *doc);
     void actualizarBuffer();
-    void actualizarBuffer(irr::core::map<std::string,std::string>*strings,
-                          irr::core::map<std::string,std::string>*strings_contrario,
-                          irr::core::map<std::string,int>*enteros,
-                          irr::core::map<std::string,int>*enteros_contrario
+    void actualizarBuffer(std::map<std::string,std::string>*strings,
+                          std::map<std::string,std::string>*strings_contrario,
+                          std::map<std::string,int>*enteros,
+                          std::map<std::string,int>*enteros_contrario
                           );
     std::vector<std::string> getBufferInputs();
     void endEventProcess();

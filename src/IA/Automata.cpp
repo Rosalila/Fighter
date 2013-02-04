@@ -14,10 +14,10 @@ Estado* Automata::getEstadoInicial()
     return estados["S"];
 }
 
-std::string Automata::getNextInput(irr::core::map<std::string,std::string>*strings,
-                               irr::core::map<std::string,std::string>*strings_contrario,
-                               irr::core::map<std::string,int>*enteros,
-                               irr::core::map<std::string,int>*enteros_contrario
+std::string Automata::getNextInput(std::map<std::string,std::string>*strings,
+                               std::map<std::string,std::string>*strings_contrario,
+                               std::map<std::string,int>*enteros,
+                               std::map<std::string,int>*enteros_contrario
                                )
 {
     if(wait>0)

@@ -64,3 +64,529 @@ menu/flecha_izq2.png loaded
 Size: 8 60x59
 menu/flecha_der2.png loaded
 Size: 8 61x56
+Initializing game.
+Initializing stage.
+Loading stage from XML.
+Loading stage's BackLayers.
+stages/CastleSuzaku/images/Layer5.png loaded
+Size: 8 1280x410
+stages/CastleSuzaku/images/Layer4.png loaded
+Size: 8 1391x324
+stages/CastleSuzaku/images/Layer3.png loaded
+Size: 8 560x295
+stages/CastleSuzaku/images/Layer2.png loaded
+Size: 8 2238x931
+stages/CastleSuzaku/images/Layer1.png loaded
+Size: 8 2080x610
+Loading stage's FrontLayers.
+Stage loaded succesfully from XML.
+Initializing player's 1 character #0.
+Loading inputs.
+Initializing char.
+Loading Mole from XML.
+Loading main.xml
+Loading IgnoreColor.
+Loading Declarations.
+Loading Moves declarations.
+Loading victory
+Loading intro
+Loading ko
+Loading entrance
+Loading change_char
+Loading walk back
+Loading walk forward
+Loading move_up
+Loading move_forward
+Loading move_back
+Loading move_up_change_char
+Loading move_back_change_char
+Loading move_forward_change_char
+Loading push_left
+Loading push_right
+Loading 2
+Loading crouching
+Loading 8a
+Loading 9a
+Loading 5
+Loading slash
+Loading overhead slash
+Loading low slash
+Loading move_up_opponent
+Loading move_back_opponent
+Loading super
+Loading defense.standing
+Loading defense.crouch
+Loading on_hit.stand
+Loading on_hit.crouch
+Loading on_hit.air
+Loading on_hit.knockdown
+Loading on_projectile_disolve
+Loading on_projectile_disolve_chip
+Loading separate
+Loading poison
+Loading idle jumping
+Loading gravity
+Loading setState.jumping
+Loading setState.standing
+Loading setState.crouch
+Loading on_land_cancel
+Loading projectiles.
+Loading sprites.
+Loading sprites/displacement/standing/1.png
+chars/Mole/sprites/displacement/standing/1.png loaded
+Size: 8 308x347
+Loading strings.
+Loading current_move
+Loading change_char
+Loading hit
+Loading projectile_disolve
+Loading projectile_disolve_chip
+Loading projectile_hit
+Loading orientation
+Loading colision.red_hitboxes
+Loading colision.blue_hitboxes
+Loading state
+Loading trigger.crouch
+Loading trigger.move_up
+Loading trigger.poison
+Loading jumping_state
+Loading trigger.move_up_opponent
+Loading trigger.move_back_opponent
+Loading integer.
+Loading distance
+Loading distance_absolute
+Loading hitboxes.
+Loading blue
+Loading red
+Loading bars.
+Loading hp
+chars/Mole/misc/bars/hp.png loaded
+Size: 8 410x23
+Loading super
+Loading vars.xml
+Loading inputs.xml
+Loading triggers.xml
+Loading sprites.xml
+Loading IgnoreColor.
+Loading victory.
+Loading chars/Mole/sprites/displacement/standing/1.png.
+chars/Mole/sprites/displacement/standing/1.png loaded
+Size: 8 308x347
+Loading 5.
+Loading chars/Mole/sprites/displacement/standing/1.png.
+chars/Mole/sprites/displacement/standing/1.png loaded
+Size: 8 308x347
+Loading chars/Mole/sprites/displacement/standing/2.png.
+chars/Mole/sprites/displacement/standing/2.png loaded
+Size: 8 322x347
+Loading chars/Mole/sprites/displacement/standing/3.png.
+chars/Mole/sprites/displacement/standing/3.png loaded
+Size: 8 312x352
+Loading chars/Mole/sprites/displacement/standing/4.png.
+chars/Mole/sprites/displacement/standing/4.png loaded
+Size: 8 330x346
+Loading walk back.
+Loading chars/Mole/sprites/displacement/walk back/1.png.
+chars/Mole/sprites/displacement/walk back/1.png loaded
+Size: 8 308x347
+Loading chars/Mole/sprites/displacement/walk back/2.png.
+chars/Mole/sprites/displacement/walk back/2.png loaded
+Size: 8 267x374
+Loading chars/Mole/sprites/displacement/walk back/3.png.
+chars/Mole/sprites/displacement/walk back/3.png loaded
+Size: 8 260x355
+Loading chars/Mole/sprites/displacement/walk back/4.png.
+chars/Mole/sprites/displacement/walk back/4.png loaded
+Size: 8 283x360
+Loading walk forward.
+Loading chars/Mole/sprites/displacement/walk forward/1.png.
+chars/Mole/sprites/displacement/walk forward/1.png loaded
+Size: 8 354x351
+Loading chars/Mole/sprites/displacement/walk forward/2.png.
+chars/Mole/sprites/displacement/walk forward/2.png loaded
+Size: 8 354x353
+Loading chars/Mole/sprites/displacement/walk forward/3.png.
+chars/Mole/sprites/displacement/walk forward/3.png loaded
+Size: 8 328x348
+Loading chars/Mole/sprites/displacement/walk forward/4.png.
+chars/Mole/sprites/displacement/walk forward/4.png loaded
+Size: 8 308x347
+Loading crouching.
+Loading chars/Mole/sprites/displacement/crouching/1.png.
+chars/Mole/sprites/displacement/crouching/1.png loaded
+Size: 8 367x295
+Loading 2.
+Loading chars/Mole/sprites/displacement/crouching/2.png.
+chars/Mole/sprites/displacement/crouching/2.png loaded
+Size: 8 368x251
+Loading slash.
+Loading chars/Mole/sprites/normal/slash/1.png.
+chars/Mole/sprites/normal/slash/1.png loaded
+Size: 8 308x347
+Loading chars/Mole/sprites/normal/slash/2.png.
+chars/Mole/sprites/normal/slash/2.png loaded
+Size: 8 481x345
+Loading chars/Mole/sprites/normal/slash/3.png.
+chars/Mole/sprites/normal/slash/3.png loaded
+Size: 8 813x310
+Loading chars/Mole/sprites/normal/slash/4.png.
+chars/Mole/sprites/normal/slash/4.png loaded
+Size: 8 858x310
+Loading chars/Mole/sprites/normal/slash/5.png.
+chars/Mole/sprites/normal/slash/5.png loaded
+Size: 8 418x326
+Loading low slash.
+Loading chars/Mole/sprites/normal/low slash/1.png.
+chars/Mole/sprites/normal/low slash/1.png loaded
+Size: 8 157x289
+Loading chars/Mole/sprites/normal/low slash/2.png.
+chars/Mole/sprites/normal/low slash/2.png loaded
+Size: 8 594x299
+Loading chars/Mole/sprites/normal/low slash/3.png.
+chars/Mole/sprites/normal/low slash/3.png loaded
+Size: 8 644x210
+Loading chars/Mole/sprites/normal/low slash/4.png.
+chars/Mole/sprites/normal/low slash/4.png loaded
+Size: 8 737x287
+Loading overhead slash.
+Loading chars/Mole/sprites/normal/overhead slash/1.png.
+chars/Mole/sprites/normal/overhead slash/1.png loaded
+Size: 8 254x498
+Loading chars/Mole/sprites/normal/overhead slash/2.png.
+chars/Mole/sprites/normal/overhead slash/2.png loaded
+Size: 8 345x373
+Loading chars/Mole/sprites/normal/overhead slash/3.png.
+chars/Mole/sprites/normal/overhead slash/3.png loaded
+Size: 8 279x423
+Loading chars/Mole/sprites/normal/overhead slash/4.png.
+chars/Mole/sprites/normal/overhead slash/4.png loaded
+Size: 8 1031x623
+Loading chars/Mole/sprites/normal/overhead slash/5.png.
+chars/Mole/sprites/normal/overhead slash/5.png loaded
+Size: 8 1296x610
+Loading chars/Mole/sprites/normal/overhead slash/6.png.
+chars/Mole/sprites/normal/overhead slash/6.png loaded
+Size: 8 1785x541
+Loading hitboxes.xml
+Loading sfx.xml
+Loading vfx.xml
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/hit/1.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/2.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/3.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/4.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/5.png loaded
+Size: 8 209x328
+Loaded successfully.
+Initializing player's 1 character #0.
+Loading inputs.
+Initializing char.
+Loading Mole from XML.
+Loading main.xml
+Loading IgnoreColor.
+Loading Declarations.
+Loading Moves declarations.
+Loading victory
+Loading intro
+Loading ko
+Loading entrance
+Loading change_char
+Loading walk back
+Loading walk forward
+Loading move_up
+Loading move_forward
+Loading move_back
+Loading move_up_change_char
+Loading move_back_change_char
+Loading move_forward_change_char
+Loading push_left
+Loading push_right
+Loading 2
+Loading crouching
+Loading 8a
+Loading 9a
+Loading 5
+Loading slash
+Loading overhead slash
+Loading low slash
+Loading move_up_opponent
+Loading move_back_opponent
+Loading super
+Loading defense.standing
+Loading defense.crouch
+Loading on_hit.stand
+Loading on_hit.crouch
+Loading on_hit.air
+Loading on_hit.knockdown
+Loading on_projectile_disolve
+Loading on_projectile_disolve_chip
+Loading separate
+Loading poison
+Loading idle jumping
+Loading gravity
+Loading setState.jumping
+Loading setState.standing
+Loading setState.crouch
+Loading on_land_cancel
+Loading projectiles.
+Loading sprites.
+Loading sprites/displacement/standing/1.png
+chars/Mole/sprites/displacement/standing/1.png loaded
+Size: 8 308x347
+Loading strings.
+Loading current_move
+Loading change_char
+Loading hit
+Loading projectile_disolve
+Loading projectile_disolve_chip
+Loading projectile_hit
+Loading orientation
+Loading colision.red_hitboxes
+Loading colision.blue_hitboxes
+Loading state
+Loading trigger.crouch
+Loading trigger.move_up
+Loading trigger.poison
+Loading jumping_state
+Loading trigger.move_up_opponent
+Loading trigger.move_back_opponent
+Loading integer.
+Loading distance
+Loading distance_absolute
+Loading hitboxes.
+Loading blue
+Loading red
+Loading bars.
+Loading hp
+chars/Mole/misc/bars/hp.png loaded
+Size: 8 410x23
+Loading super
+Loading vars.xml
+Loading inputs.xml
+Loading triggers.xml
+Loading sprites.xml
+Loading IgnoreColor.
+Loading victory.
+Loading chars/Mole/sprites/displacement/standing/1.png.
+chars/Mole/sprites/displacement/standing/1.png loaded
+Size: 8 308x347
+Loading 5.
+Loading chars/Mole/sprites/displacement/standing/1.png.
+chars/Mole/sprites/displacement/standing/1.png loaded
+Size: 8 308x347
+Loading chars/Mole/sprites/displacement/standing/2.png.
+chars/Mole/sprites/displacement/standing/2.png loaded
+Size: 8 322x347
+Loading chars/Mole/sprites/displacement/standing/3.png.
+chars/Mole/sprites/displacement/standing/3.png loaded
+Size: 8 312x352
+Loading chars/Mole/sprites/displacement/standing/4.png.
+chars/Mole/sprites/displacement/standing/4.png loaded
+Size: 8 330x346
+Loading walk back.
+Loading chars/Mole/sprites/displacement/walk back/1.png.
+chars/Mole/sprites/displacement/walk back/1.png loaded
+Size: 8 308x347
+Loading chars/Mole/sprites/displacement/walk back/2.png.
+chars/Mole/sprites/displacement/walk back/2.png loaded
+Size: 8 267x374
+Loading chars/Mole/sprites/displacement/walk back/3.png.
+chars/Mole/sprites/displacement/walk back/3.png loaded
+Size: 8 260x355
+Loading chars/Mole/sprites/displacement/walk back/4.png.
+chars/Mole/sprites/displacement/walk back/4.png loaded
+Size: 8 283x360
+Loading walk forward.
+Loading chars/Mole/sprites/displacement/walk forward/1.png.
+chars/Mole/sprites/displacement/walk forward/1.png loaded
+Size: 8 354x351
+Loading chars/Mole/sprites/displacement/walk forward/2.png.
+chars/Mole/sprites/displacement/walk forward/2.png loaded
+Size: 8 354x353
+Loading chars/Mole/sprites/displacement/walk forward/3.png.
+chars/Mole/sprites/displacement/walk forward/3.png loaded
+Size: 8 328x348
+Loading chars/Mole/sprites/displacement/walk forward/4.png.
+chars/Mole/sprites/displacement/walk forward/4.png loaded
+Size: 8 308x347
+Loading crouching.
+Loading chars/Mole/sprites/displacement/crouching/1.png.
+chars/Mole/sprites/displacement/crouching/1.png loaded
+Size: 8 367x295
+Loading 2.
+Loading chars/Mole/sprites/displacement/crouching/2.png.
+chars/Mole/sprites/displacement/crouching/2.png loaded
+Size: 8 368x251
+Loading slash.
+Loading chars/Mole/sprites/normal/slash/1.png.
+chars/Mole/sprites/normal/slash/1.png loaded
+Size: 8 308x347
+Loading chars/Mole/sprites/normal/slash/2.png.
+chars/Mole/sprites/normal/slash/2.png loaded
+Size: 8 481x345
+Loading chars/Mole/sprites/normal/slash/3.png.
+chars/Mole/sprites/normal/slash/3.png loaded
+Size: 8 813x310
+Loading chars/Mole/sprites/normal/slash/4.png.
+chars/Mole/sprites/normal/slash/4.png loaded
+Size: 8 858x310
+Loading chars/Mole/sprites/normal/slash/5.png.
+chars/Mole/sprites/normal/slash/5.png loaded
+Size: 8 418x326
+Loading low slash.
+Loading chars/Mole/sprites/normal/low slash/1.png.
+chars/Mole/sprites/normal/low slash/1.png loaded
+Size: 8 157x289
+Loading chars/Mole/sprites/normal/low slash/2.png.
+chars/Mole/sprites/normal/low slash/2.png loaded
+Size: 8 594x299
+Loading chars/Mole/sprites/normal/low slash/3.png.
+chars/Mole/sprites/normal/low slash/3.png loaded
+Size: 8 644x210
+Loading chars/Mole/sprites/normal/low slash/4.png.
+chars/Mole/sprites/normal/low slash/4.png loaded
+Size: 8 737x287
+Loading overhead slash.
+Loading chars/Mole/sprites/normal/overhead slash/1.png.
+chars/Mole/sprites/normal/overhead slash/1.png loaded
+Size: 8 254x498
+Loading chars/Mole/sprites/normal/overhead slash/2.png.
+chars/Mole/sprites/normal/overhead slash/2.png loaded
+Size: 8 345x373
+Loading chars/Mole/sprites/normal/overhead slash/3.png.
+chars/Mole/sprites/normal/overhead slash/3.png loaded
+Size: 8 279x423
+Loading chars/Mole/sprites/normal/overhead slash/4.png.
+chars/Mole/sprites/normal/overhead slash/4.png loaded
+Size: 8 1031x623
+Loading chars/Mole/sprites/normal/overhead slash/5.png.
+chars/Mole/sprites/normal/overhead slash/5.png loaded
+Size: 8 1296x610
+Loading chars/Mole/sprites/normal/overhead slash/6.png.
+chars/Mole/sprites/normal/overhead slash/6.png loaded
+Size: 8 1785x541
+Loading hitboxes.xml
+Loading sfx.xml
+Loading vfx.xml
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/1.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/super/2.png loaded
+Size: 8 1280x800
+chars/Mole/sprites/animations/hit/1.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/2.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/3.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/4.png loaded
+Size: 8 209x328
+chars/Mole/sprites/animations/hit/5.png loaded
+Size: 8 209x328
+Loaded successfully.
+Playing music: stages/CastleSuzaku/music.ogg
+misc/bar.png loaded
+Size: 8 1075x109
+misc/victory.png loaded
+Size: 8 70x46
+misc/match_intro/1.png loaded
+Size: 8 318x90
+misc/match_intro/2.png loaded
+Size: 8 318x90
+misc/match_intro/3.png loaded
+Size: 8 318x90
+misc/match_intro/4.png loaded
+Size: 8 318x90
+misc/match_intro/5.png loaded
+Size: 8 600x280
+misc/match_intro/6.png loaded
+Size: 8 600x280
+misc/match_intro/7.png loaded
+Size: 8 600x280
+misc/match_intro/8.png loaded
+Size: 8 600x280
+misc/match_intro/9.png loaded
+Size: 8 600x280
+misc/match_intro/10.png loaded
+Size: 8 600x280
+misc/match_intro/11.png loaded
+Size: 8 600x280
+misc/match_intro/12.png loaded
+Size: 8 600x280
+misc/match_intro/13.png loaded
+Size: 8 600x280
+misc/match_intro/14.png loaded
+Size: 8 600x280
+misc/match_intro/15.png loaded
+Size: 8 600x280
+misc/match_intro/16.png loaded
+Size: 8 600x280
+misc/match_intro/17.png loaded
+Size: 8 600x280
+misc/match_intro/18.png loaded
+Size: 8 600x280
+misc/match_intro/19.png loaded
+Size: 8 600x280
+misc/match_intro/20.png loaded
+Size: 8 600x280
+Loading stage misc.
+misc/vs_screen.png loaded
+Size: 8 1280x800
+menu/fondo.png loaded
+Size: 8 1280x800
+menu/boton1.png loaded
+Size: 8 265x138
+menu/boton2.png loaded
+Size: 8 265x138
+menu/boton1.png loaded
+Size: 8 265x138
+menu/boton2.png loaded
+Size: 8 265x138
+Deleting game.
+Deleting character.
+Deleting character.
+Deleting stage.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Playing music: menu/audio/music.ogg

@@ -22,12 +22,12 @@ void Sonido::drop()
 }
 void Sonido::agregarSonido(std::string variable,std::string valor)
 {
-    if(sonidos.find(variable)==0)
+    if(sonidos.find(variable)==sonidos.end())
         sonidos[variable]=Mix_LoadWAV(valor.c_str());
 }
 void Sonido::reproducirSonido(std::string variable,bool looped)
 {
-    if(sonidos.find(variable)==0)
+    if(sonidos.find(variable)==sonidos.end())
         return;
 
     if(sonidos[variable]!=NULL)

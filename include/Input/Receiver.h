@@ -7,7 +7,6 @@
 #include <stdarg.h>
 using namespace std;
 
-#include <irrlicht/irrlicht.h>
 #include "../include/TinyXml/tinyxml.h"
 #include "SDL/SDL.h"
 

@@ -1,6 +1,6 @@
 #include "Personaje/Barra.h"
 
-Barra::Barra(std::string nombre, std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,Color color,irr::core::rect<irr::s32> posicion,Image* imagen)
+Barra::Barra(std::string nombre, std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,Color color,int pos_x1,int pos_y1,int pos_x2,int pos_y2,Image* imagen)
 {
     this->tiempo=0;
     this->nombre=nombre;
@@ -9,7 +9,10 @@ Barra::Barra(std::string nombre, std::string valor_maximo,std::string valor_actu
     this->modificador_periodico=modificador_periodico;
     this->periodo=periodo;
     this->color=color;
-    this->posicion=posicion;
+    this->pos_x1=pos_x1;
+    this->pos_y1=pos_y1;
+    this->pos_x2=pos_x2;
+    this->pos_y2=pos_y2;
     this->imagen=imagen;
 }
 

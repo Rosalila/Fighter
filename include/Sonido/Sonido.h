@@ -1,7 +1,6 @@
 #ifndef SONIDO_H
 #define SONIDO_H
 
-#include <irrlicht/irrlicht.h>
 #include <string>
 #include <vector>
 
@@ -15,10 +14,11 @@ using namespace std;
 #include "SDL/SDL_mixer.h"
 
 #include "Log/Log.h"
+#include <map>
 
 class Sonido
 {
-    irr::core::map<std::string,Mix_Chunk*> sonidos;
+    std::map<std::string,Mix_Chunk*> sonidos;
     Mix_Music *music;
 public:
     Sonido();

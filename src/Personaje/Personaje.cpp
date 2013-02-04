@@ -199,56 +199,56 @@ void Personaje::dibujarHitBoxes(std::string variable,std::string path,bool izqui
 
 void Personaje::dibujarBarra(Barra* barra)
 {
-    irr::core::position2d<irr::s32>punto1= barra->posicion.UpperLeftCorner;
-    irr::core::position2d<irr::s32>punto2= barra->posicion.LowerRightCorner;
+//    irr::core::position2d<irr::s32>punto1= barra->posicion.UpperLeftCorner;
+//    irr::core::position2d<irr::s32>punto2= barra->posicion.LowerRightCorner;
     //resize 800x600
     float w=painter->screen_width;
-    punto1.X*=w/1024.0;
-    punto2.X*=w/1024.0;
-    float longitud_total=(float)punto2.X-(float)punto1.X;
+    barra->pos_x1*=w/1024.0;
+    barra->pos_x2*=w/1024.0;
+    float longitud_total=(float)barra->pos_x2-(float)barra->pos_x1;
     if(longitud_total<0)//if esta flipeada
         longitud_total=-longitud_total;
     float longitud_actual=((float)longitud_total/getEntero(barra->valor_maximo))*(float)getEntero(barra->valor_actual);
-    float altura=(float)punto2.Y-(float)punto1.Y;
+    float altura=(float)barra->pos_y2-(float)barra->pos_y1;
 
     float p1x,p1y,p2x,p2y;
     bool player2=false;
     if(numero==1)//player 1
     {
-        p1x=punto1.X;
-        p1y=punto1.Y;
-        p2x=punto1.X+longitud_actual;
-        p2y=punto2.Y;
+        p1x=barra->pos_x1;
+        p1y=barra->pos_y1;
+        p2x=barra->pos_x1+longitud_actual;
+        p2y=barra->pos_y2;
 
-        if(punto1.X>punto2.X)
+        if(barra->pos_x1>barra->pos_x2)
         {
-            p1x=punto1.X-longitud_actual;
-            p2x=punto1.X;
+            p1x=barra->pos_x1-longitud_actual;
+            p2x=barra->pos_x1;
         }
     }else//flip if player 2
     {
-        float temp_x2=painter->screen_width-punto1.X;
-        float temp_x1=painter->screen_width-punto1.X-longitud_actual;
+        float temp_x2=painter->screen_width-barra->pos_x1;
+        float temp_x1=painter->screen_width-barra->pos_x1-longitud_actual;
 
-        if(punto1.X>punto2.X)
+        if(barra->pos_x1>barra->pos_x2)
         {
-            temp_x2=painter->screen_width-punto1.X+longitud_actual;
-            temp_x1=painter->screen_width-punto1.X;
+            temp_x2=painter->screen_width-barra->pos_x1+longitud_actual;
+            temp_x1=painter->screen_width-barra->pos_x1;
         }
 
         p1x=temp_x1;
-        p1y=punto1.Y;
+        p1y=barra->pos_y1;
         p2x=temp_x2;
-        p2y=punto2.Y;
+        p2y=barra->pos_y2;
 
         player2=true;
     }
     bool flip=false;
-    if(punto1.X>punto2.X&&!player2)
+    if(barra->pos_x1>barra->pos_x2&&!player2)
     {
         flip=true;
     }
-    if(punto1.X>punto2.X==false&&player2)
+    if(barra->pos_x1>barra->pos_x2==false&&player2)
     {
         flip=true;
     }
@@ -270,24 +270,24 @@ void Personaje::dibujarBarra(Barra* barra)
 
 void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
 {
-    irr::core::position2d<irr::s32>punto1= barra->posicion.UpperLeftCorner;
-    irr::core::position2d<irr::s32>punto2= barra->posicion.LowerRightCorner;
+//    irr::core::position2d<irr::s32>punto1= barra->posicion.UpperLeftCorner;
+//    irr::core::position2d<irr::s32>punto2= barra->posicion.LowerRightCorner;
     //resize 800x600
     float w=painter->screen_width;
-    punto1.X*=w/1024.0;
-    punto2.X*=w/1024.0;
-    float longitud_total=(float)punto2.X-(float)punto1.X;
+    barra->pos_x1*=w/1024.0;
+    barra->pos_x2*=w/1024.0;
+    float longitud_total=(float)barra->pos_x2-(float)barra->pos_x1;
     float longitud_actual=((float)longitud_total/getEntero(barra->valor_maximo))*(float)getEntero(barra->valor_actual);
-    float altura=(float)punto2.Y-(float)punto1.Y;
+    float altura=(float)barra->pos_y2-(float)barra->pos_y1;
 
     float p1x,p1y,p2x,p2y;
     bool player2=false;
     if(numero==1)//player 1
     {
-        p1x=punto1.X;
-        p1y=punto1.Y;
-        p2x=punto1.X+longitud_actual;
-        p2y=punto2.Y;
+        p1x=barra->pos_x1;
+        p1y=barra->pos_y1;
+        p2x=barra->pos_x1+longitud_actual;
+        p2y=barra->pos_y2;
 
         p1x+=cambio_x;
         p2x+=cambio_x;
@@ -297,13 +297,13 @@ void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
         p2y-=(p2y-p1y)/2;
     }else//flip if player 2
     {
-        float temp_x2=painter->screen_width-punto1.X;
-        float temp_x1=painter->screen_width-punto1.X-longitud_actual;
+        float temp_x2=painter->screen_width-barra->pos_x1;
+        float temp_x1=painter->screen_width-barra->pos_x1-longitud_actual;
 
         p1x=temp_x1;
-        p1y=punto1.Y;
+        p1y=barra->pos_y1;
         p2x=temp_x2;
-        p2y=punto2.Y;
+        p2y=barra->pos_y2;
 
         p1x-=cambio_x;
         p2x-=cambio_x;
@@ -385,7 +385,7 @@ Frame* Personaje::getFrameActual()
 //GETS variables
 int Personaje::getEntero(std::string variable)
 {
-    if(enteros.find(variable)==0)
+    if(enteros.find(variable)==enteros.end())
     {
         writeLogLine("Integer error: "+variable+" not defined.");
     }
@@ -402,7 +402,7 @@ Barra* Personaje::getBarra(std::string variable)
 }
 vector<HitBox*> Personaje::getHitBoxes(std::string variable)
 {
-    if(hitboxes.find(variable)==0)
+    if(hitboxes.find(variable)==hitboxes.end())
     {
         writeLogLine("Hitbox error: "+variable+" not defined.");
     }
@@ -410,7 +410,7 @@ vector<HitBox*> Personaje::getHitBoxes(std::string variable)
 }
 Imagen* Personaje::getImagen(std::string variable)
 {
-    if(imagenes.find(variable)==0)
+    if(imagenes.find(variable)==imagenes.end())
     {
         writeLogLine("Image error: "+variable+" not defined.");
     }
@@ -418,7 +418,7 @@ Imagen* Personaje::getImagen(std::string variable)
 }
 std::string Personaje::getString(std::string variable)
 {
-    if(strings.find(variable)==0)
+    if(strings.find(variable)==strings.end())
     {
         writeLogLine("Strings error: "+variable+" not defined.");
     }
@@ -835,10 +835,10 @@ void Personaje::cargarMain()
     writeLogLine("Loading IgnoreColor.");
 
     TiXmlNode* ignore_color_node=main_file->FirstChild("IgnoreColor");
-    irr::video::SColor ignore_color=NULL;
+    Color* ignore_color=NULL;
     if(ignore_color_node!=NULL)
     {
-        ignore_color=irr::video::SColor(0,atoi(ignore_color_node->ToElement()->Attribute("red")),
+        ignore_color=new Color(0,atoi(ignore_color_node->ToElement()->Attribute("red")),
                                         atoi(ignore_color_node->ToElement()->Attribute("green")),
                                         atoi(ignore_color_node->ToElement()->Attribute("blue")));
     }
@@ -1099,10 +1099,10 @@ void Personaje::cargarMain()
                 std::string imagen(elemento_imagen->Attribute("image"));
                 imagen=std::string("chars/")+char_name+std::string("/")+imagen;
 
-                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),irr::core::rect<irr::s32>(x1,y1,x2,y2),painter->getTexture(imagen)));
+                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,painter->getTexture(imagen)));
             }
             else
-                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),irr::core::rect<irr::s32>(x1,y1,x2,y2),NULL));
+                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,NULL));
         }
     }
 }
@@ -1347,7 +1347,7 @@ void Personaje::cargarTriggers()
                     std::string op(elemento_condicion->Attribute("relational_op"));
                     std::string exp_d(elemento_condicion->Attribute("right_exp"));
                     bool es_entero=false;
-                    if(enteros.find(exp_i)!=0)
+                    if(enteros.find(exp_i)!=enteros.end())
                         es_entero=true;
                     std::string str_contrario(elemento_condicion->Attribute("to_opponent"));
                     bool contrario=(str_contrario=="yes");
@@ -1383,10 +1383,10 @@ void Personaje::cargarSprites()
     writeLogLine("Loading IgnoreColor.");
 
     TiXmlNode* ignore_color_node=sprites_file->FirstChild("IgnoreColor");
-    irr::video::SColor ignore_color=NULL;
+    Color* ignore_color=NULL;
     if(ignore_color_node!=NULL)
     {
-        ignore_color=irr::video::SColor(0,atoi(ignore_color_node->ToElement()->Attribute("red")),
+        ignore_color=new Color(0,atoi(ignore_color_node->ToElement()->Attribute("red")),
                                         atoi(ignore_color_node->ToElement()->Attribute("green")),
                                         atoi(ignore_color_node->ToElement()->Attribute("blue")));
     }
@@ -1579,12 +1579,12 @@ void Personaje::cargarAnimations()
         std::string name=std::string(elem_animation->Attribute("name"));
         std::string pos_x=std::string(elem_animation->Attribute("position_x"));
         std::string pos_y=std::string(elem_animation->Attribute("position_y"));
-        if(enteros.find(pos_x)==0)
+        if(enteros.find(pos_x)==enteros.end())
         {
             pos_x=std::string("Animation.")+name+std::string(".x");
             setEntero(pos_x,atoi(elem_animation->Attribute("position_x")));
         }
-        if(enteros.find(pos_y)==0)
+        if(enteros.find(pos_y)==enteros.end())
         {
             pos_y=std::string("Animation.")+name+std::string(".y");
             setEntero(pos_y,atoi(elem_animation->Attribute("position_y")));
@@ -1625,12 +1625,12 @@ void Personaje::cargarAnimations()
         std::string name=std::string(elem_animation->Attribute("name"));
         std::string pos_x=std::string(elem_animation->Attribute("position_x"));
         std::string pos_y=std::string(elem_animation->Attribute("position_y"));
-        if(enteros.find(pos_x)==0)
+        if(enteros.find(pos_x)==enteros.end())
         {
             pos_x=std::string("Animation.")+name+std::string(".x");
             setEntero(pos_x,atoi(elem_animation->Attribute("position_x")));
         }
-        if(enteros.find(pos_y)==0)
+        if(enteros.find(pos_y)==enteros.end())
         {
             pos_y=std::string("Animation.")+name+std::string(".y");
             setEntero(pos_y,atoi(elem_animation->Attribute("position_y")));

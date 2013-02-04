@@ -6,10 +6,10 @@ IA::IA(char* archivo,char* archivo_default)
     //transicion_a_recompenzar=automata->getEstadoInicial()->transiciones[0];
 }
 
-std::string IA::getInput(irr::core::map<std::string,std::string>*strings,
-                     irr::core::map<std::string,std::string>*strings_contrario,
-                     irr::core::map<std::string,int>*enteros,
-                     irr::core::map<std::string,int>*enteros_contrario
+std::string IA::getInput(std::map<std::string,std::string>*strings,
+                     std::map<std::string,std::string>*strings_contrario,
+                     std::map<std::string,int>*enteros,
+                     std::map<std::string,int>*enteros_contrario
                      )
 {
     std::string res=automata->getNextInput(strings,strings_contrario,enteros,enteros_contrario);

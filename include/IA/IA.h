@@ -2,7 +2,6 @@
 #define IA_H
 
 #include "IA/Automata.h"
-#include <irrlicht/irrlicht.h>
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -13,10 +12,10 @@ class IA
 public:
     Transicion *transicion_a_recompenzar;
     IA(char* archivo,char* archivo_default);
-    std::string getInput(irr::core::map<std::string,std::string>*strings,
-                     irr::core::map<std::string,std::string>*strings_contrario,
-                     irr::core::map<std::string,int>*enteros,
-                     irr::core::map<std::string,int>*enteros_contrario
+    std::string getInput(std::map<std::string,std::string>*strings,
+                     std::map<std::string,std::string>*strings_contrario,
+                     std::map<std::string,int>*enteros,
+                     std::map<std::string,int>*enteros_contrario
                      );
     void darRecompensa();
     void quitarRecompensa();

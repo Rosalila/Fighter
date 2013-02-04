@@ -3,8 +3,6 @@
 
 #include "Painter/Painter.h"
 
-#include <irrlicht/irrlicht.h>
-
 class Barra
 {
 public:
@@ -15,11 +13,12 @@ public:
     std::string modificador_periodico;
     std::string periodo;
     Color color;
-    irr::core::rect<irr::s32> posicion;
+    int pos_x1,pos_y1;
+    int pos_x2,pos_y2;
     Image* imagen;
 
     Barra(){}
-    Barra(std::string nombre,std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,Color color,irr::core::rect<irr::s32> posicion,Image* imagen);
+    Barra(std::string nombre,std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,Color color,int pos_x1,int pos_y1,int pos_x2,int pos_y2,Image* imagen);
     bool procesarTiempo(int periodo);
 };
 

@@ -5,10 +5,10 @@ Estado::Estado(vector<Transicion*>transiciones)
     this->transiciones=transiciones;
 }
 
-Transicion* Estado::getNextTransicion(irr::core::map<std::string,std::string>*strings,
-                                      irr::core::map<std::string,std::string>*strings_contrario,
-                           irr::core::map<std::string,int>*enteros,
-                           irr::core::map<std::string,int>*enteros_contrario
+Transicion* Estado::getNextTransicion(std::map<std::string,std::string>*strings,
+                                      std::map<std::string,std::string>*strings_contrario,
+                           std::map<std::string,int>*enteros,
+                           std::map<std::string,int>*enteros_contrario
                                       )
 {
     std::vector<int>transiciones_validas;

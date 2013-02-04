@@ -1,7 +1,7 @@
 #ifndef TRANSICION_H
 #define TRANSICION_H
 
-#include <irrlicht/irrlicht.h>
+#include <map>
 #include <vector>
 #include <iostream>
 using namespace std;
@@ -42,13 +42,13 @@ public:
     std::string getDestino();
     int getRecompensa();
     int getWait();
-    bool cumpleCondiciones(irr::core::map<std::string,std::string>*strings,
-                           irr::core::map<std::string,std::string>*strings_contrario,
-                           irr::core::map<std::string,int>*enteros,
-                           irr::core::map<std::string,int>*enteros_contrario
+    bool cumpleCondiciones(std::map<std::string,std::string>*strings,
+                           std::map<std::string,std::string>*strings_contrario,
+                           std::map<std::string,int>*enteros,
+                           std::map<std::string,int>*enteros_contrario
                            );
-    bool cumpleCondicion(Condicion2 condicion,irr::core::map<std::string,std::string>*strings,irr::core::map<std::string,std::string>*strings_contrario);
-    bool cumpleCondicion(Condicion2 condicion,irr::core::map<std::string,int>*enteros,irr::core::map<std::string,int>*enteros_contrario);
+    bool cumpleCondicion(Condicion2 condicion,std::map<std::string,std::string>*strings,std::map<std::string,std::string>*strings_contrario);
+    bool cumpleCondicion(Condicion2 condicion,std::map<std::string,int>*enteros,std::map<std::string,int>*enteros_contrario);
 };
 
 #endif

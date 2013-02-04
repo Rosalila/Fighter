@@ -44,10 +44,10 @@ int Transicion::getRecompensa()
     return recompensa;
 }
 
-bool Transicion::cumpleCondiciones(irr::core::map<std::string,std::string>*strings,
-                                   irr::core::map<std::string,std::string>*strings_contrario,
-                                   irr::core::map<std::string,int>*enteros,
-                                   irr::core::map<std::string,int>*enteros_contrario
+bool Transicion::cumpleCondiciones(std::map<std::string,std::string>*strings,
+                                   std::map<std::string,std::string>*strings_contrario,
+                                   std::map<std::string,int>*enteros,
+                                   std::map<std::string,int>*enteros_contrario
                                    )
 {
     for(int i=0;i<(int)condiciones.size();i++)
@@ -65,14 +65,14 @@ bool Transicion::cumpleCondiciones(irr::core::map<std::string,std::string>*strin
     return true;
 }
 
-bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<std::string,std::string>*strings,irr::core::map<std::string,std::string>*strings_contrario)
+bool Transicion::cumpleCondicion(Condicion2 condicion,std::map<std::string,std::string>*strings,std::map<std::string,std::string>*strings_contrario)
 {
     if(condicion.personaje_contrario)
         return condicion.comparar(strings_contrario->operator[](condicion.variable));
     return condicion.comparar(strings->operator[](condicion.variable));
 }
 
-bool Transicion::cumpleCondicion(Condicion2 condicion,irr::core::map<std::string,int>*enteros,irr::core::map<std::string,int>*enteros_contrario)
+bool Transicion::cumpleCondicion(Condicion2 condicion,std::map<std::string,int>*enteros,std::map<std::string,int>*enteros_contrario)
 {
     if(condicion.personaje_contrario)
         return condicion.comparar(enteros_contrario->operator[](condicion.variable));

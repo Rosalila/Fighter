@@ -10,9 +10,6 @@
 #include <GL/gl.h>
 #include <stdio.h>
 
-
-#include <irrlicht/irrlicht.h>
-
 #include "Painter/Image.h"
 #include "Painter/Timer.h"
 #include "Log/Log.h"
