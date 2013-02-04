@@ -1,5 +1,78 @@
 #include "Painter/Painter.h"
 
+int glh_extension_supported( const char *extension )
+{
+    static const GLubyte *extensions = NULL;
+    const GLubyte *start;
+    GLubyte *where, *terminator;
+
+    // Extension names should not have spaces.
+    where = (GLubyte *) strchr( extension, ' ');
+    if ( where || *extension == '\0')
+      return 0;
+
+    if ( !extensions )
+      extensions = glGetString( GL_EXTENSIONS );
+
+    // It takes a bit of care to be fool-proof about parsing the
+    // OpenGL extensions string.  Don't be fooled by sub-strings,
+    // etc.
+    start = extensions;
+    for (;;)
+    {
+        where = (GLubyte *) strstr( (const char *) start, extension );
+        if ( !where )
+            break;
+        terminator = where + strlen( extension );
+        if ( where == start || *(where - 1) == ' ' )
+        {
+            if ( *terminator == ' ' || *terminator == '\0' )
+            {
+                return 1;
+            }
+        }
+        start = terminator;
+    }
+    return 0;
+}
+
+
+void glEnable2D( void )
+{
+        GLint iViewport[4];
+
+        // Get a copy of the viewport
+        glGetIntegerv( GL_VIEWPORT, iViewport );
+
+        // Save a copy of the projection matrix so that we can restore it
+        // when it's time to do 3D rendering again.
+        glMatrixMode( GL_PROJECTION );
+        glPushMatrix();
+        glLoadIdentity();
+
+        // Set up the orthographic projection
+        glOrtho( iViewport[0], iViewport[0]+iViewport[2],
+                         iViewport[1]+iViewport[3], iViewport[1], -1, 1 );
+        glMatrixMode( GL_MODELVIEW );
+        glPushMatrix();
+        glLoadIdentity();
+
+        // Make sure depth testing and lighting are disabled for 2D rendering until
+        // we are finished rendering in 2D
+        glPushAttrib( GL_DEPTH_BUFFER_BIT | GL_LIGHTING_BIT );
+        glDisable( GL_DEPTH_TEST );
+        glDisable( GL_LIGHTING );
+}
+
+void glDisable2D( void )
+{
+        glPopAttrib();
+        glMatrixMode( GL_PROJECTION );
+        glPopMatrix();
+        glMatrixMode( GL_MODELVIEW );
+        glPopMatrix();
+}
+
 Painter::Painter()
 {
     //XML Initializations
@@ -31,7 +104,7 @@ Painter::Painter()
     screen_width = 1280;
     screen_height = 800;
 
-    screen_bpp = 16;
+    screen_bpp = 32;
     camera_x=camera_y=0;
 
     //Initialize all SDL subsystems
@@ -203,6 +276,9 @@ Image* Painter::getTexture(std::string filename)
     }
 
     writeLogLine(filename+" loaded");
+    GLuint *t=(GLuint*) image->getTexture();
+    int texture_size=sizeof t;
+    writeLogLine("Size: "+convertInt(texture_size)+" "+convertInt(image->getWidth())+"x"+convertInt(image->getHeight()));
 
     return image;
 }

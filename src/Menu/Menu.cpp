@@ -93,7 +93,6 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
             pa_victories++;
         else//salir en el menu de pausa
         {
-//            delete fighter;
             break;
         }
 
@@ -104,7 +103,6 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
             p1a->resetPersonaje();
             p1b->resetPersonaje();
         }
-//        delete fighter;
         //Finish game
         if(pa_victories>=rounds && pb_victories>=rounds)
         {
