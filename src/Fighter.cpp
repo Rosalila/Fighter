@@ -1,5 +1,5 @@
 #include "../include/Fighter.h"
-Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
+Fighter::Fighter(Sound* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
 {
 //    writeLogLine("Initializing fighter.");
     this->victories_a=victories_a;
@@ -33,14 +33,14 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
     pos_imagen_intro=0;
     for(int i=0;i<intro_frames;i++)
     {
-        match_intro.push_back(new Imagen(painter->getTexture(std::string("misc/match_intro/")+painter->convertInt(i+1)+std::string(".png")),1,0,0));
+        match_intro.push_back(new Imagen(painter->getTexture(std::string("misc/match_intro/")+toString(i+1)+std::string(".png")),1,0,0));
     }
 
     tiempo_actual_ko=0;
     pos_imagen_ko=0;
     for(int i=0;i<ko_frames;i++)
     {
-        ko.push_back(new Imagen(painter->getTexture(std::string("misc/ko/")+painter->convertInt(i+1)+std::string(".png")),1,0,0));
+        ko.push_back(new Imagen(painter->getTexture(std::string("misc/ko/")+toString(i+1)+std::string(".png")),1,0,0));
     }
 
     writeLogLine("Loading stage misc.");
@@ -62,7 +62,7 @@ Fighter::Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Perso
     this->pb_actual=NULL;
 
 //    writeLogLine("Initializing pause menu.");
-    pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.xml");
+    pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.svg");
 
 //    writeLogLine("Setting player misc.");
 
@@ -246,7 +246,43 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,std::string variable_ataca
     for(int a=0; a<(int)hb_azules.size(); a++)
         for(int r=0; r<(int)hb_rojas.size(); r++)
             if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
+            {
+                if(atacante->getString("orientation")=="i")
+                    for(int i=0; i<(int)hb_rojas.size(); i++)
+                    {
+                        int a=hb_rojas[i]->p1x;
+                        int b=hb_rojas[i]->p2x;
+                        hb_rojas[i]->p1x=-b;
+                        hb_rojas[i]->p2x=-a;
+                    }
+                if(atacado->getString("orientation")=="i")
+                    for(int i=0; i<(int)hb_azules.size(); i++)
+                    {
+                        int a=hb_azules[i]->p1x;
+                        int b=hb_azules[i]->p2x;
+                        hb_azules[i]->p1x=-b;
+                        hb_azules[i]->p2x=-a;
+                    }
                 return true;
+            }
+
+    if(atacante->getString("orientation")=="i")
+        for(int i=0; i<(int)hb_rojas.size(); i++)
+        {
+            int a=hb_rojas[i]->p1x;
+            int b=hb_rojas[i]->p2x;
+            hb_rojas[i]->p1x=-b;
+            hb_rojas[i]->p2x=-a;
+        }
+    if(atacado->getString("orientation")=="i")
+        for(int i=0; i<(int)hb_azules.size(); i++)
+        {
+            int a=hb_azules[i]->p1x;
+            int b=hb_azules[i]->p2x;
+            hb_azules[i]->p1x=-b;
+            hb_azules[i]->p2x=-a;
+        }
+
     return false;
 }
 
@@ -366,7 +402,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         m->tiempo_transcurrido=0;
         p->setString("current_move","entrance");
         p->setString("isActive.entrance","yes");
-        sonido->reproducirSonido(p->char_name+"entrance",false);
+        sonido->playSound(p->char_name+"entrance");
     }
 
     //verificar flip
@@ -404,7 +440,7 @@ void Fighter::logicaPersonaje(Personaje* p)
 //                m->tiempo_transcurrido=0;
 //                m->ya_pego=false;
 //                p->setString("current_move",str_movimiento);
-//                sonido->reproducirSonido(p->char_name+str_movimiento);
+//                sonido->playSound(p->char_name+str_movimiento);
 //                //setear isActive.
 //                p->setString(std::string("isActive.")+str_movimiento,"yes");
             }
@@ -457,7 +493,7 @@ void Fighter::logicaPersonaje(Personaje* p)
 //                        m->ya_pego=false;
 //                        p->setString("current_move",p->inputs[i].movimiento);
 //                        p->setString(std::string("isActive.")+p->inputs[i].movimiento,"yes");
-//                        sonido->reproducirSonido(p->char_name+p->getString("current_move"));
+//                        sonido->playSound(p->char_name+p->getString("current_move"));
                     }
                     else
                     {
@@ -525,7 +561,7 @@ void Fighter::logica()
                 m->tiempo_transcurrido=0;
                 m->ya_pego=false;
                 p->setString("current_move",move_cancel_pa);
-                sonido->reproducirSonido(p->char_name+move_cancel_pa,false);
+                sonido->playSound(p->char_name+move_cancel_pa);
                 //setear isActive.
                 p->setString(std::string("isActive.")+move_cancel_pa,"yes");
     }
@@ -538,7 +574,7 @@ void Fighter::logica()
                 m->tiempo_transcurrido=0;
                 m->ya_pego=false;
                 p->setString("current_move",move_cancel_pb);
-                sonido->reproducirSonido(p->char_name+move_cancel_pb,false);
+                sonido->playSound(p->char_name+move_cancel_pb);
                 //setear isActive.
                 p->setString(std::string("isActive.")+move_cancel_pb,"yes");
     }
@@ -595,7 +631,7 @@ void Fighter::logica()
             m->ya_pego=false;
             p->setString("current_move",hit_cancel_pa);
             p->setString(std::string("isActive.")+hit_cancel_pa,"yes");
-            sonido->reproducirSonido(p->char_name+p->getString("current_move"),false);
+            sonido->playSound(p->char_name+p->getString("current_move"));
     }
 
     if(hit_cancel_pb!="")
@@ -650,7 +686,7 @@ void Fighter::logica()
             m->ya_pego=false;
             p->setString("current_move",hit_cancel_pb);
             p->setString(std::string("isActive.")+hit_cancel_pb,"yes");
-            sonido->reproducirSonido(p->char_name+p->getString("current_move"),false);
+            sonido->playSound(p->char_name+p->getString("current_move"));
     }
 
 
@@ -824,7 +860,7 @@ void Fighter::loopJuego()
     getPbActual()->comparacion_hp=getPbActual()->getEntero("hp.current_value");
     getPbActual()->comparacion_hp_contrario=getPbActual()->getEntero("hp.current_value");
 
-    //sonido->reproducirSonido("Stage.music",true);
+    //sonido->playSound("Stage.music",true);
     //u32 anterior=painter->device->getTimer()->getTime();
     for (;;)
     {
@@ -868,7 +904,7 @@ void Fighter::loopJuego()
         render();
         //receiver->startEventProcess();
     }
-    //sonido->pararSonido("Stage.music");
+    //sonido->pararSound("Stage.music");
 }
 
 void Fighter::dibujarBarra()
@@ -878,6 +914,7 @@ void Fighter::dibujarBarra()
         texture_bar->getWidth(),texture_bar->getHeight(),
         painter->screen_width/2-texture_bar->getWidth()/2,0,
         1.0,
+        0.0,
         false,
         0,0,
         Color(255,255,255,255),
@@ -891,6 +928,7 @@ void Fighter::dibujarBarra()
             texture_victory->getWidth(),texture_victory->getHeight(),
             painter->screen_width/2-texture_victory->getWidth()/2-victory_image_x-i*separation_x,victory_image_y,
             1.0,
+            0.0,
             false,
             0,0,
             Color(255,255,255,255),
@@ -905,6 +943,7 @@ void Fighter::dibujarBarra()
             texture_victory->getWidth(),texture_victory->getHeight(),
             painter->screen_width/2-texture_victory->getWidth()/2+victory_image_x+i*separation_x,victory_image_y,
             1.0,
+            0.0,
             false,
             0,0,
             Color(255,255,255,255),
@@ -1035,6 +1074,7 @@ bool Fighter::render()
                 texture_gameover->getWidth(),texture_gameover->getHeight(),
                 (painter->screen_width-texture_gameover->getWidth())/2,(painter->screen_height-texture_gameover->getHeight())/2,
                 1.0,
+                0.0,
                 false,
                 0,0,
                 Color(255,255,255,255),
@@ -1058,6 +1098,7 @@ bool Fighter::render()
             texture_gameover->getWidth(),texture_gameover->getHeight(),
             (painter->screen_width-texture_gameover->getWidth())/2,(painter->screen_height-texture_gameover->getHeight())/2,
             1.0,
+            0.0,
             false,
             0,0,
             Color(255,255,255,255),
@@ -1086,9 +1127,9 @@ bool Fighter::render()
     dibujarBarra();
 
     if(pa[pa_actual]->combo>0)
-        painter->drawText(painter->convertInt(pa[pa_actual]->combo+1)+" hits",50,200);
+        painter->drawText(toString(pa[pa_actual]->combo+1)+" hits",50,200);
     if(pb[pb_actual]->combo>0)
-        painter->drawText(painter->convertInt(pb[pb_actual]->combo+1)+" hits",painter->screen_width-300,200);
+        painter->drawText(toString(pb[pb_actual]->combo+1)+" hits",painter->screen_width-300,200);
 
     receiver->updateInputs();
     painter->updateScreen();

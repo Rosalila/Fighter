@@ -3,7 +3,7 @@
 
 #include "TinyXml/tinyxml.h"
 #include "Painter/Painter.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 
 class Layer
 {
@@ -48,7 +48,7 @@ class Stage
     std::vector<Layer*> back,front;
     std::string music_path;
     Painter* painter;
-    Sonido* sonido;
+    Sound* sonido;
     int size;
     int pos_piso;
     //efecto terremoto
@@ -56,7 +56,7 @@ class Stage
     bool moviendo_derecha;
     int movimiento;
     int borde_efecto;
-    Stage(Painter* painter,Sonido* sonido);
+    Stage(Painter* painter,Sound* sonido);
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);

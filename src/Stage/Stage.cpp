@@ -1,6 +1,6 @@
 #include "Stage/Stage.h"
 
-Stage::Stage(Painter* painter,Sonido* sonido)
+Stage::Stage(Painter* painter,Sound* sonido)
 {
     this->painter=painter;
     this->sonido=sonido;
@@ -44,6 +44,7 @@ void Stage::drawLayer(Layer* layer)
         size_x,size_y,
         pos_x,pos_y,
         1.0,
+        0.0,
         false,
         layer->depth_effect_x,
         layer->depth_effect_y,

@@ -4,7 +4,7 @@
 #include "Personaje/Movimiento.h"
 #include "Personaje/InputMovimiento.h"
 #include "Personaje/Proyectil.h"
-#include "Sonido/Sonido.h"
+#include "RosalilaSound/RosalilaSound.h"
 #include "Personaje/Animacion.h"
 #include "Personaje/Paleta.h"
 #include "Input/Input.h"
@@ -17,7 +17,7 @@ class Personaje
     Personaje *personaje_contrario;
     Painter* painter;
     Input* input;
-    Sonido* sonido;
+    Sound* sonido;
 
     std::string char_name;
     char* char_name_ptr;
@@ -63,7 +63,7 @@ class Personaje
     //movimientos
     std::map<std::string,Movimiento*> movimientos;
 
-    Personaje(Painter* painter,Sonido* sonido,int numero,int paleta);
+    Personaje(Painter* painter,Sound* sonido,int numero,int paleta);
     ~Personaje();
     //Cargares
     void cargarDesdeXML(int px,int py,Input* input,char* nombre);

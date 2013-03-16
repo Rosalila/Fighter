@@ -2,7 +2,7 @@
 #define FIGHTER_H
 
 #include "TinyXml/tinyxml.h"
-#include "Menu/Menu.h"
+#include "FighterMenu/FighterMenu.h"
 #include <stdio.h>
 
 class Menu;
@@ -47,7 +47,7 @@ public:
     int victory_image_y;
 
     //Engines
-    Sonido* sonido;
+    Sound* sonido;
     Painter* painter;
     Receiver* receiver;
 
@@ -55,7 +55,7 @@ public:
     Image* texture_bar;
     Image* texture_victory;
 
-    Fighter(Sonido* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
+    Fighter(Sound* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);

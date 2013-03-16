@@ -1,6 +1,6 @@
 #include "Personaje/Personaje.h"
 
-Personaje::Personaje(Painter* painter,Sonido* sonido,int numero,int num_paleta)
+Personaje::Personaje(Painter* painter,Sound* sonido,int numero,int num_paleta)
 {
     writeLogLine("Initializing char.");
     this->painter=painter;
@@ -107,6 +107,7 @@ void Personaje::dibujar()
                 dimension_x,dimension_y,
                 pos_x,pos_y,
                 sombra[i]->escala,
+                0.0,
                 flip_sombra[i],
                 0,0,
                 Color(255,255,255,255),
@@ -161,6 +162,7 @@ void Personaje::dibujar()
         dimension_x,dimension_y,
         pos_x,pos_y,
         getImagen("current_image")->escala,
+        0.0,
         getString("orientation")=="i",
         0,0,
         Color(tr,tg,tb,255),
@@ -191,9 +193,17 @@ void Personaje::dibujarHitBoxes(std::string variable,std::string path,bool izqui
         int p2x=x+hitbox[i]->p2x;
         int p2y=-y+hitbox[i]->p2y+painter->screen_height-stage_piso;
         if(variable=="blue")
-            painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,0,0,100,127,true);
+            painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,0.0,0,0,100,127,true);
         else
-            painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,100,0,0,127,true);
+            painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,0.0,100,0,0,127,true);
+    }
+    if(getString("orientation")=="i")
+    for(int i=0;i<(int)hitbox.size();i++)
+    {
+        int a=hitbox[i]->p1x;
+        int b=hitbox[i]->p2x;
+        hitbox[i]->p1x=-b;
+        hitbox[i]->p2x=-a;
     }
 }
 
@@ -203,8 +213,8 @@ void Personaje::dibujarBarra(Barra* barra)
 //    irr::core::position2d<irr::s32>punto2= barra->posicion.LowerRightCorner;
     //resize 800x600
     float w=painter->screen_width;
-    barra->pos_x1*=w/1024.0;
-    barra->pos_x2*=w/1024.0;
+//    barra->pos_x1*=w/1024.0;
+//    barra->pos_x2*=w/1024.0;
     float longitud_total=(float)barra->pos_x2-(float)barra->pos_x1;
     if(longitud_total<0)//if esta flipeada
         longitud_total=-longitud_total;
@@ -254,7 +264,7 @@ void Personaje::dibujarBarra(Barra* barra)
     }
 
     if(barra->imagen==NULL)
-        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,barra->color.getRed(),barra->color.getGreen(),barra->color.getBlue(),barra->color.getAlpha(),false);
+        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,0.0,barra->color.getRed(),barra->color.getGreen(),barra->color.getBlue(),barra->color.getAlpha(),false);
     else
         painter->draw2DImage
         (   barra->imagen,
@@ -262,6 +272,7 @@ void Personaje::dibujarBarra(Barra* barra)
             //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
             p1x,p1y,
             1.0,
+            0.0,
             flip,
             0,0,
             Color(255,255,255,255),
@@ -316,7 +327,7 @@ void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
     }
     if(barra->imagen==NULL)
     {
-        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,barra->color.getRed(),barra->color.getGreen(),barra->color.getBlue(),barra->color.getAlpha(),false);
+        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,0.0,barra->color.getRed(),barra->color.getGreen(),barra->color.getBlue(),barra->color.getAlpha(),false);
     }
     else
         painter->draw2DImage
@@ -325,6 +336,7 @@ void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
             //irr::core::rect<irr::f32>(0,0,barra.imagen->getOriginalSize().Width*((float)getEntero(barra.valor_actual)/(float)getEntero(barra.valor_maximo)),barra.imagen->getOriginalSize().Height),//!!DRAW BAR
             p1x,p1y,
             1.0,
+            0.0,
             player2,
             0,0,
             Color(255,255,255,255),
@@ -357,20 +369,21 @@ void Personaje::dibujarProyectiles()
                 imagen->imagen->getWidth(),imagen->imagen->getHeight(),
                 pos_x,pos_y,
                 imagen->escala,
+                0.0,
                 getString(proyectil->orientacion)=="i",
                 0,0,
                 Color(255,255,255,255),
                 true);
         }
-        //Dibujar hitboxes
-        if(input->receiver->IsKeyDownn(SDLK_h))
-        {
-            std::string nombre=proyectil->nombre;
-            dibujarHitBoxes(proyectil->hitboxes,"",
-                        getString(proyectil->orientacion)=="i",
-                        getEntero(proyectil->posicion_x),
-                        -getEntero(proyectil->posicion_y));
-        }
+//        //Dibujar hitboxes
+//        if(input->receiver->IsKeyDownn(SDLK_h))
+//        {
+//            std::string nombre=proyectil->nombre;
+//            dibujarHitBoxes(proyectil->hitboxes,"",
+//                        getString(proyectil->orientacion)=="i",
+//                        getEntero(proyectil->posicion_x),
+//                        -getEntero(proyectil->posicion_y));
+//        }
     }
 }
 //GETS shortcuts
@@ -1098,7 +1111,6 @@ void Personaje::cargarMain()
             {
                 std::string imagen(elemento_imagen->Attribute("image"));
                 imagen=std::string("chars/")+char_name+std::string("/")+imagen;
-
                 agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,painter->getTexture(imagen)));
             }
             else
@@ -1530,7 +1542,7 @@ void Personaje::cargarSfx()
 
         char*file=new char[255];
         strcpy(file,"chars/");
-        sonido->agregarSonido(char_name+move,std::string("chars/")+char_name+std::string("/sfx/")+std::string(elemento_sonido->Attribute("file")));
+        sonido->addSound(char_name+move,std::string("chars/")+char_name+std::string("/sfx/")+std::string(elemento_sonido->Attribute("file")));
     }
 
 }
@@ -1857,6 +1869,7 @@ void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen* imagen,int pos
         pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         imagen->escala,
+        0.0,
         getString("orientation")!="d",
         0,0,
         Color(255,255,255,255),
@@ -1875,6 +1888,7 @@ void Personaje::dibujarImagen(Painter* painter,Imagen* imagen,int posicion_x,int
         pos_x,pos_y,
         //irr::core::position2d<irr::f32>(posicion_x+imagen.alineacion_x-(texture->getOriginalSize().Width*imagen.escala)/2,posicion_y+imagen.alineacion_y-(texture->getOriginalSize().Height*imagen.escala)/2),
         imagen->escala,
+        0.0,
         getString("orientation")!="d",
         0,0,
         Color(255,255,255,255),
