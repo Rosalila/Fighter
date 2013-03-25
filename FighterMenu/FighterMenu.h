@@ -41,8 +41,8 @@ public:
     Image* vs_screen;
 
     Menu(){}
-    Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo);
-    void cargarDesdeXml(char*archivo,vector<std::string> chars,vector<std::string> stages);
+    Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::string archivo);
+    void cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<std::string> stages);
     void cargarConfig();
     void loopMenu();
     Personaje* getPersonajeA(int num,bool ia);
@@ -52,7 +52,7 @@ public:
     bool getSaveRosalilaInputssSignal();
     void escribirRosalilaInputssXML(RosalilaInputs* ia,RosalilaInputs* ib);
     std::string getRosalilaInputsPressed();
-    void llenarRosalilaInputssBotones();
+    void llenarInputsBotones();
     int toKeyCode(std::string str);
     void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
 };

@@ -36,8 +36,8 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
     }
 }
 
-Image* Paleta::paintTexture(Image* texture)
-{
+//Image* Paleta::paintTexture(Image* texture)
+//{
 //    for(int i=0;i<(int)cambios.size();i++)//!!PALETTES
 //    {
 //        CambioColor cambio=cambios[i];
@@ -106,11 +106,11 @@ Image* Paleta::paintTexture(Image* texture)
 ////        }
 ////        texture->unlock();
 //    }
-}
+//}
 
-Image* Paleta::restoreTexture(Image* texture)
-{
+//Image* Paleta::restoreTexture(Image* texture)
+//{
 //    s32* p = (s32*)texture->lock();//!!PALLETTES
 //    p=copia;
 //    texture->unlock();
-}
+//}

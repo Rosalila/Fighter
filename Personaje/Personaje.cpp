@@ -148,7 +148,7 @@ void Personaje::dibujar()
         tg=t%255;
     }
 
-    Image* texture=getImagen("current_image")->imagen;
+    //Image* texture=getImagen("current_image")->imagen;
     //if(numero==1)
         //paleta.paintTexture(texture);
 
@@ -212,7 +212,7 @@ void Personaje::dibujarBarra(Barra* barra)
 //    irr::core::position2d<irr::s32>punto1= barra->posicion.UpperLeftCorner;
 //    irr::core::position2d<irr::s32>punto2= barra->posicion.LowerRightCorner;
     //resize 800x600
-    float w=painter->screen_width;
+//    float w=painter->screen_width;
 //    barra->pos_x1*=w/1024.0;
 //    barra->pos_x2*=w/1024.0;
     float longitud_total=(float)barra->pos_x2-(float)barra->pos_x1;
@@ -254,11 +254,11 @@ void Personaje::dibujarBarra(Barra* barra)
         player2=true;
     }
     bool flip=false;
-    if(barra->pos_x1>barra->pos_x2&&!player2)
+    if(barra->pos_x1>barra->pos_x2 && !player2)
     {
         flip=true;
     }
-    if(barra->pos_x1>barra->pos_x2==false&&player2)
+    if(( (barra->pos_x1>barra->pos_x2) == false) && player2)
     {
         flip=true;
     }
@@ -1269,7 +1269,7 @@ void Personaje::cargarRosalilaInputss()
                 agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='5';
                 std::string str_temp="";
-                for(int i=1;i<boton.size();i++)
+                for(int i=1;i<(int)boton.size();i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
                 lista_botones.push_back(str_temp);
@@ -1309,7 +1309,7 @@ void Personaje::cargarRosalilaInputss()
                 lista_botones.push_back(boton);
                 agregarRosalilaInputs(lista_botones,move_name);
                 std::string str_temp="";
-                for(int i=0;i<boton.size()-1;i++)
+                for(int i=0;i<(int)boton.size()-1;i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
                 lista_botones.push_back(str_temp);
@@ -1435,17 +1435,17 @@ void Personaje::cargarSprites()
                 {
                     Image* texture=painter->getTexture(path);
                     textures.push_back(texture);
-                    paleta.paintTexture(texture);
+//                    paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
-                    paleta.restoreTexture(texture);
+//                    paleta.restoreTexture(texture);
                 }
                 else//!!IGNORE COLOR
                 {
                     Image* texture=painter->getTexture(path);
                     textures.push_back(texture);
-                    paleta.paintTexture(texture);
+//                    paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
-                    paleta.restoreTexture(texture);
+//                    paleta.restoreTexture(texture);
 //                    video::IImage* image = painter->driver->createImageFromFile(path);
 //
 //                    video::Image* texture = painter->driver->addTexture("test",image);
@@ -1742,7 +1742,7 @@ void Personaje::aplicarEfectosProyectiles()
         //hit de proyectiles
         bool colision_proyectiles=false;
         Proyectil*proyectil_c;
-        for(int j=0;j<personaje_contrario->proyectiles_actuales.size();j++)
+        for(int j=0;j<(int)personaje_contrario->proyectiles_actuales.size();j++)
         {
             proyectil_c=personaje_contrario->proyectiles_actuales[j];
             if(personaje_contrario->getString(proyectil_c->estado)!=std::string("on"))

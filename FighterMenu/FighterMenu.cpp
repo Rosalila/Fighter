@@ -1,5 +1,5 @@
 #include "FighterMenu.h"
-Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo)
+Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::string archivo)
 {
     this->painter=painter;
     this->receiver=receiver;
@@ -137,7 +137,7 @@ void Menu::loopMenu()
 {
     bool tecla_arriba=false;
 
-    llenarRosalilaInputssBotones();
+    llenarInputsBotones();
     inputa=new RosalilaInputs();
     inputb=new RosalilaInputs();
     inputa->cargarDesdeXML(1,receiver);
@@ -528,9 +528,6 @@ void Menu::loopMenu()
                             p1a->setEntero("hp.period",1);
                             p1b->setEntero("hp.periodic_modifier",1);
                             p1b->setEntero("hp.period",1);
-                            RosalilaInputs*i_temp=new RosalilaInputs();
-//                            i_temp->cargarRosalilaAIXML(2,(char*)"");
-//                            p1b->input=i_temp;
 
                             Personaje* p2a=getPersonajeA(1,false);
                             Personaje* p2b=getPersonajeB(1,false);
@@ -541,9 +538,6 @@ void Menu::loopMenu()
                             p2a->setEntero("hp.period",1);
                             p2b->setEntero("hp.periodic_modifier",1);
                             p2b->setEntero("hp.period",1);
-                            i_temp=new RosalilaInputs();
-//                            i_temp->cargarRosalilaAIXML(2,(char*)"");
-//                            p2b->input=i_temp;
 
                             Personaje* p3a=getPersonajeA(2,false);
                             Personaje* p3b=getPersonajeB(2,false);
@@ -554,9 +548,6 @@ void Menu::loopMenu()
                             p3a->setEntero("hp.period",1);
                             p3b->setEntero("hp.periodic_modifier",1);
                             p3b->setEntero("hp.period",1);
-                            i_temp=new RosalilaInputs();
-//                            i_temp->cargarRosalilaAIXML(2,(char*)"");
-//                            p3b->input=i_temp;
 
                             pa.push_back(p1a);
                             pa.push_back(p2a);
@@ -684,7 +675,7 @@ void Menu::loopMenu()
 //
 //                        escribirRosalilaInputssXML(temp,temp2);
 //                        //mb->input_config=b.keyToString();
-//                        llenarRosalilaInputssBotones();
+//                        llenarInputsBotones();
 //                    }
                 }
             }else
@@ -722,13 +713,13 @@ void Menu::cargarConfig()
     rounds=atoi(rounds_elem->Attribute("rounds"));
 }
 
-void Menu::cargarDesdeXml(char* archivo,vector<std::string> chars,vector<std::string> stages)
+void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<std::string> stages)
 {
     music_path="menu/audio/music.ogg";
 
     cargarConfig();
 
-    TiXmlDocument doc_t( archivo );
+    TiXmlDocument doc_t(archivo.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1136,10 +1127,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     {
         writeLogLine("Loading AI.");
         inputa=new RosalilaInputs();
-        char*file_ia=new char[255];
-        strcpy(file_ia,"chars/");
-        strcat(file_ia,path_a);
-        strcat(file_ia,"/ia.xml");
+        std::string file_ia="chars/"+char_name+"/ia.xml";
         inputa->cargarRosalilaAIXML(2,file_ia,"");
     }else
     {
@@ -1416,13 +1404,13 @@ int Menu::toKeyCode(std::string str)
 }
 
 
-void Menu::llenarRosalilaInputssBotones()
+void Menu::llenarInputsBotones()
 {
     for(int i=0;i<(int)selectables_container->elementos.size();i++)
     {
         if(((MenuContenedor*)selectables_container)->elementos[i]->getTipo()=="Boton")
         {
-            MenuBoton*mb=(MenuBoton*)selectables_container->elementos[i];
+//            MenuBoton*mb=(MenuBoton*)selectables_container->elementos[i];
 //            if(mb->getAccion()>=10 && mb->getAccion()<=29)
 //            {
 //                int player;

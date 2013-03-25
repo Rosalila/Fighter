@@ -4,12 +4,6 @@ Stage::Stage(RosalilaGraphics* painter,Sound* sonido)
 {
     this->painter=painter;
     this->sonido=sonido;
-
-    //efecto
-    bool efecto_camara=true;
-    bool moviendo_derecha=true;
-    int movimiento=0;
-    int borde_efecto=30;
 }
 
 void Stage::drawLayer(Layer* layer)
@@ -23,7 +17,7 @@ void Stage::drawLayer(Layer* layer)
 
     //Loop animation
     layer->time_elapsed++;
-    if(layer->current_frame>=layer->textures.size())
+    if(layer->current_frame>=(int)layer->textures.size())
         layer->current_frame=0;
 
     //Get current image
@@ -32,9 +26,6 @@ void Stage::drawLayer(Layer* layer)
     //Paint
     int size_x=layer->textures_size_x[layer->current_frame];
     int size_y=layer->textures_size_y[layer->current_frame];
-
-    int dimension_x=texture->getWidth();
-    int dimension_y=texture->getHeight();
 
     int pos_x=-size_x/2+painter->screen_width/2+layer->alignment_x;
     int pos_y=painter->screen_height-size_y-layer->alignment_y;
@@ -54,7 +45,7 @@ void Stage::drawLayer(Layer* layer)
 
 void Stage::dibujarBack()
 {
-    for(int i=0;i<back.size();i++)
+    for(int i=0;i<(int)back.size();i++)
     {
         Layer* layer=back[i];
         drawLayer(layer);
@@ -63,7 +54,7 @@ void Stage::dibujarBack()
 
 void Stage::dibujarFront()
 {
-    for(int i=0;i<front.size();i++)
+    for(int i=0;i<(int)front.size();i++)
     {
         Layer* layer=front[i];
         drawLayer(layer);

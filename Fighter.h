@@ -66,7 +66,7 @@ public:
     void logicaStage();
     void aplicarModificadores(Personaje *p);
     void logica();
-    bool render();
+    void render();
     void dibujarBarra();
     void escribirRosalilaInputssXML();
     Personaje* getPaActual();

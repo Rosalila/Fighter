@@ -58,8 +58,8 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
 
     //stage->cargarDesdeXML((char*)"Stage1");
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
-    this->pa_actual=NULL;
-    this->pb_actual=NULL;
+    this->pa_actual=0;
+    this->pb_actual=0;
 
 //    writeLogLine("Initializing pause menu.");
     pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.svg");
@@ -588,7 +588,6 @@ void Fighter::logica()
                 p->combo++;
             }
             Movimiento* m=p->movimientos[p->getString("current_move")];
-            Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
 
             if(p->getString("current_move").substr(0,8)!="defense.")
             {
@@ -643,7 +642,6 @@ void Fighter::logica()
                 p->combo++;
             }
             Movimiento* m=p->movimientos[p->getString("current_move")];
-            Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
 
             if(p->getString("current_move").substr(0,8)!="defense.")
             {
@@ -826,13 +824,6 @@ void Fighter::logicaStage()
         pb_x=stage->size/2+painter->screen_width/2-marco_x;
         getPbActual()->setEntero("position_x",pb_x);
     }
-
-    //get una nueva posicion de la stage
-    int borde_izq=500;
-    int borde_der=900;
-
-    int pa_x_pantalla=pa_x+painter->camera_x;
-    int pa_y_pantalla=pb_x+painter->camera_x;
     int nueva_pos=(pa_x+pb_x)/2-painter->screen_width/2;
 
 
@@ -878,8 +869,10 @@ void Fighter::loopJuego()
                && last_input!="7"
                && last_input!="8"
                && last_input!="9"
-               && (getPaActual()->getString("current_move")=="5"||getPbActual()->getString("current_move")=="5")
-                    ||getPaActual()->getString("current_move")=="ko"&&getPbActual()->getString("current_move")=="ko")
+               && ((getPaActual()->getString("current_move")=="5"||getPbActual()->getString("current_move")=="5")
+                    || (getPaActual()->getString("current_move")=="ko"&&getPbActual()->getString("current_move")=="ko")
+                  )
+               )
                 break;
         }
         //receiver->endEventProcess();
@@ -952,7 +945,7 @@ void Fighter::dibujarBarra()
     }
 }
 
-bool Fighter::render()
+void Fighter::render()
 {
     //Stage
     stage->dibujarBack();
