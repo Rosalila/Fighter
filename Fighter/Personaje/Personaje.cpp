@@ -1,6 +1,6 @@
 #include "Personaje/Personaje.h"
 
-Personaje::Personaje(Painter* painter,Sound* sonido,int numero,int num_paleta)
+Personaje::Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int num_paleta)
 {
     writeLogLine("Initializing char.");
     this->painter=painter;
@@ -460,12 +460,12 @@ void Personaje::setString(std::string variable,std::string valor)
 }
 
 //Agregares
-void Personaje::agregarInput(vector<std::string> input,std::string movimiento)
+void Personaje::agregarRosalilaInputs(vector<std::string> input,std::string movimiento)
 {
     inputs.push_back(new InputMovimiento(input,movimiento));
 }
 
-void Personaje::agregarInput(std::string input,std::string movimiento)
+void Personaje::agregarRosalilaInputs(std::string input,std::string movimiento)
 {
     std::vector<std::string> lista_input;
     lista_input.push_back(input);
@@ -658,7 +658,7 @@ void Personaje::aplicarModificador(ModificadorPorVariable* mv)
 }
 
 //Logica
-std::string Personaje::mapInputToMovimiento()
+std::string Personaje::mapRosalilaInputsToMovimiento()
 {
     if(comparacion_hp>getEntero("hp.current_value") && input->inteligencia_artificial)
     {
@@ -673,7 +673,7 @@ std::string Personaje::mapInputToMovimiento()
     input->actualizarBuffer(&strings,&personaje_contrario->strings,&enteros,&personaje_contrario->enteros);
 
     for(int i=0;i<(int)inputs.size();i++)
-        if(inputEstaEnBuffer(inputs[i]->input,input->getBufferInputs()))
+        if(inputEstaEnBuffer(inputs[i]->input,input->getBufferRosalilaInputss()))
             if(cumpleCondiciones(inputs[i]->movimiento))
                 return inputs[i]->movimiento;
     return "";
@@ -771,7 +771,7 @@ void Personaje::cargarArchivo(char* archivo_xml)
 {
 }
 
-void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
+void Personaje::cargarDesdeXML(int px,int py,RosalilaInputs* input,char* nombre)
 {
     writeLogLine("Loading "+std::string(nombre)+" from XML.");
     this->input=input;
@@ -805,7 +805,7 @@ void Personaje::cargarDesdeXML(int px,int py,Input* input,char* nombre)
 
     cargarVars();
 
-    cargarInputs();
+    cargarRosalilaInputss();
 
     cargarTriggers();
 
@@ -1140,7 +1140,7 @@ void Personaje::cargarVars()
     {
         TiXmlElement *elemento=nodo->ToElement();
         std::string nombre(elemento->Attribute("name"));
-        //For each Input
+        //For each RosalilaInputs
 
         //For each Frame
         for(TiXmlNode* nodo_frame=nodo->FirstChild("Frame");
@@ -1207,7 +1207,7 @@ void Personaje::cargarVars()
     }
 }
 
-void Personaje::cargarInputs()
+void Personaje::cargarRosalilaInputss()
 {
     writeLogLine("Loading inputs.xml");
     char* path=new char[255];
@@ -1238,88 +1238,88 @@ void Personaje::cargarInputs()
                 boton[0]='1';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='2';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='3';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='4';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='6';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='7';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='8';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='9';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[0]='5';
                 std::string str_temp="";
                 for(int i=1;i<boton.size();i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
                 lista_botones.push_back(str_temp);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
             }else if(boton[boton.size()-1]=='*' && boton.size()>1)
             {
                 boton[boton.size()-1]='a';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='b';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='c';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='d';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='e';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='f';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='g';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 boton[boton.size()-1]='h';
                 lista_botones.clear();
                 lista_botones.push_back(boton);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
                 std::string str_temp="";
                 for(int i=0;i<boton.size()-1;i++)
                     str_temp+=boton[i];
                 lista_botones.clear();
                 lista_botones.push_back(str_temp);
-                agregarInput(lista_botones,move_name);
+                agregarRosalilaInputs(lista_botones,move_name);
             }else
             {
                 lista_botones.push_back(boton);
             }
         }
-        agregarInput(lista_botones,move_name);
+        agregarRosalilaInputs(lista_botones,move_name);
     }
 }
 
@@ -1856,7 +1856,7 @@ bool Personaje::getColisionHitBoxes(vector<HitBox*> hb_azules,vector<HitBox*> hb
     return false;
 }
 
-void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen* imagen,int posicion_x,int posicion_y)
+void Personaje::dibujarImagenCameraAlign(RosalilaGraphics* painter,Imagen* imagen,int posicion_x,int posicion_y)
 {
     Image *texture=imagen->imagen;
 
@@ -1875,7 +1875,7 @@ void Personaje::dibujarImagenCameraAlign(Painter* painter,Imagen* imagen,int pos
         Color(255,255,255,255),
         true);
 }
-void Personaje::dibujarImagen(Painter* painter,Imagen* imagen,int posicion_x,int posicion_y)
+void Personaje::dibujarImagen(RosalilaGraphics* painter,Imagen* imagen,int posicion_x,int posicion_y)
 {
     Image *texture=imagen->imagen;
 
@@ -2020,7 +2020,7 @@ void Personaje::resetPersonaje()
 //
 //    cargarVars();
 //
-//    cargarInputs();
+//    cargarRosalilaInputss();
 //
 //    cargarTriggers();
 //

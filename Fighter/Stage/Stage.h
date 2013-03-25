@@ -2,7 +2,7 @@
 #define STAGE_H
 
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "RosalilaSound/RosalilaSound.h"
 
 class Layer
@@ -47,7 +47,7 @@ class Stage
     public:
     std::vector<Layer*> back,front;
     std::string music_path;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Sound* sonido;
     int size;
     int pos_piso;
@@ -56,7 +56,7 @@ class Stage
     bool moviendo_derecha;
     int movimiento;
     int borde_efecto;
-    Stage(Painter* painter,Sound* sonido);
+    Stage(RosalilaGraphics* painter,Sound* sonido);
     void dibujarBack();
     void dibujarFront();
     void drawLayer(Layer*layer);

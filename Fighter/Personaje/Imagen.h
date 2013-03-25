@@ -1,7 +1,7 @@
 #ifndef IMAGEN_H
 #define IMAGEN_H
 
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 
 class Imagen
 {

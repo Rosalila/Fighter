@@ -1,5 +1,5 @@
-#include "../include/Fighter.h"
-Fighter::Fighter(Sound* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
+#include "Fighter.h"
+Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
 {
 //    writeLogLine("Initializing fighter.");
     this->victories_a=victories_a;
@@ -338,6 +338,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         if(!m->ya_pego || m->multihit)
         {
             p->setString("hit","yes");
+            painter->explode(px_colision,py_colision+painter->screen_height);
             m->ya_pego=true;
             p->personaje_contrario->setEntero("Colision.x",px_colision);
             p->personaje_contrario->setEntero("Colision.y",py_colision);
@@ -418,7 +419,7 @@ void Fighter::logicaPersonaje(Personaje* p)
     //get input
     std::string str_movimiento="";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
-        str_movimiento=p->mapInputToMovimiento();
+        str_movimiento=p->mapRosalilaInputsToMovimiento();
     if(game_over_a||game_over_b)
         str_movimiento="5";
 
@@ -867,7 +868,7 @@ void Fighter::loopJuego()
         //Salir con cualquier boton si ya termino la pelea
         if(game_over_a || game_over_b)
         {
-            std::string last_input=getPaActual()->input->getBufferInputs()[0];
+            std::string last_input=getPaActual()->input->getBufferRosalilaInputss()[0];
             if(last_input!="1"
                && last_input!="2"
                && last_input!="3"
@@ -1124,6 +1125,8 @@ bool Fighter::render()
     }
     stage->dibujarFront();
 
+    painter->draw3D();
+
     dibujarBarra();
 
     if(pa[pa_actual]->combo>0)
@@ -1135,7 +1138,7 @@ bool Fighter::render()
     painter->updateScreen();
 }
 
-void Fighter::escribirInputsXML()
+void Fighter::escribirRosalilaInputssXML()
 {
     TiXmlDocument *doc=new TiXmlDocument();
     inputb->getXML(inputa->getXML(doc));

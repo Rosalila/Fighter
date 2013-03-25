@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "TinyXml/tinyxml.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 
 class CambioColor
 {

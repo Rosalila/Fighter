@@ -2,7 +2,7 @@
 #define ANIMACION_H
 
 #include <vector>
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "Personaje/Imagen.h"
 
 class Animacion

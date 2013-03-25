@@ -7,7 +7,7 @@
 #include "RosalilaSound/RosalilaSound.h"
 #include "Personaje/Animacion.h"
 #include "Personaje/Paleta.h"
-#include "Input/Input.h"
+#include "RosalilaInputs/RosalilaInputs.h"
 #include <map>
 
 class Personaje
@@ -15,8 +15,8 @@ class Personaje
     public:
     //Otras
     Personaje *personaje_contrario;
-    Painter* painter;
-    Input* input;
+    RosalilaGraphics* painter;
+    RosalilaInputs* input;
     Sound* sonido;
 
     std::string char_name;
@@ -63,14 +63,14 @@ class Personaje
     //movimientos
     std::map<std::string,Movimiento*> movimientos;
 
-    Personaje(Painter* painter,Sound* sonido,int numero,int paleta);
+    Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int paleta);
     ~Personaje();
     //Cargares
-    void cargarDesdeXML(int px,int py,Input* input,char* nombre);
+    void cargarDesdeXML(int px,int py,RosalilaInputs* input,char* nombre);
     void cargarArchivo(char* archivo_xml);
     void cargarMain();
     void cargarVars();
-    void cargarInputs();
+    void cargarRosalilaInputss();
     void cargarTriggers();
     void cargarSprites();
     void cargarHitboxes();
@@ -78,8 +78,8 @@ class Personaje
     void cargarAnimations();
     //Dibujares
     void dibujar();
-    void dibujarImagenCameraAlign(Painter*painter,Imagen* imagen,int posicion_x,int posicion_y);
-    void dibujarImagen(Painter*painter,Imagen* imagen,int posicion_x,int posicion_y);
+    void dibujarImagenCameraAlign(RosalilaGraphics*painter,Imagen* imagen,int posicion_x,int posicion_y);
+    void dibujarImagen(RosalilaGraphics*painter,Imagen* imagen,int posicion_x,int posicion_y);
     void dibujarAnimacionesBack();
     void dibujarAnimacionesFront();
     void dibujarHitBoxes(std::string variable,std::string path,bool izquierda,int x,int y);
@@ -103,8 +103,8 @@ class Personaje
     void setHitBoxes(std::string variable,vector<HitBox*> valor);
     void setString(std::string variable,std::string valor);
     //Agregares
-    void agregarInput(vector<std::string> input,std::string movimiento);
-    void agregarInput(std::string input,std::string movimiento);
+    void agregarRosalilaInputs(vector<std::string> input,std::string movimiento);
+    void agregarRosalilaInputs(std::string input,std::string movimiento);
     void agregarCondicion(std::string movimiento,int frame,vector<Condicion*> condicion);
     //void agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion);
     void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
@@ -123,7 +123,7 @@ class Personaje
     void logicaProyectiles();
     void aplicarModificadores(vector<Modificador*>,bool flip);
     void flipHitBoxes();
-    std::string mapInputToMovimiento();
+    std::string mapRosalilaInputsToMovimiento();
     bool cumpleCondiciones(std::string str_movimiento);
     bool cumpleCondiciones(vector<vector<Condicion*> >);
     bool cumpleCondicion(Condicion* condicion);

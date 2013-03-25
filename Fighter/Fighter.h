@@ -11,7 +11,7 @@ class Fighter
 {
 public:
     //Logica
-    Input*inputa,*inputb;
+    RosalilaInputs*inputa,*inputb;
     Menu* pause_menu;
     Stage* stage;
     int px_colision,py_colision;
@@ -48,14 +48,14 @@ public:
 
     //Engines
     Sound* sonido;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Receiver* receiver;
 
     //Misc
     Image* texture_bar;
     Image* texture_victory;
 
-    Fighter(Sound* sonido,Painter* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
+    Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
@@ -68,7 +68,7 @@ public:
     void logica();
     bool render();
     void dibujarBarra();
-    void escribirInputsXML();
+    void escribirRosalilaInputssXML();
     Personaje* getPaActual();
     Personaje* getPbActual();
     Personaje* get2doPa();

@@ -11,8 +11,8 @@
 #include "SDL/SDL_mixer.h"
 #include <string>
 
-//#include "Input/Input.h"
-#include "include/Fighter.h"
+//#include "RosalilaInputs/RosalilaInputs.h"
+#include "Fighter.h"
 #include "Utility/Utility.h"
 
 #include <iostream>
@@ -26,13 +26,13 @@ int main(int argc, char *argv[])
     clearLog();
     //Creadas abierto
     Receiver* receiver=new Receiver();
-    Input*inputa=new Input();
-    Input*inputb=new Input();
+    RosalilaInputs*inputa=new RosalilaInputs();
+    RosalilaInputs*inputb=new RosalilaInputs();
 
     inputa->cargarDesdeXML(1,receiver);
     inputb->cargarDesdeXML(2,receiver);
 
-    Painter*painter=new Painter();
+    RosalilaGraphics*painter=new RosalilaGraphics();
     painter->video(painter);
 
 //painter->update.start();

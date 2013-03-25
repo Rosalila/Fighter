@@ -1,7 +1,7 @@
 #ifndef PROYECTIL_H
 #define PROYECTIL_H
 
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "Personaje/Imagen.h"
 #include "Personaje/Frame.h"
 

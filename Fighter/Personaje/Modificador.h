@@ -5,7 +5,7 @@
 #include "Personaje/HitBox.h"
 #include "Personaje/Imagen.h"
 #include "Personaje/Barra.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 
 class Modificador
 {

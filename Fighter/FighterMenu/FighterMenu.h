@@ -2,7 +2,7 @@
 #define MENUTEST_H
 
 #include "Stage/Stage.h"
-#include "Painter/Painter.h"
+#include "RosalilaGraphics/RosalilaGraphics.h"
 #include "Personaje/Personaje.h"
 #include "Menu/MenuContenedor.h"
 #include "Menu/MenuCharSelect.h"
@@ -14,7 +14,7 @@ class Menu
 private:
     //Engines
     Sound* sonido;
-    Painter* painter;
+    RosalilaGraphics* painter;
     Receiver* receiver;
     std::vector<Elemento*> elementos;
     MenuContenedor*selectables_container;
@@ -32,7 +32,7 @@ private:
     void iniciarJuego(int num_personajes,bool inteligencia_artificial);
 public:
     std::string music_path;
-    Input *inputa,*inputb;
+    RosalilaInputs *inputa,*inputb;
     std::vector<Personaje*>pa;
     std::vector<Personaje*>pb;
     Stage* stage;
@@ -41,7 +41,7 @@ public:
     Image* vs_screen;
 
     Menu(){}
-    Menu(Painter* painter,Receiver* receiver,Sound* sonido,char* archivo);
+    Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo);
     void cargarDesdeXml(char*archivo,vector<std::string> chars,vector<std::string> stages);
     void cargarConfig();
     void loopMenu();
@@ -49,10 +49,10 @@ public:
     Personaje* getPersonajeB(int num,bool ia);
     std::string getStage();
     bool getExitSignal();
-    bool getSaveInputsSignal();
-    void escribirInputsXML(Input* ia,Input* ib);
-    std::string getInputPressed();
-    void llenarInputsBotones();
+    bool getSaveRosalilaInputssSignal();
+    void escribirRosalilaInputssXML(RosalilaInputs* ia,RosalilaInputs* ib);
+    std::string getRosalilaInputsPressed();
+    void llenarRosalilaInputssBotones();
     int toKeyCode(std::string str);
     void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
 };
