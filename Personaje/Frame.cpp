@@ -1,4 +1,4 @@
-#include "Personaje/Frame.h"
+#include "Frame.h"
 
 Frame::Frame(int duracion)
 {

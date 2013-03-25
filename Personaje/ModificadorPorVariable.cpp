@@ -1,4 +1,4 @@
-#include "Personaje/ModificadorPorVariable.h"
+#include "ModificadorPorVariable.h"
 
 ModificadorPorVariable::ModificadorPorVariable(std::string tipo,std::string variable,std::string variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {

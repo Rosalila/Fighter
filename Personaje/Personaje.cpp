@@ -1,4 +1,4 @@
-#include "Personaje/Personaje.h"
+#include "Personaje.h"
 
 Personaje::Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int num_paleta)
 {

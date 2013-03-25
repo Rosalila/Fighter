@@ -2,7 +2,7 @@
 #define MOVIMIENTO_H
 
 #include "RosalilaGraphics/RosalilaGraphics.h"
-#include "Personaje/Frame.h"
+#include "Frame.h"
 
 class Movimiento
 {

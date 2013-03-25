@@ -1,12 +1,12 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
-#include "Personaje/Movimiento.h"
-#include "Personaje/InputMovimiento.h"
-#include "Personaje/Proyectil.h"
+#include "Movimiento.h"
+#include "InputMovimiento.h"
+#include "Proyectil.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Personaje/Animacion.h"
-#include "Personaje/Paleta.h"
+#include "Animacion.h"
+#include "Paleta.h"
 #include "RosalilaInputs/RosalilaInputs.h"
 #include <map>
 

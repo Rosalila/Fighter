@@ -1,7 +1,7 @@
 #ifndef MODIFICADORSTRING_H
 #define MODIFICADORSTRING_H
 
-#include "Personaje/Modificador.h"
+#include "Modificador.h"
 
 class ModificadorString : public Modificador
 {

@@ -1,4 +1,4 @@
-#include "Personaje/Barra.h"
+#include "Barra.h"
 
 Barra::Barra(std::string nombre, std::string valor_maximo,std::string valor_actual,std::string modificador_periodico,std::string periodo,Color color,int pos_x1,int pos_y1,int pos_x2,int pos_y2,Image* imagen)
 {

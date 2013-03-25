@@ -1,4 +1,4 @@
-#include "Personaje/Paleta.h"
+#include "Paleta.h"
 
 void Paleta::cargarXML(char* archivo,int num_paleta)
 {

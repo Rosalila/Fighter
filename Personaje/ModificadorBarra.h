@@ -1,7 +1,7 @@
 #ifndef MODIFICADORBARRA_H
 #define MODIFICADORBARRA_H
 
-#include "Personaje/Modificador.h"
+#include "Modificador.h"
 
 class ModificadorBarra : public Modificador
 {

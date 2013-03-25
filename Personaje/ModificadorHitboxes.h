@@ -1,7 +1,7 @@
 #ifndef MODIFICADORHITBOXES_H
 #define MODIFICADORHITBOXES_H
 
-#include "Personaje/Modificador.h"
+#include "Modificador.h"
 
 class ModificadorHitboxes : public Modificador
 {

@@ -1,13 +1,13 @@
 #ifndef MENUTEST_H
 #define MENUTEST_H
 
-#include "Stage/Stage.h"
+#include "../Stage/Stage.h"
 #include "RosalilaGraphics/RosalilaGraphics.h"
-#include "Personaje/Personaje.h"
+#include "../Personaje/Personaje.h"
 #include "RosalilaMenus/MenuContenedor.h"
 #include "RosalilaMenus/MenuCharSelect.h"
 #include "RosalilaSound/RosalilaSound.h"
-#include "Fighter.h"
+#include "../Fighter.h"
 
 class Menu
 {

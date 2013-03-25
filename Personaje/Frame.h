@@ -1,14 +1,14 @@
 #ifndef FRAME_H
 #define FRAME_H
 
-#include "Personaje/Modificador.h"
-#include "Personaje/ModificadorBarra.h"
-#include "Personaje/ModificadorEntero.h"
-#include "Personaje/ModificadorHitboxes.h"
-#include "Personaje/ModificadorImagen.h"
-#include "Personaje/ModificadorPorVariable.h"
-#include "Personaje/ModificadorString.h"
-#include "Personaje/Condicion.h"
+#include "Modificador.h"
+#include "ModificadorBarra.h"
+#include "ModificadorEntero.h"
+#include "ModificadorHitboxes.h"
+#include "ModificadorImagen.h"
+#include "ModificadorPorVariable.h"
+#include "ModificadorString.h"
+#include "Condicion.h"
 
 class Frame
 {

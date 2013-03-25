@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "RosalilaGraphics/RosalilaGraphics.h"
-#include "Personaje/Imagen.h"
+#include "Imagen.h"
 
 class Animacion
 {

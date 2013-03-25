@@ -1,4 +1,4 @@
-#include "Personaje/ModificadorHitboxes.h"
+#include "ModificadorHitboxes.h"
 
 ModificadorHitboxes::ModificadorHitboxes(std::string variable,std::vector <HitBox*> modificador,bool aplicar_a_contrario)
 {

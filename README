@@ -1,9 +1,0 @@
-Porting from Irrlicht and Irrklang to SDL with OpenGL
-
-ToDo:
-*Joystick inputs
-*Crop Images (used on bars)
-*Modify alpha channel
-*Color effects
-*Ignore colors
-*Palettes

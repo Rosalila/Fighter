@@ -1,7 +1,7 @@
 #ifndef MODIFICADORENTERO_H
 #define MODIFICADORENTERO_H
 
-#include "Personaje/Modificador.h"
+#include "Modificador.h"
 
 class ModificadorEntero : public Modificador
 {

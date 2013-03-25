@@ -1,4 +1,4 @@
-#include "Personaje/ModificadorEntero.h"
+#include "ModificadorEntero.h"
 
 ModificadorEntero::ModificadorEntero(std::string variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable)
 {

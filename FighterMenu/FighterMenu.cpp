@@ -1,4 +1,4 @@
-#include "FighterMenu/FighterMenu.h"
+#include "FighterMenu.h"
 Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,char* archivo)
 {
     this->painter=painter;

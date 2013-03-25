@@ -1,7 +1,7 @@
 #ifndef MODIFICADORPORVARRosalilaAIBLE_H
 #define MODIFICADORPORVARRosalilaAIBLE_H
 
-#include "Personaje/Modificador.h"
+#include "Modificador.h"
 
 class ModificadorPorVariable : public Modificador
 {

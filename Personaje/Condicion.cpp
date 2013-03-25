@@ -1,4 +1,4 @@
-#include "Personaje/Condicion.h"
+#include "Condicion.h"
 
 Condicion::Condicion(std::string variable,std::string comparacion,int entero,bool personaje_contrario)
 {

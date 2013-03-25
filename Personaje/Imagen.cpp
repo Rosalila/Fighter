@@ -1,4 +1,4 @@
-#include "Personaje/Imagen.h"
+#include "Imagen.h"
 
 Imagen::Imagen(Image* imagen,int alineacion_x,int alineacion_y)
 {

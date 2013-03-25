@@ -1,4 +1,4 @@
-#include "Personaje/ModificadorImagen.h"
+#include "ModificadorImagen.h"
 
 ModificadorImagen::ModificadorImagen(std::string variable,Imagen* modificador,bool aplicar_a_contrario)
 {

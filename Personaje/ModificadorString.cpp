@@ -1,4 +1,4 @@
-#include "Personaje/ModificadorString.h"
+#include "ModificadorString.h"
 
 ModificadorString::ModificadorString(std::string variable,std::string modificador,bool aplicar_a_contrario)
 {

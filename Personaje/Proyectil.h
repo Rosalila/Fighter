@@ -2,8 +2,8 @@
 #define PROYECTIL_H
 
 #include "RosalilaGraphics/RosalilaGraphics.h"
-#include "Personaje/Imagen.h"
-#include "Personaje/Frame.h"
+#include "Imagen.h"
+#include "Frame.h"
 
 class Proyectil
 {

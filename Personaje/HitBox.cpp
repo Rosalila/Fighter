@@ -1,4 +1,4 @@
-#include "Personaje/HitBox.h"
+#include "HitBox.h"
 
 HitBox::HitBox (int p1x,int p1y,int p2x,int p2y)
 {

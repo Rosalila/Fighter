@@ -2,9 +2,9 @@
 #define MODIFICADOR_H
 
 #include <vector>
-#include "Personaje/HitBox.h"
-#include "Personaje/Imagen.h"
-#include "Personaje/Barra.h"
+#include "HitBox.h"
+#include "Imagen.h"
+#include "Barra.h"
 #include "RosalilaGraphics/RosalilaGraphics.h"
 
 class Modificador

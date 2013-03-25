@@ -1,4 +1,4 @@
-#include "Personaje/Proyectil.h"
+#include "Proyectil.h"
 
 Proyectil::Proyectil(std::string nombre,std::string posicion_x,std::string posicion_y,std::string imagen,std::string hitboxes,std::string estado,std::string orientacion,std::vector<Imagen*>sprites,int damage,bool multihit)
 {

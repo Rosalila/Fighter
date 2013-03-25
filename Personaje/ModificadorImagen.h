@@ -1,7 +1,7 @@
 #ifndef MODIFICADORIMAGEN_H
 #define MODIFICADORIMAGEN_H
 
-#include "Personaje/Modificador.h"
+#include "Modificador.h"
 
 class ModificadorImagen : public Modificador
 {

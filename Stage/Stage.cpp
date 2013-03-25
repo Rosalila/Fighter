@@ -1,4 +1,4 @@
-#include "Stage/Stage.h"
+#include "Stage.h"
 
 Stage::Stage(RosalilaGraphics* painter,Sound* sonido)
 {

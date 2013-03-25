@@ -1,4 +1,4 @@
-#include "Personaje/Movimiento.h"
+#include "Movimiento.h"
 
 Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
 {
