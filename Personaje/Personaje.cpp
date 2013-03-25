@@ -658,7 +658,7 @@ void Personaje::aplicarModificador(ModificadorPorVariable* mv)
 }
 
 //Logica
-std::string Personaje::mapRosalilaInputsToMovimiento()
+std::string Personaje::mapInputToMovimiento()
 {
     if(comparacion_hp>getEntero("hp.current_value") && input->inteligencia_artificial)
     {

@@ -529,7 +529,7 @@ void Menu::loopMenu()
                             p1b->setEntero("hp.periodic_modifier",1);
                             p1b->setEntero("hp.period",1);
                             RosalilaInputs*i_temp=new RosalilaInputs();
-//                            i_temp->cargarIAXML(2,(char*)"");
+//                            i_temp->cargarRosalilaAIXML(2,(char*)"");
 //                            p1b->input=i_temp;
 
                             Personaje* p2a=getPersonajeA(1,false);
@@ -542,7 +542,7 @@ void Menu::loopMenu()
                             p2b->setEntero("hp.periodic_modifier",1);
                             p2b->setEntero("hp.period",1);
                             i_temp=new RosalilaInputs();
-//                            i_temp->cargarIAXML(2,(char*)"");
+//                            i_temp->cargarRosalilaAIXML(2,(char*)"");
 //                            p2b->input=i_temp;
 
                             Personaje* p3a=getPersonajeA(2,false);
@@ -555,7 +555,7 @@ void Menu::loopMenu()
                             p3b->setEntero("hp.periodic_modifier",1);
                             p3b->setEntero("hp.period",1);
                             i_temp=new RosalilaInputs();
-//                            i_temp->cargarIAXML(2,(char*)"");
+//                            i_temp->cargarRosalilaAIXML(2,(char*)"");
 //                            p3b->input=i_temp;
 
                             pa.push_back(p1a);
@@ -1140,7 +1140,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
         strcpy(file_ia,"chars/");
         strcat(file_ia,path_a);
         strcat(file_ia,"/ia.xml");
-        inputa->cargarIAXML(2,file_ia,"");
+        inputa->cargarRosalilaAIXML(2,file_ia,"");
     }else
     {
         writeLogLine("Loading inputs.");
@@ -1188,7 +1188,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
             strcat(file_ia,"/ai/level 4.xml");
         if(ai_level==5)
             strcat(file_ia,"/ai/level 5.xml");
-        inputb->cargarIAXML(2,file_ia,file_ia_default);
+        inputb->cargarRosalilaAIXML(2,file_ia,file_ia_default);
     }else
     {
         writeLogLine("Loading inputs.");

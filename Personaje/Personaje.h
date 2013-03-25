@@ -123,7 +123,7 @@ class Personaje
     void logicaProyectiles();
     void aplicarModificadores(vector<Modificador*>,bool flip);
     void flipHitBoxes();
-    std::string mapRosalilaInputsToMovimiento();
+    std::string mapInputToMovimiento();
     bool cumpleCondiciones(std::string str_movimiento);
     bool cumpleCondiciones(vector<vector<Condicion*> >);
     bool cumpleCondicion(Condicion* condicion);

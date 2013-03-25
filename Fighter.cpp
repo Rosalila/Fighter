@@ -419,7 +419,7 @@ void Fighter::logicaPersonaje(Personaje* p)
     //get input
     std::string str_movimiento="";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
-        str_movimiento=p->mapRosalilaInputsToMovimiento();
+        str_movimiento=p->mapInputToMovimiento();
     if(game_over_a||game_over_b)
         str_movimiento="5";
 

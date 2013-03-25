@@ -1,5 +1,5 @@
-#ifndef MODIFICADORPORVARIABLE_H
-#define MODIFICADORPORVARIABLE_H
+#ifndef MODIFICADORPORVARRosalilaAIBLE_H
+#define MODIFICADORPORVARRosalilaAIBLE_H
 
 #include "Personaje/Modificador.h"
 

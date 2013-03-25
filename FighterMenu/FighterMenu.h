@@ -4,8 +4,8 @@
 #include "Stage/Stage.h"
 #include "RosalilaGraphics/RosalilaGraphics.h"
 #include "Personaje/Personaje.h"
-#include "Menu/MenuContenedor.h"
-#include "Menu/MenuCharSelect.h"
+#include "RosalilaMenus/MenuContenedor.h"
+#include "RosalilaMenus/MenuCharSelect.h"
 #include "RosalilaSound/RosalilaSound.h"
 #include "Fighter.h"
 

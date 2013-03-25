@@ -1,148 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Fighter/Fighter.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="40035" topLine="1118" />
-	</File>
-	<File name="Fighter/Fighter.h" open="0" top="0" tabpos="4">
-		<Cursor position="1728" topLine="42" />
-	</File>
-	<File name="Fighter/FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="5">
-		<Cursor position="28151" topLine="704" />
-	</File>
-	<File name="Fighter/FighterMenu/FighterMenu.h" open="0" top="0" tabpos="6">
-		<Cursor position="65" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Animacion.h" open="0" top="0" tabpos="7">
-		<Cursor position="103" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Barra.h" open="0" top="0" tabpos="8">
-		<Cursor position="77" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Condicion.h" open="0" top="0" tabpos="9">
-		<Cursor position="84" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Imagen.h" open="0" top="0" tabpos="10">
-		<Cursor position="79" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/InputMovimiento.cpp" open="0" top="0" tabpos="7">
-		<Cursor position="72" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/InputMovimiento.h" open="0" top="0" tabpos="8">
-		<Cursor position="235" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Modificador.h" open="0" top="0" tabpos="12">
-		<Cursor position="196" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Movimiento.h" open="0" top="0" tabpos="13">
-		<Cursor position="87" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Paleta.h" open="0" top="0" tabpos="14">
-		<Cursor position="126" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Personaje.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="44497" topLine="1209" />
-	</File>
-	<File name="Fighter/Personaje/Personaje.h" open="0" top="0" tabpos="10">
-		<Cursor position="293" topLine="0" />
-	</File>
-	<File name="Fighter/Personaje/Proyectil.h" open="0" top="0" tabpos="17">
-		<Cursor position="85" topLine="0" />
-	</File>
-	<File name="Fighter/Stage/Stage.cpp" open="0" top="0" tabpos="18">
-		<Cursor position="56" topLine="0" />
-	</File>
-	<File name="Fighter/Stage/Stage.h" open="0" top="0" tabpos="1">
-		<Cursor position="89" topLine="0" />
-	</File>
-	<File name="Rosalila/IA/Automata.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="1116" topLine="9" />
-	</File>
-	<File name="Rosalila/IA/Automata.h" open="0" top="0" tabpos="12">
-		<Cursor position="438" topLine="0" />
-	</File>
-	<File name="Rosalila/IA/IA.cpp" open="0" top="0" tabpos="13">
-		<Cursor position="1275" topLine="8" />
-	</File>
-	<File name="Rosalila/IA/IA.h" open="0" top="0" tabpos="14">
-		<Cursor position="280" topLine="0" />
-	</File>
-	<File name="Rosalila/IA/Transicion.cpp" open="0" top="0" tabpos="15">
-		<Cursor position="536" topLine="0" />
-	</File>
-	<File name="Rosalila/IA/Transicion.h" open="0" top="0" tabpos="16">
-		<Cursor position="1031" topLine="12" />
-	</File>
-	<File name="Rosalila/Menu/Elemento.cpp" open="0" top="0" tabpos="20">
-		<Cursor position="63" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/Elemento.h" open="0" top="0" tabpos="21">
-		<Cursor position="428" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuBarra.cpp" open="0" top="0" tabpos="22">
-		<Cursor position="66" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuBarra.h" open="0" top="0" tabpos="23">
-		<Cursor position="349" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuBoton.cpp" open="0" top="0" tabpos="24">
-		<Cursor position="66" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuBoton.h" open="0" top="0" tabpos="25">
-		<Cursor position="447" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuCharSelect.cpp" open="0" top="0" tabpos="26">
-		<Cursor position="81" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuCharSelect.h" open="0" top="0" tabpos="27">
-		<Cursor position="1105" topLine="18" />
-	</File>
-	<File name="Rosalila/Menu/MenuContenedor.cpp" open="0" top="0" tabpos="28">
-		<Cursor position="81" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuContenedor.h" open="0" top="0" tabpos="29">
-		<Cursor position="365" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuImagen.cpp" open="0" top="0" tabpos="30">
-		<Cursor position="69" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuImagen.h" open="0" top="0" tabpos="31">
-		<Cursor position="270" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuLista.cpp" open="0" top="0" tabpos="32">
-		<Cursor position="66" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuLista.h" open="0" top="0" tabpos="33">
-		<Cursor position="552" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuTexto.cpp" open="0" top="0" tabpos="34">
-		<Cursor position="66" topLine="0" />
-	</File>
-	<File name="Rosalila/Menu/MenuTexto.h" open="0" top="0" tabpos="35">
-		<Cursor position="158" topLine="0" />
-	</File>
 	<File name="Rosalila/RosalilaGraphics/Animation.h" open="0" top="0" tabpos="22">
 		<Cursor position="250" topLine="0" />
 	</File>
+	<File name="Rosalila/RosalilaGraphics/Object3D.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="1148" topLine="25" />
+	</File>
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="0">
+		<Cursor position="427" topLine="0" />
+	</File>
 	<File name="Rosalila/RosalilaInputs/Boton.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="317" topLine="12" />
+		<Cursor position="662" topLine="9" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/Boton.h" open="0" top="0" tabpos="0">
 		<Cursor position="59" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="1" top="1" tabpos="3">
-		<Cursor position="3150" topLine="235" />
+	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="954" topLine="25" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/Receiver.h" open="0" top="0" tabpos="0">
 		<Cursor position="989" topLine="11" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/RosalilaInputs.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="3538" topLine="93" />
+	<File name="Rosalila/RosalilaInputs/RosalilaInputs.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="10346" topLine="211" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="0">
-		<Cursor position="317" topLine="4" />
+		<Cursor position="88" topLine="0" />
+	</File>
+	<File name="Rosalila/RosalilaSound/RosalilaSound.h" open="0" top="0" tabpos="0">
+		<Cursor position="247" topLine="1" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="23">
-		<Cursor position="249" topLine="6" />
+		<Cursor position="313" topLine="15" />
 	</File>
 </CodeBlocks_layout_file>

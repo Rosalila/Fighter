@@ -13,7 +13,7 @@
 
 //#include "RosalilaInputs/RosalilaInputs.h"
 #include "Fighter.h"
-#include "Utility/Utility.h"
+#include "RosalilaUtility/RosalilaUtility.h"
 
 #include <iostream>
 using namespace std;
