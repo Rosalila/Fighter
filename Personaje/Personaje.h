@@ -66,16 +66,16 @@ class Personaje
     Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int paleta);
     ~Personaje();
     //Cargares
-    void cargarDesdeXML(int px,int py,RosalilaInputs* input,char* nombre);
-    void cargarArchivo(char* archivo_xml);
-    void cargarMain();
-    void cargarVars();
-    void cargarRosalilaInputss();
-    void cargarTriggers();
-    void cargarSprites();
-    void cargarHitboxes();
-    void cargarSfx();
-    void cargarAnimations();
+    void loadFromXML(int px,int py,RosalilaInputs* input,char* nombre);
+    void loadMain();
+    void loadVars();
+    void loadInputs();
+    void loadTriggers();
+    void loadSprites();
+    void loadHitboxes();
+    void loadSfx();
+    void loadAnimations();
+    void loadProjectiles();
     //Dibujares
     void dibujar();
     void dibujarImagenCameraAlign(RosalilaGraphics*painter,Imagen* imagen,int posicion_x,int posicion_y);
@@ -107,7 +107,7 @@ class Personaje
     void agregarRosalilaInputs(std::string input,std::string movimiento);
     void agregarCondicion(std::string movimiento,int frame,vector<Condicion*> condicion);
     //void agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion);
-    void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
+    void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y);
     void agregarProyectil(Proyectil* proyectil);
     void agregarFrame(std::string movimiento, int duracion);
     void agregarModificador(std::string movimiento,int frame,std::string variable,Imagen* modificador,bool aplicar_a_contrario);

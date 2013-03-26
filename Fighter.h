@@ -65,6 +65,7 @@ public:
     void logicaPersonaje(Personaje *p);
     void logicaStage();
     void aplicarModificadores(Personaje *p);
+    void mandatoryModifiers(Personaje* p,Movimiento* m);
     void logica();
     void render();
     void dibujarBarra();

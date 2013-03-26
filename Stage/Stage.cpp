@@ -61,7 +61,7 @@ void Stage::dibujarFront()
     }
 }
 
-void Stage::cargarDesdeXML(std::string path)
+void Stage::loadFromXML(std::string path)
 {
     writeLogLine("Loading stage from XML.");
 

@@ -57,7 +57,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
 
     stage=new Stage(painter,sonido);
 
-    stage->cargarDesdeXML(getStage());
+    stage->loadFromXML(getStage());
 
     for(int i=0;i<num_personajes;i++)
     {
@@ -140,8 +140,8 @@ void Menu::loopMenu()
     llenarInputsBotones();
     inputa=new RosalilaInputs();
     inputb=new RosalilaInputs();
-    inputa->cargarDesdeXML(1,receiver);
-    inputb->cargarDesdeXML(2,receiver);
+    inputa->loadFromXML(1,receiver);
+    inputb->loadFromXML(2,receiver);
     bool tecla_arriba_p1=true;
     bool tecla_arriba_p2=true;
     //inicio
@@ -558,7 +558,7 @@ void Menu::loopMenu()
                             pb.push_back(p3b);
 
                             stage=new Stage(painter,sonido);
-                            stage->cargarDesdeXML(getStage());
+                            stage->loadFromXML(getStage());
 
                             sonido->stopMusic();
                             Fighter*fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,0,0);
@@ -601,12 +601,12 @@ void Menu::loopMenu()
 //                        RosalilaInputs* temp2=new RosalilaInputs();
 //                        if(player==1)
 //                        {
-//                            temp->cargarDesdeXML(1,receiver);
-//                            temp2->cargarDesdeXML(2,receiver);
+//                            temp->loadFromXML(1,receiver);
+//                            temp2->loadFromXML(2,receiver);
 //                        }else
 //                        {
-//                            temp->cargarDesdeXML(2,receiver);
-//                            temp2->cargarDesdeXML(1,receiver);
+//                            temp->loadFromXML(2,receiver);
+//                            temp2->loadFromXML(1,receiver);
 //                        }
 //                        if(accion==10||accion==20)mapeo="8";
 //                        if(accion==11||accion==21)mapeo="2";
@@ -1133,12 +1133,12 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     {
         writeLogLine("Loading inputs.");
         inputa=new RosalilaInputs();
-        inputa->cargarDesdeXML(1,receiver);
+        inputa->loadFromXML(1,receiver);
     }
 
     //get char
     Personaje* p=new Personaje(painter,sonido,1,num_paleta);
-    p->cargarDesdeXML(stage->size/2-painter->screen_width/4-200,0,inputa,(char *)path_a);
+    p->loadFromXML(stage->size/2-painter->screen_width/4-200,0,inputa,(char *)path_a);
     writeLogLine("Loaded successfully.");
     return p;
 }
@@ -1181,12 +1181,12 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     {
         writeLogLine("Loading inputs.");
         inputb=new RosalilaInputs();
-        inputb->cargarDesdeXML(2,receiver);
+        inputb->loadFromXML(2,receiver);
     }
 
     //get char
     Personaje* p=new Personaje(painter,sonido,2,num_paleta);
-    p->cargarDesdeXML(stage->size/2-painter->screen_width/4+200,0,inputb,(char *)path_b);
+    p->loadFromXML(stage->size/2-painter->screen_width/4+200,0,inputb,(char *)path_b);
     writeLogLine("Loaded successfully.");
     return p;
 }
@@ -1424,12 +1424,12 @@ void Menu::llenarInputsBotones()
 //                RosalilaInputs* temp2=new RosalilaInputs();
 //                if(player==1)
 //                {
-//                    temp->cargarDesdeXML(1,receiver);
-//                    temp2->cargarDesdeXML(2,receiver);
+//                    temp->loadFromXML(1,receiver);
+//                    temp2->loadFromXML(2,receiver);
 //                }else
 //                {
-//                    temp->cargarDesdeXML(2,receiver);
-//                    temp2->cargarDesdeXML(1,receiver);
+//                    temp->loadFromXML(2,receiver);
+//                    temp2->loadFromXML(1,receiver);
 //                }
 //                if(accion==10||accion==20)mapeo="8";
 //                if(accion==11||accion==21)mapeo="2";

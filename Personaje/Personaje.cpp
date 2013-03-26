@@ -477,9 +477,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -767,11 +767,7 @@ void Personaje::aplicarModificadores(vector<Modificador*> modificadores,bool fli
     }
 }
 
-void Personaje::cargarArchivo(char* archivo_xml)
-{
-}
-
-void Personaje::cargarDesdeXML(int px,int py,RosalilaInputs* input,char* nombre)
+void Personaje::loadFromXML(int px,int py,RosalilaInputs* input,char* nombre)
 {
     writeLogLine("Loading "+std::string(nombre)+" from XML.");
     this->input=input;
@@ -801,21 +797,23 @@ void Personaje::cargarDesdeXML(int px,int py,RosalilaInputs* input,char* nombre)
     strcat(path_palettes,"/palettes.xml\0");
     paleta.cargarXML(path_palettes,num_paleta);
 
-    cargarMain();
+    loadMain();
 
-    cargarVars();
+    loadVars();
 
-    cargarRosalilaInputss();
+    loadInputs();
 
-    cargarTriggers();
+    loadTriggers();
 
-    cargarSprites();
+    loadSprites();
 
-    cargarHitboxes();
+    loadHitboxes();
 
-    cargarSfx();
+    loadSfx();
 
-    cargarAnimations();
+    loadAnimations();
+
+    loadProjectiles();
 }
 
 void Personaje::logicaBarras()
@@ -831,7 +829,7 @@ void Personaje::logicaBarras()
     }
 }
 
-void Personaje::cargarMain()
+void Personaje::loadMain()
 {
     writeLogLine("Loading main.xml");
     char* path=new char[255];
@@ -896,129 +894,26 @@ void Personaje::cargarMain()
             if(elemento_imagen->Attribute("unblockable_low")!=NULL)
                 unblockable_low=strcmp(elemento_imagen->Attribute("unblockable_low"),"yes")==0;
 
+            int velocity_x=0;
+            if(elemento_imagen->Attribute("velocity_x")!=NULL)
+                velocity_x=atoi(elemento_imagen->Attribute("velocity_x"));
+
+            int velocity_y=0;
+            if(elemento_imagen->Attribute("velocity_y")!=NULL)
+                velocity_y=atoi(elemento_imagen->Attribute("velocity_y"));
+
+            int acceleration_x=0;
+            if(elemento_imagen->Attribute("acceleration_x")!=NULL)
+                acceleration_x=atoi(elemento_imagen->Attribute("acceleration_x"));
+
+            int acceleration_y=0;
+            if(elemento_imagen->Attribute("acceleration_y")!=NULL)
+                acceleration_y=atoi(elemento_imagen->Attribute("acceleration_y"));
+
             setString(std::string("isActive.")+nombre,"no");
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low);
+            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
-            if(elemento_imagen->Attribute("move_x")!=NULL)
-            {
-                int desplazamiento=atoi(elemento_imagen->Attribute("move_x"));
-                for(int i=0;i<frames;i++)
-                    agregarModificador(nombre,i,"position_x",desplazamiento,true,false,true);
-            }
-            if(elemento_imagen->Attribute("move_y")!=NULL)
-            {
-                int desplazamiento=atoi(elemento_imagen->Attribute("move_y"));
-                for(int i=0;i<frames;i++)
-                    agregarModificador(nombre,i,"position_y",desplazamiento,true,false,false);
-            }
-        }
-        writeLogLine("Loading projectiles.");
-        if(nodo->FirstChild("projectile")!=NULL)
-        for(TiXmlElement *elemento_imagen=nodo->FirstChild("projectile")->ToElement();
-                elemento_imagen!=NULL;
-                elemento_imagen=elemento_imagen->NextSiblingElement("projectile"))
-        {
-            std::string nombre(elemento_imagen->Attribute("name"));
-            writeLogLine("Loading "+nombre);
-            int posicion_x(atoi(elemento_imagen->Attribute("position_x")));
-            int posicion_y(atoi(elemento_imagen->Attribute("position_y")));
-            int speed_x(atoi(elemento_imagen->Attribute("speed_x")));
-            int speed_y(atoi(elemento_imagen->Attribute("speed_y")));
-            int damage(atoi(elemento_imagen->Attribute("damage")));
-            bool multihit=false;
-            if(elemento_imagen->Attribute("multihit")!=NULL)
-                multihit=strcmp(elemento_imagen->Attribute("multihit"),"yes")==0;
-
-            setEntero(nombre+".position_x",0);
-            setEntero(nombre+".position_y",0);
-
-            setString(nombre+".state","");
-            setString(nombre+".orientation","");
-
-            //Sprites
-            std::vector<Imagen*>sprites;
-            TiXmlNode *temp=elemento_imagen->FirstChild("Sprites");
-            if(temp!=NULL)
-            {
-                if(!temp->NoChildren())
-                for(TiXmlElement *elemento_sprite=temp->FirstChild("Sprite")->ToElement();
-                        elemento_sprite!=NULL;
-                        elemento_sprite=elemento_sprite->NextSiblingElement("Sprite"))
-                {
-                    std::string path(elemento_sprite->Attribute("path"));
-                    std::string dir("chars/");
-                    path=dir+char_name+"/"+path;
-                    int escala=atoi(elemento_sprite->Attribute("scale"));
-                    int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
-                    int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
-
-
-                    Image* texture;
-                    if(ignore_color==NULL)
-                        texture=painter->getTexture(path);
-//                        else//!!IGNORE COLOR
-//                            texture=painter->getTexture(path,ignore_color);
-                    sprites.push_back(new Imagen(texture,escala,alineacion_x,alineacion_y));
-                }
-            }
-
-            //Proyectil listo
-            Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage,multihit);
-
-            //Frames
-            std::string prefijo="Projectile.";
-            int frames=atoi(elemento_imagen->Attribute("frames"));
-            int frame_duration=atoi(elemento_imagen->Attribute("frame_duration"));
-
-            for(int i=0;i<frames;i++)
-            {
-                proyectil->agregarFrame(frame_duration);
-                proyectil->frames[i]->agregarModificador(speed_x,nombre+".position_x",true,false,true);
-                proyectil->frames[i]->agregarModificador(-speed_y,nombre+".position_y",true,false,false);
-//                    if(i==frames-1)
-//                        proyectil->frames[i].agregarModificador(hitboxes,nombre+".hitboxes",false);
-            }
-
-            //Hitboxes
-            std::vector<HitBox*> hitboxes_vacia;
-            setHitBoxes(nombre+".hitboxes",hitboxes_vacia);
-            for(TiXmlElement *elemento_hitboxes=elemento_imagen->FirstChild("Hitboxes")->ToElement();
-                    elemento_hitboxes!=NULL;
-                    elemento_hitboxes=elemento_hitboxes->NextSiblingElement("Hitboxes"))
-            {
-                int num_frame=atoi(elemento_hitboxes->Attribute("frame"));
-                temp=elemento_hitboxes;
-                std::vector<HitBox*> hitboxes;
-                if(!temp->NoChildren())
-                for(TiXmlElement *elemento_hb=temp->FirstChild("Hitbox")->ToElement();
-                        elemento_hb!=NULL;
-                        elemento_hb=elemento_hb->NextSiblingElement("Hitbox"))
-                {
-                    int x1=atoi(elemento_hb->Attribute("x1"));
-                    int y1=atoi(elemento_hb->Attribute("y1"));
-                    int x2=atoi(elemento_hb->Attribute("x2"));
-                    int y2=atoi(elemento_hb->Attribute("y2"));
-                    hitboxes.push_back(new HitBox(x1,-y1,x2,-y2));
-                }
-                proyectil->frames[num_frame]->agregarModificador(hitboxes,nombre+".hitboxes",false);
-            }
-
-            //Modificadores
-            proyectil->frames[0]->agregarModificador("off",nombre+".trigger",false);
-            proyectil->frames[0]->agregarModificador("entero","position_x",nombre+".position_x",false,false,false);
-            proyectil->frames[0]->agregarModificador(posicion_x,nombre+".position_x",true,false,true);
-            proyectil->frames[0]->agregarModificador("entero","position_y",nombre+".position_y",false,false,false);
-            proyectil->frames[0]->agregarModificador(-posicion_y,nombre+".position_y",true,false,false);
-
-            //Triggers
-            setString(nombre+".trigger","off");
-            std::vector<Condicion*>cond_temp;
-            cond_temp.push_back(new Condicion(nombre+".trigger","=","on",false));
-            proyectil->agregarCondicion(cond_temp,0);
-
-            //Listo
-            agregarProyectil(proyectil);
         }
 
         writeLogLine("Loading sprites.");
@@ -1119,7 +1014,7 @@ void Personaje::cargarMain()
     }
 }
 
-void Personaje::cargarVars()
+void Personaje::loadVars()
 {
     writeLogLine("Loading vars.xml");
     char* path=new char[255];
@@ -1207,7 +1102,7 @@ void Personaje::cargarVars()
     }
 }
 
-void Personaje::cargarRosalilaInputss()
+void Personaje::loadInputs()
 {
     writeLogLine("Loading inputs.xml");
     char* path=new char[255];
@@ -1323,7 +1218,7 @@ void Personaje::cargarRosalilaInputss()
     }
 }
 
-void Personaje::cargarTriggers()
+void Personaje::loadTriggers()
 {
     writeLogLine("Loading triggers.xml");
     char* path=new char[255];
@@ -1377,7 +1272,7 @@ void Personaje::cargarTriggers()
     }
 }
 
-void Personaje::cargarSprites()
+void Personaje::loadSprites()
 {
     writeLogLine("Loading sprites.xml");
     char* path=new char[255];
@@ -1418,7 +1313,7 @@ void Personaje::cargarSprites()
                     e=e->NextSiblingElement("Sprite"))
             {
                 int frame=atoi(e->Attribute("frame_number"))-1;
-                std::string str_variable(e->Attribute("variable"));
+                std::string str_variable="current_image";
                 std::string path(e->Attribute("path"));
                 std::string dir("chars/");
                 path=dir+char_name+"/"+path;
@@ -1426,8 +1321,11 @@ void Personaje::cargarSprites()
                 e->QueryDoubleAttribute("scale",&escala);
                 int alineacion_x=atoi(e->Attribute("align_x"));
                 int alineacion_y=atoi(e->Attribute("align_y"));
-                std::string str_contrario(e->Attribute("to_opponent"));
-                bool contrario=(str_contrario=="si");
+                bool to_opponent=false;
+                if(e->Attribute("to_opponent")!=NULL)
+                {
+                    to_opponent=strcmp(e->Attribute("to_opponent"),"yes")==0;
+                }
 
                 writeLogLine("Loading "+path+".");
 
@@ -1436,7 +1334,7 @@ void Personaje::cargarSprites()
                     Image* texture=painter->getTexture(path);
                     textures.push_back(texture);
 //                    paleta.paintTexture(texture);
-                    agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
+                    agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),to_opponent);
 //                    paleta.restoreTexture(texture);
                 }
                 else//!!IGNORE COLOR
@@ -1444,7 +1342,7 @@ void Personaje::cargarSprites()
                     Image* texture=painter->getTexture(path);
                     textures.push_back(texture);
 //                    paleta.paintTexture(texture);
-                    agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),contrario);
+                    agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),to_opponent);
 //                    paleta.restoreTexture(texture);
 //                    video::IImage* image = painter->driver->createImageFromFile(path);
 //
@@ -1460,7 +1358,7 @@ void Personaje::cargarSprites()
     }
 }
 
-void Personaje::cargarHitboxes()
+void Personaje::loadHitboxes()
 {
     writeLogLine("Loading hitboxes.xml");
     char* path=new char[255];
@@ -1518,7 +1416,7 @@ void Personaje::cargarHitboxes()
     }
 }
 
-void Personaje::cargarSfx()
+void Personaje::loadSfx()
 {
     writeLogLine("Loading sfx.xml");
     char* path=new char[255];
@@ -1547,7 +1445,7 @@ void Personaje::cargarSfx()
 
 }
 
-void Personaje::cargarAnimations()
+void Personaje::loadAnimations()
 {
     writeLogLine("Loading vfx.xml");
     char* path_animations=new char[255];
@@ -1658,8 +1556,127 @@ void Personaje::cargarAnimations()
                                     );
         setString(std::string("Animation.")+name,"off");
         setString(std::string("Animation.")+std::string(name+".isActive"),"false");
-
     }
+}
+
+void Personaje::loadProjectiles()
+{
+    writeLogLine("Loading vfx.xml");
+    char* path_animations=new char[255];
+    strcpy(path_animations,"chars/");
+    strcat(path_animations,char_name_ptr);
+    strcat(path_animations,"/projectiles.xml");
+    TiXmlDocument doc_t(path_animations);
+    doc_t.LoadFile();
+    TiXmlDocument *doc;
+    doc=&doc_t;
+
+    TiXmlNode*projectiles_file=doc->FirstChild("ProjectilesFile");
+
+    if(projectiles_file->FirstChild("projectile")!=NULL)
+    for(TiXmlElement *projectile_element=projectiles_file->FirstChild("projectile")->ToElement();
+            projectile_element!=NULL;
+            projectile_element=projectile_element->NextSiblingElement("projectile"))
+    {
+        std::string nombre(projectile_element->Attribute("name"));
+        writeLogLine("Loading "+nombre);
+        int posicion_x(atoi(projectile_element->Attribute("position_x")));
+        int posicion_y(atoi(projectile_element->Attribute("position_y")));
+        int speed_x(atoi(projectile_element->Attribute("speed_x")));
+        int speed_y(atoi(projectile_element->Attribute("speed_y")));
+        int damage(atoi(projectile_element->Attribute("damage")));
+        bool multihit=false;
+        if(projectile_element->Attribute("multihit")!=NULL)
+            multihit=strcmp(projectile_element->Attribute("multihit"),"yes")==0;
+
+        setEntero(nombre+".position_x",0);
+        setEntero(nombre+".position_y",0);
+
+        setString(nombre+".state","");
+        setString(nombre+".orientation","");
+
+        //Sprites
+        std::vector<Imagen*>sprites;
+        TiXmlNode *temp=projectile_element->FirstChild("Sprites");
+        if(temp!=NULL)
+        {
+            if(!temp->NoChildren())
+            for(TiXmlElement *elemento_sprite=temp->FirstChild("Sprite")->ToElement();
+                    elemento_sprite!=NULL;
+                    elemento_sprite=elemento_sprite->NextSiblingElement("Sprite"))
+            {
+                std::string path(elemento_sprite->Attribute("path"));
+                std::string dir("chars/");
+                path=dir+char_name+"/"+path;
+                int escala=atoi(elemento_sprite->Attribute("scale"));
+                int alineacion_x=atoi(elemento_sprite->Attribute("align_x"));
+                int alineacion_y=atoi(elemento_sprite->Attribute("align_y"));
+
+
+                Image* texture;
+                texture=painter->getTexture(path);
+                sprites.push_back(new Imagen(texture,escala,alineacion_x,alineacion_y));
+            }
+        }
+
+        //Proyectil listo
+        Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage,multihit);
+
+        //Frames
+        std::string prefijo="Projectile.";
+        int frames=atoi(projectile_element->Attribute("frames"));
+        int frame_duration=atoi(projectile_element->Attribute("frame_duration"));
+
+        for(int i=0;i<frames;i++)
+        {
+            proyectil->agregarFrame(frame_duration);
+            proyectil->frames[i]->agregarModificador(speed_x,nombre+".position_x",true,false,true);
+            proyectil->frames[i]->agregarModificador(-speed_y,nombre+".position_y",true,false,false);
+//                    if(i==frames-1)
+//                        proyectil->frames[i].agregarModificador(hitboxes,nombre+".hitboxes",false);
+        }
+
+        //Hitboxes
+        std::vector<HitBox*> hitboxes_vacia;
+        setHitBoxes(nombre+".hitboxes",hitboxes_vacia);
+        for(TiXmlElement *elemento_hitboxes=projectile_element->FirstChild("Hitboxes")->ToElement();
+                elemento_hitboxes!=NULL;
+                elemento_hitboxes=elemento_hitboxes->NextSiblingElement("Hitboxes"))
+        {
+            int num_frame=atoi(elemento_hitboxes->Attribute("frame"));
+            temp=elemento_hitboxes;
+            std::vector<HitBox*> hitboxes;
+            if(!temp->NoChildren())
+            for(TiXmlElement *elemento_hb=temp->FirstChild("Hitbox")->ToElement();
+                    elemento_hb!=NULL;
+                    elemento_hb=elemento_hb->NextSiblingElement("Hitbox"))
+            {
+                int x1=atoi(elemento_hb->Attribute("x1"));
+                int y1=atoi(elemento_hb->Attribute("y1"));
+                int x2=atoi(elemento_hb->Attribute("x2"));
+                int y2=atoi(elemento_hb->Attribute("y2"));
+                hitboxes.push_back(new HitBox(x1,-y1,x2,-y2));
+            }
+            proyectil->frames[num_frame]->agregarModificador(hitboxes,nombre+".hitboxes",false);
+        }
+
+        //Modificadores
+        proyectil->frames[0]->agregarModificador("off",nombre+".trigger",false);
+        proyectil->frames[0]->agregarModificador("entero","position_x",nombre+".position_x",false,false,false);
+        proyectil->frames[0]->agregarModificador(posicion_x,nombre+".position_x",true,false,true);
+        proyectil->frames[0]->agregarModificador("entero","position_y",nombre+".position_y",false,false,false);
+        proyectil->frames[0]->agregarModificador(-posicion_y,nombre+".position_y",true,false,false);
+
+        //Triggers
+        setString(nombre+".trigger","off");
+        std::vector<Condicion*>cond_temp;
+        cond_temp.push_back(new Condicion(nombre+".trigger","=","on",false));
+        proyectil->agregarCondicion(cond_temp,0);
+
+        //Listo
+        agregarProyectil(proyectil);
+    }
+
 }
 
 void Personaje::logicaProyectiles()
@@ -2016,17 +2033,17 @@ void Personaje::resetPersonaje()
     setEntero("Colision.x",0);
     setEntero("Colision.y",0);
 
-//    cargarMain();
+//    loadMain();
 //
-//    cargarVars();
+//    loadVars();
 //
-//    cargarRosalilaInputss();
+//    loadInputs();
 //
-//    cargarTriggers();
+//    loadTriggers();
 //
-//    cargarHitboxes();
+//    loadHitboxes();
 //
-//    cargarSfx();
+//    loadSfx();
 //
-//    cargarAnimations();
+//    loadAnimations();
 }

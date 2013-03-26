@@ -38,68 +38,37 @@ Loading Moves declarations.
 Loading victory
 Loading intro
 Loading ko
-Loading entrance
-Loading change_char
 Loading walk back
 Loading walk forward
 Loading jump up
 Loading jump forward
 Loading jump back
-Loading move_up
-Loading move_forward
-Loading move_back
-Loading move_up_change_char
-Loading move_back_change_char
-Loading move_forward_change_char
-Loading push_left
-Loading push_right
-Loading a
-Loading b
 Loading 2
 Loading crouching
-Loading 2a
-Loading 2b
-Loading 8a
-Loading 9a
 Loading 5
-Loading stand light punch
-Loading stand light kick
-Loading stand medium punch
-Loading stand medium kick
-Loading stand fierce punch
-Loading stand fierce kick
-Loading crouch light punch
-Loading crouch light kick
-Loading crouch medium punch
-Loading crouch medium kick
-Loading crouch fierce punch
-Loading crouch fierce kick
-Loading move_up_opponent
-Loading move_back_opponent
+Loading a
+Loading b
+Loading crouch a
+Loading crouch b
+Loading air a
+Loading air b
 Loading super
-Loading tatsumaki
-Loading shoryuken
-Loading hadouken
 Loading defense.standing
 Loading defense.crouch
 Loading on_hit.stand
 Loading on_hit.crouch
 Loading on_hit.air
 Loading on_hit.knockdown
+Loading separate
 Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
-Loading separate
-Loading poison
-Loading idle jumping
-Loading gravity
+Loading on_land_cancel
 Loading setState.jumping
 Loading setState.standing
 Loading setState.crouch
-Loading on_land_cancel
-Loading projectiles.
-Loading hadouken
-chars/Shizune/sprites/projectiles/hadouken/1.png loaded
-chars/Shizune/sprites/projectiles/hadouken/2.png loaded
+Loading push_left
+Loading push_right
+Loading idle jumping
 Loading sprites.
 Loading sprites/idle/1.png
 chars/Shizune/sprites/idle/1.png loaded
@@ -118,8 +87,6 @@ Loading trigger.crouch
 Loading trigger.move_up
 Loading trigger.poison
 Loading jumping_state
-Loading trigger.move_up_opponent
-Loading trigger.move_back_opponent
 Loading integer.
 Loading distance
 Loading distance_absolute
@@ -189,7 +156,7 @@ chars/Shizune/sprites/crouching/2.png loaded
 Loading 2.
 Loading chars/Shizune/sprites/crouched/1.png.
 chars/Shizune/sprites/crouched/1.png loaded
-Loading stand light punch.
+Loading a.
 Loading chars/Shizune/sprites/a/1.png.
 chars/Shizune/sprites/a/1.png loaded
 Loading chars/Shizune/sprites/a/2.png.
@@ -198,20 +165,98 @@ Loading chars/Shizune/sprites/a/3.png.
 chars/Shizune/sprites/a/3.png loaded
 Loading chars/Shizune/sprites/a/4.png.
 chars/Shizune/sprites/a/4.png loaded
-Loading crouch light punch.
-Loading chars/Shizune/sprites/2a/1.png.
-chars/Shizune/sprites/2a/1.png loaded
-Loading chars/Shizune/sprites/2a/2.png.
-chars/Shizune/sprites/2a/2.png loaded
-Loading chars/Shizune/sprites/2a/3.png.
-chars/Shizune/sprites/2a/3.png loaded
-Loading crouch medium punch.
-Loading chars/Shizune/sprites/2b/1.png.
-chars/Shizune/sprites/2b/1.png loaded
-Loading chars/Shizune/sprites/2b/2.png.
-chars/Shizune/sprites/2b/2.png loaded
-Loading chars/Shizune/sprites/2b/3.png.
-chars/Shizune/sprites/2b/3.png loaded
+Loading b.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
+Loading crouch a.
+Loading chars/Shizune/sprites/crouch a/1.png.
+chars/Shizune/sprites/crouch a/1.png loaded
+Loading chars/Shizune/sprites/crouch a/2.png.
+chars/Shizune/sprites/crouch a/2.png loaded
+Loading crouch b.
+Loading chars/Shizune/sprites/crouch b/1.png.
+chars/Shizune/sprites/crouch b/1.png loaded
+Loading chars/Shizune/sprites/crouch b/2.png.
+chars/Shizune/sprites/crouch b/2.png loaded
+Loading air a.
+Loading chars/Shizune/sprites/air a/1.png.
+chars/Shizune/sprites/air a/1.png loaded
+Loading air b.
+Loading chars/Shizune/sprites/air b/1.png.
+chars/Shizune/sprites/air b/1.png loaded
+Loading jump up.
+Loading chars/Shizune/sprites/jump/1.png.
+chars/Shizune/sprites/jump/1.png loaded
+Loading chars/Shizune/sprites/jump/2.png.
+chars/Shizune/sprites/jump/2.png loaded
+Loading chars/Shizune/sprites/jump/3.png.
+chars/Shizune/sprites/jump/3.png loaded
+Loading idle jumping.
+Loading chars/Shizune/sprites/jump/3.png.
+chars/Shizune/sprites/jump/3.png loaded
+Loading on_hit.stand.
+Loading chars/Shizune/sprites/on_hit_stand/1.png.
+chars/Shizune/sprites/on_hit_stand/1.png loaded
+Loading chars/Shizune/sprites/on_hit_stand/2.png.
+chars/Shizune/sprites/on_hit_stand/2.png loaded
+Loading on_hit.crouch.
+Loading chars/Shizune/sprites/on_hit_crouch/1.png.
+chars/Shizune/sprites/on_hit_crouch/1.png loaded
+Loading chars/Shizune/sprites/on_hit_crouch/2.png.
+chars/Shizune/sprites/on_hit_crouch/2.png loaded
+Loading defense.standing.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
+Loading defense.crouch.
+Loading chars/Shizune/sprites/crouch_defense/1.png.
+chars/Shizune/sprites/crouch_defense/1.png loaded
+Loading super.
+Loading chars/Shizune/sprites/super/1.png.
+chars/Shizune/sprites/super/1.png loaded
+Loading chars/Shizune/sprites/super/2.png.
+chars/Shizune/sprites/super/2.png loaded
+Loading chars/Shizune/sprites/super/3.png.
+chars/Shizune/sprites/super/3.png loaded
+Loading chars/Shizune/sprites/super/4.png.
+chars/Shizune/sprites/super/4.png loaded
+Loading chars/Shizune/sprites/super/5.png.
+chars/Shizune/sprites/super/5.png loaded
+Loading chars/Shizune/sprites/super/6.png.
+chars/Shizune/sprites/super/6.png loaded
+Loading chars/Shizune/sprites/super/7.png.
+chars/Shizune/sprites/super/7.png loaded
+Loading chars/Shizune/sprites/super/8.png.
+chars/Shizune/sprites/super/8.png loaded
+Loading chars/Shizune/sprites/super/9.png.
+chars/Shizune/sprites/super/9.png loaded
+Loading chars/Shizune/sprites/super/10.png.
+chars/Shizune/sprites/super/10.png loaded
+Loading chars/Shizune/sprites/super/11.png.
+chars/Shizune/sprites/super/11.png loaded
+Loading chars/Shizune/sprites/super/12.png.
+chars/Shizune/sprites/super/12.png loaded
+Loading chars/Shizune/sprites/super/13.png.
+chars/Shizune/sprites/super/13.png loaded
+Loading chars/Shizune/sprites/super/14.png.
+chars/Shizune/sprites/super/14.png loaded
+Loading chars/Shizune/sprites/super/15.png.
+chars/Shizune/sprites/super/15.png loaded
+Loading chars/Shizune/sprites/super/16.png.
+chars/Shizune/sprites/super/16.png loaded
+Loading chars/Shizune/sprites/super/17.png.
+chars/Shizune/sprites/super/17.png loaded
+Loading chars/Shizune/sprites/super/18.png.
+chars/Shizune/sprites/super/18.png loaded
+Loading chars/Shizune/sprites/super/19.png.
+chars/Shizune/sprites/super/19.png loaded
+Loading chars/Shizune/sprites/super/20.png.
+chars/Shizune/sprites/super/20.png loaded
+Loading ko.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
+Loading victory.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
 Loading hitboxes.xml
 Loading sfx.xml
 Loading vfx.xml
@@ -230,6 +275,10 @@ chars/Shizune/sprites/animations/hit/2.png loaded
 chars/Shizune/sprites/animations/hit/3.png loaded
 chars/Shizune/sprites/animations/hit/4.png loaded
 chars/Shizune/sprites/animations/hit/5.png loaded
+Loading vfx.xml
+Loading hadouken
+chars/Shizune/sprites/projectiles/hadouken/1.png loaded
+chars/Shizune/sprites/projectiles/hadouken/2.png loaded
 Loaded successfully.
 Initializing player's 1 character #0.
 Loading inputs.
@@ -242,68 +291,37 @@ Loading Moves declarations.
 Loading victory
 Loading intro
 Loading ko
-Loading entrance
-Loading change_char
 Loading walk back
 Loading walk forward
 Loading jump up
 Loading jump forward
 Loading jump back
-Loading move_up
-Loading move_forward
-Loading move_back
-Loading move_up_change_char
-Loading move_back_change_char
-Loading move_forward_change_char
-Loading push_left
-Loading push_right
-Loading a
-Loading b
 Loading 2
 Loading crouching
-Loading 2a
-Loading 2b
-Loading 8a
-Loading 9a
 Loading 5
-Loading stand light punch
-Loading stand light kick
-Loading stand medium punch
-Loading stand medium kick
-Loading stand fierce punch
-Loading stand fierce kick
-Loading crouch light punch
-Loading crouch light kick
-Loading crouch medium punch
-Loading crouch medium kick
-Loading crouch fierce punch
-Loading crouch fierce kick
-Loading move_up_opponent
-Loading move_back_opponent
+Loading a
+Loading b
+Loading crouch a
+Loading crouch b
+Loading air a
+Loading air b
 Loading super
-Loading tatsumaki
-Loading shoryuken
-Loading hadouken
 Loading defense.standing
 Loading defense.crouch
 Loading on_hit.stand
 Loading on_hit.crouch
 Loading on_hit.air
 Loading on_hit.knockdown
+Loading separate
 Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
-Loading separate
-Loading poison
-Loading idle jumping
-Loading gravity
+Loading on_land_cancel
 Loading setState.jumping
 Loading setState.standing
 Loading setState.crouch
-Loading on_land_cancel
-Loading projectiles.
-Loading hadouken
-chars/Shizune/sprites/projectiles/hadouken/1.png loaded
-chars/Shizune/sprites/projectiles/hadouken/2.png loaded
+Loading push_left
+Loading push_right
+Loading idle jumping
 Loading sprites.
 Loading sprites/idle/1.png
 chars/Shizune/sprites/idle/1.png loaded
@@ -322,8 +340,6 @@ Loading trigger.crouch
 Loading trigger.move_up
 Loading trigger.poison
 Loading jumping_state
-Loading trigger.move_up_opponent
-Loading trigger.move_back_opponent
 Loading integer.
 Loading distance
 Loading distance_absolute
@@ -393,7 +409,7 @@ chars/Shizune/sprites/crouching/2.png loaded
 Loading 2.
 Loading chars/Shizune/sprites/crouched/1.png.
 chars/Shizune/sprites/crouched/1.png loaded
-Loading stand light punch.
+Loading a.
 Loading chars/Shizune/sprites/a/1.png.
 chars/Shizune/sprites/a/1.png loaded
 Loading chars/Shizune/sprites/a/2.png.
@@ -402,20 +418,98 @@ Loading chars/Shizune/sprites/a/3.png.
 chars/Shizune/sprites/a/3.png loaded
 Loading chars/Shizune/sprites/a/4.png.
 chars/Shizune/sprites/a/4.png loaded
-Loading crouch light punch.
-Loading chars/Shizune/sprites/2a/1.png.
-chars/Shizune/sprites/2a/1.png loaded
-Loading chars/Shizune/sprites/2a/2.png.
-chars/Shizune/sprites/2a/2.png loaded
-Loading chars/Shizune/sprites/2a/3.png.
-chars/Shizune/sprites/2a/3.png loaded
-Loading crouch medium punch.
-Loading chars/Shizune/sprites/2b/1.png.
-chars/Shizune/sprites/2b/1.png loaded
-Loading chars/Shizune/sprites/2b/2.png.
-chars/Shizune/sprites/2b/2.png loaded
-Loading chars/Shizune/sprites/2b/3.png.
-chars/Shizune/sprites/2b/3.png loaded
+Loading b.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
+Loading crouch a.
+Loading chars/Shizune/sprites/crouch a/1.png.
+chars/Shizune/sprites/crouch a/1.png loaded
+Loading chars/Shizune/sprites/crouch a/2.png.
+chars/Shizune/sprites/crouch a/2.png loaded
+Loading crouch b.
+Loading chars/Shizune/sprites/crouch b/1.png.
+chars/Shizune/sprites/crouch b/1.png loaded
+Loading chars/Shizune/sprites/crouch b/2.png.
+chars/Shizune/sprites/crouch b/2.png loaded
+Loading air a.
+Loading chars/Shizune/sprites/air a/1.png.
+chars/Shizune/sprites/air a/1.png loaded
+Loading air b.
+Loading chars/Shizune/sprites/air b/1.png.
+chars/Shizune/sprites/air b/1.png loaded
+Loading jump up.
+Loading chars/Shizune/sprites/jump/1.png.
+chars/Shizune/sprites/jump/1.png loaded
+Loading chars/Shizune/sprites/jump/2.png.
+chars/Shizune/sprites/jump/2.png loaded
+Loading chars/Shizune/sprites/jump/3.png.
+chars/Shizune/sprites/jump/3.png loaded
+Loading idle jumping.
+Loading chars/Shizune/sprites/jump/3.png.
+chars/Shizune/sprites/jump/3.png loaded
+Loading on_hit.stand.
+Loading chars/Shizune/sprites/on_hit_stand/1.png.
+chars/Shizune/sprites/on_hit_stand/1.png loaded
+Loading chars/Shizune/sprites/on_hit_stand/2.png.
+chars/Shizune/sprites/on_hit_stand/2.png loaded
+Loading on_hit.crouch.
+Loading chars/Shizune/sprites/on_hit_crouch/1.png.
+chars/Shizune/sprites/on_hit_crouch/1.png loaded
+Loading chars/Shizune/sprites/on_hit_crouch/2.png.
+chars/Shizune/sprites/on_hit_crouch/2.png loaded
+Loading defense.standing.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
+Loading defense.crouch.
+Loading chars/Shizune/sprites/crouch_defense/1.png.
+chars/Shizune/sprites/crouch_defense/1.png loaded
+Loading super.
+Loading chars/Shizune/sprites/super/1.png.
+chars/Shizune/sprites/super/1.png loaded
+Loading chars/Shizune/sprites/super/2.png.
+chars/Shizune/sprites/super/2.png loaded
+Loading chars/Shizune/sprites/super/3.png.
+chars/Shizune/sprites/super/3.png loaded
+Loading chars/Shizune/sprites/super/4.png.
+chars/Shizune/sprites/super/4.png loaded
+Loading chars/Shizune/sprites/super/5.png.
+chars/Shizune/sprites/super/5.png loaded
+Loading chars/Shizune/sprites/super/6.png.
+chars/Shizune/sprites/super/6.png loaded
+Loading chars/Shizune/sprites/super/7.png.
+chars/Shizune/sprites/super/7.png loaded
+Loading chars/Shizune/sprites/super/8.png.
+chars/Shizune/sprites/super/8.png loaded
+Loading chars/Shizune/sprites/super/9.png.
+chars/Shizune/sprites/super/9.png loaded
+Loading chars/Shizune/sprites/super/10.png.
+chars/Shizune/sprites/super/10.png loaded
+Loading chars/Shizune/sprites/super/11.png.
+chars/Shizune/sprites/super/11.png loaded
+Loading chars/Shizune/sprites/super/12.png.
+chars/Shizune/sprites/super/12.png loaded
+Loading chars/Shizune/sprites/super/13.png.
+chars/Shizune/sprites/super/13.png loaded
+Loading chars/Shizune/sprites/super/14.png.
+chars/Shizune/sprites/super/14.png loaded
+Loading chars/Shizune/sprites/super/15.png.
+chars/Shizune/sprites/super/15.png loaded
+Loading chars/Shizune/sprites/super/16.png.
+chars/Shizune/sprites/super/16.png loaded
+Loading chars/Shizune/sprites/super/17.png.
+chars/Shizune/sprites/super/17.png loaded
+Loading chars/Shizune/sprites/super/18.png.
+chars/Shizune/sprites/super/18.png loaded
+Loading chars/Shizune/sprites/super/19.png.
+chars/Shizune/sprites/super/19.png loaded
+Loading chars/Shizune/sprites/super/20.png.
+chars/Shizune/sprites/super/20.png loaded
+Loading ko.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
+Loading victory.
+Loading chars/Shizune/sprites/not_done.png.
+chars/Shizune/sprites/not_done.png loaded
 Loading hitboxes.xml
 Loading sfx.xml
 Loading vfx.xml
@@ -434,6 +528,10 @@ chars/Shizune/sprites/animations/hit/2.png loaded
 chars/Shizune/sprites/animations/hit/3.png loaded
 chars/Shizune/sprites/animations/hit/4.png loaded
 chars/Shizune/sprites/animations/hit/5.png loaded
+Loading vfx.xml
+Loading hadouken
+chars/Shizune/sprites/projectiles/hadouken/1.png loaded
+chars/Shizune/sprites/projectiles/hadouken/2.png loaded
 Loaded successfully.
 Playing music: stages/CastleSuzaku/music.ogg
 misc/bar.png loaded

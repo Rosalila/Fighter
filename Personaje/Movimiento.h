@@ -14,8 +14,12 @@ class Movimiento
     bool unblockable_high;
     bool unblockable_air;
     int frame_actual,tiempo_transcurrido;
+    int velocity_x;
+    int velocity_y;
+    int acceleration_x;
+    int acceleration_y;
     std::vector <Frame*> frames;
-    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low);
+    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y);
     ~Movimiento();
     Frame* getFrameActual();
     bool ya_pego;

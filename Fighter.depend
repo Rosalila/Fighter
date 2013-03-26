@@ -345,7 +345,7 @@
 	"TinyXml/tinyxml.h"
 	<windows.h>
 
-1364183130 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
+1364228034 source:/home/turupawn/Projects/CodeBlocks/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
@@ -977,20 +977,20 @@
 	"SDL/SDL.h"
 	"RosalilaGraphics/Timer.h"
 
-1364171622 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaInputs/Boton.cpp
+1364194131 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaInputs/Boton.cpp
 	"RosalilaInputs/Boton.h"
 
-1364182400 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaInputs/Receiver.cpp
+1364196477 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaInputs/Receiver.cpp
 	"RosalilaInputs/RosalilaInputs.h"
 
-1364193676 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+1364228034 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaInputs/RosalilaInputs.cpp
 	"RosalilaInputs/RosalilaInputs.h"
 	<sstream>
 
-1364183130 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+1364194144 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaUtility/RosalilaUtility.cpp
 	"RosalilaUtility/RosalilaUtility.h"
 
-1364193594 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaAI/Automata.cpp
+1364228034 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaAI/Automata.cpp
 	"RosalilaAI/Automata.h"
 
 1364183333 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaAI/Estado.cpp
@@ -1026,10 +1026,10 @@
 1364183485 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"RosalilaMenus/MenuTexto.h"
 
-1364192872 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
+1364316858 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
 	"Fighter.h"
 
-1364192886 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
+1364314771 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
 	"TinyXml/tinyxml.h"
 	"FighterMenu/FighterMenu.h"
 	<stdio.h>
@@ -1043,7 +1043,7 @@
 	"RosalilaSound/RosalilaSound.h"
 	"../Fighter.h"
 
-1364194167 source:/home/turupawn/Projects/CodeBlocks/Fighter/FighterMenu/FighterMenu.cpp
+1364228034 source:/home/turupawn/Projects/CodeBlocks/Fighter/FighterMenu/FighterMenu.cpp
 	"FighterMenu.h"
 
 1364184528 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Animacion.cpp
@@ -1087,27 +1087,27 @@
 1364184587 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/ModificadorString.cpp
 	"ModificadorString.h"
 
-1364184596 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
+1364316251 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
 	"Movimiento.h"
 
 1364194459 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1364184606 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
+1364316378 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
 1364184613 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Proyectil.cpp
 	"Proyectil.h"
 
-1364184631 source:/home/turupawn/Projects/CodeBlocks/Fighter/Stage/Stage.cpp
+1364228034 source:/home/turupawn/Projects/CodeBlocks/Fighter/Stage/Stage.cpp
 	"Stage.h"
 
-1364169885 /home/turupawn/Projects/CodeBlocks/Fighter/Stage/Stage.h
+1364228034 /home/turupawn/Projects/CodeBlocks/Fighter/Stage/Stage.h
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 
-1364184511 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
+1364316308 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
 	"Movimiento.h"
 	"InputMovimiento.h"
 	"Proyectil.h"
@@ -1121,7 +1121,7 @@
 	<vector>
 	"RosalilaGraphics/RosalilaGraphics.h"
 
-1364184441 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
+1364316228 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"Frame.h"
 

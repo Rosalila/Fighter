@@ -56,7 +56,7 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     this->receiver=receiver;
     //stage=new Stage(grafico,sonido);
 
-    //stage->cargarDesdeXML((char*)"Stage1");
+    //stage->loadFromXML((char*)"Stage1");
     //this->stage=(Stage*)new StageXml(grafico,(char*)"stages/Stage1/Stage1.xml");
     this->pa_actual=0;
     this->pb_actual=0;
@@ -706,6 +706,8 @@ void Fighter::aplicarModificadores(Personaje *p)
 
     //get movimiento y frame
     Movimiento* m=p->movimientos[p->getString("current_move")];
+    mandatoryModifiers(p,m);
+
     Frame* f=m->frames[m->frame_actual];
     //aplicar modificadores
     if(m->tiempo_transcurrido==0)
@@ -748,6 +750,7 @@ void Fighter::aplicarModificadores(Personaje *p)
     for(int i=0; i<(int)p->movimientos_constantes_actuales.size(); i++)
     {
         Movimiento* mc=p->movimientos_constantes_actuales[i];
+        mandatoryModifiers(p,mc);
         if(p->getString(std::string("isActive.")+p->movimientos_constantes_actuales[i]->nombre)=="no")
         {
             mc->frame_actual=0;
@@ -795,6 +798,20 @@ void Fighter::aplicarModificadores(Personaje *p)
     {
         p->setEntero("position_y",0);
     }
+}
+
+void Fighter::mandatoryModifiers(Personaje* p, Movimiento* m)
+{
+    if(p->getString("orientation")!="i")
+    {
+        p->setEntero("position_x",p->getEntero("position_x")+m->velocity_x);
+        p->setEntero("position_y",p->getEntero("position_y")+m->velocity_y);
+    }else
+    {
+        p->setEntero("position_x",p->getEntero("position_x")-m->velocity_x);
+        p->setEntero("position_y",p->getEntero("position_y")+m->velocity_y);
+    }
+    m->velocity_y+=m->acceleration_y;
 }
 
 void Fighter::logicaStage()
@@ -875,12 +892,6 @@ void Fighter::loopJuego()
                )
                 break;
         }
-        //receiver->endEventProcess();
-        //painter->device->run();
-        //cout<<grafico->device->getTimer()->getTime()<<endl;
-        //setear frames a "60"
-//        if(painter->device->getTimer()->getTime()<anterior+16)
-//            continue;
 
         if(receiver->IsKeyDownn(SDLK_ESCAPE))///!!!
         {
@@ -898,7 +909,6 @@ void Fighter::loopJuego()
         render();
         //receiver->startEventProcess();
     }
-    //sonido->pararSound("Stage.music");
 }
 
 void Fighter::dibujarBarra()
