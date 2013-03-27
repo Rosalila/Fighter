@@ -1026,7 +1026,7 @@
 1364183485 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"RosalilaMenus/MenuTexto.h"
 
-1364316858 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
+1364360173 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
 	"Fighter.h"
 
 1364314771 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
@@ -1087,13 +1087,13 @@
 1364184587 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/ModificadorString.cpp
 	"ModificadorString.h"
 
-1364316251 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
+1364354962 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
 	"Movimiento.h"
 
 1364194459 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1364316378 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
+1364355084 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
 1364184613 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Proyectil.cpp
@@ -1107,7 +1107,7 @@
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 
-1364316308 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
+1364355031 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
 	"Movimiento.h"
 	"InputMovimiento.h"
 	"Proyectil.h"
@@ -1121,7 +1121,7 @@
 	<vector>
 	"RosalilaGraphics/RosalilaGraphics.h"
 
-1364316228 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
+1364354935 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"Frame.h"
 

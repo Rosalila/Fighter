@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Fighter.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="39498" topLine="1111" />
+	<File name="Fighter.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="30497" topLine="828" />
 	</File>
-	<File name="Fighter.h" open="0" top="0" tabpos="0">
-		<Cursor position="2173" topLine="54" />
+	<File name="Fighter.h" open="1" top="0" tabpos="1">
+		<Cursor position="2197" topLine="54" />
 	</File>
 	<File name="FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="55072" topLine="1378" />
@@ -79,11 +79,11 @@
 	<File name="Personaje/ModificadorString.h" open="0" top="0" tabpos="0">
 		<Cursor position="67" topLine="0" />
 	</File>
-	<File name="Personaje/Movimiento.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="10" topLine="0" />
+	<File name="Personaje/Movimiento.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="598" topLine="0" />
 	</File>
-	<File name="Personaje/Movimiento.h" open="0" top="0" tabpos="0">
-		<Cursor position="101" topLine="0" />
+	<File name="Personaje/Movimiento.h" open="1" top="0" tabpos="3">
+		<Cursor position="775" topLine="3" />
 	</File>
 	<File name="Personaje/Paleta.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1709" topLine="25" />
@@ -91,11 +91,11 @@
 	<File name="Personaje/Paleta.h" open="0" top="0" tabpos="0">
 		<Cursor position="912" topLine="9" />
 	</File>
-	<File name="Personaje/Personaje.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="54351" topLine="1420" />
+	<File name="Personaje/Personaje.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="29609" topLine="892" />
 	</File>
-	<File name="Personaje/Personaje.h" open="0" top="0" tabpos="0">
-		<Cursor position="192" topLine="0" />
+	<File name="Personaje/Personaje.h" open="1" top="0" tabpos="5">
+		<Cursor position="3831" topLine="95" />
 	</File>
 	<File name="Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />

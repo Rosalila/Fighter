@@ -16,10 +16,13 @@ class Movimiento
     int frame_actual,tiempo_transcurrido;
     int velocity_x;
     int velocity_y;
+    int initial_velocity_x;
+    int initial_velocity_y;
     int acceleration_x;
     int acceleration_y;
+    bool inherits_velocity;
     std::vector <Frame*> frames;
-    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y);
+    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity);
     ~Movimiento();
     Frame* getFrameActual();
     bool ya_pego;

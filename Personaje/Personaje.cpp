@@ -477,9 +477,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -910,8 +910,12 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("acceleration_y")!=NULL)
                 acceleration_y=atoi(elemento_imagen->Attribute("acceleration_y"));
 
+            bool inherits_velocity=false;
+            if(elemento_imagen->Attribute("inherits_velocity")!=NULL)
+                inherits_velocity=strcmp(elemento_imagen->Attribute("inherits_velocity"),"yes")==0;
+
             setString(std::string("isActive.")+nombre,"no");
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y);
+            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
         }

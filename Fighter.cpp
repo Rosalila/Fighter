@@ -401,6 +401,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         Movimiento* m=p->movimientos[p->getString("current_move")];
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
+        m->ya_pego=false;
         p->setString("current_move","entrance");
         p->setString("isActive.entrance","yes");
         sonido->playSound(p->char_name+"entrance");
@@ -565,6 +566,19 @@ void Fighter::logica()
                 sonido->playSound(p->char_name+move_cancel_pa);
                 //setear isActive.
                 p->setString(std::string("isActive.")+move_cancel_pa,"yes");
+
+                Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+                if(m_nuevo->inherits_velocity)
+                {
+                    m_nuevo->velocity_x=m->velocity_x;
+                    m_nuevo->velocity_y=m->velocity_y;
+                    m_nuevo->acceleration_x=m->acceleration_x;
+                    m_nuevo->acceleration_y=m->acceleration_y;
+                }else
+                {
+                    m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
+                    m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
+                }
     }
 
     if(move_cancel_pb!="")
@@ -578,6 +592,19 @@ void Fighter::logica()
                 sonido->playSound(p->char_name+move_cancel_pb);
                 //setear isActive.
                 p->setString(std::string("isActive.")+move_cancel_pb,"yes");
+
+                Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+                if(m_nuevo->inherits_velocity)
+                {
+                    m_nuevo->velocity_x=m->velocity_x;
+                    m_nuevo->velocity_y=m->velocity_y;
+                    m_nuevo->acceleration_x=m->acceleration_x;
+                    m_nuevo->acceleration_y=m->acceleration_y;
+                }else
+                {
+                    m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
+                    m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
+                }
     }
 
     if(hit_cancel_pa!="")
@@ -729,6 +756,8 @@ void Fighter::aplicarModificadores(Personaje *p)
         if(p->getString("current_move")!="ko")
         {
             m->frame_actual=0;
+            m->tiempo_transcurrido=0;
+            m->ya_pego=false;
             p->setString(std::string("isActive.")+p->getString("current_move"),"no");
             p->setString("current_move","5");
         }
@@ -741,6 +770,8 @@ void Fighter::aplicarModificadores(Personaje *p)
     if(p->getString(std::string("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="5")
     {
         m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
         p->setString(std::string("isActive.")+p->getString("current_move"),"no");
         //poner idle
         p->setString("current_move","5");
@@ -811,6 +842,7 @@ void Fighter::mandatoryModifiers(Personaje* p, Movimiento* m)
         p->setEntero("position_x",p->getEntero("position_x")-m->velocity_x);
         p->setEntero("position_y",p->getEntero("position_y")+m->velocity_y);
     }
+    m->velocity_x+=m->acceleration_x;
     m->velocity_y+=m->acceleration_y;
 }
 
