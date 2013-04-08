@@ -6,6 +6,7 @@
 #include "../Personaje/Personaje.h"
 #include "RosalilaMenus/MenuContenedor.h"
 #include "RosalilaMenus/MenuCharSelect.h"
+#include "RosalilaMenus/MenuGallery.h"
 #include "RosalilaSound/RosalilaSound.h"
 #include "../Fighter.h"
 

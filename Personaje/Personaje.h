@@ -107,7 +107,7 @@ class Personaje
     void agregarRosalilaInputs(std::string input,std::string movimiento);
     void agregarCondicion(std::string movimiento,int frame,vector<Condicion*> condicion);
     //void agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion);
-    void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity);
+    void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity,bool pushes,int separate);
     void agregarProyectil(Proyectil* proyectil);
     void agregarFrame(std::string movimiento, int duracion);
     void agregarModificador(std::string movimiento,int frame,std::string variable,Imagen* modificador,bool aplicar_a_contrario);

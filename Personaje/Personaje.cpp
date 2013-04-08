@@ -16,6 +16,15 @@ Personaje::Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int num_
         setString("player","1");
     if(numero==2)
         setString("player","2");
+
+    std::vector<HitBox*> hitbox;
+    setHitBoxes("red",hitbox);
+    setHitBoxes("blue",hitbox);
+    setImagen("current_image",NULL);
+    setString("change_char","off");
+    setEntero("distance",0);
+    setEntero("distance_absolute",0);
+    setString("hit","no");
 }
 Personaje::~Personaje()
 {
@@ -477,9 +486,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -914,13 +923,22 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("inherits_velocity")!=NULL)
                 inherits_velocity=strcmp(elemento_imagen->Attribute("inherits_velocity"),"yes")==0;
 
+            bool pushes=false;
+            if(elemento_imagen->Attribute("pushes")!=NULL)
+                pushes=strcmp(elemento_imagen->Attribute("pushes"),"yes")==0;
+
+            int separate=0;
+            if(elemento_imagen->Attribute("separate")!=NULL)
+                separate=atoi(elemento_imagen->Attribute("separate"));
+
             setString(std::string("isActive.")+nombre,"no");
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity);
+            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
         }
 
         writeLogLine("Loading sprites.");
+        if(nodo->FirstChild("sprite")!=NULL)
         for(TiXmlElement *elemento_imagen=nodo->FirstChild("sprite")->ToElement();
                 elemento_imagen!=NULL;
                 elemento_imagen=elemento_imagen->NextSiblingElement("sprite"))
@@ -961,6 +979,7 @@ void Personaje::loadMain()
             setEntero(variable,valor);
         }
         writeLogLine("Loading hitboxes.");
+        if(nodo->FirstChild("hitboxes")!=NULL)
         for(TiXmlElement *elemento_imagen=nodo->FirstChild("hitboxes")->ToElement();
                 elemento_imagen!=NULL;
                 elemento_imagen=elemento_imagen->NextSiblingElement("hitboxes"))

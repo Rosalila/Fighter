@@ -1,6 +1,6 @@
 #include "Movimiento.h"
 
-Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity)
+Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate)
 {
     frame_actual=0;
     tiempo_transcurrido=0;
@@ -19,6 +19,8 @@ Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multih
     this->acceleration_x=acceleration_x;
     this->acceleration_y=acceleration_y;
     this->inherits_velocity=inherits_velocity;
+    this->pushes=pushes;
+    this->separate=separate;
 }
 
 Movimiento::~Movimiento()

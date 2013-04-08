@@ -111,6 +111,8 @@
 		<Unit filename="Rosalila/RosalilaMenus/MenuCharSelect.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuContenedor.cpp" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuContenedor.h" />
+		<Unit filename="Rosalila/RosalilaMenus/MenuGallery.cpp" />
+		<Unit filename="Rosalila/RosalilaMenus/MenuGallery.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuImagen.cpp" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuImagen.h" />
 		<Unit filename="Rosalila/RosalilaMenus/MenuLista.cpp" />

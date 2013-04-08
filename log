@@ -45,7 +45,7 @@ Loading jump forward
 Loading jump back
 Loading 2
 Loading crouching
-Loading 5
+Loading idle
 Loading a
 Loading b
 Loading crouch a
@@ -59,40 +59,22 @@ Loading on_hit.stand
 Loading on_hit.crouch
 Loading on_hit.air
 Loading on_hit.knockdown
-Loading separate
 Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
-Loading on_land_cancel
 Loading setState.jumping
 Loading setState.standing
 Loading setState.crouch
-Loading push_left
-Loading push_right
 Loading idle jumping
+Loading on_land_cancel
 Loading sprites.
-Loading sprites/idle/1.png
-chars/Shizune/sprites/idle/1.png loaded
 Loading strings.
-Loading current_move
-Loading change_char
-Loading hit
 Loading projectile_disolve
 Loading projectile_disolve_chip
 Loading projectile_hit
-Loading orientation
-Loading colision.red_hitboxes
-Loading colision.blue_hitboxes
 Loading state
 Loading trigger.crouch
-Loading trigger.move_up
-Loading trigger.poison
-Loading jumping_state
 Loading integer.
-Loading distance
-Loading distance_absolute
 Loading hitboxes.
-Loading blue
-Loading red
 Loading bars.
 Loading hp
 chars/Shizune/misc/bars/hp.png loaded
@@ -111,7 +93,7 @@ Loading chars/Shizune/sprites/intro/3.png.
 chars/Shizune/sprites/intro/3.png loaded
 Loading chars/Shizune/sprites/intro/4.png.
 chars/Shizune/sprites/intro/4.png loaded
-Loading 5.
+Loading idle.
 Loading chars/Shizune/sprites/idle/1.png.
 chars/Shizune/sprites/idle/1.png loaded
 Loading walk forward.
@@ -316,7 +298,7 @@ Loading jump forward
 Loading jump back
 Loading 2
 Loading crouching
-Loading 5
+Loading idle
 Loading a
 Loading b
 Loading crouch a
@@ -330,40 +312,22 @@ Loading on_hit.stand
 Loading on_hit.crouch
 Loading on_hit.air
 Loading on_hit.knockdown
-Loading separate
 Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
-Loading on_land_cancel
 Loading setState.jumping
 Loading setState.standing
 Loading setState.crouch
-Loading push_left
-Loading push_right
 Loading idle jumping
+Loading on_land_cancel
 Loading sprites.
-Loading sprites/idle/1.png
-chars/Shizune/sprites/idle/1.png loaded
 Loading strings.
-Loading current_move
-Loading change_char
-Loading hit
 Loading projectile_disolve
 Loading projectile_disolve_chip
 Loading projectile_hit
-Loading orientation
-Loading colision.red_hitboxes
-Loading colision.blue_hitboxes
 Loading state
 Loading trigger.crouch
-Loading trigger.move_up
-Loading trigger.poison
-Loading jumping_state
 Loading integer.
-Loading distance
-Loading distance_absolute
 Loading hitboxes.
-Loading blue
-Loading red
 Loading bars.
 Loading hp
 chars/Shizune/misc/bars/hp.png loaded
@@ -382,7 +346,7 @@ Loading chars/Shizune/sprites/intro/3.png.
 chars/Shizune/sprites/intro/3.png loaded
 Loading chars/Shizune/sprites/intro/4.png.
 chars/Shizune/sprites/intro/4.png loaded
-Loading 5.
+Loading idle.
 Loading chars/Shizune/sprites/idle/1.png.
 chars/Shizune/sprites/idle/1.png loaded
 Loading walk forward.
@@ -607,6 +571,9 @@ menu/locked_char_p1.png loaded
 menu/locked_char_p2.png loaded
 menu/no_portrait.png loaded
 stages/CastleSuzaku/images/preview.png loaded
+Error: Shizunejump up sound does not exists.
+Error: Shizuneair a sound does not exists.
+Error: Shizuneair b sound does not exists.
 Deleting game.
 Deleting character.
 Deleting character.

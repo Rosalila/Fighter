@@ -185,6 +185,49 @@ void Menu::loopMenu()
         {
             tecla_arriba_p1=true;
         }
+
+        if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Gallery")
+        {
+            if(inputa->getBufferRosalilaInputss()[0]=="2" && tecla_arriba_p1)
+            {
+                MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->select_p1_y++;
+                if(mg->select_p1_y>=mg->size_y)
+                    mg->select_p1_y=0;
+                tecla_arriba_p1=false;
+            }
+            if(inputa->getBufferRosalilaInputss()[0]=="4" && tecla_arriba_p1)
+            {
+                MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->select_p1_x--;
+                if(mg->select_p1_x<0)
+                    mg->select_p1_x=mg->size_x-1;
+                tecla_arriba_p1=false;
+            }
+            if(inputa->getBufferRosalilaInputss()[0]=="6" && tecla_arriba_p1)
+            {
+                MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->select_p1_x++;
+                if(mg->select_p1_x>=mg->size_x)
+                    mg->select_p1_x=0;
+                tecla_arriba_p1=false;
+            }
+            if(inputa->getBufferRosalilaInputss()[0]=="8" && tecla_arriba_p1)
+            {
+                MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->select_p1_y--;
+                if(mg->select_p1_y<0)
+                    mg->select_p1_y=mg->size_y-1;
+                tecla_arriba_p1=false;
+            }
+            if(inputa->getBufferRosalilaInputss()[0]=="a" && tecla_arriba_p1)
+            {
+                MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                exit(0);
+                tecla_arriba_p1=false;
+            }
+        }
+
         if(char_select!=NULL && tecla_arriba_p1)
         {
             if(char_select->listoPA())
@@ -280,6 +323,7 @@ void Menu::loopMenu()
         {
             tecla_arriba_p2=true;
         }
+
         if(char_select!=NULL && tecla_arriba_p2)
         {
             if(char_select->listoPB())
@@ -505,7 +549,7 @@ void Menu::loopMenu()
                     }
                     if(mb->getAccion()=="quit")
                     {
-                        exit_signal=true;
+                        exit(0);
                         break;
                     }
                     if(mb->getAccion()=="load")
@@ -1089,10 +1133,70 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                                                                         )
                                                );
 
+            }else if(strcmp(e->Attribute("type"),"gallery")==0)
+            {
+                int x=atoi(e->Attribute("x"));
+                int y=atoi(e->Attribute("y"));
+                int size_x=3;
+                if(e->Attribute("size_x")!=NULL)
+                    size_x=atoi(e->Attribute("size_x"));
+
+                int size_y=3;
+                if(e->Attribute("size_y")!=NULL)
+                    size_y=atoi(e->Attribute("size_y"));
+
+                int box_size_x=100;
+                if(e->Attribute("box_size_x")!=NULL)
+                    box_size_x=atoi(e->Attribute("box_size_x"));
+
+                int box_size_y=100;
+                if(e->Attribute("box_size_y")!=NULL)
+                    box_size_y=atoi(e->Attribute("box_size_y"));
+
+                int box_separation_x=0;
+                if(e->Attribute("box_separation_x")!=NULL)
+                    box_separation_x=atoi(e->Attribute("box_separation_x"));
+
+                int box_separation_y=0;
+                if(e->Attribute("box_separation_y")!=NULL)
+                    box_separation_y=atoi(e->Attribute("box_separation_y"));
+
+                int preview_player1_x=0;
+                if(e->Attribute("preview_player1_x")!=NULL)
+                    preview_player1_x=atoi(e->Attribute("preview_player1_x"));
+
+                int preview_player1_y=0;
+                if(e->Attribute("preview_player1_y")!=NULL)
+                    preview_player1_y=atoi(e->Attribute("preview_player1_y"));
+
+                int player1_cursor_x=0;
+                if(e->Attribute("player1_cursor_x")!=NULL)
+                    player1_cursor_x=atoi(e->Attribute("player1_cursor_x"));
+
+                int player1_cursor_y=0;
+                if(e->Attribute("player1_cursor_y")!=NULL)
+                    player1_cursor_y=atoi(e->Attribute("player1_cursor_y"));
+
+                int image_amount=0;
+                if(e->Attribute("image_amount")!=NULL)
+                    image_amount=atoi(e->Attribute("image_amount"));
+
+
+                MenuGallery* menu_gallery=new MenuGallery(painter,x,y,
+                                               size_x,size_y,
+                                               box_size_x,box_size_y,
+                                               box_separation_x,box_separation_y,
+                                               preview_player1_x,preview_player1_y,
+                                               image_amount,
+                                               player1_cursor_x,player1_cursor_y
+                                               );
+                elementos_contenedor.push_back((Elemento*)menu_gallery);
             }
         }
     }
 
+    selectables_container=new MenuContenedor(painter,elementos_contenedor);
+    elementos.push_back((Elemento*)selectables_container);
 
     for(TiXmlNode* text_node=g_node->FirstChild("text");
             text_node!=NULL;
@@ -1106,9 +1210,6 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                                                      text_span_elem->GetText()
                                                      ));
     }
-
-    selectables_container=new MenuContenedor(painter,elementos_contenedor);
-    elementos.push_back((Elemento*)selectables_container);
 }
 
 Personaje* Menu::getPersonajeA(int num,bool ia)
