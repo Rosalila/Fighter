@@ -321,32 +321,60 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_ataca
     return false;
 }
 
-void Fighter::landCancel(Personaje *p)
+void Fighter::cancel(Personaje *p)
 {
-    if(p->getEntero("position_y")<=0)
+    RosalilaInputs*input=getPaActual()->input;
+    if(p->numero==2)
+        input=getPbActual()->input;
+
+    Movimiento* m=p->movimientos[p->getString("current_move")];
+    m->frame_actual=0;
+    m->tiempo_transcurrido=0;
+    m->ya_pego=false;
+    p->setString(std::string("isActive.")+p->getString("current_move"),"no");
+    if(p->getEntero("position_y")>0)
     {
-        p->setString("isActive.air a","no");
-        p->setString("isActive.air b","no");
-        p->setString("isActive.idle jumping","no");
-        p->setString("isActive.jump up","no");
-        p->setString("isActive.jump back","no");
-        p->setString("isActive.jump forward","no");
-        p->setString("isActive.on_hit.air","no");
+        p->setString("current_move","idle.jump");
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        m_nuevo->velocity_x=m->velocity_x;
+        m_nuevo->velocity_y=m->velocity_y;
+        m_nuevo->acceleration_x=m->acceleration_x;
+        m_nuevo->acceleration_y=m->acceleration_y;
+        m_nuevo->frame_actual=0;
+        m_nuevo->tiempo_transcurrido=0;
+    }
+    else if(m->crouched
+            &&
+            (input->getBufferRosalilaInputss()[0]=="1" || input->getBufferRosalilaInputss()[0]=="2" || input->getBufferRosalilaInputss()[0]=="3")
+            )
+    {
+        p->setString("current_move","idle.crouch");
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        m_nuevo->frame_actual=m_nuevo->repeat_from-1;
+        m_nuevo->tiempo_transcurrido=0;
+    }
+    else
+    {
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        p->setString("current_move","idle.stand");
+        m_nuevo->frame_actual=0;
+        m_nuevo->tiempo_transcurrido=0;
     }
 }
 
-void Fighter::logicaPersonaje(Personaje* p)
+void Fighter::landCancel(Personaje *p)
 {
-    landCancel(p);
-    //verificar distancia entre chars
-    int distancia=p->getEntero("position_x")-p->personaje_contrario->getEntero("position_x");
-    p->setEntero("distance",distancia);
-    if(distancia<0)
-        distancia=-distancia;
-    p->setEntero("distance_absolute",distancia);
-    //verificar colision de hitboxes
+    Movimiento* m=p->movimientos[p->getString("current_move")];
+    if(p->getEntero("position_y")<=0 && m->land_cancelable)
+    {
+        cancel(p);
+    }
+}
+
+void Fighter::colisionCheck(Personaje*p)
+{
     p->setString("hit","no");
-    if(getColisionHitBoxes(p,"red",p->personaje_contrario,"blue") && p->personaje_contrario->getString("current_move")!="idle")
+    if(getColisionHitBoxes(p,"red",p->personaje_contrario,"blue") && p->personaje_contrario->getString("current_move")!="idle.stand")
     {
         p->setString("colision.red_to_blue","yes");
     }
@@ -378,6 +406,19 @@ void Fighter::logicaPersonaje(Personaje* p)
     }
     else
         p->setString("colision.blue_to_red","no");
+}
+
+void Fighter::logicaPersonaje(Personaje* p)
+{
+    landCancel(p);
+    //verificar distancia entre chars
+    int distancia=p->getEntero("position_x")-p->personaje_contrario->getEntero("position_x");
+    p->setEntero("distance",distancia);
+    if(distancia<0)
+        distancia=-distancia;
+    p->setEntero("distance_absolute",distancia);
+
+    colisionCheck(p);
 
     //Change char
     if(p->numero==1 && pa_vivos<1)
@@ -426,20 +467,20 @@ void Fighter::logicaPersonaje(Personaje* p)
 
     //verificar flip
     if(p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x")
-            && (p->getString("current_move")=="idle" || p->getString("current_move")=="2")
-            && (p->getString("state")=="standing" || p->getString("state")=="crouch"))
+            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
+            )
         p->setString("orientation","i");
 
     if(p->getEntero("position_x")<p->personaje_contrario->getEntero("position_x")
-            && (p->getString("current_move")=="idle" || p->getString("current_move")=="2")
-            && (p->getString("state")=="standing" || p->getString("state")=="crouch"))
+            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
+            )
         p->setString("orientation","d");
     //get input
     std::string str_movimiento="";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
         str_movimiento=p->mapInputToMovimiento();
     if(game_over_a||game_over_b)
-        str_movimiento="idle";
+        str_movimiento="idle.stand";
 
     //ejecutar cancel
     if(str_movimiento!="")
@@ -767,57 +808,29 @@ void Fighter::aplicarModificadores(Personaje *p)
     //verificar fin de movimiento
     if(m->frame_actual==(int)m->frames.size())
     {
-        m->ya_pego=false;
-        if(p->getString("current_move").substr(0,7)=="on_hit.")
-            p->combo=0;
-        if(p->getString("current_move")!="ko")
+        if(m->repeat_from>=0)
         {
-            m->frame_actual=0;
+            m->frame_actual=m->repeat_from;
             m->tiempo_transcurrido=0;
+        }else
+        {
             m->ya_pego=false;
-            p->setString(std::string("isActive.")+p->getString("current_move"),"no");
-            if(p->getEntero("position_y")>0)
+            if(p->getString("current_move").substr(0,7)=="on_hit.")
+                p->combo=0;
+            if(p->getString("current_move")!="ko")
             {
-                p->setString("current_move","idle jumping");
-                Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-                m_nuevo->velocity_x=m->velocity_x;
-                m_nuevo->velocity_y=m->velocity_y;
-                m_nuevo->acceleration_x=m->acceleration_x;
-                m_nuevo->acceleration_y=m->acceleration_y;
+                cancel(p);
             }
             else
             {
-                p->setString("current_move","idle");
+                m->frame_actual--;
             }
-        }
-        else
-        {
-            m->frame_actual--;
         }
     }
     //verificar cancel de isActive.
-    if(p->getString(std::string("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="idle")
+    if(p->getString(std::string("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="idle.stand")
     {
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
-        p->setString(std::string("isActive.")+p->getString("current_move"),"no");
-        //poner idle
-        //p->setString("current_move","idle");
-
-        if(p->getEntero("position_y")>0)
-        {
-            p->setString("current_move","idle jumping");
-            Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-            m_nuevo->velocity_x=m->velocity_x;
-            m_nuevo->velocity_y=m->velocity_y;
-            m_nuevo->acceleration_x=m->acceleration_x;
-            m_nuevo->acceleration_y=m->acceleration_y;
-        }
-        else
-        {
-            p->setString("current_move","idle");
-        }
+        cancel(p);
     }
     //Movimientos continuos
     //ejecutar existentes
@@ -974,7 +987,7 @@ void Fighter::loopJuego()
                && last_input!="7"
                && last_input!="8"
                && last_input!="9"
-               && ((getPaActual()->getString("current_move")=="idle"||getPbActual()->getString("current_move")=="idle")
+               && ((getPaActual()->getString("current_move")=="idle.stand"||getPbActual()->getString("current_move")=="idle.stand")
                     || (getPaActual()->getString("current_move")=="ko"&&getPbActual()->getString("current_move")=="ko")
                   )
                )
@@ -994,6 +1007,14 @@ void Fighter::loopJuego()
         logica();
 
         //render
+
+
+//        //Caption test inputs
+//        RosalilaInputs*input=getPaActual()->input;
+//        std::string caption = input->getBufferRosalilaInputss()[0]+"-"+input->getBufferRosalilaInputss()[1]+"-"+input->getBufferRosalilaInputss()[2]+"-"+input->getBufferRosalilaInputss()[3];
+//        SDL_WM_SetCaption( caption.c_str(), NULL );
+
+
         render();
         //receiver->startEventProcess();
     }
@@ -1175,7 +1196,7 @@ void Fighter::render()
     }
 
 
-    if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("current_move")=="idle" && pb[0]->getString("current_move")=="idle")
+    if(pos_imagen_intro<(int)match_intro.size() && pa[0]->getString("current_move")=="idle.stand" && pb[0]->getString("current_move")=="idle.stand")
     {
         //Image* texture_gameover=grafico->getTexture("misc/ko/1.png");
         Image* texture_gameover=match_intro[pos_imagen_intro]->imagen;
@@ -1227,11 +1248,4 @@ void Fighter::render()
 
     receiver->updateInputs();
     painter->updateScreen();
-}
-
-void Fighter::escribirRosalilaInputssXML()
-{
-    TiXmlDocument *doc=new TiXmlDocument();
-    inputb->getXML(inputa->getXML(doc));
-    doc->SaveFile( "misc/inputs.xml" );
 }

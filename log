@@ -43,9 +43,9 @@ Loading walk forward
 Loading jump up
 Loading jump forward
 Loading jump back
-Loading 2
-Loading crouching
-Loading idle
+Loading idle.stand
+Loading idle.jump
+Loading idle.crouch
 Loading a
 Loading b
 Loading crouch a
@@ -53,7 +53,7 @@ Loading crouch b
 Loading air a
 Loading air b
 Loading super
-Loading defense.standing
+Loading defense.stand
 Loading defense.crouch
 Loading on_hit.stand
 Loading on_hit.crouch
@@ -61,18 +61,11 @@ Loading on_hit.air
 Loading on_hit.knockdown
 Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
-Loading setState.jumping
-Loading setState.standing
-Loading setState.crouch
-Loading idle jumping
-Loading on_land_cancel
 Loading sprites.
 Loading strings.
 Loading projectile_disolve
 Loading projectile_disolve_chip
 Loading projectile_hit
-Loading state
-Loading trigger.crouch
 Loading integer.
 Loading hitboxes.
 Loading bars.
@@ -93,7 +86,7 @@ Loading chars/Shizune/sprites/intro/3.png.
 chars/Shizune/sprites/intro/3.png loaded
 Loading chars/Shizune/sprites/intro/4.png.
 chars/Shizune/sprites/intro/4.png loaded
-Loading idle.
+Loading idle.stand.
 Loading chars/Shizune/sprites/idle/1.png.
 chars/Shizune/sprites/idle/1.png loaded
 Loading walk forward.
@@ -130,14 +123,13 @@ Loading chars/Shizune/sprites/walk/2.png.
 chars/Shizune/sprites/walk/2.png loaded
 Loading chars/Shizune/sprites/walk/1.png.
 chars/Shizune/sprites/walk/1.png loaded
-Loading crouching.
+Loading idle.crouch.
 Loading chars/Shizune/sprites/crouching/1.png.
 chars/Shizune/sprites/crouching/1.png loaded
 Loading chars/Shizune/sprites/crouching/2.png.
 chars/Shizune/sprites/crouching/2.png loaded
-Loading 2.
-Loading chars/Shizune/sprites/crouched/1.png.
-chars/Shizune/sprites/crouched/1.png loaded
+Loading chars/Shizune/sprites/crouching/3.png.
+chars/Shizune/sprites/crouching/3.png loaded
 Loading a.
 Loading chars/Shizune/sprites/a/1.png.
 chars/Shizune/sprites/a/1.png loaded
@@ -191,7 +183,7 @@ Loading chars/Shizune/sprites/jump/2.png.
 chars/Shizune/sprites/jump/2.png loaded
 Loading chars/Shizune/sprites/jump/3.png.
 chars/Shizune/sprites/jump/3.png loaded
-Loading idle jumping.
+Loading idle.jump.
 Loading chars/Shizune/sprites/jump/3.png.
 chars/Shizune/sprites/jump/3.png loaded
 Loading on_hit.stand.
@@ -204,7 +196,7 @@ Loading chars/Shizune/sprites/on_hit_crouch/1.png.
 chars/Shizune/sprites/on_hit_crouch/1.png loaded
 Loading chars/Shizune/sprites/on_hit_crouch/2.png.
 chars/Shizune/sprites/on_hit_crouch/2.png loaded
-Loading defense.standing.
+Loading defense.stand.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
 Loading defense.crouch.
@@ -296,9 +288,9 @@ Loading walk forward
 Loading jump up
 Loading jump forward
 Loading jump back
-Loading 2
-Loading crouching
-Loading idle
+Loading idle.stand
+Loading idle.jump
+Loading idle.crouch
 Loading a
 Loading b
 Loading crouch a
@@ -306,7 +298,7 @@ Loading crouch b
 Loading air a
 Loading air b
 Loading super
-Loading defense.standing
+Loading defense.stand
 Loading defense.crouch
 Loading on_hit.stand
 Loading on_hit.crouch
@@ -314,18 +306,11 @@ Loading on_hit.air
 Loading on_hit.knockdown
 Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
-Loading setState.jumping
-Loading setState.standing
-Loading setState.crouch
-Loading idle jumping
-Loading on_land_cancel
 Loading sprites.
 Loading strings.
 Loading projectile_disolve
 Loading projectile_disolve_chip
 Loading projectile_hit
-Loading state
-Loading trigger.crouch
 Loading integer.
 Loading hitboxes.
 Loading bars.
@@ -346,7 +331,7 @@ Loading chars/Shizune/sprites/intro/3.png.
 chars/Shizune/sprites/intro/3.png loaded
 Loading chars/Shizune/sprites/intro/4.png.
 chars/Shizune/sprites/intro/4.png loaded
-Loading idle.
+Loading idle.stand.
 Loading chars/Shizune/sprites/idle/1.png.
 chars/Shizune/sprites/idle/1.png loaded
 Loading walk forward.
@@ -383,14 +368,13 @@ Loading chars/Shizune/sprites/walk/2.png.
 chars/Shizune/sprites/walk/2.png loaded
 Loading chars/Shizune/sprites/walk/1.png.
 chars/Shizune/sprites/walk/1.png loaded
-Loading crouching.
+Loading idle.crouch.
 Loading chars/Shizune/sprites/crouching/1.png.
 chars/Shizune/sprites/crouching/1.png loaded
 Loading chars/Shizune/sprites/crouching/2.png.
 chars/Shizune/sprites/crouching/2.png loaded
-Loading 2.
-Loading chars/Shizune/sprites/crouched/1.png.
-chars/Shizune/sprites/crouched/1.png loaded
+Loading chars/Shizune/sprites/crouching/3.png.
+chars/Shizune/sprites/crouching/3.png loaded
 Loading a.
 Loading chars/Shizune/sprites/a/1.png.
 chars/Shizune/sprites/a/1.png loaded
@@ -444,7 +428,7 @@ Loading chars/Shizune/sprites/jump/2.png.
 chars/Shizune/sprites/jump/2.png loaded
 Loading chars/Shizune/sprites/jump/3.png.
 chars/Shizune/sprites/jump/3.png loaded
-Loading idle jumping.
+Loading idle.jump.
 Loading chars/Shizune/sprites/jump/3.png.
 chars/Shizune/sprites/jump/3.png loaded
 Loading on_hit.stand.
@@ -457,7 +441,7 @@ Loading chars/Shizune/sprites/on_hit_crouch/1.png.
 chars/Shizune/sprites/on_hit_crouch/1.png loaded
 Loading chars/Shizune/sprites/on_hit_crouch/2.png.
 chars/Shizune/sprites/on_hit_crouch/2.png loaded
-Loading defense.standing.
+Loading defense.stand.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
 Loading defense.crouch.
@@ -571,9 +555,12 @@ menu/locked_char_p1.png loaded
 menu/locked_char_p2.png loaded
 menu/no_portrait.png loaded
 stages/CastleSuzaku/images/preview.png loaded
-Error: Shizunejump up sound does not exists.
-Error: Shizuneair a sound does not exists.
+Error: Shizunewalk forward sound does not exists.
+Error: Shizunejump forward sound does not exists.
 Error: Shizuneair b sound does not exists.
+Error: Shizuneon_hit.stand sound does not exists.
+Error: Shizunea sound does not exists.
+Error: Shizuneidle.stand sound does not exists.
 Deleting game.
 Deleting character.
 Deleting character.

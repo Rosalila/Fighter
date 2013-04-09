@@ -11,7 +11,6 @@ class Fighter
 {
 public:
     //Logica
-    RosalilaInputs*inputa,*inputb;
     Menu* pause_menu;
     Stage* stage;
     int px_colision,py_colision;
@@ -64,13 +63,14 @@ public:
     void loopJuego();
     void logicaPersonaje(Personaje *p);
     void landCancel(Personaje *p);
+    void colisionCheck(Personaje*p);
+    void cancel(Personaje *p);
     void logicaStage();
     void aplicarModificadores(Personaje *p);
     void mandatoryModifiers(Personaje* p,Movimiento* m);
     void logica();
     void render();
     void dibujarBarra();
-    void escribirRosalilaInputssXML();
     Personaje* getPaActual();
     Personaje* getPbActual();
     Personaje* get2doPa();

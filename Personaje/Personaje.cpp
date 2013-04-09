@@ -486,9 +486,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate,int repeat_from,bool land_cancelable,bool crouched)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -931,8 +931,20 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("separate")!=NULL)
                 separate=atoi(elemento_imagen->Attribute("separate"));
 
+            int repeat_from=-1;
+            if(elemento_imagen->Attribute("repeat_from")!=NULL)
+                repeat_from=atoi(elemento_imagen->Attribute("repeat_from"))-1;
+
+            bool land_cancelable=false;
+            if(elemento_imagen->Attribute("land_cancelable")!=NULL)
+                land_cancelable=strcmp(elemento_imagen->Attribute("land_cancelable"),"yes")==0;
+
+            bool crouched=false;
+            if(elemento_imagen->Attribute("crouched")!=NULL)
+                crouched=strcmp(elemento_imagen->Attribute("crouched"),"yes")==0;
+
             setString(std::string("isActive.")+nombre,"no");
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate);
+            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
         }

@@ -970,7 +970,7 @@
 1364183396 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Object3D.cpp
 	"RosalilaGraphics/Object3D.h"
 
-1365288693 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1365461470 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics/RosalilaGraphics.h"
 
 1364169886 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Timer.cpp
@@ -1026,10 +1026,10 @@
 1364183485 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"RosalilaMenus/MenuTexto.h"
 
-1365379393 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
+1365470683 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
 	"Fighter.h"
 
-1365379369 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
+1365469043 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
 	"TinyXml/tinyxml.h"
 	"FighterMenu/FighterMenu.h"
 	<stdio.h>
@@ -1088,13 +1088,13 @@
 1364184587 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/ModificadorString.cpp
 	"ModificadorString.h"
 
-1365369346 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
+1365456181 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
 	"Movimiento.h"
 
 1364194459 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1365371000 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
+1365456283 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
 1364184613 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Proyectil.cpp
@@ -1108,7 +1108,7 @@
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 
-1365369380 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
+1365456248 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
 	"Movimiento.h"
 	"InputMovimiento.h"
 	"Proyectil.h"
@@ -1122,7 +1122,7 @@
 	<vector>
 	"RosalilaGraphics/RosalilaGraphics.h"
 
-1365369323 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
+1365456214 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"Frame.h"
 
