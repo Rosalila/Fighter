@@ -129,6 +129,8 @@
 		<Unit filename="Rosalila/TinyXml/tinyxml.h" />
 		<Unit filename="Rosalila/TinyXml/tinyxmlerror.cpp" />
 		<Unit filename="Rosalila/TinyXml/tinyxmlparser.cpp" />
+		<Unit filename="Stage/Layer.cpp" />
+		<Unit filename="Stage/Layer.h" />
 		<Unit filename="Stage/Stage.cpp" />
 		<Unit filename="Stage/Stage.h" />
 		<Unit filename="main.cpp" />

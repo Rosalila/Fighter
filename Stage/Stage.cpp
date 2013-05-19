@@ -41,6 +41,13 @@ void Stage::drawLayer(Layer* layer)
         layer->depth_effect_y,
         Color(255,255,255,255),
         false);
+
+    //Logic
+    layer->alignment_x+=layer->velocity_x;
+    if(layer->alignment_x>layer->max_x)
+        layer->alignment_x=layer->initial_x;
+    if(layer->alignment_x<layer->min_x)
+        layer->alignment_x=layer->initial_x;
 }
 
 void Stage::dibujarBack()
@@ -102,6 +109,18 @@ void Stage::loadFromXML(std::string path)
         int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
         int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
 
+        int velocity_x=0;
+        if(nodo_back->ToElement()->Attribute("velocity_x")!=NULL)
+            velocity_x=atoi(nodo_back->ToElement()->Attribute("velocity_x"));
+
+        int min_x=-999999;
+        if(nodo_back->ToElement()->Attribute("min_x")!=NULL)
+            min_x=atoi(nodo_back->ToElement()->Attribute("min_x"));
+
+        int max_x=999999;
+        if(nodo_back->ToElement()->Attribute("max_x")!=NULL)
+            max_x=atoi(nodo_back->ToElement()->Attribute("max_x"));
+
         std::vector <Image*> textures;
         std::vector <int> textures_size_x;
         std::vector <int> textures_size_y;
@@ -110,20 +129,28 @@ void Stage::loadFromXML(std::string path)
                 layer!=NULL;
                 layer=layer->NextSibling("frame"))
         {
-            char *image=new char[255];
-            strcpy(image,"stages/");
-            strcat(image,path.c_str());
-            strcat(image,"/images/");
-            strcat(image,layer->ToElement()->Attribute("image_path"));
-            int size_x=atoi(layer->ToElement()->Attribute("size_x"));
-            int size_y=atoi(layer->ToElement()->Attribute("size_y"));
+            char *image_path=new char[255];
+            strcpy(image_path,"stages/");
+            strcat(image_path,path.c_str());
+            strcat(image_path,"/images/");
+            strcat(image_path,layer->ToElement()->Attribute("image_path"));
 
-            textures.push_back(painter->getTexture(image));
+            Image* image=painter->getTexture(image_path);
+            textures.push_back(image);
+
+            int size_x=image->getWidth();
+            if(layer->ToElement()->Attribute("size_x")!=NULL)
+                size_x=atoi(layer->ToElement()->Attribute("size_x"));
+
+            int size_y=image->getHeight();
+            if(layer->ToElement()->Attribute("size_y")!=NULL)
+                size_y=atoi(layer->ToElement()->Attribute("size_y"));
+
             textures_size_x.push_back(size_x);
             textures_size_y.push_back(size_y);
         }
 
-        back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
+        back.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y,velocity_x,min_x,max_x));
     }
 
     writeLogLine("Loading stage's FrontLayers.");
@@ -139,6 +166,18 @@ void Stage::loadFromXML(std::string path)
         int alignment_x=atoi(nodo_back->ToElement()->Attribute("alignment_x"));
         int alignment_y=atoi(nodo_back->ToElement()->Attribute("alignment_y"));
 
+        int velocity_x=0;
+        if(nodo_back->ToElement()->Attribute("velocity_x")!=NULL)
+            velocity_x=atoi(nodo_back->ToElement()->Attribute("velocity_x"));
+
+        int min_x=-999999;
+        if(nodo_back->ToElement()->Attribute("min_x")!=NULL)
+            min_x=atoi(nodo_back->ToElement()->Attribute("min_x"));
+
+        int max_x=999999;
+        if(nodo_back->ToElement()->Attribute("max_x")!=NULL)
+            max_x=atoi(nodo_back->ToElement()->Attribute("max_x"));
+
         std::vector <Image*> textures;
         std::vector <int> textures_size_x;
         std::vector <int> textures_size_y;
@@ -147,20 +186,30 @@ void Stage::loadFromXML(std::string path)
                 layer!=NULL;
                 layer=layer->NextSibling("frame"))
         {
-            char *image=new char[255];
-            strcpy(image,"stages/");
-            strcat(image,path.c_str());
-            strcat(image,"/images/");
-            strcat(image,layer->ToElement()->Attribute("image_path"));
-            int size_x=atoi(layer->ToElement()->Attribute("size_x"));
-            int size_y=atoi(layer->ToElement()->Attribute("size_y"));
+            char *image_path=new char[255];
+            strcpy(image_path,"stages/");
+            strcat(image_path,path.c_str());
+            strcat(image_path,"/images/");
+            strcat(image_path,layer->ToElement()->Attribute("image_path"));
 
-            textures.push_back(painter->getTexture(image));
+            textures.push_back(painter->getTexture(image_path));
+
+            Image* image=painter->getTexture(image_path);
+            textures.push_back(image);
+
+            int size_x=image->getWidth();
+            if(layer->ToElement()->Attribute("size_x")!=NULL)
+                size_x=atoi(layer->ToElement()->Attribute("size_x"));
+
+            int size_y=image->getHeight();
+            if(layer->ToElement()->Attribute("size_y")!=NULL)
+                size_y=atoi(layer->ToElement()->Attribute("size_y"));
+
             textures_size_x.push_back(size_x);
             textures_size_y.push_back(size_y);
         }
 
-        front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y));
+        front.push_back(new Layer(textures,textures_size_x,textures_size_y,frame_duration,depth_effect_x,depth_effect_y,alignment_x,alignment_y,velocity_x,min_x,max_x));
     }
     writeLogLine("Stage loaded succesfully from XML.");
 }

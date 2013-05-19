@@ -776,15 +776,13 @@ void Personaje::aplicarModificadores(vector<Modificador*> modificadores,bool fli
     }
 }
 
-void Personaje::loadFromXML(int px,int py,RosalilaInputs* input,char* nombre)
+void Personaje::loadFromXML(RosalilaInputs* input,char* nombre)
 {
     writeLogLine("Loading "+std::string(nombre)+" from XML.");
     this->input=input;
     this->painter=painter;
     this->char_name=std::string(nombre);
     this->char_name_ptr=nombre;
-    this->px_inicial=px;
-    this->py_inicial=py;
 
     setString("effect.shadow","off");
     setString("effect.violet","off");
@@ -797,8 +795,8 @@ void Personaje::loadFromXML(int px,int py,RosalilaInputs* input,char* nombre)
     setEntero("Colision.x",0);
     setEntero("Colision.y",0);
 
-    setEntero("position_x",px);
-    setEntero("position_y",py);
+    setEntero("position_x",0);
+    setEntero("position_y",0);
 
     char* path_palettes=new char[255];
     strcpy(path_palettes,"chars/");

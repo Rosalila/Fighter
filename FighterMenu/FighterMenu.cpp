@@ -191,6 +191,7 @@ void Menu::loopMenu()
             if(inputa->getBufferRosalilaInputss()[0]=="2" && tecla_arriba_p1)
             {
                 MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->fullscreen_on=false;
                 mg->select_p1_y++;
                 if(mg->select_p1_y>=mg->size_y)
                     mg->select_p1_y=0;
@@ -199,6 +200,7 @@ void Menu::loopMenu()
             if(inputa->getBufferRosalilaInputss()[0]=="4" && tecla_arriba_p1)
             {
                 MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->fullscreen_on=false;
                 mg->select_p1_x--;
                 if(mg->select_p1_x<0)
                     mg->select_p1_x=mg->size_x-1;
@@ -207,6 +209,7 @@ void Menu::loopMenu()
             if(inputa->getBufferRosalilaInputss()[0]=="6" && tecla_arriba_p1)
             {
                 MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->fullscreen_on=false;
                 mg->select_p1_x++;
                 if(mg->select_p1_x>=mg->size_x)
                     mg->select_p1_x=0;
@@ -215,6 +218,7 @@ void Menu::loopMenu()
             if(inputa->getBufferRosalilaInputss()[0]=="8" && tecla_arriba_p1)
             {
                 MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                mg->fullscreen_on=false;
                 mg->select_p1_y--;
                 if(mg->select_p1_y<0)
                     mg->select_p1_y=mg->size_y-1;
@@ -223,7 +227,7 @@ void Menu::loopMenu()
             if(inputa->getBufferRosalilaInputss()[0]=="a" && tecla_arriba_p1)
             {
                 MenuGallery*mg = ((MenuGallery*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
-                exit(0);
+                mg->select();
                 tecla_arriba_p1=false;
             }
         }
@@ -1239,7 +1243,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(painter,sonido,1,num_paleta);
-    p->loadFromXML(stage->size/2-painter->screen_width/4-200,0,inputa,(char *)path_a);
+    p->loadFromXML(inputa,(char *)path_a);
     writeLogLine("Loaded successfully.");
     return p;
 }
@@ -1287,7 +1291,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(painter,sonido,2,num_paleta);
-    p->loadFromXML(stage->size/2-painter->screen_width/4+200,0,inputb,(char *)path_b);
+    p->loadFromXML(inputb,(char *)path_b);
     writeLogLine("Loaded successfully.");
     return p;
 }

@@ -66,7 +66,7 @@ class Personaje
     Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int paleta);
     ~Personaje();
     //Cargares
-    void loadFromXML(int px,int py,RosalilaInputs* input,char* nombre);
+    void loadFromXML(RosalilaInputs* input,char* nombre);
     void loadMain();
     void loadVars();
     void loadInputs();

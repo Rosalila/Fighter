@@ -79,7 +79,9 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     getPaActual()->setString("orientation","d");
     getPbActual()->setString("orientation","i");
 
-//    writeLogLine("Entering game loop.");
+    //Set chars inital position
+    getPaActual()->setEntero("position_x",painter->screen_width/2-250);
+    getPbActual()->setEntero("position_x",painter->screen_width/2+250);
 
     loopJuego();
 }
@@ -215,7 +217,7 @@ bool Fighter::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,
     return hay_colision;
 }
 
-bool Fighter::getColisionHitBoxes(Personaje* atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado)
 {
     std::vector <HitBox*> hb_azules=atacado->getHitBoxes(variable_atacado);
     std::vector <HitBox*> hb_rojas=atacante->getHitBoxes(variable_atacante);
@@ -238,10 +240,10 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,std::string variable_ataca
         }
 
 
-    int ax=atacado_x;
-    int ay=-atacado_y;
-    int rx=atacante_x;
-    int ry=-atacante_y;
+    int ax=atacado->getEntero("position_x");
+    int ay=-atacado->getEntero("position_y");
+    int rx=atacante->getEntero("position_x");
+    int ry=-atacante->getEntero("position_y");
 
     for(int a=0; a<(int)hb_azules.size(); a++)
         for(int r=0; r<(int)hb_rojas.size(); r++)
@@ -282,42 +284,6 @@ bool Fighter::getColisionHitBoxes(Personaje* atacante,std::string variable_ataca
             hb_azules[i]->p1x=-b;
             hb_azules[i]->p2x=-a;
         }
-
-    return false;
-}
-
-bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado)
-{
-    std::vector <HitBox*> hb_azules=atacado->getHitBoxes(variable_atacado);
-    std::vector <HitBox*> hb_rojas=atacante->getHitBoxes(variable_atacante);
-
-    if(atacante->getString("orientation")=="i")
-        for(int i=0; i<(int)hb_rojas.size(); i++)
-        {
-            int a=hb_rojas[i]->p1x;
-            int b=hb_rojas[i]->p2x;
-            hb_rojas[i]->p1x=-b;
-            hb_rojas[i]->p2x=-a;
-        }
-    if(atacado->getString("orientation")=="i")
-        for(int i=0; i<(int)hb_azules.size(); i++)
-        {
-            int a=hb_azules[i]->p1x;
-            int b=hb_azules[i]->p2x;
-            hb_azules[i]->p1x=-b;
-            hb_azules[i]->p2x=-a;
-        }
-
-
-    int ax=atacado->getEntero("position_x");
-    int ay=-atacado->getEntero("position_y");
-    int rx=atacante->getEntero("position_x");
-    int ry=-atacante->getEntero("position_y");
-
-    for(int a=0; a<(int)hb_azules.size(); a++)
-        for(int r=0; r<(int)hb_rojas.size(); r++)
-            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
-                return true;
     return false;
 }
 
@@ -942,16 +908,17 @@ void Fighter::logicaStage()
         pb_x=stage->size/2+painter->screen_width/2-marco_x;
         getPbActual()->setEntero("position_x",pb_x);
     }
+
+    //New camera position
     int nueva_pos=(pa_x+pb_x)/2-painter->screen_width/2;
 
+    if(nueva_pos<-stage->size/2+painter->screen_width/2)
+        nueva_pos=-stage->size/2+painter->screen_width/2;
 
-    //verificar q  el stage no se salga
-    if(nueva_pos>-stage->size/2+painter->screen_width/2
-            && nueva_pos<stage->size/2-painter->screen_width/2
-      )
-    {
-        painter->camera_x=nueva_pos;
-    }
+    if(nueva_pos>stage->size/2-painter->screen_width/2)
+        nueva_pos=stage->size/2-painter->screen_width/2;
+
+    painter->camera_x=nueva_pos;
 
 
     //Alineacion y

@@ -59,7 +59,6 @@ public:
     //Logica
     bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     bool getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado);
-    bool getColisionHitBoxes(Personaje*atacante,std::string variable_atacante,Personaje*atacado,std::string variable_atacado,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     void loopJuego();
     void logicaPersonaje(Personaje *p);
     void landCancel(Personaje *p);

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Fighter.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="9416" topLine="292" />
+	<File name="Fighter.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="4341" topLine="160" />
 	</File>
-	<File name="Fighter.h" open="1" top="0" tabpos="1">
-		<Cursor position="2140" topLine="54" />
+	<File name="Fighter.h" open="0" top="0" tabpos="3">
+		<Cursor position="38" topLine="0" />
 	</File>
-	<File name="FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="1">
-		<Cursor position="50330" topLine="1177" />
+	<File name="FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="6346" topLine="210" />
 	</File>
 	<File name="FighterMenu/FighterMenu.h" open="0" top="0" tabpos="0">
 		<Cursor position="270" topLine="12" />
@@ -79,10 +79,10 @@
 	<File name="Personaje/ModificadorString.h" open="0" top="0" tabpos="0">
 		<Cursor position="67" topLine="0" />
 	</File>
-	<File name="Personaje/Movimiento.cpp" open="1" top="0" tabpos="4">
+	<File name="Personaje/Movimiento.cpp" open="0" top="0" tabpos="4">
 		<Cursor position="25" topLine="0" />
 	</File>
-	<File name="Personaje/Movimiento.h" open="1" top="0" tabpos="3">
+	<File name="Personaje/Movimiento.h" open="0" top="0" tabpos="3">
 		<Cursor position="615" topLine="1" />
 	</File>
 	<File name="Personaje/Paleta.cpp" open="0" top="0" tabpos="0">
@@ -91,10 +91,10 @@
 	<File name="Personaje/Paleta.h" open="0" top="0" tabpos="0">
 		<Cursor position="912" topLine="9" />
 	</File>
-	<File name="Personaje/Personaje.cpp" open="1" top="0" tabpos="6">
+	<File name="Personaje/Personaje.cpp" open="0" top="0" tabpos="6">
 		<Cursor position="31155" topLine="914" />
 	</File>
-	<File name="Personaje/Personaje.h" open="1" top="0" tabpos="5">
+	<File name="Personaje/Personaje.h" open="0" top="0" tabpos="5">
 		<Cursor position="4886" topLine="113" />
 	</File>
 	<File name="Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
@@ -124,8 +124,8 @@
 	<File name="Rosalila/RosalilaGraphics/Object3D.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1148" topLine="25" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="13132" topLine="450" />
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="16317" topLine="666" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="0">
 		<Cursor position="427" topLine="0" />
@@ -151,11 +151,11 @@
 	<File name="Rosalila/RosalilaMenus/MenuCharSelect.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="0" topLine="261" />
 	</File>
-	<File name="Rosalila/RosalilaMenus/MenuGallery.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="3608" topLine="60" />
+	<File name="Rosalila/RosalilaMenus/MenuGallery.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="7445" topLine="107" />
 	</File>
-	<File name="Rosalila/RosalilaMenus/MenuGallery.h" open="0" top="0" tabpos="2">
-		<Cursor position="367" topLine="5" />
+	<File name="Rosalila/RosalilaMenus/MenuGallery.h" open="0" top="0" tabpos="1">
+		<Cursor position="376" topLine="16" />
 	</File>
 	<File name="Rosalila/RosalilaMenus/MenuImagen.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="721" topLine="0" />
@@ -166,8 +166,17 @@
 	<File name="Rosalila/RosalilaUtility/RosalilaUtility.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="7180" topLine="254" />
 	</File>
-	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="743" topLine="16" />
+	<File name="Stage/Layer.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="Stage/Layer.h" open="0" top="0" tabpos="3">
+		<Cursor position="0" topLine="6" />
+	</File>
+	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="832" topLine="18" />
+	</File>
+	<File name="Stage/Stage.h" open="0" top="0" tabpos="1">
+		<Cursor position="231" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="23">
 		<Cursor position="313" topLine="15" />
