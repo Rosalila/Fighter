@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Fighter.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="4341" topLine="160" />
+	<File name="Fighter.cpp" open="1" top="1" tabpos="1">
+		<Cursor position="9237" topLine="319" />
 	</File>
-	<File name="Fighter.h" open="0" top="0" tabpos="3">
-		<Cursor position="38" topLine="0" />
+	<File name="Fighter.h" open="1" top="0" tabpos="2">
+		<Cursor position="1549" topLine="39" />
 	</File>
-	<File name="FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="6346" topLine="210" />
+	<File name="FighterMenu/FighterMenu.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="53706" topLine="1282" />
 	</File>
 	<File name="FighterMenu/FighterMenu.h" open="0" top="0" tabpos="0">
 		<Cursor position="270" topLine="12" />
@@ -91,11 +91,11 @@
 	<File name="Personaje/Paleta.h" open="0" top="0" tabpos="0">
 		<Cursor position="912" topLine="9" />
 	</File>
-	<File name="Personaje/Personaje.cpp" open="0" top="0" tabpos="6">
-		<Cursor position="31155" topLine="914" />
+	<File name="Personaje/Personaje.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="31134" topLine="929" />
 	</File>
-	<File name="Personaje/Personaje.h" open="0" top="0" tabpos="5">
-		<Cursor position="4886" topLine="113" />
+	<File name="Personaje/Personaje.h" open="1" top="0" tabpos="5">
+		<Cursor position="1759" topLine="57" />
 	</File>
 	<File name="Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
@@ -124,8 +124,8 @@
 	<File name="Rosalila/RosalilaGraphics/Object3D.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1148" topLine="25" />
 	</File>
-	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="16317" topLine="666" />
+	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="16317" topLine="664" />
 	</File>
 	<File name="Rosalila/RosalilaGraphics/RosalilaGraphics.h" open="0" top="0" tabpos="0">
 		<Cursor position="427" topLine="0" />

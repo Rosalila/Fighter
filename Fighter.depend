@@ -1026,7 +1026,7 @@
 1364183485 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"RosalilaMenus/MenuTexto.h"
 
-1368924652 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
+1369252875 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
 	"Fighter.h"
 
 1368919962 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
@@ -1094,7 +1094,7 @@
 1364194459 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1368924306 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
+1368924909 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
 1364184613 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Proyectil.cpp
@@ -1199,10 +1199,10 @@
 1366180620 source:/home/turupawn/Projects/CodeBlocks/Fighter/Stage/Layer.cpp
 	"Layer.h"
 
-1365470846 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
+1368924652 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
 	"Fighter.h"
 
-1365469043 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
+1368919962 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
 	"TinyXml/tinyxml.h"
 	"FighterMenu/FighterMenu.h"
 	<stdio.h>
@@ -1228,7 +1228,7 @@
 	"RosalilaGraphics/RosalilaGraphics.h"
 	"RosalilaSound/RosalilaSound.h"
 
-1365456248 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
+1368924854 /media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
 	"Movimiento.h"
 	"InputMovimiento.h"
 	"Proyectil.h"
@@ -1307,7 +1307,7 @@
 	"TinyXml/tinyxml.h"
 	"RosalilaGraphics/RosalilaGraphics.h"
 
-1365564556 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/FighterMenu/FighterMenu.cpp
+1368924870 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/FighterMenu/FighterMenu.cpp
 	"FighterMenu.h"
 
 1364184528 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Animacion.cpp
@@ -1357,7 +1357,7 @@
 1364194459 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1365456283 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
+1368924909 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
 1364184613 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Proyectil.cpp
@@ -1378,7 +1378,7 @@
 1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Animation.cpp
 	"RosalilaGraphics/Animation.h"
 
-1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Cube.cpp
+1368902238 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Cube.cpp
 	"RosalilaGraphics/Cube.h"
 
 1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Image.cpp
@@ -1387,7 +1387,7 @@
 1364183396 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Object3D.cpp
 	"RosalilaGraphics/Object3D.h"
 
-1365471102 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1368902331 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics/RosalilaGraphics.h"
 
 1364169886 source:/media/turupawn/b73645b2-07b4-41fa-9edf-04c4052abd85/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Timer.cpp

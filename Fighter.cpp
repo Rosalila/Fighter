@@ -308,10 +308,11 @@ void Fighter::cancel(Personaje *p)
         m_nuevo->acceleration_y=m->acceleration_y;
         m_nuevo->frame_actual=0;
         m_nuevo->tiempo_transcurrido=0;
+        m_nuevo->ya_pego=true;
     }
     else if(m->crouched
             &&
-            (input->getBufferRosalilaInputss()[0]=="1" || input->getBufferRosalilaInputss()[0]=="2" || input->getBufferRosalilaInputss()[0]=="3")
+            (input->getBufferRosalilaInputss()[0][0]=='1' || input->getBufferRosalilaInputss()[0][0]=='2' || input->getBufferRosalilaInputss()[0][0]=='3')
             )
     {
         p->setString("current_move","idle.crouch");
@@ -321,11 +322,17 @@ void Fighter::cancel(Personaje *p)
     }
     else
     {
-        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         p->setString("current_move","idle.stand");
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         m_nuevo->frame_actual=0;
         m_nuevo->tiempo_transcurrido=0;
     }
+
+    Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+    //aplicar modificadores de la primera frame
+    Frame* f=m_nuevo->frames[m_nuevo->frame_actual];
+    if(m_nuevo->tiempo_transcurrido==0)
+        p->aplicarModificadores(f->modificadores,p->getString("orientation")=="i");
 }
 
 void Fighter::landCancel(Personaje *p)
@@ -363,6 +370,7 @@ void Fighter::colisionCheck(Personaje*p)
         Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
         if(!m->ya_pego || m->multihit)
         {
+            writeLogLine("testa");
             p->setString("hit","yes");
             painter->explode(px_colision,py_colision+painter->screen_height);
             m->ya_pego=true;
@@ -507,19 +515,6 @@ void Fighter::logicaPersonaje(Personaje* p)
                             hit_cancel_pb_unblockable_high=m_contrario->unblockable_high;
                             hit_cancel_pb_unblockable_low=m_contrario->unblockable_low;
                         }
-//                        if(p->getString("current_move").subString(0,7)=="on_hit.")
-//                        {
-//                            p->combo++;
-//                        }
-//                        Movimiento* m=p->movimientos[p->getString("current_move")];
-//                        Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
-//                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-m_contrario->damage);
-//                        m->frame_actual=0;
-//                        m->tiempo_transcurrido=0;
-//                        m->ya_pego=false;
-//                        p->setString("current_move",p->inputs[i].movimiento);
-//                        p->setString(std::string("isActive.")+p->inputs[i].movimiento,"yes");
-//                        sonido->playSound(p->char_name+p->getString("current_move"));
                     }
                     else
                     {
@@ -683,6 +678,19 @@ void Fighter::logica()
             p->setString("current_move",hit_cancel_pa);
             p->setString(std::string("isActive.")+hit_cancel_pa,"yes");
             sonido->playSound(p->char_name+p->getString("current_move"));
+
+            Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+            if(m_nuevo->inherits_velocity)
+            {
+                m_nuevo->velocity_x=m->velocity_x;
+                m_nuevo->velocity_y=m->velocity_y;
+                m_nuevo->acceleration_x=m->acceleration_x;
+                m_nuevo->acceleration_y=m->acceleration_y;
+            }else
+            {
+                m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
+                m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
+            }
     }
 
     if(hit_cancel_pb!="")
@@ -737,6 +745,19 @@ void Fighter::logica()
             p->setString("current_move",hit_cancel_pb);
             p->setString(std::string("isActive.")+hit_cancel_pb,"yes");
             sonido->playSound(p->char_name+p->getString("current_move"));
+
+            Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+            if(m_nuevo->inherits_velocity)
+            {
+                m_nuevo->velocity_x=m->velocity_x;
+                m_nuevo->velocity_y=m->velocity_y;
+                m_nuevo->acceleration_x=m->acceleration_x;
+                m_nuevo->acceleration_y=m->acceleration_y;
+            }else
+            {
+                m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
+                m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
+            }
     }
 
 
