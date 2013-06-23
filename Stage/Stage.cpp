@@ -6,19 +6,29 @@ Stage::Stage(RosalilaGraphics* painter,Sound* sonido)
     this->sonido=sonido;
 }
 
-void Stage::drawLayer(Layer* layer)
+void Stage::drawLayer(Layer* layer,bool time_stopped)
 {
-    //Animation speed
-    if(layer->time_elapsed>layer->frame_duration)
+    if(!time_stopped)
     {
-        layer->current_frame++;
-        layer->time_elapsed=0;
-    }
+        //Animation speed
+        if(layer->time_elapsed>layer->frame_duration)
+        {
+            layer->current_frame++;
+            layer->time_elapsed=0;
+        }
 
-    //Loop animation
-    layer->time_elapsed++;
-    if(layer->current_frame>=(int)layer->textures.size())
-        layer->current_frame=0;
+        //Loop animation
+        layer->time_elapsed++;
+        if(layer->current_frame>=(int)layer->textures.size())
+            layer->current_frame=0;
+
+        //Logic
+        layer->alignment_x+=layer->velocity_x;
+        if(layer->alignment_x>layer->max_x)
+            layer->alignment_x=layer->initial_x;
+        if(layer->alignment_x<layer->min_x)
+            layer->alignment_x=layer->initial_x;
+    }
 
     //Get current image
     Image* texture=layer->textures[layer->current_frame];
@@ -41,30 +51,23 @@ void Stage::drawLayer(Layer* layer)
         layer->depth_effect_y,
         Color(255,255,255,255),
         false);
-
-    //Logic
-    layer->alignment_x+=layer->velocity_x;
-    if(layer->alignment_x>layer->max_x)
-        layer->alignment_x=layer->initial_x;
-    if(layer->alignment_x<layer->min_x)
-        layer->alignment_x=layer->initial_x;
 }
 
-void Stage::dibujarBack()
+void Stage::dibujarBack(bool time_stopped)
 {
     for(int i=0;i<(int)back.size();i++)
     {
         Layer* layer=back[i];
-        drawLayer(layer);
+        drawLayer(layer,time_stopped);
     }
 }
 
-void Stage::dibujarFront()
+void Stage::dibujarFront(bool time_stopped)
 {
     for(int i=0;i<(int)front.size();i++)
     {
         Layer* layer=front[i];
-        drawLayer(layer);
+        drawLayer(layer,time_stopped);
     }
 }
 

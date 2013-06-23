@@ -21,9 +21,9 @@ class Stage
     int movimiento;
     int borde_efecto;
     Stage(RosalilaGraphics* painter,Sound* sonido);
-    void dibujarBack();
-    void dibujarFront();
-    void drawLayer(Layer*layer);
+    void dibujarBack(bool time_stopped);
+    void dibujarFront(bool time_stopped);
+    void drawLayer(Layer*layer, bool time_stopped);
     void loadFromXML(std::string archivo);
     ~Stage();
 };

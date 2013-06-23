@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Fighter.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="9237" topLine="319" />
+	<File name="Fighter.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="27037" topLine="741" />
 	</File>
-	<File name="Fighter.h" open="1" top="0" tabpos="2">
-		<Cursor position="1549" topLine="39" />
+	<File name="Fighter.h" open="1" top="0" tabpos="1">
+		<Cursor position="693" topLine="9" />
 	</File>
-	<File name="FighterMenu/FighterMenu.cpp" open="1" top="0" tabpos="3">
+	<File name="FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="3">
 		<Cursor position="53706" topLine="1282" />
 	</File>
 	<File name="FighterMenu/FighterMenu.h" open="0" top="0" tabpos="0">
@@ -80,10 +80,10 @@
 		<Cursor position="67" topLine="0" />
 	</File>
 	<File name="Personaje/Movimiento.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="25" topLine="0" />
+		<Cursor position="355" topLine="0" />
 	</File>
 	<File name="Personaje/Movimiento.h" open="0" top="0" tabpos="3">
-		<Cursor position="615" topLine="1" />
+		<Cursor position="227" topLine="3" />
 	</File>
 	<File name="Personaje/Paleta.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1709" topLine="25" />
@@ -91,11 +91,11 @@
 	<File name="Personaje/Paleta.h" open="0" top="0" tabpos="0">
 		<Cursor position="912" topLine="9" />
 	</File>
-	<File name="Personaje/Personaje.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="31134" topLine="929" />
+	<File name="Personaje/Personaje.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="31292" topLine="930" />
 	</File>
-	<File name="Personaje/Personaje.h" open="1" top="0" tabpos="5">
-		<Cursor position="1759" topLine="57" />
+	<File name="Personaje/Personaje.h" open="0" top="0" tabpos="5">
+		<Cursor position="3929" topLine="98" />
 	</File>
 	<File name="Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
@@ -172,11 +172,11 @@
 	<File name="Stage/Layer.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="6" />
 	</File>
-	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="832" topLine="18" />
+	<File name="Stage/Stage.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="196" topLine="6" />
 	</File>
-	<File name="Stage/Stage.h" open="0" top="0" tabpos="1">
-		<Cursor position="231" topLine="0" />
+	<File name="Stage/Stage.h" open="1" top="0" tabpos="3">
+		<Cursor position="643" topLine="8" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="23">
 		<Cursor position="313" topLine="15" />

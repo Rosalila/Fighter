@@ -486,9 +486,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate,int repeat_from,bool land_cancelable,bool crouched)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate,int repeat_from,bool land_cancelable,bool crouched,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched,stop_time_at,resume_time_at,cancel_on_hit,is_attack);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -941,8 +941,24 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("crouched")!=NULL)
                 crouched=strcmp(elemento_imagen->Attribute("crouched"),"yes")==0;
 
+            int stop_time_at=-1;
+            if(elemento_imagen->Attribute("stop_time_at")!=NULL)
+                stop_time_at=atoi(elemento_imagen->Attribute("stop_time_at"));
+
+            int resume_time_at=-1;
+            if(elemento_imagen->Attribute("resume_time_at")!=NULL)
+                resume_time_at=atoi(elemento_imagen->Attribute("resume_time_at"));
+
+            string cancel_on_hit="";
+            if(elemento_imagen->Attribute("cancel_on_hit")!=NULL)
+                cancel_on_hit=elemento_imagen->Attribute("cancel_on_hit");
+
+            bool is_attack=false;
+            if(elemento_imagen->Attribute("is_attack")!=NULL)
+                is_attack=strcmp(elemento_imagen->Attribute("is_attack"),"yes")==0;
+
             setString(std::string("isActive.")+nombre,"no");
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched);
+            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched,stop_time_at,resume_time_at,cancel_on_hit,is_attack);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
         }

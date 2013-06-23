@@ -28,6 +28,8 @@ public:
     int victories_b;
     std::string move_cancel_pa;
     std::string move_cancel_pb;
+    bool stop_time_pa;
+    bool stop_time_pb;
 
     //hit cancel control
     std::string hit_cancel_pa;

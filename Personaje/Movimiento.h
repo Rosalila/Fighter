@@ -27,11 +27,15 @@ class Movimiento
     bool land_cancelable;
     bool crouched;
     std::vector <Frame*> frames;
-    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity,bool pushes,int separate,int repeat_from,int land_cancelable,bool crouched);
+    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity,bool pushes,int separate,int repeat_from,int land_cancelable,bool crouched,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack);
     ~Movimiento();
     Frame* getFrameActual();
     bool ya_pego;
     bool multihit;
+    int stop_time_at;
+    int resume_time_at;
+    string cancel_on_hit;
+    bool is_attack;
     void agregarFrame(int duracion);
     void agregarCondicion(std::vector<Condicion*> condicion,int frame);
     //void agregarCondicion(int posicion,Condicion condicion,int frame);

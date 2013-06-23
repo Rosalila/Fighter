@@ -1,6 +1,6 @@
 #include "Movimiento.h"
 
-Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate,int repeat_from,int land_cancelable,bool crouched)
+Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate,int repeat_from,int land_cancelable,bool crouched,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack)
 {
     frame_actual=0;
     tiempo_transcurrido=0;
@@ -24,6 +24,10 @@ Movimiento::Movimiento(std::string nombre,int damage,int chip_damage,bool multih
     this->repeat_from=repeat_from;
     this->land_cancelable=land_cancelable;
     this->crouched=crouched;
+    this->stop_time_at=stop_time_at;
+    this->resume_time_at=resume_time_at;
+    this->cancel_on_hit=cancel_on_hit;
+    this->is_attack=is_attack;
 }
 
 Movimiento::~Movimiento()
@@ -49,8 +53,3 @@ void Movimiento::agregarCondicion(std::vector<Condicion*> condicion,int frame)
 {
     frames[frame]->condiciones.push_back(condicion);
 }
-
-//void Movimiento::agregarCondicion(int posicion,Condicion condicion,int frame)
-//{
-//    frames[frame].condiciones[posicion].push_back(condicion);
-//}

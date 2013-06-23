@@ -99,16 +99,20 @@ Loading jump back
 Loading idle.stand
 Loading idle.jump
 Loading idle.crouch
+Loading idle.land_cancel
 Loading a
 Loading b
 Loading crouch a
 Loading crouch b
 Loading air a
 Loading air b
+Loading grab
+Loading grab_cont
 Loading super
 Loading defense.stand
 Loading defense.crouch
 Loading on_hit.stand
+Loading on_hit.stand_low
 Loading on_hit.crouch
 Loading on_hit.air
 Loading on_hit.knockdown
@@ -140,6 +144,11 @@ chars/Shizune/sprites/intro/3.png loaded
 Loading chars/Shizune/sprites/intro/4.png.
 chars/Shizune/sprites/intro/4.png loaded
 Loading idle.stand.
+Loading chars/Shizune/sprites/idle/1.png.
+chars/Shizune/sprites/idle/1.png loaded
+Loading idle.land_cancel.
+Loading chars/Shizune/sprites/crouching/1.png.
+chars/Shizune/sprites/crouching/1.png loaded
 Loading chars/Shizune/sprites/idle/1.png.
 chars/Shizune/sprites/idle/1.png loaded
 Loading walk forward.
@@ -195,7 +204,21 @@ chars/Shizune/sprites/a/4.png loaded
 Loading b.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
+Loading grab.
+Loading chars/Shizune/sprites/grab/1.png.
+chars/Shizune/sprites/grab/1.png loaded
+Loading grab_cont.
+Loading chars/Shizune/sprites/grab/2.png.
+chars/Shizune/sprites/grab/2.png loaded
+Loading chars/Shizune/sprites/grab/3.png.
+chars/Shizune/sprites/grab/3.png loaded
+Loading chars/Shizune/sprites/grab/4.png.
+chars/Shizune/sprites/grab/4.png loaded
+Loading chars/Shizune/sprites/grab/5.png.
+chars/Shizune/sprites/grab/5.png loaded
 Loading crouch a.
+Loading chars/Shizune/sprites/crouch a/2.png.
+chars/Shizune/sprites/crouch a/2.png loaded
 Loading chars/Shizune/sprites/crouch a/1.png.
 chars/Shizune/sprites/crouch a/1.png loaded
 Loading chars/Shizune/sprites/crouch a/2.png.
@@ -240,6 +263,11 @@ Loading idle.jump.
 Loading chars/Shizune/sprites/jump/3.png.
 chars/Shizune/sprites/jump/3.png loaded
 Loading on_hit.stand.
+Loading chars/Shizune/sprites/on_hit_high/1.png.
+chars/Shizune/sprites/on_hit_high/1.png loaded
+Loading chars/Shizune/sprites/on_hit_high/2.png.
+chars/Shizune/sprites/on_hit_high/2.png loaded
+Loading on_hit.stand_low.
 Loading chars/Shizune/sprites/on_hit_stand/1.png.
 chars/Shizune/sprites/on_hit_stand/1.png loaded
 Loading chars/Shizune/sprites/on_hit_stand/2.png.
@@ -249,6 +277,30 @@ Loading chars/Shizune/sprites/on_hit_crouch/1.png.
 chars/Shizune/sprites/on_hit_crouch/1.png loaded
 Loading chars/Shizune/sprites/on_hit_crouch/2.png.
 chars/Shizune/sprites/on_hit_crouch/2.png loaded
+Loading on_hit.air.
+Loading chars/Shizune/sprites/fall/1.png.
+chars/Shizune/sprites/fall/1.png loaded
+Loading on_hit.knockdown.
+Loading chars/Shizune/sprites/fall/1.png.
+chars/Shizune/sprites/fall/1.png loaded
+Loading chars/Shizune/sprites/fall/2.png.
+chars/Shizune/sprites/fall/2.png loaded
+Loading chars/Shizune/sprites/fall/3.png.
+chars/Shizune/sprites/fall/3.png loaded
+Loading chars/Shizune/sprites/fall/4.png.
+chars/Shizune/sprites/fall/4.png loaded
+Loading chars/Shizune/sprites/fall/5.png.
+chars/Shizune/sprites/fall/5.png loaded
+Loading chars/Shizune/sprites/fall/6.png.
+chars/Shizune/sprites/fall/6.png loaded
+Loading chars/Shizune/sprites/fall/7.png.
+chars/Shizune/sprites/fall/7.png loaded
+Loading chars/Shizune/sprites/fall/8.png.
+chars/Shizune/sprites/fall/8.png loaded
+Loading chars/Shizune/sprites/crouching/2.png.
+chars/Shizune/sprites/crouching/2.png loaded
+Loading chars/Shizune/sprites/crouching/1.png.
+chars/Shizune/sprites/crouching/1.png loaded
 Loading defense.stand.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
@@ -297,14 +349,38 @@ chars/Shizune/sprites/super/19.png loaded
 Loading chars/Shizune/sprites/super/20.png.
 chars/Shizune/sprites/super/20.png loaded
 Loading ko.
-Loading chars/Shizune/sprites/not_done.png.
-chars/Shizune/sprites/not_done.png loaded
+Loading chars/Shizune/sprites/ko/1.png.
+chars/Shizune/sprites/ko/1.png loaded
+Loading chars/Shizune/sprites/ko/2.png.
+chars/Shizune/sprites/ko/2.png loaded
+Loading chars/Shizune/sprites/ko/3.png.
+chars/Shizune/sprites/ko/3.png loaded
+Loading chars/Shizune/sprites/ko/4.png.
+chars/Shizune/sprites/ko/4.png loaded
+Loading chars/Shizune/sprites/ko/5.png.
+chars/Shizune/sprites/ko/5.png loaded
 Loading victory.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
 Loading hitboxes.xml
 Loading sfx.xml
 Loading vfx.xml
+chars/Shizune/sprites/animations/grey_pixel.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
 chars/Shizune/sprites/animations/super/1.png loaded
 chars/Shizune/sprites/animations/super/2.png loaded
 chars/Shizune/sprites/animations/super/1.png loaded
@@ -344,16 +420,20 @@ Loading jump back
 Loading idle.stand
 Loading idle.jump
 Loading idle.crouch
+Loading idle.land_cancel
 Loading a
 Loading b
 Loading crouch a
 Loading crouch b
 Loading air a
 Loading air b
+Loading grab
+Loading grab_cont
 Loading super
 Loading defense.stand
 Loading defense.crouch
 Loading on_hit.stand
+Loading on_hit.stand_low
 Loading on_hit.crouch
 Loading on_hit.air
 Loading on_hit.knockdown
@@ -385,6 +465,11 @@ chars/Shizune/sprites/intro/3.png loaded
 Loading chars/Shizune/sprites/intro/4.png.
 chars/Shizune/sprites/intro/4.png loaded
 Loading idle.stand.
+Loading chars/Shizune/sprites/idle/1.png.
+chars/Shizune/sprites/idle/1.png loaded
+Loading idle.land_cancel.
+Loading chars/Shizune/sprites/crouching/1.png.
+chars/Shizune/sprites/crouching/1.png loaded
 Loading chars/Shizune/sprites/idle/1.png.
 chars/Shizune/sprites/idle/1.png loaded
 Loading walk forward.
@@ -440,7 +525,21 @@ chars/Shizune/sprites/a/4.png loaded
 Loading b.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
+Loading grab.
+Loading chars/Shizune/sprites/grab/1.png.
+chars/Shizune/sprites/grab/1.png loaded
+Loading grab_cont.
+Loading chars/Shizune/sprites/grab/2.png.
+chars/Shizune/sprites/grab/2.png loaded
+Loading chars/Shizune/sprites/grab/3.png.
+chars/Shizune/sprites/grab/3.png loaded
+Loading chars/Shizune/sprites/grab/4.png.
+chars/Shizune/sprites/grab/4.png loaded
+Loading chars/Shizune/sprites/grab/5.png.
+chars/Shizune/sprites/grab/5.png loaded
 Loading crouch a.
+Loading chars/Shizune/sprites/crouch a/2.png.
+chars/Shizune/sprites/crouch a/2.png loaded
 Loading chars/Shizune/sprites/crouch a/1.png.
 chars/Shizune/sprites/crouch a/1.png loaded
 Loading chars/Shizune/sprites/crouch a/2.png.
@@ -485,6 +584,11 @@ Loading idle.jump.
 Loading chars/Shizune/sprites/jump/3.png.
 chars/Shizune/sprites/jump/3.png loaded
 Loading on_hit.stand.
+Loading chars/Shizune/sprites/on_hit_high/1.png.
+chars/Shizune/sprites/on_hit_high/1.png loaded
+Loading chars/Shizune/sprites/on_hit_high/2.png.
+chars/Shizune/sprites/on_hit_high/2.png loaded
+Loading on_hit.stand_low.
 Loading chars/Shizune/sprites/on_hit_stand/1.png.
 chars/Shizune/sprites/on_hit_stand/1.png loaded
 Loading chars/Shizune/sprites/on_hit_stand/2.png.
@@ -494,6 +598,30 @@ Loading chars/Shizune/sprites/on_hit_crouch/1.png.
 chars/Shizune/sprites/on_hit_crouch/1.png loaded
 Loading chars/Shizune/sprites/on_hit_crouch/2.png.
 chars/Shizune/sprites/on_hit_crouch/2.png loaded
+Loading on_hit.air.
+Loading chars/Shizune/sprites/fall/1.png.
+chars/Shizune/sprites/fall/1.png loaded
+Loading on_hit.knockdown.
+Loading chars/Shizune/sprites/fall/1.png.
+chars/Shizune/sprites/fall/1.png loaded
+Loading chars/Shizune/sprites/fall/2.png.
+chars/Shizune/sprites/fall/2.png loaded
+Loading chars/Shizune/sprites/fall/3.png.
+chars/Shizune/sprites/fall/3.png loaded
+Loading chars/Shizune/sprites/fall/4.png.
+chars/Shizune/sprites/fall/4.png loaded
+Loading chars/Shizune/sprites/fall/5.png.
+chars/Shizune/sprites/fall/5.png loaded
+Loading chars/Shizune/sprites/fall/6.png.
+chars/Shizune/sprites/fall/6.png loaded
+Loading chars/Shizune/sprites/fall/7.png.
+chars/Shizune/sprites/fall/7.png loaded
+Loading chars/Shizune/sprites/fall/8.png.
+chars/Shizune/sprites/fall/8.png loaded
+Loading chars/Shizune/sprites/crouching/2.png.
+chars/Shizune/sprites/crouching/2.png loaded
+Loading chars/Shizune/sprites/crouching/1.png.
+chars/Shizune/sprites/crouching/1.png loaded
 Loading defense.stand.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
@@ -542,14 +670,38 @@ chars/Shizune/sprites/super/19.png loaded
 Loading chars/Shizune/sprites/super/20.png.
 chars/Shizune/sprites/super/20.png loaded
 Loading ko.
-Loading chars/Shizune/sprites/not_done.png.
-chars/Shizune/sprites/not_done.png loaded
+Loading chars/Shizune/sprites/ko/1.png.
+chars/Shizune/sprites/ko/1.png loaded
+Loading chars/Shizune/sprites/ko/2.png.
+chars/Shizune/sprites/ko/2.png loaded
+Loading chars/Shizune/sprites/ko/3.png.
+chars/Shizune/sprites/ko/3.png loaded
+Loading chars/Shizune/sprites/ko/4.png.
+chars/Shizune/sprites/ko/4.png loaded
+Loading chars/Shizune/sprites/ko/5.png.
+chars/Shizune/sprites/ko/5.png loaded
 Loading victory.
 Loading chars/Shizune/sprites/not_done.png.
 chars/Shizune/sprites/not_done.png loaded
 Loading hitboxes.xml
 Loading sfx.xml
 Loading vfx.xml
+chars/Shizune/sprites/animations/grey_pixel.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/1.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
+chars/Shizune/sprites/animations/super closeup/2.png loaded
 chars/Shizune/sprites/animations/super/1.png loaded
 chars/Shizune/sprites/animations/super/2.png loaded
 chars/Shizune/sprites/animations/super/1.png loaded
@@ -609,56 +761,3 @@ menu/selected_char_p2.png loaded
 menu/no_portrait.png loaded
 stages/TemploNocturno/images/preview.png loaded
 stages/CastleSuzaku/images/preview.png loaded
-Error: Shizunewalk forward sound does not exists.
-Error: Shizuneidle.crouch sound does not exists.
-Error: Shizunecrouch a sound does not exists.
-testa
-Error: Shizuneon_hit.stand sound does not exists.
-Error: Shizunecrouch b sound does not exists.
-testa
-testa
-Error: Shizunejump forward sound does not exists.
-Error: Shizuneair b sound does not exists.
-testa
-testa
-testa
-testa
-Error: Shizunewalk back sound does not exists.
-Error: Shizuneidle.stand sound does not exists.
-Error: Shizunea sound does not exists.
-testa
-testa
-Error: Shizuneb sound does not exists.
-testa
-testa
-testa
-testa
-testa
-testa
-testa
-testa
-testa
-testa
-Error: Shizunejump up sound does not exists.
-Error: Shizuneair a sound does not exists.
-Error: Shizunejump back sound does not exists.
-Deleting game.
-Deleting character.
-Deleting character.
-Deleting stage.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Deleting layer.
-Playing music: menu/audio/music.ogg

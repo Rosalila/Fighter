@@ -5,6 +5,9 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     this->victories_a=victories_a;
     this->victories_b=victories_b;
 
+    this->stop_time_pa=false;
+    this->stop_time_pb=false;
+
 //    writeLogLine("Loading misc config.");
 
     TiXmlDocument doc_t((char*)"config.xml");
@@ -320,7 +323,13 @@ void Fighter::cancel(Personaje *p)
         m_nuevo->frame_actual=m_nuevo->repeat_from-1;
         m_nuevo->tiempo_transcurrido=0;
     }
-    else
+    else if(p->getEntero("position_y")<=0 && m->land_cancelable)
+    {
+        p->setString("current_move","idle.land_cancel");
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        m_nuevo->frame_actual=0;
+        m_nuevo->tiempo_transcurrido=0;
+    }else
     {
         p->setString("current_move","idle.stand");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
@@ -376,6 +385,14 @@ void Fighter::colisionCheck(Personaje*p)
             m->ya_pego=true;
             p->personaje_contrario->setEntero("Colision.x",px_colision);
             p->personaje_contrario->setEntero("Colision.y",py_colision);
+
+            if(m->cancel_on_hit!="")
+            {
+                if(p->personaje_contrario->numero==1)
+                    move_cancel_pa=m->cancel_on_hit;
+                if(p->personaje_contrario->numero==2)
+                    move_cancel_pa=m->cancel_on_hit;
+            }
         }
     }
     else
@@ -439,16 +456,6 @@ void Fighter::logicaPersonaje(Personaje* p)
         sonido->playSound(p->char_name+"entrance");
     }
 
-    //verificar flip
-    if(p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x")
-            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
-            )
-        p->setString("orientation","i");
-
-    if(p->getEntero("position_x")<p->personaje_contrario->getEntero("position_x")
-            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
-            )
-        p->setString("orientation","d");
     //get input
     std::string str_movimiento="";
     if(pos_imagen_intro>=(int)match_intro.size())//si ya inicio la pelea
@@ -532,8 +539,7 @@ void Fighter::logica()
     getPaActual()->logicaProyectiles();
     getPbActual()->logicaProyectiles();
     //verificar si estan atacando
-    if(getPaActual()->getHitBoxes("red").size()>0
-       || getPaActual()->proyectiles_activos>0)
+    if(getPaActual()->getMovimientoActual()->is_attack)
     {
         getPaActual()->setString("attacking","yes");
     }
@@ -541,8 +547,8 @@ void Fighter::logica()
     {
         getPaActual()->setString("attacking","no");
     }
-    if(getPbActual()->getHitBoxes("red").size()>0
-       || getPbActual()->proyectiles_activos>0)
+
+    if(getPbActual()->getMovimientoActual()->is_attack)
     {
         getPbActual()->setString("attacking","yes");
     }
@@ -550,6 +556,25 @@ void Fighter::logica()
     {
         getPbActual()->setString("attacking","no");
     }
+
+//    if(getPaActual()->getHitBoxes("red").size()>0
+//       || getPaActual()->proyectiles_activos>0)
+//    {
+//        getPaActual()->setString("attacking","yes");
+//    }
+//    else
+//    {
+//        getPaActual()->setString("attacking","no");
+//    }
+//    if(getPbActual()->getHitBoxes("red").size()>0
+//       || getPbActual()->proyectiles_activos>0)
+//    {
+//        getPbActual()->setString("attacking","yes");
+//    }
+//    else
+//    {
+//        getPbActual()->setString("attacking","no");
+//    }
 
     move_cancel_pa="";
     move_cancel_pb="";
@@ -571,59 +596,58 @@ void Fighter::logica()
     logicaPersonaje(getPaActual());
     logicaPersonaje(getPbActual());
 
-
     //cancelar justamente
     if(move_cancel_pa!="")
     {
 
         Personaje* p=getPaActual();
-                Movimiento* m=p->movimientos[p->getString("current_move")];
-                m->frame_actual=0;
-                m->tiempo_transcurrido=0;
-                m->ya_pego=false;
-                p->setString("current_move",move_cancel_pa);
-                sonido->playSound(p->char_name+move_cancel_pa);
-                //setear isActive.
-                p->setString(std::string("isActive.")+move_cancel_pa,"yes");
+        Movimiento* m=p->movimientos[p->getString("current_move")];
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
+        p->setString("current_move",move_cancel_pa);
+        sonido->playSound(p->char_name+move_cancel_pa);
+        //setear isActive.
+        p->setString(std::string("isActive.")+move_cancel_pa,"yes");
 
-                Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-                if(m_nuevo->inherits_velocity)
-                {
-                    m_nuevo->velocity_x=m->velocity_x;
-                    m_nuevo->velocity_y=m->velocity_y;
-                    m_nuevo->acceleration_x=m->acceleration_x;
-                    m_nuevo->acceleration_y=m->acceleration_y;
-                }else
-                {
-                    m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
-                    m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
-                }
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        if(m_nuevo->inherits_velocity)
+        {
+            m_nuevo->velocity_x=m->velocity_x;
+            m_nuevo->velocity_y=m->velocity_y;
+            m_nuevo->acceleration_x=m->acceleration_x;
+            m_nuevo->acceleration_y=m->acceleration_y;
+        }else
+        {
+            m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
+            m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
+        }
     }
 
     if(move_cancel_pb!="")
     {
         Personaje* p=getPbActual();
-                Movimiento* m=p->movimientos[p->getString("current_move")];
-                m->frame_actual=0;
-                m->tiempo_transcurrido=0;
-                m->ya_pego=false;
-                p->setString("current_move",move_cancel_pb);
-                sonido->playSound(p->char_name+move_cancel_pb);
-                //setear isActive.
-                p->setString(std::string("isActive.")+move_cancel_pb,"yes");
+        Movimiento* m=p->movimientos[p->getString("current_move")];
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
+        p->setString("current_move",move_cancel_pb);
+        sonido->playSound(p->char_name+move_cancel_pb);
+        //setear isActive.
+        p->setString(std::string("isActive.")+move_cancel_pb,"yes");
 
-                Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-                if(m_nuevo->inherits_velocity)
-                {
-                    m_nuevo->velocity_x=m->velocity_x;
-                    m_nuevo->velocity_y=m->velocity_y;
-                    m_nuevo->acceleration_x=m->acceleration_x;
-                    m_nuevo->acceleration_y=m->acceleration_y;
-                }else
-                {
-                    m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
-                    m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
-                }
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        if(m_nuevo->inherits_velocity)
+        {
+            m_nuevo->velocity_x=m->velocity_x;
+            m_nuevo->velocity_y=m->velocity_y;
+            m_nuevo->acceleration_x=m->acceleration_x;
+            m_nuevo->acceleration_y=m->acceleration_y;
+        }else
+        {
+            m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
+            m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
+        }
     }
 
     if(hit_cancel_pa!="")
@@ -640,7 +664,7 @@ void Fighter::logica()
                 p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
             }else
             {
-                if(p->getString("current_move").substr(0,11)=="defense.air")
+                if(p->getString("current_move")=="defense.air")
                 {
                     if(hit_cancel_pa_unblockable_air)
                     {
@@ -650,7 +674,7 @@ void Fighter::logica()
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
                     }
                 }
-                if(p->getString("current_move").substr(0,12)=="defense.high")
+                if(p->getString("current_move")=="defense.high")
                 {
                     if(hit_cancel_pa_unblockable_high)
                     {
@@ -660,7 +684,7 @@ void Fighter::logica()
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
                     }
                 }
-                if(p->getString("current_move").substr(0,11)=="defense.low")
+                if(p->getString("current_move")=="defense.crouch")
                 {
                     if(hit_cancel_pa_unblockable_low)
                     {
@@ -707,7 +731,7 @@ void Fighter::logica()
                 p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_damage);
             }else
             {
-                if(p->getString("current_move").substr(0,11)=="defense.air")
+                if(p->getString("current_move")=="defense.air")
                 {
                     if(hit_cancel_pb_unblockable_air)
                     {
@@ -717,7 +741,7 @@ void Fighter::logica()
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
                     }
                 }
-                if(p->getString("current_move").substr(0,12)=="defense.high")
+                if(p->getString("current_move")=="defense.high")
                 {
                     if(hit_cancel_pb_unblockable_high)
                     {
@@ -727,7 +751,7 @@ void Fighter::logica()
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
                     }
                 }
-                if(p->getString("current_move").substr(0,11)=="defense.low")
+                if(p->getString("current_move")=="defense.crouch")
                 {
                     if(hit_cancel_pb_unblockable_low)
                     {
@@ -765,8 +789,10 @@ void Fighter::logica()
     getPaActual()->aplicarEfectosProyectiles();
     getPbActual()->aplicarEfectosProyectiles();
     //APLICAR MODIFICADORES
-    aplicarModificadores(getPaActual());
-    aplicarModificadores(getPbActual());
+    if(!stop_time_pb)
+        aplicarModificadores(getPaActual());
+    if(!stop_time_pa)
+        aplicarModificadores(getPbActual());
     logicaStage();
 }
 
@@ -791,7 +817,9 @@ void Fighter::aplicarModificadores(Personaje *p)
         m->tiempo_transcurrido=0;
     }
     else
+    {
         m->tiempo_transcurrido++;
+    }
     //verificar fin de movimiento
     if(m->frame_actual==(int)m->frames.size())
     {
@@ -815,7 +843,7 @@ void Fighter::aplicarModificadores(Personaje *p)
         }
     }
     //verificar cancel de isActive.
-    if(p->getString(std::string("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="idle.stand")
+    if(p->getString(std::string("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="idle.stand" && p->getString("current_move")!="idle.land_cancel")
     {
         cancel(p);
     }
@@ -843,7 +871,9 @@ void Fighter::aplicarModificadores(Personaje *p)
             mc->tiempo_transcurrido=0;
         }
         else
-            mc->tiempo_transcurrido++;
+        {
+            m->tiempo_transcurrido++;
+        }
         //verificar fin de movimiento
         if(mc->frame_actual==(int)mc->frames.size())
         {
@@ -872,10 +902,37 @@ void Fighter::aplicarModificadores(Personaje *p)
     {
         p->setEntero("position_y",0);
     }
+
+    //verificar flip
+    if(p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x")
+            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
+            )
+        p->setString("orientation","i");
+
+    if(p->getEntero("position_x")<p->personaje_contrario->getEntero("position_x")
+            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
+            )
+        p->setString("orientation","d");
 }
 
 void Fighter::mandatoryModifiers(Personaje* p, Movimiento* m)
 {
+    if(m->stop_time_at==m->frame_actual)
+    {
+        if(p->numero==1)
+            stop_time_pa=true;
+        if(p->numero==2)
+            stop_time_pb=true;
+    }
+
+    if(m->resume_time_at==m->frame_actual)
+    {
+        if(p->numero==1)
+            stop_time_pa=false;
+        if(p->numero==2)
+            stop_time_pb=false;
+    }
+
     int orientation_miltiplier=1;
     if(p->getString("orientation")=="i")
         orientation_miltiplier=-1;
@@ -1055,7 +1112,7 @@ void Fighter::dibujarBarra()
 void Fighter::render()
 {
     //Stage
-    stage->dibujarBack();
+    stage->dibujarBack(stop_time_pa || stop_time_pb);
 
     //Animaciones back
     getPaActual()->dibujarAnimacionesBack();
@@ -1223,7 +1280,7 @@ void Fighter::render()
         getPbActual()->setString("current_move","change_char");
         getPbActual()->setString("isActive.change_char","yes");
     }
-    stage->dibujarFront();
+    stage->dibujarFront(stop_time_pa || stop_time_pb);
 
     painter->draw3D();
 
