@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Debug" />
-	<File name="Fighter.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="27037" topLine="741" />
+	<File name="Fighter.cpp" open="0" top="0" tabpos="2">
+		<Cursor position="24149" topLine="706" />
 	</File>
-	<File name="Fighter.h" open="1" top="0" tabpos="1">
-		<Cursor position="693" topLine="9" />
+	<File name="Fighter.h" open="0" top="0" tabpos="1">
+		<Cursor position="2132" topLine="61" />
 	</File>
-	<File name="FighterMenu/FighterMenu.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="53706" topLine="1282" />
+	<File name="FighterMenu/FighterMenu.cpp" open="1" top="1" tabpos="0">
+		<Cursor position="35105" topLine="837" />
 	</File>
 	<File name="FighterMenu/FighterMenu.h" open="0" top="0" tabpos="0">
 		<Cursor position="270" topLine="12" />
@@ -20,7 +20,10 @@
 		<Cursor position="117" topLine="0" />
 	</File>
 	<File name="Personaje/Barra.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="10" topLine="0" />
+		<Cursor position="604" topLine="0" />
+	</File>
+	<File name="Personaje/Barra.h" open="0" top="0" tabpos="0">
+		<Cursor position="581" topLine="4" />
 	</File>
 	<File name="Personaje/Condicion.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
@@ -79,11 +82,11 @@
 	<File name="Personaje/ModificadorString.h" open="0" top="0" tabpos="0">
 		<Cursor position="67" topLine="0" />
 	</File>
-	<File name="Personaje/Movimiento.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="355" topLine="0" />
+	<File name="Personaje/Movimiento.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="1592" topLine="14" />
 	</File>
-	<File name="Personaje/Movimiento.h" open="0" top="0" tabpos="3">
-		<Cursor position="227" topLine="3" />
+	<File name="Personaje/Movimiento.h" open="0" top="0" tabpos="5">
+		<Cursor position="1108" topLine="24" />
 	</File>
 	<File name="Personaje/Paleta.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="1709" topLine="25" />
@@ -92,10 +95,10 @@
 		<Cursor position="912" topLine="9" />
 	</File>
 	<File name="Personaje/Personaje.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="31292" topLine="930" />
+		<Cursor position="23118" topLine="678" />
 	</File>
-	<File name="Personaje/Personaje.h" open="0" top="0" tabpos="5">
-		<Cursor position="3929" topLine="98" />
+	<File name="Personaje/Personaje.h" open="0" top="0" tabpos="3">
+		<Cursor position="3930" topLine="99" />
 	</File>
 	<File name="Personaje/Proyectil.cpp" open="0" top="0" tabpos="0">
 		<Cursor position="10" topLine="0" />
@@ -136,14 +139,14 @@
 	<File name="Rosalila/RosalilaInputs/Boton.h" open="0" top="0" tabpos="0">
 		<Cursor position="59" topLine="0" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="0" top="0" tabpos="3">
-		<Cursor position="3032" topLine="103" />
+	<File name="Rosalila/RosalilaInputs/Receiver.cpp" open="0" top="0" tabpos="6">
+		<Cursor position="3032" topLine="165" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/Receiver.h" open="0" top="0" tabpos="0">
 		<Cursor position="989" topLine="11" />
 	</File>
-	<File name="Rosalila/RosalilaInputs/RosalilaInputs.cpp" open="0" top="0" tabpos="2">
-		<Cursor position="10468" topLine="215" />
+	<File name="Rosalila/RosalilaInputs/RosalilaInputs.cpp" open="0" top="0" tabpos="7">
+		<Cursor position="8708" topLine="191" />
 	</File>
 	<File name="Rosalila/RosalilaInputs/RosalilaInputs.h" open="0" top="0" tabpos="0">
 		<Cursor position="388" topLine="7" />
@@ -172,10 +175,10 @@
 	<File name="Stage/Layer.h" open="0" top="0" tabpos="3">
 		<Cursor position="0" topLine="6" />
 	</File>
-	<File name="Stage/Stage.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="196" topLine="6" />
+	<File name="Stage/Stage.cpp" open="0" top="0" tabpos="3">
+		<Cursor position="1413" topLine="51" />
 	</File>
-	<File name="Stage/Stage.h" open="1" top="0" tabpos="3">
+	<File name="Stage/Stage.h" open="0" top="0" tabpos="3">
 		<Cursor position="643" topLine="8" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="23">

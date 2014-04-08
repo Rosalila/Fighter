@@ -195,8 +195,6 @@ void Stage::loadFromXML(std::string path)
             strcat(image_path,"/images/");
             strcat(image_path,layer->ToElement()->Attribute("image_path"));
 
-            textures.push_back(painter->getTexture(image_path));
-
             Image* image=painter->getTexture(image_path);
             textures.push_back(image);
 

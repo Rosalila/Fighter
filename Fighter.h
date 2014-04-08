@@ -69,6 +69,7 @@ public:
     void logicaStage();
     void aplicarModificadores(Personaje *p);
     void mandatoryModifiers(Personaje* p,Movimiento* m);
+    void velocityInheritance(Personaje* p, Movimiento* old_move, Movimiento* new_move);
     void logica();
     void render();
     void dibujarBarra();

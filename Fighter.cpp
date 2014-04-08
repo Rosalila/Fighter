@@ -305,13 +305,10 @@ void Fighter::cancel(Personaje *p)
     {
         p->setString("current_move","idle.jump");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->velocity_x=m->velocity_x;
-        m_nuevo->velocity_y=m->velocity_y;
-        m_nuevo->acceleration_x=m->acceleration_x;
-        m_nuevo->acceleration_y=m->acceleration_y;
         m_nuevo->frame_actual=0;
         m_nuevo->tiempo_transcurrido=0;
         m_nuevo->ya_pego=true;
+        velocityInheritance(p,m,m_nuevo);
     }
     else if(m->crouched
             &&
@@ -320,8 +317,9 @@ void Fighter::cancel(Personaje *p)
     {
         p->setString("current_move","idle.crouch");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->frame_actual=m_nuevo->repeat_from-1;
+        m_nuevo->frame_actual=m_nuevo->repeat_from;
         m_nuevo->tiempo_transcurrido=0;
+        velocityInheritance(p,m,m_nuevo);
     }
     else if(p->getEntero("position_y")<=0 && m->land_cancelable)
     {
@@ -329,12 +327,14 @@ void Fighter::cancel(Personaje *p)
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         m_nuevo->frame_actual=0;
         m_nuevo->tiempo_transcurrido=0;
+        velocityInheritance(p,m,m_nuevo);
     }else
     {
         p->setString("current_move","idle.stand");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         m_nuevo->frame_actual=0;
         m_nuevo->tiempo_transcurrido=0;
+        velocityInheritance(p,m,m_nuevo);
     }
 
     Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
@@ -379,7 +379,6 @@ void Fighter::colisionCheck(Personaje*p)
         Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
         if(!m->ya_pego || m->multihit)
         {
-            writeLogLine("testa");
             p->setString("hit","yes");
             painter->explode(px_colision,py_colision+painter->screen_height);
             m->ya_pego=true;
@@ -391,7 +390,7 @@ void Fighter::colisionCheck(Personaje*p)
                 if(p->personaje_contrario->numero==1)
                     move_cancel_pa=m->cancel_on_hit;
                 if(p->personaje_contrario->numero==2)
-                    move_cancel_pa=m->cancel_on_hit;
+                    move_cancel_pb=m->cancel_on_hit;
             }
         }
     }
@@ -465,6 +464,30 @@ void Fighter::logicaPersonaje(Personaje* p)
 
     //ejecutar cancel
     if(str_movimiento!="")
+    {
+        if(str_movimiento.substr(0,7)=="on_hit.")
+        {
+            if(p->numero==1)
+            {
+                hit_cancel_pa=str_movimiento;
+                Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
+                hit_cancel_pa_damage=m_contrario->damage;
+                hit_cancel_pa_chip_damage=m_contrario->chip_damage;
+                hit_cancel_pa_unblockable_air=m_contrario->unblockable_air;
+                hit_cancel_pa_unblockable_high=m_contrario->unblockable_high;
+                hit_cancel_pa_unblockable_low=m_contrario->unblockable_low;
+            }
+            if(p->numero==2)
+            {
+                hit_cancel_pb=str_movimiento;
+                Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
+                hit_cancel_pb_damage=m_contrario->damage;
+                hit_cancel_pb_chip_damage=m_contrario->chip_damage;
+                hit_cancel_pb_unblockable_air=m_contrario->unblockable_air;
+                hit_cancel_pb_unblockable_high=m_contrario->unblockable_high;
+                hit_cancel_pb_unblockable_low=m_contrario->unblockable_low;
+            }
+        }
         if(p->cumpleCondiciones(str_movimiento))
         {
             if((str_movimiento=="change_char"//validacion de no poder hacer "change_char" si no hay mas chars
@@ -486,51 +509,53 @@ void Fighter::logicaPersonaje(Personaje* p)
 //                p->setString(std::string("isActive.")+str_movimiento,"yes");
             }
         }
+    }
     //Movimientos continuos
     //agregar nuevos
     for(int i=0; i<(int)p->inputs.size(); i++) //for each movimiento
-        if(p->inputs[i]->input[0]=="*")//buscar los constantes
-            if(p->cumpleCondiciones(p->inputs[i]->movimiento))//si cumple
-            {
-                bool existe=false;
-                for(int j=0; j<(int)p->movimientos_constantes_actuales.size(); j++) //for each movimiento
-                    if(p->movimientos_constantes_actuales[j]->nombre==p->inputs[i]->movimiento)
-                    {
-                        existe=true;
-                    }
-                if(!existe)
+        if(p->movimientos[p->inputs[i]->movimiento]->is_status)
+//            if(p->inputs[i]->input[0]=="*")//buscar los constantes
+                if(p->cumpleCondiciones(p->inputs[i]->movimiento))//si cumple
                 {
-                    if(p->inputs[i]->movimiento.substr(0,7)=="on_hit.")
-                    {
-                        if(p->numero==1)
+                    bool existe=false;
+                    for(int j=0; j<(int)p->movimientos_constantes_actuales.size(); j++) //for each movimiento
+                        if(p->movimientos_constantes_actuales[j]->nombre==p->inputs[i]->movimiento)
                         {
-                            hit_cancel_pa=p->inputs[i]->movimiento;
-                            Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
-                            hit_cancel_pa_damage=m_contrario->damage;
-                            hit_cancel_pa_chip_damage=m_contrario->chip_damage;
-                            hit_cancel_pa_unblockable_air=m_contrario->unblockable_air;
-                            hit_cancel_pa_unblockable_high=m_contrario->unblockable_high;
-                            hit_cancel_pa_unblockable_low=m_contrario->unblockable_low;
+                            existe=true;
                         }
-                        if(p->numero==2)
-                        {
-                            hit_cancel_pb=p->inputs[i]->movimiento;
-                            Movimiento* m_contrario=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
-                            hit_cancel_pb_damage=m_contrario->damage;
-                            hit_cancel_pb_chip_damage=m_contrario->chip_damage;
-                            hit_cancel_pb_unblockable_air=m_contrario->unblockable_air;
-                            hit_cancel_pb_unblockable_high=m_contrario->unblockable_high;
-                            hit_cancel_pb_unblockable_low=m_contrario->unblockable_low;
-                        }
-                    }
-                    else
+                    if(!existe)
                     {
-                        std::string movimiento_temp=p->inputs[i]->movimiento;
-                        p->setString(std::string("isActive.")+movimiento_temp,"yes");
-                        p->movimientos_constantes_actuales.push_back(p->movimientos[movimiento_temp]);
+//                        else
+//                        {
+                            std::string movimiento_temp=p->inputs[i]->movimiento;
+                            p->setString(std::string("isActive.")+movimiento_temp,"yes");
+                            p->movimientos_constantes_actuales.push_back(p->movimientos[movimiento_temp]);
+//                        }
                     }
                 }
-            }
+}
+
+void Fighter::velocityInheritance(Personaje*p,Movimiento*old_move,Movimiento*new_move)
+{
+    if(old_move->final_velocity_x!=9999)
+        p->setEntero("velocity_x",old_move->final_velocity_x);
+
+    if(old_move->final_velocity_y!=9999)
+        p->setEntero("velocity_y",old_move->final_velocity_y);
+
+    if(old_move->final_acceleration_x!=9999)
+        p->setEntero("acceleration_x",old_move->final_acceleration_x);
+
+    if(old_move->final_acceleration_y!=9999)
+        p->setEntero("acceleration_y",old_move->final_acceleration_y);
+
+    if(!new_move->inherits_velocity)
+    {
+        p->setEntero("velocity_x",new_move->initial_velocity_x);
+        p->setEntero("velocity_y",new_move->initial_velocity_y);
+        p->setEntero("acceleration_x",new_move->initial_acceleration_x);
+        p->setEntero("acceleration_y",new_move->initial_acceleration_y);
+    }
 }
 
 void Fighter::logica()
@@ -611,17 +636,7 @@ void Fighter::logica()
         p->setString(std::string("isActive.")+move_cancel_pa,"yes");
 
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        if(m_nuevo->inherits_velocity)
-        {
-            m_nuevo->velocity_x=m->velocity_x;
-            m_nuevo->velocity_y=m->velocity_y;
-            m_nuevo->acceleration_x=m->acceleration_x;
-            m_nuevo->acceleration_y=m->acceleration_y;
-        }else
-        {
-            m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
-            m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
-        }
+        velocityInheritance(p,m,m_nuevo);
     }
 
     if(move_cancel_pb!="")
@@ -637,17 +652,7 @@ void Fighter::logica()
         p->setString(std::string("isActive.")+move_cancel_pb,"yes");
 
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        if(m_nuevo->inherits_velocity)
-        {
-            m_nuevo->velocity_x=m->velocity_x;
-            m_nuevo->velocity_y=m->velocity_y;
-            m_nuevo->acceleration_x=m->acceleration_x;
-            m_nuevo->acceleration_y=m->acceleration_y;
-        }else
-        {
-            m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
-            m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
-        }
+        velocityInheritance(p,m,m_nuevo);
     }
 
     if(hit_cancel_pa!="")
@@ -704,17 +709,7 @@ void Fighter::logica()
             sonido->playSound(p->char_name+p->getString("current_move"));
 
             Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-            if(m_nuevo->inherits_velocity)
-            {
-                m_nuevo->velocity_x=m->velocity_x;
-                m_nuevo->velocity_y=m->velocity_y;
-                m_nuevo->acceleration_x=m->acceleration_x;
-                m_nuevo->acceleration_y=m->acceleration_y;
-            }else
-            {
-                m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
-                m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
-            }
+            velocityInheritance(p,m,m_nuevo);
     }
 
     if(hit_cancel_pb!="")
@@ -771,17 +766,7 @@ void Fighter::logica()
             sonido->playSound(p->char_name+p->getString("current_move"));
 
             Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-            if(m_nuevo->inherits_velocity)
-            {
-                m_nuevo->velocity_x=m->velocity_x;
-                m_nuevo->velocity_y=m->velocity_y;
-                m_nuevo->acceleration_x=m->acceleration_x;
-                m_nuevo->acceleration_y=m->acceleration_y;
-            }else
-            {
-                m_nuevo->velocity_x=m_nuevo->initial_velocity_x;
-                m_nuevo->velocity_y=m_nuevo->initial_velocity_y;
-            }
+            velocityInheritance(p,m,m_nuevo);
     }
 
 
@@ -938,25 +923,53 @@ void Fighter::mandatoryModifiers(Personaje* p, Movimiento* m)
         orientation_miltiplier=-1;
 
     //Push and move
-    if(m->velocity_x<0 || p->getString("colision.blue_to_blue")!="yes" || !m->pushes)//No push
+    if(p->getEntero("velocity_x")<0 || p->getString("colision.blue_to_blue")!="yes" || !m->pushes)//No push
     {
-        p->setEntero("position_x",p->getEntero("position_x")+m->velocity_x*orientation_miltiplier);
+        p->setEntero("position_x",p->getEntero("position_x")+p->getEntero("velocity_x")*orientation_miltiplier);
     }else//Push
     {
-        p->setEntero("position_x",p->getEntero("position_x")+m->velocity_x*orientation_miltiplier/2);
-        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+m->velocity_x*orientation_miltiplier/2);
+        p->setEntero("position_x",p->getEntero("position_x")+p->getEntero("velocity_x")*orientation_miltiplier/2);
+        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+p->getEntero("velocity_x")*orientation_miltiplier/2);
     }
-    p->setEntero("position_y",p->getEntero("position_y")+m->velocity_y);
+    p->setEntero("position_y",p->getEntero("position_y")+p->getEntero("velocity_y"));
 
-    //Separate
-    if(p->getString("colision.red_to_blue")=="yes")
+    //Separate blue
+    if(p->getString("colision.blue_to_blue")=="yes" && !p->personaje_contrario->getMovimientoActual()->pushes)
     {
-        p->setEntero("position_x",p->getEntero("position_x")-m->separate*orientation_miltiplier);
-        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+m->separate*orientation_miltiplier/2);
+        p->setEntero("position_x",p->getEntero("position_x")-m->separate_blue*orientation_miltiplier);
+        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+m->separate_blue*orientation_miltiplier/2);
+    }
+    //Separate red
+    if(p->getString("colision.red_to_blue")=="yes" && !p->personaje_contrario->getMovimientoActual()->pushes)
+    {
+        p->setEntero("position_x",p->getEntero("position_x")-m->separate_red*orientation_miltiplier);
+        p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+m->separate_red*orientation_miltiplier/2);
     }
 
-    m->velocity_x+=m->acceleration_x;
-    m->velocity_y+=m->acceleration_y;
+    int new_velocity_x = p->getEntero("velocity_x") + p->getEntero("acceleration_x");
+    int new_velocity_y = p->getEntero("velocity_y") + p->getEntero("acceleration_y");
+
+    if(m->friction)
+    {
+        if((new_velocity_x > 0 && p->getEntero("velocity_x") > 0)
+           || (new_velocity_x < 0 && p->getEntero("velocity_x") < 0)
+            )
+        {
+            p->setEntero("velocity_x",new_velocity_x);
+        }else
+        {
+            p->setEntero("velocity_x",0);
+            p->setEntero("acceleration_x",0);
+        }
+
+        p->setEntero("velocity_y",new_velocity_y);
+
+    }else
+    {
+        p->setEntero("velocity_x",new_velocity_x);
+        p->setEntero("velocity_y",new_velocity_y);
+    }
+
 }
 
 void Fighter::logicaStage()
@@ -1137,6 +1150,8 @@ void Fighter::render()
     getPaActual()->dibujarProyectiles();
     getPbActual()->dibujarProyectiles();
 
+    stage->dibujarFront(stop_time_pa || stop_time_pb);
+
     //HP
     getPaActual()->dibujarBarras();
     getPbActual()->dibujarBarras();
@@ -1164,7 +1179,7 @@ void Fighter::render()
     game_over_a=pa_vivos<=0;
     game_over_b=pb_vivos<=0;
 
-    if(game_over_a && getPaActual()->getString("current_move")!="ko")
+    if(game_over_a && getPaActual()->getString("current_move")!="ko" && getPbActual()->getString("current_move")=="idle.stand")
     {
         //cancelar anterior
         Personaje*p=getPaActual();
@@ -1189,7 +1204,7 @@ void Fighter::render()
         }
     }
 
-    if(game_over_b && getPbActual()->getString("current_move")!="ko")
+    if(game_over_b && getPbActual()->getString("current_move")!="ko" && getPaActual()->getString("current_move")=="idle.stand")
     {
         //cancelar anterior
         Personaje*p=getPaActual();
@@ -1280,7 +1295,6 @@ void Fighter::render()
         getPbActual()->setString("current_move","change_char");
         getPbActual()->setString("isActive.change_char","yes");
     }
-    stage->dibujarFront(stop_time_pa || stop_time_pb);
 
     painter->draw3D();
 

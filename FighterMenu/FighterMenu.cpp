@@ -106,19 +106,19 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
         //Finish game
         if(pa_victories>=rounds && pb_victories>=rounds)
         {
-            Menu *temp=new Menu(painter,receiver,sonido,"menu/draw.xml");
+            Menu *temp=new Menu(painter,receiver,sonido,"menu/draw.svg");
             temp->loopMenu();
             break;
         }
         else if(pa_victories>=rounds)
         {
-            Menu *temp=new Menu(painter,receiver,sonido,"menu/pa_wins.xml");
+            Menu *temp=new Menu(painter,receiver,sonido,"menu/pa_wins.svg");
             temp->loopMenu();
             break;
         }
         else if(pb_victories>=rounds)
         {
-            Menu *temp=new Menu(painter,receiver,sonido,"menu/pb_wins.xml");
+            Menu *temp=new Menu(painter,receiver,sonido,"menu/pb_wins.svg");
             temp->loopMenu();
             break;
         }

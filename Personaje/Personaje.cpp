@@ -11,6 +11,10 @@ Personaje::Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int num_
     this->num_paleta=num_paleta;
     this->proyectiles_activos=0;
 
+    setString("projectile_disolve","no");
+    setString("projectile_disolve_chip","no");
+    setString("projectile_hit","no");
+
     setString("player","0");
     if(numero==1)
         setString("player","1");
@@ -25,6 +29,10 @@ Personaje::Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int num_
     setEntero("distance",0);
     setEntero("distance_absolute",0);
     setString("hit","no");
+    setEntero("velocity_x",0);
+    setEntero("velocity_y",0);
+    setEntero("acceleration_x",0);
+    setEntero("acceleration_y",0);
 }
 Personaje::~Personaje()
 {
@@ -124,6 +132,8 @@ void Personaje::dibujar()
         }
     }
 
+    if(getImagen("current_image")==NULL)
+        return;
     if(getImagen("current_image")->imagen==NULL)
         return;
     int dimension_x=getImagen("current_image")->dimension_x;
@@ -246,18 +256,18 @@ void Personaje::dibujarBarra(Barra* barra)
         }
     }else//flip if player 2
     {
-        float temp_x2=painter->screen_width-barra->pos_x1;
         float temp_x1=painter->screen_width-barra->pos_x1-longitud_actual;
+        float temp_x2=painter->screen_width-barra->pos_x1;
 
         if(barra->pos_x1>barra->pos_x2)
         {
-            temp_x2=painter->screen_width-barra->pos_x1+longitud_actual;
-            temp_x1=painter->screen_width-barra->pos_x1;
+            temp_x1=painter->screen_width-barra->pos_x1+longitud_actual;
+            temp_x2=painter->screen_width-barra->pos_x1;
         }
 
-        p1x=temp_x1;
+        p1x=temp_x2;
         p1y=barra->pos_y1;
-        p2x=temp_x2;
+        p2x=temp_x1;
         p2y=barra->pos_y2;
 
         player2=true;
@@ -273,7 +283,7 @@ void Personaje::dibujarBarra(Barra* barra)
     }
 
     if(barra->imagen==NULL)
-        painter->drawRectangle(p1x,p1y,p1x-p2x,p1y-p2y,0.0,barra->color.getRed(),barra->color.getGreen(),barra->color.getBlue(),barra->color.getAlpha(),false);
+        painter->drawRectangle(p1x,p1y,p2x-p1x,p2y-p1y,0.0,barra->color.getRed(),barra->color.getGreen(),barra->color.getBlue(),barra->color.getAlpha(),false);
     else
         painter->draw2DImage
         (   barra->imagen,
@@ -486,9 +496,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate,int repeat_from,bool land_cancelable,bool crouched,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack)
+void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate_blue,int separate_red,int repeat_from,bool land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched,stop_time_at,resume_time_at,cancel_on_hit,is_attack);
+    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate_blue,separate_red,repeat_from,land_cancelable,crouched,is_status,stop_time_at,resume_time_at,cancel_on_hit,is_attack,friction,final_velocity_x,final_velocity_y,final_acceleration_x,final_acceleration_y);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -690,16 +700,39 @@ std::string Personaje::mapInputToMovimiento()
 bool Personaje::inputEstaEnBuffer(vector<std::string> input,vector<std::string> buffer)
 {
     if(input.size()==1)
+    {
+        if(input[0]=="*")
+            return true;
         return input[0]==buffer[0];
+    }
     int j=(int)input.size()-1;
+
+    //Precise
     for(int i=0;i<(int)buffer.size();i++)
     {
-        if(input[j]==buffer[i])
-            j--;
+        if(input[j]!=buffer[i])
+            return false;
+        while(i<(int)buffer.size())
+        {
+            if(input[j]!=buffer[i])
+                break;
+            i++;
+        }
+        j--;
         if(j==-1)
             return true;
     }
     return false;
+
+//    //Not precise
+//    for(int i=0;i<(int)buffer.size();i++)
+//    {
+//        if(input[j]==buffer[i])
+//            j--;
+//        if(j==-1)
+//            return true;
+//    }
+//    return false;
 }
 bool Personaje::cumpleCondiciones(std::string str_movimiento)
 {
@@ -828,7 +861,8 @@ void Personaje::logicaBarras()
     for(int i=0;i<(int)barras.size();i++)
     {
         if(barras[i]->procesarTiempo(getEntero(barras[i]->periodo)))
-            setEntero(barras[i]->valor_actual,getEntero(barras[i]->valor_actual)+getEntero(barras[i]->modificador_periodico));
+            if(!barras[i]->stay_at_max || getEntero(barras[i]->valor_actual)<getEntero(barras[i]->valor_maximo))
+                setEntero(barras[i]->valor_actual,getEntero(barras[i]->valor_actual)+getEntero(barras[i]->modificador_periodico));
         if(getEntero(barras[i]->valor_actual)>getEntero(barras[i]->valor_maximo))
             setEntero(barras[i]->valor_actual,getEntero(barras[i]->valor_maximo));
         if(getEntero(barras[i]->valor_actual)<0)
@@ -925,9 +959,13 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("pushes")!=NULL)
                 pushes=strcmp(elemento_imagen->Attribute("pushes"),"yes")==0;
 
-            int separate=0;
-            if(elemento_imagen->Attribute("separate")!=NULL)
-                separate=atoi(elemento_imagen->Attribute("separate"));
+            int separate_blue=0;
+            if(elemento_imagen->Attribute("separate_blue")!=NULL)
+                separate_blue=atoi(elemento_imagen->Attribute("separate_blue"));
+
+            int separate_red=0;
+            if(elemento_imagen->Attribute("separate_red")!=NULL)
+                separate_red=atoi(elemento_imagen->Attribute("separate_red"));
 
             int repeat_from=-1;
             if(elemento_imagen->Attribute("repeat_from")!=NULL)
@@ -940,6 +978,10 @@ void Personaje::loadMain()
             bool crouched=false;
             if(elemento_imagen->Attribute("crouched")!=NULL)
                 crouched=strcmp(elemento_imagen->Attribute("crouched"),"yes")==0;
+
+            bool is_status=false;
+            if(elemento_imagen->Attribute("is_status")!=NULL)
+                is_status=strcmp(elemento_imagen->Attribute("is_status"),"yes")==0;
 
             int stop_time_at=-1;
             if(elemento_imagen->Attribute("stop_time_at")!=NULL)
@@ -957,8 +999,29 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("is_attack")!=NULL)
                 is_attack=strcmp(elemento_imagen->Attribute("is_attack"),"yes")==0;
 
+            bool friction=false;
+            if(elemento_imagen->Attribute("friction")!=NULL)
+                friction=strcmp(elemento_imagen->Attribute("friction"),"yes")==0;
+
+            int final_velocity_x=9999;
+            if(elemento_imagen->Attribute("final_velocity_x")!=NULL)
+                final_velocity_x=atoi(elemento_imagen->Attribute("final_velocity_x"));
+
+            int final_velocity_y=9999;
+            if(elemento_imagen->Attribute("final_velocity_y")!=NULL)
+                final_velocity_y=atoi(elemento_imagen->Attribute("final_velocity_y"));
+
+            int final_acceleration_x=9999;
+            if(elemento_imagen->Attribute("final_acceleration_x")!=NULL)
+                final_acceleration_x=atoi(elemento_imagen->Attribute("final_acceleration_x"));
+
+            int final_acceleration_y=9999;
+            if(elemento_imagen->Attribute("final_acceleration_y")!=NULL)
+                final_acceleration_y=atoi(elemento_imagen->Attribute("final_acceleration_y"));
+
             setString(std::string("isActive.")+nombre,"no");
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate,repeat_from,land_cancelable,crouched,stop_time_at,resume_time_at,cancel_on_hit,is_attack);
+
+            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate_blue,separate_red,repeat_from,land_cancelable,crouched,is_status,stop_time_at,resume_time_at,cancel_on_hit,is_attack,friction,final_velocity_x,final_velocity_y,final_acceleration_x,final_acceleration_y);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
         }
@@ -984,14 +1047,17 @@ void Personaje::loadMain()
 //                    setImagen(variable,Imagen(painter->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
         }
         writeLogLine("Loading strings.");
-        for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
+        if(nodo->FirstChild("string")!=NULL)
+        {
+            for(TiXmlElement *elemento_imagen=nodo->FirstChild("string")->ToElement();
                 elemento_imagen!=NULL;
                 elemento_imagen=elemento_imagen->NextSiblingElement("string"))
-        {
-            std::string variable(elemento_imagen->Attribute("variable"));
-            writeLogLine("Loading "+variable);
-            std::string valor(elemento_imagen->Attribute("value"));
-            setString(variable,valor);
+            {
+                std::string variable(elemento_imagen->Attribute("variable"));
+                writeLogLine("Loading "+variable);
+                std::string valor(elemento_imagen->Attribute("value"));
+                setString(variable,valor);
+            }
         }
         writeLogLine("Loading integer.");
         if(nodo->FirstChild("integer")!=NULL)
@@ -1051,14 +1117,18 @@ void Personaje::loadMain()
             int x2=atoi(elemento_imagen->Attribute("x2"));
             int y2=atoi(elemento_imagen->Attribute("y2"));
 
+            bool stay_at_max=false;
+            if(elemento_imagen->Attribute("stay_at_max")!=NULL)
+                stay_at_max=strcmp(elemento_imagen->Attribute("stay_at_max"),"yes")==0;
+
             if(elemento_imagen->Attribute("image")!=NULL)
             {
                 std::string imagen(elemento_imagen->Attribute("image"));
                 imagen=std::string("chars/")+char_name+std::string("/")+imagen;
-                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,painter->getTexture(imagen)));
+                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,stay_at_max,painter->getTexture(imagen)));
             }
             else
-                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,NULL));
+                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,stay_at_max,NULL));
         }
     }
 }
@@ -2067,9 +2137,13 @@ void Personaje::dibujarAnimacionesFront()
 
 void Personaje::resetPersonaje()
 {
+    setString("projectile_disolve","no");
+    setString("projectile_disolve_chip","no");
+    setString("projectile_hit","no");
+
     setEntero("hp.current_value",getEntero("hp.max_value"));
-    setEntero("position_x",px_inicial);
-    setEntero("position_y",py_inicial);
+    setEntero("position_x",0);
+    setEntero("position_y",0);
 
     setString("effect.shadow","off");
     setString("effect.violet","off");
