@@ -1,9 +1,9 @@
 #ifndef LAYER_H
 #define LAYER_H
 
-#include "TinyXml/tinyxml.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
-#include "RosalilaSound/RosalilaSound.h"
+#include "../Rosalila/TinyXml/tinyxml.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaSound/RosalilaSound.h"
 
 class Layer
 {

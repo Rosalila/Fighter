@@ -5,7 +5,7 @@
 #include "HitBox.h"
 #include "Imagen.h"
 #include "Barra.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
 class Modificador
 {

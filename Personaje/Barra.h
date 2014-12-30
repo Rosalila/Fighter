@@ -1,7 +1,7 @@
 #ifndef BARRA_H
 #define BARRA_H
 
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
 class Barra
 {

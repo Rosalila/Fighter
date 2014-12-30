@@ -2,8 +2,8 @@
 #define PALETA_H
 
 #include <vector>
-#include "TinyXml/tinyxml.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/TinyXml/tinyxml.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
 class CambioColor
 {

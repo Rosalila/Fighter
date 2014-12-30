@@ -2,12 +2,12 @@
 #define MENUTEST_H
 
 #include "../Stage/Stage.h"
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "../Personaje/Personaje.h"
-#include "RosalilaMenus/MenuContenedor.h"
-#include "RosalilaMenus/MenuCharSelect.h"
-#include "RosalilaMenus/MenuGallery.h"
-#include "RosalilaSound/RosalilaSound.h"
+#include "../Rosalila/RosalilaMenus/MenuContenedor.h"
+#include "../Rosalila/RosalilaMenus/MenuCharSelect.h"
+#include "../Rosalila/RosalilaMenus/MenuGallery.h"
+#include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../Fighter.h"
 
 class Menu

@@ -1,7 +1,7 @@
 #ifndef CONDICION_H
 #define CONDICION_H
 
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
 class Condicion
 {

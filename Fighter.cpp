@@ -1052,7 +1052,7 @@ void Fighter::loopJuego()
                 break;
         }
 
-        if(receiver->IsKeyDownn(SDLK_ESCAPE))///!!!
+        if(receiver->isKeyDown(SDLK_ESCAPE))///!!!
         {
             pause_menu->loopMenu();
             if(pause_menu->getExitSignal())
@@ -1138,7 +1138,7 @@ void Fighter::render()
     getPbActual()->dibujarAnimacionesFront();
 
     //Hit Boxes
-    if(receiver->IsKeyDownn(SDLK_h))
+    if(receiver->isKeyDown(SDLK_h))
     {
         getPaActual()->dibujarHitBoxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
         getPbActual()->dibujarHitBoxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));

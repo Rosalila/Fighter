@@ -2,7 +2,7 @@
 #define INPUTMOVIMIENTO_H
 
 #include <vector>
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
 class InputMovimiento
 {

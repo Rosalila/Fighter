@@ -1,7 +1,7 @@
 #ifndef MOVIMIENTO_H
 #define MOVIMIENTO_H
 
-#include "RosalilaGraphics/RosalilaGraphics.h"
+#include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "Frame.h"
 
 class Movimiento

@@ -4,10 +4,10 @@
 #include "Movimiento.h"
 #include "InputMovimiento.h"
 #include "Proyectil.h"
-#include "RosalilaSound/RosalilaSound.h"
+#include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "Animacion.h"
 #include "Paleta.h"
-#include "RosalilaInputs/RosalilaInputs.h"
+#include "../Rosalila/RosalilaInputs/RosalilaInputs.h"
 #include <map>
 
 class Personaje
