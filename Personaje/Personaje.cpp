@@ -824,6 +824,7 @@ void Personaje::loadFromXML(RosalilaInputs* input,char* nombre)
     setString("effect.blue","off");
 
     setString("attacking","no");
+    setString("projectile_active","no");
 
     setEntero("Colision.x",0);
     setEntero("Colision.y",0);
@@ -1801,6 +1802,7 @@ void Personaje::loadProjectiles()
 void Personaje::logicaProyectiles()
 {
     //Agregar Proyectiles
+    setString("projectile_active","no");
     for(int i=0; i<(int)proyectiles_actuales.size(); i++)
     {
         Proyectil*proyectil=proyectiles_actuales[i];
@@ -1823,6 +1825,9 @@ void Personaje::logicaProyectiles()
 
         if(getString(proyectil->estado)!=std::string("on"))
             continue;
+
+        setString("projectile_active","yes");
+
         proyectiles_activos++;
 
         Frame* fc=proyectil->frames[proyectil->frame_actual];

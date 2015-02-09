@@ -465,7 +465,9 @@ void Fighter::logicaPersonaje(Personaje* p)
     //ejecutar cancel
     if(str_movimiento!="")
     {
-        if(str_movimiento.substr(0,7)=="on_hit.")
+        if(str_movimiento.substr(0,7)=="on_hit."
+                /*ugly patch for chained on hit*/
+                && p->getString("current_move")!="on_hit.air_knockdown")
         {
             if(p->numero==1)
             {
@@ -564,7 +566,8 @@ void Fighter::logica()
     getPaActual()->logicaProyectiles();
     getPbActual()->logicaProyectiles();
     //verificar si estan atacando
-    if(getPaActual()->getMovimientoActual()->is_attack)
+    if(getPaActual()->getMovimientoActual()->is_attack
+        || getPaActual()->getString("projectile_active")=="yes")
     {
         getPaActual()->setString("attacking","yes");
     }
@@ -573,7 +576,8 @@ void Fighter::logica()
         getPaActual()->setString("attacking","no");
     }
 
-    if(getPbActual()->getMovimientoActual()->is_attack)
+    if(getPbActual()->getMovimientoActual()->is_attack
+        || getPbActual()->getString("projectile_active")=="yes")
     {
         getPbActual()->setString("attacking","yes");
     }
@@ -660,7 +664,8 @@ void Fighter::logica()
         Personaje*p=getPaActual();
             if(p->getString("current_move").substr(0,7)=="on_hit.")
             {
-                p->combo++;
+                if(p->getString("current_move")!="on_hit.knockdown")
+                    p->combo++;
             }
             Movimiento* m=p->movimientos[p->getString("current_move")];
 
@@ -940,10 +945,23 @@ void Fighter::mandatoryModifiers(Personaje* p, Movimiento* m)
         p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+m->separate_blue*orientation_miltiplier/2);
     }
     //Separate red
+    int marco_x=50;
     if(p->getString("colision.red_to_blue")=="yes" && !p->personaje_contrario->getMovimientoActual()->pushes)
     {
-        p->setEntero("position_x",p->getEntero("position_x")-m->separate_red*orientation_miltiplier);
+        //p->setEntero("position_x",p->getEntero("position_x")-m->separate_red*orientation_miltiplier);
+        int personaje_contrario_pos_ant = p->personaje_contrario->getEntero("position_x");
         p->personaje_contrario->setEntero("position_x",p->personaje_contrario->getEntero("position_x")+m->separate_red*orientation_miltiplier/2);
+
+        if(p->personaje_contrario->getEntero("position_x")<-stage->size/2+painter->screen_width/2+marco_x)//pa borde izquierdo
+        {
+            p->setEntero("position_x",p->getEntero("position_x")-m->separate_red*orientation_miltiplier/2);
+            p->personaje_contrario->setEntero("position_x",personaje_contrario_pos_ant);
+        }
+        if(p->personaje_contrario->getEntero("position_x")>stage->size/2+painter->screen_width/2-marco_x)//pa borde derecho
+        {
+            p->setEntero("position_x",p->getEntero("position_x")-m->separate_red*orientation_miltiplier/2);
+            p->personaje_contrario->setEntero("position_x",personaje_contrario_pos_ant);
+        }
     }
 
     int new_velocity_x = p->getEntero("velocity_x") + p->getEntero("acceleration_x");
@@ -1032,6 +1050,8 @@ void Fighter::loopJuego()
     //u32 anterior=painter->device->getTimer()->getTime();
     for (;;)
     {
+        //cout<<getPaActual()->input->getBufferRosalilaInputss()[0]<<"\t";
+        //cout<<getPbActual()->input->getBufferRosalilaInputss()[0]<<endl;
         //Salir con cualquier boton si ya termino la pelea
         if(game_over_a || game_over_b)
         {
@@ -1300,10 +1320,10 @@ void Fighter::render()
 
     dibujarBarra();
 
-    if(pa[pa_actual]->combo>0)
-        painter->drawText(toString(pa[pa_actual]->combo+1)+" hits",50,200);
-    if(pb[pb_actual]->combo>0)
-        painter->drawText(toString(pb[pb_actual]->combo+1)+" hits",painter->screen_width-300,200);
+    if(pa[pa_actual]->combo>1)
+        painter->drawText(toString(pa[pa_actual]->combo)+" hits",50,200);
+    if(pb[pb_actual]->combo>1)
+        painter->drawText(toString(pb[pb_actual]->combo)+" hits",painter->screen_width-300,200);
 
     receiver->updateInputs();
     painter->updateScreen();

@@ -970,7 +970,7 @@
 1419898934 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1419898938 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1420267795 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1419898942 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaGraphics/Timer.cpp
@@ -1026,10 +1026,10 @@
 1419898996 source:/home/turupawn/Projects/CodeBlocks/Fighter/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"MenuTexto.h"
 
-1419898688 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
+1423501596 source:/home/turupawn/Projects/CodeBlocks/Fighter/Fighter.cpp
 	"Fighter.h"
 
-1419898044 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
+1419972562 /home/turupawn/Projects/CodeBlocks/Fighter/Fighter.h
 	"Rosalila/TinyXml/tinyxml.h"
 	"FighterMenu/FighterMenu.h"
 	<stdio.h>
@@ -1088,13 +1088,13 @@
 1419897979 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/ModificadorString.cpp
 	"ModificadorString.h"
 
-1419897979 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
+1419972574 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.cpp
 	"Movimiento.h"
 
 1419897979 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1419897979 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
+1423501537 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
 1419897979 source:/home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Proyectil.cpp
@@ -1109,7 +1109,7 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"Layer.h"
 
-1419898324 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
+1419972612 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Personaje.h
 	"Movimiento.h"
 	"InputMovimiento.h"
 	"Proyectil.h"
@@ -1123,7 +1123,7 @@
 	<vector>
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
-1419898248 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
+1419972545 /home/turupawn/Projects/CodeBlocks/Fighter/Personaje/Movimiento.h
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"Frame.h"
 

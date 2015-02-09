@@ -31,7 +31,7 @@ class Movimiento
     bool crouched;
     bool is_status;
     std::vector <Frame*> frames;
-    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int initial_acceleration_x,int initial_acceleration_y,bool inherits_velocity,bool pushes,int separate_blue,int separate_red,int repeat_from,int land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y);
+    Movimiento(std::string nombre,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int initial_velocity_x,int initial_velocity_y,int initial_acceleration_x,int initial_acceleration_y,bool inherits_velocity,bool pushes,int separate_blue,int separate_red,int repeat_from,bool land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y);
     ~Movimiento();
     Frame* getFrameActual();
     bool ya_pego;
