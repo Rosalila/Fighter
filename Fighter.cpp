@@ -86,6 +86,23 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     getPaActual()->setEntero("position_x",painter->screen_width/2-250);
     getPbActual()->setEntero("position_x",painter->screen_width/2+250);
 
+    input_buffer_images['1']=painter->getTexture("misc/input_buffer/1.png");
+    input_buffer_images['2']=painter->getTexture("misc/input_buffer/2.png");
+    input_buffer_images['3']=painter->getTexture("misc/input_buffer/3.png");
+    input_buffer_images['4']=painter->getTexture("misc/input_buffer/4.png");
+    input_buffer_images['5']=painter->getTexture("misc/input_buffer/5.png");
+    input_buffer_images['6']=painter->getTexture("misc/input_buffer/6.png");
+    input_buffer_images['7']=painter->getTexture("misc/input_buffer/7.png");
+    input_buffer_images['8']=painter->getTexture("misc/input_buffer/8.png");
+    input_buffer_images['9']=painter->getTexture("misc/input_buffer/9.png");
+
+    input_buffer_images['a']=painter->getTexture("misc/input_buffer/a.png");
+    input_buffer_images['b']=painter->getTexture("misc/input_buffer/b.png");
+    input_buffer_images['c']=painter->getTexture("misc/input_buffer/c.png");
+    input_buffer_images['d']=painter->getTexture("misc/input_buffer/d.png");
+    input_buffer_images['e']=painter->getTexture("misc/input_buffer/e.png");
+    input_buffer_images['f']=painter->getTexture("misc/input_buffer/f.png");
+
     loopJuego();
 }
 
@@ -111,6 +128,12 @@ Fighter::~Fighter()
         match_intro.pop_back();
         delete imagen;
     }
+
+    for(map<char,Image*>::iterator i=input_buffer_images.begin();
+        i!=input_buffer_images.end();
+        i++)
+        delete (*i).second;
+
     delete texture_bar;
     delete texture_victory;
 }
@@ -312,7 +335,7 @@ void Fighter::cancel(Personaje *p)
     }
     else if(m->crouched
             &&
-            (input->getBufferRosalilaInputss()[0][0]=='1' || input->getBufferRosalilaInputss()[0][0]=='2' || input->getBufferRosalilaInputss()[0][0]=='3')
+            (input->getBufferRosalilaInputs()[0][0]=='1' || input->getBufferRosalilaInputs()[0][0]=='2' || input->getBufferRosalilaInputs()[0][0]=='3')
             )
     {
         p->setString("current_move","idle.crouch");
@@ -1055,7 +1078,7 @@ void Fighter::loopJuego()
         //Salir con cualquier boton si ya termino la pelea
         if(game_over_a || game_over_b)
         {
-            std::string last_input=getPaActual()->input->getBufferRosalilaInputss()[0];
+            std::string last_input=getPaActual()->input->getBufferRosalilaInputs()[0];
             if(last_input!="1"
                && last_input!="2"
                && last_input!="3"
@@ -1072,7 +1095,7 @@ void Fighter::loopJuego()
                 break;
         }
 
-        if(receiver->isKeyDown(SDLK_ESCAPE))///!!!
+        if(receiver->isKeyPressed(SDLK_ESCAPE))///!!!
         {
             pause_menu->loopMenu();
             if(pause_menu->getExitSignal())
@@ -1324,6 +1347,43 @@ void Fighter::render()
         painter->drawText(toString(pa[pa_actual]->combo)+" hits",50,200);
     if(pb[pb_actual]->combo>1)
         painter->drawText(toString(pb[pb_actual]->combo)+" hits",painter->screen_width-300,200);
+
+    for(int i=0;i<getPaActual()->input->getBufferRosalilaInputs().size();i++)
+    {
+        string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
+        for(int j=0;j<input_iterator.size();j++)
+        {
+            painter->draw2DImage
+            (   input_buffer_images[input_iterator[j]],
+                50,50,
+                50*(20-i),50*j,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                false);
+        }
+    }
+
+
+for(int i=0;i<getPaActual()->input->getPrintableBufferRosalilaInputs().size();i++)
+    {
+        string input_iterator = getPaActual()->input->getPrintableBufferRosalilaInputs()[i];
+        for(int j=0;j<input_iterator.size();j++)
+        {
+            painter->draw2DImage
+            (   input_buffer_images[input_iterator[j]],
+                50,50,
+                50*(20-i),50*j+100,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                false);
+        }
+    }
 
     receiver->updateInputs();
     painter->updateScreen();

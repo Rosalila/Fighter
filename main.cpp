@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     RosalilaGraphics*painter=new RosalilaGraphics();
     painter->video(painter);
 
-//painter->update.start();
+//painter->update.start();|
 //painter->fps.start();
 
 

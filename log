@@ -1523,48 +1523,42 @@ misc/match_intro/20.png loaded
 Loading stage misc.
 misc/vs_screen.png loaded
 menu/fondo.png loaded
-chars/Sho/portrait.png loaded
-chars/Sho/preview.png loaded
-chars/Sho/portrait.png loaded
-chars/Sho/preview.png loaded
-chars/Sho/portrait.png loaded
-chars/Sho/preview.png loaded
-menu/selected_char_p1.png loaded
-menu/locked_char_p1.png loaded
-menu/locked_char_p2.png loaded
-menu/selected_char_p2.png loaded
-menu/no_portrait.png loaded
-stages/CastleSuzaku/images/preview.png loaded
-Error: Showalk back sound does not exists.
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
 Error: Shoidle.crouch sound does not exists.
-Error: Showalk forward sound does not exists.
-Error: Shohadouken light sound does not exists.
-Error: Shodefense.stand sound does not exists.
-Error: Shoidle.stand sound does not exists.
+Error: Showalk back sound does not exists.
 Error: Shojump back sound does not exists.
-Error: Shojump up sound does not exists.
+Error: Shoidle.stand sound does not exists.
+Error: Showalk forward sound does not exists.
 Error: Shojump forward sound does not exists.
-Error: Shostand near light punch sound does not exists.
-Error: Shoon_hit.stand sound does not exists.
-Error: Shostand near light kick sound does not exists.
-Error: Shostand light kick sound does not exists.
-Error: Shostand medium kick sound does not exists.
-Error: Shocrouch light punch sound does not exists.
-Error: Shoshoryuken light sound does not exists.
-Error: Shoon_hit.air_knockdown sound does not exists.
-Error: Shoon_hit.knockdown sound does not exists.
-Error: Shoair light punch sound does not exists.
-Error: Shoair medium punch sound does not exists.
-Error: Shoair fierce punch sound does not exists.
-Error: Shoair fierce kick sound does not exists.
-Error: Shoair up medium kick sound does not exists.
-Error: Shoair light kick sound does not exists.
-Error: Shoair medium kick sound does not exists.
+Error: Shojump up sound does not exists.
 Error: Shostand light punch sound does not exists.
-Error: Shocrouch medium punch sound does not exists.
-Error: Shocrouch fierce punch sound does not exists.
-Error: Shotatsumaki medium sound does not exists.
-Error: Shocrouch fierce kick sound does not exists.
+Error: Shostand medium punch sound does not exists.
+Error: Shostand fierce punch sound does not exists.
+Error: Shostand light kick sound does not exists.
+Error: Shostand fierce kick sound does not exists.
+Error: Shohadouken light sound does not exists.
+Error: Shoon_hit.stand sound does not exists.
+Error: Shotatsumaki light sound does not exists.
+Error: Shoshoryuken light sound does not exists.
+Error: Shocrouch light punch sound does not exists.
 Deleting game.
 Deleting character.
 Deleting character.

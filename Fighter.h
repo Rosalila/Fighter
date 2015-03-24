@@ -14,6 +14,7 @@ public:
     Menu* pause_menu;
     Stage* stage;
     int px_colision,py_colision;
+    std::map<char,Image*>input_buffer_images;
     std::vector<Personaje*>pa;
     std::vector<Personaje*>pb;
     int pa_vivos,pb_vivos;

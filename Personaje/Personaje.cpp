@@ -692,7 +692,7 @@ std::string Personaje::mapInputToMovimiento()
     input->actualizarBuffer(&strings,&personaje_contrario->strings,&enteros,&personaje_contrario->enteros);
 
     for(int i=0;i<(int)inputs.size();i++)
-        if(inputEstaEnBuffer(inputs[i]->input,input->getBufferRosalilaInputss()))
+        if(inputEstaEnBuffer(inputs[i]->input,input->getBufferRosalilaInputs()))
             if(cumpleCondiciones(inputs[i]->movimiento))
                 return inputs[i]->movimiento;
     return "";
