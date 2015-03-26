@@ -72,6 +72,8 @@ public:
     void mandatoryModifiers(Personaje* p,Movimiento* m);
     void velocityInheritance(Personaje* p, Movimiento* old_move, Movimiento* new_move);
     void logica();
+    void printHitboxes();
+    void printBuffer();
     void render();
     void dibujarBarra();
     Personaje* getPaActual();

@@ -718,6 +718,7 @@ bool Personaje::inputEstaEnBuffer(vector<std::string> input,vector<std::string> 
                 break;
             i++;
         }
+        i--;
         j--;
         if(j==-1)
             return true;
@@ -2174,4 +2175,14 @@ void Personaje::resetPersonaje()
 //    loadSfx();
 //
 //    loadAnimations();
+}
+
+void Personaje::flipLeft()
+{
+    setString("orientation","i");
+}
+
+void Personaje::flipRight()
+{
+    setString("orientation","d");
 }

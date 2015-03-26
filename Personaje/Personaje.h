@@ -136,6 +136,8 @@ class Personaje
     void aplicarModificador(ModificadorHitboxes* mh);
     void aplicarModificador(ModificadorPorVariable* mv);
     void aplicarEfectosProyectiles();
+    void flipLeft();
+    void flipRight();
 };
 
 #endif

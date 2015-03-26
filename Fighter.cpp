@@ -79,8 +79,8 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     getPbActual()->setString("current_move","intro");
     getPaActual()->setString("isActive.intro","yes");
     getPbActual()->setString("isActive.intro","yes");
-    getPaActual()->setString("orientation","d");
-    getPbActual()->setString("orientation","i");
+    getPaActual()->flipRight();
+    getPbActual()->flipLeft();
 
     //Set chars inital position
     getPaActual()->setEntero("position_x",painter->screen_width/2-250);
@@ -351,6 +351,12 @@ void Fighter::cancel(Personaje *p)
         m_nuevo->frame_actual=0;
         m_nuevo->tiempo_transcurrido=0;
         velocityInheritance(p,m,m_nuevo);
+
+        if(p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x"))
+            p->flipLeft();
+        else
+            p->flipRight();
+
     }else
     {
         p->setString("current_move","idle.stand");
@@ -918,14 +924,14 @@ void Fighter::aplicarModificadores(Personaje *p)
 
     //verificar flip
     if(p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x")
-            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
+            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch" || p->getString("current_move")=="idle.land_cancel")
             )
-        p->setString("orientation","i");
+        p->flipLeft();
 
     if(p->getEntero("position_x")<p->personaje_contrario->getEntero("position_x")
-            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch")
+            && (p->getString("current_move")=="idle.stand" || p->getString("current_move")=="idle.crouch" || p->getString("current_move")=="idle.land_cancel")
             )
-        p->setString("orientation","d");
+        p->flipRight();
 }
 
 void Fighter::mandatoryModifiers(Personaje* p, Movimiento* m)
@@ -1165,6 +1171,53 @@ void Fighter::dibujarBarra()
     }
 }
 
+void Fighter::printHitboxes()
+{
+    getPaActual()->dibujarHitBoxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
+    getPbActual()->dibujarHitBoxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
+    getPaActual()->dibujarHitBoxes("red","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
+    getPbActual()->dibujarHitBoxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
+}
+
+void Fighter::printBuffer()
+{
+    for(int i=0;i<getPaActual()->input->getBufferRosalilaInputs().size();i++)
+    {
+        string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
+        for(int j=0;j<input_iterator.size();j++)
+        {
+            painter->draw2DImage
+            (   input_buffer_images[input_iterator[j]],
+                50,50,
+                50*(20-i),50*j,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                false);
+        }
+    }
+
+    for(int i=0;i<getPaActual()->input->getPrintableBufferRosalilaInputs().size();i++)
+    {
+        string input_iterator = getPaActual()->input->getPrintableBufferRosalilaInputs()[i];
+        for(int j=0;j<input_iterator.size();j++)
+        {
+            painter->draw2DImage
+            (   input_buffer_images[input_iterator[j]],
+                50,50,
+                50*(20-i),50*j+100,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                false);
+        }
+    }
+}
+
 void Fighter::render()
 {
     //Stage
@@ -1183,10 +1236,7 @@ void Fighter::render()
     //Hit Boxes
     if(receiver->isKeyDown(SDLK_h))
     {
-        getPaActual()->dibujarHitBoxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
-        getPbActual()->dibujarHitBoxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
-        getPaActual()->dibujarHitBoxes("red","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
-        getPbActual()->dibujarHitBoxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
+        printHitboxes();
     }
 
 
@@ -1348,42 +1398,7 @@ void Fighter::render()
     if(pb[pb_actual]->combo>1)
         painter->drawText(toString(pb[pb_actual]->combo)+" hits",painter->screen_width-300,200);
 
-    for(int i=0;i<getPaActual()->input->getBufferRosalilaInputs().size();i++)
-    {
-        string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
-        for(int j=0;j<input_iterator.size();j++)
-        {
-            painter->draw2DImage
-            (   input_buffer_images[input_iterator[j]],
-                50,50,
-                50*(20-i),50*j,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,255),
-                false);
-        }
-    }
-
-
-for(int i=0;i<getPaActual()->input->getPrintableBufferRosalilaInputs().size();i++)
-    {
-        string input_iterator = getPaActual()->input->getPrintableBufferRosalilaInputs()[i];
-        for(int j=0;j<input_iterator.size();j++)
-        {
-            painter->draw2DImage
-            (   input_buffer_images[input_iterator[j]],
-                50,50,
-                50*(20-i),50*j+100,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,255),
-                false);
-        }
-    }
+    printBuffer();
 
     receiver->updateInputs();
     painter->updateScreen();
