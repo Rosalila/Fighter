@@ -4,6 +4,7 @@
 #include "Rosalila/TinyXml/tinyxml.h"
 #include "FighterMenu/FighterMenu.h"
 #include <stdio.h>
+#include <queue>
 
 class Menu;
 
@@ -48,6 +49,10 @@ public:
     int victory_image_x;
     int victory_image_y;
 
+    //Game info debug
+    bool hitboxes_are_visible;
+    bool buffer_is_visible;
+
     //Engines
     Sound* sonido;
     RosalilaGraphics* painter;
@@ -56,6 +61,10 @@ public:
     //Misc
     Image* texture_bar;
     Image* texture_victory;
+
+    //Camera effects
+    queue<int>camera_effect_x;
+    queue<int>camera_effect_y;
 
     Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
     ~Fighter();
@@ -84,6 +93,7 @@ public:
     Personaje* get3erPb();
     void setPaActual(Personaje* p);
     void setPbActual(Personaje* p);
+    void applyCameraEffect();
 };
 
 #endif

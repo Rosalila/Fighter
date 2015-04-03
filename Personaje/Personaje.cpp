@@ -496,9 +496,9 @@ void Personaje::agregarCondicion(std::string movimiento,int frame,vector<Condici
     ((Movimiento*)movimientos[movimiento])->agregarCondicion(condicion,frame);
 }
 
-void Personaje::agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate_blue,int separate_red,int repeat_from,bool land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y)
+void Personaje::agregarMovimiento(std::string movimiento,int damage, int blockstun,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity, bool pushes,int separate_blue,int separate_red,int repeat_from,bool land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y)
 {
-    movimientos[movimiento]=new Movimiento(movimiento,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate_blue,separate_red,repeat_from,land_cancelable,crouched,is_status,stop_time_at,resume_time_at,cancel_on_hit,is_attack,friction,final_velocity_x,final_velocity_y,final_acceleration_x,final_acceleration_y);
+    movimientos[movimiento]=new Movimiento(movimiento,damage, blockstun,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate_blue,separate_red,repeat_from,land_cancelable,crouched,is_status,stop_time_at,resume_time_at,cancel_on_hit,is_attack,friction,final_velocity_x,final_velocity_y,final_acceleration_x,final_acceleration_y);
 }
 void Personaje::agregarProyectil(Proyectil* proyectil)
 {
@@ -917,6 +917,10 @@ void Personaje::loadMain()
             if(elemento_imagen->Attribute("damage")!=NULL)
                 damage=atoi(elemento_imagen->Attribute("damage"));
 
+            int blockstun=0;
+            if(elemento_imagen->Attribute("blockstun")!=NULL)
+                blockstun=atoi(elemento_imagen->Attribute("blockstun"));
+
             int chip_damage=0;
             if(elemento_imagen->Attribute("chip_damage")!=NULL)
                 chip_damage=atoi(elemento_imagen->Attribute("chip_damage"));
@@ -1023,7 +1027,7 @@ void Personaje::loadMain()
 
             setString(std::string("isActive.")+nombre,"no");
 
-            agregarMovimiento(nombre,damage,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate_blue,separate_red,repeat_from,land_cancelable,crouched,is_status,stop_time_at,resume_time_at,cancel_on_hit,is_attack,friction,final_velocity_x,final_velocity_y,final_acceleration_x,final_acceleration_y);
+            agregarMovimiento(nombre,damage,blockstun,chip_damage,multihit,unblockable_air,unblockable_high,unblockable_low,velocity_x,velocity_y,acceleration_x,acceleration_y,inherits_velocity,pushes,separate_blue,separate_red,repeat_from,land_cancelable,crouched,is_status,stop_time_at,resume_time_at,cancel_on_hit,is_attack,friction,final_velocity_x,final_velocity_y,final_acceleration_x,final_acceleration_y);
             for(int i=0;i<frames;i++)
                 agregarFrame(nombre,frame_duration);
         }
@@ -1706,6 +1710,7 @@ void Personaje::loadProjectiles()
         int speed_x(atoi(projectile_element->Attribute("speed_x")));
         int speed_y(atoi(projectile_element->Attribute("speed_y")));
         int damage(atoi(projectile_element->Attribute("damage")));
+        int blockstun(atoi(projectile_element->Attribute("blockstun")));
         bool multihit=false;
         if(projectile_element->Attribute("multihit")!=NULL)
             multihit=strcmp(projectile_element->Attribute("multihit"),"yes")==0;
@@ -1741,7 +1746,7 @@ void Personaje::loadProjectiles()
         }
 
         //Proyectil listo
-        Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage,multihit);
+        Proyectil* proyectil=new Proyectil(nombre,nombre+".position_x",nombre+".position_y",nombre+".sprite",nombre+".hitboxes",nombre+".state",nombre+".orientation",sprites,damage,blockstun,multihit);
 
         //Frames
         std::string prefijo="Projectile.";
@@ -1918,6 +1923,7 @@ void Personaje::aplicarEfectosProyectiles()
                 pego=true;
             }else//hit defense
             {
+                personaje_contrario->setEntero("blockstun.current_value",proyectil->blockstun);
                 chip=true;
             }
         }else if(colision_proyectiles)

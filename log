@@ -1,3 +1,6 @@
+2 joysticks were found.
+Joystick for player 1 initialized succesfully.
+Joystick for player 2 initialized succesfully.
 Success! SDL initialized.
 Initializing SLD sound engine.
 Success!
@@ -5,7 +8,6 @@ misc/vs_screen.png loaded
 menu/startscreen.png loaded
 menu/boton1.png loaded
 menu/boton1.png loaded
-Playing music: menu/audio/music.ogg
 misc/vs_screen.png loaded
 menu/fondo.png loaded
 chars/Sho/portrait.png loaded
@@ -95,6 +97,7 @@ Loading super
 Loading on_hit.stand
 Loading on_hit.air
 Loading on_hit.air_knockdown
+Loading on_hit.air_knockdown_part2
 Loading on_hit.knockdown
 Loading on_hit.grab_throw
 Loading on_hit.grab_throw_kick
@@ -102,6 +105,8 @@ Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
 Loading defense.stand
 Loading defense.crouch
+Loading blockstun.stand
+Loading blockstun.crouch
 Loading dizzy
 Loading sprites.
 Loading strings.
@@ -112,6 +117,7 @@ Loading hp
 chars/Sho/misc/bars/hp.png loaded
 Loading super
 Loading dizzy
+Loading blockstun
 Loading vars.xml
 Loading inputs.xml
 Loading triggers.xml
@@ -684,6 +690,23 @@ Loading chars/Sho/sprites/on hit/standup/3.png.
 chars/Sho/sprites/on hit/standup/3.png loaded
 Loading chars/Sho/sprites/on hit/standup/4.png.
 chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.air_knockdown_part2.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
 Loading grab throw punch.
 Loading chars/Sho/sprites/grab/throw punch/1.png.
 chars/Sho/sprites/grab/throw punch/1.png loaded
@@ -736,6 +759,11 @@ chars/Sho/sprites/animations/hit/2.png loaded
 chars/Sho/sprites/animations/hit/3.png loaded
 chars/Sho/sprites/animations/hit/4.png loaded
 chars/Sho/sprites/animations/hit/5.png loaded
+chars/Sho/sprites/animations/blocked_hit/1.png loaded
+chars/Sho/sprites/animations/blocked_hit/2.png loaded
+chars/Sho/sprites/animations/blocked_hit/3.png loaded
+chars/Sho/sprites/animations/blocked_hit/4.png loaded
+chars/Sho/sprites/animations/blocked_hit/5.png loaded
 Loading vfx.xml
 Loading hadouken light
 chars/Sho/sprites/projectiles/hadouken/1.png loaded
@@ -826,6 +854,7 @@ Loading super
 Loading on_hit.stand
 Loading on_hit.air
 Loading on_hit.air_knockdown
+Loading on_hit.air_knockdown_part2
 Loading on_hit.knockdown
 Loading on_hit.grab_throw
 Loading on_hit.grab_throw_kick
@@ -833,6 +862,8 @@ Loading on_projectile_disolve
 Loading on_projectile_disolve_chip
 Loading defense.stand
 Loading defense.crouch
+Loading blockstun.stand
+Loading blockstun.crouch
 Loading dizzy
 Loading sprites.
 Loading strings.
@@ -843,6 +874,7 @@ Loading hp
 chars/Sho/misc/bars/hp.png loaded
 Loading super
 Loading dizzy
+Loading blockstun
 Loading vars.xml
 Loading inputs.xml
 Loading triggers.xml
@@ -1415,6 +1447,23 @@ Loading chars/Sho/sprites/on hit/standup/3.png.
 chars/Sho/sprites/on hit/standup/3.png loaded
 Loading chars/Sho/sprites/on hit/standup/4.png.
 chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.air_knockdown_part2.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
 Loading grab throw punch.
 Loading chars/Sho/sprites/grab/throw punch/1.png.
 chars/Sho/sprites/grab/throw punch/1.png loaded
@@ -1467,6 +1516,11 @@ chars/Sho/sprites/animations/hit/2.png loaded
 chars/Sho/sprites/animations/hit/3.png loaded
 chars/Sho/sprites/animations/hit/4.png loaded
 chars/Sho/sprites/animations/hit/5.png loaded
+chars/Sho/sprites/animations/blocked_hit/1.png loaded
+chars/Sho/sprites/animations/blocked_hit/2.png loaded
+chars/Sho/sprites/animations/blocked_hit/3.png loaded
+chars/Sho/sprites/animations/blocked_hit/4.png loaded
+chars/Sho/sprites/animations/blocked_hit/5.png loaded
 Loading vfx.xml
 Loading hadouken light
 chars/Sho/sprites/projectiles/hadouken/1.png loaded
@@ -1493,7 +1547,6 @@ Loading super 5
 chars/Sho/sprites/projectiles/hadouken/1.png loaded
 chars/Sho/sprites/projectiles/hadouken/2.png loaded
 Loaded successfully.
-Playing music: stages/CastleSuzaku/music.ogg
 misc/bar.png loaded
 misc/victory.png loaded
 Warning: misc/match_intro/1.png is not truecolor. This will probably break.
@@ -1542,23 +1595,106 @@ misc/input_buffer/c.png loaded
 misc/input_buffer/d.png loaded
 misc/input_buffer/e.png loaded
 misc/input_buffer/f.png loaded
-Error: Shoidle.crouch sound does not exists.
-Error: Showalk back sound does not exists.
-Error: Shojump back sound does not exists.
-Error: Shoidle.stand sound does not exists.
-Error: Showalk forward sound does not exists.
-Error: Shojump forward sound does not exists.
-Error: Shojump up sound does not exists.
-Error: Shostand light punch sound does not exists.
-Error: Shostand medium punch sound does not exists.
-Error: Shostand fierce punch sound does not exists.
-Error: Shostand light kick sound does not exists.
-Error: Shostand fierce kick sound does not exists.
-Error: Shohadouken light sound does not exists.
-Error: Shoon_hit.stand sound does not exists.
-Error: Shotatsumaki light sound does not exists.
-Error: Shoshoryuken light sound does not exists.
-Error: Shocrouch light punch sound does not exists.
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/vs_screen.png loaded
+menu/pa_wins.png loaded
+menu/boton1.png loaded
+menu/boton2.png loaded
 Deleting game.
 Deleting character.
 Deleting character.
@@ -1568,4 +1704,3511 @@ Deleting layer.
 Deleting layer.
 Deleting layer.
 Deleting layer.
-Playing music: menu/audio/music.ogg
+Initializing game.
+Initializing stage.
+Loading stage from XML.
+Loading stage's BackLayers.
+stages/CastleSuzaku/images/Layer5.png loaded
+stages/CastleSuzaku/images/Layer4.png loaded
+stages/CastleSuzaku/images/Layer3.png loaded
+stages/CastleSuzaku/images/Layer2.png loaded
+stages/CastleSuzaku/images/Layer1.png loaded
+Loading stage's FrontLayers.
+Stage loaded succesfully from XML.
+Initializing player's 1 character #0.
+Loading inputs.
+Initializing char.
+Loading Sho from XML.
+Loading main.xml
+Loading IgnoreColor.
+Loading Declarations.
+Loading Moves declarations.
+Loading victory
+Loading intro
+Loading ko
+Loading walk back
+Loading walk forward
+Loading jump up
+Loading jump forward
+Loading jump back
+Loading idle.crouch
+Loading idle.stand
+Loading idle.land_cancel
+Loading idle.jump
+Loading stand light punch
+Loading stand light kick
+Loading stand medium punch
+Loading stand medium kick
+Loading stand fierce punch
+Loading stand fierce kick
+Loading stand near light punch
+Loading stand near light kick
+Loading stand near medium punch
+Loading stand near medium kick
+Loading stand near fierce punch
+Loading stand near fierce kick
+Loading crouch light punch
+Loading crouch light kick
+Loading crouch medium punch
+Loading crouch medium kick
+Loading crouch fierce punch
+Loading crouch fierce kick
+Loading air light punch
+Loading air light kick
+Loading air medium punch
+Loading air medium kick
+Loading air fierce punch
+Loading air fierce kick
+Loading air up light kick
+Loading air up medium kick
+Loading air up fierce kick
+Loading grab throw punch
+Loading grab throw punch cont
+Loading grab throw kick
+Loading grab throw kick cont
+Loading shoryuken light
+Loading shoryuken medium
+Loading shoryuken fierce
+Loading hadouken light
+Loading hadouken medium
+Loading hadouken fierce
+Loading tatsumaki light
+Loading tatsumaki medium
+Loading tatsumaki fierce
+Loading super
+Loading on_hit.stand
+Loading on_hit.air
+Loading on_hit.air_knockdown
+Loading on_hit.air_knockdown_part2
+Loading on_hit.knockdown
+Loading on_hit.grab_throw
+Loading on_hit.grab_throw_kick
+Loading on_projectile_disolve
+Loading on_projectile_disolve_chip
+Loading defense.stand
+Loading defense.crouch
+Loading blockstun.stand
+Loading blockstun.crouch
+Loading dizzy
+Loading sprites.
+Loading strings.
+Loading integer.
+Loading hitboxes.
+Loading bars.
+Loading hp
+chars/Sho/misc/bars/hp.png loaded
+Loading super
+Loading dizzy
+Loading blockstun
+Loading vars.xml
+Loading inputs.xml
+Loading triggers.xml
+Loading sprites.xml
+Loading IgnoreColor.
+Loading victory.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading idle.stand.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading chars/Sho/sprites/displacement/standing/2.png.
+chars/Sho/sprites/displacement/standing/2.png loaded
+Loading chars/Sho/sprites/displacement/standing/3.png.
+chars/Sho/sprites/displacement/standing/3.png loaded
+Loading chars/Sho/sprites/displacement/standing/4.png.
+chars/Sho/sprites/displacement/standing/4.png loaded
+Loading idle.jump.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading idle.land_cancel.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading walk back.
+Loading chars/Sho/sprites/displacement/walk back/1.png.
+chars/Sho/sprites/displacement/walk back/1.png loaded
+Loading chars/Sho/sprites/displacement/walk back/2.png.
+chars/Sho/sprites/displacement/walk back/2.png loaded
+Loading chars/Sho/sprites/displacement/walk back/3.png.
+chars/Sho/sprites/displacement/walk back/3.png loaded
+Loading chars/Sho/sprites/displacement/walk back/4.png.
+chars/Sho/sprites/displacement/walk back/4.png loaded
+Loading chars/Sho/sprites/displacement/walk back/5.png.
+chars/Sho/sprites/displacement/walk back/5.png loaded
+Loading walk forward.
+Loading chars/Sho/sprites/displacement/walk forward/1.png.
+chars/Sho/sprites/displacement/walk forward/1.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/2.png.
+chars/Sho/sprites/displacement/walk forward/2.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/3.png.
+chars/Sho/sprites/displacement/walk forward/3.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/4.png.
+chars/Sho/sprites/displacement/walk forward/4.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/5.png.
+chars/Sho/sprites/displacement/walk forward/5.png loaded
+Loading jump back.
+Loading chars/Sho/sprites/displacement/jump back/2.png.
+chars/Sho/sprites/displacement/jump back/2.png loaded
+Loading chars/Sho/sprites/displacement/jump back/3.png.
+chars/Sho/sprites/displacement/jump back/3.png loaded
+Loading chars/Sho/sprites/displacement/jump back/4.png.
+chars/Sho/sprites/displacement/jump back/4.png loaded
+Loading chars/Sho/sprites/displacement/jump back/5.png.
+chars/Sho/sprites/displacement/jump back/5.png loaded
+Loading chars/Sho/sprites/displacement/jump back/6.png.
+chars/Sho/sprites/displacement/jump back/6.png loaded
+Loading chars/Sho/sprites/displacement/jump back/7.png.
+chars/Sho/sprites/displacement/jump back/7.png loaded
+Loading jump forward.
+Loading chars/Sho/sprites/displacement/jump forward/2.png.
+chars/Sho/sprites/displacement/jump forward/2.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/3.png.
+chars/Sho/sprites/displacement/jump forward/3.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/4.png.
+chars/Sho/sprites/displacement/jump forward/4.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/5.png.
+chars/Sho/sprites/displacement/jump forward/5.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/6.png.
+chars/Sho/sprites/displacement/jump forward/6.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading jump up.
+Loading chars/Sho/sprites/displacement/jump up/2.png.
+chars/Sho/sprites/displacement/jump up/2.png loaded
+Loading chars/Sho/sprites/displacement/jump up/3.png.
+chars/Sho/sprites/displacement/jump up/3.png loaded
+Loading chars/Sho/sprites/displacement/jump up/4.png.
+chars/Sho/sprites/displacement/jump up/4.png loaded
+Loading chars/Sho/sprites/displacement/jump up/5.png.
+chars/Sho/sprites/displacement/jump up/5.png loaded
+Loading chars/Sho/sprites/displacement/jump up/6.png.
+chars/Sho/sprites/displacement/jump up/6.png loaded
+Loading idle.crouch.
+Loading chars/Sho/sprites/displacement/crouching/1.png.
+chars/Sho/sprites/displacement/crouching/1.png loaded
+Loading chars/Sho/sprites/displacement/crouching/2.png.
+chars/Sho/sprites/displacement/crouching/2.png loaded
+Loading stand light punch.
+Loading chars/Sho/sprites/normal/stand/light punch/1.png.
+chars/Sho/sprites/normal/stand/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/2.png.
+chars/Sho/sprites/normal/stand/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/3.png.
+chars/Sho/sprites/normal/stand/light punch/3.png loaded
+Loading stand light kick.
+Loading chars/Sho/sprites/normal/stand/light kick/1.png.
+chars/Sho/sprites/normal/stand/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/2.png.
+chars/Sho/sprites/normal/stand/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/3.png.
+chars/Sho/sprites/normal/stand/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/4.png.
+chars/Sho/sprites/normal/stand/light kick/4.png loaded
+Loading stand medium punch.
+Loading chars/Sho/sprites/normal/stand/medium punch/1.png.
+chars/Sho/sprites/normal/stand/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/2.png.
+chars/Sho/sprites/normal/stand/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/3.png.
+chars/Sho/sprites/normal/stand/medium punch/3.png loaded
+Loading stand medium kick.
+Loading chars/Sho/sprites/normal/stand/medium kick/1.png.
+chars/Sho/sprites/normal/stand/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/2.png.
+chars/Sho/sprites/normal/stand/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/3.png.
+chars/Sho/sprites/normal/stand/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/4.png.
+chars/Sho/sprites/normal/stand/medium kick/4.png loaded
+Loading stand fierce punch.
+Loading chars/Sho/sprites/normal/stand/fierce punch/1.png.
+chars/Sho/sprites/normal/stand/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/2.png.
+chars/Sho/sprites/normal/stand/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/3.png.
+chars/Sho/sprites/normal/stand/fierce punch/3.png loaded
+Loading stand fierce kick.
+Loading chars/Sho/sprites/normal/stand/fierce kick/1.png.
+chars/Sho/sprites/normal/stand/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/2.png.
+chars/Sho/sprites/normal/stand/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/3.png.
+chars/Sho/sprites/normal/stand/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/4.png.
+chars/Sho/sprites/normal/stand/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/5.png.
+chars/Sho/sprites/normal/stand/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/6.png.
+chars/Sho/sprites/normal/stand/fierce kick/6.png loaded
+Loading stand near light punch.
+Loading chars/Sho/sprites/normal/stand near/light punch/1.png.
+chars/Sho/sprites/normal/stand near/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/2.png.
+chars/Sho/sprites/normal/stand near/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/3.png.
+chars/Sho/sprites/normal/stand near/light punch/3.png loaded
+Loading stand near light kick.
+Loading chars/Sho/sprites/normal/stand near/light kick/1.png.
+chars/Sho/sprites/normal/stand near/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/2.png.
+chars/Sho/sprites/normal/stand near/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/3.png.
+chars/Sho/sprites/normal/stand near/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/4.png.
+chars/Sho/sprites/normal/stand near/light kick/4.png loaded
+Loading stand near medium punch.
+Loading chars/Sho/sprites/normal/stand near/medium punch/1.png.
+chars/Sho/sprites/normal/stand near/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/2.png.
+chars/Sho/sprites/normal/stand near/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/3.png.
+chars/Sho/sprites/normal/stand near/medium punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/4.png.
+chars/Sho/sprites/normal/stand near/medium punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/5.png.
+chars/Sho/sprites/normal/stand near/medium punch/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/6.png.
+chars/Sho/sprites/normal/stand near/medium punch/6.png loaded
+Loading stand near medium kick.
+Loading chars/Sho/sprites/normal/stand near/medium kick/1.png.
+chars/Sho/sprites/normal/stand near/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/2.png.
+chars/Sho/sprites/normal/stand near/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/3.png.
+chars/Sho/sprites/normal/stand near/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/4.png.
+chars/Sho/sprites/normal/stand near/medium kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/5.png.
+chars/Sho/sprites/normal/stand near/medium kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/6.png.
+chars/Sho/sprites/normal/stand near/medium kick/6.png loaded
+Loading stand near fierce punch.
+Loading chars/Sho/sprites/normal/stand near/fierce punch/1.png.
+chars/Sho/sprites/normal/stand near/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/2.png.
+chars/Sho/sprites/normal/stand near/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/3.png.
+chars/Sho/sprites/normal/stand near/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/4.png.
+chars/Sho/sprites/normal/stand near/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/5.png.
+chars/Sho/sprites/normal/stand near/fierce punch/5.png loaded
+Loading stand near fierce kick.
+Loading chars/Sho/sprites/normal/stand near/fierce kick/1.png.
+chars/Sho/sprites/normal/stand near/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/2.png.
+chars/Sho/sprites/normal/stand near/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/3.png.
+chars/Sho/sprites/normal/stand near/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/4.png.
+chars/Sho/sprites/normal/stand near/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/5.png.
+chars/Sho/sprites/normal/stand near/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/6.png.
+chars/Sho/sprites/normal/stand near/fierce kick/6.png loaded
+Loading crouch light punch.
+Loading chars/Sho/sprites/normal/crouch/light punch/1.png.
+chars/Sho/sprites/normal/crouch/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/2.png.
+chars/Sho/sprites/normal/crouch/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/3.png.
+chars/Sho/sprites/normal/crouch/light punch/3.png loaded
+Loading crouch light kick.
+Loading chars/Sho/sprites/normal/crouch/light kick/1.png.
+chars/Sho/sprites/normal/crouch/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/2.png.
+chars/Sho/sprites/normal/crouch/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/3.png.
+chars/Sho/sprites/normal/crouch/light kick/3.png loaded
+Loading crouch medium punch.
+Loading chars/Sho/sprites/normal/crouch/medium punch/1.png.
+chars/Sho/sprites/normal/crouch/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/2.png.
+chars/Sho/sprites/normal/crouch/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/3.png.
+chars/Sho/sprites/normal/crouch/medium punch/3.png loaded
+Loading crouch medium kick.
+Loading chars/Sho/sprites/normal/crouch/medium kick/1.png.
+chars/Sho/sprites/normal/crouch/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/2.png.
+chars/Sho/sprites/normal/crouch/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/3.png.
+chars/Sho/sprites/normal/crouch/medium kick/3.png loaded
+Loading crouch fierce punch.
+Loading chars/Sho/sprites/normal/crouch/fierce punch/1.png.
+chars/Sho/sprites/normal/crouch/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/2.png.
+chars/Sho/sprites/normal/crouch/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/3.png.
+chars/Sho/sprites/normal/crouch/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/4.png.
+chars/Sho/sprites/normal/crouch/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/5.png.
+chars/Sho/sprites/normal/crouch/fierce punch/5.png loaded
+Loading crouch fierce kick.
+Loading chars/Sho/sprites/normal/crouch/fierce kick/1.png.
+chars/Sho/sprites/normal/crouch/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/2.png.
+chars/Sho/sprites/normal/crouch/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/3.png.
+chars/Sho/sprites/normal/crouch/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/4.png.
+chars/Sho/sprites/normal/crouch/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/5.png.
+chars/Sho/sprites/normal/crouch/fierce kick/5.png loaded
+Loading air light punch.
+Loading chars/Sho/sprites/normal/jump/light punch/1.png.
+chars/Sho/sprites/normal/jump/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light punch/2.png.
+chars/Sho/sprites/normal/jump/light punch/2.png loaded
+Loading air medium punch.
+Loading chars/Sho/sprites/normal/jump/medium punch/1.png.
+chars/Sho/sprites/normal/jump/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium punch/2.png.
+chars/Sho/sprites/normal/jump/medium punch/2.png loaded
+Loading air fierce punch.
+Loading chars/Sho/sprites/normal/jump/fierce punch/1.png.
+chars/Sho/sprites/normal/jump/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce punch/2.png.
+chars/Sho/sprites/normal/jump/fierce punch/2.png loaded
+Loading air light kick.
+Loading chars/Sho/sprites/normal/jump/light kick/1.png.
+chars/Sho/sprites/normal/jump/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/2.png.
+chars/Sho/sprites/normal/jump/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/3.png.
+chars/Sho/sprites/normal/jump/light kick/3.png loaded
+Loading air medium kick.
+Loading chars/Sho/sprites/normal/jump/medium kick/1.png.
+chars/Sho/sprites/normal/jump/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/2.png.
+chars/Sho/sprites/normal/jump/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/3.png.
+chars/Sho/sprites/normal/jump/medium kick/3.png loaded
+Loading air fierce kick.
+Loading chars/Sho/sprites/normal/jump/fierce kick/1.png.
+chars/Sho/sprites/normal/jump/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/2.png.
+chars/Sho/sprites/normal/jump/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/3.png.
+chars/Sho/sprites/normal/jump/fierce kick/3.png loaded
+Loading air up light kick.
+Loading chars/Sho/sprites/normal/jump up/light kick/1.png.
+chars/Sho/sprites/normal/jump up/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/2.png.
+chars/Sho/sprites/normal/jump up/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/3.png.
+chars/Sho/sprites/normal/jump up/light kick/3.png loaded
+Loading air up medium kick.
+Loading chars/Sho/sprites/normal/jump up/medium kick/1.png.
+chars/Sho/sprites/normal/jump up/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/2.png.
+chars/Sho/sprites/normal/jump up/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/3.png.
+chars/Sho/sprites/normal/jump up/medium kick/3.png loaded
+Loading air up fierce kick.
+Loading chars/Sho/sprites/normal/jump up/fierce kick/1.png.
+chars/Sho/sprites/normal/jump up/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/2.png.
+chars/Sho/sprites/normal/jump up/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/3.png.
+chars/Sho/sprites/normal/jump up/fierce kick/3.png loaded
+Loading tatsumaki light.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki medium.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki fierce.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading shoryuken light.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken medium.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken fierce.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading hadouken light.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken medium.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken fierce.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading super.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading defense.stand.
+Loading chars/Sho/sprites/defense/stand/1.png.
+chars/Sho/sprites/defense/stand/1.png loaded
+Loading defense.crouch.
+Loading chars/Sho/sprites/defense/crouch/1.png.
+chars/Sho/sprites/defense/crouch/1.png loaded
+Loading on_hit.stand.
+Loading chars/Sho/sprites/on hit/stand/1.png.
+chars/Sho/sprites/on hit/stand/1.png loaded
+Loading chars/Sho/sprites/on hit/stand/2.png.
+chars/Sho/sprites/on hit/stand/2.png loaded
+Loading chars/Sho/sprites/on hit/stand/3.png.
+chars/Sho/sprites/on hit/stand/3.png loaded
+Loading chars/Sho/sprites/on hit/stand/4.png.
+chars/Sho/sprites/on hit/stand/4.png loaded
+Loading chars/Sho/sprites/on hit/stand/5.png.
+chars/Sho/sprites/on hit/stand/5.png loaded
+Loading on_hit.air_knockdown.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.air.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.grab_throw.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.grab_throw_kick.
+Loading chars/Sho/sprites/on hit/grab_throw_kick/1.png.
+chars/Sho/sprites/on hit/grab_throw_kick/1.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/2.png.
+chars/Sho/sprites/on hit/grab_throw_kick/2.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/3.png.
+chars/Sho/sprites/on hit/grab_throw_kick/3.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/4.png.
+chars/Sho/sprites/on hit/grab_throw_kick/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.knockdown.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.air_knockdown_part2.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading grab throw punch.
+Loading chars/Sho/sprites/grab/throw punch/1.png.
+chars/Sho/sprites/grab/throw punch/1.png loaded
+Loading grab throw punch cont.
+Loading chars/Sho/sprites/grab/throw punch/2.png.
+chars/Sho/sprites/grab/throw punch/2.png loaded
+Loading chars/Sho/sprites/grab/throw punch/3.png.
+chars/Sho/sprites/grab/throw punch/3.png loaded
+Loading chars/Sho/sprites/grab/throw punch/4.png.
+chars/Sho/sprites/grab/throw punch/4.png loaded
+Loading chars/Sho/sprites/grab/throw punch/5.png.
+chars/Sho/sprites/grab/throw punch/5.png loaded
+Loading grab throw kick.
+Loading chars/Sho/sprites/grab/throw kick/1.png.
+chars/Sho/sprites/grab/throw kick/1.png loaded
+Loading grab throw kick cont.
+Loading chars/Sho/sprites/grab/throw kick/2.png.
+chars/Sho/sprites/grab/throw kick/2.png loaded
+Loading chars/Sho/sprites/grab/throw kick/3.png.
+chars/Sho/sprites/grab/throw kick/3.png loaded
+Loading chars/Sho/sprites/grab/throw kick/4.png.
+chars/Sho/sprites/grab/throw kick/4.png loaded
+Loading chars/Sho/sprites/grab/throw kick/5.png.
+chars/Sho/sprites/grab/throw kick/5.png loaded
+Loading dizzy.
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading hitboxes.xml
+Loading sfx.xml
+Loading vfx.xml
+chars/Sho/sprites/animations/grey_pixel.png loaded
+chars/Sho/sprites/animations/hit/1.png loaded
+chars/Sho/sprites/animations/hit/2.png loaded
+chars/Sho/sprites/animations/hit/3.png loaded
+chars/Sho/sprites/animations/hit/4.png loaded
+chars/Sho/sprites/animations/hit/5.png loaded
+chars/Sho/sprites/animations/blocked_hit/1.png loaded
+chars/Sho/sprites/animations/blocked_hit/2.png loaded
+chars/Sho/sprites/animations/blocked_hit/3.png loaded
+chars/Sho/sprites/animations/blocked_hit/4.png loaded
+chars/Sho/sprites/animations/blocked_hit/5.png loaded
+Loading vfx.xml
+Loading hadouken light
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken medium
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken fierce
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 1
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 2
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 3
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 4
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 5
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loaded successfully.
+Initializing player's 1 character #0.
+Loading inputs.
+Initializing char.
+Loading Sho from XML.
+Loading main.xml
+Loading IgnoreColor.
+Loading Declarations.
+Loading Moves declarations.
+Loading victory
+Loading intro
+Loading ko
+Loading walk back
+Loading walk forward
+Loading jump up
+Loading jump forward
+Loading jump back
+Loading idle.crouch
+Loading idle.stand
+Loading idle.land_cancel
+Loading idle.jump
+Loading stand light punch
+Loading stand light kick
+Loading stand medium punch
+Loading stand medium kick
+Loading stand fierce punch
+Loading stand fierce kick
+Loading stand near light punch
+Loading stand near light kick
+Loading stand near medium punch
+Loading stand near medium kick
+Loading stand near fierce punch
+Loading stand near fierce kick
+Loading crouch light punch
+Loading crouch light kick
+Loading crouch medium punch
+Loading crouch medium kick
+Loading crouch fierce punch
+Loading crouch fierce kick
+Loading air light punch
+Loading air light kick
+Loading air medium punch
+Loading air medium kick
+Loading air fierce punch
+Loading air fierce kick
+Loading air up light kick
+Loading air up medium kick
+Loading air up fierce kick
+Loading grab throw punch
+Loading grab throw punch cont
+Loading grab throw kick
+Loading grab throw kick cont
+Loading shoryuken light
+Loading shoryuken medium
+Loading shoryuken fierce
+Loading hadouken light
+Loading hadouken medium
+Loading hadouken fierce
+Loading tatsumaki light
+Loading tatsumaki medium
+Loading tatsumaki fierce
+Loading super
+Loading on_hit.stand
+Loading on_hit.air
+Loading on_hit.air_knockdown
+Loading on_hit.air_knockdown_part2
+Loading on_hit.knockdown
+Loading on_hit.grab_throw
+Loading on_hit.grab_throw_kick
+Loading on_projectile_disolve
+Loading on_projectile_disolve_chip
+Loading defense.stand
+Loading defense.crouch
+Loading blockstun.stand
+Loading blockstun.crouch
+Loading dizzy
+Loading sprites.
+Loading strings.
+Loading integer.
+Loading hitboxes.
+Loading bars.
+Loading hp
+chars/Sho/misc/bars/hp.png loaded
+Loading super
+Loading dizzy
+Loading blockstun
+Loading vars.xml
+Loading inputs.xml
+Loading triggers.xml
+Loading sprites.xml
+Loading IgnoreColor.
+Loading victory.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading idle.stand.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading chars/Sho/sprites/displacement/standing/2.png.
+chars/Sho/sprites/displacement/standing/2.png loaded
+Loading chars/Sho/sprites/displacement/standing/3.png.
+chars/Sho/sprites/displacement/standing/3.png loaded
+Loading chars/Sho/sprites/displacement/standing/4.png.
+chars/Sho/sprites/displacement/standing/4.png loaded
+Loading idle.jump.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading idle.land_cancel.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading walk back.
+Loading chars/Sho/sprites/displacement/walk back/1.png.
+chars/Sho/sprites/displacement/walk back/1.png loaded
+Loading chars/Sho/sprites/displacement/walk back/2.png.
+chars/Sho/sprites/displacement/walk back/2.png loaded
+Loading chars/Sho/sprites/displacement/walk back/3.png.
+chars/Sho/sprites/displacement/walk back/3.png loaded
+Loading chars/Sho/sprites/displacement/walk back/4.png.
+chars/Sho/sprites/displacement/walk back/4.png loaded
+Loading chars/Sho/sprites/displacement/walk back/5.png.
+chars/Sho/sprites/displacement/walk back/5.png loaded
+Loading walk forward.
+Loading chars/Sho/sprites/displacement/walk forward/1.png.
+chars/Sho/sprites/displacement/walk forward/1.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/2.png.
+chars/Sho/sprites/displacement/walk forward/2.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/3.png.
+chars/Sho/sprites/displacement/walk forward/3.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/4.png.
+chars/Sho/sprites/displacement/walk forward/4.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/5.png.
+chars/Sho/sprites/displacement/walk forward/5.png loaded
+Loading jump back.
+Loading chars/Sho/sprites/displacement/jump back/2.png.
+chars/Sho/sprites/displacement/jump back/2.png loaded
+Loading chars/Sho/sprites/displacement/jump back/3.png.
+chars/Sho/sprites/displacement/jump back/3.png loaded
+Loading chars/Sho/sprites/displacement/jump back/4.png.
+chars/Sho/sprites/displacement/jump back/4.png loaded
+Loading chars/Sho/sprites/displacement/jump back/5.png.
+chars/Sho/sprites/displacement/jump back/5.png loaded
+Loading chars/Sho/sprites/displacement/jump back/6.png.
+chars/Sho/sprites/displacement/jump back/6.png loaded
+Loading chars/Sho/sprites/displacement/jump back/7.png.
+chars/Sho/sprites/displacement/jump back/7.png loaded
+Loading jump forward.
+Loading chars/Sho/sprites/displacement/jump forward/2.png.
+chars/Sho/sprites/displacement/jump forward/2.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/3.png.
+chars/Sho/sprites/displacement/jump forward/3.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/4.png.
+chars/Sho/sprites/displacement/jump forward/4.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/5.png.
+chars/Sho/sprites/displacement/jump forward/5.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/6.png.
+chars/Sho/sprites/displacement/jump forward/6.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading jump up.
+Loading chars/Sho/sprites/displacement/jump up/2.png.
+chars/Sho/sprites/displacement/jump up/2.png loaded
+Loading chars/Sho/sprites/displacement/jump up/3.png.
+chars/Sho/sprites/displacement/jump up/3.png loaded
+Loading chars/Sho/sprites/displacement/jump up/4.png.
+chars/Sho/sprites/displacement/jump up/4.png loaded
+Loading chars/Sho/sprites/displacement/jump up/5.png.
+chars/Sho/sprites/displacement/jump up/5.png loaded
+Loading chars/Sho/sprites/displacement/jump up/6.png.
+chars/Sho/sprites/displacement/jump up/6.png loaded
+Loading idle.crouch.
+Loading chars/Sho/sprites/displacement/crouching/1.png.
+chars/Sho/sprites/displacement/crouching/1.png loaded
+Loading chars/Sho/sprites/displacement/crouching/2.png.
+chars/Sho/sprites/displacement/crouching/2.png loaded
+Loading stand light punch.
+Loading chars/Sho/sprites/normal/stand/light punch/1.png.
+chars/Sho/sprites/normal/stand/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/2.png.
+chars/Sho/sprites/normal/stand/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/3.png.
+chars/Sho/sprites/normal/stand/light punch/3.png loaded
+Loading stand light kick.
+Loading chars/Sho/sprites/normal/stand/light kick/1.png.
+chars/Sho/sprites/normal/stand/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/2.png.
+chars/Sho/sprites/normal/stand/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/3.png.
+chars/Sho/sprites/normal/stand/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/4.png.
+chars/Sho/sprites/normal/stand/light kick/4.png loaded
+Loading stand medium punch.
+Loading chars/Sho/sprites/normal/stand/medium punch/1.png.
+chars/Sho/sprites/normal/stand/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/2.png.
+chars/Sho/sprites/normal/stand/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/3.png.
+chars/Sho/sprites/normal/stand/medium punch/3.png loaded
+Loading stand medium kick.
+Loading chars/Sho/sprites/normal/stand/medium kick/1.png.
+chars/Sho/sprites/normal/stand/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/2.png.
+chars/Sho/sprites/normal/stand/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/3.png.
+chars/Sho/sprites/normal/stand/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/4.png.
+chars/Sho/sprites/normal/stand/medium kick/4.png loaded
+Loading stand fierce punch.
+Loading chars/Sho/sprites/normal/stand/fierce punch/1.png.
+chars/Sho/sprites/normal/stand/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/2.png.
+chars/Sho/sprites/normal/stand/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/3.png.
+chars/Sho/sprites/normal/stand/fierce punch/3.png loaded
+Loading stand fierce kick.
+Loading chars/Sho/sprites/normal/stand/fierce kick/1.png.
+chars/Sho/sprites/normal/stand/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/2.png.
+chars/Sho/sprites/normal/stand/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/3.png.
+chars/Sho/sprites/normal/stand/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/4.png.
+chars/Sho/sprites/normal/stand/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/5.png.
+chars/Sho/sprites/normal/stand/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/6.png.
+chars/Sho/sprites/normal/stand/fierce kick/6.png loaded
+Loading stand near light punch.
+Loading chars/Sho/sprites/normal/stand near/light punch/1.png.
+chars/Sho/sprites/normal/stand near/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/2.png.
+chars/Sho/sprites/normal/stand near/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/3.png.
+chars/Sho/sprites/normal/stand near/light punch/3.png loaded
+Loading stand near light kick.
+Loading chars/Sho/sprites/normal/stand near/light kick/1.png.
+chars/Sho/sprites/normal/stand near/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/2.png.
+chars/Sho/sprites/normal/stand near/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/3.png.
+chars/Sho/sprites/normal/stand near/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/4.png.
+chars/Sho/sprites/normal/stand near/light kick/4.png loaded
+Loading stand near medium punch.
+Loading chars/Sho/sprites/normal/stand near/medium punch/1.png.
+chars/Sho/sprites/normal/stand near/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/2.png.
+chars/Sho/sprites/normal/stand near/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/3.png.
+chars/Sho/sprites/normal/stand near/medium punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/4.png.
+chars/Sho/sprites/normal/stand near/medium punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/5.png.
+chars/Sho/sprites/normal/stand near/medium punch/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/6.png.
+chars/Sho/sprites/normal/stand near/medium punch/6.png loaded
+Loading stand near medium kick.
+Loading chars/Sho/sprites/normal/stand near/medium kick/1.png.
+chars/Sho/sprites/normal/stand near/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/2.png.
+chars/Sho/sprites/normal/stand near/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/3.png.
+chars/Sho/sprites/normal/stand near/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/4.png.
+chars/Sho/sprites/normal/stand near/medium kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/5.png.
+chars/Sho/sprites/normal/stand near/medium kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/6.png.
+chars/Sho/sprites/normal/stand near/medium kick/6.png loaded
+Loading stand near fierce punch.
+Loading chars/Sho/sprites/normal/stand near/fierce punch/1.png.
+chars/Sho/sprites/normal/stand near/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/2.png.
+chars/Sho/sprites/normal/stand near/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/3.png.
+chars/Sho/sprites/normal/stand near/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/4.png.
+chars/Sho/sprites/normal/stand near/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/5.png.
+chars/Sho/sprites/normal/stand near/fierce punch/5.png loaded
+Loading stand near fierce kick.
+Loading chars/Sho/sprites/normal/stand near/fierce kick/1.png.
+chars/Sho/sprites/normal/stand near/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/2.png.
+chars/Sho/sprites/normal/stand near/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/3.png.
+chars/Sho/sprites/normal/stand near/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/4.png.
+chars/Sho/sprites/normal/stand near/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/5.png.
+chars/Sho/sprites/normal/stand near/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/6.png.
+chars/Sho/sprites/normal/stand near/fierce kick/6.png loaded
+Loading crouch light punch.
+Loading chars/Sho/sprites/normal/crouch/light punch/1.png.
+chars/Sho/sprites/normal/crouch/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/2.png.
+chars/Sho/sprites/normal/crouch/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/3.png.
+chars/Sho/sprites/normal/crouch/light punch/3.png loaded
+Loading crouch light kick.
+Loading chars/Sho/sprites/normal/crouch/light kick/1.png.
+chars/Sho/sprites/normal/crouch/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/2.png.
+chars/Sho/sprites/normal/crouch/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/3.png.
+chars/Sho/sprites/normal/crouch/light kick/3.png loaded
+Loading crouch medium punch.
+Loading chars/Sho/sprites/normal/crouch/medium punch/1.png.
+chars/Sho/sprites/normal/crouch/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/2.png.
+chars/Sho/sprites/normal/crouch/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/3.png.
+chars/Sho/sprites/normal/crouch/medium punch/3.png loaded
+Loading crouch medium kick.
+Loading chars/Sho/sprites/normal/crouch/medium kick/1.png.
+chars/Sho/sprites/normal/crouch/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/2.png.
+chars/Sho/sprites/normal/crouch/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/3.png.
+chars/Sho/sprites/normal/crouch/medium kick/3.png loaded
+Loading crouch fierce punch.
+Loading chars/Sho/sprites/normal/crouch/fierce punch/1.png.
+chars/Sho/sprites/normal/crouch/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/2.png.
+chars/Sho/sprites/normal/crouch/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/3.png.
+chars/Sho/sprites/normal/crouch/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/4.png.
+chars/Sho/sprites/normal/crouch/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/5.png.
+chars/Sho/sprites/normal/crouch/fierce punch/5.png loaded
+Loading crouch fierce kick.
+Loading chars/Sho/sprites/normal/crouch/fierce kick/1.png.
+chars/Sho/sprites/normal/crouch/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/2.png.
+chars/Sho/sprites/normal/crouch/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/3.png.
+chars/Sho/sprites/normal/crouch/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/4.png.
+chars/Sho/sprites/normal/crouch/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/5.png.
+chars/Sho/sprites/normal/crouch/fierce kick/5.png loaded
+Loading air light punch.
+Loading chars/Sho/sprites/normal/jump/light punch/1.png.
+chars/Sho/sprites/normal/jump/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light punch/2.png.
+chars/Sho/sprites/normal/jump/light punch/2.png loaded
+Loading air medium punch.
+Loading chars/Sho/sprites/normal/jump/medium punch/1.png.
+chars/Sho/sprites/normal/jump/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium punch/2.png.
+chars/Sho/sprites/normal/jump/medium punch/2.png loaded
+Loading air fierce punch.
+Loading chars/Sho/sprites/normal/jump/fierce punch/1.png.
+chars/Sho/sprites/normal/jump/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce punch/2.png.
+chars/Sho/sprites/normal/jump/fierce punch/2.png loaded
+Loading air light kick.
+Loading chars/Sho/sprites/normal/jump/light kick/1.png.
+chars/Sho/sprites/normal/jump/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/2.png.
+chars/Sho/sprites/normal/jump/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/3.png.
+chars/Sho/sprites/normal/jump/light kick/3.png loaded
+Loading air medium kick.
+Loading chars/Sho/sprites/normal/jump/medium kick/1.png.
+chars/Sho/sprites/normal/jump/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/2.png.
+chars/Sho/sprites/normal/jump/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/3.png.
+chars/Sho/sprites/normal/jump/medium kick/3.png loaded
+Loading air fierce kick.
+Loading chars/Sho/sprites/normal/jump/fierce kick/1.png.
+chars/Sho/sprites/normal/jump/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/2.png.
+chars/Sho/sprites/normal/jump/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/3.png.
+chars/Sho/sprites/normal/jump/fierce kick/3.png loaded
+Loading air up light kick.
+Loading chars/Sho/sprites/normal/jump up/light kick/1.png.
+chars/Sho/sprites/normal/jump up/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/2.png.
+chars/Sho/sprites/normal/jump up/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/3.png.
+chars/Sho/sprites/normal/jump up/light kick/3.png loaded
+Loading air up medium kick.
+Loading chars/Sho/sprites/normal/jump up/medium kick/1.png.
+chars/Sho/sprites/normal/jump up/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/2.png.
+chars/Sho/sprites/normal/jump up/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/3.png.
+chars/Sho/sprites/normal/jump up/medium kick/3.png loaded
+Loading air up fierce kick.
+Loading chars/Sho/sprites/normal/jump up/fierce kick/1.png.
+chars/Sho/sprites/normal/jump up/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/2.png.
+chars/Sho/sprites/normal/jump up/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/3.png.
+chars/Sho/sprites/normal/jump up/fierce kick/3.png loaded
+Loading tatsumaki light.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki medium.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki fierce.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading shoryuken light.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken medium.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken fierce.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading hadouken light.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken medium.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken fierce.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading super.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading defense.stand.
+Loading chars/Sho/sprites/defense/stand/1.png.
+chars/Sho/sprites/defense/stand/1.png loaded
+Loading defense.crouch.
+Loading chars/Sho/sprites/defense/crouch/1.png.
+chars/Sho/sprites/defense/crouch/1.png loaded
+Loading on_hit.stand.
+Loading chars/Sho/sprites/on hit/stand/1.png.
+chars/Sho/sprites/on hit/stand/1.png loaded
+Loading chars/Sho/sprites/on hit/stand/2.png.
+chars/Sho/sprites/on hit/stand/2.png loaded
+Loading chars/Sho/sprites/on hit/stand/3.png.
+chars/Sho/sprites/on hit/stand/3.png loaded
+Loading chars/Sho/sprites/on hit/stand/4.png.
+chars/Sho/sprites/on hit/stand/4.png loaded
+Loading chars/Sho/sprites/on hit/stand/5.png.
+chars/Sho/sprites/on hit/stand/5.png loaded
+Loading on_hit.air_knockdown.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.air.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.grab_throw.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.grab_throw_kick.
+Loading chars/Sho/sprites/on hit/grab_throw_kick/1.png.
+chars/Sho/sprites/on hit/grab_throw_kick/1.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/2.png.
+chars/Sho/sprites/on hit/grab_throw_kick/2.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/3.png.
+chars/Sho/sprites/on hit/grab_throw_kick/3.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/4.png.
+chars/Sho/sprites/on hit/grab_throw_kick/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.knockdown.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.air_knockdown_part2.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading grab throw punch.
+Loading chars/Sho/sprites/grab/throw punch/1.png.
+chars/Sho/sprites/grab/throw punch/1.png loaded
+Loading grab throw punch cont.
+Loading chars/Sho/sprites/grab/throw punch/2.png.
+chars/Sho/sprites/grab/throw punch/2.png loaded
+Loading chars/Sho/sprites/grab/throw punch/3.png.
+chars/Sho/sprites/grab/throw punch/3.png loaded
+Loading chars/Sho/sprites/grab/throw punch/4.png.
+chars/Sho/sprites/grab/throw punch/4.png loaded
+Loading chars/Sho/sprites/grab/throw punch/5.png.
+chars/Sho/sprites/grab/throw punch/5.png loaded
+Loading grab throw kick.
+Loading chars/Sho/sprites/grab/throw kick/1.png.
+chars/Sho/sprites/grab/throw kick/1.png loaded
+Loading grab throw kick cont.
+Loading chars/Sho/sprites/grab/throw kick/2.png.
+chars/Sho/sprites/grab/throw kick/2.png loaded
+Loading chars/Sho/sprites/grab/throw kick/3.png.
+chars/Sho/sprites/grab/throw kick/3.png loaded
+Loading chars/Sho/sprites/grab/throw kick/4.png.
+chars/Sho/sprites/grab/throw kick/4.png loaded
+Loading chars/Sho/sprites/grab/throw kick/5.png.
+chars/Sho/sprites/grab/throw kick/5.png loaded
+Loading dizzy.
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading hitboxes.xml
+Loading sfx.xml
+Loading vfx.xml
+chars/Sho/sprites/animations/grey_pixel.png loaded
+chars/Sho/sprites/animations/hit/1.png loaded
+chars/Sho/sprites/animations/hit/2.png loaded
+chars/Sho/sprites/animations/hit/3.png loaded
+chars/Sho/sprites/animations/hit/4.png loaded
+chars/Sho/sprites/animations/hit/5.png loaded
+chars/Sho/sprites/animations/blocked_hit/1.png loaded
+chars/Sho/sprites/animations/blocked_hit/2.png loaded
+chars/Sho/sprites/animations/blocked_hit/3.png loaded
+chars/Sho/sprites/animations/blocked_hit/4.png loaded
+chars/Sho/sprites/animations/blocked_hit/5.png loaded
+Loading vfx.xml
+Loading hadouken light
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken medium
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken fierce
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 1
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 2
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 3
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 4
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 5
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loaded successfully.
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/vs_screen.png loaded
+menu/pa_wins.png loaded
+menu/boton1.png loaded
+menu/boton2.png loaded
+Deleting game.
+Deleting character.
+Deleting character.
+Deleting stage.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Initializing game.
+Initializing stage.
+Loading stage from XML.
+Loading stage's BackLayers.
+stages/CastleSuzaku/images/Layer5.png loaded
+stages/CastleSuzaku/images/Layer4.png loaded
+stages/CastleSuzaku/images/Layer3.png loaded
+stages/CastleSuzaku/images/Layer2.png loaded
+stages/CastleSuzaku/images/Layer1.png loaded
+Loading stage's FrontLayers.
+Stage loaded succesfully from XML.
+Initializing player's 1 character #0.
+Loading inputs.
+Initializing char.
+Loading Sho from XML.
+Loading main.xml
+Loading IgnoreColor.
+Loading Declarations.
+Loading Moves declarations.
+Loading victory
+Loading intro
+Loading ko
+Loading walk back
+Loading walk forward
+Loading jump up
+Loading jump forward
+Loading jump back
+Loading idle.crouch
+Loading idle.stand
+Loading idle.land_cancel
+Loading idle.jump
+Loading stand light punch
+Loading stand light kick
+Loading stand medium punch
+Loading stand medium kick
+Loading stand fierce punch
+Loading stand fierce kick
+Loading stand near light punch
+Loading stand near light kick
+Loading stand near medium punch
+Loading stand near medium kick
+Loading stand near fierce punch
+Loading stand near fierce kick
+Loading crouch light punch
+Loading crouch light kick
+Loading crouch medium punch
+Loading crouch medium kick
+Loading crouch fierce punch
+Loading crouch fierce kick
+Loading air light punch
+Loading air light kick
+Loading air medium punch
+Loading air medium kick
+Loading air fierce punch
+Loading air fierce kick
+Loading air up light kick
+Loading air up medium kick
+Loading air up fierce kick
+Loading grab throw punch
+Loading grab throw punch cont
+Loading grab throw kick
+Loading grab throw kick cont
+Loading shoryuken light
+Loading shoryuken medium
+Loading shoryuken fierce
+Loading hadouken light
+Loading hadouken medium
+Loading hadouken fierce
+Loading tatsumaki light
+Loading tatsumaki medium
+Loading tatsumaki fierce
+Loading super
+Loading on_hit.stand
+Loading on_hit.air
+Loading on_hit.air_knockdown
+Loading on_hit.air_knockdown_part2
+Loading on_hit.knockdown
+Loading on_hit.grab_throw
+Loading on_hit.grab_throw_kick
+Loading on_projectile_disolve
+Loading on_projectile_disolve_chip
+Loading defense.stand
+Loading defense.crouch
+Loading blockstun.stand
+Loading blockstun.crouch
+Loading dizzy
+Loading sprites.
+Loading strings.
+Loading integer.
+Loading hitboxes.
+Loading bars.
+Loading hp
+chars/Sho/misc/bars/hp.png loaded
+Loading super
+Loading dizzy
+Loading blockstun
+Loading vars.xml
+Loading inputs.xml
+Loading triggers.xml
+Loading sprites.xml
+Loading IgnoreColor.
+Loading victory.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading idle.stand.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading chars/Sho/sprites/displacement/standing/2.png.
+chars/Sho/sprites/displacement/standing/2.png loaded
+Loading chars/Sho/sprites/displacement/standing/3.png.
+chars/Sho/sprites/displacement/standing/3.png loaded
+Loading chars/Sho/sprites/displacement/standing/4.png.
+chars/Sho/sprites/displacement/standing/4.png loaded
+Loading idle.jump.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading idle.land_cancel.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading walk back.
+Loading chars/Sho/sprites/displacement/walk back/1.png.
+chars/Sho/sprites/displacement/walk back/1.png loaded
+Loading chars/Sho/sprites/displacement/walk back/2.png.
+chars/Sho/sprites/displacement/walk back/2.png loaded
+Loading chars/Sho/sprites/displacement/walk back/3.png.
+chars/Sho/sprites/displacement/walk back/3.png loaded
+Loading chars/Sho/sprites/displacement/walk back/4.png.
+chars/Sho/sprites/displacement/walk back/4.png loaded
+Loading chars/Sho/sprites/displacement/walk back/5.png.
+chars/Sho/sprites/displacement/walk back/5.png loaded
+Loading walk forward.
+Loading chars/Sho/sprites/displacement/walk forward/1.png.
+chars/Sho/sprites/displacement/walk forward/1.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/2.png.
+chars/Sho/sprites/displacement/walk forward/2.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/3.png.
+chars/Sho/sprites/displacement/walk forward/3.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/4.png.
+chars/Sho/sprites/displacement/walk forward/4.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/5.png.
+chars/Sho/sprites/displacement/walk forward/5.png loaded
+Loading jump back.
+Loading chars/Sho/sprites/displacement/jump back/2.png.
+chars/Sho/sprites/displacement/jump back/2.png loaded
+Loading chars/Sho/sprites/displacement/jump back/3.png.
+chars/Sho/sprites/displacement/jump back/3.png loaded
+Loading chars/Sho/sprites/displacement/jump back/4.png.
+chars/Sho/sprites/displacement/jump back/4.png loaded
+Loading chars/Sho/sprites/displacement/jump back/5.png.
+chars/Sho/sprites/displacement/jump back/5.png loaded
+Loading chars/Sho/sprites/displacement/jump back/6.png.
+chars/Sho/sprites/displacement/jump back/6.png loaded
+Loading chars/Sho/sprites/displacement/jump back/7.png.
+chars/Sho/sprites/displacement/jump back/7.png loaded
+Loading jump forward.
+Loading chars/Sho/sprites/displacement/jump forward/2.png.
+chars/Sho/sprites/displacement/jump forward/2.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/3.png.
+chars/Sho/sprites/displacement/jump forward/3.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/4.png.
+chars/Sho/sprites/displacement/jump forward/4.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/5.png.
+chars/Sho/sprites/displacement/jump forward/5.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/6.png.
+chars/Sho/sprites/displacement/jump forward/6.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading jump up.
+Loading chars/Sho/sprites/displacement/jump up/2.png.
+chars/Sho/sprites/displacement/jump up/2.png loaded
+Loading chars/Sho/sprites/displacement/jump up/3.png.
+chars/Sho/sprites/displacement/jump up/3.png loaded
+Loading chars/Sho/sprites/displacement/jump up/4.png.
+chars/Sho/sprites/displacement/jump up/4.png loaded
+Loading chars/Sho/sprites/displacement/jump up/5.png.
+chars/Sho/sprites/displacement/jump up/5.png loaded
+Loading chars/Sho/sprites/displacement/jump up/6.png.
+chars/Sho/sprites/displacement/jump up/6.png loaded
+Loading idle.crouch.
+Loading chars/Sho/sprites/displacement/crouching/1.png.
+chars/Sho/sprites/displacement/crouching/1.png loaded
+Loading chars/Sho/sprites/displacement/crouching/2.png.
+chars/Sho/sprites/displacement/crouching/2.png loaded
+Loading stand light punch.
+Loading chars/Sho/sprites/normal/stand/light punch/1.png.
+chars/Sho/sprites/normal/stand/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/2.png.
+chars/Sho/sprites/normal/stand/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/3.png.
+chars/Sho/sprites/normal/stand/light punch/3.png loaded
+Loading stand light kick.
+Loading chars/Sho/sprites/normal/stand/light kick/1.png.
+chars/Sho/sprites/normal/stand/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/2.png.
+chars/Sho/sprites/normal/stand/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/3.png.
+chars/Sho/sprites/normal/stand/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/4.png.
+chars/Sho/sprites/normal/stand/light kick/4.png loaded
+Loading stand medium punch.
+Loading chars/Sho/sprites/normal/stand/medium punch/1.png.
+chars/Sho/sprites/normal/stand/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/2.png.
+chars/Sho/sprites/normal/stand/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/3.png.
+chars/Sho/sprites/normal/stand/medium punch/3.png loaded
+Loading stand medium kick.
+Loading chars/Sho/sprites/normal/stand/medium kick/1.png.
+chars/Sho/sprites/normal/stand/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/2.png.
+chars/Sho/sprites/normal/stand/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/3.png.
+chars/Sho/sprites/normal/stand/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/4.png.
+chars/Sho/sprites/normal/stand/medium kick/4.png loaded
+Loading stand fierce punch.
+Loading chars/Sho/sprites/normal/stand/fierce punch/1.png.
+chars/Sho/sprites/normal/stand/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/2.png.
+chars/Sho/sprites/normal/stand/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/3.png.
+chars/Sho/sprites/normal/stand/fierce punch/3.png loaded
+Loading stand fierce kick.
+Loading chars/Sho/sprites/normal/stand/fierce kick/1.png.
+chars/Sho/sprites/normal/stand/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/2.png.
+chars/Sho/sprites/normal/stand/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/3.png.
+chars/Sho/sprites/normal/stand/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/4.png.
+chars/Sho/sprites/normal/stand/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/5.png.
+chars/Sho/sprites/normal/stand/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/6.png.
+chars/Sho/sprites/normal/stand/fierce kick/6.png loaded
+Loading stand near light punch.
+Loading chars/Sho/sprites/normal/stand near/light punch/1.png.
+chars/Sho/sprites/normal/stand near/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/2.png.
+chars/Sho/sprites/normal/stand near/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/3.png.
+chars/Sho/sprites/normal/stand near/light punch/3.png loaded
+Loading stand near light kick.
+Loading chars/Sho/sprites/normal/stand near/light kick/1.png.
+chars/Sho/sprites/normal/stand near/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/2.png.
+chars/Sho/sprites/normal/stand near/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/3.png.
+chars/Sho/sprites/normal/stand near/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/4.png.
+chars/Sho/sprites/normal/stand near/light kick/4.png loaded
+Loading stand near medium punch.
+Loading chars/Sho/sprites/normal/stand near/medium punch/1.png.
+chars/Sho/sprites/normal/stand near/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/2.png.
+chars/Sho/sprites/normal/stand near/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/3.png.
+chars/Sho/sprites/normal/stand near/medium punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/4.png.
+chars/Sho/sprites/normal/stand near/medium punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/5.png.
+chars/Sho/sprites/normal/stand near/medium punch/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/6.png.
+chars/Sho/sprites/normal/stand near/medium punch/6.png loaded
+Loading stand near medium kick.
+Loading chars/Sho/sprites/normal/stand near/medium kick/1.png.
+chars/Sho/sprites/normal/stand near/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/2.png.
+chars/Sho/sprites/normal/stand near/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/3.png.
+chars/Sho/sprites/normal/stand near/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/4.png.
+chars/Sho/sprites/normal/stand near/medium kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/5.png.
+chars/Sho/sprites/normal/stand near/medium kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/6.png.
+chars/Sho/sprites/normal/stand near/medium kick/6.png loaded
+Loading stand near fierce punch.
+Loading chars/Sho/sprites/normal/stand near/fierce punch/1.png.
+chars/Sho/sprites/normal/stand near/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/2.png.
+chars/Sho/sprites/normal/stand near/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/3.png.
+chars/Sho/sprites/normal/stand near/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/4.png.
+chars/Sho/sprites/normal/stand near/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/5.png.
+chars/Sho/sprites/normal/stand near/fierce punch/5.png loaded
+Loading stand near fierce kick.
+Loading chars/Sho/sprites/normal/stand near/fierce kick/1.png.
+chars/Sho/sprites/normal/stand near/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/2.png.
+chars/Sho/sprites/normal/stand near/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/3.png.
+chars/Sho/sprites/normal/stand near/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/4.png.
+chars/Sho/sprites/normal/stand near/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/5.png.
+chars/Sho/sprites/normal/stand near/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/6.png.
+chars/Sho/sprites/normal/stand near/fierce kick/6.png loaded
+Loading crouch light punch.
+Loading chars/Sho/sprites/normal/crouch/light punch/1.png.
+chars/Sho/sprites/normal/crouch/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/2.png.
+chars/Sho/sprites/normal/crouch/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/3.png.
+chars/Sho/sprites/normal/crouch/light punch/3.png loaded
+Loading crouch light kick.
+Loading chars/Sho/sprites/normal/crouch/light kick/1.png.
+chars/Sho/sprites/normal/crouch/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/2.png.
+chars/Sho/sprites/normal/crouch/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/3.png.
+chars/Sho/sprites/normal/crouch/light kick/3.png loaded
+Loading crouch medium punch.
+Loading chars/Sho/sprites/normal/crouch/medium punch/1.png.
+chars/Sho/sprites/normal/crouch/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/2.png.
+chars/Sho/sprites/normal/crouch/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/3.png.
+chars/Sho/sprites/normal/crouch/medium punch/3.png loaded
+Loading crouch medium kick.
+Loading chars/Sho/sprites/normal/crouch/medium kick/1.png.
+chars/Sho/sprites/normal/crouch/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/2.png.
+chars/Sho/sprites/normal/crouch/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/3.png.
+chars/Sho/sprites/normal/crouch/medium kick/3.png loaded
+Loading crouch fierce punch.
+Loading chars/Sho/sprites/normal/crouch/fierce punch/1.png.
+chars/Sho/sprites/normal/crouch/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/2.png.
+chars/Sho/sprites/normal/crouch/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/3.png.
+chars/Sho/sprites/normal/crouch/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/4.png.
+chars/Sho/sprites/normal/crouch/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/5.png.
+chars/Sho/sprites/normal/crouch/fierce punch/5.png loaded
+Loading crouch fierce kick.
+Loading chars/Sho/sprites/normal/crouch/fierce kick/1.png.
+chars/Sho/sprites/normal/crouch/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/2.png.
+chars/Sho/sprites/normal/crouch/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/3.png.
+chars/Sho/sprites/normal/crouch/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/4.png.
+chars/Sho/sprites/normal/crouch/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/5.png.
+chars/Sho/sprites/normal/crouch/fierce kick/5.png loaded
+Loading air light punch.
+Loading chars/Sho/sprites/normal/jump/light punch/1.png.
+chars/Sho/sprites/normal/jump/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light punch/2.png.
+chars/Sho/sprites/normal/jump/light punch/2.png loaded
+Loading air medium punch.
+Loading chars/Sho/sprites/normal/jump/medium punch/1.png.
+chars/Sho/sprites/normal/jump/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium punch/2.png.
+chars/Sho/sprites/normal/jump/medium punch/2.png loaded
+Loading air fierce punch.
+Loading chars/Sho/sprites/normal/jump/fierce punch/1.png.
+chars/Sho/sprites/normal/jump/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce punch/2.png.
+chars/Sho/sprites/normal/jump/fierce punch/2.png loaded
+Loading air light kick.
+Loading chars/Sho/sprites/normal/jump/light kick/1.png.
+chars/Sho/sprites/normal/jump/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/2.png.
+chars/Sho/sprites/normal/jump/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/3.png.
+chars/Sho/sprites/normal/jump/light kick/3.png loaded
+Loading air medium kick.
+Loading chars/Sho/sprites/normal/jump/medium kick/1.png.
+chars/Sho/sprites/normal/jump/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/2.png.
+chars/Sho/sprites/normal/jump/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/3.png.
+chars/Sho/sprites/normal/jump/medium kick/3.png loaded
+Loading air fierce kick.
+Loading chars/Sho/sprites/normal/jump/fierce kick/1.png.
+chars/Sho/sprites/normal/jump/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/2.png.
+chars/Sho/sprites/normal/jump/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/3.png.
+chars/Sho/sprites/normal/jump/fierce kick/3.png loaded
+Loading air up light kick.
+Loading chars/Sho/sprites/normal/jump up/light kick/1.png.
+chars/Sho/sprites/normal/jump up/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/2.png.
+chars/Sho/sprites/normal/jump up/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/3.png.
+chars/Sho/sprites/normal/jump up/light kick/3.png loaded
+Loading air up medium kick.
+Loading chars/Sho/sprites/normal/jump up/medium kick/1.png.
+chars/Sho/sprites/normal/jump up/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/2.png.
+chars/Sho/sprites/normal/jump up/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/3.png.
+chars/Sho/sprites/normal/jump up/medium kick/3.png loaded
+Loading air up fierce kick.
+Loading chars/Sho/sprites/normal/jump up/fierce kick/1.png.
+chars/Sho/sprites/normal/jump up/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/2.png.
+chars/Sho/sprites/normal/jump up/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/3.png.
+chars/Sho/sprites/normal/jump up/fierce kick/3.png loaded
+Loading tatsumaki light.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki medium.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki fierce.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading shoryuken light.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken medium.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken fierce.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading hadouken light.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken medium.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken fierce.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading super.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading defense.stand.
+Loading chars/Sho/sprites/defense/stand/1.png.
+chars/Sho/sprites/defense/stand/1.png loaded
+Loading defense.crouch.
+Loading chars/Sho/sprites/defense/crouch/1.png.
+chars/Sho/sprites/defense/crouch/1.png loaded
+Loading on_hit.stand.
+Loading chars/Sho/sprites/on hit/stand/1.png.
+chars/Sho/sprites/on hit/stand/1.png loaded
+Loading chars/Sho/sprites/on hit/stand/2.png.
+chars/Sho/sprites/on hit/stand/2.png loaded
+Loading chars/Sho/sprites/on hit/stand/3.png.
+chars/Sho/sprites/on hit/stand/3.png loaded
+Loading chars/Sho/sprites/on hit/stand/4.png.
+chars/Sho/sprites/on hit/stand/4.png loaded
+Loading chars/Sho/sprites/on hit/stand/5.png.
+chars/Sho/sprites/on hit/stand/5.png loaded
+Loading on_hit.air_knockdown.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.air.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.grab_throw.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.grab_throw_kick.
+Loading chars/Sho/sprites/on hit/grab_throw_kick/1.png.
+chars/Sho/sprites/on hit/grab_throw_kick/1.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/2.png.
+chars/Sho/sprites/on hit/grab_throw_kick/2.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/3.png.
+chars/Sho/sprites/on hit/grab_throw_kick/3.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/4.png.
+chars/Sho/sprites/on hit/grab_throw_kick/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.knockdown.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.air_knockdown_part2.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading grab throw punch.
+Loading chars/Sho/sprites/grab/throw punch/1.png.
+chars/Sho/sprites/grab/throw punch/1.png loaded
+Loading grab throw punch cont.
+Loading chars/Sho/sprites/grab/throw punch/2.png.
+chars/Sho/sprites/grab/throw punch/2.png loaded
+Loading chars/Sho/sprites/grab/throw punch/3.png.
+chars/Sho/sprites/grab/throw punch/3.png loaded
+Loading chars/Sho/sprites/grab/throw punch/4.png.
+chars/Sho/sprites/grab/throw punch/4.png loaded
+Loading chars/Sho/sprites/grab/throw punch/5.png.
+chars/Sho/sprites/grab/throw punch/5.png loaded
+Loading grab throw kick.
+Loading chars/Sho/sprites/grab/throw kick/1.png.
+chars/Sho/sprites/grab/throw kick/1.png loaded
+Loading grab throw kick cont.
+Loading chars/Sho/sprites/grab/throw kick/2.png.
+chars/Sho/sprites/grab/throw kick/2.png loaded
+Loading chars/Sho/sprites/grab/throw kick/3.png.
+chars/Sho/sprites/grab/throw kick/3.png loaded
+Loading chars/Sho/sprites/grab/throw kick/4.png.
+chars/Sho/sprites/grab/throw kick/4.png loaded
+Loading chars/Sho/sprites/grab/throw kick/5.png.
+chars/Sho/sprites/grab/throw kick/5.png loaded
+Loading dizzy.
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading hitboxes.xml
+Loading sfx.xml
+Loading vfx.xml
+chars/Sho/sprites/animations/grey_pixel.png loaded
+chars/Sho/sprites/animations/hit/1.png loaded
+chars/Sho/sprites/animations/hit/2.png loaded
+chars/Sho/sprites/animations/hit/3.png loaded
+chars/Sho/sprites/animations/hit/4.png loaded
+chars/Sho/sprites/animations/hit/5.png loaded
+chars/Sho/sprites/animations/blocked_hit/1.png loaded
+chars/Sho/sprites/animations/blocked_hit/2.png loaded
+chars/Sho/sprites/animations/blocked_hit/3.png loaded
+chars/Sho/sprites/animations/blocked_hit/4.png loaded
+chars/Sho/sprites/animations/blocked_hit/5.png loaded
+Loading vfx.xml
+Loading hadouken light
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken medium
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken fierce
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 1
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 2
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 3
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 4
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 5
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loaded successfully.
+Initializing player's 1 character #0.
+Loading inputs.
+Initializing char.
+Loading Sho from XML.
+Loading main.xml
+Loading IgnoreColor.
+Loading Declarations.
+Loading Moves declarations.
+Loading victory
+Loading intro
+Loading ko
+Loading walk back
+Loading walk forward
+Loading jump up
+Loading jump forward
+Loading jump back
+Loading idle.crouch
+Loading idle.stand
+Loading idle.land_cancel
+Loading idle.jump
+Loading stand light punch
+Loading stand light kick
+Loading stand medium punch
+Loading stand medium kick
+Loading stand fierce punch
+Loading stand fierce kick
+Loading stand near light punch
+Loading stand near light kick
+Loading stand near medium punch
+Loading stand near medium kick
+Loading stand near fierce punch
+Loading stand near fierce kick
+Loading crouch light punch
+Loading crouch light kick
+Loading crouch medium punch
+Loading crouch medium kick
+Loading crouch fierce punch
+Loading crouch fierce kick
+Loading air light punch
+Loading air light kick
+Loading air medium punch
+Loading air medium kick
+Loading air fierce punch
+Loading air fierce kick
+Loading air up light kick
+Loading air up medium kick
+Loading air up fierce kick
+Loading grab throw punch
+Loading grab throw punch cont
+Loading grab throw kick
+Loading grab throw kick cont
+Loading shoryuken light
+Loading shoryuken medium
+Loading shoryuken fierce
+Loading hadouken light
+Loading hadouken medium
+Loading hadouken fierce
+Loading tatsumaki light
+Loading tatsumaki medium
+Loading tatsumaki fierce
+Loading super
+Loading on_hit.stand
+Loading on_hit.air
+Loading on_hit.air_knockdown
+Loading on_hit.air_knockdown_part2
+Loading on_hit.knockdown
+Loading on_hit.grab_throw
+Loading on_hit.grab_throw_kick
+Loading on_projectile_disolve
+Loading on_projectile_disolve_chip
+Loading defense.stand
+Loading defense.crouch
+Loading blockstun.stand
+Loading blockstun.crouch
+Loading dizzy
+Loading sprites.
+Loading strings.
+Loading integer.
+Loading hitboxes.
+Loading bars.
+Loading hp
+chars/Sho/misc/bars/hp.png loaded
+Loading super
+Loading dizzy
+Loading blockstun
+Loading vars.xml
+Loading inputs.xml
+Loading triggers.xml
+Loading sprites.xml
+Loading IgnoreColor.
+Loading victory.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading idle.stand.
+Loading chars/Sho/sprites/displacement/standing/1.png.
+chars/Sho/sprites/displacement/standing/1.png loaded
+Loading chars/Sho/sprites/displacement/standing/2.png.
+chars/Sho/sprites/displacement/standing/2.png loaded
+Loading chars/Sho/sprites/displacement/standing/3.png.
+chars/Sho/sprites/displacement/standing/3.png loaded
+Loading chars/Sho/sprites/displacement/standing/4.png.
+chars/Sho/sprites/displacement/standing/4.png loaded
+Loading idle.jump.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading idle.land_cancel.
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading walk back.
+Loading chars/Sho/sprites/displacement/walk back/1.png.
+chars/Sho/sprites/displacement/walk back/1.png loaded
+Loading chars/Sho/sprites/displacement/walk back/2.png.
+chars/Sho/sprites/displacement/walk back/2.png loaded
+Loading chars/Sho/sprites/displacement/walk back/3.png.
+chars/Sho/sprites/displacement/walk back/3.png loaded
+Loading chars/Sho/sprites/displacement/walk back/4.png.
+chars/Sho/sprites/displacement/walk back/4.png loaded
+Loading chars/Sho/sprites/displacement/walk back/5.png.
+chars/Sho/sprites/displacement/walk back/5.png loaded
+Loading walk forward.
+Loading chars/Sho/sprites/displacement/walk forward/1.png.
+chars/Sho/sprites/displacement/walk forward/1.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/2.png.
+chars/Sho/sprites/displacement/walk forward/2.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/3.png.
+chars/Sho/sprites/displacement/walk forward/3.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/4.png.
+chars/Sho/sprites/displacement/walk forward/4.png loaded
+Loading chars/Sho/sprites/displacement/walk forward/5.png.
+chars/Sho/sprites/displacement/walk forward/5.png loaded
+Loading jump back.
+Loading chars/Sho/sprites/displacement/jump back/2.png.
+chars/Sho/sprites/displacement/jump back/2.png loaded
+Loading chars/Sho/sprites/displacement/jump back/3.png.
+chars/Sho/sprites/displacement/jump back/3.png loaded
+Loading chars/Sho/sprites/displacement/jump back/4.png.
+chars/Sho/sprites/displacement/jump back/4.png loaded
+Loading chars/Sho/sprites/displacement/jump back/5.png.
+chars/Sho/sprites/displacement/jump back/5.png loaded
+Loading chars/Sho/sprites/displacement/jump back/6.png.
+chars/Sho/sprites/displacement/jump back/6.png loaded
+Loading chars/Sho/sprites/displacement/jump back/7.png.
+chars/Sho/sprites/displacement/jump back/7.png loaded
+Loading jump forward.
+Loading chars/Sho/sprites/displacement/jump forward/2.png.
+chars/Sho/sprites/displacement/jump forward/2.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/3.png.
+chars/Sho/sprites/displacement/jump forward/3.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/4.png.
+chars/Sho/sprites/displacement/jump forward/4.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/5.png.
+chars/Sho/sprites/displacement/jump forward/5.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/6.png.
+chars/Sho/sprites/displacement/jump forward/6.png loaded
+Loading chars/Sho/sprites/displacement/jump forward/7.png.
+chars/Sho/sprites/displacement/jump forward/7.png loaded
+Loading jump up.
+Loading chars/Sho/sprites/displacement/jump up/2.png.
+chars/Sho/sprites/displacement/jump up/2.png loaded
+Loading chars/Sho/sprites/displacement/jump up/3.png.
+chars/Sho/sprites/displacement/jump up/3.png loaded
+Loading chars/Sho/sprites/displacement/jump up/4.png.
+chars/Sho/sprites/displacement/jump up/4.png loaded
+Loading chars/Sho/sprites/displacement/jump up/5.png.
+chars/Sho/sprites/displacement/jump up/5.png loaded
+Loading chars/Sho/sprites/displacement/jump up/6.png.
+chars/Sho/sprites/displacement/jump up/6.png loaded
+Loading idle.crouch.
+Loading chars/Sho/sprites/displacement/crouching/1.png.
+chars/Sho/sprites/displacement/crouching/1.png loaded
+Loading chars/Sho/sprites/displacement/crouching/2.png.
+chars/Sho/sprites/displacement/crouching/2.png loaded
+Loading stand light punch.
+Loading chars/Sho/sprites/normal/stand/light punch/1.png.
+chars/Sho/sprites/normal/stand/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/2.png.
+chars/Sho/sprites/normal/stand/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light punch/3.png.
+chars/Sho/sprites/normal/stand/light punch/3.png loaded
+Loading stand light kick.
+Loading chars/Sho/sprites/normal/stand/light kick/1.png.
+chars/Sho/sprites/normal/stand/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/2.png.
+chars/Sho/sprites/normal/stand/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/3.png.
+chars/Sho/sprites/normal/stand/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/light kick/4.png.
+chars/Sho/sprites/normal/stand/light kick/4.png loaded
+Loading stand medium punch.
+Loading chars/Sho/sprites/normal/stand/medium punch/1.png.
+chars/Sho/sprites/normal/stand/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/2.png.
+chars/Sho/sprites/normal/stand/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium punch/3.png.
+chars/Sho/sprites/normal/stand/medium punch/3.png loaded
+Loading stand medium kick.
+Loading chars/Sho/sprites/normal/stand/medium kick/1.png.
+chars/Sho/sprites/normal/stand/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/2.png.
+chars/Sho/sprites/normal/stand/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/3.png.
+chars/Sho/sprites/normal/stand/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/medium kick/4.png.
+chars/Sho/sprites/normal/stand/medium kick/4.png loaded
+Loading stand fierce punch.
+Loading chars/Sho/sprites/normal/stand/fierce punch/1.png.
+chars/Sho/sprites/normal/stand/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/2.png.
+chars/Sho/sprites/normal/stand/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce punch/3.png.
+chars/Sho/sprites/normal/stand/fierce punch/3.png loaded
+Loading stand fierce kick.
+Loading chars/Sho/sprites/normal/stand/fierce kick/1.png.
+chars/Sho/sprites/normal/stand/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/2.png.
+chars/Sho/sprites/normal/stand/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/3.png.
+chars/Sho/sprites/normal/stand/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/4.png.
+chars/Sho/sprites/normal/stand/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/5.png.
+chars/Sho/sprites/normal/stand/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand/fierce kick/6.png.
+chars/Sho/sprites/normal/stand/fierce kick/6.png loaded
+Loading stand near light punch.
+Loading chars/Sho/sprites/normal/stand near/light punch/1.png.
+chars/Sho/sprites/normal/stand near/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/2.png.
+chars/Sho/sprites/normal/stand near/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light punch/3.png.
+chars/Sho/sprites/normal/stand near/light punch/3.png loaded
+Loading stand near light kick.
+Loading chars/Sho/sprites/normal/stand near/light kick/1.png.
+chars/Sho/sprites/normal/stand near/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/2.png.
+chars/Sho/sprites/normal/stand near/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/3.png.
+chars/Sho/sprites/normal/stand near/light kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/light kick/4.png.
+chars/Sho/sprites/normal/stand near/light kick/4.png loaded
+Loading stand near medium punch.
+Loading chars/Sho/sprites/normal/stand near/medium punch/1.png.
+chars/Sho/sprites/normal/stand near/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/2.png.
+chars/Sho/sprites/normal/stand near/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/3.png.
+chars/Sho/sprites/normal/stand near/medium punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/4.png.
+chars/Sho/sprites/normal/stand near/medium punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/5.png.
+chars/Sho/sprites/normal/stand near/medium punch/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium punch/6.png.
+chars/Sho/sprites/normal/stand near/medium punch/6.png loaded
+Loading stand near medium kick.
+Loading chars/Sho/sprites/normal/stand near/medium kick/1.png.
+chars/Sho/sprites/normal/stand near/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/2.png.
+chars/Sho/sprites/normal/stand near/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/3.png.
+chars/Sho/sprites/normal/stand near/medium kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/4.png.
+chars/Sho/sprites/normal/stand near/medium kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/5.png.
+chars/Sho/sprites/normal/stand near/medium kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/medium kick/6.png.
+chars/Sho/sprites/normal/stand near/medium kick/6.png loaded
+Loading stand near fierce punch.
+Loading chars/Sho/sprites/normal/stand near/fierce punch/1.png.
+chars/Sho/sprites/normal/stand near/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/2.png.
+chars/Sho/sprites/normal/stand near/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/3.png.
+chars/Sho/sprites/normal/stand near/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/4.png.
+chars/Sho/sprites/normal/stand near/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce punch/5.png.
+chars/Sho/sprites/normal/stand near/fierce punch/5.png loaded
+Loading stand near fierce kick.
+Loading chars/Sho/sprites/normal/stand near/fierce kick/1.png.
+chars/Sho/sprites/normal/stand near/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/2.png.
+chars/Sho/sprites/normal/stand near/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/3.png.
+chars/Sho/sprites/normal/stand near/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/4.png.
+chars/Sho/sprites/normal/stand near/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/5.png.
+chars/Sho/sprites/normal/stand near/fierce kick/5.png loaded
+Loading chars/Sho/sprites/normal/stand near/fierce kick/6.png.
+chars/Sho/sprites/normal/stand near/fierce kick/6.png loaded
+Loading crouch light punch.
+Loading chars/Sho/sprites/normal/crouch/light punch/1.png.
+chars/Sho/sprites/normal/crouch/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/2.png.
+chars/Sho/sprites/normal/crouch/light punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light punch/3.png.
+chars/Sho/sprites/normal/crouch/light punch/3.png loaded
+Loading crouch light kick.
+Loading chars/Sho/sprites/normal/crouch/light kick/1.png.
+chars/Sho/sprites/normal/crouch/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/2.png.
+chars/Sho/sprites/normal/crouch/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/light kick/3.png.
+chars/Sho/sprites/normal/crouch/light kick/3.png loaded
+Loading crouch medium punch.
+Loading chars/Sho/sprites/normal/crouch/medium punch/1.png.
+chars/Sho/sprites/normal/crouch/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/2.png.
+chars/Sho/sprites/normal/crouch/medium punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium punch/3.png.
+chars/Sho/sprites/normal/crouch/medium punch/3.png loaded
+Loading crouch medium kick.
+Loading chars/Sho/sprites/normal/crouch/medium kick/1.png.
+chars/Sho/sprites/normal/crouch/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/2.png.
+chars/Sho/sprites/normal/crouch/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/medium kick/3.png.
+chars/Sho/sprites/normal/crouch/medium kick/3.png loaded
+Loading crouch fierce punch.
+Loading chars/Sho/sprites/normal/crouch/fierce punch/1.png.
+chars/Sho/sprites/normal/crouch/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/2.png.
+chars/Sho/sprites/normal/crouch/fierce punch/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/3.png.
+chars/Sho/sprites/normal/crouch/fierce punch/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/4.png.
+chars/Sho/sprites/normal/crouch/fierce punch/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce punch/5.png.
+chars/Sho/sprites/normal/crouch/fierce punch/5.png loaded
+Loading crouch fierce kick.
+Loading chars/Sho/sprites/normal/crouch/fierce kick/1.png.
+chars/Sho/sprites/normal/crouch/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/2.png.
+chars/Sho/sprites/normal/crouch/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/3.png.
+chars/Sho/sprites/normal/crouch/fierce kick/3.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/4.png.
+chars/Sho/sprites/normal/crouch/fierce kick/4.png loaded
+Loading chars/Sho/sprites/normal/crouch/fierce kick/5.png.
+chars/Sho/sprites/normal/crouch/fierce kick/5.png loaded
+Loading air light punch.
+Loading chars/Sho/sprites/normal/jump/light punch/1.png.
+chars/Sho/sprites/normal/jump/light punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light punch/2.png.
+chars/Sho/sprites/normal/jump/light punch/2.png loaded
+Loading air medium punch.
+Loading chars/Sho/sprites/normal/jump/medium punch/1.png.
+chars/Sho/sprites/normal/jump/medium punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium punch/2.png.
+chars/Sho/sprites/normal/jump/medium punch/2.png loaded
+Loading air fierce punch.
+Loading chars/Sho/sprites/normal/jump/fierce punch/1.png.
+chars/Sho/sprites/normal/jump/fierce punch/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce punch/2.png.
+chars/Sho/sprites/normal/jump/fierce punch/2.png loaded
+Loading air light kick.
+Loading chars/Sho/sprites/normal/jump/light kick/1.png.
+chars/Sho/sprites/normal/jump/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/2.png.
+chars/Sho/sprites/normal/jump/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/light kick/3.png.
+chars/Sho/sprites/normal/jump/light kick/3.png loaded
+Loading air medium kick.
+Loading chars/Sho/sprites/normal/jump/medium kick/1.png.
+chars/Sho/sprites/normal/jump/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/2.png.
+chars/Sho/sprites/normal/jump/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/medium kick/3.png.
+chars/Sho/sprites/normal/jump/medium kick/3.png loaded
+Loading air fierce kick.
+Loading chars/Sho/sprites/normal/jump/fierce kick/1.png.
+chars/Sho/sprites/normal/jump/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/2.png.
+chars/Sho/sprites/normal/jump/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump/fierce kick/3.png.
+chars/Sho/sprites/normal/jump/fierce kick/3.png loaded
+Loading air up light kick.
+Loading chars/Sho/sprites/normal/jump up/light kick/1.png.
+chars/Sho/sprites/normal/jump up/light kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/2.png.
+chars/Sho/sprites/normal/jump up/light kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/light kick/3.png.
+chars/Sho/sprites/normal/jump up/light kick/3.png loaded
+Loading air up medium kick.
+Loading chars/Sho/sprites/normal/jump up/medium kick/1.png.
+chars/Sho/sprites/normal/jump up/medium kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/2.png.
+chars/Sho/sprites/normal/jump up/medium kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/medium kick/3.png.
+chars/Sho/sprites/normal/jump up/medium kick/3.png loaded
+Loading air up fierce kick.
+Loading chars/Sho/sprites/normal/jump up/fierce kick/1.png.
+chars/Sho/sprites/normal/jump up/fierce kick/1.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/2.png.
+chars/Sho/sprites/normal/jump up/fierce kick/2.png loaded
+Loading chars/Sho/sprites/normal/jump up/fierce kick/3.png.
+chars/Sho/sprites/normal/jump up/fierce kick/3.png loaded
+Loading tatsumaki light.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki medium.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading tatsumaki fierce.
+Loading chars/Sho/sprites/special/tatsumaki/1.png.
+chars/Sho/sprites/special/tatsumaki/1.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/2.png.
+chars/Sho/sprites/special/tatsumaki/2.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/3.png.
+chars/Sho/sprites/special/tatsumaki/3.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/4.png.
+chars/Sho/sprites/special/tatsumaki/4.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/5.png.
+chars/Sho/sprites/special/tatsumaki/5.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/6.png.
+chars/Sho/sprites/special/tatsumaki/6.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/7.png.
+chars/Sho/sprites/special/tatsumaki/7.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/8.png.
+chars/Sho/sprites/special/tatsumaki/8.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/9.png.
+chars/Sho/sprites/special/tatsumaki/9.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/10.png.
+chars/Sho/sprites/special/tatsumaki/10.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/11.png.
+chars/Sho/sprites/special/tatsumaki/11.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/12.png.
+chars/Sho/sprites/special/tatsumaki/12.png loaded
+Loading chars/Sho/sprites/special/tatsumaki/13.png.
+chars/Sho/sprites/special/tatsumaki/13.png loaded
+Loading shoryuken light.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken medium.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading shoryuken fierce.
+Loading chars/Sho/sprites/special/shoryuken/1.png.
+chars/Sho/sprites/special/shoryuken/1.png loaded
+Loading chars/Sho/sprites/special/shoryuken/2.png.
+chars/Sho/sprites/special/shoryuken/2.png loaded
+Loading chars/Sho/sprites/special/shoryuken/3.png.
+chars/Sho/sprites/special/shoryuken/3.png loaded
+Loading chars/Sho/sprites/special/shoryuken/4.png.
+chars/Sho/sprites/special/shoryuken/4.png loaded
+Loading chars/Sho/sprites/special/shoryuken/5.png.
+chars/Sho/sprites/special/shoryuken/5.png loaded
+Loading chars/Sho/sprites/special/shoryuken/6.png.
+chars/Sho/sprites/special/shoryuken/6.png loaded
+Loading chars/Sho/sprites/special/shoryuken/7.png.
+chars/Sho/sprites/special/shoryuken/7.png loaded
+Loading hadouken light.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken medium.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading hadouken fierce.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading super.
+Loading chars/Sho/sprites/special/hadouken/1.png.
+chars/Sho/sprites/special/hadouken/1.png loaded
+Loading chars/Sho/sprites/special/hadouken/2.png.
+chars/Sho/sprites/special/hadouken/2.png loaded
+Loading chars/Sho/sprites/special/hadouken/3.png.
+chars/Sho/sprites/special/hadouken/3.png loaded
+Loading chars/Sho/sprites/special/hadouken/4.png.
+chars/Sho/sprites/special/hadouken/4.png loaded
+Loading defense.stand.
+Loading chars/Sho/sprites/defense/stand/1.png.
+chars/Sho/sprites/defense/stand/1.png loaded
+Loading defense.crouch.
+Loading chars/Sho/sprites/defense/crouch/1.png.
+chars/Sho/sprites/defense/crouch/1.png loaded
+Loading on_hit.stand.
+Loading chars/Sho/sprites/on hit/stand/1.png.
+chars/Sho/sprites/on hit/stand/1.png loaded
+Loading chars/Sho/sprites/on hit/stand/2.png.
+chars/Sho/sprites/on hit/stand/2.png loaded
+Loading chars/Sho/sprites/on hit/stand/3.png.
+chars/Sho/sprites/on hit/stand/3.png loaded
+Loading chars/Sho/sprites/on hit/stand/4.png.
+chars/Sho/sprites/on hit/stand/4.png loaded
+Loading chars/Sho/sprites/on hit/stand/5.png.
+chars/Sho/sprites/on hit/stand/5.png loaded
+Loading on_hit.air_knockdown.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.air.
+Loading chars/Sho/sprites/on hit/air/1.png.
+chars/Sho/sprites/on hit/air/1.png loaded
+Loading on_hit.grab_throw.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.grab_throw_kick.
+Loading chars/Sho/sprites/on hit/grab_throw_kick/1.png.
+chars/Sho/sprites/on hit/grab_throw_kick/1.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/2.png.
+chars/Sho/sprites/on hit/grab_throw_kick/2.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/3.png.
+chars/Sho/sprites/on hit/grab_throw_kick/3.png loaded
+Loading chars/Sho/sprites/on hit/grab_throw_kick/4.png.
+chars/Sho/sprites/on hit/grab_throw_kick/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.knockdown.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading on_hit.air_knockdown_part2.
+Loading chars/Sho/sprites/on hit/knockdown/1.png.
+chars/Sho/sprites/on hit/knockdown/1.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/2.png.
+chars/Sho/sprites/on hit/knockdown/2.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/3.png.
+chars/Sho/sprites/on hit/knockdown/3.png loaded
+Loading chars/Sho/sprites/on hit/knockdown/4.png.
+chars/Sho/sprites/on hit/knockdown/4.png loaded
+Loading chars/Sho/sprites/on hit/standup/1.png.
+chars/Sho/sprites/on hit/standup/1.png loaded
+Loading chars/Sho/sprites/on hit/standup/2.png.
+chars/Sho/sprites/on hit/standup/2.png loaded
+Loading chars/Sho/sprites/on hit/standup/3.png.
+chars/Sho/sprites/on hit/standup/3.png loaded
+Loading chars/Sho/sprites/on hit/standup/4.png.
+chars/Sho/sprites/on hit/standup/4.png loaded
+Loading grab throw punch.
+Loading chars/Sho/sprites/grab/throw punch/1.png.
+chars/Sho/sprites/grab/throw punch/1.png loaded
+Loading grab throw punch cont.
+Loading chars/Sho/sprites/grab/throw punch/2.png.
+chars/Sho/sprites/grab/throw punch/2.png loaded
+Loading chars/Sho/sprites/grab/throw punch/3.png.
+chars/Sho/sprites/grab/throw punch/3.png loaded
+Loading chars/Sho/sprites/grab/throw punch/4.png.
+chars/Sho/sprites/grab/throw punch/4.png loaded
+Loading chars/Sho/sprites/grab/throw punch/5.png.
+chars/Sho/sprites/grab/throw punch/5.png loaded
+Loading grab throw kick.
+Loading chars/Sho/sprites/grab/throw kick/1.png.
+chars/Sho/sprites/grab/throw kick/1.png loaded
+Loading grab throw kick cont.
+Loading chars/Sho/sprites/grab/throw kick/2.png.
+chars/Sho/sprites/grab/throw kick/2.png loaded
+Loading chars/Sho/sprites/grab/throw kick/3.png.
+chars/Sho/sprites/grab/throw kick/3.png loaded
+Loading chars/Sho/sprites/grab/throw kick/4.png.
+chars/Sho/sprites/grab/throw kick/4.png loaded
+Loading chars/Sho/sprites/grab/throw kick/5.png.
+chars/Sho/sprites/grab/throw kick/5.png loaded
+Loading dizzy.
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/1.png.
+chars/Sho/sprites/on hit/dizzy/1.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/2.png.
+chars/Sho/sprites/on hit/dizzy/2.png loaded
+Loading chars/Sho/sprites/on hit/dizzy/3.png.
+chars/Sho/sprites/on hit/dizzy/3.png loaded
+Loading hitboxes.xml
+Loading sfx.xml
+Loading vfx.xml
+chars/Sho/sprites/animations/grey_pixel.png loaded
+chars/Sho/sprites/animations/hit/1.png loaded
+chars/Sho/sprites/animations/hit/2.png loaded
+chars/Sho/sprites/animations/hit/3.png loaded
+chars/Sho/sprites/animations/hit/4.png loaded
+chars/Sho/sprites/animations/hit/5.png loaded
+chars/Sho/sprites/animations/blocked_hit/1.png loaded
+chars/Sho/sprites/animations/blocked_hit/2.png loaded
+chars/Sho/sprites/animations/blocked_hit/3.png loaded
+chars/Sho/sprites/animations/blocked_hit/4.png loaded
+chars/Sho/sprites/animations/blocked_hit/5.png loaded
+Loading vfx.xml
+Loading hadouken light
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken medium
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading hadouken fierce
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 1
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 2
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 3
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 4
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loading super 5
+chars/Sho/sprites/projectiles/hadouken/1.png loaded
+chars/Sho/sprites/projectiles/hadouken/2.png loaded
+Loaded successfully.
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/bar.png loaded
+misc/victory.png loaded
+Warning: misc/match_intro/1.png is not truecolor. This will probably break.
+misc/match_intro/1.png loaded
+Warning: misc/match_intro/2.png is not truecolor. This will probably break.
+misc/match_intro/2.png loaded
+Warning: misc/match_intro/3.png is not truecolor. This will probably break.
+misc/match_intro/3.png loaded
+Warning: misc/match_intro/4.png is not truecolor. This will probably break.
+misc/match_intro/4.png loaded
+misc/match_intro/5.png loaded
+misc/match_intro/6.png loaded
+misc/match_intro/7.png loaded
+misc/match_intro/8.png loaded
+misc/match_intro/9.png loaded
+misc/match_intro/10.png loaded
+misc/match_intro/11.png loaded
+misc/match_intro/12.png loaded
+misc/match_intro/13.png loaded
+misc/match_intro/14.png loaded
+misc/match_intro/15.png loaded
+misc/match_intro/16.png loaded
+misc/match_intro/17.png loaded
+misc/match_intro/18.png loaded
+misc/match_intro/19.png loaded
+misc/match_intro/20.png loaded
+Loading stage misc.
+misc/vs_screen.png loaded
+menu/fondo.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+menu/boton1.png loaded
+misc/input_buffer/1.png loaded
+misc/input_buffer/2.png loaded
+misc/input_buffer/3.png loaded
+misc/input_buffer/4.png loaded
+misc/input_buffer/5.png loaded
+misc/input_buffer/6.png loaded
+misc/input_buffer/7.png loaded
+misc/input_buffer/8.png loaded
+misc/input_buffer/9.png loaded
+misc/input_buffer/a.png loaded
+misc/input_buffer/b.png loaded
+misc/input_buffer/c.png loaded
+misc/input_buffer/d.png loaded
+misc/input_buffer/e.png loaded
+misc/input_buffer/f.png loaded
+misc/vs_screen.png loaded
+menu/pa_wins.png loaded
+menu/boton1.png loaded
+menu/boton2.png loaded
+Deleting game.
+Deleting character.
+Deleting character.
+Deleting stage.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Deleting layer.
+Deleting layer.

@@ -8,7 +8,7 @@
 class Proyectil
 {
 public:
-int frame_actual,tiempo_transcurrido,damage;
+int frame_actual,tiempo_transcurrido,damage,blockstun;
     //variables
     std::string nombre;
     std::string posicion_x;
@@ -27,7 +27,7 @@ int frame_actual,tiempo_transcurrido,damage;
     void agregarCondicion(std::vector<Condicion*> condicion,int frame);
 
     int sprite_actual;
-    Proyectil(std::string nombre,std::string posicion_x,std::string posicion_y,std::string imagen,std::string hitboxes,std::string estado,std::string orientacion,std::vector<Imagen*>sprites,int damage,bool multihit);
+    Proyectil(std::string nombre,std::string posicion_x,std::string posicion_y,std::string imagen,std::string hitboxes,std::string estado,std::string orientacion,std::vector<Imagen*>sprites,int damage, int blockstun,bool multihit);
     void avanzarFrame();
 };
 

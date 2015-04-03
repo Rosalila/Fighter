@@ -107,7 +107,7 @@ class Personaje
     void agregarRosalilaInputs(std::string input,std::string movimiento);
     void agregarCondicion(std::string movimiento,int frame,vector<Condicion*> condicion);
     //void agregarCondicion(std::string movimiento,int frame,int posicion,Condicion condicion);
-    void agregarMovimiento(std::string movimiento,int damage,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity,bool pushes,int separate_blue,int separate_red,int repeat_from,bool land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y);
+    void agregarMovimiento(std::string movimiento,int damage,int blockstun,int chip_damage,bool multihit,bool unblockable_air,bool unblockable_high,bool unblockable_low,int velocity_x,int velocity_y,int acceleration_x,int acceleration_y,bool inherits_velocity,bool pushes,int separate_blue,int separate_red,int repeat_from,bool land_cancelable,bool crouched,bool is_status,int stop_time_at,int resume_time_at,string cancel_on_hit,bool is_attack,bool friction,int final_velocity_x,int final_velocity_y,int final_acceleration_x,int final_acceleration_y);
     void agregarProyectil(Proyectil* proyectil);
     void agregarFrame(std::string movimiento, int duracion);
     void agregarModificador(std::string movimiento,int frame,std::string variable,Imagen* modificador,bool aplicar_a_contrario);

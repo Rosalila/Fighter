@@ -11,11 +11,12 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
             palette!=NULL;
             palette=palette->NextSibling("Palette"))
     {
-        if(i!=num_paleta)
-        {
-            i++;
-            continue;
-        }
+
+//        if(i!=num_paleta)
+//        {
+//            i++;
+//            continue;
+//        }
         for(TiXmlNode* c_change=palette->FirstChild("ColorChange");
                 c_change!=NULL;
                 c_change=c_change->NextSibling("ColorChange"))
@@ -32,14 +33,20 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
                                      );
             cambios.push_back(cambio_color);
         }
-        break;
+        //break;
     }
 }
 
-//Image* Paleta::paintTexture(Image* texture)
-//{
-//    for(int i=0;i<(int)cambios.size();i++)//!!PALETTES
-//    {
+Image* Paleta::paintTexture(Image* texture)
+{
+//            GLuint*p = &texture->texture;
+
+            //p[10]=100;
+//        for(int i=0;i<100;i++)
+//            p[i]=100;
+
+    for(int i=0;i<(int)cambios.size();i++)//!!PALETTES
+    {
 //        CambioColor cambio=cambios[i];
 //        int a_min=cambio.color_min.getAlpha();
 //        int a_max=cambio.color_max.getAlpha();
@@ -65,48 +72,47 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
 //        if(b_max>255)b_max=255;
 //
 //        GLuint*p = &texture->texture;
-//
 //        for(int i=0;i<100;i++)
 //            p[i]=100;
+
+//        copia=new s32[texture->*texture->getHeight()];
+//        // update texture with color
+//        s32* p = (s32*)texture->lock();
+//        for(s32 i=0; i<texture->*texture->getHeight(); i++)
+//        {
+//            copia[i]=p[i];
+//            //verficacion
+//            SColor actual(p[i]);
 //
-////        copia=new s32[texture->*texture->getHeight()];
-////        // update texture with color
-////        s32* p = (s32*)texture->lock();
-////        for(s32 i=0; i<texture->*texture->getHeight(); i++)
-////        {
-////            copia[i]=p[i];
-////            //verficacion
-////            SColor actual(p[i]);
-////
-////           if(actual.getAlpha()>=a_min && actual.getAlpha()<=a_max
-////              && actual.getRed()>=r_min && actual.getRed()<=r_max
-////              && actual.getGreen()>=g_min && actual.getGreen()<=g_max
-////              && actual.getBlue()>=b_min && actual.getBlue()<=b_max
-////              )
-////           {
-////               int nuevo_a=actual.getAlpha()+modificacion_a;
-////               int nuevo_r=actual.getRed()+modificacion_r;
-////               int nuevo_g=actual.getGreen()+modificacion_g;
-////               int nuevo_b=actual.getBlue()+modificacion_b;
-////               if(nuevo_a<0)nuevo_a=0;
-////               if(nuevo_r<0)nuevo_r=0;
-////               if(nuevo_g<0)nuevo_g=0;
-////               if(nuevo_b<0)nuevo_b=0;
-////               if(nuevo_a>255)nuevo_a=255;
-////               if(nuevo_r>255)nuevo_r=255;
-////               if(nuevo_g>255)nuevo_g=255;
-////               if(nuevo_b>255)nuevo_b=255;
-////               actual.setAlpha(nuevo_a);
-////               actual.setRed(nuevo_r);
-////               actual.setGreen(nuevo_g);
-////               actual.setBlue(nuevo_b);
-////
-////               p[i]=actual.color;
-////           }
-////        }
-////        texture->unlock();
-//    }
-//}
+//           if(actual.getAlpha()>=a_min && actual.getAlpha()<=a_max
+//              && actual.getRed()>=r_min && actual.getRed()<=r_max
+//              && actual.getGreen()>=g_min && actual.getGreen()<=g_max
+//              && actual.getBlue()>=b_min && actual.getBlue()<=b_max
+//              )
+//           {
+//               int nuevo_a=actual.getAlpha()+modificacion_a;
+//               int nuevo_r=actual.getRed()+modificacion_r;
+//               int nuevo_g=actual.getGreen()+modificacion_g;
+//               int nuevo_b=actual.getBlue()+modificacion_b;
+//               if(nuevo_a<0)nuevo_a=0;
+//               if(nuevo_r<0)nuevo_r=0;
+//               if(nuevo_g<0)nuevo_g=0;
+//               if(nuevo_b<0)nuevo_b=0;
+//               if(nuevo_a>255)nuevo_a=255;
+//               if(nuevo_r>255)nuevo_r=255;
+//               if(nuevo_g>255)nuevo_g=255;
+//               if(nuevo_b>255)nuevo_b=255;
+//               actual.setAlpha(nuevo_a);
+//               actual.setRed(nuevo_r);
+//               actual.setGreen(nuevo_g);
+//               actual.setBlue(nuevo_b);
+//
+//               p[i]=actual.color;
+//           }
+//        }
+//        texture->unlock();
+    }
+}
 
 //Image* Paleta::restoreTexture(Image* texture)
 //{

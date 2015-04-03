@@ -103,6 +103,9 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     input_buffer_images['e']=painter->getTexture("misc/input_buffer/e.png");
     input_buffer_images['f']=painter->getTexture("misc/input_buffer/f.png");
 
+    hitboxes_are_visible=false;
+    buffer_is_visible=false;
+
     loopJuego();
 }
 
@@ -494,10 +497,23 @@ void Fighter::logicaPersonaje(Personaje* p)
     //ejecutar cancel
     if(str_movimiento!="")
     {
+//        if(p->getString("current_move")=="on_hit.knockdown")
+//        applyCameraEffect();
+        if(str_movimiento.substr(0,7)=="on_hit."
+                && p->getString("current_move")=="on_hit.air_knockdown")
+            applyCameraEffect();
+        if(str_movimiento.substr(0,7)=="on_hit."
+                /*ugly patch for chained on hit*/
+                && p->getString("current_move")=="on_hit.air_knockdown")
+        {
+            p->setEntero("Colision.x",-1000);
+            p->setEntero("Colision.y",-1000);
+        }
         if(str_movimiento.substr(0,7)=="on_hit."
                 /*ugly patch for chained on hit*/
                 && p->getString("current_move")!="on_hit.air_knockdown")
         {
+
             if(p->numero==1)
             {
                 hit_cancel_pa=str_movimiento;
@@ -670,6 +686,10 @@ void Fighter::logica()
 
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         velocityInheritance(p,m,m_nuevo);
+        if(p->getString("current_move")=="blockstun.stand")
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
+        if(p->getString("current_move")=="blockstun.crouch")
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
     }
 
     if(move_cancel_pb!="")
@@ -686,6 +706,10 @@ void Fighter::logica()
 
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         velocityInheritance(p,m,m_nuevo);
+        if(p->getString("current_move")=="blockstun.stand")
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
+        if(p->getString("current_move")=="blockstun.crouch")
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
     }
 
     if(hit_cancel_pa!="")
@@ -703,6 +727,8 @@ void Fighter::logica()
                 p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
             }else
             {
+                //exit(0);
+                //Unreachable code?
                 if(p->getString("current_move")=="defense.air")
                 {
                     if(hit_cancel_pa_unblockable_air)
@@ -711,6 +737,7 @@ void Fighter::logica()
                     }else
                     {
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
+                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                     }
                 }
                 if(p->getString("current_move")=="defense.high")
@@ -721,6 +748,7 @@ void Fighter::logica()
                     }else
                     {
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
+                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                     }
                 }
                 if(p->getString("current_move")=="defense.crouch")
@@ -731,6 +759,7 @@ void Fighter::logica()
                     }else
                     {
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
+                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                     }
                 }
             }
@@ -768,9 +797,10 @@ void Fighter::logica()
                     }else
                     {
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
+                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                     }
                 }
-                if(p->getString("current_move")=="defense.high")
+                if(p->getString("current_move")=="defense.stand")
                 {
                     if(hit_cancel_pb_unblockable_high)
                     {
@@ -778,6 +808,7 @@ void Fighter::logica()
                     }else
                     {
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
+                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                     }
                 }
                 if(p->getString("current_move")=="defense.crouch")
@@ -788,6 +819,7 @@ void Fighter::logica()
                     }else
                     {
                         p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
+                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                     }
                 }
             }
@@ -860,6 +892,23 @@ void Fighter::aplicarModificadores(Personaje *p)
                 m->frame_actual--;
             }
         }
+    }
+    //verify blockstun cancel
+    if(p->getEntero("blockstun.current_value")==0 && p->getString("current_move")=="blockstun.stand")
+    {
+        p->setString("current_move","idle.stand");
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        m_nuevo->frame_actual=0;
+        m_nuevo->tiempo_transcurrido=0;
+        velocityInheritance(p,m,m_nuevo);
+    }
+    if(p->getEntero("blockstun.current_value")==0 && p->getString("current_move")=="blockstun.crouch")
+    {
+        p->setString("current_move","idle.crouch");
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        m_nuevo->frame_actual=1;
+        m_nuevo->tiempo_transcurrido=0;
+        velocityInheritance(p,m,m_nuevo);
     }
     //verificar cancel de isActive.
     if(p->getString(std::string("isActive.")+p->getString("current_move"))=="no" && p->getString("current_move")!="idle.stand" && p->getString("current_move")!="idle.land_cancel")
@@ -1058,13 +1107,25 @@ void Fighter::logicaStage()
 
     painter->camera_x=nueva_pos;
 
-
     //Alineacion y
     int y_max=getPaActual()->getEntero("position_y");
     if(y_max<getPbActual()->getEntero("position_y"))
         y_max=getPbActual()->getEntero("position_y");
 
     painter->camera_y=y_max/4;
+
+
+    if(!camera_effect_x.empty())
+    {
+        painter->camera_x+=camera_effect_x.front();
+        camera_effect_x.pop();
+    }
+
+    if(!camera_effect_y.empty())
+    {
+        painter->camera_y+=camera_effect_y.front();
+        camera_effect_y.pop();
+    }
 }
 
 void Fighter::loopJuego()
@@ -1234,10 +1295,11 @@ void Fighter::render()
     getPbActual()->dibujarAnimacionesFront();
 
     //Hit Boxes
-    if(receiver->isKeyDown(SDLK_h))
-    {
+    if(receiver->isKeyPressed(SDLK_h))
+        hitboxes_are_visible=!hitboxes_are_visible;
+
+    if(hitboxes_are_visible)
         printHitboxes();
-    }
 
 
     getPaActual()->dibujarProyectiles();
@@ -1276,6 +1338,8 @@ void Fighter::render()
     {
         //cancelar anterior
         Personaje*p=getPaActual();
+        p->combo=0;
+        p->personaje_contrario->combo=0;
         Movimiento* m=p->movimientos[p->getString("current_move")];
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
@@ -1301,6 +1365,8 @@ void Fighter::render()
     {
         //cancelar anterior
         Personaje*p=getPaActual();
+        p->combo=0;
+        p->personaje_contrario->combo=0;
         Movimiento* m=p->movimientos[p->getString("current_move")];
         m->frame_actual=0;
         m->tiempo_transcurrido=0;
@@ -1398,8 +1464,26 @@ void Fighter::render()
     if(pb[pb_actual]->combo>1)
         painter->drawText(toString(pb[pb_actual]->combo)+" hits",painter->screen_width-300,200);
 
-    printBuffer();
+    if(receiver->isKeyPressed(SDLK_b))
+        buffer_is_visible=!buffer_is_visible;
+    if(buffer_is_visible)
+        printBuffer();
 
     receiver->updateInputs();
     painter->updateScreen();
+}
+
+void Fighter::applyCameraEffect()
+{
+
+    for(int i=6;i>0;i--)
+    {
+        if(i%2==0)
+            for(int j=0;j<i;j++)
+                camera_effect_y.push(j*15);
+        else
+            for(int j=0;j<i;j++)
+                camera_effect_y.push(-j*15);
+    }
+
 }

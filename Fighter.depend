@@ -1631,7 +1631,7 @@
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"Imagen.h"
 
-1427158917 /home/turupawn/Projects/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+1427574517 /home/turupawn/Projects/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.h
 	<iostream>
 	<list>
 	"SDL/SDL_image.h"
@@ -1801,25 +1801,25 @@
 1427153819 source:/home/turupawn/Projects/Fighter/Personaje/ModificadorString.cpp
 	"ModificadorString.h"
 
-1427153819 source:/home/turupawn/Projects/Fighter/Personaje/Movimiento.cpp
+1428038857 source:/home/turupawn/Projects/Fighter/Personaje/Movimiento.cpp
 	"Movimiento.h"
 
-1427153819 /home/turupawn/Projects/Fighter/Personaje/Movimiento.h
+1428038833 /home/turupawn/Projects/Fighter/Personaje/Movimiento.h
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"Frame.h"
 
-1427153819 source:/home/turupawn/Projects/Fighter/Personaje/Paleta.cpp
+1427705675 source:/home/turupawn/Projects/Fighter/Personaje/Paleta.cpp
 	"Paleta.h"
 
-1427153819 /home/turupawn/Projects/Fighter/Personaje/Paleta.h
+1427704111 /home/turupawn/Projects/Fighter/Personaje/Paleta.h
 	<vector>
 	"../Rosalila/TinyXml/tinyxml.h"
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 
-1427153819 source:/home/turupawn/Projects/Fighter/Personaje/Proyectil.cpp
+1428039740 source:/home/turupawn/Projects/Fighter/Personaje/Proyectil.cpp
 	"Proyectil.h"
 
-1427153819 /home/turupawn/Projects/Fighter/Personaje/Proyectil.h
+1428039714 /home/turupawn/Projects/Fighter/Personaje/Proyectil.h
 	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 	"Imagen.h"
 	"Frame.h"
@@ -1907,7 +1907,7 @@
 1427158917 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaGraphics/Object3D.cpp
 	"Object3D.h"
 
-1427158917 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+1427707977 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
 	"RosalilaGraphics.h"
 
 1427158917 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaGraphics/Timer.cpp
@@ -1986,7 +1986,7 @@
 1427158917 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaMenus/MenuTexto.cpp
 	"MenuTexto.h"
 
-1427329427 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaSound/RosalilaSound.cpp
+1428031462 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaSound/RosalilaSound.cpp
 	"RosalilaSound.h"
 
 1427158917 source:/home/turupawn/Projects/Fighter/Rosalila/RosalilaUtility/RosalilaUtility.cpp
@@ -2027,13 +2027,14 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"Layer.h"
 
-1427391365 source:/home/turupawn/Projects/Fighter/Fighter.cpp
+1428042546 source:/home/turupawn/Projects/Fighter/Fighter.cpp
 	"Fighter.h"
 
-1427336543 /home/turupawn/Projects/Fighter/Fighter.h
+1427575155 /home/turupawn/Projects/Fighter/Fighter.h
 	"Rosalila/TinyXml/tinyxml.h"
 	"FighterMenu/FighterMenu.h"
 	<stdio.h>
+	<queue>
 
 1427153819 /home/turupawn/Projects/Fighter/FighterMenu/FighterMenu.h
 	"../Stage/Stage.h"
@@ -2045,7 +2046,7 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"../Fighter.h"
 
-1427391246 /home/turupawn/Projects/Fighter/Personaje/Personaje.h
+1428038942 /home/turupawn/Projects/Fighter/Personaje/Personaje.h
 	"Movimiento.h"
 	"InputMovimiento.h"
 	"Proyectil.h"
@@ -2058,10 +2059,10 @@
 1427329397 source:/home/turupawn/Projects/Fighter/FighterMenu/FighterMenu.cpp
 	"FighterMenu.h"
 
-1427391279 source:/home/turupawn/Projects/Fighter/Personaje/Personaje.cpp
+1428039799 source:/home/turupawn/Projects/Fighter/Personaje/Personaje.cpp
 	"Personaje.h"
 
-1427329397 source:/home/turupawn/Projects/Fighter/main.cpp
+1427418708 source:/home/turupawn/Projects/Fighter/main.cpp
 	<pthread.h>
 	<stdio.h>
 	<stdlib.h>
