@@ -417,17 +417,17 @@ void Menu::loopMenu()
             break;
         }
 
-        if(receiver->isKeyDown(SDLK_DOWN))
+        if(receiver->isKeyDown(SDL_SCANCODE_DOWN))
         {
             sonido->playSound(std::string("Menu.move"));
             ((MenuContenedor*)selectables_container)->avanzar();
         }
-        else if(receiver->isKeyDown(SDLK_UP))
+        else if(receiver->isKeyDown(SDL_SCANCODE_UP))
         {
             sonido->playSound(std::string("Menu.move"));
             ((MenuContenedor*)selectables_container)->retroceder();
         }
-        else if(receiver->isKeyDown(SDLK_RIGHT))
+        else if(receiver->isKeyDown(SDL_SCANCODE_RIGHT))
         {
             sonido->playSound(std::string("Menu.move"));
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
@@ -465,7 +465,7 @@ void Menu::loopMenu()
                 }
             }
         }
-        else if(receiver->isKeyDown(SDLK_LEFT))
+        else if(receiver->isKeyDown(SDL_SCANCODE_LEFT))
         {
             sonido->playSound(std::string("Menu.move"));
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")

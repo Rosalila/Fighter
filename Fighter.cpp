@@ -396,9 +396,13 @@ void Fighter::colisionCheck(Personaje*p)
         p->setString("colision.red_to_blue","no");
 
     if(getColisionHitBoxes(p,"red",p->personaje_contrario,"red"))
+    {
         p->setString("colision.red_to_red","yes");
+    }
     else
+    {
         p->setString("colision.red_to_red","no");
+    }
 
     if(getColisionHitBoxes(p,"blue",p->personaje_contrario,"blue"))
         p->setString("colision.blue_to_blue","yes");
@@ -687,9 +691,16 @@ void Fighter::logica()
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         velocityInheritance(p,m,m_nuevo);
         if(p->getString("current_move")=="blockstun.stand")
-            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
+        {
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->blockstun);
+            p->setEntero("hp.current_value",p->getEntero("hp.current_value")-p->personaje_contrario->getMovimientoActual()->chip_damage);
+        }
         if(p->getString("current_move")=="blockstun.crouch")
-            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
+        {
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->blockstun);
+            p->setEntero("hp.current_value",p->getEntero("hp.current_value")-p->personaje_contrario->getMovimientoActual()->chip_damage);
+        }
+
     }
 
     if(move_cancel_pb!="")
@@ -707,9 +718,15 @@ void Fighter::logica()
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         velocityInheritance(p,m,m_nuevo);
         if(p->getString("current_move")=="blockstun.stand")
-            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
+        {
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->blockstun);
+            p->setEntero("hp.current_value",p->getEntero("hp.current_value")-p->personaje_contrario->getMovimientoActual()->chip_damage);
+        }
         if(p->getString("current_move")=="blockstun.crouch")
-            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->damage);
+        {
+            p->setEntero("blockstun.current_value",p->personaje_contrario->getMovimientoActual()->blockstun);
+            p->setEntero("hp.current_value",p->getEntero("hp.current_value")-p->personaje_contrario->getMovimientoActual()->chip_damage);
+        }
     }
 
     if(hit_cancel_pa!="")
@@ -1155,8 +1172,32 @@ void Fighter::loopJuego()
                && last_input!="7"
                && last_input!="8"
                && last_input!="9"
-               && ((getPaActual()->getString("current_move")=="idle.stand"||getPbActual()->getString("current_move")=="idle.stand")
-                    || (getPaActual()->getString("current_move")=="ko"&&getPbActual()->getString("current_move")=="ko")
+               && ((getPaActual()->getString("current_move")=="idle.stand"
+                    ||getPbActual()->getString("current_move")=="idle.stand")
+                    || (getPaActual()->getString("current_move")=="victory"
+                            && getPaActual()->getMovimientoActual()->frame_actual== getPaActual()->getMovimientoActual()->frames.size()-1)
+                    || (getPbActual()->getString("current_move")=="victory"
+                            && getPbActual()->getMovimientoActual()->frame_actual== getPbActual()->getMovimientoActual()->frames.size()-1)
+                  )
+               )
+                break;
+
+            last_input=getPbActual()->input->getBufferRosalilaInputs()[0];
+            if(last_input!="1"
+               && last_input!="2"
+               && last_input!="3"
+               && last_input!="4"
+               && last_input!="5"
+               && last_input!="6"
+               && last_input!="7"
+               && last_input!="8"
+               && last_input!="9"
+               && ((getPbActual()->getString("current_move")=="idle.stand"
+                    ||getPbActual()->getString("current_move")=="idle.stand")
+                    || (getPbActual()->getString("current_move")=="victory"
+                            && getPbActual()->getMovimientoActual()->frame_actual== getPbActual()->getMovimientoActual()->frames.size()-1)
+                    || (getPbActual()->getString("current_move")=="victory"
+                            && getPbActual()->getMovimientoActual()->frame_actual== getPbActual()->getMovimientoActual()->frames.size()-1)
                   )
                )
                 break;
@@ -1352,6 +1393,14 @@ void Fighter::render()
         m->ya_pego=false;
         //Agregar nuevo
         getPaActual()->setString("current_move","ko");
+        m=getPaActual()->movimientos[p->getString("current_move")];
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
+        getPaActual()->setEntero("velocity_x",0);
+        getPaActual()->setEntero("velocity_y",0);
+        getPaActual()->setEntero("acceleration_x",0);
+        getPaActual()->setEntero("acceleration_x",0);
         getPaActual()->setString("isActive.ko","yes");
 
         if(!game_over_b)
@@ -1379,6 +1428,14 @@ void Fighter::render()
         m->ya_pego=false;
         //Agregar nuevo
         getPbActual()->setString("current_move","ko");
+        m=getPbActual()->movimientos[p->getString("current_move")];
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
+        getPbActual()->setEntero("velocity_x",0);
+        getPbActual()->setEntero("velocity_y",0);
+        getPbActual()->setEntero("acceleration_x",0);
+        getPbActual()->setEntero("acceleration_x",0);
         getPbActual()->setString("isActive.ko","yes");
 
         if(!game_over_a)

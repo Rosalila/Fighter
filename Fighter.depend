@@ -2027,7 +2027,7 @@
 	"../Rosalila/RosalilaSound/RosalilaSound.h"
 	"Layer.h"
 
-1428042546 source:/home/turupawn/Projects/Fighter/Fighter.cpp
+1428082251 source:/home/turupawn/Projects/Fighter/Fighter.cpp
 	"Fighter.h"
 
 1427575155 /home/turupawn/Projects/Fighter/Fighter.h
@@ -2071,6 +2071,455 @@
 	"SDL/SDL_image.h"
 	"SDL/SDL_ttf.h"
 	"SDL/SDL_mixer.h"
+	<string>
+	"Fighter.h"
+	"Rosalila/RosalilaUtility/RosalilaUtility.h"
+	<iostream>
+
+1428085603 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Fighter.cpp
+	"Fighter.h"
+
+1427575155 /home/turupawn/Projects/Fighter SDL 2 round 2/Fighter.h
+	"Rosalila/TinyXml/tinyxml.h"
+	"FighterMenu/FighterMenu.h"
+	<stdio.h>
+	<queue>
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/TinyXml/tinyxml.h
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<string>
+	<iostream>
+	<sstream>
+	"tinystr.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/TinyXml/tinystr.h
+	<assert.h>
+	<string.h>
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/FighterMenu/FighterMenu.h
+	"../Stage/Stage.h"
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+	"../Personaje/Personaje.h"
+	"../Rosalila/RosalilaMenus/MenuContenedor.h"
+	"../Rosalila/RosalilaMenus/MenuCharSelect.h"
+	"../Rosalila/RosalilaMenus/MenuGallery.h"
+	"../Rosalila/RosalilaSound/RosalilaSound.h"
+	"../Fighter.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Stage/Stage.h
+	"../Rosalila/TinyXml/tinyxml.h"
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+	"../Rosalila/RosalilaSound/RosalilaSound.h"
+	"Layer.h"
+
+1428103820 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/RosalilaGraphics.h
+	<iostream>
+	<list>
+	"SDL2/SDL_image.h"
+	"SDL2/SDL_ttf.h"
+	"../TinyXml/tinyxml.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	"../RosalilaGraphics/smpeg.h"
+	"../RosalilaGraphics/Image.h"
+	"../RosalilaGraphics/Timer.h"
+	"../RosalilaGraphics/Explosion.h"
+	"../RosalilaGraphics/Cube.h"
+	"../RosalilaGraphics/Object3D.h"
+	"../RosalilaUtility/RosalilaUtility.h"
+	<iostream>
+	<fstream>
+
+1428103673 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/smpeg.h
+
+1428103657 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/MPEGfilter.h
+
+1428103647 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Image.h
+	"SDL2/SDL_image.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Timer.h
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Explosion.h
+	"SDL/SDL_image.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	<math.h>
+
+1428103647 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Cube.h
+	"SDL2/SDL_image.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	<math.h>
+
+1428103648 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Object3D.h
+	"SDL2/SDL_image.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	<math.h>
+	<vector>
+	<iostream>
+	<fstream>
+	<sstream>
+	<string>
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaUtility/RosalilaUtility.h
+	<iostream>
+	<fstream>
+	<cmath>
+	<vector>
+
+1428103648 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaSound/RosalilaSound.h
+	<string>
+	<vector>
+	<iostream>
+	"SDL2/SDL.h"
+	"SDL2/SDL_image.h"
+	"SDL2/SDL_ttf.h"
+	"SDL2/SDL_mixer.h"
+	"../RosalilaUtility/RosalilaUtility.h"
+	<map>
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Stage/Layer.h
+	"../Rosalila/TinyXml/tinyxml.h"
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+	"../Rosalila/RosalilaSound/RosalilaSound.h"
+
+1428038942 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Personaje.h
+	"Movimiento.h"
+	"InputMovimiento.h"
+	"Proyectil.h"
+	"../Rosalila/RosalilaSound/RosalilaSound.h"
+	"Animacion.h"
+	"Paleta.h"
+	"../Rosalila/RosalilaInputs/RosalilaInputs.h"
+	<map>
+
+1428038833 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Movimiento.h
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+	"Frame.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Frame.h
+	"Modificador.h"
+	"ModificadorBarra.h"
+	"ModificadorEntero.h"
+	"ModificadorHitboxes.h"
+	"ModificadorImagen.h"
+	"ModificadorPorVariable.h"
+	"ModificadorString.h"
+	"Condicion.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Modificador.h
+	<vector>
+	"HitBox.h"
+	"Imagen.h"
+	"Barra.h"
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/HitBox.h
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Imagen.h
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Barra.h
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorBarra.h
+	"Modificador.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorEntero.h
+	"Modificador.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorHitboxes.h
+	"Modificador.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorImagen.h
+	"Modificador.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorPorVariable.h
+	"Modificador.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorString.h
+	"Modificador.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Condicion.h
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/InputMovimiento.h
+	<vector>
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+
+1428039714 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Proyectil.h
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+	"Imagen.h"
+	"Frame.h"
+
+1427153819 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Animacion.h
+	<vector>
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+	"Imagen.h"
+
+1427704111 /home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Paleta.h
+	<vector>
+	"../Rosalila/TinyXml/tinyxml.h"
+	"../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
+
+1427329427 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaInputs/RosalilaInputs.h
+	"../RosalilaInputs/Boton.h"
+	"../RosalilaAI/RosalilaAI.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaInputs/Boton.h
+	"../RosalilaInputs/Receiver.h"
+
+1428105419 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaInputs/Receiver.h
+	<iostream>
+	<fstream>
+	<vector>
+	<stdarg.h>
+	"../TinyXml/tinyxml.h"
+	"SDL2/SDL.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/RosalilaAI.h
+	"Automata.h"
+	<cstdlib>
+	<iostream>
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/Automata.h
+	"Estado.h"
+	"../TinyXml/tinyxml.h"
+	"../RosalilaUtility/RosalilaUtility.h"
+	<vector>
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/Estado.h
+	"Transicion.h"
+	<cstdlib>
+	<iostream>
+	<vector>
+	"Estado.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/Transicion.h
+	<map>
+	<vector>
+	<iostream>
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuContenedor.h
+	"Elemento.h"
+	"MenuLista.h"
+	"MenuBarra.h"
+	"MenuBoton.h"
+	"MenuImagen.h"
+	"MenuTexto.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/Elemento.h
+	"../RosalilaGraphics/RosalilaGraphics.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuLista.h
+	<vector>
+	"Elemento.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuBarra.h
+	"Elemento.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuBoton.h
+	"Elemento.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuImagen.h
+	"Elemento.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuTexto.h
+	"Elemento.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuCharSelect.h
+	<vector>
+	"Elemento.h"
+
+1427158917 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuGallery.h
+	<vector>
+	"Elemento.h"
+
+1428106370 source:/home/turupawn/Projects/Fighter SDL 2 round 2/FighterMenu/FighterMenu.cpp
+	"FighterMenu.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Animacion.cpp
+	"Animacion.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Barra.cpp
+	"Barra.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Condicion.cpp
+	"Condicion.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Frame.cpp
+	"Frame.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/HitBox.cpp
+	"HitBox.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Imagen.cpp
+	"Imagen.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/InputMovimiento.cpp
+	"InputMovimiento.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Modificador.cpp
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorBarra.cpp
+	"ModificadorBarra.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorEntero.cpp
+	"ModificadorEntero.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorHitboxes.cpp
+	"ModificadorHitboxes.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorImagen.cpp
+	"ModificadorImagen.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorPorVariable.cpp
+	"ModificadorPorVariable.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/ModificadorString.cpp
+	"ModificadorString.h"
+
+1428038857 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Movimiento.cpp
+	"Movimiento.h"
+
+1427705675 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Paleta.cpp
+	"Paleta.h"
+
+1428039799 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Personaje.cpp
+	"Personaje.h"
+
+1428039740 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Personaje/Proyectil.cpp
+	"Proyectil.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/Automata.cpp
+	"Automata.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/Estado.cpp
+	"Estado.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/RosalilaAI.cpp
+	"RosalilaAI.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaAI/Transicion.cpp
+	"Transicion.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Animation.cpp
+	"Animation.h"
+
+1428103647 /home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Animation.h
+	"SDL2/SDL_image.h"
+	<GL/freeglut.h>
+	<GL/gl.h>
+	<stdio.h>
+	"../TinyXml/tinyxml.h"
+	"RosalilaGraphics.h"
+	"../RosalilaSound/RosalilaSound.h"
+	"../RosalilaInputs/RosalilaInputs.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Cube.cpp
+	"Cube.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Image.cpp
+	"RosalilaGraphics.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Object3D.cpp
+	"Object3D.h"
+
+1428107655 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/RosalilaGraphics.cpp
+	"RosalilaGraphics.h"
+
+1428103648 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaGraphics/Timer.cpp
+	"SDL2/SDL.h"
+	"Timer.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaInputs/Boton.cpp
+	"Boton.h"
+
+1428107674 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaInputs/Receiver.cpp
+	"RosalilaInputs.h"
+
+1427329427 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaInputs/RosalilaInputs.cpp
+	"RosalilaInputs.h"
+	<sstream>
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/Elemento.cpp
+	"Elemento.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuBarra.cpp
+	"MenuBarra.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuBoton.cpp
+	"MenuBoton.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuCharSelect.cpp
+	"MenuCharSelect.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuContenedor.cpp
+	"MenuContenedor.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuGallery.cpp
+	"MenuGallery.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuImagen.cpp
+	"MenuImagen.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuLista.cpp
+	"MenuLista.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaMenus/MenuTexto.cpp
+	"MenuTexto.h"
+
+1428031462 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaSound/RosalilaSound.cpp
+	"RosalilaSound.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/RosalilaUtility/RosalilaUtility.cpp
+	"RosalilaUtility.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/TinyXml/tinystr.cpp
+	"tinystr.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/TinyXml/tinyxml.cpp
+	<ctype.h>
+	<sstream>
+	<iostream>
+	"tinyxml.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/TinyXml/tinyxmlerror.cpp
+	"tinyxml.h"
+
+1427158917 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Rosalila/TinyXml/tinyxmlparser.cpp
+	<ctype.h>
+	<stddef.h>
+	"tinyxml.h"
+	<windows.h>
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Stage/Layer.cpp
+	"Layer.h"
+
+1427153819 source:/home/turupawn/Projects/Fighter SDL 2 round 2/Stage/Stage.cpp
+	"Stage.h"
+
+1428103648 source:/home/turupawn/Projects/Fighter SDL 2 round 2/main.cpp
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<sstream>
+	"SDL2/SDL.h"
+	"SDL2/SDL_image.h"
+	"SDL2/SDL_ttf.h"
+	"SDL2/SDL_mixer.h"
 	<string>
 	"Fighter.h"
 	"Rosalila/RosalilaUtility/RosalilaUtility.h"
