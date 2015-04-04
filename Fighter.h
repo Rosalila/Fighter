@@ -52,6 +52,7 @@ public:
     //Game info debug
     bool hitboxes_are_visible;
     bool buffer_is_visible;
+    bool fps_is_visible;
 
     //Engines
     Sound* sonido;

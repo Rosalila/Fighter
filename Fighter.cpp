@@ -1533,6 +1533,12 @@ void Fighter::render()
     if(buffer_is_visible)
         printBuffer();
 
+    if(receiver->isKeyPressed(SDLK_f))
+        fps_is_visible=!fps_is_visible;
+
+    if(fps_is_visible)
+        painter->drawText("FPS: "+toString(painter->getFrameCap()),0,0);
+
     receiver->updateInputs();
     painter->updateScreen();
 }
