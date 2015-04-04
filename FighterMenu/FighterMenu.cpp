@@ -1597,6 +1597,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         false);
 
     for(int i=0;i<(int)pa_previews.size();i++)
@@ -1611,6 +1612,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 
@@ -1626,6 +1628,7 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
     painter->updateScreen();

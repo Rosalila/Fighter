@@ -128,6 +128,7 @@ void Personaje::dibujar()
                 flip_sombra[i],
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 true);
         }
     }
@@ -185,6 +186,7 @@ void Personaje::dibujar()
         getString("orientation")=="i",
         0,0,
         Color(tr,tg,tb,255),
+        -200,-300,
         true);
 //    if(numero==1)
         //paleta.restoreTexture(texture);
@@ -295,6 +297,7 @@ void Personaje::dibujarBarra(Barra* barra)
             flip,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
 }
 
@@ -359,6 +362,7 @@ void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
             player2,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
 }
 
@@ -392,6 +396,7 @@ void Personaje::dibujarProyectiles()
                 getString(proyectil->orientacion)=="i",
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 true);
         }
 //        //Dibujar hitboxes
@@ -2021,6 +2026,7 @@ void Personaje::dibujarImagenCameraAlign(RosalilaGraphics* painter,Imagen* image
         getString("orientation")!="d",
         0,0,
         Color(255,255,255,255),
+        0,0,
         true);
 }
 void Personaje::dibujarImagen(RosalilaGraphics* painter,Imagen* imagen,int posicion_x,int posicion_y)
@@ -2040,6 +2046,7 @@ void Personaje::dibujarImagen(RosalilaGraphics* painter,Imagen* imagen,int posic
         getString("orientation")!="d",
         0,0,
         Color(255,255,255,255),
+        0,0,
         false);
 }
 void Personaje::dibujarAnimacionesBack()

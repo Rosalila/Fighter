@@ -50,6 +50,7 @@ void Stage::drawLayer(Layer* layer,bool time_stopped)
         layer->depth_effect_x,
         layer->depth_effect_y,
         Color(255,255,255,255),
+        0,0,
         false);
 }
 

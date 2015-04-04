@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:ns0="http://xmoto.tuxfamily.org/"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1366"
+   height="768"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="pause_menu.svg">
+  <defs
+     id="defs9" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="746"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="0.71429396"
+     inkscape:cx="435.0263"
+     inkscape:cy="463.82748"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:description
+           ns0:default_xmoto_label="position:_smooth=9.0|physics:grip=45.8" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,0)">
+    <image
+       sodipodi:absref="/home/turupawn/Projects/Fighter SDL 2 round 2/menu/fondo.png"
+       xlink:href="fondo.png"
+       width="1366"
+       height="768"
+       id="image2992"
+       x="0"
+       y="0"
+       fade_in_initial="100"
+       fade_in_speed="0" />
+    <image
+       sodipodi:absref="/home/turupawn/Projects/Fighter SDL 2 round 2/menu/boton1.png"
+       xlink:href="boton1.png"
+       y="269.76129"
+       x="550.5"
+       id="image2995"
+       height="138"
+       width="265"
+       type="button"
+       action="resume"
+       load_menu="test.svg" />
+    <image
+       sodipodi:absref="/home/turupawn/Projects/Fighter SDL 2 round 2/menu/boton1.png"
+       xlink:href="boton1.png"
+       load_menu="test.svg"
+       action="exit"
+       type="button"
+       width="265"
+       height="138"
+       id="image2984"
+       x="550.5"
+       y="497.44705" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="561.26764"
+       y="303.87888"
+       id="text2985"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="561.26764"
+         y="303.87888">Resume</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text2989"
+       y="529.27625"
+       x="591.92194"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="529.27625"
+         x="591.92194"
+         id="tspan2991"
+         sodipodi:role="line">Back</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text2993"
+       y="46.281849"
+       x="623.23438"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"><tspan
+         y="46.281849"
+         x="623.23438"
+         id="tspan2995"
+         sodipodi:role="line">Pause</tspan></text>
+  </g>
+</svg>

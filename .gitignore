@@ -1,9 +1,11 @@
 bin/
 chars/
-menu/
-misc/
+#menu/
+#misc/
 obj/
 Rosalila/
-stages/
+#stages/
 config.xml
-log
+*log
+*Fighter.depend
+*Fighter.layout

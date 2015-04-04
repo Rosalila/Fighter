@@ -1240,6 +1240,7 @@ void Fighter::dibujarBarra()
         false,
         0,0,
         Color(255,255,255,255),
+        0,0,
         false);
 
     for(int i=0;i<victories_a;i++)
@@ -1254,6 +1255,7 @@ void Fighter::dibujarBarra()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 
@@ -1269,6 +1271,7 @@ void Fighter::dibujarBarra()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 }
@@ -1297,6 +1300,7 @@ void Fighter::printBuffer()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
     }
@@ -1315,6 +1319,7 @@ void Fighter::printBuffer()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
     }
@@ -1467,6 +1472,7 @@ void Fighter::render()
                 false,
                 0,0,
                 Color(255,255,255,255),
+                0,0,
                 false);
         }
     }
@@ -1491,6 +1497,7 @@ void Fighter::render()
             false,
             0,0,
             Color(255,255,255,255),
+            0,0,
             false);
     }
 
