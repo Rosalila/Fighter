@@ -5,7 +5,7 @@ chars/
 obj/
 Rosalila/
 #stages/
-config.xml
+#config.xml
 *log
 *Fighter.depend
 *Fighter.layout
