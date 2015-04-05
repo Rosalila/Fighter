@@ -1175,9 +1175,9 @@ void Fighter::loopJuego()
                && ((getPaActual()->getString("current_move")=="idle.stand"
                     ||getPbActual()->getString("current_move")=="idle.stand")
                     || (getPaActual()->getString("current_move")=="victory"
-                            && getPaActual()->getMovimientoActual()->frame_actual== getPaActual()->getMovimientoActual()->frames.size()-1)
+                            && getPaActual()->getMovimientoActual()->frame_actual==(int)getPaActual()->getMovimientoActual()->frames.size()-1)
                     || (getPbActual()->getString("current_move")=="victory"
-                            && getPbActual()->getMovimientoActual()->frame_actual== getPbActual()->getMovimientoActual()->frames.size()-1)
+                            && getPbActual()->getMovimientoActual()->frame_actual==(int)getPbActual()->getMovimientoActual()->frames.size()-1)
                   )
                )
                 break;
@@ -1195,9 +1195,9 @@ void Fighter::loopJuego()
                && ((getPbActual()->getString("current_move")=="idle.stand"
                     ||getPbActual()->getString("current_move")=="idle.stand")
                     || (getPbActual()->getString("current_move")=="victory"
-                            && getPbActual()->getMovimientoActual()->frame_actual== getPbActual()->getMovimientoActual()->frames.size()-1)
+                            && getPbActual()->getMovimientoActual()->frame_actual==(int)getPbActual()->getMovimientoActual()->frames.size()-1)
                     || (getPbActual()->getString("current_move")=="victory"
-                            && getPbActual()->getMovimientoActual()->frame_actual== getPbActual()->getMovimientoActual()->frames.size()-1)
+                            && getPbActual()->getMovimientoActual()->frame_actual==(int)getPbActual()->getMovimientoActual()->frames.size()-1)
                   )
                )
                 break;
@@ -1286,10 +1286,10 @@ void Fighter::printHitboxes()
 
 void Fighter::printBuffer()
 {
-    for(int i=0;i<getPaActual()->input->getBufferRosalilaInputs().size();i++)
+    for(int i=0;i<(int)getPaActual()->input->getBufferRosalilaInputs().size();i++)
     {
         string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
-        for(int j=0;j<input_iterator.size();j++)
+        for(int j=0;j<(int)input_iterator.size();j++)
         {
             painter->draw2DImage
             (   input_buffer_images[input_iterator[j]],
@@ -1305,10 +1305,10 @@ void Fighter::printBuffer()
         }
     }
 
-    for(int i=0;i<getPaActual()->input->getPrintableBufferRosalilaInputs().size();i++)
+    for(int i=0;i<(int)getPaActual()->input->getPrintableBufferRosalilaInputs().size();i++)
     {
         string input_iterator = getPaActual()->input->getPrintableBufferRosalilaInputs()[i];
-        for(int j=0;j<input_iterator.size();j++)
+        for(int j=0;j<(int)input_iterator.size();j++)
         {
             painter->draw2DImage
             (   input_buffer_images[input_iterator[j]],

@@ -1,3 +1,5 @@
+#include "Rosalila/system.h"
+
 #include <pthread.h>
 
 #include <stdio.h>
@@ -6,9 +8,25 @@
 
 //SDL
 #include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
-#include "SDL2/SDL_mixer.h"
+
+#ifdef LINUX
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+#endif
+
+#ifdef WINDOWS
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL_mixer.h>
+#endif
+
+#ifdef OSX
+#include <SDL2_image/SDL_image.h>
+#include <SDL2_ttf/SDL_ttf.h>
+#include <SDL2_mixer/SDL_mixer.h>
+#endif
+
 #include <string>
 
 //#include "RosalilaInputs/RosalilaInputs.h"
