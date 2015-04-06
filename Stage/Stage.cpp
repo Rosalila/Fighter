@@ -76,11 +76,9 @@ void Stage::loadFromXML(std::string path)
 {
     writeLogLine("Loading stage from XML.");
 
-    char *archivo=new char[255];
-    strcpy(archivo,"stages/");
-    strcat(archivo,path.c_str());
-    strcat(archivo,"/main.xml");
-    TiXmlDocument doc_t( archivo );
+    string xml_path=assets_directory+"stages/"+path+"/main.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -133,11 +131,7 @@ void Stage::loadFromXML(std::string path)
                 layer!=NULL;
                 layer=layer->NextSibling("frame"))
         {
-            char *image_path=new char[255];
-            strcpy(image_path,"stages/");
-            strcat(image_path,path.c_str());
-            strcat(image_path,"/images/");
-            strcat(image_path,layer->ToElement()->Attribute("image_path"));
+            string image_path=assets_directory+"stages/"+path+"/images/"+layer->ToElement()->Attribute("image_path");
 
             Image* image=painter->getTexture(image_path);
             textures.push_back(image);
@@ -190,11 +184,7 @@ void Stage::loadFromXML(std::string path)
                 layer!=NULL;
                 layer=layer->NextSibling("frame"))
         {
-            char *image_path=new char[255];
-            strcpy(image_path,"stages/");
-            strcat(image_path,path.c_str());
-            strcat(image_path,"/images/");
-            strcat(image_path,layer->ToElement()->Attribute("image_path"));
+            string image_path=assets_directory+"stages/"+path+"/images/"+layer->ToElement()->Attribute("image_path");
 
             Image* image=painter->getTexture(image_path);
             textures.push_back(image);

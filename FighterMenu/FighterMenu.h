@@ -1,6 +1,7 @@
 #ifndef MENUTEST_H
 #define MENUTEST_H
 
+#include "../Rosalila/system.h"
 #include "../Stage/Stage.h"
 #include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
 #include "../Personaje/Personaje.h"

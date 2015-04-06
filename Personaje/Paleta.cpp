@@ -6,7 +6,6 @@ void Paleta::cargarXML(char* archivo,int num_paleta)
     doc_t.LoadFile();
     TiXmlDocument*doc=&doc_t;
     TiXmlNode* palettes_file=doc->FirstChild("PalettesFile");
-    int i=1;
     for(TiXmlNode* palette=palettes_file->FirstChild("Palette");
             palette!=NULL;
             palette=palette->NextSibling("Palette"))

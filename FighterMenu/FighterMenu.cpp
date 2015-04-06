@@ -1,6 +1,7 @@
 #include "FighterMenu.h"
 Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::string archivo)
 {
+    writeLogLine("loading menu: "+archivo);
     this->painter=painter;
     this->receiver=receiver;
     this->sonido=sonido;
@@ -8,9 +9,10 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::strin
     this->save_inputs_signal=false;
     this->char_select=NULL;
 
-    vs_screen=painter->getTexture("misc/vs_screen.png");
+    vs_screen=painter->getTexture(assets_directory+"misc/vs_screen.png");
 
-    TiXmlDocument doc_t((char*)"config.xml");
+    string configxml_path=assets_directory+"config.xml";
+    TiXmlDocument doc_t(configxml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -41,6 +43,8 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::strin
     }
 
     cargarDesdeXml(archivo,chars,stages);
+
+    writeLogLine("menu loaded: "+archivo);
 }
 
 void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
@@ -70,9 +74,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
     }
 
     sonido->stopMusic();
-
     sonido->playMusic(stage->music_path);
-
     Fighter*fighter=NULL;
 
     int pa_victories=0;
@@ -106,20 +108,23 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
         //Finish game
         if(pa_victories>=rounds && pb_victories>=rounds)
         {
-            Menu *temp=new Menu(painter,receiver,sonido,"menu/draw.svg");
+            Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/draw.svg");
             temp->loopMenu();
+            delete temp;
             break;
         }
         else if(pa_victories>=rounds)
         {
-            Menu *temp=new Menu(painter,receiver,sonido,"menu/pa_wins.svg");
+            Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pa_wins.svg");
             temp->loopMenu();
+            delete temp;
             break;
         }
         else if(pb_victories>=rounds)
         {
-            Menu *temp=new Menu(painter,receiver,sonido,"menu/pb_wins.svg");
+            Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pb_wins.svg");
             temp->loopMenu();
+            delete temp;
             break;
         }
     }
@@ -546,7 +551,7 @@ void Menu::loopMenu()
                 }
                 if(mb->getAccion()=="load")
                 {
-                    Menu *temp=new Menu(painter,receiver,sonido,mb->load_menu);
+                    Menu *temp=new Menu(painter,receiver,sonido,assets_directory+mb->load_menu);
                     temp->loopMenu();
                 }
                 if(mb->getAccion()=="training")
@@ -622,7 +627,8 @@ void Menu::loopMenu()
                     root->LinkEndChild(r);
                     doc->LinkEndChild(root);
 
-                    doc->SaveFile("misc/config.xml");
+                    string miscconfigxml_path=assets_directory+"/misc/config.xml";
+                    doc->SaveFile(miscconfigxml_path.c_str());
                 }
 //                    if(mb->getAccion()>=10 && mb->getAccion()<=29)
 //                    {
@@ -731,7 +737,8 @@ void Menu::dibujarMenu()
 
 void Menu::cargarConfig()
 {
-    TiXmlDocument doc_t("misc/config.xml");
+    string miscconfigxml_path=assets_directory+"/misc/config.xml";
+    TiXmlDocument doc_t(miscconfigxml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -747,7 +754,7 @@ void Menu::cargarConfig()
 
 void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<std::string> stages)
 {
-    music_path="menu/audio/music.ogg";
+    music_path=assets_directory+"menu/audio/music.ogg";
 
     cargarConfig();
 
@@ -756,14 +763,16 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
     TiXmlDocument *doc;
     doc=&doc_t;
 
-    sonido->addSound("Menu.select","menu/audio/select.ogg");
-    sonido->addSound("Menu.select_char","menu/audio/select_char.ogg");
-    sonido->addSound("Menu.move","menu/audio/move.ogg");
-    sonido->addSound("Menu.move_char","menu/audio/move_char.ogg");
-    sonido->addSound("Menu.back","menu/audio/back.ogg");
+    sonido->addSound("Menu.select",assets_directory+"menu/audio/select.ogg");
+    sonido->addSound("Menu.select_char",assets_directory+"menu/audio/select_char.ogg");
+    sonido->addSound("Menu.move",assets_directory+"menu/audio/move.ogg");
+    sonido->addSound("Menu.move_char",assets_directory+"menu/audio/move_char.ogg");
+    sonido->addSound("Menu.back",assets_directory+"menu/audio/back.ogg");
 
     TiXmlNode* elemento=doc->FirstChild("svg");
     TiXmlNode* g_node=elemento->FirstChild("g");
+
+    writeLogLine("loading menu elements");
 
     std::vector<Elemento*>elementos_contenedor;
     for(TiXmlNode* image_node=g_node->FirstChild("image");
@@ -797,7 +806,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                 fade_in_initial=atoi(e->Attribute("fade_in_initial"));
             if(e->Attribute("fade_in_speed")!=NULL)
                 fade_in_speed=atoi(e->Attribute("fade_in_speed"));
-            Image* image=painter->getTexture(path);
+            Image* image=painter->getTexture(assets_directory+path);
 
             elementos.push_back((Elemento*)new MenuImagen(painter,atoi(e->Attribute("x")),atoi(e->Attribute("y")),displacement_x,displacement_y,stop_displacement_x_at,stop_displacement_y_at,fade_in_initial,fade_in_speed,
                                                           atoi(e->Attribute("width")),atoi(e->Attribute("height")),image,""
@@ -854,9 +863,9 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
             elementos_contenedor.push_back((Elemento*)new MenuBoton(painter,
                                                                     x,y,
                                                                     width,height,
-                                                                    painter->getTexture(std::string("menu/")+path),
+                                                                    painter->getTexture(assets_directory+"menu/"+path),
                                                                     text_x,text_y,text,
-                                                                    painter->getTexture(std::string("menu/")+path_selected),
+                                                                    painter->getTexture(assets_directory+"menu/"+path_selected),
                                                                     text_x_selected,text_y_selected,text_selected,
                                                                     action,menu_load
                                                                     ));
@@ -919,12 +928,12 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
             elementos_contenedor.push_back((Elemento*)new MenuBarra(painter,
                                                                     x,y,
                                                                     width,height,
-                                                                    painter->getTexture(std::string("menu/")+background),
+                                                                    painter->getTexture(assets_directory+"menu/"+background),
                                                                     bar_x,bar_y,
-                                                                    painter->getTexture(std::string("menu/")+path),
-                                                                    painter->getTexture(std::string("menu/")+background_selected),
+                                                                    painter->getTexture(assets_directory+"menu/"+path),
+                                                                    painter->getTexture(assets_directory+"menu/"+background_selected),
                                                                     bar_x_selected,bar_y_selected,
-                                                                    painter->getTexture(std::string("menu/")+image_selected),
+                                                                    painter->getTexture(assets_directory+"menu/"+image_selected),
                                                                     max,default_value,accion
                                                                     )
                                            );
@@ -1045,7 +1054,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                     if(e->Attribute("fade_in_speed")!=NULL)
                         fade_in_speed=atoi(e->Attribute("fade_in_speed"));
 
-                    Image*image=painter->getTexture(std::string("stages/")+stages[i]+std::string("/images/preview.png"));
+                    Image*image=painter->getTexture(assets_directory+"stages/"+stages[i]+std::string("/images/preview.png"));
 
 
                     elem_lista.push_back((Elemento*)new MenuImagen(painter,
@@ -1069,7 +1078,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
 
                 Image*path_left=NULL;
                 if(e->Attribute("path_left")!=NULL)
-                    path_left=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_left")));
+                    path_left=painter->getTexture(assets_directory+"menu/"+std::string(e->Attribute("path_left")));
 
                 int arrow_right_x=x;
                 if(e->Attribute("arrow_right_x"))
@@ -1081,7 +1090,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
 
                 Image*path_right=NULL;
                 if(e->Attribute("path_right")!=NULL)
-                    path_right=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_right")));
+                    path_right=painter->getTexture(assets_directory+"menu/"+std::string(e->Attribute("path_right")));
 
                 int arrow_left_x_selected=x;
                 if(e->Attribute("arrow_left_x_selected"))
@@ -1093,7 +1102,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
 
                 Image*path_left_selected=path_left;
                 if(e->Attribute("path_left_selected")!=NULL)
-                    path_left_selected=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_left_selected")));
+                    path_left_selected=painter->getTexture(assets_directory+"menu/"+std::string(e->Attribute("path_left_selected")));
 
                 int arrow_right_x_selected=x;
                 if(e->Attribute("arrow_right_x_selected"))
@@ -1105,7 +1114,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
 
                 Image*path_right_selected=path_right;
                 if(e->Attribute("path_right_selected")!=NULL)
-                    path_right_selected=painter->getTexture(std::string("menu/")+std::string(e->Attribute("path_right_selected")));
+                    path_right_selected=painter->getTexture(assets_directory+"menu/"+std::string(e->Attribute("path_right_selected")));
 
                 elementos_contenedor.push_back((Elemento*)new MenuLista(painter,x,y,
                                                                         arrow_left_x,arrow_left_y,
@@ -1198,6 +1207,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                                                      text_span_elem->GetText()
                                                      ));
     }
+    writeLogLine("menu elements loaded");
 }
 
 Personaje* Menu::getPersonajeA(int num,bool ia)
@@ -1216,8 +1226,8 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     {
         writeLogLine("Loading AI.");
         inputa=new RosalilaInputs();
-        std::string file_ia="chars/"+char_name+"/ia.xml";
-        inputa->cargarRosalilaAIXML(2,file_ia,"");
+        string xml_path=assets_directory+"chars/"+char_name+"/ia.xml";
+        inputa->cargarRosalilaAIXML(2,xml_path,"");
     }else
     {
         writeLogLine("Loading inputs.");
@@ -1239,33 +1249,25 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     std::string char_name=char_select->getLockedNamesPB()[num];
     int num_paleta=char_select->getLockedPalettesPB()[num];
 
-    //get string
-    char *path_b=new char[255];
-    strcpy(path_b,"");
-    strcat(path_b,char_name.c_str());
-
     if(ia)
     {
         writeLogLine("Loading AI.");
         inputb=new RosalilaInputs();
-        char*file_ia=new char[255];
-        char*file_ia_default=new char[255];
-        strcpy(file_ia,"chars/");
-        strcpy(file_ia_default,"chars/");
-        strcat(file_ia,path_b);
-        strcat(file_ia_default,path_b);
-        strcat(file_ia_default,"/ai/default.xml");
+
+        string xml_path_default=assets_directory+"chars/"+char_name+"/ai/default.xml";
+        string xml_path=assets_directory+"chars/"+char_name;
+
         if(ai_level==1)
-            strcat(file_ia,"/ai/level 1.xml");
+            xml_path+="/ai/level 1.xml";
         if(ai_level==2)
-            strcat(file_ia,"/ai/level 2.xml");
+            xml_path+="/ai/level 2.xml";
         if(ai_level==3)
-            strcat(file_ia,"/ai/level 3.xml");
+            xml_path+="/ai/level 3.xml";
         if(ai_level==4)
-            strcat(file_ia,"/ai/level 4.xml");
+            xml_path+="/ai/level 4.xml";
         if(ai_level==5)
-            strcat(file_ia,"/ai/level 5.xml");
-        inputb->cargarRosalilaAIXML(2,file_ia,file_ia_default);
+            xml_path+="/ai/level 5.xml";
+        inputb->cargarRosalilaAIXML(2,xml_path,xml_path_default);
     }else
     {
         writeLogLine("Loading inputs.");
@@ -1275,7 +1277,8 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(painter,sonido,2,num_paleta);
-    p->loadFromXML(inputb,(char *)path_b);
+    string xml_path=assets_directory+char_name;
+    p->loadFromXML(inputb,(char*)char_name.c_str());
     writeLogLine("Loaded successfully.");
     return p;
 }
@@ -1309,7 +1312,8 @@ void Menu::escribirRosalilaInputssXML(RosalilaInputs* ia,RosalilaInputs* ib)
 {
     TiXmlDocument *doc=new TiXmlDocument();
     ib->getXML(ia->getXML(doc));
-    doc->SaveFile( "misc/inputs.xml" );
+    string xml_path = assets_directory+"misc/inputs.xml";
+    doc->SaveFile( xml_path.c_str() );
 }
 
 std::string Menu::getRosalilaInputsPressed()

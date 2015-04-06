@@ -58,7 +58,8 @@ int main(int argc, char *argv[])
 
 
     Sound*sonido = new Sound();
-    Menu* menu=new Menu(painter,receiver,sonido,(char*)"menu/main_menu.svg");
+    string menu_path=assets_directory+"menu/main_menu.svg";
+    Menu* menu=new Menu(painter,receiver,sonido,menu_path.c_str());
     sonido->playMusic(menu->music_path);
 
     menu->loopMenu();

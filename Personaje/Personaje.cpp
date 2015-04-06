@@ -838,11 +838,8 @@ void Personaje::loadFromXML(RosalilaInputs* input,char* nombre)
     setEntero("position_x",0);
     setEntero("position_y",0);
 
-    char* path_palettes=new char[255];
-    strcpy(path_palettes,"chars/");
-    strcat(path_palettes,char_name_ptr);
-    strcat(path_palettes,"/palettes.xml\0");
-    paleta.cargarXML(path_palettes,num_paleta);
+    string xml_path=assets_directory+"chars/"+nombre+"/palettes.xml";
+    paleta.cargarXML((char*)xml_path.c_str(),num_paleta);
 
     loadMain();
 
@@ -880,12 +877,9 @@ void Personaje::logicaBarras()
 void Personaje::loadMain()
 {
     writeLogLine("Loading main.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/main.xml\0");
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/main.xml";
 
-    TiXmlDocument doc_t(path);
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1053,7 +1047,7 @@ void Personaje::loadMain()
             int alineacion_y=atoi(elemento_imagen->Attribute("align_y"));
 
             if(ignore_color==NULL)
-                setImagen(variable,new Imagen(painter->getTexture(path),escala,alineacion_x,alineacion_y));
+                setImagen(variable,new Imagen(painter->getTexture(assets_directory+path),escala,alineacion_x,alineacion_y));
 //                else//!!IGNORE COLOR
 //                    setImagen(variable,Imagen(painter->getTexture(path,ignore_color),escala,alineacion_x,alineacion_y));
         }
@@ -1136,7 +1130,7 @@ void Personaje::loadMain()
             {
                 std::string imagen(elemento_imagen->Attribute("image"));
                 imagen=std::string("chars/")+char_name+std::string("/")+imagen;
-                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,stay_at_max,painter->getTexture(imagen)));
+                agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,stay_at_max,painter->getTexture(assets_directory+imagen)));
             }
             else
                 agregarBarra(new Barra(variable,variable+".max_value",variable+".current_value",variable+".periodic_modifier",variable+".period",Color(r,g,b,alpha),x1,y1,x2,y2,stay_at_max,NULL));
@@ -1147,12 +1141,10 @@ void Personaje::loadMain()
 void Personaje::loadVars()
 {
     writeLogLine("Loading vars.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/vars.xml\0");
 
-    TiXmlDocument doc_t(path);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/vars.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1234,13 +1226,11 @@ void Personaje::loadVars()
 
 void Personaje::loadInputs()
 {
-    writeLogLine("Loading inputs.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/input.xml\0");
+    writeLogLine("Loading input.xml");
 
-    TiXmlDocument doc_t(path);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/input.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1351,12 +1341,10 @@ void Personaje::loadInputs()
 void Personaje::loadTriggers()
 {
     writeLogLine("Loading triggers.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/triggers.xml\0");
 
-    TiXmlDocument doc_t(path);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/triggers.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1405,12 +1393,10 @@ void Personaje::loadTriggers()
 void Personaje::loadSprites()
 {
     writeLogLine("Loading sprites.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/sprites.xml\0");
 
-    TiXmlDocument doc_t(path);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/sprites.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1461,7 +1447,7 @@ void Personaje::loadSprites()
 
                 if(ignore_color==NULL)
                 {
-                    Image* texture=painter->getTexture(path);
+                    Image* texture=painter->getTexture(assets_directory+path);
                     textures.push_back(texture);
 //                    paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),to_opponent);
@@ -1469,7 +1455,7 @@ void Personaje::loadSprites()
                 }
                 else//!!IGNORE COLOR
                 {
-                    Image* texture=painter->getTexture(path);
+                    Image* texture=painter->getTexture(assets_directory+path);
                     textures.push_back(texture);
 //                    paleta.paintTexture(texture);
                     agregarModificador(nombre,frame,str_variable,new Imagen(texture,escala,alineacion_x,alineacion_y),to_opponent);
@@ -1491,12 +1477,10 @@ void Personaje::loadSprites()
 void Personaje::loadHitboxes()
 {
     writeLogLine("Loading hitboxes.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/hitboxes.xml\0");
 
-    TiXmlDocument doc_t(path);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/hitboxes.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1549,12 +1533,10 @@ void Personaje::loadHitboxes()
 void Personaje::loadSfx()
 {
     writeLogLine("Loading sfx.xml");
-    char* path=new char[255];
-    strcpy(path,"chars/");
-    strcat(path,char_name_ptr);
-    strcat(path,"/sfx.xml\0");
 
-    TiXmlDocument doc_t(path);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/sfx.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1578,25 +1560,16 @@ void Personaje::loadSfx()
 void Personaje::loadAnimations()
 {
     writeLogLine("Loading vfx.xml");
-    char* path_animations=new char[255];
-    char* path_archivos=new char[255];
-    strcpy(path_animations,"chars/");
-    strcat(path_animations,char_name_ptr);
 
-    strcpy(path_archivos,path_animations);
-    strcat(path_archivos,"/sprites/");
-
-    strcat(path_animations,"/vfx.xml");
-    TiXmlDocument doc_t(path_animations);
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/vfx.xml";
+    string files_path=assets_directory+"chars/"+char_name_ptr+"/sprites/";
+    TiXmlDocument doc_t(xml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
-
     TiXmlNode*animations_file=doc->FirstChild("AnimationsFile");
-
     TiXmlNode *back=animations_file->FirstChild("Back");
     TiXmlNode *front=animations_file->FirstChild("Front");
-
     //Back
     for(TiXmlNode* nodo=back->FirstChild("Animation");
             nodo!=NULL;
@@ -1608,7 +1581,7 @@ void Personaje::loadAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            Image *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
+            Image *texture=painter->getTexture(files_path+elem_frame->Attribute("path"));
             i_temp.push_back(new Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1654,7 +1627,7 @@ void Personaje::loadAnimations()
         nodo_frame=nodo_frame->NextSibling("Sprite"))
         {
             TiXmlElement *elem_frame=nodo_frame->ToElement();
-            Image *texture=painter->getTexture(std::string(path_archivos)+std::string(elem_frame->Attribute("path")));
+            Image *texture=painter->getTexture(files_path+elem_frame->Attribute("path"));
             i_temp.push_back(new Imagen(texture,
                                     (float)atoi(elem_frame->Attribute("scale")),
                                     atoi(elem_frame->Attribute("align_x")),
@@ -1691,12 +1664,12 @@ void Personaje::loadAnimations()
 
 void Personaje::loadProjectiles()
 {
-    writeLogLine("Loading vfx.xml");
-    char* path_animations=new char[255];
-    strcpy(path_animations,"chars/");
-    strcat(path_animations,char_name_ptr);
-    strcat(path_animations,"/projectiles.xml");
-    TiXmlDocument doc_t(path_animations);
+    writeLogLine("Loading projectiles.xml");
+
+    string xml_path=assets_directory+"chars/"+char_name_ptr+"/projectiles.xml";
+
+    TiXmlDocument doc_t(xml_path.c_str());
+
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
@@ -1745,7 +1718,7 @@ void Personaje::loadProjectiles()
 
 
                 Image* texture;
-                texture=painter->getTexture(path);
+                texture=painter->getTexture(assets_directory+path);
                 sprites.push_back(new Imagen(texture,escala,alineacion_x,alineacion_y));
             }
         }

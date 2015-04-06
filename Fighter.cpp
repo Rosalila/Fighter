@@ -1,20 +1,19 @@
 #include "Fighter.h"
 Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
 {
-//    writeLogLine("Initializing fighter.");
+    writeLogLine("Initializing Fighter game");
+
     this->victories_a=victories_a;
     this->victories_b=victories_b;
 
     this->stop_time_pa=false;
     this->stop_time_pb=false;
 
-//    writeLogLine("Loading misc config.");
-
-    TiXmlDocument doc_t((char*)"config.xml");
+    string configxml_path=assets_directory+"config.xml";
+    TiXmlDocument doc_t(configxml_path.c_str());
     doc_t.LoadFile();
     TiXmlDocument *doc;
     doc=&doc_t;
-
 
     TiXmlElement* elem_victory=doc->FirstChild("VictoryIcon")->ToElement();
     victory_image_x=atoi(elem_victory->Attribute("x"));
@@ -28,22 +27,21 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     int ko_frames=atoi(elem_ko->Attribute("frames"));
     duracion_ko=atoi(elem_ko->Attribute("duration"));
 
-    texture_bar=painter->getTexture("misc/bar.png");
-    texture_victory=painter->getTexture("misc/victory.png");
-
+    texture_bar=painter->getTexture(assets_directory+"misc/bar.png");
+    texture_victory=painter->getTexture(assets_directory+"misc/victory.png");
 
     tiempo_actual_intro=0;
     pos_imagen_intro=0;
     for(int i=0;i<intro_frames;i++)
     {
-        match_intro.push_back(new Imagen(painter->getTexture(std::string("misc/match_intro/")+toString(i+1)+std::string(".png")),1,0,0));
+        match_intro.push_back(new Imagen(painter->getTexture(assets_directory+"misc/match_intro/"+toString(i+1)+".png"),1,0,0));
     }
 
     tiempo_actual_ko=0;
     pos_imagen_ko=0;
     for(int i=0;i<ko_frames;i++)
     {
-        ko.push_back(new Imagen(painter->getTexture(std::string("misc/ko/")+toString(i+1)+std::string(".png")),1,0,0));
+        ko.push_back(new Imagen(painter->getTexture(assets_directory+"misc/ko/"+toString(i+1)+".png"),1,0,0));
     }
 
     writeLogLine("Loading stage misc.");
@@ -52,7 +50,6 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
         pa[i]->stage_piso=stage->pos_piso;
     for(int i=0; i<(int)pb.size(); i++)
         pb[i]->stage_piso=stage->pos_piso;
-
     //Engines
     this->sonido=sonido;
     this->painter=painter;
@@ -64,10 +61,10 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     this->pa_actual=0;
     this->pb_actual=0;
 
-//    writeLogLine("Initializing pause menu.");
-    pause_menu=new Menu(painter,receiver,sonido,(char*)"menu/pause_menu.svg");
+    writeLogLine("Initializing pause menu.");
+    pause_menu=new Menu(painter,receiver,sonido,assets_directory+"menu/pause_menu.svg");
 
-//    writeLogLine("Setting player misc.");
+    writeLogLine("Setting player misc.");
 
     this->pa=pa;
     this->pb=pb;
@@ -81,31 +78,29 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     getPbActual()->setString("isActive.intro","yes");
     getPaActual()->flipRight();
     getPbActual()->flipLeft();
-
     //Set chars inital position
     getPaActual()->setEntero("position_x",painter->screen_width/2-250);
     getPbActual()->setEntero("position_x",painter->screen_width/2+250);
 
-    input_buffer_images['1']=painter->getTexture("misc/input_buffer/1.png");
-    input_buffer_images['2']=painter->getTexture("misc/input_buffer/2.png");
-    input_buffer_images['3']=painter->getTexture("misc/input_buffer/3.png");
-    input_buffer_images['4']=painter->getTexture("misc/input_buffer/4.png");
-    input_buffer_images['5']=painter->getTexture("misc/input_buffer/5.png");
-    input_buffer_images['6']=painter->getTexture("misc/input_buffer/6.png");
-    input_buffer_images['7']=painter->getTexture("misc/input_buffer/7.png");
-    input_buffer_images['8']=painter->getTexture("misc/input_buffer/8.png");
-    input_buffer_images['9']=painter->getTexture("misc/input_buffer/9.png");
+    input_buffer_images['1']=painter->getTexture(assets_directory+"misc/input_buffer/1.png");
+    input_buffer_images['2']=painter->getTexture(assets_directory+"misc/input_buffer/2.png");
+    input_buffer_images['3']=painter->getTexture(assets_directory+"misc/input_buffer/3.png");
+    input_buffer_images['4']=painter->getTexture(assets_directory+"misc/input_buffer/4.png");
+    input_buffer_images['5']=painter->getTexture(assets_directory+"misc/input_buffer/5.png");
+    input_buffer_images['6']=painter->getTexture(assets_directory+"misc/input_buffer/6.png");
+    input_buffer_images['7']=painter->getTexture(assets_directory+"misc/input_buffer/7.png");
+    input_buffer_images['8']=painter->getTexture(assets_directory+"misc/input_buffer/8.png");
+    input_buffer_images['9']=painter->getTexture(assets_directory+"misc/input_buffer/9.png");
 
-    input_buffer_images['a']=painter->getTexture("misc/input_buffer/a.png");
-    input_buffer_images['b']=painter->getTexture("misc/input_buffer/b.png");
-    input_buffer_images['c']=painter->getTexture("misc/input_buffer/c.png");
-    input_buffer_images['d']=painter->getTexture("misc/input_buffer/d.png");
-    input_buffer_images['e']=painter->getTexture("misc/input_buffer/e.png");
-    input_buffer_images['f']=painter->getTexture("misc/input_buffer/f.png");
+    input_buffer_images['a']=painter->getTexture(assets_directory+"misc/input_buffer/a.png");
+    input_buffer_images['b']=painter->getTexture(assets_directory+"misc/input_buffer/b.png");
+    input_buffer_images['c']=painter->getTexture(assets_directory+"misc/input_buffer/c.png");
+    input_buffer_images['d']=painter->getTexture(assets_directory+"misc/input_buffer/d.png");
+    input_buffer_images['e']=painter->getTexture(assets_directory+"misc/input_buffer/e.png");
+    input_buffer_images['f']=painter->getTexture(assets_directory+"misc/input_buffer/f.png");
 
     hitboxes_are_visible=false;
     buffer_is_visible=false;
-
     loopJuego();
 }
 
