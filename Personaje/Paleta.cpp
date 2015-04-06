@@ -112,6 +112,7 @@ Image* Paleta::paintTexture(Image* texture)
 //        }
 //        texture->unlock();
     }
+    return NULL;
 }
 
 //Image* Paleta::restoreTexture(Image* texture)
