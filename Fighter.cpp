@@ -1,10 +1,12 @@
 #include "Fighter.h"
-Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b)
+Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training)
 {
     writeLogLine("Initializing Fighter game");
 
     this->victories_a=victories_a;
     this->victories_b=victories_b;
+
+    this->is_training = is_training;
 
     this->stop_time_pa=false;
     this->stop_time_pb=false;
@@ -101,6 +103,11 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
 
     hitboxes_are_visible=false;
     buffer_is_visible=false;
+
+    counter_pa_visible_frame=0;
+    counter_pb_visible_frame=0;
+    training_health_regen_frame=0;
+
     loopJuego();
 }
 
@@ -496,11 +503,19 @@ void Fighter::logicaPersonaje(Personaje* p)
     //ejecutar cancel
     if(str_movimiento!="")
     {
-//        if(p->getString("current_move")=="on_hit.knockdown")
-//        applyCameraEffect();
         if(str_movimiento.substr(0,7)=="on_hit."
                 && p->getString("current_move")=="on_hit.air_knockdown")
             applyCameraEffect();
+        if(p->getString("current_move").substr(0,7)!="on_hit."
+            && p->getString("current_move").substr(0,4)!="walk"
+            && p->getString("current_move").substr(0,5)!="idle."
+            && str_movimiento.substr(0,7)=="on_hit.")
+        {
+            if(p->numero==1)
+                counter_pa_visible_frame=45;
+            else
+                counter_pb_visible_frame=45;
+        }
         if(str_movimiento.substr(0,7)=="on_hit."
                 /*ugly patch for chained on hit*/
                 && p->getString("current_move")=="on_hit.air_knockdown")
@@ -609,6 +624,14 @@ void Fighter::logica()
     //logica proyectiles
     getPaActual()->logicaProyectiles();
     getPbActual()->logicaProyectiles();
+
+    if(is_training)
+    {
+        if(training_health_regen_frame<=0)
+            getPbActual()->heal(5);
+        training_health_regen_frame--;
+    }
+
     //verificar si estan atacando
     if(getPaActual()->getMovimientoActual()->is_attack
         || getPaActual()->getString("projectile_active")=="yes")
@@ -727,124 +750,95 @@ void Fighter::logica()
     if(hit_cancel_pa!="")
     {
         Personaje*p=getPaActual();
-            if(p->getString("current_move").substr(0,7)=="on_hit.")
-            {
-                if(p->getString("current_move")!="on_hit.knockdown")
-                    p->combo++;
-            }
-            Movimiento* m=p->movimientos[p->getString("current_move")];
+        if(p->getString("current_move").substr(0,7)=="on_hit.")
+        {
+            if(p->getString("current_move")!="on_hit.knockdown")
+                p->combo++;
+        }
+        Movimiento* m=p->movimientos[p->getString("current_move")];
 
-            if(p->getString("current_move").substr(0,8)!="defense.")
+        if(p->getString("current_move").substr(0,8)!="defense.")
+        {
+            p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
+        }else
+        {
+            //exit(0);
+            //Unreachable code?
+            if(p->getString("current_move")=="defense.air")
             {
-                p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
-            }else
-            {
-                //exit(0);
-                //Unreachable code?
-                if(p->getString("current_move")=="defense.air")
+                if(hit_cancel_pa_unblockable_air)
                 {
-                    if(hit_cancel_pa_unblockable_air)
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
-                    }else
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
-                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
-                    }
-                }
-                if(p->getString("current_move")=="defense.high")
+                    p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
+                }else
                 {
-                    if(hit_cancel_pa_unblockable_high)
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
-                    }else
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
-                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
-                    }
-                }
-                if(p->getString("current_move")=="defense.crouch")
-                {
-                    if(hit_cancel_pa_unblockable_low)
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
-                    }else
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
-                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
-                    }
+                    p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
+                    p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
                 }
             }
+            if(p->getString("current_move")=="defense.high")
+            {
+                if(hit_cancel_pa_unblockable_high)
+                {
+                    p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
+                }else
+                {
+                    p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
+                    p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
+                }
+            }
+            if(p->getString("current_move")=="defense.crouch")
+            {
+                if(hit_cancel_pa_unblockable_low)
+                {
+                    p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_damage);
+                }else
+                {
+                    p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pa_chip_damage);
+                    p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
+                }
+            }
+        }
 
-            m->frame_actual=0;
-            m->tiempo_transcurrido=0;
-            m->ya_pego=false;
-            p->setString("current_move",hit_cancel_pa);
-            p->setString(std::string("isActive.")+hit_cancel_pa,"yes");
-            sonido->playSound(p->char_name+p->getString("current_move"));
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
+        p->setString("current_move",hit_cancel_pa);
+        p->setString(std::string("isActive.")+hit_cancel_pa,"yes");
+        sonido->playSound(p->char_name+p->getString("current_move"));
 
-            Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-            velocityInheritance(p,m,m_nuevo);
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        velocityInheritance(p,m,m_nuevo);
     }
 
     if(hit_cancel_pb!="")
     {
         Personaje*p=getPbActual();
-            if(p->getString("current_move").substr(0,7)=="on_hit.")
+        if(p->getString("current_move").substr(0,7)=="on_hit.")
+        {
+            p->combo++;
+        }
+        Movimiento* m=p->movimientos[p->getString("current_move")];
+
+        p->takeDamage(hit_cancel_pb_damage);
+
+        if(is_training)
+        {
+            if(p->getEntero("hp.current_value")<=0)
             {
-                p->combo++;
+                p->setEntero("hp.current_value",1);
             }
-            Movimiento* m=p->movimientos[p->getString("current_move")];
+            training_health_regen_frame=60;
+        }
 
-            if(p->getString("current_move").substr(0,8)!="defense.")
-            {
-                p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_damage);
-            }else
-            {
-                if(p->getString("current_move")=="defense.air")
-                {
-                    if(hit_cancel_pb_unblockable_air)
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_damage);
-                    }else
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
-                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
-                    }
-                }
-                if(p->getString("current_move")=="defense.stand")
-                {
-                    if(hit_cancel_pb_unblockable_high)
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_damage);
-                    }else
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
-                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
-                    }
-                }
-                if(p->getString("current_move")=="defense.crouch")
-                {
-                    if(hit_cancel_pb_unblockable_low)
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_damage);
-                    }else
-                    {
-                        p->setEntero("hp.current_value",p->getEntero("hp.current_value")-hit_cancel_pb_chip_damage);
-                        p->setEntero("block_stun.current_value",hit_cancel_pb_damage);
-                    }
-                }
-            }
+        m->frame_actual=0;
+        m->tiempo_transcurrido=0;
+        m->ya_pego=false;
+        p->setString("current_move",hit_cancel_pb);
+        p->setString(std::string("isActive.")+hit_cancel_pb,"yes");
+        sonido->playSound(p->char_name+p->getString("current_move"));
 
-            m->frame_actual=0;
-            m->tiempo_transcurrido=0;
-            m->ya_pego=false;
-            p->setString("current_move",hit_cancel_pb);
-            p->setString(std::string("isActive.")+hit_cancel_pb,"yes");
-            sonido->playSound(p->char_name+p->getString("current_move"));
-
-            Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-            velocityInheritance(p,m,m_nuevo);
+        Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
+        velocityInheritance(p,m,m_nuevo);
     }
 
 
@@ -1523,12 +1517,25 @@ void Fighter::render()
     if(pb[pb_actual]->combo>1)
         painter->drawText(toString(pb[pb_actual]->combo)+" hits",painter->screen_width-300,200);
 
-    if(receiver->isKeyPressed(SDLK_b))
+    if(counter_pa_visible_frame>0)
+        painter->drawText("Counter!",50,300);
+    if(counter_pb_visible_frame>0)
+        painter->drawText("Counter!",painter->screen_width-400,300);
+
+    counter_pb_visible_frame--;
+    counter_pa_visible_frame--;
+
+    if(receiver->isKeyPressed(SDLK_1))
+        distance_is_visible=!distance_is_visible;
+    if(distance_is_visible)
+        painter->drawText(toString(getPaActual()->getEntero("distance_absolute")),painter->screen_width/2-100,0);
+
+    if(receiver->isKeyPressed(SDLK_2))
         buffer_is_visible=!buffer_is_visible;
     if(buffer_is_visible)
         printBuffer();
 
-    if(receiver->isKeyPressed(SDLK_f))
+    if(receiver->isKeyPressed(SDLK_3))
         fps_is_visible=!fps_is_visible;
 
     if(fps_is_visible)

@@ -53,6 +53,13 @@ public:
     bool hitboxes_are_visible;
     bool buffer_is_visible;
     bool fps_is_visible;
+    bool distance_is_visible;
+    int counter_pa_visible_frame;
+    int counter_pb_visible_frame;
+
+    //Game mode
+    bool is_training;
+    int training_health_regen_frame;
 
     //Engines
     Sound* sonido;
@@ -67,7 +74,7 @@ public:
     queue<int>camera_effect_x;
     queue<int>camera_effect_y;
 
-    Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b);
+    Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training);
     ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);

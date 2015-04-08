@@ -2172,3 +2172,15 @@ void Personaje::flipRight()
 {
     setString("orientation","d");
 }
+
+void Personaje::takeDamage(int damage)
+{
+    setEntero("hp.current_value",getEntero("hp.current_value")-damage);
+}
+
+void Personaje::heal(int hp)
+{
+    setEntero("hp.current_value",getEntero("hp.current_value")+hp);
+    if(getEntero("hp.current_value")>getEntero("hp.max_value"))
+        setEntero("hp.current_value",getEntero("hp.max_value"));
+}

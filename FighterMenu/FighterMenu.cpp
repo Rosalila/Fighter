@@ -47,7 +47,7 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::strin
     writeLogLine("menu loaded: "+archivo);
 }
 
-void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
+void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_training)
 {
     writeLogLine("Initializing game.");
     if(inteligencia_artificial)
@@ -82,7 +82,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial)
 
     for(int current_round=0;;current_round++)
     {
-        fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,pa_victories,pb_victories);
+        fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,pa_victories,pb_victories,is_training);
 
         if(fighter->game_over_a && fighter->game_over_b)
         {
@@ -146,9 +146,11 @@ void Menu::loopMenu()
     inputb=new RosalilaInputs();
     inputa->loadFromXML(1,receiver);
     inputb->loadFromXML(2,receiver);
-    bool tecla_arriba_p1=true;
-    bool tecla_arriba_p2=true;
+    bool tecla_arriba_p1=false;
+    bool tecla_arriba_p2=false;
     //inicio
+    inputa->limpiarBuffer();
+    inputb->limpiarBuffer();
 	for (;;)
 	{
 	    dibujarMenu();
@@ -240,6 +242,52 @@ void Menu::loopMenu()
         {
             if(char_select->listoPA())
             {
+                if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
+                {
+                    MenuLista*ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                    if(ml->getAccion()=="1v1-cpu"
+                        || ml->getAccion()=="1v1-training"
+                       )
+                    {
+                        if(inputa->getBufferRosalilaInputs()[0]=="6")
+                        {
+                            sonido->playSound(std::string("Menu.move_char"));
+                            char_select->select_p2_x++;
+                            if(char_select->select_p2_x>=char_select->size_x)
+                                char_select->select_p2_x=0;
+                            tecla_arriba_p1=false;
+                        }else if(inputa->getBufferRosalilaInputs()[0]=="4")
+                        {
+                            sonido->playSound(std::string("Menu.move_char"));
+                            char_select->select_p2_x--;
+                            if(char_select->select_p2_x<0)
+                                char_select->select_p2_x=char_select->size_x-1;
+                            tecla_arriba_p1=false;
+                        }
+                        else if(inputa->getBufferRosalilaInputs()[0]=="2")
+                        {
+                            sonido->playSound(std::string("Menu.move_char"));
+                            char_select->select_p2_y++;
+                            if(char_select->select_p2_y>=char_select->size_y)
+                                char_select->select_p2_y=0;
+                            tecla_arriba_p1=false;
+                        }
+                        else if(inputa->getBufferRosalilaInputs()[0]=="8")
+                        {
+                            sonido->playSound(std::string("Menu.move_char"));
+                            char_select->select_p2_y--;
+                            if(char_select->select_p2_y<0)
+                                char_select->select_p2_y=char_select->size_y-1;
+                            tecla_arriba_p1=false;
+                        }
+                        else if(inputa->getBufferRosalilaInputs()[0]=="a")
+                        {
+                            sonido->playSound(std::string("Menu.select_char"));
+                            char_select->lockPB(0);
+                            //tecla_arriba_p1=false;
+                        }
+                    }
+                }
             }else if(inputa->getBufferRosalilaInputs()[0]=="6")
             {
                 sonido->playSound(std::string("Menu.move_char"));
@@ -275,49 +323,7 @@ void Menu::loopMenu()
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPA(0);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="b")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(1);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="c")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(2);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="d")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(3);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="e")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(4);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="f")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(5);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="g")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(6);
-                tecla_arriba_p1=false;
-            }
-            else if(inputa->getBufferRosalilaInputs()[0]=="h")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPA(7);
-                tecla_arriba_p1=false;
+                //tecla_arriba_p1=false;
             }
         }
 
@@ -371,94 +377,49 @@ void Menu::loopMenu()
             {
                 sonido->playSound(std::string("Menu.select_char"));
                 char_select->lockPB(0);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="b")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(1);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="c")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(2);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="d")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(3);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="e")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(4);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="f")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(5);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="g")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(6);
-                tecla_arriba_p2=false;
-            }
-            else if(inputb->getBufferRosalilaInputs()[0]=="h")
-            {
-                sonido->playSound(std::string("Menu.select_char"));
-                char_select->lockPB(7);
-                tecla_arriba_p2=false;
+                //tecla_arriba_p2=false;
             }
         }
-        if(receiver->isKeyPressed(SDLK_ESCAPE))
+
+        if(receiver->isKeyPressed(SDLK_ESCAPE)
+            || (inputa->getBufferRosalilaInputs()[0]=="b" && tecla_arriba_p1)
+            || (inputb->getBufferRosalilaInputs()[0]=="b" && tecla_arriba_p2)
+           )
         {
             sonido->playSound(std::string("Menu.back"));
             break;
         }
 
-        if(receiver->isKeyDown(SDL_SCANCODE_DOWN))
+        if(receiver->isKeyPressed(SDL_SCANCODE_DOWN)
+            || (inputa->getBufferRosalilaInputs()[0]=="2" && tecla_arriba_p1)
+            || (inputb->getBufferRosalilaInputs()[0]=="2" && tecla_arriba_p2)
+           )
         {
             sonido->playSound(std::string("Menu.move"));
             ((MenuContenedor*)selectables_container)->avanzar();
+            tecla_arriba_p1=false;
+            tecla_arriba_p2=false;
         }
-        else if(receiver->isKeyDown(SDL_SCANCODE_UP))
+        else if(receiver->isKeyPressed(SDL_SCANCODE_UP)
+            || (inputa->getBufferRosalilaInputs()[0]=="8" && tecla_arriba_p1)
+            || (inputb->getBufferRosalilaInputs()[0]=="8" && tecla_arriba_p2)
+                )
         {
             sonido->playSound(std::string("Menu.move"));
             ((MenuContenedor*)selectables_container)->retroceder();
+            tecla_arriba_p1=false;
+            tecla_arriba_p2=false;
         }
-        else if(receiver->isKeyDown(SDL_SCANCODE_RIGHT))
+        else if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
+                    || inputa->getBufferRosalilaInputs()[0]=="6"
+                    || inputb->getBufferRosalilaInputs()[0]=="6"
+                )
         {
             sonido->playSound(std::string("Menu.move"));
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
             {
                 MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                 ml->avanzar();
-//                    if(ml->getAccion()==0)
-//                    {
-//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-//                        //convert to char*
-//                        size_t count = 255;
-//                        c8* str_ptr= (char*)malloc( 255 );
-//                        wcstombs(str_ptr, mt->texto.c_str(), count);
-//
-//                        time=atoi(str_ptr);
-//                    }
-//                    if(ml->getAccion()==1)
-//                    {
-//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-//                        //convert to char*
-//                        size_t count = 255;
-//                        c8* str_ptr= (char*)malloc( 255 );
-//                        wcstombs(str_ptr, mt->texto.c_str(), count);
-//
-//                        rounds=atoi(str_ptr);
-//                    }
             }
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Barra")
             {
@@ -470,33 +431,16 @@ void Menu::loopMenu()
                 }
             }
         }
-        else if(receiver->isKeyDown(SDL_SCANCODE_LEFT))
+        else if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
+                    || inputa->getBufferRosalilaInputs()[0]=="4"
+                    || inputb->getBufferRosalilaInputs()[0]=="4"
+                )
         {
             sonido->playSound(std::string("Menu.move"));
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
             {
                 MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                 ml->retroceder();
-//                    if(ml->getAccion()==0)
-//                    {
-//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-//                        //convert to char*
-//                        size_t count = 255;
-//                        c8* str_ptr= (char*)malloc( 255 );
-//                        wcstombs(str_ptr, mt->texto.c_str(), count);
-//
-//                        time=atoi(str_ptr);
-//                    }
-//                    if(ml->getAccion()==1)
-//                    {
-//                        MenuTexto*mt=(MenuTexto*)ml->getElementoActual();
-//                        //convert to char*
-//                        size_t count = 255;
-//                        c8* str_ptr= (char*)malloc( 255 );
-//                        wcstombs(str_ptr, mt->texto.c_str(), count);
-//
-//                        rounds=atoi(str_ptr);
-//                    }
             }
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Barra")
             {
@@ -507,7 +451,10 @@ void Menu::loopMenu()
                     ai_level=mb->actual;
                 }
             }
-        }else if(receiver->isKeyDown(SDLK_RETURN))
+        }else if(receiver->isKeyPressed(SDLK_RETURN)
+                    || (inputa->getBufferRosalilaInputs()[0]=="a" && tecla_arriba_p1)
+                    || (inputb->getBufferRosalilaInputs()[0]=="a" && tecla_arriba_p2)
+                 )
         {
             sonido->playSound(std::string("Menu.select"));
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
@@ -515,22 +462,44 @@ void Menu::loopMenu()
                 MenuLista*ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
                 if(ml->getAccion()=="1v1")
                     if(char_select->listo())
-                        iniciarJuego(1,false);
+                        iniciarJuego(1,false,false);//iniciarJuego(1,true);
                 if(ml->getAccion()=="2v2")
                     if(char_select->listo())
-                        iniciarJuego(2,false);
+                        iniciarJuego(2,false,false);
                 if(ml->getAccion()=="3v3")
                     if(char_select->listo())
-                        iniciarJuego(3,false);
-                if(ml->getAccion()=="1v1cpu")
+                        iniciarJuego(3,false,false);
+                if(ml->getAccion()=="1v1-cpu")
                     if(char_select->listoPA())
-                        iniciarJuego(1,true);
-                if(ml->getAccion()=="2v2cpu")
+                        iniciarJuego(1,true,false);
+                if(ml->getAccion()=="2v2-cpu")
                     if(char_select->listoPA())
-                        iniciarJuego(2,true);
-                if(ml->getAccion()=="3v3cpu")
+                        iniciarJuego(2,true,false);
+                if(ml->getAccion()=="3v3-cpu")
                     if(char_select->listoPA())
-                        iniciarJuego(3,true);
+                        iniciarJuego(3,true,false);
+
+                if(ml->getAccion()=="1v1-training")
+                    if(char_select->listo())
+                        iniciarJuego(1,false,true);//iniciarJuego(1,true);
+                if(ml->getAccion()=="2v2-training")
+                    if(char_select->listo())
+                        iniciarJuego(2,false,true);
+                if(ml->getAccion()=="3v3-training")
+                    if(char_select->listo())
+                        iniciarJuego(3,false,true);
+                if(ml->getAccion()=="1v1-cpu-training")
+                    if(char_select->listoPA())
+                        iniciarJuego(1,true,true);
+                if(ml->getAccion()=="2v2-cpu-training")
+                    if(char_select->listoPA())
+                        iniciarJuego(2,true,true);
+                if(ml->getAccion()=="3v3-cpu-training")
+                    if(char_select->listoPA())
+                        iniciarJuego(3,true,true);
+
+                tecla_arriba_p1=false;
+                tecla_arriba_p2=false;
             }
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
             {
@@ -553,61 +522,8 @@ void Menu::loopMenu()
                 {
                     Menu *temp=new Menu(painter,receiver,sonido,assets_directory+mb->load_menu);
                     temp->loopMenu();
-                }
-                if(mb->getAccion()=="training")
-                {
-                    if(char_select->listo())
-                    {
-                        printVsScreen(char_select->getLockedPreviewsPA(),char_select->getLockedPreviewsPB());
-
-                        Personaje* p1a=getPersonajeA(0,false);
-                        Personaje* p1b=getPersonajeB(0,false);
-                        p1a->personaje_contrario=p1b;
-                        p1b->personaje_contrario=p1a;
-
-                        p1a->setEntero("hp.periodic_modifier",1);
-                        p1a->setEntero("hp.period",1);
-                        p1b->setEntero("hp.periodic_modifier",1);
-                        p1b->setEntero("hp.period",1);
-
-                        Personaje* p2a=getPersonajeA(1,false);
-                        Personaje* p2b=getPersonajeB(1,false);
-                        p2a->personaje_contrario=p1b;
-                        p2b->personaje_contrario=p1a;
-
-                        p2a->setEntero("hp.periodic_modifier",1);
-                        p2a->setEntero("hp.period",1);
-                        p2b->setEntero("hp.periodic_modifier",1);
-                        p2b->setEntero("hp.period",1);
-
-                        Personaje* p3a=getPersonajeA(2,false);
-                        Personaje* p3b=getPersonajeB(2,false);
-                        p3a->personaje_contrario=p1b;
-                        p3b->personaje_contrario=p1a;
-
-                        p3a->setEntero("hp.periodic_modifier",1);
-                        p3a->setEntero("hp.period",1);
-                        p3b->setEntero("hp.periodic_modifier",1);
-                        p3b->setEntero("hp.period",1);
-
-                        pa.push_back(p1a);
-                        pa.push_back(p2a);
-                        pa.push_back(p3a);
-
-                        pb.push_back(p1b);
-                        pb.push_back(p2b);
-                        pb.push_back(p3b);
-
-                        stage=new Stage(painter,sonido);
-                        stage->loadFromXML(getStage());
-
-                        sonido->stopMusic();
-                        Fighter*fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,0,0);
-                        delete fighter;
-                        sonido->playMusic("menu/audio/music.ogg");
-
-                        break;
-                    }
+                    tecla_arriba_p1=false;
+                    tecla_arriba_p2=false;
                 }
                 if(mb->getAccion()=="save config")//save config
                 {
@@ -630,97 +546,9 @@ void Menu::loopMenu()
                     string miscconfigxml_path=assets_directory+"/misc/config.xml";
                     doc->SaveFile(miscconfigxml_path.c_str());
                 }
-//                    if(mb->getAccion()>=10 && mb->getAccion()<=29)
-//                    {
-//                        int player;
-//                        std::string mapeo="";
-//                        int accion=mb->getAccion();
-//                        if(accion>=10 && accion<=19)
-//                            player=1;
-//                        else
-//                            player=2;
-//                        RosalilaInputs* temp=new RosalilaInputs();
-//                        RosalilaInputs* temp2=new RosalilaInputs();
-//                        if(player==1)
-//                        {
-//                            temp->loadFromXML(1,receiver);
-//                            temp2->loadFromXML(2,receiver);
-//                        }else
-//                        {
-//                            temp->loadFromXML(2,receiver);
-//                            temp2->loadFromXML(1,receiver);
-//                        }
-//                        if(accion==10||accion==20)mapeo="8";
-//                        if(accion==11||accion==21)mapeo="2";
-//                        if(accion==12||accion==22)mapeo="4";
-//                        if(accion==13||accion==23)mapeo="6";
-//                        if(accion==14||accion==24)mapeo="a";
-//                        if(accion==15||accion==25)mapeo="b";
-//                        if(accion==16||accion==26)mapeo="c";
-//                        if(accion==17||accion==27)mapeo="d";
-//                        if(accion==18||accion==28)mapeo="e";
-//                        if(accion==19||accion==29)mapeo="f";
-//
-//                        mb->input_config="";
-//                        std::string str_input=getRosalilaInputsPressed();
-//                        //key
-//                        if((char)str_input[0]!='j')
-//                        {
-//                            int pos=-1,posc=-1;
-//                            for(int j=0;j<(int)temp->botones.size();j++)
-//                                if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
-//                                    pos=j;
-//
-//                            for(int j=0;j<(int)temp->cruz.size();j++)
-//                                if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
-//                                    posc=j;
-//
-//                            Boton b(receiver,toKeyCode(str_input),mapeo);
-//                            if(pos!=-1)
-//                                temp->botones[pos]=b;
-//                            else if (posc!=-1)
-//                                temp->cruz[posc]=b;
-//                            else
-//                                temp->botones.push_back(b);
-//                        }else//joy
-//                        {
-//                            int pos=-1,posc=-1;
-//                            for(int j=0;j<(int)temp->botones.size();j++)
-//                                if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
-//                                    pos=j;
-//
-//                            for(int j=0;j<(int)temp->cruz.size();j++)
-//                                if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
-//                                    posc=j;
-//
-//                            int int_input=((int)(str_input[3]))-48;
-//                            if((char)str_input[3]=='u')
-//                                int_input=-8;
-//                            if((char)str_input[3]=='d')
-//                                int_input=-2;
-//                            if((char)str_input[3]=='l')
-//                                int_input=-4;
-//                            if((char)str_input[3]=='r')
-//                                int_input=-6;
-//                            Boton b(receiver,int_input,((int)str_input[1])-48,mapeo);
-//                            if(pos!=-1)
-//                            {
-//                                temp->botones[pos]=b;
-//                            }else if(posc!=-1)
-//                            {
-//                                temp->cruz[posc]=b;
-//                            }else
-//                            {
-//                                temp->botones.push_back(b);
-//                            }
-//                        }
-//
-//                        escribirRosalilaInputssXML(temp,temp2);
-//                        //mb->input_config=b.keyToString();
-//                        llenarInputsBotones();
-//                    }
             }
         }
+        editInputCheck();
 	}
 }
 
@@ -1116,6 +944,10 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                 if(e->Attribute("path_right_selected")!=NULL)
                     path_right_selected=painter->getTexture(assets_directory+"menu/"+std::string(e->Attribute("path_right_selected")));
 
+                string action="1v1";
+                if(e->Attribute("action"))
+                    action=e->Attribute("action");
+
                 elementos_contenedor.push_back((Elemento*)new MenuLista(painter,x,y,
                                                                         arrow_left_x,arrow_left_y,
                                                                         path_left,
@@ -1126,7 +958,7 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
                                                                         arrow_right_x_selected,arrow_right_y_selected,
                                                                         path_right_selected,
                                                                         elem_lista,
-                                                                        "1v1"
+                                                                        action
                                                                         )
                                                );
 
@@ -1247,6 +1079,7 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     writeLogLine("Initializing player's 1 character #"+toString(num)+".");
     //get string
     std::string char_name=char_select->getLockedNamesPB()[num];
+    char_name+="-Player2";
     int num_paleta=char_select->getLockedPalettesPB()[num];
 
     if(ia)
@@ -1636,4 +1469,151 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             false);
     }
     painter->updateScreen();
+}
+
+void Menu::joyPressedEditInput(int button,int joystick_number,int player)
+{
+    if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
+    {
+        MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+        if(player==1)
+        {
+            if(mb->getAccion()=="Player1.KeyConfig:a")
+            {
+                inputa->editInput(player,joystick_number,toString(button),"a");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player1.KeyConfig:b")
+            {
+                inputa->editInput(player,joystick_number,toString(button),"b");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player1.KeyConfig:c")
+            {
+                inputa->editInput(player,joystick_number,toString(button),"c");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player1.KeyConfig:d")
+            {
+                inputa->editInput(player,joystick_number,toString(button),"d");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player1.KeyConfig:e")
+            {
+                inputa->editInput(player,joystick_number,toString(button),"e");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player1.KeyConfig:f")
+            {
+                inputa->editInput(player,joystick_number,toString(button),"f");
+                reloadInputs();
+            }
+        }
+        if(player==2)
+        {
+            if(mb->getAccion()=="Player2.KeyConfig:a")
+            {
+                inputb->editInput(player,joystick_number,toString(button),"a");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player2.KeyConfig:b")
+            {
+                inputb->editInput(player,joystick_number,toString(button),"b");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player2.KeyConfig:c")
+            {
+                inputb->editInput(player,joystick_number,toString(button),"c");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player2.KeyConfig:d")
+            {
+                inputb->editInput(player,joystick_number,toString(button),"d");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player2.KeyConfig:e")
+            {
+                inputb->editInput(player,joystick_number,toString(button),"e");
+                reloadInputs();
+            }
+            if(mb->getAccion()=="Player2.KeyConfig:f")
+            {
+                inputb->editInput(player,joystick_number,toString(button),"f");
+                reloadInputs();
+            }
+        }
+    }
+}
+
+void Menu::editInputCheck()
+{
+    if(receiver->isJoyPressed(0,0))
+    {
+        joyPressedEditInput(0,0,1);
+    }
+    if(receiver->isJoyPressed(1,0))
+    {
+        joyPressedEditInput(1,0,1);
+    }
+    if(receiver->isJoyPressed(2,0))
+    {
+        joyPressedEditInput(2,0,1);
+    }
+    if(receiver->isJoyPressed(3,0))
+    {
+        joyPressedEditInput(3,0,1);
+    }
+    if(receiver->isJoyPressed(4,0))
+    {
+        joyPressedEditInput(4,0,1);
+    }
+    if(receiver->isJoyPressed(5,0))
+    {
+        joyPressedEditInput(5,0,1);
+    }
+    if(receiver->isJoyPressed(6,0))
+    {
+        joyPressedEditInput(6,0,1);
+    }
+
+
+    if(receiver->isJoyPressed(0,1))
+    {
+        joyPressedEditInput(0,1,2);
+    }
+    if(receiver->isJoyPressed(1,1))
+    {
+        joyPressedEditInput(1,1,2);
+    }
+    if(receiver->isJoyPressed(2,1))
+    {
+        joyPressedEditInput(2,1,2);
+    }
+    if(receiver->isJoyPressed(3,1))
+    {
+        joyPressedEditInput(3,1,2);
+    }
+    if(receiver->isJoyPressed(4,1))
+    {
+        joyPressedEditInput(4,1,2);
+    }
+    if(receiver->isJoyPressed(5,1))
+    {
+        joyPressedEditInput(5,1,2);
+    }
+    if(receiver->isJoyPressed(6,1))
+    {
+        joyPressedEditInput(6,1,2);
+    }
+}
+
+void Menu::reloadInputs()
+{
+    delete inputa;
+    inputa=new RosalilaInputs();
+    inputa->loadFromXML(1,receiver);
+
+    delete inputb;
+    inputb=new RosalilaInputs();
+    inputb->loadFromXML(2,receiver);
 }

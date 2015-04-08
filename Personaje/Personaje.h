@@ -138,6 +138,8 @@ class Personaje
     void aplicarEfectosProyectiles();
     void flipLeft();
     void flipRight();
+    void takeDamage(int damage);
+    void heal(int hp);
 };
 
 #endif

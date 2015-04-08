@@ -31,7 +31,7 @@ private:
     //config vars
     int ai_level,time,rounds;
 
-    void iniciarJuego(int num_personajes,bool inteligencia_artificial);
+    void iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_training);
 public:
     std::string music_path;
     RosalilaInputs *inputa,*inputb;
@@ -57,6 +57,9 @@ public:
     void llenarInputsBotones();
     int toKeyCode(std::string str);
     void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
+    void editInputCheck();
+    void joyPressedEditInput(int button,int joystick_number,int player);
+    void reloadInputs();
 };
 
 #endif
