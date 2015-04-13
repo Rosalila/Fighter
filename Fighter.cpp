@@ -325,17 +325,13 @@ void Fighter::cancel(Personaje *p)
         input=getPbActual()->input;
 
     Movimiento* m=p->movimientos[p->getString("current_move")];
-    m->frame_actual=0;
-    m->tiempo_transcurrido=0;
-    m->ya_pego=false;
+    m->resetMove();
     p->setString(std::string("isActive.")+p->getString("current_move"),"no");
     if(p->getEntero("position_y")>0)
     {
         p->setString("current_move","idle.jump");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->frame_actual=0;
-        m_nuevo->tiempo_transcurrido=0;
-        m_nuevo->ya_pego=true;
+        m_nuevo->resetMove();
         velocityInheritance(p,m,m_nuevo);
     }
     else if(m->crouched
@@ -353,8 +349,7 @@ void Fighter::cancel(Personaje *p)
     {
         p->setString("current_move","idle.land_cancel");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->frame_actual=0;
-        m_nuevo->tiempo_transcurrido=0;
+        m_nuevo->resetMove();
         velocityInheritance(p,m,m_nuevo);
 
         if(p->getEntero("position_x")>p->personaje_contrario->getEntero("position_x"))
@@ -366,8 +361,7 @@ void Fighter::cancel(Personaje *p)
     {
         p->setString("current_move","idle.stand");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->frame_actual=0;
-        m_nuevo->tiempo_transcurrido=0;
+        m_nuevo->resetMove();
         velocityInheritance(p,m,m_nuevo);
     }
 
@@ -415,8 +409,10 @@ void Fighter::colisionCheck(Personaje*p)
     {
         p->setString("colision.blue_to_red","yes");
         Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
-        if(!m->ya_pego || m->multihit)
+        if(!m->ya_pego
+           || (m->multihit && m->frame_actual > m->last_mulithit_frame_hit+1/*Why +1 frame? Who knows...*/))
         {
+            m->last_mulithit_frame_hit=m->frame_actual;
             p->setString("hit","yes");
             painter->explode(px_colision,py_colision+painter->screen_height);
             m->ya_pego=true;
@@ -485,9 +481,7 @@ void Fighter::logicaPersonaje(Personaje* p)
 
         //aplicar movimiento entrance
         Movimiento* m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         p->setString("current_move","entrance");
         p->setString("isActive.entrance","yes");
         sonido->playSound(p->char_name+"entrance");
@@ -698,9 +692,7 @@ void Fighter::logica()
 
         Personaje* p=getPaActual();
         Movimiento* m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         p->setString("current_move",move_cancel_pa);
         sonido->playSound(p->char_name+move_cancel_pa);
         //setear isActive.
@@ -725,9 +717,7 @@ void Fighter::logica()
     {
         Personaje* p=getPbActual();
         Movimiento* m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         p->setString("current_move",move_cancel_pb);
         sonido->playSound(p->char_name+move_cancel_pb);
         //setear isActive.
@@ -799,9 +789,7 @@ void Fighter::logica()
             }
         }
 
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         p->setString("current_move",hit_cancel_pa);
         p->setString(std::string("isActive.")+hit_cancel_pa,"yes");
         sonido->playSound(p->char_name+p->getString("current_move"));
@@ -830,9 +818,7 @@ void Fighter::logica()
             training_health_regen_frame=60;
         }
 
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         p->setString("current_move",hit_cancel_pb);
         p->setString(std::string("isActive.")+hit_cancel_pb,"yes");
         sonido->playSound(p->char_name+p->getString("current_move"));
@@ -868,7 +854,7 @@ void Fighter::aplicarModificadores(Personaje *p)
     if(m->tiempo_transcurrido==0)
         p->aplicarModificadores(f->modificadores,p->getString("orientation")=="i");
     //avanzar frame
-    if(m->tiempo_transcurrido==f->duracion)
+    if(m->tiempo_transcurrido==f->duracion-1)
     {
         m->frame_actual++;
         m->tiempo_transcurrido=0;
@@ -904,16 +890,14 @@ void Fighter::aplicarModificadores(Personaje *p)
     {
         p->setString("current_move","idle.stand");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->frame_actual=0;
-        m_nuevo->tiempo_transcurrido=0;
+        m_nuevo->resetMove();
         velocityInheritance(p,m,m_nuevo);
     }
     if(p->getEntero("blockstun.current_value")==0 && p->getString("current_move")=="blockstun.crouch")
     {
         p->setString("current_move","idle.crouch");
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
-        m_nuevo->frame_actual=1;
-        m_nuevo->tiempo_transcurrido=0;
+        m_nuevo->resetMove();
         velocityInheritance(p,m,m_nuevo);
     }
     //verificar cancel de isActive.
@@ -1376,21 +1360,15 @@ void Fighter::render()
         p->combo=0;
         p->personaje_contrario->combo=0;
         Movimiento* m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
 
         p=getPbActual();
         m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         //Agregar nuevo
         getPaActual()->setString("current_move","ko");
         m=getPaActual()->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         getPaActual()->setEntero("velocity_x",0);
         getPaActual()->setEntero("velocity_y",0);
         getPaActual()->setEntero("acceleration_x",0);
@@ -1411,21 +1389,15 @@ void Fighter::render()
         p->combo=0;
         p->personaje_contrario->combo=0;
         Movimiento* m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
 
         p=getPbActual();
         m=p->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         //Agregar nuevo
         getPbActual()->setString("current_move","ko");
         m=getPbActual()->movimientos[p->getString("current_move")];
-        m->frame_actual=0;
-        m->tiempo_transcurrido=0;
-        m->ya_pego=false;
+        m->resetMove();
         getPbActual()->setEntero("velocity_x",0);
         getPbActual()->setEntero("velocity_y",0);
         getPbActual()->setEntero("acceleration_x",0);

@@ -110,6 +110,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
         {
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/draw.svg");
             temp->loopMenu();
+            reloadInputs();
             delete temp;
             break;
         }
@@ -117,6 +118,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
         {
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pa_wins.svg");
             temp->loopMenu();
+            reloadInputs();
             delete temp;
             break;
         }
@@ -124,6 +126,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
         {
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pb_wins.svg");
             temp->loopMenu();
+            reloadInputs();
             delete temp;
             break;
         }
@@ -178,6 +181,63 @@ void Menu::loopMenu()
             {
                 e->y+=e->displacement_y;
                 e->current_displacement_y++;
+            }
+
+            if(e->getTipo()=="Contenedor")
+            {
+                MenuContenedor* container = (MenuContenedor*)e;
+                for(int j=0;j<(int)container->elementos.size();j++)
+                {
+                    if(container->elementos[j]->getTipo()=="Boton")
+                    {
+                        MenuBoton* button = (MenuBoton*)container->elementos[j];
+                        string action = button->getAccion();
+                        if(action.size()>=18
+                           &&
+                            (action.substr(0,18)=="Player1.KeyConfig:"
+                            || action.substr(0,18)=="Player2.KeyConfig:")
+                           )
+                        {
+                            RosalilaInputs* input = inputa;
+                            int joystick_num = 0;
+                            if(action.substr(0,18)=="Player2.KeyConfig:")
+                            {
+                                input = inputb;
+                                joystick_num = 1;
+                            }
+                            if(action[action.size()-1]=='a')
+                            {
+                                button->texto = input->getJoystickInput("a",joystick_num);
+                                button->texto_sel = input->getJoystickInput("a",joystick_num);
+                            }
+                            if(action[action.size()-1]=='b')
+                            {
+                                button->texto = input->getJoystickInput("b",joystick_num);
+                                button->texto_sel = input->getJoystickInput("b",joystick_num);
+                            }
+                            if(action[action.size()-1]=='c')
+                            {
+                                button->texto = input->getJoystickInput("c",joystick_num);
+                                button->texto_sel = input->getJoystickInput("c",joystick_num);
+                            }
+                            if(action[action.size()-1]=='d')
+                            {
+                                button->texto = input->getJoystickInput("d",joystick_num);
+                                button->texto_sel = input->getJoystickInput("d",joystick_num);
+                            }
+                            if(action[action.size()-1]=='e')
+                            {
+                                button->texto = input->getJoystickInput("e",joystick_num);
+                                button->texto_sel = input->getJoystickInput("e",joystick_num);
+                            }
+                            if(action[action.size()-1]=='f')
+                            {
+                                button->texto = input->getJoystickInput("f",joystick_num);
+                                button->texto_sel = input->getJoystickInput("f",joystick_num);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -386,8 +446,24 @@ void Menu::loopMenu()
             || (inputb->getBufferRosalilaInputs()[0]=="b" && tecla_arriba_p2)
            )
         {
-            sonido->playSound(std::string("Menu.back"));
-            break;
+            bool is_input_config_menu=false;
+            if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
+            {
+                MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                if(mb->getAccion().size()>18
+                   || mb->getAccion().substr(0,18)=="Player1.KeyConfig:"
+                   || mb->getAccion().substr(0,18)=="Player2.KeyConfig:"
+                   )
+                {
+                    is_input_config_menu=true;
+                }
+            }
+
+            if(!is_input_config_menu)
+            {
+                sonido->playSound(std::string("Menu.back"));
+                break;
+            }
         }
 
         if(receiver->isKeyPressed(SDL_SCANCODE_DOWN)
@@ -524,6 +600,7 @@ void Menu::loopMenu()
                     temp->loopMenu();
                     tecla_arriba_p1=false;
                     tecla_arriba_p2=false;
+                    reloadInputs();
                 }
                 if(mb->getAccion()=="save config")//save config
                 {
@@ -659,11 +736,11 @@ void Menu::cargarDesdeXml(std::string archivo,vector<std::string> chars,vector<s
             int height=atoi(e->Attribute("height"));
             std::string path=e->Attribute("xlink:href");
 
-            int text_x=x;
+            int text_x=0;
             if(e->Attribute("text_x")!=NULL)
                 text_x=atoi(e->Attribute("text_x"));
 
-            int text_y=y;
+            int text_y=0;
             if(e->Attribute("text_y")!=NULL)
                 text_x=atoi(e->Attribute("text_y"));
 

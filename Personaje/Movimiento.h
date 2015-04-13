@@ -37,6 +37,7 @@ class Movimiento
     Frame* getFrameActual();
     bool ya_pego;
     bool multihit;
+    int last_mulithit_frame_hit;
     int stop_time_at;
     int resume_time_at;
     string cancel_on_hit;
@@ -46,6 +47,7 @@ class Movimiento
 
     void agregarFrame(int duracion);
     void agregarCondicion(std::vector<Condicion*> condicion,int frame);
+    void resetMove();
     //void agregarCondicion(int posicion,Condicion condicion,int frame);
 };
 

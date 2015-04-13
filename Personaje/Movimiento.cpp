@@ -10,6 +10,7 @@ Movimiento::Movimiento(std::string nombre,int damage, int blockstun,int chip_dam
     this->chip_damage=chip_damage;
     this->ya_pego=false;
     this->multihit=multihit;
+    last_mulithit_frame_hit=-1;
     this->unblockable_air=unblockable_air;
     this->unblockable_high=unblockable_high;
     this->unblockable_low=unblockable_low;
@@ -62,4 +63,12 @@ void Movimiento::agregarFrame(int duracion)
 void Movimiento::agregarCondicion(std::vector<Condicion*> condicion,int frame)
 {
     frames[frame]->condiciones.push_back(condicion);
+}
+
+void Movimiento::resetMove()
+{
+    frame_actual=0;
+    tiempo_transcurrido=0;
+    ya_pego=false;
+    last_mulithit_frame_hit=-1;
 }
