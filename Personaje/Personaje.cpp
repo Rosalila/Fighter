@@ -1552,7 +1552,7 @@ void Personaje::loadSfx()
 
         char*file=new char[255];
         strcpy(file,"chars/");
-        sonido->addSound(char_name+move,std::string("chars/")+char_name+std::string("/sfx/")+std::string(elemento_sonido->Attribute("file")));
+        sonido->addSound(char_name+move,assets_directory+std::string("chars/")+char_name+std::string("/sfx/")+std::string(elemento_sonido->Attribute("file")));
     }
 
 }

@@ -73,6 +73,7 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     pa_vivos=(int)pa.size();
     pb_vivos=(int)pb.size();
     this->stage=stage;
+
     //Juego
     getPaActual()->setString("current_move","intro");
     getPbActual()->setString("current_move","intro");
@@ -107,6 +108,20 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
     counter_pa_visible_frame=0;
     counter_pb_visible_frame=0;
     training_health_regen_frame=0;
+
+    fps_is_visible = false;
+    distance_is_visible = false;
+    buffer_is_visible = false;
+    hitboxes_are_visible = false;
+
+
+    if(is_training)
+    {
+        fps_is_visible = true;
+        distance_is_visible = true;
+        buffer_is_visible = true;
+        hitboxes_are_visible = true;
+    }
 
     loopJuego();
 }
@@ -1126,13 +1141,11 @@ void Fighter::loopJuego()
     getPbActual()->comparacion_hp=getPbActual()->getEntero("hp.current_value");
     getPbActual()->comparacion_hp_contrario=getPbActual()->getEntero("hp.current_value");
 
-    //sonido->playSound("Stage.music",true);
-    //u32 anterior=painter->device->getTimer()->getTime();
+    sonido->playSound(getPaActual()->char_name+"intro");
+    sonido->playSound(getPbActual()->char_name+"intro");
     for (;;)
     {
-        //cout<<getPaActual()->input->getBufferRosalilaInputss()[0]<<"\t";
-        //cout<<getPbActual()->input->getBufferRosalilaInputss()[0]<<endl;
-        //Salir con cualquier boton si ya termino la pelea
+        //Exit game when game over and any button is pressed
         if(game_over_a || game_over_b)
         {
             std::string last_input=getPaActual()->input->getBufferRosalilaInputs()[0];
@@ -1153,7 +1166,12 @@ void Fighter::loopJuego()
                             && getPbActual()->getMovimientoActual()->frame_actual==(int)getPbActual()->getMovimientoActual()->frames.size()-1)
                   )
                )
-                break;
+           {
+               //Reset ko and victory
+               getPaActual()->getMovimientoActual()->resetMove();
+               getPbActual()->getMovimientoActual()->resetMove();
+               break;
+           }
 
             last_input=getPbActual()->input->getBufferRosalilaInputs()[0];
             if(last_input!="1"
@@ -1173,32 +1191,22 @@ void Fighter::loopJuego()
                             && getPbActual()->getMovimientoActual()->frame_actual==(int)getPbActual()->getMovimientoActual()->frames.size()-1)
                   )
                )
-                break;
+           {
+               //Reset ko and victory
+               getPaActual()->getMovimientoActual()->resetMove();
+               getPbActual()->getMovimientoActual()->resetMove();
+               break;
+           }
         }
 
-        if(receiver->isKeyPressed(SDLK_ESCAPE))///!!!
+        if(receiver->isKeyPressed(SDLK_ESCAPE))
         {
             pause_menu->loopMenu();
             if(pause_menu->getExitSignal())
                 break;
         }
-
-        //anterior=painter->device->getTimer()->getTime();
-
-        //logica
         logica();
-
-        //render
-
-
-//        //Caption test inputs
-//        RosalilaInputs*input=getPaActual()->input;
-//        std::string caption = input->getBufferRosalilaInputss()[0]+"-"+input->getBufferRosalilaInputss()[1]+"-"+input->getBufferRosalilaInputss()[2]+"-"+input->getBufferRosalilaInputss()[3];
-//        SDL_WM_SetCaption( caption.c_str(), NULL );
-
-
         render();
-        //receiver->startEventProcess();
     }
 }
 
@@ -1259,6 +1267,10 @@ void Fighter::printHitboxes()
 
 void Fighter::printBuffer()
 {
+    int x_printable_buffer = 100;
+    int y_printable_buffer = 100;
+    int x_real_buffer = 100;
+    int y_real_buffer = 150;
     for(int i=0;i<(int)getPaActual()->input->getBufferRosalilaInputs().size();i++)
     {
         string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
@@ -1267,7 +1279,7 @@ void Fighter::printBuffer()
             painter->draw2DImage
             (   input_buffer_images[input_iterator[j]],
                 50,50,
-                50*(20-i),50*j,
+                x_real_buffer+50*(20-i),y_real_buffer+50*j,
                 1.0,
                 0.0,
                 false,
@@ -1286,7 +1298,7 @@ void Fighter::printBuffer()
             painter->draw2DImage
             (   input_buffer_images[input_iterator[j]],
                 50,50,
-                50*(20-i),50*j+100,
+                x_printable_buffer+50*(20-i),y_printable_buffer+50*j,
                 1.0,
                 0.0,
                 false,
@@ -1314,7 +1326,7 @@ void Fighter::render()
     getPbActual()->dibujarAnimacionesFront();
 
     //Hit Boxes
-    if(receiver->isKeyPressed(SDLK_h))
+    if(receiver->isKeyPressed(SDLK_4))
         hitboxes_are_visible=!hitboxes_are_visible;
 
     if(hitboxes_are_visible)
@@ -1375,6 +1387,8 @@ void Fighter::render()
         getPaActual()->setEntero("acceleration_x",0);
         getPaActual()->setString("isActive.ko","yes");
 
+        sonido->playSound(getPaActual()->char_name+"ko");
+
         if(!game_over_b)
         {
             getPbActual()->setString("current_move","victory");
@@ -1404,6 +1418,8 @@ void Fighter::render()
         getPbActual()->setEntero("acceleration_x",0);
         getPbActual()->setString("isActive.ko","yes");
 
+        sonido->playSound(getPbActual()->char_name+"ko");
+
         if(!game_over_a)
         {
             getPaActual()->setString("current_move","victory");
@@ -1424,6 +1440,8 @@ void Fighter::render()
             }
             if(pos_imagen_ko>=(int)ko.size())
                 pos_imagen_ko=0;
+                //pos_imagen_ko=ko.size()-1;
+
             painter->draw2DImage
             (   texture_gameover,
                 texture_gameover->getWidth(),texture_gameover->getHeight(),

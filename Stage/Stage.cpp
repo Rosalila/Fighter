@@ -86,11 +86,7 @@ void Stage::loadFromXML(std::string path)
     TiXmlNode *stage_file=doc->FirstChild("StageFile");
 
     //Load settings
-    char *music=new char[255];
-    strcpy(music,"stages/");
-    strcat(music,path.c_str());
-    strcat(music,"/music.ogg");
-    music_path=(std::string)music;
+    music_path=assets_directory+"stages/"+path+"/music.ogg";
 
     TiXmlNode *nodo_ss=stage_file->FirstChild("StageSize");
     this->size=atoi(nodo_ss->ToElement()->Attribute("x"));

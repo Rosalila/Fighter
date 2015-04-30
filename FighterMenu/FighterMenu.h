@@ -10,6 +10,7 @@
 #include "../Rosalila/RosalilaMenus/MenuGallery.h"
 #include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../Fighter.h"
+#include "GameplayEditor.h"
 
 class Menu
 {
@@ -30,11 +31,13 @@ private:
 
     //config vars
     int ai_level,time,rounds;
+    GameplayEditor gameplay_editor;
 
     void iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_training);
 public:
     std::string music_path;
-    RosalilaInputs *inputa,*inputb;
+    RosalilaInputs *input_player1,*input_player2;
+    bool keyup_player1,keyup_player2;
     std::vector<Personaje*>pa;
     std::vector<Personaje*>pb;
     Stage* stage;
@@ -60,6 +63,11 @@ public:
     void editInputCheck();
     void joyPressedEditInput(int button,int joystick_number,int player);
     void reloadInputs();
+    void applyGraphicEffects();
+    void updateKeyUpCheck();
+    void renderGallery();
+    void characterSelectControl();
+    void gameplayEdit(string character, string variable, int value, bool relative);
 };
 
 #endif

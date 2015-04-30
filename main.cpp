@@ -1,13 +1,17 @@
 #include "Rosalila/system.h"
 
 #include <pthread.h>
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
+#include <string>
+#include <iostream>
+using namespace std;
 
 //SDL
 #include "SDL2/SDL.h"
+#include "Fighter.h"
+#include "Rosalila/RosalilaUtility/RosalilaUtility.h"
 
 #ifdef LINUX
 #include <SDL2/SDL_image.h>
@@ -27,41 +31,30 @@
 #include <SDL2_mixer/SDL_mixer.h>
 #endif
 
-#include <string>
-
-//#include "RosalilaInputs/RosalilaInputs.h"
-#include "Fighter.h"
-#include "Rosalila/RosalilaUtility/RosalilaUtility.h"
-
-#include <iostream>
-using namespace std;
-
 int main(int argc, char *argv[])
 {
-  glutInit (&argc, argv);
-  glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
-
+    //Clean the previous log
     clearLog();
-    //Creadas abierto
-    Receiver* receiver=new Receiver();
-    RosalilaInputs*inputa=new RosalilaInputs();
-    RosalilaInputs*inputb=new RosalilaInputs();
 
-    inputa->loadFromXML(1,receiver);
-    inputb->loadFromXML(2,receiver);
+    //OpenGL initialization
+    glutInit (&argc, argv);
+    glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
 
-    RosalilaGraphics*painter=new RosalilaGraphics();
+    //Input receiver initialization
+    Receiver* receiver = new Receiver();
+
+    //Graphics initialization
+    RosalilaGraphics*painter = new RosalilaGraphics();
     painter->video(painter);
 
-//painter->update.start();|
-//painter->fps.start();
-
-
+    //Sound initialization
     Sound*sonido = new Sound();
+
+    //Menu initialization
     string menu_path=assets_directory+"menu/main_menu.svg";
     Menu* menu=new Menu(painter,receiver,sonido,menu_path.c_str());
     sonido->playMusic(menu->music_path);
-
     menu->loopMenu();
+
     return 0;
 }

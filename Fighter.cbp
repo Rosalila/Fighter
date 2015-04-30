@@ -36,6 +36,8 @@
 		<Unit filename="Fighter.h" />
 		<Unit filename="FighterMenu/FighterMenu.cpp" />
 		<Unit filename="FighterMenu/FighterMenu.h" />
+		<Unit filename="FighterMenu/GameplayEditor.cpp" />
+		<Unit filename="FighterMenu/GameplayEditor.h" />
 		<Unit filename="Personaje/Animacion.cpp" />
 		<Unit filename="Personaje/Animacion.h" />
 		<Unit filename="Personaje/Barra.cpp" />
