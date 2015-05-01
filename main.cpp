@@ -1,6 +1,5 @@
 #include "Rosalila/system.h"
 
-#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sstream>
@@ -37,8 +36,10 @@ int main(int argc, char *argv[])
     clearLog();
 
     //OpenGL initialization
+/* Died as glut did
     glutInit (&argc, argv);
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_DEPTH | GLUT_RGB);
+*/
 
     //Input receiver initialization
     Receiver* receiver = new Receiver();
