@@ -176,6 +176,180 @@ void GameplayEditor::setSpeedForward(int value, bool relative)
     doc.SaveFile(xml_path.c_str());
 }
 
+string GameplayEditor::getSpeedOverhead()
+{
+    string character="Mole";
+    string xml_path=assets_directory+"chars/"+character+"/main.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
+    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
+            move_node!=NULL;
+            move_node=move_node->NextSibling("Move"))
+    {
+        if(strcmp("overhead",move_node->ToElement()->Attribute("name"))==0)
+        {
+            return move_node->ToElement()->Attribute("frame_duration");
+        }
+    }
+    return "Error";
+}
+
+void GameplayEditor::setSpeedOverhead(int value, bool relative)
+{
+    string character="Mole";
+    string xml_path=assets_directory+"chars/"+character+"/main.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
+    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
+            move_node!=NULL;
+            move_node=move_node->NextSibling("Move"))
+    {
+        if(strcmp("overhead",move_node->ToElement()->Attribute("name"))==0)
+        {
+            for(TiXmlAttribute* move_attributes = move_node->ToElement()->FirstAttribute();
+                move_attributes!=NULL;
+                move_attributes=move_attributes->Next()
+                )
+            {
+                if(strcmp(move_attributes->Name(),"frame_duration")==0)
+                {
+                    string new_value = toString(value);
+                    if(relative)
+                    {
+                        new_value = toString(atoi(move_node->ToElement()->Attribute("frame_duration"))+value);
+                    }
+                    move_attributes->SetValue(new_value.c_str());
+                }
+            }
+        }
+    }
+    doc.SaveFile(xml_path.c_str());
+}
+
+string GameplayEditor::getSpeedSlash()
+{
+    string character="Mole";
+    string xml_path=assets_directory+"chars/"+character+"/main.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
+    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
+            move_node!=NULL;
+            move_node=move_node->NextSibling("Move"))
+    {
+        if(strcmp("slash",move_node->ToElement()->Attribute("name"))==0)
+        {
+            return move_node->ToElement()->Attribute("frame_duration");
+        }
+    }
+    return "Error";
+}
+
+void GameplayEditor::setSpeedSlash(int value, bool relative)
+{
+    string character="Mole";
+    string xml_path=assets_directory+"chars/"+character+"/main.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
+    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
+            move_node!=NULL;
+            move_node=move_node->NextSibling("Move"))
+    {
+        if(strcmp("slash",move_node->ToElement()->Attribute("name"))==0)
+        {
+            for(TiXmlAttribute* move_attributes = move_node->ToElement()->FirstAttribute();
+                move_attributes!=NULL;
+                move_attributes=move_attributes->Next()
+                )
+            {
+                if(strcmp(move_attributes->Name(),"frame_duration")==0)
+                {
+                    string new_value = toString(value);
+                    if(relative)
+                    {
+                        new_value = toString(atoi(move_node->ToElement()->Attribute("frame_duration"))+value);
+                    }
+                    move_attributes->SetValue(new_value.c_str());
+                }
+            }
+        }
+    }
+    doc.SaveFile(xml_path.c_str());
+}
+
+string GameplayEditor::getSpeedLow()
+{
+    string character="Mole";
+    string xml_path=assets_directory+"chars/"+character+"/main.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
+    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
+            move_node!=NULL;
+            move_node=move_node->NextSibling("Move"))
+    {
+        if(strcmp("low",move_node->ToElement()->Attribute("name"))==0)
+        {
+            return move_node->ToElement()->Attribute("frame_duration");
+        }
+    }
+    return "Error";
+}
+
+void GameplayEditor::setSpeedLow(int value, bool relative)
+{
+    string character="Mole";
+    string xml_path=assets_directory+"chars/"+character+"/main.xml";
+    TiXmlDocument doc(xml_path.c_str());
+    doc.LoadFile();
+    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
+    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
+            move_node!=NULL;
+            move_node=move_node->NextSibling("Move"))
+    {
+        if(strcmp("low",move_node->ToElement()->Attribute("name"))==0)
+        {
+            for(TiXmlAttribute* move_attributes = move_node->ToElement()->FirstAttribute();
+                move_attributes!=NULL;
+                move_attributes=move_attributes->Next()
+                )
+            {
+                if(strcmp(move_attributes->Name(),"frame_duration")==0)
+                {
+                    string new_value = toString(value);
+                    if(relative)
+                    {
+                        new_value = toString(atoi(move_node->ToElement()->Attribute("frame_duration"))+value);
+                    }
+                    move_attributes->SetValue(new_value.c_str());
+                }
+            }
+        }
+        if(strcmp("low2",move_node->ToElement()->Attribute("name"))==0)
+        {
+            for(TiXmlAttribute* move_attributes = move_node->ToElement()->FirstAttribute();
+                move_attributes!=NULL;
+                move_attributes=move_attributes->Next()
+                )
+            {
+                if(strcmp(move_attributes->Name(),"frame_duration")==0)
+                {
+                    string new_value = toString(value);
+                    if(relative)
+                    {
+                        new_value = toString(atoi(move_node->ToElement()->Attribute("frame_duration"))+value);
+                    }
+                    move_attributes->SetValue(new_value.c_str());
+                }
+            }
+        }
+    }
+    doc.SaveFile(xml_path.c_str());
+}
+
 string GameplayEditor::getDamageOverhead()
 {
     string character="Mole";

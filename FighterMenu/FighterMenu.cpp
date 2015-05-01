@@ -400,6 +400,57 @@ void Menu::loopMenu()
                     reloadInputs();
                 }
 
+                //Speed Overhead
+                if(mb->getAccion()=="GameplayEdit.Mole.SpeedOverhead:-1")
+                {
+                    gameplay_editor.setSpeedOverhead(-1, true);
+                    reloadInputs();
+                }
+                if(mb->getAccion()=="GameplayEdit.Mole.SpeedOverhead:+1")
+                {
+                    gameplay_editor.setSpeedOverhead(1, true);
+                    reloadInputs();
+                }
+                if(mb->getAccion()=="GameplayEdit.Mole.ShowSpeedOverhead")
+                {
+                    gameplay_editor.setSpeedOverhead(6, false);
+                    reloadInputs();
+                }
+
+                //Speed Slash
+                if(mb->getAccion()=="GameplayEdit.Mole.SpeedSlash:-1")
+                {
+                    gameplay_editor.setSpeedSlash(-1, true);
+                    reloadInputs();
+                }
+                if(mb->getAccion()=="GameplayEdit.Mole.SpeedSlash:+1")
+                {
+                    gameplay_editor.setSpeedSlash(1, true);
+                    reloadInputs();
+                }
+                if(mb->getAccion()=="GameplayEdit.Mole.ShowSpeedSlash")
+                {
+                    gameplay_editor.setSpeedSlash(6, false);
+                    reloadInputs();
+                }
+
+                //Speed Low
+                if(mb->getAccion()=="GameplayEdit.Mole.SpeedLow:-1")
+                {
+                    gameplay_editor.setSpeedLow(-1, true);
+                    reloadInputs();
+                }
+                if(mb->getAccion()=="GameplayEdit.Mole.SpeedLow:+1")
+                {
+                    gameplay_editor.setSpeedLow(1, true);
+                    reloadInputs();
+                }
+                if(mb->getAccion()=="GameplayEdit.Mole.ShowSpeedLow")
+                {
+                    gameplay_editor.setSpeedLow(6, false);
+                    reloadInputs();
+                }
+
                 //Damage overhead
                 if(mb->getAccion()=="GameplayEdit.Mole.DamageOverhead:-1")
                 {
@@ -1101,7 +1152,6 @@ Personaje* Menu::getPersonajeB(int num,bool ia)
     writeLogLine("Initializing player's 1 character #"+toString(num)+".");
     //get string
     std::string char_name=char_select->getLockedNamesPB()[num];
-    char_name+="-Player2";
     int num_paleta=char_select->getLockedPalettesPB()[num];
 
     if(ia)
@@ -1691,6 +1741,22 @@ void Menu::reloadInputs()
                         button->texto = "Speed:" + gameplay_editor.getSpeedBack();
                         button->texto_sel = "Speed:" + gameplay_editor.getSpeedBack();
                     }
+                    if(action=="GameplayEdit.Mole.ShowSpeedOverhead")
+                    {
+                        button->texto = "Speed:" + gameplay_editor.getSpeedOverhead();
+                        button->texto_sel = "Speed:" + gameplay_editor.getSpeedOverhead();
+                    }
+                    if(action=="GameplayEdit.Mole.ShowSpeedSlash")
+                    {
+                        button->texto = "Speed:" + gameplay_editor.getSpeedSlash();
+                        button->texto_sel = "Speed:" + gameplay_editor.getSpeedSlash();
+                    }
+                    if(action=="GameplayEdit.Mole.ShowSpeedLow")
+                    {
+                        button->texto = "Speed:" + gameplay_editor.getSpeedLow();
+                        button->texto_sel = "Speed:" + gameplay_editor.getSpeedLow();
+                    }
+
                     if(action=="GameplayEdit.Mole.ShowDamageOverhead")
                     {
                         button->texto = "Damage:" + gameplay_editor.getDamageOverhead();

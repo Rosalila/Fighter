@@ -1432,7 +1432,10 @@ void Personaje::loadSprites()
                 std::string str_variable="current_image";
                 std::string path(e->Attribute("path"));
                 std::string dir("chars/");
-                path=dir+char_name+"/"+path;
+                if(numero==1)
+                    path=dir+char_name+"/sprites/"+path;
+                else
+                    path=dir+char_name+"/sprites_player2/"+path;
                 double escala;
                 e->QueryDoubleAttribute("scale",&escala);
                 int alineacion_x=atoi(e->Attribute("align_x"));

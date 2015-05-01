@@ -25,6 +25,15 @@ public:
     string getSpeedForward();
     void setSpeedForward(int value, bool relative);
 
+    string getSpeedOverhead();
+    void setSpeedOverhead(int value, bool relative);
+
+    string getSpeedSlash();
+    void setSpeedSlash(int value, bool relative);
+
+    string getSpeedLow();
+    void setSpeedLow(int value, bool relative);
+
     string getDamageOverhead();
     void setDamageOverhead(int value, bool relative);
 

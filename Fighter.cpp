@@ -1267,28 +1267,10 @@ void Fighter::printHitboxes()
 
 void Fighter::printBuffer()
 {
-    int x_printable_buffer = 100;
-    int y_printable_buffer = 100;
     int x_real_buffer = 100;
-    int y_real_buffer = 150;
-    for(int i=0;i<(int)getPaActual()->input->getBufferRosalilaInputs().size();i++)
-    {
-        string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
-        for(int j=0;j<(int)input_iterator.size();j++)
-        {
-            painter->draw2DImage
-            (   input_buffer_images[input_iterator[j]],
-                50,50,
-                x_real_buffer+50*(20-i),y_real_buffer+50*j,
-                1.0,
-                0.0,
-                false,
-                0,0,
-                Color(255,255,255,255),
-                0,0,
-                false);
-        }
-    }
+    int y_real_buffer = 100;
+    int x_printable_buffer = 100;
+    int y_printable_buffer = 150;
 
     for(int i=0;i<(int)getPaActual()->input->getPrintableBufferRosalilaInputs().size();i++)
     {
@@ -1299,6 +1281,25 @@ void Fighter::printBuffer()
             (   input_buffer_images[input_iterator[j]],
                 50,50,
                 x_printable_buffer+50*(20-i),y_printable_buffer+50*j,
+                1.0,
+                0.0,
+                false,
+                0,0,
+                Color(255,255,255,255),
+                0,0,
+                false);
+        }
+    }
+
+    for(int i=0;i<(int)getPaActual()->input->getBufferRosalilaInputs().size();i++)
+    {
+        string input_iterator = getPaActual()->input->getBufferRosalilaInputs()[i];
+        for(int j=0;j<(int)input_iterator.size();j++)
+        {
+            painter->draw2DImage
+            (   input_buffer_images[input_iterator[j]],
+                50,50,
+                x_real_buffer+50*(20-i),y_real_buffer+50*j,
                 1.0,
                 0.0,
                 false,
