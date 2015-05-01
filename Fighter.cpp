@@ -1,5 +1,5 @@
 #include "Fighter.h"
-Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training)
+Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training,int player1_wins_count,int player2_wins_count)
 {
     writeLogLine("Initializing Fighter game");
 
@@ -10,6 +10,9 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
 
     this->stop_time_pa=false;
     this->stop_time_pb=false;
+
+    this->player1_wins_count = player1_wins_count;
+    this->player2_wins_count = player2_wins_count;
 
     string configxml_path=assets_directory+"config.xml";
     TiXmlDocument doc_t(configxml_path.c_str());
@@ -1531,6 +1534,16 @@ void Fighter::render()
 
     if(fps_is_visible)
         painter->drawText("FPS: "+toString(painter->getFrameCap()),0,0);
+
+    if(player1_wins_count==1)
+        painter->drawText("1 win",0,100);
+    else if(player1_wins_count>0)
+        painter->drawText(toString(player1_wins_count)+" wins",0,100);
+
+    if(player2_wins_count==1)
+        painter->drawText("1 win",painter->screen_width-350,100);
+    else if(player2_wins_count>0)
+        painter->drawText(toString(player2_wins_count)+" wins",painter->screen_width-350,100);
 
     receiver->updateInputs();
     painter->updateScreen();

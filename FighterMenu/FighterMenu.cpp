@@ -8,6 +8,8 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::strin
     this->exit_signal=false;
     this->save_inputs_signal=false;
     this->char_select=NULL;
+    this->player1_wins_count = 0;
+    this->player2_wins_count = 0;
 
     vs_screen=painter->getTexture(assets_directory+"misc/vs_screen.png");
 
@@ -82,7 +84,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
 
     for(int current_round=0;;current_round++)
     {
-        fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,pa_victories,pb_victories,is_training);
+        fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,pa_victories,pb_victories,is_training,player1_wins_count,player2_wins_count);
 
         if(fighter->game_over_a && fighter->game_over_b)
         {
@@ -119,6 +121,8 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pa_wins.svg");
             temp->loopMenu();
             reloadInputs();
+            player1_wins_count++;
+            //player2_wins_count=0;
             delete temp;
             break;
         }
@@ -127,6 +131,8 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pb_wins.svg");
             temp->loopMenu();
             reloadInputs();
+            player2_wins_count++;
+            //player1_wins_count=0;
             delete temp;
             break;
         }
@@ -154,6 +160,7 @@ void Menu::loopMenu()
     input_player1->limpiarBuffer();
     input_player2->limpiarBuffer();
     reloadInputs();
+
 	for (;;)
 	{
 	    dibujarMenu();

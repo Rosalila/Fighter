@@ -73,8 +73,10 @@ public:
     //Camera effects
     queue<int>camera_effect_x;
     queue<int>camera_effect_y;
+    int player1_wins_count;
+    int player2_wins_count;
 
-    Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training);
+    Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training,int player1_wins_count, int player2_wins_count);
     ~Fighter();
     //Logica
     bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);

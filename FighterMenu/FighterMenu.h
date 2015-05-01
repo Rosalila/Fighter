@@ -33,6 +33,9 @@ private:
     int ai_level,time,rounds;
     GameplayEditor gameplay_editor;
 
+    int player1_wins_count;
+    int player2_wins_count;
+
     void iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_training);
 public:
     std::string music_path;
