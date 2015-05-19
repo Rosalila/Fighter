@@ -76,7 +76,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
     }
 
     sonido->stopMusic();
-    sonido->playMusic(stage->music_path);
+    //sonido->playMusic(stage->music_path);
     Fighter*fighter=NULL;
 
     int pa_victories=0;
@@ -84,7 +84,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
 
     for(int current_round=0;;current_round++)
     {
-        fighter=new Fighter(sonido,painter,receiver,pa,pb,stage,pa_victories,pb_victories,is_training,player1_wins_count,player2_wins_count);
+        fighter = new Fighter(sonido,painter,receiver,pa,pb,stage,pa_victories,pb_victories,is_training,player1_wins_count,player2_wins_count);
 
         if(fighter->game_over_a && fighter->game_over_b)
         {
@@ -97,8 +97,13 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
             pa_victories++;
         else//salir en el menu de pausa
         {
+            delete fighter;
+            fighter=NULL;
             break;
         }
+
+        delete fighter;
+        fighter=NULL;
 
         for(int i=0;i<num_personajes;i++)
         {
@@ -112,7 +117,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
         {
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/draw.svg");
             temp->loopMenu();
-            reloadInputs();
+            //reloadInputs();
             delete temp;
             break;
         }
@@ -120,7 +125,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
         {
             Menu *temp=new Menu(painter,receiver,sonido,assets_directory+"menu/pa_wins.svg");
             temp->loopMenu();
-            reloadInputs();
+            //reloadInputs();
             player1_wins_count++;
             //player2_wins_count=0;
             delete temp;
@@ -138,7 +143,15 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
         }
     }
 
-    delete fighter;
+    if(fighter!=NULL)
+        delete fighter;
+
+    for(int i=0;i<(int)pa.size();i++)
+        delete pa[i];
+    for(int i=0;i<(int)pb.size();i++)
+        delete pb[i];
+
+    delete stage;
 
     char_select->clearLocks();
 
@@ -638,8 +651,6 @@ void Menu::dibujarMenu()
     for(int i=0;i<(int)elementos.size();i++)
         elementos[i]->dibujar();
 
-    painter->draw3D();
-
     receiver->updateInputs();
     painter->updateScreen();
 }
@@ -1130,9 +1141,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
     int num_paleta=char_select->getLockedPalettesPA()[num];
 
     //get cadena
-    char *path_a=new char[255];
-    strcpy(path_a,"");
-    strcat(path_a,char_name.c_str());
+    string path_a=char_name;
 
     if(ia)
     {
@@ -1149,7 +1158,7 @@ Personaje* Menu::getPersonajeA(int num,bool ia)
 
     //get char
     Personaje* p=new Personaje(painter,sonido,1,num_paleta);
-    p->loadFromXML(input_player1,(char *)path_a);
+    p->loadFromXML(input_player1,(char *)path_a.c_str());
     writeLogLine("Loaded successfully.");
     return p;
 }

@@ -132,11 +132,7 @@ Fighter::Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vect
 Fighter::~Fighter()
 {
     writeLogLine("Deleting game.");
-    for(int i=0;i<(int)pa.size();i++)
-        delete pa[i];
-    for(int i=0;i<(int)pb.size();i++)
-        delete pb[i];
-    delete stage;
+    delete pause_menu;
 
     for(;!ko.empty();)
     {

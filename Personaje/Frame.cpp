@@ -2,7 +2,6 @@
 
 Frame::Frame(int duracion)
 {
-    this->modificadores=std::vector<Modificador*>();
     this->duracion=duracion;
 }
 
