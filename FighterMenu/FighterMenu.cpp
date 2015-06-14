@@ -10,6 +10,7 @@ Menu::Menu(RosalilaGraphics* painter,Receiver* receiver,Sound* sonido,std::strin
     this->char_select=NULL;
     this->player1_wins_count = 0;
     this->player2_wins_count = 0;
+    this->config_button_lock = false;
 
     vs_screen=painter->getTexture(assets_directory+"misc/vs_screen.png");
 
@@ -162,7 +163,6 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
 
 void Menu::loopMenu()
 {
-    llenarInputsBotones();
     input_player1=new RosalilaInputs();
     input_player2=new RosalilaInputs();
     input_player1->loadFromXML(1,receiver);
@@ -186,34 +186,22 @@ void Menu::loopMenu()
 
 	    characterSelectControl();
 
+        if(config_button_lock)
+            editInputCheck();
+
         if(receiver->isKeyPressed(SDLK_ESCAPE)
             || (input_player1->getBufferRosalilaInputs()[0]=="b" && keyup_player1)
             || (input_player2->getBufferRosalilaInputs()[0]=="b" && keyup_player2)
            )
         {
-            bool is_input_config_menu=false;
-            if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
-            {
-                MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
-                if(mb->getAccion().size()>18
-                   || mb->getAccion().substr(0,18)=="Player1.KeyConfig:"
-                   || mb->getAccion().substr(0,18)=="Player2.KeyConfig:"
-                   )
-                {
-                    is_input_config_menu=true;
-                }
-            }
-
-            if(!is_input_config_menu)
-            {
-                sonido->playSound(std::string("Menu.back"));
-                break;
-            }
+            sonido->playSound(std::string("Menu.back"));
+            break;
         }
 
-        if(receiver->isKeyPressed(SDL_SCANCODE_DOWN)
+        if((receiver->isKeyPressed(SDL_SCANCODE_DOWN)
             || (input_player1->getBufferRosalilaInputs()[0]=="2" && keyup_player1)
-            || (input_player2->getBufferRosalilaInputs()[0]=="2" && keyup_player2)
+            || (input_player2->getBufferRosalilaInputs()[0]=="2" && keyup_player2))
+            && !config_button_lock
            )
         {
             sonido->playSound(std::string("Menu.move"));
@@ -221,9 +209,10 @@ void Menu::loopMenu()
             keyup_player1=false;
             keyup_player2=false;
         }
-        else if(receiver->isKeyPressed(SDL_SCANCODE_UP)
+        else if((receiver->isKeyPressed(SDL_SCANCODE_UP)
             || (input_player1->getBufferRosalilaInputs()[0]=="8" && keyup_player1)
-            || (input_player2->getBufferRosalilaInputs()[0]=="8" && keyup_player2)
+            || (input_player2->getBufferRosalilaInputs()[0]=="8" && keyup_player2))
+            && !config_button_lock
                 )
         {
             sonido->playSound(std::string("Menu.move"));
@@ -231,9 +220,10 @@ void Menu::loopMenu()
             keyup_player1=false;
             keyup_player2=false;
         }
-        else if(receiver->isKeyDown(SDL_SCANCODE_RIGHT)
+        else if((receiver->isKeyDown(SDL_SCANCODE_RIGHT)
                     || input_player1->getBufferRosalilaInputs()[0]=="6"
-                    || input_player2->getBufferRosalilaInputs()[0]=="6"
+                    || input_player2->getBufferRosalilaInputs()[0]=="6")
+                    && !config_button_lock
                 )
         {
             sonido->playSound(std::string("Menu.move"));
@@ -252,9 +242,10 @@ void Menu::loopMenu()
                 }
             }
         }
-        else if(receiver->isKeyDown(SDL_SCANCODE_LEFT)
+        else if((receiver->isKeyDown(SDL_SCANCODE_LEFT)
                     || input_player1->getBufferRosalilaInputs()[0]=="4"
-                    || input_player2->getBufferRosalilaInputs()[0]=="4"
+                    || input_player2->getBufferRosalilaInputs()[0]=="4")
+                    && !config_button_lock
                 )
         {
             sonido->playSound(std::string("Menu.move"));
@@ -272,9 +263,10 @@ void Menu::loopMenu()
                     ai_level=mb->actual;
                 }
             }
-        }else if(receiver->isKeyPressed(SDLK_RETURN)
+        }else if((receiver->isKeyPressed(SDLK_RETURN)
                     || (input_player1->getBufferRosalilaInputs()[0]=="a" && keyup_player1)
-                    || (input_player2->getBufferRosalilaInputs()[0]=="a" && keyup_player2)
+                    || (input_player2->getBufferRosalilaInputs()[0]=="a" && keyup_player2))
+                    && !config_button_lock
                  )
         {
             sonido->playSound(std::string("Menu.select"));
@@ -325,6 +317,13 @@ void Menu::loopMenu()
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
             {
                 MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
+                if(mb->getAccion().substr(0,7)=="Config.")
+                {
+                    mb->texto = "?";
+                    mb->texto_sel = "?";
+                    config_button_lock=true;
+                    receiver->unpressAllInputs();
+                }
                 if(mb->getAccion()=="exit")
                 {
                     exit_signal = true;
@@ -642,7 +641,6 @@ void Menu::loopMenu()
                 }
             }
         }
-        editInputCheck();
 	}
 }
 
@@ -1417,100 +1415,6 @@ int Menu::toKeyCode(std::string str)
     return SDLK_ESCAPE;
 }
 
-
-void Menu::llenarInputsBotones()
-{
-    for(int i=0;i<(int)selectables_container->elementos.size();i++)
-    {
-        if(((MenuContenedor*)selectables_container)->elementos[i]->getTipo()=="Boton")
-        {
-//            MenuBoton*mb=(MenuBoton*)selectables_container->elementos[i];
-//            if(mb->getAccion()>=10 && mb->getAccion()<=29)
-//            {
-//                int player;
-//                std::string mapeo="";
-//                int accion=mb->getAccion();
-//                if(accion>=10 && accion<=19)
-//                    player=1;
-//                else
-//                    player=2;
-//                RosalilaInputs* temp=new RosalilaInputs();
-//                RosalilaInputs* temp2=new RosalilaInputs();
-//                if(player==1)
-//                {
-//                    temp->loadFromXML(1,receiver);
-//                    temp2->loadFromXML(2,receiver);
-//                }else
-//                {
-//                    temp->loadFromXML(2,receiver);
-//                    temp2->loadFromXML(1,receiver);
-//                }
-//                if(accion==10||accion==20)mapeo="8";
-//                if(accion==11||accion==21)mapeo="2";
-//                if(accion==12||accion==22)mapeo="4";
-//                if(accion==13||accion==23)mapeo="6";
-//                if(accion==14||accion==24)mapeo="a";
-//                if(accion==15||accion==25)mapeo="b";
-//                if(accion==16||accion==26)mapeo="c";
-//                if(accion==17||accion==27)mapeo="d";
-//                if(accion==18||accion==28)mapeo="e";
-//                if(accion==19||accion==29)mapeo="f";
-//
-//                //key
-//                mb->input_config="";
-//                int pos=-1,posc=-1;
-//                for(int j=0;j<(int)temp->botones.size();j++)
-//                    if(temp->botones[j].getMapeo()==mapeo && !temp->botones[j].usaJoystick())
-//                        pos=j;
-//
-//                for(int j=0;j<(int)temp->cruz.size();j++)
-//                    if(temp->cruz[j].getMapeo()==mapeo && !temp->cruz[j].usaJoystick())
-//                        posc=j;
-//
-//                if(pos!=-1)
-//                    mb->input_config=temp->botones[pos].keyToString();
-//
-//                if(posc!=-1)
-//                    mb->input_config=temp->cruz[posc].keyToString();
-//
-//                //joy
-//                pos=-1;
-//                for(int j=0;j<(int)temp->botones.size();j++)
-//                    if(temp->botones[j].getMapeo()==mapeo && temp->botones[j].usaJoystick())
-//                        pos=j;
-//                posc=-1;
-//                for(int j=0;j<(int)temp->cruz.size();j++)
-//                    if(temp->cruz[j].getMapeo()==mapeo && temp->cruz[j].usaJoystick())
-//                        posc=j;
-//
-//                if(pos!=-1)
-//                {
-//                    mb->input_config+=" j";
-//                    mb->input_config+=toString((int)temp->botones[pos].getNumJoystick());
-//                    mb->input_config+=toString((int)temp->botones[pos].joystick);
-//                }
-//
-//                if(posc!=-1)
-//                {
-//                    mb->input_config+=" j";
-//                    mb->input_config+=toString((int)temp->cruz[posc].getNumJoystick());
-//                    mb->input_config+="-";
-//                    if(temp->cruz[posc].joystick==-8)
-//                        mb->input_config+=std::string("up");
-//                    else if(temp->cruz[posc].joystick==-2)
-//                        mb->input_config+=std::string("down");
-//                    else if(temp->cruz[posc].joystick==-4)
-//                        mb->input_config+=std::string("left");
-//                    else if(temp->cruz[posc].joystick==-6)
-//                        mb->input_config+=std::string("right");
-//                    else
-//                        mb->input_config+=toString((int)temp->cruz[posc].joystick);
-//                }
-//            }
-        }
-    }
-}
-
 void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
 {
     painter->draw2DImage
@@ -1559,139 +1463,89 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
     painter->updateScreen();
 }
 
-void Menu::joyPressedEditInput(int button,int joystick_number,int player)
+void Menu::editInputCheck()
 {
     if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Boton")
     {
         MenuBoton*mb=((MenuBoton*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
-        if(player==1)
+
+        char str[50];
+        strcpy(str,mb->getAccion().c_str());
+        char * token;
+        token = strtok (str," ,.-");
+        if(token != NULL
+           && strcmp(token,"Config")==0)
         {
-            if(mb->getAccion()=="Player1.KeyConfig:a")
+            token = strtok (NULL, " ,.-");
+            if(token != NULL
+               && strcmp(token,"Keyboard")==0)
             {
-                input_player1->editInput(player,joystick_number,toString(button),"a");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player1.KeyConfig:b")
+                token = strtok (NULL, " ,.-");
+                if(token != NULL
+                   && strcmp(token,"Player1")==0)
+                {
+                    token = strtok (NULL, " ,.-");
+                    for(char c='a';c<='z';c++)
+                    {
+                        if(receiver->isKeyPressed(c))
+                        {
+                            string button = "";
+                            button+=c-32;
+                            input_player1->editKeyboardInput(1,button,token);
+                            reloadInputs();
+                            config_button_lock=false;
+                        }
+                    }
+
+                }else if(token != NULL
+                   && strcmp(token,"Player2")==0)
+                {
+                    token = strtok (NULL, " ,.-");
+                    for(char c='a';c<='z';c++)
+                    {
+                        if(receiver->isKeyPressed(c))
+                        {
+                            string button = "";
+                            button+=c-32;
+                            input_player2->editKeyboardInput(2,button,token);
+                            reloadInputs();
+                            config_button_lock=false;
+                        }
+                    }
+                }
+            }else if(token != NULL
+               && strcmp(token,"Gamepad")==0)
             {
-                input_player1->editInput(player,joystick_number,toString(button),"b");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player1.KeyConfig:c")
-            {
-                input_player1->editInput(player,joystick_number,toString(button),"c");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player1.KeyConfig:d")
-            {
-                input_player1->editInput(player,joystick_number,toString(button),"d");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player1.KeyConfig:e")
-            {
-                input_player1->editInput(player,joystick_number,toString(button),"e");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player1.KeyConfig:f")
-            {
-                input_player1->editInput(player,joystick_number,toString(button),"f");
-                reloadInputs();
+                token = strtok (NULL, " ,.-");
+                if(token != NULL
+                   && strcmp(token,"Player1")==0)
+                {
+                    token = strtok (NULL, " ,.-");
+                    for(int button=0;button<=6;button++)
+                    {
+                        if(receiver->isJoyPressed(button,0))
+                        {
+                            input_player1->editInput(1,0,toString(button),token);
+                            reloadInputs();
+                            config_button_lock=false;
+                        }
+                    }
+                }else if(token != NULL
+                   && strcmp(token,"Player2")==0)
+                {
+                    token = strtok (NULL, " ,.-");
+                    for(int button=0;button<=6;button++)
+                    {
+                        if(receiver->isJoyPressed(button,1))
+                        {
+                            input_player1->editInput(2,1,toString(button),token);
+                            reloadInputs();
+                            config_button_lock=false;
+                        }
+                    }
+                }
             }
         }
-        if(player==2)
-        {
-            if(mb->getAccion()=="Player2.KeyConfig:a")
-            {
-                input_player2->editInput(player,joystick_number,toString(button),"a");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player2.KeyConfig:b")
-            {
-                input_player2->editInput(player,joystick_number,toString(button),"b");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player2.KeyConfig:c")
-            {
-                input_player2->editInput(player,joystick_number,toString(button),"c");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player2.KeyConfig:d")
-            {
-                input_player2->editInput(player,joystick_number,toString(button),"d");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player2.KeyConfig:e")
-            {
-                input_player2->editInput(player,joystick_number,toString(button),"e");
-                reloadInputs();
-            }
-            if(mb->getAccion()=="Player2.KeyConfig:f")
-            {
-                input_player2->editInput(player,joystick_number,toString(button),"f");
-                reloadInputs();
-            }
-        }
-    }
-}
-
-void Menu::editInputCheck()
-{
-    if(receiver->isJoyPressed(0,0))
-    {
-        joyPressedEditInput(0,0,1);
-    }
-    if(receiver->isJoyPressed(1,0))
-    {
-        joyPressedEditInput(1,0,1);
-    }
-    if(receiver->isJoyPressed(2,0))
-    {
-        joyPressedEditInput(2,0,1);
-    }
-    if(receiver->isJoyPressed(3,0))
-    {
-        joyPressedEditInput(3,0,1);
-    }
-    if(receiver->isJoyPressed(4,0))
-    {
-        joyPressedEditInput(4,0,1);
-    }
-    if(receiver->isJoyPressed(5,0))
-    {
-        joyPressedEditInput(5,0,1);
-    }
-    if(receiver->isJoyPressed(6,0))
-    {
-        joyPressedEditInput(6,0,1);
-    }
-
-
-    if(receiver->isJoyPressed(0,1))
-    {
-        joyPressedEditInput(0,1,2);
-    }
-    if(receiver->isJoyPressed(1,1))
-    {
-        joyPressedEditInput(1,1,2);
-    }
-    if(receiver->isJoyPressed(2,1))
-    {
-        joyPressedEditInput(2,1,2);
-    }
-    if(receiver->isJoyPressed(3,1))
-    {
-        joyPressedEditInput(3,1,2);
-    }
-    if(receiver->isJoyPressed(4,1))
-    {
-        joyPressedEditInput(4,1,2);
-    }
-    if(receiver->isJoyPressed(5,1))
-    {
-        joyPressedEditInput(5,1,2);
-    }
-    if(receiver->isJoyPressed(6,1))
-    {
-        joyPressedEditInput(6,1,2);
     }
 }
 
@@ -1826,49 +1680,42 @@ void Menu::reloadInputs()
                         button->texto_sel = "Hitstun:" + gameplay_editor.getHitstun();
                     }
 
-                    if(action.size()>=18
+                    if(action.size()>=15
                        &&
-                        (action.substr(0,18)=="Player1.KeyConfig:"
-                        || action.substr(0,18)=="Player2.KeyConfig:")
+                        (action.substr(0,15)=="Config.Gamepad."
+                        || action.substr(0,15)=="Config.Gamepad.")
                        )
                     {
                         RosalilaInputs* input = input_player1;
                         int joystick_num = 0;
-                        if(action.substr(0,18)=="Player2.KeyConfig:")
+                        if(action.substr(0,23)=="Config.Gamepad.Player2.")
                         {
                             input = input_player2;
                             joystick_num = 1;
                         }
-                        if(action[action.size()-1]=='a')
+                        string button_str="";
+                        button_str+=action[action.size()-1];
+                        button->texto = input->getJoystickInput(button_str,joystick_num);
+                        button->texto_sel = input->getJoystickInput(button_str,joystick_num);
+                    }
+
+                    if(action.size()>=16
+                       &&
+                        (action.substr(0,16)=="Config.Keyboard."
+                        || action.substr(0,16)=="Config.Gamepad.")
+                       )
+                    {
+                        RosalilaInputs* input = input_player1;
+                        int joystick_num = 0;
+                        if(action.substr(0,24)=="Config.Keyboard.Player2.")
                         {
-                            button->texto = input->getJoystickInput("a",joystick_num);
-                            button->texto_sel = input->getJoystickInput("a",joystick_num);
+                            input = input_player2;
+                            joystick_num = 1;
                         }
-                        if(action[action.size()-1]=='b')
-                        {
-                            button->texto = input->getJoystickInput("b",joystick_num);
-                            button->texto_sel = input->getJoystickInput("b",joystick_num);
-                        }
-                        if(action[action.size()-1]=='c')
-                        {
-                            button->texto = input->getJoystickInput("c",joystick_num);
-                            button->texto_sel = input->getJoystickInput("c",joystick_num);
-                        }
-                        if(action[action.size()-1]=='d')
-                        {
-                            button->texto = input->getJoystickInput("d",joystick_num);
-                            button->texto_sel = input->getJoystickInput("d",joystick_num);
-                        }
-                        if(action[action.size()-1]=='e')
-                        {
-                            button->texto = input->getJoystickInput("e",joystick_num);
-                            button->texto_sel = input->getJoystickInput("e",joystick_num);
-                        }
-                        if(action[action.size()-1]=='f')
-                        {
-                            button->texto = input->getJoystickInput("f",joystick_num);
-                            button->texto_sel = input->getJoystickInput("f",joystick_num);
-                        }
+                        string button_str="";
+                        button_str+=action[action.size()-1];
+                        button->texto = input->getKeyboardInput(button_str);
+                        button->texto_sel = input->getKeyboardInput(button_str);
                     }
                 }
             }
@@ -2115,33 +1962,4 @@ void Menu::characterSelectControl()
             //keyup_player2=false;
         }
     }
-}
-
-void Menu::gameplayEdit(string character, string variable, int value, bool relative)
-{
-    string xml_path=assets_directory+"chars/"+character+"/main.xml";
-    TiXmlDocument doc(xml_path.c_str());
-    doc.LoadFile();
-    TiXmlNode* declarations_tag=doc.FirstChild("MainFile")->FirstChild("Declarations");
-    for(TiXmlNode* move_node=declarations_tag->FirstChild("Move");
-            move_node!=NULL;
-            move_node=move_node->NextSibling("Move"))
-    {
-        if(strcmp("walk forward",move_node->ToElement()->Attribute("name"))==0)
-        {
-            int velocity_x = atoi(move_node->ToElement()->Attribute("velocity_x"));
-            velocity_x++;
-            for(TiXmlAttribute* move_attribute = move_node->ToElement()->FirstAttribute();
-                move_attribute!=NULL;
-                move_attribute=move_attribute->Next()
-                )
-            {
-                if(strcmp(move_attribute->Name(),"velocity_x")==0)
-                {
-                    move_attribute->SetValue(toString(velocity_x).c_str());
-                }
-            }
-        }
-    }
-    doc.SaveFile(xml_path.c_str());
 }

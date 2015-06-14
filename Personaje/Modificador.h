@@ -2,7 +2,7 @@
 #define MODIFICADOR_H
 
 #include <vector>
-#include "HitBox.h"
+#include "../Rosalila/RosalilaUtility/HitBox.h"
 #include "Imagen.h"
 #include "Barra.h"
 #include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"

@@ -111,7 +111,7 @@ void Personaje::dibujar()
     bool red=getString("effect.red")==std::string("on");
     bool green=getString("effect.green")==std::string("on");
     bool blue=getString("effect.blue")==std::string("on");
-    if(sombra.size()>20)
+    if(sombra.size()>7)
     {
         sombra.erase (sombra.begin());
         sombra_x.erase (sombra_x.begin());
@@ -122,7 +122,7 @@ void Personaje::dibujar()
     {
         for(int i=1; i<(int)sombra.size(); i++)
         {
-            if(i%8!=0)
+            if(i%3!=0)
                 continue;
             if(sombra[i]->imagen==NULL)
                 continue;
@@ -144,7 +144,7 @@ void Personaje::dibujar()
                 0.0,
                 flip_sombra[i],
                 0,0,
-                Color(255,255,255,255),
+                Color(0,0,255,128),
                 0,0,
                 true);
         }
@@ -1965,6 +1965,7 @@ void Personaje::aplicarEfectosProyectiles()
 
 bool Personaje::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
 {
+
     int x1r=hb_roja->p1x+atacante_x;
     int y1r=hb_roja->p1y+atacante_y;
     int x2r=hb_roja->p2x+atacante_x;
@@ -1975,17 +1976,10 @@ bool Personaje::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_
     int x2a=hb_azul->p2x+atacado_x;
     int y2a=hb_azul->p2y+atacado_y;
 
-    bool hay_colision=(
-                          (x1r<=x1a && x1a<=x2r && x2r<=x2a) ||
-                          (x1r<=x1a && x1a<=x2a && x2a<=x2r) ||
-                          (x1a<=x1r && x1r<=x2r && x2r<=x2a) ||
-                          (x1a<=x1r && x1r<=x2a && x2a<=x2r)
-                      )&&(
-                          (y1r<=y1a && y1a<=y2r && y2r<=y2a) ||
-                          (y1r<=y1a && y1a<=y2a && y2a<=y2r) ||
-                          (y1a<=y1r && y1r<=y2r && y2r<=y2a) ||
-                          (y1a<=y1r && y1r<=y2a && y2a<=y2r)
-                      );
+    HitBox hb_azul_temp(x1r,y1r,x2r,y2r);
+    HitBox hb_roja_temp(x1a,y1a,x2a,y2a);
+
+    bool hay_colision = collisionCheck(&hb_azul_temp,&hb_roja_temp);
 
     if(hay_colision)
     {

@@ -11,6 +11,7 @@
 #include "../Rosalila/RosalilaSound/RosalilaSound.h"
 #include "../Fighter.h"
 #include "GameplayEditor.h"
+#include "InputEditor.h"
 
 class Menu
 {
@@ -32,9 +33,12 @@ private:
     //config vars
     int ai_level,time,rounds;
     GameplayEditor gameplay_editor;
+    InputEditor input_editor;
 
     int player1_wins_count;
     int player2_wins_count;
+
+    bool config_button_lock;
 
     void iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_training);
 public:
@@ -64,13 +68,12 @@ public:
     int toKeyCode(std::string str);
     void printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews);
     void editInputCheck();
-    void joyPressedEditInput(int button,int joystick_number,int player);
+    void keyboardPressedEditInput(string button,int player);
     void reloadInputs();
     void applyGraphicEffects();
     void updateKeyUpCheck();
     void renderGallery();
     void characterSelectControl();
-    void gameplayEdit(string character, string variable, int value, bool relative);
 };
 
 #endif
