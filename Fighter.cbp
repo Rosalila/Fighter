@@ -38,6 +38,8 @@
 		<Unit filename="FighterMenu/FighterMenu.h" />
 		<Unit filename="FighterMenu/GameplayEditor.cpp" />
 		<Unit filename="FighterMenu/GameplayEditor.h" />
+		<Unit filename="FighterMenu/InputEditor.cpp" />
+		<Unit filename="FighterMenu/InputEditor.h" />
 		<Unit filename="Personaje/Animacion.cpp" />
 		<Unit filename="Personaje/Animacion.h" />
 		<Unit filename="Personaje/Barra.cpp" />

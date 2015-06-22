@@ -1706,11 +1706,9 @@ void Menu::reloadInputs()
                        )
                     {
                         RosalilaInputs* input = input_player1;
-                        int joystick_num = 0;
                         if(action.substr(0,24)=="Config.Keyboard.Player2.")
                         {
                             input = input_player2;
-                            joystick_num = 1;
                         }
                         string button_str="";
                         button_str+=action[action.size()-1];
