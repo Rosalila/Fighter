@@ -216,8 +216,9 @@ void Fighter::setPbActual(Personaje* p)
         pb[pb_actual]=p;
 }
 
-bool Fighter::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+bool Fighter::getColisionHitboxes(Hitbox* hb_azul,Hitbox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
 {
+    /*
     int x1r=hb_roja->p1x+atacante_x;
     int y1r=hb_roja->p1y+atacante_y;
     int x2r=hb_roja->p2x+atacante_x;
@@ -258,14 +259,15 @@ bool Fighter::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,
 //        getPbActual()->setEntero("Colision.x",x1+((x2-x1)/2));
 //        getPbActual()->setEntero("Colision.y",y1+((y2-y1)/2));
     }
-
-    return hay_colision;
+*/
+    return false;
 }
 
-bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado)
+bool Fighter::getColisionHitboxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado)
 {
-    std::vector <HitBox*> hb_azules=atacado->getHitBoxes(variable_atacado);
-    std::vector <HitBox*> hb_rojas=atacante->getHitBoxes(variable_atacante);
+    /*
+    std::vector <Hitbox*> hb_azules=atacado->getHitboxes(variable_atacado);
+    std::vector <Hitbox*> hb_rojas=atacante->getHitboxes(variable_atacante);
 
     if(atacante->getString("orientation")=="i")
         for(int i=0; i<(int)hb_rojas.size(); i++)
@@ -292,7 +294,7 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_ataca
 
     for(int a=0; a<(int)hb_azules.size(); a++)
         for(int r=0; r<(int)hb_rojas.size(); r++)
-            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
+            if(getColisionHitboxes(hb_azules[a],hb_rojas[r],ax,ay,rx,ry))
             {
                 if(atacante->getString("orientation")=="i")
                     for(int i=0; i<(int)hb_rojas.size(); i++)
@@ -329,6 +331,7 @@ bool Fighter::getColisionHitBoxes(Personaje *atacante,std::string variable_ataca
             hb_azules[i]->p1x=-b;
             hb_azules[i]->p2x=-a;
         }
+        */
     return false;
 }
 
@@ -398,14 +401,14 @@ void Fighter::landCancel(Personaje *p)
 void Fighter::colisionCheck(Personaje*p)
 {
     p->setString("hit","no");
-    if(getColisionHitBoxes(p,"red",p->personaje_contrario,"blue") && p->personaje_contrario->getString("current_move")!="idle.stand")
+    if(getColisionHitboxes(p,"red",p->personaje_contrario,"blue") && p->personaje_contrario->getString("current_move")!="idle.stand")
     {
         p->setString("colision.red_to_blue","yes");
     }
     else
         p->setString("colision.red_to_blue","no");
 
-    if(getColisionHitBoxes(p,"red",p->personaje_contrario,"red"))
+    if(getColisionHitboxes(p,"red",p->personaje_contrario,"red"))
     {
         p->setString("colision.red_to_red","yes");
     }
@@ -414,12 +417,12 @@ void Fighter::colisionCheck(Personaje*p)
         p->setString("colision.red_to_red","no");
     }
 
-    if(getColisionHitBoxes(p,"blue",p->personaje_contrario,"blue"))
+    if(getColisionHitboxes(p,"blue",p->personaje_contrario,"blue"))
         p->setString("colision.blue_to_blue","yes");
     else
         p->setString("colision.blue_to_blue","no");
 
-    if(getColisionHitBoxes(p,"blue",p->personaje_contrario,"red"))
+    if(getColisionHitboxes(p,"blue",p->personaje_contrario,"red"))
     {
         p->setString("colision.blue_to_red","yes");
         Movimiento* m=p->personaje_contrario->movimientos[p->personaje_contrario->getString("current_move")];
@@ -661,7 +664,7 @@ void Fighter::logica()
         getPbActual()->setString("attacking","no");
     }
 
-//    if(getPaActual()->getHitBoxes("red").size()>0
+//    if(getPaActual()->getHitboxes("red").size()>0
 //       || getPaActual()->proyectiles_activos>0)
 //    {
 //        getPaActual()->setString("attacking","yes");
@@ -670,7 +673,7 @@ void Fighter::logica()
 //    {
 //        getPaActual()->setString("attacking","no");
 //    }
-//    if(getPbActual()->getHitBoxes("red").size()>0
+//    if(getPbActual()->getHitboxes("red").size()>0
 //       || getPbActual()->proyectiles_activos>0)
 //    {
 //        getPbActual()->setString("attacking","yes");
@@ -1221,7 +1224,8 @@ void Fighter::dibujarBarra()
         0,0,
         Color(255,255,255,255),
         0,0,
-        false);
+        false,
+        FlatShadow());
 
     for(int i=0;i<victories_a;i++)
     {
@@ -1236,7 +1240,8 @@ void Fighter::dibujarBarra()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
     }
 
     for(int i=0;i<victories_b;i++)
@@ -1252,16 +1257,17 @@ void Fighter::dibujarBarra()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
     }
 }
 
 void Fighter::printHitboxes()
 {
-    getPaActual()->dibujarHitBoxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
-    getPbActual()->dibujarHitBoxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
-    getPaActual()->dibujarHitBoxes("red","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
-    getPbActual()->dibujarHitBoxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
+    getPaActual()->dibujarHitboxes("blue","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
+    getPbActual()->dibujarHitboxes("blue","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
+    getPaActual()->dibujarHitboxes("red","",getPaActual()->getString("orientation")=="i",getPaActual()->getEntero("position_x"),getPaActual()->getEntero("position_y"));
+    getPbActual()->dibujarHitboxes("red","",getPbActual()->getString("orientation")=="i",getPbActual()->getEntero("position_x"),getPbActual()->getEntero("position_y"));
 }
 
 void Fighter::printBuffer()
@@ -1286,7 +1292,8 @@ void Fighter::printBuffer()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
     }
 
@@ -1305,7 +1312,8 @@ void Fighter::printBuffer()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
     }
 }
@@ -1452,7 +1460,8 @@ void Fighter::render()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                false);
+                false,
+                FlatShadow());
         }
     }
 
@@ -1477,7 +1486,8 @@ void Fighter::render()
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
     }
 
 

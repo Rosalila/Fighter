@@ -39,7 +39,7 @@ void Frame::agregarModificador(Barra modificador,std::string variable,bool aplic
 {
     modificadores.push_back(new ModificadorBarra(variable,modificador,aplicar_a_contrario));
 }
-void Frame::agregarModificador(std::vector <HitBox*> modificador,std::string variable,bool aplicar_a_contrario)
+void Frame::agregarModificador(std::vector <Hitbox*> modificador,std::string variable,bool aplicar_a_contrario)
 {
     modificadores.push_back(new ModificadorHitboxes(variable,modificador,aplicar_a_contrario));
 }

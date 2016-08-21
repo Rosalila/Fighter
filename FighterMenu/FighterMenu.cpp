@@ -1427,7 +1427,8 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
         0,0,
         Color(255,255,255,255),
         0,0,
-        false);
+        false,
+        FlatShadow());
 
     for(int i=0;i<(int)pa_previews.size();i++)
     {
@@ -1442,7 +1443,8 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
     }
 
     for(int i=0;i<(int)pb_previews.size();i++)
@@ -1458,7 +1460,8 @@ void Menu::printVsScreen(vector<Image*>pa_previews,vector<Image*>pb_previews)
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
     }
     painter->updateScreen();
 }

@@ -79,8 +79,8 @@ public:
     Fighter(Sound* sonido,RosalilaGraphics* painter,Receiver* receiver,vector<Personaje*>pa,vector<Personaje*>pb,Stage*stage,int victories_a,int victories_b,bool is_training,int player1_wins_count, int player2_wins_count);
     ~Fighter();
     //Logica
-    bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
-    bool getColisionHitBoxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado);
+    bool getColisionHitboxes(Hitbox* hb_azul,Hitbox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
+    bool getColisionHitboxes(Personaje *atacante,std::string variable_atacante,Personaje* atacado,std::string variable_atacado);
     void loopJuego();
     void logicaPersonaje(Personaje *p);
     void landCancel(Personaje *p);

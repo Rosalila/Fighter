@@ -59,7 +59,7 @@ class Personaje
     //ints
     std::map<std::string,int> enteros;
     //hitboxes
-    std::map<std::string,vector<HitBox*> > hitboxes;
+    std::map<std::string,vector<Hitbox*> > hitboxes;
     //movimientos
     std::map<std::string,Movimiento*> movimientos;
 
@@ -82,7 +82,7 @@ class Personaje
     void dibujarImagen(RosalilaGraphics*painter,Imagen* imagen,int posicion_x,int posicion_y);
     void dibujarAnimacionesBack();
     void dibujarAnimacionesFront();
-    void dibujarHitBoxes(std::string variable,std::string path,bool izquierda,int x,int y);
+    void dibujarHitboxes(std::string variable,std::string path,bool izquierda,int x,int y);
     void dibujarBarras();
     void dibujarBarra(Barra* barra);
     void dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y);
@@ -93,14 +93,14 @@ class Personaje
     //GETS variables
     int getEntero(std::string variable);
     Barra* getBarra(std::string variable);
-    std::vector<HitBox*> getHitBoxes(std::string variable);
+    std::vector<Hitbox*> getHitboxes(std::string variable);
     Imagen* getImagen(std::string variable);
     std::string getString(std::string variable);
     //SETS variables
     void setImagen(std::string variable,Imagen* valor);
     void setEntero(std::string variable,int valor);
     void agregarBarra(Barra* valor);
-    void setHitBoxes(std::string variable,vector<HitBox*> valor);
+    void setHitboxes(std::string variable,vector<Hitbox*> valor);
     void setString(std::string variable,std::string valor);
     //Agregares
     void agregarRosalilaInputs(vector<std::string> input,std::string movimiento);
@@ -113,16 +113,16 @@ class Personaje
     void agregarModificador(std::string movimiento,int frame,std::string variable,Imagen* modificador,bool aplicar_a_contrario);
     void agregarModificador(std::string movimiento,int frame,std::string variable,int modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
     void agregarModificador(std::string movimiento,int frame,std::string variable,Barra modificador,bool aplicar_a_contrario);
-    void agregarModificador(std::string movimiento,int frame,std::string variable,vector <HitBox*> modificador,bool aplicar_a_contrario);
+    void agregarModificador(std::string movimiento,int frame,std::string variable,vector <Hitbox*> modificador,bool aplicar_a_contrario);
     void agregarModificador(std::string movimiento,int frame,std::string modificador,std::string variable,bool aplicar_a_contrario);
     void agregarModificador(std::string movimiento,int frame,std::string tipo,std::string variable,std::string variable_modificador,bool relativo,bool aplicar_a_contrario,bool flipeable);
     //Logica
-    bool getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
-    bool getColisionHitBoxes(vector<HitBox*> hb_azules,vector<HitBox*> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
+    bool getColisionHitboxes(Hitbox* hb_azul,Hitbox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
+    bool getColisionHitboxes(vector<Hitbox*> hb_azules,vector<Hitbox*> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y);
     void logicaBarras();
     void logicaProyectiles();
     void aplicarModificadores(vector<Modificador*>,bool flip);
-    void flipHitBoxes();
+    void flipHitboxes();
     std::string mapInputToMovimiento();
     bool cumpleCondiciones(std::string str_movimiento);
     bool cumpleCondiciones(vector<vector<Condicion*> >);

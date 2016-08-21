@@ -2,7 +2,7 @@
 #define MODIFICADOR_H
 
 #include <vector>
-#include "../Rosalila/RosalilaUtility/HitBox.h"
+#include "../Rosalila/RosalilaUtility/Hitbox.h"
 #include "Imagen.h"
 #include "Barra.h"
 #include "../Rosalila/RosalilaGraphics/RosalilaGraphics.h"
@@ -20,7 +20,7 @@ class Modificador
     std::string tipo_variable;//solo para por variables
 
     Barra modificador_barra;
-    std::vector <HitBox*> modificador_hitbox;
+    std::vector <Hitbox*> modificador_hitbox;
     std::string modificador_string;
     int modificador_entero;
     bool flipeable;

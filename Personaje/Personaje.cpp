@@ -21,9 +21,9 @@ Personaje::Personaje(RosalilaGraphics* painter,Sound* sonido,int numero,int num_
     if(numero==2)
         setString("player","2");
 
-    std::vector<HitBox*> hitbox;
-    setHitBoxes("red",hitbox);
-    setHitBoxes("blue",hitbox);
+    std::vector<Hitbox*> hitbox;
+    setHitboxes("red",hitbox);
+    setHitboxes("blue",hitbox);
     setImagen("current_image",NULL);
     setString("change_char","off");
     setEntero("distance",0);
@@ -146,7 +146,8 @@ void Personaje::dibujar()
                 0,0,
                 Color(0,0,255,128),
                 0,0,
-                true);
+                true,
+                FlatShadow());
         }
     }
 
@@ -204,7 +205,8 @@ void Personaje::dibujar()
         0,0,
         Color(tr,tg,tb,255),
         -200,-300,
-        true);
+        true,
+        FlatShadow());
 //    if(numero==1)
     //paleta.restoreTexture(texture);
 
@@ -213,9 +215,10 @@ void Personaje::dibujar()
     sombra_y.push_back(getEntero("position_y"));
     flip_sombra.push_back(getString("orientation")=="i");
 }
-void Personaje::dibujarHitBoxes(std::string variable,std::string path,bool izquierda,int x,int y)
+void Personaje::dibujarHitboxes(std::string variable,std::string path,bool izquierda,int x,int y)
 {
-    std::vector <HitBox*> hitbox=getHitBoxes(variable);
+    /*
+    std::vector <Hitbox*> hitbox=getHitboxes(variable);
     if(getString("orientation")=="i")
         for(int i=0; i<(int)hitbox.size(); i++)
         {
@@ -243,6 +246,7 @@ void Personaje::dibujarHitBoxes(std::string variable,std::string path,bool izqui
             hitbox[i]->p1x=-b;
             hitbox[i]->p2x=-a;
         }
+    */
 }
 
 void Personaje::dibujarBarra(Barra* barra)
@@ -316,7 +320,8 @@ void Personaje::dibujarBarra(Barra* barra)
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
 }
 
 void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
@@ -382,7 +387,8 @@ void Personaje::dibujarBarraPequena(Barra* barra,int cambio_x,int cambio_y)
             0,0,
             Color(255,255,255,255),
             0,0,
-            false);
+            false,
+            FlatShadow());
 }
 
 void Personaje::dibujarBarras()
@@ -416,13 +422,14 @@ void Personaje::dibujarProyectiles()
                 0,0,
                 Color(255,255,255,255),
                 0,0,
-                true);
+                true,
+                FlatShadow());
         }
 //        //Dibujar hitboxes
 //        if(input->receiver->IsKeyDownn(SDLK_h))
 //        {
 //            std::string nombre=proyectil->nombre;
-//            dibujarHitBoxes(proyectil->hitboxes,"",
+//            dibujarHitboxes(proyectil->hitboxes,"",
 //                        getString(proyectil->orientacion)=="i",
 //                        getEntero(proyectil->posicion_x),
 //                        -getEntero(proyectil->posicion_y));
@@ -456,7 +463,7 @@ Barra* Personaje::getBarra(std::string variable)
     return NULL;
 //    return new Barra("error","","","","",Color(0,0,0,0),irr::core::rect<irr::s32> (0,0,0,0),NULL);
 }
-vector<HitBox*> Personaje::getHitBoxes(std::string variable)
+vector<Hitbox*> Personaje::getHitboxes(std::string variable)
 {
     if(hitboxes.find(variable)==hitboxes.end())
     {
@@ -493,7 +500,7 @@ void Personaje::agregarBarra(Barra* valor)
 {
     barras.push_back(valor);
 }
-void Personaje::setHitBoxes(std::string variable,vector<HitBox*> valor)
+void Personaje::setHitboxes(std::string variable,vector<Hitbox*> valor)
 {
     hitboxes[variable]=valor;
 }
@@ -544,7 +551,7 @@ void Personaje::agregarModificador(std::string movimiento,int frame,std::string 
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame]->agregarModificador(modificador,variable,aplicar_a_contrario);
 }
-void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,vector <HitBox*> modificador,bool aplicar_a_contrario)
+void Personaje::agregarModificador(std::string movimiento,int frame,std::string variable,vector <Hitbox*> modificador,bool aplicar_a_contrario)
 {
     ((Movimiento*)movimientos[movimiento])->frames[frame]->agregarModificador(modificador,variable,aplicar_a_contrario);
 }
@@ -613,9 +620,10 @@ void Personaje::aplicarModificador(ModificadorString* ms)
         setString(ms->variable,ms->modificador_string);
 }
 
-void Personaje::flipHitBoxes()
+void Personaje::flipHitboxes()
 {
-    std::vector<HitBox*> hb=getHitBoxes("blue");
+    /*
+    std::vector<Hitbox*> hb=getHitboxes("blue");
     for(int i=0; i<(int)hb.size(); i++)
     {
         int a=hb[i]->p1x;
@@ -623,9 +631,9 @@ void Personaje::flipHitBoxes()
         hb[i]->p1x=-b;
         hb[i]->p2x=-a;
     }
-    setHitBoxes("blue",hb);
+    setHitboxes("blue",hb);
 
-    hb=getHitBoxes("red");
+    hb=getHitboxes("red");
     for(int i=0; i<(int)hb.size(); i++)
     {
         int a=hb[i]->p1x;
@@ -633,15 +641,16 @@ void Personaje::flipHitBoxes()
         hb[i]->p1x=-b;
         hb[i]->p2x=-a;
     }
-    setHitBoxes("red",hb);
+    setHitboxes("red",hb);
+    */
 }
 
 void Personaje::aplicarModificador(ModificadorHitboxes* mh)
 {
     if(mh->aplicar_a_contrario)
-        personaje_contrario->setHitBoxes(mh->variable,mh->modificador_hitbox);
+        personaje_contrario->setHitboxes(mh->variable,mh->modificador_hitbox);
     else
-        setHitBoxes(mh->variable,mh->modificador_hitbox);
+        setHitboxes(mh->variable,mh->modificador_hitbox);
 }
 
 void Personaje::aplicarModificador(ModificadorPorVariable* mv)
@@ -1105,7 +1114,7 @@ void Personaje::loadMain()
             {
                 std::string variable(elemento_imagen->Attribute("variable"));
                 writeLogLine("Loading "+variable);
-                std::vector<HitBox*> hitbox;
+                std::vector<Hitbox*> hitbox;
                 if(!elemento_imagen->NoChildren())
                     for(TiXmlElement *elemento_hitbox=elemento_imagen->FirstChild("Hitbox")->ToElement();
                             elemento_hitbox!=NULL;
@@ -1115,9 +1124,9 @@ void Personaje::loadMain()
                         int y1=atoi(elemento_hitbox->Attribute("y1"));
                         int x2=atoi(elemento_hitbox->Attribute("x2"));
                         int y2=atoi(elemento_hitbox->Attribute("y2"));
-                        hitbox.push_back(new HitBox(x1,-y1,x2,-y2));
+                        hitbox.push_back(new Hitbox(x1,-y1,x2,-y2,0.0));
                     }
-                setHitBoxes(variable,hitbox);
+                setHitboxes(variable,hitbox);
             }
         writeLogLine("Loading bars.");
         for(TiXmlElement *elemento_imagen=nodo->FirstChild("bar")->ToElement();
@@ -1533,7 +1542,7 @@ void Personaje::loadHitboxes()
                         e!=NULL;
                         e=e->NextSiblingElement("Hitboxes"))
                 {
-                    std::vector <HitBox*> hitbox;
+                    std::vector <Hitbox*> hitbox;
                     std::string str_variable(e->Attribute("variable"));
                     std::string str_contrario(e->Attribute("to_opponent"));
                     bool contrario=(str_contrario=="yes");
@@ -1547,7 +1556,7 @@ void Personaje::loadHitboxes()
                             int y1=atoi(elemento_hitbox->Attribute("y1"));
                             int x2=atoi(elemento_hitbox->Attribute("x2"));
                             int y2=atoi(elemento_hitbox->Attribute("y2"));
-                            hitbox.push_back(new HitBox(x1,-y1,x2,-y2));
+                            hitbox.push_back(new Hitbox(x1,-y1,x2,-y2,0.0));
                         }
                     }
                     agregarModificador(nombre,frame,str_variable,hitbox,contrario);
@@ -1768,15 +1777,15 @@ void Personaje::loadProjectiles()
             }
 
             //Hitboxes
-            std::vector<HitBox*> hitboxes_vacia;
-            setHitBoxes(nombre+".hitboxes",hitboxes_vacia);
+            std::vector<Hitbox*> hitboxes_vacia;
+            setHitboxes(nombre+".hitboxes",hitboxes_vacia);
             for(TiXmlElement *elemento_hitboxes=projectile_element->FirstChild("Hitboxes")->ToElement();
                     elemento_hitboxes!=NULL;
                     elemento_hitboxes=elemento_hitboxes->NextSiblingElement("Hitboxes"))
             {
                 int num_frame=atoi(elemento_hitboxes->Attribute("frame"));
                 temp=elemento_hitboxes;
-                std::vector<HitBox*> hitboxes;
+                std::vector<Hitbox*> hitboxes;
                 if(!temp->NoChildren())
                     for(TiXmlElement *elemento_hb=temp->FirstChild("Hitbox")->ToElement();
                             elemento_hb!=NULL;
@@ -1786,7 +1795,7 @@ void Personaje::loadProjectiles()
                         int y1=atoi(elemento_hb->Attribute("y1"));
                         int x2=atoi(elemento_hb->Attribute("x2"));
                         int y2=atoi(elemento_hb->Attribute("y2"));
-                        hitboxes.push_back(new HitBox(x1,-y1,x2,-y2));
+                        hitboxes.push_back(new Hitbox(x1,-y1,x2,-y2,0.0));
                     }
                 proyectil->frames[num_frame]->agregarModificador(hitboxes,nombre+".hitboxes",false);
             }
@@ -1882,8 +1891,8 @@ void Personaje::aplicarEfectosProyectiles()
 
         //hit
         bool hit=false;
-        if(getColisionHitBoxes(personaje_contrario->getHitBoxes("blue"),
-                               getHitBoxes(proyectil->hitboxes),
+        if(getColisionHitboxes(personaje_contrario->getHitboxes("blue"),
+                               getHitboxes(proyectil->hitboxes),
                                personaje_contrario->getEntero("position_x"),
                                -personaje_contrario->getEntero("position_y"),
                                getEntero(proyectil->posicion_x),
@@ -1901,8 +1910,8 @@ void Personaje::aplicarEfectosProyectiles()
             if(personaje_contrario->getString(proyectil_c->estado)!=std::string("on"))
                 continue;
 
-            if(getColisionHitBoxes(personaje_contrario->getHitBoxes(proyectil_c->hitboxes),
-                                   getHitBoxes(proyectil->hitboxes),
+            if(getColisionHitboxes(personaje_contrario->getHitboxes(proyectil_c->hitboxes),
+                                   getHitboxes(proyectil->hitboxes),
                                    personaje_contrario->getEntero(proyectil_c->posicion_x),
                                    personaje_contrario->getEntero(proyectil_c->posicion_y),
                                    getEntero(proyectil->posicion_x),
@@ -1963,9 +1972,9 @@ void Personaje::aplicarEfectosProyectiles()
         personaje_contrario->setString("projectile_disolve_chip","no");
 }
 
-bool Personaje::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+bool Personaje::getColisionHitboxes(Hitbox* hb_azul,Hitbox* hb_roja,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
 {
-
+/*
     int x1r=hb_roja->p1x+atacante_x;
     int y1r=hb_roja->p1y+atacante_y;
     int x2r=hb_roja->p2x+atacante_x;
@@ -1976,8 +1985,8 @@ bool Personaje::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_
     int x2a=hb_azul->p2x+atacado_x;
     int y2a=hb_azul->p2y+atacado_y;
 
-    HitBox hb_azul_temp(x1r,y1r,x2r,y2r);
-    HitBox hb_roja_temp(x1a,y1a,x2a,y2a);
+    Hitbox hb_azul_temp(x1r,y1r,x2r,y2r);
+    Hitbox hb_roja_temp(x1a,y1a,x2a,y2a);
 
     bool hay_colision = collisionCheck(&hb_azul_temp,&hb_roja_temp);
 
@@ -1997,15 +2006,15 @@ bool Personaje::getColisionHitBoxes(HitBox* hb_azul,HitBox* hb_roja,int atacado_
         px_colision=x1+((x2-x1)/2);
         py_colision=y1+((y2-y1)/2);
     }
-
-    return hay_colision;
+*/
+    return false;
 }
 
-bool Personaje::getColisionHitBoxes(vector<HitBox*> hb_azules,vector<HitBox*> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
+bool Personaje::getColisionHitboxes(vector<Hitbox*> hb_azules,vector<Hitbox*> hb_rojas,int atacado_x,int atacado_y,int atacante_x,int atacante_y)
 {
     for(int a=0; a<(int)hb_azules.size(); a++)
         for(int r=0; r<(int)hb_rojas.size(); r++)
-            if(getColisionHitBoxes(hb_azules[a],hb_rojas[r],atacado_x,atacado_y,atacante_x,atacante_y))
+            if(getColisionHitboxes(hb_azules[a],hb_rojas[r],atacado_x,atacado_y,atacante_x,atacante_y))
                 return true;
     return false;
 }
@@ -2028,7 +2037,8 @@ void Personaje::dibujarImagenCameraAlign(RosalilaGraphics* painter,Imagen* image
         0,0,
         Color(255,255,255,255),
         0,0,
-        true);
+        true,
+        FlatShadow());
 }
 void Personaje::dibujarImagen(RosalilaGraphics* painter,Imagen* imagen,int posicion_x,int posicion_y)
 {
@@ -2048,7 +2058,8 @@ void Personaje::dibujarImagen(RosalilaGraphics* painter,Imagen* imagen,int posic
         0,0,
         Color(255,255,255,255),
         0,0,
-        false);
+        false,
+        FlatShadow());
 }
 void Personaje::dibujarAnimacionesBack()
 {
