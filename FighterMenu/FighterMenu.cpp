@@ -158,7 +158,7 @@ void Menu::iniciarJuego(int num_personajes,bool inteligencia_artificial,bool is_
 
     sonido->stopMusic();
 
-    sonido->playMusic(assets_directory+"menu/audio/music.ogg");
+    sonido->playMusic(assets_directory+"menu/audio/music.ogg",-1);
 }
 
 void Menu::loopMenu()
@@ -194,7 +194,7 @@ void Menu::loopMenu()
             || (input_player2->getBufferRosalilaInputs()[0]=="b" && keyup_player2)
            )
         {
-            sonido->playSound(std::string("Menu.back"));
+            sonido->playSound(std::string("Menu.back"),-1,0);
             break;
         }
 
@@ -204,7 +204,7 @@ void Menu::loopMenu()
             && !config_button_lock
            )
         {
-            sonido->playSound(std::string("Menu.move"));
+            sonido->playSound(std::string("Menu.move"),-1,0);
             ((MenuContenedor*)selectables_container)->avanzar();
             keyup_player1=false;
             keyup_player2=false;
@@ -215,7 +215,7 @@ void Menu::loopMenu()
             && !config_button_lock
                 )
         {
-            sonido->playSound(std::string("Menu.move"));
+            sonido->playSound(std::string("Menu.move"),-1,0);
             ((MenuContenedor*)selectables_container)->retroceder();
             keyup_player1=false;
             keyup_player2=false;
@@ -226,7 +226,7 @@ void Menu::loopMenu()
                     && !config_button_lock
                 )
         {
-            sonido->playSound(std::string("Menu.move"));
+            sonido->playSound(std::string("Menu.move"),-1,0);
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
             {
                 MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
@@ -248,7 +248,7 @@ void Menu::loopMenu()
                     && !config_button_lock
                 )
         {
-            sonido->playSound(std::string("Menu.move"));
+            sonido->playSound(std::string("Menu.move"),-1,0);
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
             {
                 MenuLista* ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
@@ -269,7 +269,7 @@ void Menu::loopMenu()
                     && !config_button_lock
                  )
         {
-            sonido->playSound(std::string("Menu.select"));
+            sonido->playSound(std::string("Menu.select"),-1,0);
             if(((MenuContenedor*)selectables_container)->getElementoSeleccionado()->getTipo()=="Lista")
             {
                 MenuLista*ml=((MenuLista*)((MenuContenedor*)selectables_container)->getElementoSeleccionado());
@@ -1845,14 +1845,14 @@ void Menu::characterSelectControl()
                 {
                     if(input_player1->getBufferRosalilaInputs()[0]=="6")
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),-1,0);
                         char_select->select_p2_x++;
                         if(char_select->select_p2_x>=char_select->size_x)
                             char_select->select_p2_x=0;
                         keyup_player1=false;
                     }else if(input_player1->getBufferRosalilaInputs()[0]=="4")
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),-1,0);
                         char_select->select_p2_x--;
                         if(char_select->select_p2_x<0)
                             char_select->select_p2_x=char_select->size_x-1;
@@ -1860,7 +1860,7 @@ void Menu::characterSelectControl()
                     }
                     else if(input_player1->getBufferRosalilaInputs()[0]=="2")
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),-1,0);
                         char_select->select_p2_y++;
                         if(char_select->select_p2_y>=char_select->size_y)
                             char_select->select_p2_y=0;
@@ -1868,7 +1868,7 @@ void Menu::characterSelectControl()
                     }
                     else if(input_player1->getBufferRosalilaInputs()[0]=="8")
                     {
-                        sonido->playSound(std::string("Menu.move_char"));
+                        sonido->playSound(std::string("Menu.move_char"),-1,0);
                         char_select->select_p2_y--;
                         if(char_select->select_p2_y<0)
                             char_select->select_p2_y=char_select->size_y-1;
@@ -1876,7 +1876,7 @@ void Menu::characterSelectControl()
                     }
                     else if(input_player1->getBufferRosalilaInputs()[0]=="a")
                     {
-                        sonido->playSound(std::string("Menu.select_char"));
+                        sonido->playSound(std::string("Menu.select_char"),-1,0);
                         char_select->lockPB(0);
                         //keyup_player1=false;
                     }
@@ -1884,14 +1884,14 @@ void Menu::characterSelectControl()
             }
         }else if(input_player1->getBufferRosalilaInputs()[0]=="6")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p1_x++;
             if(char_select->select_p1_x>=char_select->size_x)
                 char_select->select_p1_x=0;
             keyup_player1=false;
         }else if(input_player1->getBufferRosalilaInputs()[0]=="4")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p1_x--;
             if(char_select->select_p1_x<0)
                 char_select->select_p1_x=char_select->size_x-1;
@@ -1899,7 +1899,7 @@ void Menu::characterSelectControl()
         }
         else if(input_player1->getBufferRosalilaInputs()[0]=="2")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p1_y++;
             if(char_select->select_p1_y>=char_select->size_y)
                 char_select->select_p1_y=0;
@@ -1907,7 +1907,7 @@ void Menu::characterSelectControl()
         }
         else if(input_player1->getBufferRosalilaInputs()[0]=="8")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p1_y--;
             if(char_select->select_p1_y<0)
                 char_select->select_p1_y=char_select->size_y-1;
@@ -1915,7 +1915,7 @@ void Menu::characterSelectControl()
         }
         else if(input_player1->getBufferRosalilaInputs()[0]=="a")
         {
-            sonido->playSound(std::string("Menu.select_char"));
+            sonido->playSound(std::string("Menu.select_char"),-1,0);
             char_select->lockPA(0);
             //keyup_player1=false;
         }
@@ -1927,14 +1927,14 @@ void Menu::characterSelectControl()
         {
         }else if(input_player2->getBufferRosalilaInputs()[0]=="6")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p2_x++;
             if(char_select->select_p2_x>=char_select->size_x)
                 char_select->select_p2_x=0;
             keyup_player2=false;
         }else if(input_player2->getBufferRosalilaInputs()[0]=="4")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p2_x--;
             if(char_select->select_p2_x<0)
                 char_select->select_p2_x=char_select->size_x-1;
@@ -1942,7 +1942,7 @@ void Menu::characterSelectControl()
         }
         else if(input_player2->getBufferRosalilaInputs()[0]=="2")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p2_y++;
             if(char_select->select_p2_y>=char_select->size_y)
                 char_select->select_p2_y=0;
@@ -1950,7 +1950,7 @@ void Menu::characterSelectControl()
         }
         else if(input_player2->getBufferRosalilaInputs()[0]=="8")
         {
-            sonido->playSound(std::string("Menu.move_char"));
+            sonido->playSound(std::string("Menu.move_char"),-1,0);
             char_select->select_p2_y--;
             if(char_select->select_p2_y<0)
                 char_select->select_p2_y=char_select->size_y-1;
@@ -1958,7 +1958,7 @@ void Menu::characterSelectControl()
         }
         else if(input_player2->getBufferRosalilaInputs()[0]=="a")
         {
-            sonido->playSound(std::string("Menu.select_char"));
+            sonido->playSound(std::string("Menu.select_char"),-1,0);
             char_select->lockPB(0);
             //keyup_player2=false;
         }

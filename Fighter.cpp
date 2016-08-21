@@ -431,7 +431,6 @@ void Fighter::colisionCheck(Personaje*p)
         {
             m->last_mulithit_frame_hit=m->frame_actual;
             p->setString("hit","yes");
-            painter->explode(px_colision,py_colision+painter->screen_height);
             m->ya_pego=true;
             p->personaje_contrario->setEntero("Colision.x",px_colision);
             p->personaje_contrario->setEntero("Colision.y",py_colision);
@@ -501,7 +500,7 @@ void Fighter::logicaPersonaje(Personaje* p)
         m->resetMove();
         p->setString("current_move","entrance");
         p->setString("isActive.entrance","yes");
-        sonido->playSound(p->char_name+"entrance");
+        sonido->playSound(p->char_name+"entrance",-1,0);
     }
 
     //get input
@@ -711,7 +710,7 @@ void Fighter::logica()
         Movimiento* m=p->movimientos[p->getString("current_move")];
         m->resetMove();
         p->setString("current_move",move_cancel_pa);
-        sonido->playSound(p->char_name+move_cancel_pa);
+        sonido->playSound(p->char_name+move_cancel_pa,-1,0);
         //setear isActive.
         p->setString(std::string("isActive.")+move_cancel_pa,"yes");
 
@@ -736,7 +735,7 @@ void Fighter::logica()
         Movimiento* m=p->movimientos[p->getString("current_move")];
         m->resetMove();
         p->setString("current_move",move_cancel_pb);
-        sonido->playSound(p->char_name+move_cancel_pb);
+        sonido->playSound(p->char_name+move_cancel_pb,-1,0);
         //setear isActive.
         p->setString(std::string("isActive.")+move_cancel_pb,"yes");
 
@@ -809,7 +808,7 @@ void Fighter::logica()
         m->resetMove();
         p->setString("current_move",hit_cancel_pa);
         p->setString(std::string("isActive.")+hit_cancel_pa,"yes");
-        sonido->playSound(p->char_name+p->getString("current_move"));
+        sonido->playSound(p->char_name+p->getString("current_move"),-1,0);
 
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         velocityInheritance(p,m,m_nuevo);
@@ -838,7 +837,7 @@ void Fighter::logica()
         m->resetMove();
         p->setString("current_move",hit_cancel_pb);
         p->setString(std::string("isActive.")+hit_cancel_pb,"yes");
-        sonido->playSound(p->char_name+p->getString("current_move"));
+        sonido->playSound(p->char_name+p->getString("current_move"),-1,0);
 
         Movimiento* m_nuevo=p->movimientos[p->getString("current_move")];
         velocityInheritance(p,m,m_nuevo);
@@ -1143,8 +1142,8 @@ void Fighter::loopJuego()
     getPbActual()->comparacion_hp=getPbActual()->getEntero("hp.current_value");
     getPbActual()->comparacion_hp_contrario=getPbActual()->getEntero("hp.current_value");
 
-    sonido->playSound(getPaActual()->char_name+"intro");
-    sonido->playSound(getPbActual()->char_name+"intro");
+    sonido->playSound(getPaActual()->char_name+"intro",-1,0);
+    sonido->playSound(getPbActual()->char_name+"intro",-1,0);
     for (;;)
     {
         //Exit game when game over and any button is pressed
@@ -1395,7 +1394,7 @@ void Fighter::render()
         getPaActual()->setEntero("acceleration_x",0);
         getPaActual()->setString("isActive.ko","yes");
 
-        sonido->playSound(getPaActual()->char_name+"ko");
+        sonido->playSound(getPaActual()->char_name+"ko",-1,0);
 
         if(!game_over_b)
         {
@@ -1426,7 +1425,7 @@ void Fighter::render()
         getPbActual()->setEntero("acceleration_x",0);
         getPbActual()->setString("isActive.ko","yes");
 
-        sonido->playSound(getPbActual()->char_name+"ko");
+        sonido->playSound(getPbActual()->char_name+"ko",-1,0);
 
         if(!game_over_a)
         {
@@ -1508,8 +1507,6 @@ void Fighter::render()
         getPbActual()->setString("isActive.change_char","yes");
     }
 
-    painter->draw3D();
-
     dibujarBarra();
 
     if(pa[pa_actual]->combo>1)
@@ -1537,9 +1534,6 @@ void Fighter::render()
 
     if(receiver->isKeyPressed(SDLK_3))
         fps_is_visible=!fps_is_visible;
-
-    if(fps_is_visible)
-        painter->drawText("FPS: "+toString(painter->getFrameCap()),0,0);
 
     if(player1_wins_count==1)
         painter->drawText("1 win",0,100);

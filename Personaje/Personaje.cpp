@@ -160,7 +160,7 @@ void Personaje::dibujar()
     int alineacion_x=getImagen("current_image")->alineacion_x;
     int alineacion_y=getImagen("current_image")->alineacion_y;
     //u32 t=painter->device->getTimer()->getTime();//!!COOL VFX
-    int t=painter->fps->get_ticks();
+    int t=painter->current_fps;
     int tr=255,tg=255,tb=255;
 
     if(getString("orientation")=="i")

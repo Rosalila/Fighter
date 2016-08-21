@@ -46,7 +46,6 @@ int main(int argc, char *argv[])
 
     //Graphics initialization
     RosalilaGraphics*painter = new RosalilaGraphics();
-    painter->video(painter);
 
     //Sound initialization
     Sound*sonido = new Sound();
@@ -54,7 +53,7 @@ int main(int argc, char *argv[])
     //Menu initialization
     string menu_path=assets_directory+"menu/main_menu.svg";
     Menu* menu=new Menu(painter,receiver,sonido,menu_path.c_str());
-    sonido->playMusic(menu->music_path);
+    sonido->playMusic(menu->music_path,-1);
     menu->loopMenu();
 
     return 0;
